@@ -58,6 +58,8 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
     random.shuffle(val_trees)
     random.shuffle(test_trees)
     # build the inputs and outputs of the network
+    tf.reset_default_graph()
+    
     nodes_node, children_node, hidden_node, pooling = network.init_net(
         num_feats,
         len(labels),
@@ -141,7 +143,6 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
                 print(classification_report(correct_labels, predictions, target_names=target_names))
                 print(confusion_matrix(correct_labels, predictions))
 
-            saver.save(sess, os.path.join(checkfile), step)
 
     if opt.testing:
         correct_labels = []
