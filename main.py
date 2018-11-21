@@ -75,7 +75,7 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
     # Initialize the variables (i.e. assign their default value)
     init = tf.global_variables_initializer()
 
-    saver = tf.train.Saver()
+    saver = tf.train.Saver(save_relative_paths=True)
         
     checkfile = os.path.join(logdir, 'cnn_tree.ckpt')
 
