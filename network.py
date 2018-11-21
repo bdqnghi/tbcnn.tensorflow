@@ -5,7 +5,7 @@ import math
 import tensorflow as tf
 
 
-def init_net(feature_size, label_size):
+def init_net(feature_size, label_size, aggregation_type):
     """Initialize an empty network."""
 
     with tf.name_scope('inputs'):
@@ -15,27 +15,15 @@ def init_net(feature_size, label_size):
     with tf.name_scope('network'):
         conv1 = conv_layer(1, 100, nodes, children, feature_size)
         #conv2 = conv_layer(1, 10, conv1, children, 100)
-        # aggregation = pooling_layer(conv1)
-        aggregation = aggregation_layer(conv1, 100)
+
+        if aggregation_type == 0:
+            aggregation = pooling_layer(conv1)
+        else:
+            aggregation = aggregation_layer(conv1, 100)
         hidden = hidden_layer(aggregation, 100, label_size)
 
     return nodes, children, hidden, conv1
 
-
-def init_net_for_siamese(feature_size):
-    """Initialize an empty network."""
-
-    with tf.name_scope("inputs"):
-        nodes = tf.placeholder(tf.float32, shape=(None, None, feature_size), name='tree')
-        children = tf.placeholder(tf.int32, shape=(None, None, None), name='children')
-
-    with tf.name_scope("network"):
-        conv1 = conv_layer(1, 100, nodes, children, feature_size)
-        #conv2 = conv_layer(1, 10, conv1, children, 100)
-        pooling = pooling_layer(conv1)
-     
-
-    return nodes, children, pooling
 
 
 def conv_layer(num_conv, output_size, nodes, children, feature_size):
