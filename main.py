@@ -59,7 +59,7 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
     random.shuffle(test_trees)
     # build the inputs and outputs of the network
     tf.reset_default_graph()
-    
+
     nodes_node, children_node, hidden_node, pooling = network.init_net(
         num_feats,
         len(labels),
@@ -79,7 +79,6 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
         
     checkfile = os.path.join(logdir, 'cnn_tree.ckpt')
 
-
     if opt.training:
         print("Begin training..........")
 
@@ -90,7 +89,7 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
             if ckpt and ckpt.model_checkpoint_path:
                 print("Continue training with old model")
                 print("Checkpoint path : " + str(ckpt.model_checkpoint_path))
-                saver.restore(sess, ckpt.model_checkpoint_path)
+                saver.restore(sess, checkfile)
 
             num_batches = len(train_trees) // batch_size + (1 if len(train_trees) % batch_size != 0 else 0)
             for epoch in range(1, epochs+1):
@@ -142,30 +141,39 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
                 print('Accuracy:', accuracy_score(correct_labels, predictions))
                 print(classification_report(correct_labels, predictions, target_names=target_names))
                 print(confusion_matrix(correct_labels, predictions))
-
+            saver.save(sess, checkfile)
 
     if opt.testing:
-        correct_labels = []
-        predictions = []
-        print('Computing training accuracy...')
-        for batch in sampling.batch_samples(
-            sampling.gen_samples(test_trees, labels, embeddings, embedding_lookup), 1
-        ):
-            nodes, children, batch_labels = batch
-            output = sess.run([out_node],
-                feed_dict={
-                    nodes_node: nodes,
-                    children_node: children,
-                }
-            )
-            # print(output)
-            correct_labels.append(np.argmax(batch_labels))
-            predictions.append(np.argmax(output))
+          with tf.Session() as sess:
 
-        target_names = list(labels)
-        print('Accuracy:', accuracy_score(correct_labels, predictions))
-        print(classification_report(correct_labels, predictions, target_names=target_names))
-        print(confusion_matrix(correct_labels, predictions))
+            sess.run(init)
+            ckpt = tf.train.get_checkpoint_state(logdir)
+            if ckpt and ckpt.model_checkpoint_path:
+                print("Continue training with old model")
+                print("Checkpoint path : " + str(ckpt.model_checkpoint_path))
+                saver.restore(sess, ckpt.model_checkpoint_path)
+
+            correct_labels = []
+            predictions = []
+            print('Computing training accuracy...')
+            for batch in sampling.batch_samples(
+                sampling.gen_samples(test_trees, labels, embeddings, embedding_lookup), 1
+            ):
+                nodes, children, batch_labels = batch
+                output = sess.run([out_node],
+                    feed_dict={
+                        nodes_node: nodes,
+                        children_node: children,
+                    }
+                )
+                # print(output)
+                correct_labels.append(np.argmax(batch_labels))
+                predictions.append(np.argmax(output))
+
+            target_names = list(labels)
+            print('Accuracy:', accuracy_score(correct_labels, predictions))
+            print(classification_report(correct_labels, predictions, target_names=target_names))
+            print(confusion_matrix(correct_labels, predictions))
 
 # def test_model(trees, labels, embeddings, embedding_lookup, opt):
     
