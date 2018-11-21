@@ -70,75 +70,78 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
     optimizer = tf.train.AdamOptimizer(LEARN_RATE)
     train_step = optimizer.minimize(loss_node)
     
-    ### init the graph
-    sess = tf.Session()#config=tf.ConfigProto(device_count={'GPU':0}))
-    sess.run(tf.global_variables_initializer())
+    # Initialize the variables (i.e. assign their default value)
+    init = tf.global_variables_initializer()
 
-    with tf.name_scope('saver'):
-        saver = tf.train.Saver()
+    saver = tf.train.Saver()
         
-        ckpt = tf.train.get_checkpoint_state(logdir)
-        if ckpt and ckpt.model_checkpoint_path:
-            print("Continue training with old model")
-            print("Checkpoint path : " + str(ckpt.model_checkpoint_path))
-            saver.restore(sess, ckpt.model_checkpoint_path)
-
     checkfile = os.path.join(logdir, 'cnn_tree.ckpt')
+
 
     if opt.training:
         print("Begin training..........")
-        num_batches = len(train_trees) // batch_size + (1 if len(train_trees) % batch_size != 0 else 0)
-        for epoch in range(1, epochs+1):
-            for i, batch in enumerate(sampling.batch_samples(
-                sampling.gen_samples(train_trees, labels, embeddings, embedding_lookup), batch_size
-            )):
-                nodes, children, batch_labels = batch
-                # print(len(batch_labels))
-                # print(len(batch_labels[0]))
-                step = (epoch - 1) * num_batches + i * BATCH_SIZE
 
-                if not nodes:
-                    continue # don't try to train on an empty batch
-                # print(batch_labels)
-                _, err, out = sess.run(
-                    [train_step, loss_node, out_node],
-                    feed_dict={
-                        nodes_node: nodes,
-                        children_node: children,
-                        labels_node: batch_labels
-                    }
-                )
-             
-                print('Epoch:', epoch, 'Step:', step, 'Loss:', err, 'Max nodes:', len(nodes[0]))
-                # print(pooling_output.shape)
+        with tf.Session() as sess:
 
-                if step % CHECKPOINT_EVERY == 0:
-                    # save state so we can resume later
-                    saver.save(sess, checkfile)
-                    print('Checkpoint saved, epoch:' + str(epoch) + ', step: ' + str(step) + ', loss: ' + str(err) + '.')
+            sess.run(init)
+            ckpt = tf.train.get_checkpoint_state(logdir)
+            if ckpt and ckpt.model_checkpoint_path:
+                print("Continue training with old model")
+                print("Checkpoint path : " + str(ckpt.model_checkpoint_path))
+                saver.restore(sess, ckpt.model_checkpoint_path)
 
-            correct_labels = []
-            predictions = []
-            for batch in sampling.batch_samples(
-                sampling.gen_samples(val_trees, labels, embeddings, embedding_lookup), 1
-            ):
-                nodes, children, batch_labels = batch
-                output = sess.run([out_node],
-                    feed_dict={
-                        nodes_node: nodes,
-                        children_node: children,
-                    }
-                )
-                # print(output)
-                correct_labels.append(np.argmax(batch_labels))
-                predictions.append(np.argmax(output))
+            num_batches = len(train_trees) // batch_size + (1 if len(train_trees) % batch_size != 0 else 0)
+            for epoch in range(1, epochs+1):
+                for i, batch in enumerate(sampling.batch_samples(
+                    sampling.gen_samples(train_trees, labels, embeddings, embedding_lookup), batch_size
+                )):
+                    nodes, children, batch_labels = batch
+                    # print(len(batch_labels))
+                    # print(len(batch_labels[0]))
+                    step = (epoch - 1) * num_batches + i * BATCH_SIZE
 
-            target_names = list(labels)
-            print('Accuracy:', accuracy_score(correct_labels, predictions))
-            print(classification_report(correct_labels, predictions, target_names=target_names))
-            print(confusion_matrix(correct_labels, predictions))
+                    if not nodes:
+                        continue # don't try to train on an empty batch
+                    # print(batch_labels)
+                    _, err, out = sess.run(
+                        [train_step, loss_node, out_node],
+                        feed_dict={
+                            nodes_node: nodes,
+                            children_node: children,
+                            labels_node: batch_labels
+                        }
+                    )
+                 
+                    print('Epoch:', epoch, 'Step:', step, 'Loss:', err, 'Max nodes:', len(nodes[0]))
+                    # print(pooling_output.shape)
 
-        saver.save(sess, os.path.join(checkfile), step)
+                    if step % CHECKPOINT_EVERY == 0:
+                        # save state so we can resume later
+                        saver.save(sess, checkfile)
+                        print('Checkpoint saved, epoch:' + str(epoch) + ', step: ' + str(step) + ', loss: ' + str(err) + '.')
+
+                correct_labels = []
+                predictions = []
+                for batch in sampling.batch_samples(
+                    sampling.gen_samples(val_trees, labels, embeddings, embedding_lookup), 1
+                ):
+                    nodes, children, batch_labels = batch
+                    output = sess.run([out_node],
+                        feed_dict={
+                            nodes_node: nodes,
+                            children_node: children,
+                        }
+                    )
+                    # print(output)
+                    correct_labels.append(np.argmax(batch_labels))
+                    predictions.append(np.argmax(output))
+
+                target_names = list(labels)
+                print('Accuracy:', accuracy_score(correct_labels, predictions))
+                print(classification_report(correct_labels, predictions, target_names=target_names))
+                print(confusion_matrix(correct_labels, predictions))
+
+            saver.save(sess, os.path.join(checkfile), step)
 
     if opt.testing:
         correct_labels = []
