@@ -1,6 +1,8 @@
 """Train the cnn model as  described in Lili Mou et al. (2015) 
 https://arxiv.org/pdf/1409.5718.pdf"""
-
+from tensorflow import saved_model
+from tensorflow.python.saved_model import tag_constants
+from tensorflow.python.saved_model.signature_def_utils_impl import predict_signature_def
 import os
 import logging
 import pickle
@@ -16,7 +18,7 @@ from data_loader import load_program_data
 from data_loader import MonoLanguageProgramData
 import argparse
 import random
-
+import shutil
 
 os.environ['CUDA_VISIBLE_DEVICES'] = "0"
 
@@ -57,10 +59,9 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
     random.shuffle(train_trees)
     random.shuffle(val_trees)
     random.shuffle(test_trees)
-    # build the inputs and outputs of the network
-    tf.reset_default_graph()
+    
 
-    nodes_node, children_node, hidden_node, pooling = network.init_net(
+    nodes_node, children_node, hidden_node = network.init_net(
         num_feats,
         len(labels),
         opt.aggregation
@@ -78,7 +79,7 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
     saver = tf.train.Saver(save_relative_paths=True)
         
     checkfile = os.path.join(logdir, 'cnn_tree.ckpt')
-
+    savedmodel_path = os.path.join(logdir,"savedmodel")
     if opt.training:
         print("Begin training..........")
 
@@ -90,6 +91,7 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
                 print("Continue training with old model")
                 print("Checkpoint path : " + str(ckpt.model_checkpoint_path))
                 saver.restore(sess, checkfile)
+            # tf.saved_model.loader.load(sess, [tag_constants.TRAINING], savedmodel_path)
 
             num_batches = len(train_trees) // batch_size + (1 if len(train_trees) % batch_size != 0 else 0)
             for epoch in range(1, epochs+1):
@@ -119,6 +121,8 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
                     if step % CHECKPOINT_EVERY == 0:
                         # save state so we can resume later
                         saver.save(sess, checkfile)
+                        # shutil.rmtree(savedmodel_path)
+                     
                         print('Checkpoint saved, epoch:' + str(epoch) + ', step: ' + str(step) + ', loss: ' + str(err) + '.')
 
                 correct_labels = []
@@ -142,6 +146,14 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
                 print(classification_report(correct_labels, predictions, target_names=target_names))
                 print(confusion_matrix(correct_labels, predictions))
             saver.save(sess, checkfile)
+            builder = saved_model.builder.SavedModelBuilder(savedmodel_path)
+            signature = predict_signature_def(inputs={'nodes': nodes_node, "children": children_node},
+                                              outputs={'labels': labels_node})
+            # using custom tag instead of: tags=[tag_constants.SERVING]
+            builder.add_meta_graph_and_variables(sess=sess,
+                                                 tags=[tag_constants.TRAINING],
+                                                 signature_def_map={'predict': signature})
+            builder.save()
 
     if opt.testing:
           with tf.Session() as sess:

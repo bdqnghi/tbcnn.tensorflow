@@ -22,7 +22,7 @@ def init_net(feature_size, label_size, aggregation_type):
             aggregation = aggregation_layer(conv1, 100)
         hidden = hidden_layer(aggregation, 100, label_size)
 
-    return nodes, children, hidden, conv1
+    return nodes, children, hidden
 
 
 
