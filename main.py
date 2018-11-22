@@ -20,6 +20,7 @@ import argparse
 import random
 import shutil
 from utils import scale_attention_score
+import math
 
 os.environ['CUDA_VISIBLE_DEVICES'] = "0"
 
@@ -43,6 +44,7 @@ parser.add_argument('--testing', action="store_true",help='is testing')
 parser.add_argument('--training_percentage', type=float, default=1.0 ,help='percentage of data use for training')
 parser.add_argument('--log_path', default="" ,help='log path for tensorboard')
 parser.add_argument('--epoch', type=int, default=0, help='epoch to test')
+parser.add_argument('--feature_size', type=int, default=100, help='epoch to test')
 parser.add_argument('--aggregation', type=int, default=0, help='0 for max pooling, 1 for global attention')
 parser.add_argument('--embeddings_directory', default="embedding/fast_pretrained_vectors.pkl", help='pretrained embeddings url, there are 2 objects in this file, the first object is the embedding matrix, the other is the lookup dictionary')
 
@@ -55,7 +57,7 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
     logdir = opt.model_path
     batch_size = opt.train_batch_size
     epochs = opt.niter
-    num_feats = len(embeddings[0])
+    node_embedding_size = len(embeddings[0])
     
     random.shuffle(train_trees)
     random.shuffle(val_trees)
@@ -73,9 +75,36 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
     #     hidden_node = graph.get_tensor_by_name("hidden_node:0")
     #     attention_score_node = graph.get_tensor_by_name("hidden_node:0")
 
+    checkfile = os.path.join(logdir, 'cnn_tree.ckpt')   
+    ckpt = tf.train.get_checkpoint_state(logdir)
+    # restoring = False
+    # if ckpt and ckpt.model_checkpoint_path:
+    #     tf.reset_default_graph()
+    #     meta_file = os.path.join(logdir, "cnn_tree.ckpt.meta")
+    #     print("Restoring graph..........")
+    #     saver = tf.train.import_meta_graph(meta_file)
+    #     restoring = True
+    
+    std = 1.0 / math.sqrt(node_embedding_size)
+    weights = {
+        "w_t" : tf.Variable(tf.truncated_normal([node_embedding_size, opt.feature_size], stddev=std), name="w_t"),
+        "w_l" : tf.Variable(tf.truncated_normal([node_embedding_size, opt.feature_size], stddev=std), name="w_l"),
+        "w_r" : tf.Variable(tf.truncated_normal([node_embedding_size, opt.feature_size], stddev=std), name="w_r"),
+        "w_attention" : tf.Variable(tf.truncated_normal([opt.feature_size,1], stddev=std), name="w_attention"),
+        "w_hidden": tf.Variable(tf.truncated_normal([opt.feature_size, len(labels)], stddev=1.0 / math.sqrt(opt.feature_size)),name="w_hidden")
+    }
+
+    biases = {
+        "b_conv": tf.Variable(tf.truncated_normal([opt.feature_size,], stddev=math.sqrt(2.0/node_embedding_size)), name="b_conv"),
+        "b_hidden": tf.Variable(tf.truncated_normal([len(labels),], stddev=math.sqrt(2.0/node_embedding_size)), name="b_hidden")
+    }
+
     nodes_node, children_node, hidden_node, attention_score_node = network.init_net(
-        num_feats,
+        node_embedding_size,
         len(labels),
+        opt.feature_size,
+        weights,
+        biases,
         opt.aggregation
     )
     hidden_node = tf.identity(hidden_node, name="hidden_node")
@@ -89,16 +118,11 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
     # Initialize the variables (i.e. assign their default value)
     init = tf.global_variables_initializer()
 
+    # if restoring == False:
     saver = tf.train.Saver(save_relative_paths=True)
-        
-    checkfile = os.path.join(logdir, 'cnn_tree.ckpt')
-    
-    ckpt = tf.train.get_checkpoint_state(logdir)
-    if ckpt and ckpt.model_checkpoint_path:
-        meta_file = os.path.join(logdir, "cnn_tree.ckpt.meta")
-        print("Restoring graph..........")
-        saver = tf.train.import_meta_graph(meta_file)
-
+   
+   
+  
     if opt.training:
         print("Begin training..........")
 

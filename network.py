@@ -5,7 +5,7 @@ import math
 import tensorflow as tf
 
 
-def init_net(feature_size, label_size, aggregation_type):
+def init_net(feature_size, label_size, output_size, weights, biases, aggregation_type):
     """Initialize an empty network."""
 
     with tf.name_scope('inputs'):
@@ -13,45 +13,30 @@ def init_net(feature_size, label_size, aggregation_type):
         children = tf.placeholder(tf.int32, shape=(None, None, None), name='children')
 
     with tf.name_scope('network'):
-        conv1 = conv_layer(1, 100, nodes, children, feature_size)
+        conv1 = conv_layer(1, output_size, nodes, children, feature_size, weights["w_t"], weights["w_l"], weights["w_r"], biases["b_conv"])
         #conv2 = conv_layer(1, 10, conv1, children, 100)
 
         if aggregation_type == 0:
             aggregation = pooling_layer(conv1)
         else:
-            aggregation, attention_score = aggregation_layer(conv1, 100)
-        hidden = hidden_layer(aggregation, 100, label_size)
+            aggregation, attention_score = aggregation_layer(conv1, weights["w_attention"], output_size)
+        hidden = hidden_layer(aggregation, weights["w_hidden"], biases["b_hidden"])
 
     return nodes, children, hidden, attention_score
 
 
 
-def conv_layer(num_conv, output_size, nodes, children, feature_size):
+def conv_layer(num_conv, output_size, nodes, children, feature_size, w_t, w_r, w_l, b_conv):
     """Creates a convolution layer with num_conv convolutions merged together at
     the output. Final output will be a tensor with shape
     [batch_size, num_nodes, output_size * num_conv]"""
 
     with tf.name_scope('conv_layer'):
-        nodes = [
-            conv_node(nodes, children, feature_size, output_size)
+        nodes = [           
+            conv_step(nodes, children, feature_size, w_t, w_r, w_l, b_conv)
             for _ in range(num_conv)
         ]
         return tf.concat(nodes, axis=2)
-
-def conv_node(nodes, children, feature_size, output_size):
-    """Perform convolutions over every batch sample."""
-    with tf.name_scope('conv_node'):
-        std = 1.0 / math.sqrt(feature_size)
-        w_t, w_l, w_r = (
-            tf.Variable(tf.truncated_normal([feature_size, output_size], stddev=std), name='Wt'),
-            tf.Variable(tf.truncated_normal([feature_size, output_size], stddev=std), name='Wl'),
-            tf.Variable(tf.truncated_normal([feature_size, output_size], stddev=std), name='Wr'),
-        )
-        init = tf.truncated_normal([output_size,], stddev=math.sqrt(2.0/feature_size))
-        #init = tf.zeros([output_size,])
-        b_conv = tf.Variable(init, name='b_conv')
-
-        return conv_step(nodes, children, feature_size, w_t, w_r, w_l, b_conv)
 
 def conv_step(nodes, children, feature_size, w_t, w_r, w_l, b_conv):
     """Convolve a batch of nodes and children.
@@ -226,12 +211,9 @@ def eta_l(children, coef_t, coef_r):
             tf.multiply((1.0 - coef_t), (1.0 - coef_r)), mask, name='coef_l'
         )
 
-def aggregation_layer(conv, output_size):
+def aggregation_layer(conv, w_attention, output_size):
     # conv is (batch_size, max_tree_size, output_size)
     with tf.name_scope("global_attention"):
-        init = tf.truncated_normal([output_size,1], stddev=math.sqrt(2.0/output_size))
-        w_attention = tf.Variable(init, name='w_attention')
-
         batch_size = tf.shape(conv)[0]
         max_tree_size = tf.shape(conv)[1]
 
@@ -254,22 +236,11 @@ def pooling_layer(nodes):
 def lrelu(x, alpha):
     return tf.nn.relu(x) - alpha * tf.nn.relu(-x)
 
-def hidden_layer(pooled, input_size, output_size):
+def hidden_layer(pooled, w_hidden, b_hidden):
     """Create a hidden feedforward layer."""
     with tf.name_scope("hidden"):
-        weights = tf.Variable(
-            tf.truncated_normal(
-                [input_size, output_size], stddev=1.0 / math.sqrt(input_size)
-            ),
-            name='weights'
-        )
-
-        init = tf.truncated_normal([output_size,], stddev=math.sqrt(2.0/input_size))
-        #init = tf.zeros([output_size,])
-        biases = tf.Variable(init, name='biases')
-
         # return tf.nn.lrelu(tf.matmul(pooled, weights) + biases)
-        return lrelu(tf.matmul(pooled, weights) + biases, 0.01)
+        return lrelu(tf.matmul(pooled, w_hidden) + b_hidden, 0.01)
 
 
 def loss_layer(logits_node, label_size):
