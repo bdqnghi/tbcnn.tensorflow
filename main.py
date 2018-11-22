@@ -108,7 +108,7 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
         with tf.Session() as sess:
 
             sess.run(init)
-            saver = tf.train.Saver(save_relative_paths=True)
+            saver = tf.train.Saver(save_relative_paths=True, max_to_keep=5)
             if ckpt and ckpt.model_checkpoint_path:
                 print("Continue training with old model")
                 print("Checkpoint path : " + str(ckpt.model_checkpoint_path))
@@ -149,7 +149,7 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
 
                     if step % CHECKPOINT_EVERY == 0:
                         # save state so we can resume later
-                        saver.save(sess, checkfile, step)
+                        saver.save(sess, checkfile)
                         # shutil.rmtree(savedmodel_path)
                      
                         print('Checkpoint saved, epoch:' + str(epoch) + ', step: ' + str(step) + ', loss: ' + str(err) + '.')
@@ -176,7 +176,7 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
                 print(confusion_matrix(correct_labels, predictions))
 
             print("Finish all iters, storring the whole model..........")
-            saver.save(sess, checkfile, step)
+            saver.save(sess, checkfile)
             # builder = saved_model.builder.SavedModelBuilder(savedmodel_path)
             # signature = predict_signature_def(inputs={'nodes': nodes_node, "children": children_node},
             #                                   outputs={'labels': labels_node})
