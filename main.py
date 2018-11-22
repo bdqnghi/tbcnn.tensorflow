@@ -63,27 +63,8 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
     random.shuffle(val_trees)
     random.shuffle(test_trees)
     
-
-    # meta_file = os.path.join(logdir, "cnn_tree.ckpt.meta")
-    # if os.path.exists(meta_file):
-    #     saver = tf.train.import_meta_graph(meta_file)
-    #     saver.restore(sess,tf.train.latest_checkpoint('./'))
-
-    #     graph = tf.get_default_graph()
-    #     nodes_node = graph.get_tensor_by_name("tree:0")
-    #     children_node = graph.get_tensor_by_name("children:0")
-    #     hidden_node = graph.get_tensor_by_name("hidden_node:0")
-    #     attention_score_node = graph.get_tensor_by_name("hidden_node:0")
-
     checkfile = os.path.join(logdir, 'cnn_tree.ckpt')   
     ckpt = tf.train.get_checkpoint_state(logdir)
-    # restoring = False
-    # if ckpt and ckpt.model_checkpoint_path:
-    #     tf.reset_default_graph()
-    #     meta_file = os.path.join(logdir, "cnn_tree.ckpt.meta")
-    #     print("Restoring graph..........")
-    #     saver = tf.train.import_meta_graph(meta_file)
-    #     restoring = True
     
     std = 1.0 / math.sqrt(node_embedding_size)
     weights = {
@@ -132,6 +113,9 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
                 print("Continue training with old model")
                 print("Checkpoint path : " + str(ckpt.model_checkpoint_path))
                 saver.restore(sess, ckpt.model_checkpoint_path)
+                for i, var in enumerate(saver._var_list):
+                    print('Var {}: {}'.format(i, var))
+     
             # saved_model.loader.load(sess, [tag_constants.TRAINING], savedmodel_path)
 
             num_batches = len(train_trees) // batch_size + (1 if len(train_trees) % batch_size != 0 else 0)
