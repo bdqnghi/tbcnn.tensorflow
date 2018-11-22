@@ -19,6 +19,7 @@ from data_loader import MonoLanguageProgramData
 import argparse
 import random
 import shutil
+from utils import scale_attention_score
 
 os.environ['CUDA_VISIBLE_DEVICES'] = "0"
 
@@ -79,7 +80,7 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
     saver = tf.train.Saver(save_relative_paths=True)
         
     checkfile = os.path.join(logdir, 'cnn_tree.ckpt')
-    savedmodel_path = os.path.join(logdir,"savedmodel")
+  
     if opt.training:
         print("Begin training..........")
 
@@ -90,8 +91,10 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
             if ckpt and ckpt.model_checkpoint_path:
                 print("Continue training with old model")
                 print("Checkpoint path : " + str(ckpt.model_checkpoint_path))
+                meta_file = os.path.join(logdir, "cnn_tree.ckpt.meta")
+                saver = tf.train.import_meta_graph(meta_file)
                 saver.restore(sess, checkfile)
-            # tf.saved_model.loader.load(sess, [tag_constants.TRAINING], savedmodel_path)
+            # saved_model.loader.load(sess, [tag_constants.TRAINING], savedmodel_path)
 
             num_batches = len(train_trees) // batch_size + (1 if len(train_trees) % batch_size != 0 else 0)
             for epoch in range(1, epochs+1):
@@ -116,8 +119,8 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
                     )
                  
                     print('Epoch:', epoch, 'Step:', step, 'Loss:', err, 'Max nodes:', len(nodes[0]))
-                    print(attention_score[0])
-                    print(len(attention_score[0]))
+                    # print(attention_score[0])
+                    # print(len(attention_score[0]))
                     # print(pooling_output.shape)
 
                     if step % CHECKPOINT_EVERY == 0:
@@ -150,14 +153,16 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
 
             print("Finish all iters, storring the whole model..........")
             saver.save(sess, checkfile)
-            builder = saved_model.builder.SavedModelBuilder(savedmodel_path)
-            signature = predict_signature_def(inputs={'nodes': nodes_node, "children": children_node},
-                                              outputs={'labels': labels_node})
-            # using custom tag instead of: tags=[tag_constants.SERVING]
-            builder.add_meta_graph_and_variables(sess=sess,
-                                                 tags=[tag_constants.TRAINING],
-                                                 signature_def_map={'predict': signature})
-            builder.save()
+            # builder = saved_model.builder.SavedModelBuilder(savedmodel_path)
+            # signature = predict_signature_def(inputs={'nodes': nodes_node, "children": children_node},
+            #                                   outputs={'labels': labels_node})
+            # # using custom tag instead of: tags=[tag_constants.SERVING]
+            # builder.add_meta_graph_and_variables(sess=sess,
+            #                                      tags=[tag_constants.TRAINING],
+            #                                      signature_def_map={'predict': signature})
+            # builder.save()
+            # saved_model.simple_save(sess,savedmodel_path,inputs={'nodes': nodes_node, "children": children_node},
+                                              # outputs={'labels': labels_node})
 
     if opt.testing:
           with tf.Session() as sess:

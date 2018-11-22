@@ -109,3 +109,9 @@ def _traverse_tree(root):
             # print current_node_json
   
     return root_json, num_nodes
+
+
+# if __name__ == "__main__":
+#     file = "ProgramData_pkl_train_test_val/train/1/1018.c.pb.pkl"
+#     source = build_tree(file)
+#     print(source)
