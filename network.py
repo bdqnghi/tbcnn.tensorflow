@@ -19,10 +19,10 @@ def init_net(feature_size, label_size, aggregation_type):
         if aggregation_type == 0:
             aggregation = pooling_layer(conv1)
         else:
-            aggregation = aggregation_layer(conv1, 100)
+            aggregation, attention_score = aggregation_layer(conv1, 100)
         hidden = hidden_layer(aggregation, 100, label_size)
 
-    return nodes, children, hidden
+    return nodes, children, hidden, attention_score
 
 
 
@@ -242,7 +242,7 @@ def aggregation_layer(conv, output_size):
         attention_weights = tf.nn.softmax(attention_score, dim=1)
 
         weighted_average_nodes = tf.reduce_sum(tf.multiply(conv, attention_weights), axis=1)
-        return weighted_average_nodes
+        return weighted_average_nodes, attention_weights
 
 def pooling_layer(nodes):
     """Creates a max dynamic pooling layer from the nodes."""

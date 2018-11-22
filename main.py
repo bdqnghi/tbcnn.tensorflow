@@ -61,7 +61,7 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
     random.shuffle(test_trees)
     
 
-    nodes_node, children_node, hidden_node = network.init_net(
+    nodes_node, children_node, hidden_node, attention_score_node = network.init_net(
         num_feats,
         len(labels),
         opt.aggregation
@@ -106,8 +106,8 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
                     if not nodes:
                         continue # don't try to train on an empty batch
                     # print(batch_labels)
-                    _, err, out = sess.run(
-                        [train_step, loss_node, out_node],
+                    _, err, out, attention_score = sess.run(
+                        [train_step, loss_node, out_node, attention_score_node],
                         feed_dict={
                             nodes_node: nodes,
                             children_node: children,
@@ -116,6 +116,8 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
                     )
                  
                     print('Epoch:', epoch, 'Step:', step, 'Loss:', err, 'Max nodes:', len(nodes[0]))
+                    print(attention_score[0])
+                    print(len(attention_score[0]))
                     # print(pooling_output.shape)
 
                     if step % CHECKPOINT_EVERY == 0:
@@ -145,6 +147,8 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
                 print('Accuracy:', accuracy_score(correct_labels, predictions))
                 print(classification_report(correct_labels, predictions, target_names=target_names))
                 print(confusion_matrix(correct_labels, predictions))
+
+            print("Finish all iters, storring the whole model..........")
             saver.save(sess, checkfile)
             builder = saved_model.builder.SavedModelBuilder(savedmodel_path)
             signature = predict_signature_def(inputs={'nodes': nodes_node, "children": children_node},
