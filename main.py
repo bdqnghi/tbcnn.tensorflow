@@ -62,11 +62,23 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
     random.shuffle(test_trees)
     
 
+    # meta_file = os.path.join(logdir, "cnn_tree.ckpt.meta")
+    # if os.path.exists(meta_file):
+    #     saver = tf.train.import_meta_graph(meta_file)
+    #     saver.restore(sess,tf.train.latest_checkpoint('./'))
+
+    #     graph = tf.get_default_graph()
+    #     nodes_node = graph.get_tensor_by_name("tree:0")
+    #     children_node = graph.get_tensor_by_name("children:0")
+    #     hidden_node = graph.get_tensor_by_name("hidden_node:0")
+    #     attention_score_node = graph.get_tensor_by_name("hidden_node:0")
+
     nodes_node, children_node, hidden_node, attention_score_node = network.init_net(
         num_feats,
         len(labels),
         opt.aggregation
     )
+    hidden_node = tf.identity(hidden_node, name="hidden_node")
 
     out_node = network.out_layer(hidden_node)
     labels_node, loss_node = network.loss_layer(hidden_node, len(labels))
@@ -80,19 +92,22 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
     saver = tf.train.Saver(save_relative_paths=True)
         
     checkfile = os.path.join(logdir, 'cnn_tree.ckpt')
-  
+    
+    ckpt = tf.train.get_checkpoint_state(logdir)
+    if ckpt and ckpt.model_checkpoint_path:
+        meta_file = os.path.join(logdir, "cnn_tree.ckpt.meta")
+        print("Restoring graph..........")
+        saver = tf.train.import_meta_graph(meta_file)
+
     if opt.training:
         print("Begin training..........")
 
         with tf.Session() as sess:
 
             sess.run(init)
-            ckpt = tf.train.get_checkpoint_state(logdir)
             if ckpt and ckpt.model_checkpoint_path:
                 print("Continue training with old model")
                 print("Checkpoint path : " + str(ckpt.model_checkpoint_path))
-                meta_file = os.path.join(logdir, "cnn_tree.ckpt.meta")
-                saver = tf.train.import_meta_graph(meta_file)
                 saver.restore(sess, checkfile)
             # saved_model.loader.load(sess, [tag_constants.TRAINING], savedmodel_path)
 
