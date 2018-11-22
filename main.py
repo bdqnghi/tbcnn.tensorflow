@@ -117,7 +117,7 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
     
    
     # if restoring == False:
-    saver = tf.train.Saver(save_relative_paths=True)
+    
     # Initialize the variables (i.e. assign their default value)
     init = tf.global_variables_initializer()
 
@@ -127,10 +127,11 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
         with tf.Session() as sess:
 
             sess.run(init)
+            saver = tf.train.Saver(save_relative_paths=True)
             if ckpt and ckpt.model_checkpoint_path:
                 print("Continue training with old model")
                 print("Checkpoint path : " + str(ckpt.model_checkpoint_path))
-                saver.restore(sess, checkfile)
+                saver.restore(sess, ckpt.model_checkpoint_path)
             # saved_model.loader.load(sess, [tag_constants.TRAINING], savedmodel_path)
 
             num_batches = len(train_trees) // batch_size + (1 if len(train_trees) % batch_size != 0 else 0)
@@ -162,7 +163,7 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
 
                     if step % CHECKPOINT_EVERY == 0:
                         # save state so we can resume later
-                        saver.save(sess, checkfile)
+                        saver.save(sess, checkfile, step)
                         # shutil.rmtree(savedmodel_path)
                      
                         print('Checkpoint saved, epoch:' + str(epoch) + ', step: ' + str(step) + ', loss: ' + str(err) + '.')
@@ -189,7 +190,7 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
                 print(confusion_matrix(correct_labels, predictions))
 
             print("Finish all iters, storring the whole model..........")
-            saver.save(sess, checkfile)
+            saver.save(sess, checkfile, step)
             # builder = saved_model.builder.SavedModelBuilder(savedmodel_path)
             # signature = predict_signature_def(inputs={'nodes': nodes_node, "children": children_node},
             #                                   outputs={'labels': labels_node})
