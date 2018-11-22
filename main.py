@@ -115,7 +115,9 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
                 saver.restore(sess, ckpt.model_checkpoint_path)
                 for i, var in enumerate(saver._var_list):
                     print('Var {}: {}'.format(i, var))
-     
+                
+                w_t_out = sess.run([weights["w_t"]])
+                print('w_t_out = ', w_t_out)
             # saved_model.loader.load(sess, [tag_constants.TRAINING], savedmodel_path)
 
             num_batches = len(train_trees) // batch_size + (1 if len(train_trees) % batch_size != 0 else 0)
@@ -187,8 +189,7 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
                                               # outputs={'labels': labels_node})
 
     if opt.testing:
-          with tf.Session() as sess:
-
+        with tf.Session() as sess:
             sess.run(init)
             ckpt = tf.train.get_checkpoint_state(logdir)
             if ckpt and ckpt.model_checkpoint_path:
