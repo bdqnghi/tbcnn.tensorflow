@@ -115,14 +115,12 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
     optimizer = tf.train.AdamOptimizer(LEARN_RATE)
     train_step = optimizer.minimize(loss_node)
     
+   
+    # if restoring == False:
+    saver = tf.train.Saver(save_relative_paths=True)
     # Initialize the variables (i.e. assign their default value)
     init = tf.global_variables_initializer()
 
-    # if restoring == False:
-    saver = tf.train.Saver(save_relative_paths=True)
-   
-   
-  
     if opt.training:
         print("Begin training..........")
 
