@@ -50,24 +50,25 @@ def load_single_program(file_path):
     result = []
     labels = []
     nodes_ids_list = []
+    nodes_types_list = []
     splits = file_path.split("/")
-    # l = splits[len(splits)-2]
-    # if l == lang:
+    
     label = splits[len(splits)-2]
     # print(label)
     ast_representation = build_tree(file_path)
 
     if ast_representation.HasField("element"):
         root = ast_representation.element
-        tree, size, node_ids= _traverse_tree(root)
+        tree, size, node_ids, node_types = _traverse_tree(root)
 
     result.append({
         'tree': tree, 'label': label
     })
     labels.append(label)
     nodes_ids_list.append(node_ids)
+    nodes_types_list.append(node_types)
 
-    return result, labels, nodes_ids_list
+    return result, labels, nodes_ids_list, nodes_types_list
 
 def load_program_data(directory, n_classes):
 
@@ -79,15 +80,14 @@ def load_program_data(directory, n_classes):
             file_path = os.path.join(dir_path, file)
             # print(file_path)
             splits = file_path.split("/")
-            # l = splits[len(splits)-2]
-            # if l == lang:
+          
             label = splits[len(splits)-2]
             # print(label)
             ast_representation = build_tree(file_path)
 
             if ast_representation.HasField("element"):
                 root = ast_representation.element
-                tree, size, _ = _traverse_tree(root)
+                tree, size, _, _ = _traverse_tree(root)
 
             result.append({
                 'tree': tree, 'label': label
@@ -107,7 +107,8 @@ def _traverse_tree(root):
         "children": []
     }
     queue_json = [root_json]
-    nodes_id = []
+    node_ids = []
+    node_types = []
     # nodes_id.append(root.id)
     while queue:
       
@@ -115,7 +116,9 @@ def _traverse_tree(root):
         num_nodes += 1
         # print (_name(current_node))
         current_node_json = queue_json.pop(0)
-        nodes_id.append(current_node.id)
+
+        node_ids.append(current_node.id)
+        node_types.append(current_node.kind)
         
         children = [x for x in current_node.child]
         queue.extend(children)
@@ -134,7 +137,7 @@ def _traverse_tree(root):
             
             # print current_node_json
   
-    return root_json, num_nodes, nodes_id
+    return root_json, num_nodes, node_ids, node_types
 
 
 # if __name__ == "__main__":
