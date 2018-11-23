@@ -16,11 +16,11 @@ class MonoLanguageProgramData():
         cached_path = "cached"
         base_name = os.path.basename(path)
         if train_test_val == 0:
-           saved_input_filename = "%s/%d-train.pkl" % (cached_path, n_classes)
+           saved_input_filename = "%s/%s-%d-train.pkl" % (cached_path, path.split("/")[-2], n_classes)
         if train_test_val == 1:
-           saved_input_filename = "%s/%d-test.pkl" % (cached_path, n_classes)
+           saved_input_filename = "%s/%s-%d-test.pkl" % (cached_path, path.split("/")[-2], n_classes)
         if train_test_val == 2:
-           saved_input_filename = "%s/%d-val.pkl" % (cached_path, n_classes)
+           saved_input_filename = "%s/%s-%d-val.pkl" % (cached_path, path.split("/")[-2], n_classes)
         print(saved_input_filename)
         if os.path.exists(saved_input_filename):
             with open(saved_input_filename, 'rb') as file_handler:
@@ -46,6 +46,29 @@ def build_tree(script):
         data_source = pickle.load(file_handler)
     return data_source
 
+def load_single_program(file_path):
+    result = []
+    labels = []
+    nodes_ids_list = []
+    splits = file_path.split("/")
+    # l = splits[len(splits)-2]
+    # if l == lang:
+    label = splits[len(splits)-2]
+    # print(label)
+    ast_representation = build_tree(file_path)
+
+    if ast_representation.HasField("element"):
+        root = ast_representation.element
+        tree, size, node_ids= _traverse_tree(root)
+
+    result.append({
+        'tree': tree, 'label': label
+    })
+    labels.append(label)
+    nodes_ids_list.append(node_ids)
+
+    return result, labels, nodes_ids_list
+
 def load_program_data(directory, n_classes):
 
     result = []
@@ -64,7 +87,7 @@ def load_program_data(directory, n_classes):
 
             if ast_representation.HasField("element"):
                 root = ast_representation.element
-                tree, size = _traverse_tree(root)
+                tree, size, _ = _traverse_tree(root)
 
             result.append({
                 'tree': tree, 'label': label
@@ -84,14 +107,16 @@ def _traverse_tree(root):
         "children": []
     }
     queue_json = [root_json]
+    nodes_id = []
+    # nodes_id.append(root.id)
     while queue:
       
         current_node = queue.pop(0)
         num_nodes += 1
         # print (_name(current_node))
         current_node_json = queue_json.pop(0)
-
-
+        nodes_id.append(current_node.id)
+        
         children = [x for x in current_node.child]
         queue.extend(children)
        
@@ -106,12 +131,20 @@ def _traverse_tree(root):
 
             current_node_json['children'].append(child_json)
             queue_json.append(child_json)
+            
             # print current_node_json
   
-    return root_json, num_nodes
+    return root_json, num_nodes, nodes_id
 
 
 # if __name__ == "__main__":
-#     file = "ProgramData_pkl_train_test_val/train/1/1018.c.pb.pkl"
-#     source = build_tree(file)
-#     print(source)
+#     file = "github_cpp_pkl/1/12.cpp.pb.pkl"
+#     ast_representation = build_tree(file)
+#     print(ast_representation)
+
+#     if ast_representation.HasField("element"):
+#         root = ast_representation.element
+#         tree, size, nodes_id = _traverse_tree(root)
+#         print(nodes_id)
+#         print(len(nodes_id))
+#         print(size)
