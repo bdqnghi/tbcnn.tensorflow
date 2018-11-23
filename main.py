@@ -45,7 +45,7 @@ parser.add_argument('--training_percentage', type=float, default=1.0 ,help='perc
 parser.add_argument('--log_path', default="" ,help='log path for tensorboard')
 parser.add_argument('--epoch', type=int, default=0, help='epoch to test')
 parser.add_argument('--feature_size', type=int, default=100, help='epoch to test')
-parser.add_argument('--aggregation', type=int, default=0, help='0 for max pooling, 1 for global attention')
+parser.add_argument('--aggregation', type=int, default=1, help='0 for max pooling, 1 for global attention')
 parser.add_argument('--embeddings_directory', default="embedding/fast_pretrained_vectors.pkl", help='pretrained embeddings url, there are 2 objects in this file, the first object is the embedding matrix, the other is the lookup dictionary')
 
 opt = parser.parse_args()
@@ -96,9 +96,7 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
     optimizer = tf.train.AdamOptimizer(LEARN_RATE)
     train_step = optimizer.minimize(loss_node)
     
-   
-    # if restoring == False:
-    
+    saver = tf.train.Saver(save_relative_paths=True, max_to_keep=5)
     # Initialize the variables (i.e. assign their default value)
     init = tf.global_variables_initializer()
 
@@ -108,7 +106,7 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
         with tf.Session() as sess:
 
             sess.run(init)
-            saver = tf.train.Saver(save_relative_paths=True, max_to_keep=5)
+            
             if ckpt and ckpt.model_checkpoint_path:
                 print("Continue training with old model")
                 print("Checkpoint path : " + str(ckpt.model_checkpoint_path))
@@ -143,10 +141,7 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
                     )
                  
                     print('Epoch:', epoch, 'Step:', step, 'Loss:', err, 'Max nodes:', len(nodes[0]))
-                    # print(attention_score[0])
-                    # print(len(attention_score[0]))
-                    # print(pooling_output.shape)
-
+                   
                     if step % CHECKPOINT_EVERY == 0:
                         # save state so we can resume later
                         saver.save(sess, checkfile)
@@ -204,12 +199,16 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
                 sampling.gen_samples(test_trees, labels, embeddings, embedding_lookup), 1
             ):
                 nodes, children, batch_labels = batch
-                output = sess.run([out_node],
+                output, attention_score = sess.run([out_node, attention_score_node],
                     feed_dict={
                         nodes_node: nodes,
                         children_node: children,
                     }
                 )
+
+                print(attention_score[0])
+                print(len(attention_score[0]))
+             
                 # print(output)
                 correct_labels.append(np.argmax(batch_labels))
                 predictions.append(np.argmax(output))
@@ -281,18 +280,19 @@ def main(opt):
         embeddings, embed_lookup = pickle.load(fh,encoding='latin1')
        
     # if opt.training:
-
+    labels = [str(i) for i in range(1, opt.n_classes+1)]
     print("Loading train trees...")
     train_data_loader = MonoLanguageProgramData(opt.train_directory, 0, opt.n_classes)
-    train_trees, labels = train_data_loader.trees, train_data_loader.labels
+    train_trees, _ = train_data_loader.trees, train_data_loader.labels
+  
 
     val_data_loader = MonoLanguageProgramData(opt.val_directory, 2, opt.n_classes)
-    val_trees, labels = val_data_loader.trees, val_data_loader.labels
+    val_trees, _ = val_data_loader.trees, val_data_loader.labels
 
     test_data_loader = MonoLanguageProgramData(opt.test_directory, 1, opt.n_classes)
-    test_trees, labels = test_data_loader.trees, test_data_loader.labels
-    print("All training trees : " + str(len(train_trees)))
-    train_model(train_trees, test_trees, val_trees,  labels, embeddings, embed_lookup , opt) 
+    test_trees, _ = test_data_loader.trees, test_data_loader.labels
+ 
+    train_model(train_trees, test_trees, val_trees, labels, embeddings, embed_lookup , opt) 
 
     # if opt.testing:
 
