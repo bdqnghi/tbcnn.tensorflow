@@ -1,0 +1,62 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+<font color='#0000ff' weight='6.86636e-44' id='438'>/* 
+ *éµå¾ªç¥è¯å±äº«ï¼CC By2.5ï¼åè®®è¯¦è§
+ *http://creativecommons.org/licenses/by/2.5/cn/
+ */
+/**
+ * @file bubble-sort.cpp
+ * @Synopsis  åæ³¡æåº
+ * @author ç½ç£, luoleicn@gmail.com
+ * @version 
+ * @date 2011-04-18
+ */
+
+#include &lt;iostream&gt;
+#include &lt;iterator&gt;
+
+using namespace std;
+
+/* --------------------------------------------------------------------------*/
+/**
+ * @Synopsis  bubble_sort åæ³¡æåº
+ *
+ * @tparam T æ³ååæ°
+ * @Param T[] å¾æåºæ°ç»
+ * @Param size æ°ç»å¤§å°
+ */
+/* ----------------------------------------------------------------------------*/
+template&lt;class T&gt; void bubble_sort(T[], int);
+<font color='#0000ff' weight='1.51481e-05' id='222'>int main(int args, char** argv)
+{
+    int ia[] = {1, 9, 5, 4, 8, 0, 2, 3, 7, 9};
+    int size = sizeof(ia)/sizeof(int);
+
+    <font color='#0000ff' weight='1.51481e-05' id='160'>bubble_sort(ia, size)</font>;
+    <font color='#0000ff' weight='1.51481e-05' id='202'>copy(ia, ia+size, <font color='#0000ff' weight='1.51481e-05' id='197'>ostream_iterator&lt;int&gt;(cout, " ")</font>)</font>;
+    cout &lt;&lt; endl;
+    return 0;
+}
+
+</font><font color='#0000ff' weight='1.51481e-05' id='437'>template&lt;class T&gt; 
+void bubble_sort(T s[], int size)
+{
+    for (int i=0; i&lt;size; i++)
+    {
+        bool change = false;
+        int index = 0;
+        for (int j=index+1; j&lt;size-i; j++)
+        {
+            <font color='#0002ff' weight='0.00203398' id='407'>if (s[j] &lt; s[index])
+            {
+                <font color='#0000ff' weight='1.51481e-05' id='391'>swap(s[index], s[j])</font>;
+                change = true;
+            }
+            </font>index = j;
+        }
+        <font color='#0002ff' weight='0.00203398' id='431'>if (!change)
+            break;
+    }</font>
+}
+</font></font></font>
+</pre>

@@ -1,0 +1,43 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+<font color='#000000' weight='1.78562e+25' id='329'>#include&lt;iostream&gt;
+#include&lt;vector&gt;
+
+using namespace std;
+
+//Avg. Time Complexity: O(n^2)
+//Worst Time Complexity: O(n^2)
+//Extra Space Complexity: O(1)
+
+int main(){
+    
+    vector&lt;int&gt; a = {45, 56, 23, 8, 7, 4, 10, 34, 12, 25, 19};
+    int n = a.size();
+
+    //bubble sort
+
+    int temp=0;
+    bool swapped = true;
+
+    //each while loop puts maximum
+    //element in a[0,..,n-1] at its place
+    while(swapped){
+        <font color='#0000ff' weight='1.27364e-05' id='138'>swapped = false;
+        </font>for(int i=0; i&lt;n-1; i++){
+            <font color='#0001ff' weight='0.00171015' id='269'>if(a[i]&gt;a[i+1]){
+                //swap
+                <font color='#0000ff' weight='1.27364e-05' id='212'>temp = a[i];
+                </font><font color='#0000ff' weight='1.27364e-05' id='237'>a[i] = a[i+1];
+                </font><font color='#0000ff' weight='1.27364e-05' id='256'>a[i+1] = temp;
+                </font><font color='#0000ff' weight='1.27364e-05' id='265'>swapped = true;
+            }</font>
+        }</font>
+        <font color='#0000ff' weight='1.27364e-05' id='285'>n = n-1;
+    }</font>
+
+    for(int num:a) <font color='#0000ff' weight='1.27364e-05' id='314'>cout &lt;&lt; num &lt;&lt; " ";</font>
+    <font color='#0000ff' weight='1.27364e-05' id='325'>cout &lt;&lt; endl;
+
+}</font>
+</font></font>
+</pre>
