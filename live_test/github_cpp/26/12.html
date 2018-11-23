@@ -1,0 +1,36 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+<font color='#000000' weight='2.51225e+32' id='257'>//============================================================================
+// Name        : bubble-sort.cpp
+// Author      : Alex Kaiser
+// Date        :
+// Copyright   : 
+// Description : Implementation of bubble sort in C++
+//============================================================================
+
+#include "sort.h"
+
+<font color='#0000ff' weight='3.77095e-05' id='256'><font color='#0000ff' weight='2.10931e-07' id='15'>void 
+</font><font color='#0000ff' weight='2.10931e-07' id='22'>BubbleSort::sort</font>(<font color='#0000ff' weight='2.10931e-07' id='25'>int </font><font color='#0000ff' weight='2.10931e-07' id='30'>A[]</font>, <font color='#0000ff' weight='2.10931e-07' id='35'>int </font>size)			// main entry point
+{
+  /* Complete this function with the implementation of bubble sort algorithm 
+     Record number of comparisons in variable num_cmps of class Sort
+  */
+  num_cmps = 0;
+  for (<font color='#0000ff' weight='2.10931e-07' id='55'>int </font>k = 1; k &lt; size; k++) {
+		<font color='#0000ff' weight='2.10931e-07' id='84'>bool </font>cont = false;
+			for (<font color='#0000ff' weight='2.10931e-07' id='96'>int </font>j = 0; j &lt; size - k; j++){
+				if (<font color='#0000ff' weight='2.10931e-07' id='138'>A[j+1] </font>&lt; <font color='#0000ff' weight='2.10931e-07' id='148'>A[j]</font>) 
+				{
+			<font color='#0000ff' weight='2.10931e-07' id='154'>int </font>tmp = <font color='#0000ff' weight='2.10931e-07' id='164'>A[j]</font>; // swap A[j] and A[j+1]
+			<font color='#0000ff' weight='2.10931e-07' id='178'>A[j] </font>= <font color='#0000ff' weight='2.10931e-07' id='192'>A[j+1]</font>;
+			<font color='#0000ff' weight='2.10931e-07' id='207'>A[j+1] </font>= tmp;
+			cont = true;
+			}	
+			num_cmps++;
+			}
+	if (!cont) break; // stop sorting
+	}
+}
+</font></font></font>
+</pre>
