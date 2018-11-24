@@ -37,9 +37,6 @@ parser.add_argument('--n_classes', type=int, default=50, help='manual seed')
 parser.add_argument('--test_file', default="live_test/github_cpp/26/10.cpp", help='test program')
 parser.add_argument('--model_path', default="model/github_50_cpp", help='path to save the model')
 parser.add_argument('--n_hidden', type=int, default=50, help='number of hidden layers')
-parser.add_argument('--training', action="store_true",help='is training')
-parser.add_argument('--testing', action="store_true",help='is testing')
-parser.add_argument('--training_percentage', type=float, default=1.0 ,help='percentage of data use for training')
 parser.add_argument('--log_path', default="" ,help='log path for tensorboard')
 parser.add_argument('--epoch', type=int, default=0, help='epoch to test')
 parser.add_argument('--feature_size', type=int, default=100, help='epoch to test')
@@ -49,6 +46,10 @@ parser.add_argument('--embeddings_directory', default="embedding/fast_pretrained
 
 opt = parser.parse_args()
 
+if not os.path.isdir("cached"):
+    os.mkdir("cached")
+
+
 def generate_pb(src_path):
     splits = src_path.split(".")
     pb_path = os.path.join(splits[0] + ".pb")
@@ -56,12 +57,21 @@ def generate_pb(src_path):
     os.system(cmd)
     return pb_path
 
-def generate_visualization(pkl_path):
+def generate_visualization_accumulation(pkl_path):
     splits = pkl_path.split(".")
-    attention_path = os.path.join(splits[0] + "_raw_attention_without_node_type.txt")
+    attention_path = os.path.join(splits[0] + "_raw_attention_without_node_type.csv")
     pb_path = os.path.join(splits[0] + ".pb")
-    html_path = os.path.join(splits[0] + ".html")
-    cmd = "docker run --rm -v $(pwd):/e -it yijun/fast:built -H -a -t -Y " + attention_path + " " + pb_path  + " > " + html_path
+    html_path = os.path.join(splits[0] + "_accumulation.html")
+    cmd = "docker run --rm -v $(pwd):/e -it yijun/fast:built -H -a -t -y " + attention_path + " " + pb_path  + " > " + html_path
+    os.system(cmd)
+    return html_path
+
+def generate_visualization_normal(pkl_path):
+    splits = pkl_path.split(".")
+    attention_path = os.path.join(splits[0] + "_raw_attention_without_node_type.csv")
+    pb_path = os.path.join(splits[0] + ".pb")
+    html_path = os.path.join(splits[0] + "_normal.html")
+    cmd = "docker run --rm -v $(pwd):/e -it yijun/fast:built -H -t -y " + attention_path + " " + pb_path  + " > " + html_path
     os.system(cmd)
     return html_path
 
@@ -145,8 +155,8 @@ def live_test(path, test_trees, labels, node_ids, node_types, embeddings, embedd
             node_ids = node_ids[0]
             node_types = node_types[0]
 
-            print(output)
-            print(np.argmax(output))
+            print("Actual classes : " + str(np.argmax(batch_labels)+1))
+            print("Predicted classes : " + str(np.argmax(output)+1))
 
             max_node = len(nodes[0])
 
@@ -171,14 +181,14 @@ def live_test(path, test_trees, labels, node_ids, node_types, embeddings, embedd
                 node_types.append(node_type)
                 attention_score.append(element[1])
 
-            attention_file_path_raw = splits[0] + "_raw_attention_with_node_type.txt"
+            attention_file_path_raw = splits[0] + "_raw_attention_with_node_type.csv"
 
             with open(attention_file_path_raw,"w") as f:
                 for i, score in enumerate(attention_score):
                     line = str(node_ids[i]) + "," + str(node_types[i])  + "," + str(score)
                     f.write("%s\n" % line)
 
-            attention_file_path_raw_no_node_type = splits[0] + "_raw_attention_without_node_type.txt"
+            attention_file_path_raw_no_node_type = splits[0] + "_raw_attention_without_node_type.csv"
 
             with open(attention_file_path_raw_no_node_type,"w") as f:
                 for i, score in enumerate(attention_score):
@@ -188,19 +198,20 @@ def live_test(path, test_trees, labels, node_ids, node_types, embeddings, embedd
             attention_score = scale_attention_score(attention_score, 100)
             scale_attention_score_by_group(attention_score)
    
-            attention_file_path = splits[0] + "_scaled_attention_with_node_type.txt"
+            attention_file_path = splits[0] + "_scaled_attention_with_node_type.csv"
             with open(attention_file_path,"w") as f:
                 for i, score in enumerate(attention_score):
                     line = str(node_ids[i]) + "," + str(node_types[i])  + "," + str(score)
                     f.write("%s\n" % line)
 
-            attention_file_path_no_node_type = splits[0] + "_scaled_attention_without_node_type.txt"
+            attention_file_path_no_node_type = splits[0] + "_scaled_attention_without_node_type.csv"
             with open(attention_file_path_no_node_type,"w") as f:
                 for i, score in enumerate(attention_score):
                     line = str(node_ids[i]) + "," + str(score)
                     f.write("%s\n" % line)
 
-            generate_visualization(path)
+            generate_visualization_accumulation(path)
+            generate_visualization_normal(path)
 
             correct_labels.append(np.argmax(batch_labels))
             predictions.append(np.argmax(output))
@@ -223,10 +234,7 @@ def main(opt):
 
     # an array of only 1 tree, just wrap it into 1 more dimension to make it consistent with the training process
     test_trees, _ , node_ids, node_types = load_single_program(pkl_path)
-    labels = ['34', '41', '31', '1', '21', '42', '24', '45', '12', '26', '18', '2', '43', '13', '8', '50', '9', '17', '25', '44', '19', '36', '15', '4', '35', '37', '38', '14', '33', '3', '23', '28', '46', '48', '22', '30', '39', '6', '47', '7', '49', '40', '10', '20', '29', '5', '11', '32', '16', '27']
-
-    # labels = list(set(labels))
-    print(labels)
+    labels = [str(i) for i in range(1, opt.n_classes+1)]
 
     live_test(pkl_path, test_trees, labels, node_ids, node_types, embeddings, embed_lookup , opt)
  
