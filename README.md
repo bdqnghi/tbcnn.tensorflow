@@ -23,3 +23,6 @@ There is a pretrained model in "model/github_50_cpp_new" for the Github C++ data
 - 10_accumulation.html: the visual reprentation of the important nodes, by spreading the score of a parent node to its children
 and visualize on the accumulated score
 
+### Note
+
+- If you run any of the above scripts for the first time, it may take a while since the code needs to load the data and do the caching. From the second time, it will be much faster, since the data will be loaded from the cache.
