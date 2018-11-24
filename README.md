@@ -32,3 +32,4 @@ and visualize on the accumulated score
 ### Note
 
 - If you run any of the above scripts for the first time, it may take a while since the code needs to load the data and do the caching. From the second time, it will be much faster, since the data will be loaded from the cache.
+- One can check the node type in the file src_node_map.tsv
