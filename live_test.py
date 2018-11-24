@@ -15,6 +15,7 @@ from sklearn.metrics import classification_report, confusion_matrix, accuracy_sc
 from data_loader import load_program_data
 from data_loader import MonoLanguageProgramData
 from data_loader import load_single_program
+from data_loader import build_tree
 import argparse
 import random
 import shutil
@@ -68,7 +69,7 @@ def generate_visualization_accumulation(pkl_path):
 
 def generate_visualization_normal(pkl_path):
     splits = pkl_path.split(".")
-    attention_path = os.path.join(splits[0] + "_raw_attention_without_node_type.csv")
+    attention_path = os.path.join(splits[0] + "_scaled_attention_without_node_type.csv")
     pb_path = os.path.join(splits[0] + ".pb")
     html_path = os.path.join(splits[0] + "_normal.html")
     cmd = "docker run --rm -v $(pwd):/e -it yijun/fast:built -H -t -y " + attention_path + " " + pb_path  + " > " + html_path
@@ -138,8 +139,7 @@ def live_test(path, test_trees, labels, node_ids, node_types, embeddings, embedd
             print("Checkpoint path : " + str(ckpt.model_checkpoint_path))
             saver.restore(sess, ckpt.model_checkpoint_path)
 
-        correct_labels = []
-        predictions = []
+       
         print('Computing training accuracy...')
         for batch in sampling.batch_samples(
             sampling.gen_samples(test_trees, labels, embeddings, embedding_lookup), 1
@@ -194,9 +194,10 @@ def live_test(path, test_trees, labels, node_ids, node_types, embeddings, embedd
                 for i, score in enumerate(attention_score):
                     line = str(node_ids[i]) + "," + str(score)
                     f.write("%s\n" % line)
-          
-            attention_score = scale_attention_score(attention_score, 100)
-            scale_attention_score_by_group(attention_score)
+            
+            attention_score = scale_attention_score_by_group(attention_score)
+            # attention_score = scale_attention_score(attention_score, 50)
+           
    
             attention_file_path = splits[0] + "_scaled_attention_with_node_type.csv"
             with open(attention_file_path,"w") as f:
@@ -213,14 +214,7 @@ def live_test(path, test_trees, labels, node_ids, node_types, embeddings, embedd
             generate_visualization_accumulation(path)
             generate_visualization_normal(path)
 
-            correct_labels.append(np.argmax(batch_labels))
-            predictions.append(np.argmax(output))
-
-        target_names = list(labels)
-        print('Accuracy:', accuracy_score(correct_labels, predictions))
-        print(classification_report(correct_labels, predictions, target_names=target_names))
-        print(confusion_matrix(correct_labels, predictions))
-
+      
 
 def main(opt):
 
@@ -231,7 +225,10 @@ def main(opt):
 
     pb_path = generate_pb(opt.test_file)
     pkl_path = generate_pkl(pb_path)
-
+    ast_representation = build_tree(pkl_path)
+    ast_representation_path = pkl_path.split(".")[0] + "_ast.txt"
+    with open(ast_representation_path,"w") as f:
+        f.write(str(ast_representation))    
     # an array of only 1 tree, just wrap it into 1 more dimension to make it consistent with the training process
     test_trees, _ , node_ids, node_types = load_single_program(pkl_path)
     labels = [str(i) for i in range(1, opt.n_classes+1)]
