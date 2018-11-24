@@ -3,6 +3,12 @@ A modified version of Tree-based convolutional neural network using Global Atten
 
 ## How to run
 
+First, run:
+```
+python3 prepare_data.py
+```
+to extract the pretrained embedding.
+
 For general training and testing:
 ```
 python3 main.py --model_path "model/github_50_cpp_new" --n_classes 50 --training
