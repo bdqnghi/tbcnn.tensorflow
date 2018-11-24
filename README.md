@@ -18,7 +18,7 @@ For single file testing:
 ```
 python3 live_test.py --model_path "model/github_50_cpp_new" --n_classes 50 --test_file "live_test/github_cpp/26/10.cpp"
 ```
-There is a pretrained model in "model/github_50_cpp_new" for the Github C++ dataset. "The live_test" directory contains the  raw programming files for testing. Once running the above command, there will be 8 files generated in the same directory of the test file, e.g in this case, they are: 
+There is a pretrained model in "model/github_50_cpp_new" for the Github C++ dataset. "The live_test" directory contains the  raw programming files for testing. Once running the above command, there will be 9 files generated in the same directory of the test file, e.g in this case, they are: 
 - 10.pb: protobuf format of the AST
 - 10.pkl: pickle format of the protobuf
 - 10_ast.txt: string format of the AST, one can view the actual AST in this file
