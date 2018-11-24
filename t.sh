@@ -1,9 +1,6 @@
 if [ ! -f embedding/fast_pretrained_vectors.pkl ]; then
 	pip3 install --upgrade pip
-	pip3 install tensorflow
-	pip3 install sklearn
-	pip3 install tqdm
-	pip3 install msgpack
+	pip3 install -r requirements.txt
 	tar xvfz embedding/fast_pretrained_vectors.pkl.tar.gz
 	mv fast_pretrained_vectors.pkl embedding/
 fi
