@@ -5,9 +5,9 @@ A modified version of Tree-based convolutional neural network using Global Atten
 
 First, run:
 ```
-python3 prepare_data.py
+bash script.sh
 ```
-to extract the pretrained embedding.
+to extract the pretrained embedding and download the docker image of f-ast tool.
 
 For general training and testing:
 ```
