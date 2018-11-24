@@ -22,10 +22,10 @@ There is a pretrained model in "model/github_50_cpp_new" for the Github C++ data
 - 10.pb: protobuf format of the AST
 - 10.pkl: pickle format of the protobuf
 - 10_ast.txt: string format of the AST, one can view the actual AST in this file
-- 10_raw_attention_without_node_type.csv: a csv file contains the attention score for each node from the softmax layer (node_id, attention, score)
+- 10_raw_attention_without_node_type.csv: a csv file contains the attention score for each node from the softmax layer (node_id, score)
 - 10_raw_attention_with_node_type.csv: a csv file contains the attention score for each node from the softmax layer with the node type (node_id, node_type, score)
-- 10_scaled_attention_without_node_type.csv:  a csv file contains the attention score after scaled with Min-Max scaling to 0-1 (node_id, attention, score)
-- 10_scaled_attention_with_node_type.csv: a csv file contains the attention score after scaled with Min-Max scaling to 0-1, with node type (node_id, attention, score)
+- 10_scaled_attention_without_node_type.csv:  a csv file contains the attention score after scaled with Min-Max scaling to 0-1 (node_id, score)
+- 10_scaled_attention_with_node_type.csv: a csv file contains the attention score after scaled with Min-Max scaling to 0-1, with node type (node_id, node_type, score)
 - 10_normal.html: the visual reprentation of the important nodes by just taking the raw attention to visualize
 - 10_accumulation.html: the visual reprentation of the important nodes, by spreading the score of a parent node to its children
 and visualize on the accumulated score
