@@ -3,12 +3,12 @@ A modified version of Tree-based convolutional neural network using Global Atten
 
 ## How to run
 
-For training:
+For general training and testing:
 ```
 python3 main.py --model_path "model/github_50_cpp_new" --n_classes 50 --training
 ```
 
-For testing:
+For single file testing:
 ```
 python3 live_test.py --model_path "model/github_50_cpp_new" --n_classes 50 --test_file "live_test/github_cpp/26/10.cpp"
 ```
