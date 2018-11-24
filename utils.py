@@ -36,7 +36,17 @@ def scale_attention_score_by_group(attention_array):
   
     clusters = [list(g) for _, g in itertools.groupby(attention_array, lambda x: x)]
     average = float(1/len(clusters))
-    
+    # print(clusters)
+    # print("Num clusters : " + str(len(clusters)))
+
+    scaled_attention_array = []
+    for score in attention_array:
+        for i, cluster in enumerate(clusters):
+            if score in cluster:
+                temp_score = average * (len(clusters) - i)
+                scaled_attention_array.append(round(temp_score,5))
+    return scaled_attention_array
+
 
 def robust_scale(attention_score):
     attention_score = attention_score.reshape(attention_score.shape[1],1)
