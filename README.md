@@ -5,7 +5,7 @@ A modified version of Tree-based convolutional neural network using Global Atten
 
 For training:
 ```
-python main.py --model_path "model/104_pku" --n_classes 104 --training --aggregation 1 --niter 300
+python3 main.py --model_path "model/github_50_cpp_new" --n_classes 50 --training
 ```
 
 For testing:
