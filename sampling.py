@@ -42,7 +42,8 @@ def gen_samples(trees, labels, vectors, vector_lookup):
             nodes.append(vectors[int(n)])
         # print "children list length: " + str(len(children))
 
-        if len(nodes) > 4000 :
+        if len(nodes) > 5500 :
+            print("Skipping nodes : " + str(len(nodes)))
             if len(children) < 800:
                 yield (nodes, children, label)
         else:
