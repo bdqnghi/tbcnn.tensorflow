@@ -1,0 +1,296 @@
+#include <iostream>
+#include <cstdlib>
+#include <time.h>
+#include "F_Ordenação.h"
+#include <cstdlib>
+#include <algorithm>
+#include <stdio.h>
+
+using namespace std;
+using namespace ED;
+
+template <typename T>
+void preenche(T *vet,int n,int seed)
+{
+
+    RandomCL<T> gerador(seed);
+    for(int i=0; i<n; i++)
+    {
+        vet[i] = gerador.nextr();
+    }
+
+}
+void imprime_medias(int n ,int line, int *vmedias, int tam, int met,FILE *file)
+{
+
+    int  j; 
+
+    fprintf(file,"%d;", n);
+    cout<<endl;
+    cout<<"tamanho "<< line<<"    ";
+
+    for (j=0; j<met; j++){
+
+        fprintf(file,"%d;", *vmedias);
+        cout<<" "<<*vmedias++;
+
+    }
+    fprintf(file,"\n");
+    cout<<endl;
+
+
+}
+
+template<typename T>
+int Media_Heap_Sort(T*vet, int n)
+{
+
+    int seed;
+    int media_metodo=0, soma=0;
+    int start;
+    int tmili;
+
+    for(seed=0; seed<6; seed++)
+    {
+        preenche(vet, n, seed);
+
+        start = clock();
+        Ordenacao<T>::Heap_Sort(vet,n);
+        tmili = (int)((clock()-start)*1000/CLOCKS_PER_SEC);
+        soma += tmili;
+
+    }
+
+
+    media_metodo = soma/6;
+    return(media_metodo);
+
+}
+
+template<typename T>
+int Media_Quick_Sort(T *vet,int n)
+{
+
+    int seed;
+    int media_metodo=0, soma=0;
+    int start;
+    int tmili;
+
+    for(seed=0; seed<6; seed++)
+    {
+        preenche(vet, n, seed);
+
+        start = clock();
+        Ordenacao<T>::quick_Sort(vet,n);
+        tmili = (int)((clock()-start)*1000/CLOCKS_PER_SEC);
+        soma += tmili;
+    }
+
+
+    media_metodo = soma/6;
+    return(media_metodo);
+
+}
+
+template<typename T>
+int Media_Merge_Sort(T *vet,int n)
+{
+
+    int seed;
+    int media_metodo=0, soma = 0;
+    int start;
+    int tmili;
+
+    for(seed=0; seed<6; seed++)
+    {
+        preenche(vet, n, seed);
+
+        start = clock();
+        Ordenacao<T>::Merge_Sort(vet,n);
+        tmili = (int)((clock()-start)*1000/CLOCKS_PER_SEC);
+        soma += tmili;
+    }
+
+
+    media_metodo = soma/6;
+    return(media_metodo);
+
+}
+
+template<typename T>
+int Media_Shell_Sort_Shell(T *vet, int n)
+{
+
+    int seed;
+    int media_metodo=0, soma = 0;
+    int start;
+    int tmili;
+
+    for(seed=0; seed<6; seed++)
+    {
+
+        preenche(vet, n, seed);
+
+        start = clock();
+        Ordenacao<T>::Shell_Sort_shell(vet,n);
+        tmili = (int)((clock()-start)*1000/CLOCKS_PER_SEC);
+        soma += tmili;
+
+    }
+
+
+    media_metodo = soma/6;
+    return(media_metodo);
+
+}
+
+template <typename T>
+int Media_Shell_Sort_Knuth(T *vet,int n)
+{
+
+    int seed;
+    int media_metodo=0, soma=0;
+    int start;
+    int tmili;
+
+    for(seed=0; seed<6; seed++)
+    {
+
+        preenche(vet, n, seed);
+
+        start = clock();
+        Ordenacao<T>::Shell_Sort_knuth(vet,n);
+        tmili = (int)((clock()-start)*1000/CLOCKS_PER_SEC);
+        soma += tmili;
+    }
+
+
+    media_metodo = soma/6;
+    return(media_metodo);
+
+}
+
+template <typename T>
+int Media_Shell_Sort_Pardons(T *vet, int n)
+{
+
+    int seed;
+    int media_metodo=0, soma = 0;
+    int start;
+    int tmili;
+
+    for(seed=0; seed<6; seed++)
+    {
+        preenche(vet, n, seed);
+
+        start = clock();
+        Ordenacao<T>::Shell_Sort_pardons(vet,n);
+        tmili = (int)((clock()-start)*1000/CLOCKS_PER_SEC);
+        soma += tmili;
+
+    }
+
+
+    media_metodo = soma/6;
+    return(media_metodo);
+
+}
+
+template<typename T>
+int Media_Quick_Sort_C(T *vet, int n)
+{
+
+    int seed;
+    int media_metodo=0, soma=0;
+    int start;
+    int tmili;
+
+    for(seed=0; seed<6; seed++)
+    {
+        preenche(vet, n, seed);
+
+        start = clock();
+        Ordenacao<T>::Quick_Sort_C(vet,n);
+        tmili = (int)((clock()-start)*1000/CLOCKS_PER_SEC);
+        soma += tmili;
+
+    }
+
+
+    media_metodo = soma/6;
+    return(media_metodo);
+
+}
+
+template<typename T>
+int Media_Sort_Cpp(T *vet, int n)
+{
+
+    int seed;
+    int media_metodo=0, soma=0;
+    int start;
+    int tmili;
+
+    for(seed=0; seed<6; seed++)
+    {
+        preenche(vet, n, seed);
+
+        start = clock();
+        Ordenacao<T>::Sort_Cpp(vet,n);
+        tmili = (int)((clock()-start)*1000/CLOCKS_PER_SEC);
+        soma += tmili;
+    }
+
+
+    media_metodo = soma/6;
+    return(media_metodo);
+
+}
+
+
+int main(int argc, char *argv[])
+{
+    int n_min, n_max;
+    n_min = 10000;   
+    n_max = 65610000; 
+
+    unsigned long int *vet = new unsigned long int[n_max];
+
+
+    int tam = 9;   
+    int met = 8;   
+
+    int medias[met]; 
+    int *vmedias = &medias[0];
+
+    FILE *file;
+    file=fopen("resultados.csv","w");
+    fprintf(file,"Tamanho; ShellSort-shell; ShellSort-Knuth; ShellSort-Pardons; MergeSort; HeapSort; QuickSort-C; QuickSort-C++; QuickSort-Pivo central ;\n");
+
+    int i, n;
+    n = n_min;
+
+    
+    for(i=0; i<tam; i++){
+
+        medias[0] = Media_Shell_Sort_Shell(vet, n);
+        medias[1] = Media_Shell_Sort_Knuth(vet, n);
+        medias[2] = Media_Shell_Sort_Pardons(vet, n);
+        medias[3] = Media_Merge_Sort(vet, n);
+        medias[4] = Media_Heap_Sort(vet, n);
+        medias[5] = Media_Quick_Sort_C(vet, n);
+        medias[6] = Media_Sort_Cpp(vet, n);
+        medias[7] = Media_Quick_Sort(vet, n);
+
+        imprime_medias(n,i, vmedias, tam, met, file);
+        n *= 3;
+
+    }
+    delete vet; 
+
+    fclose(file);
+    system("PAUSE");
+    system("cls");
+    return EXIT_SUCCESS;
+
+}

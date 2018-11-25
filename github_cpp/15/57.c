@@ -1,0 +1,524 @@
+
+
+#include <kamiMath.hpp>
+
+#include <kami/common/include/type.hpp>
+
+#include <matrix.hpp>
+#include <matrix.inl>
+
+KAMI_INTERNAL_MATRIX_EXPORT(int, 1, 1)
+KAMI_INTERNAL_MATRIX_EXPORT(int, 1, 2)
+KAMI_INTERNAL_MATRIX_EXPORT(int, 1, 3)
+KAMI_INTERNAL_MATRIX_EXPORT(int, 1, 4)
+KAMI_INTERNAL_MATRIX_EXPORT(int, 2, 1)
+KAMI_INTERNAL_MATRIX_EXPORT(int, 2, 2)
+KAMI_INTERNAL_MATRIX_EXPORT(int, 2, 3)
+KAMI_INTERNAL_MATRIX_EXPORT(int, 2, 4)
+KAMI_INTERNAL_MATRIX_EXPORT(int, 3, 1)
+KAMI_INTERNAL_MATRIX_EXPORT(int, 3, 2)
+KAMI_INTERNAL_MATRIX_EXPORT(int, 3, 3)
+KAMI_INTERNAL_MATRIX_EXPORT(int, 3, 4)
+KAMI_INTERNAL_MATRIX_EXPORT(int, 4, 1)
+KAMI_INTERNAL_MATRIX_EXPORT(int, 4, 2)
+KAMI_INTERNAL_MATRIX_EXPORT(int, 4, 3)
+KAMI_INTERNAL_MATRIX_EXPORT(int, 4, 4)
+
+KAMI_INTERNAL_MATRIX_EXPORT(unsigned int, 1, 1)
+KAMI_INTERNAL_MATRIX_EXPORT(unsigned int, 1, 2)
+KAMI_INTERNAL_MATRIX_EXPORT(unsigned int, 1, 3)
+KAMI_INTERNAL_MATRIX_EXPORT(unsigned int, 1, 4)
+KAMI_INTERNAL_MATRIX_EXPORT(unsigned int, 2, 1)
+KAMI_INTERNAL_MATRIX_EXPORT(unsigned int, 2, 2)
+KAMI_INTERNAL_MATRIX_EXPORT(unsigned int, 2, 3)
+KAMI_INTERNAL_MATRIX_EXPORT(unsigned int, 2, 4)
+KAMI_INTERNAL_MATRIX_EXPORT(unsigned int, 3, 1)
+KAMI_INTERNAL_MATRIX_EXPORT(unsigned int, 3, 2)
+KAMI_INTERNAL_MATRIX_EXPORT(unsigned int, 3, 3)
+KAMI_INTERNAL_MATRIX_EXPORT(unsigned int, 3, 4)
+KAMI_INTERNAL_MATRIX_EXPORT(unsigned int, 4, 1)
+KAMI_INTERNAL_MATRIX_EXPORT(unsigned int, 4, 2)
+KAMI_INTERNAL_MATRIX_EXPORT(unsigned int, 4, 3)
+KAMI_INTERNAL_MATRIX_EXPORT(unsigned int, 4, 4)
+
+KAMI_INTERNAL_MATRIX_EXPORT(long, 1, 1)
+KAMI_INTERNAL_MATRIX_EXPORT(long, 1, 2)
+KAMI_INTERNAL_MATRIX_EXPORT(long, 1, 3)
+KAMI_INTERNAL_MATRIX_EXPORT(long, 1, 4)
+KAMI_INTERNAL_MATRIX_EXPORT(long, 2, 1)
+KAMI_INTERNAL_MATRIX_EXPORT(long, 2, 2)
+KAMI_INTERNAL_MATRIX_EXPORT(long, 2, 3)
+KAMI_INTERNAL_MATRIX_EXPORT(long, 2, 4)
+KAMI_INTERNAL_MATRIX_EXPORT(long, 3, 1)
+KAMI_INTERNAL_MATRIX_EXPORT(long, 3, 2)
+KAMI_INTERNAL_MATRIX_EXPORT(long, 3, 3)
+KAMI_INTERNAL_MATRIX_EXPORT(long, 3, 4)
+KAMI_INTERNAL_MATRIX_EXPORT(long, 4, 1)
+KAMI_INTERNAL_MATRIX_EXPORT(long, 4, 2)
+KAMI_INTERNAL_MATRIX_EXPORT(long, 4, 3)
+KAMI_INTERNAL_MATRIX_EXPORT(long, 4, 4)
+
+KAMI_INTERNAL_MATRIX_EXPORT(unsigned long, 1, 1)
+KAMI_INTERNAL_MATRIX_EXPORT(unsigned long, 1, 2)
+KAMI_INTERNAL_MATRIX_EXPORT(unsigned long, 1, 3)
+KAMI_INTERNAL_MATRIX_EXPORT(unsigned long, 1, 4)
+KAMI_INTERNAL_MATRIX_EXPORT(unsigned long, 2, 1)
+KAMI_INTERNAL_MATRIX_EXPORT(unsigned long, 2, 2)
+KAMI_INTERNAL_MATRIX_EXPORT(unsigned long, 2, 3)
+KAMI_INTERNAL_MATRIX_EXPORT(unsigned long, 2, 4)
+KAMI_INTERNAL_MATRIX_EXPORT(unsigned long, 3, 1)
+KAMI_INTERNAL_MATRIX_EXPORT(unsigned long, 3, 2)
+KAMI_INTERNAL_MATRIX_EXPORT(unsigned long, 3, 3)
+KAMI_INTERNAL_MATRIX_EXPORT(unsigned long, 3, 4)
+KAMI_INTERNAL_MATRIX_EXPORT(unsigned long, 4, 1)
+KAMI_INTERNAL_MATRIX_EXPORT(unsigned long, 4, 2)
+KAMI_INTERNAL_MATRIX_EXPORT(unsigned long, 4, 3)
+KAMI_INTERNAL_MATRIX_EXPORT(unsigned long, 4, 4)
+
+KAMI_INTERNAL_MATRIX_EXPORT(float, 1, 1)
+KAMI_INTERNAL_MATRIX_EXPORT(float, 1, 2)
+KAMI_INTERNAL_MATRIX_EXPORT(float, 1, 3)
+KAMI_INTERNAL_MATRIX_EXPORT(float, 1, 4)
+KAMI_INTERNAL_MATRIX_EXPORT(float, 2, 1)
+KAMI_INTERNAL_MATRIX_EXPORT(float, 2, 2)
+KAMI_INTERNAL_MATRIX_EXPORT(float, 2, 3)
+KAMI_INTERNAL_MATRIX_EXPORT(float, 2, 4)
+KAMI_INTERNAL_MATRIX_EXPORT(float, 3, 1)
+KAMI_INTERNAL_MATRIX_EXPORT(float, 3, 2)
+KAMI_INTERNAL_MATRIX_EXPORT(float, 3, 3)
+KAMI_INTERNAL_MATRIX_EXPORT(float, 3, 4)
+KAMI_INTERNAL_MATRIX_EXPORT(float, 4, 1)
+KAMI_INTERNAL_MATRIX_EXPORT(float, 4, 2)
+KAMI_INTERNAL_MATRIX_EXPORT(float, 4, 3)
+KAMI_INTERNAL_MATRIX_EXPORT(float, 4, 4)
+
+KAMI_INTERNAL_MATRIX_EXPORT(double, 1, 1)
+KAMI_INTERNAL_MATRIX_EXPORT(double, 1, 2)
+KAMI_INTERNAL_MATRIX_EXPORT(double, 1, 3)
+KAMI_INTERNAL_MATRIX_EXPORT(double, 1, 4)
+KAMI_INTERNAL_MATRIX_EXPORT(double, 2, 1)
+KAMI_INTERNAL_MATRIX_EXPORT(double, 2, 2)
+KAMI_INTERNAL_MATRIX_EXPORT(double, 2, 3)
+KAMI_INTERNAL_MATRIX_EXPORT(double, 2, 4)
+KAMI_INTERNAL_MATRIX_EXPORT(double, 3, 1)
+KAMI_INTERNAL_MATRIX_EXPORT(double, 3, 2)
+KAMI_INTERNAL_MATRIX_EXPORT(double, 3, 3)
+KAMI_INTERNAL_MATRIX_EXPORT(double, 3, 4)
+KAMI_INTERNAL_MATRIX_EXPORT(double, 4, 1)
+KAMI_INTERNAL_MATRIX_EXPORT(double, 4, 2)
+KAMI_INTERNAL_MATRIX_EXPORT(double, 4, 3)
+KAMI_INTERNAL_MATRIX_EXPORT(double, 4, 4)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
