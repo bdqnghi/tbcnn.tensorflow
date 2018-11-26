@@ -1,0 +1,86 @@
+//
+//  LRU.cpp
+//  3
+//
+//  Created by Gregory Moon on 4/7/15.
+//  Copyright (c) 2015 Gregory Moon. All rights reserved.
+//
+
+#include "LRU.h"
+
+LRU::LRU(int cacheSize){
+    this->cacheSize = cacheSize;
+    numHits = 0;
+    numRequests = 0;
+    size = 0;
+}
+
+LRU::~LRU(){
+    
+}
+
+void LRU::setCacheSize(int cacheSize){
+    this->cacheSize = cacheSize;
+}
+
+void LRU::add(int page){
+    numRequests++;
+    
+    if(contains(page))
+        moveToBack(page);
+    else{
+        if(cache.size() < cacheSize){
+            itLocs[page] = cache.insert(cache.end(),page);
+            currPages[page] = true;
+            size++;
+        }
+        else
+            replacePage(page);
+    }
+}
+
+bool LRU::contains(int page){
+    if(currPages[page]){
+        numHits++;
+        return true;
+    }
+    
+    return false;
+}
+
+float LRU::getHitRatio(){
+    calculateHitRatio();
+        
+    return hitRatio;
+}
+
+void LRU::calculateHitRatio(){
+    hitRatio = (float)numHits/(float)numRequests * 100;
+}
+
+void LRU::moveToBack(int page){
+    cache.erase(itLocs[page]);
+    itLocs[page] = cache.insert(cache.end(),page);
+}
+
+void LRU::replacePage(int page){
+    int oldPage = cache.front();
+    
+    //lower memory use, higher runtime
+    //currPages.erase(oldPage);
+    
+    //higher memory use, lower runtime
+    removePage(oldPage);
+    
+    
+    currPages[page] = true;
+    
+    cache.pop_front();
+
+    itLocs[page] = cache.insert(cache.end(), page);
+}
+
+void LRU::removePage(int page){
+    currPages[page] = false;
+    size--;
+}
