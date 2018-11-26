@@ -223,6 +223,12 @@ def aggregation_layer(conv, w_attention, output_size, aggregation_type):
         aggregated_vector = tf.matmul(flat_conv, w_attention)
 
         attention_score = tf.reshape(aggregated_vector, [-1, max_tree_size, 1])
+
+        """A note here: softmax will distributed the weights to all of the nodes (sum of node weghts = 1),
+        an interesting finding is that for some nodes, the attention score will be very very small, i.e e-12, 
+        thus making parts of aggregated vector becomes near zero and affect on the learning (very slow convergence
+        - Better to use sigmoid"""
+
         attention_weights = tf.nn.sigmoid(attention_score)
         # attention_weights = tf.nn.softmax(attention_score,dim=1)
 
