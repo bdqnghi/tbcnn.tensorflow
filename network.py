@@ -18,8 +18,9 @@ def init_net(feature_size, label_size, output_size, weights, biases, aggregation
 
         if aggregation_type == 0:
             aggregation = pooling_layer(conv1)
+            attention_score = None
         else:
-            aggregation, attention_score = aggregation_layer(conv1, weights["w_attention"], output_size)
+            aggregation, attention_score = aggregation_layer(conv1, weights["w_attention"], output_size, aggregation_type)
         hidden = hidden_layer(aggregation, weights["w_hidden"], biases["b_hidden"])
 
     return nodes, children, hidden, attention_score
@@ -211,7 +212,7 @@ def eta_l(children, coef_t, coef_r):
             tf.multiply((1.0 - coef_t), (1.0 - coef_r)), mask, name='coef_l'
         )
 
-def aggregation_layer(conv, w_attention, output_size):
+def aggregation_layer(conv, w_attention, output_size, aggregation_type):
     # conv is (batch_size, max_tree_size, output_size)
     with tf.name_scope("global_attention"):
         batch_size = tf.shape(conv)[0]
@@ -223,7 +224,11 @@ def aggregation_layer(conv, w_attention, output_size):
         attention_score = tf.reshape(aggregated_vector, [-1, max_tree_size, 1])
         attention_weights = tf.nn.softmax(attention_score, dim=1)
 
-        weighted_average_nodes = tf.reduce_sum(tf.multiply(conv, attention_weights), axis=1)
+        # TODO: reduce_max vs reduce_sum vs reduce_mean
+        if aggregation_type == 1:
+            weighted_average_nodes = tf.reduce_sum(tf.multiply(conv, attention_weights), axis=1)
+        else:
+            weighted_average_nodes = tf.reduce_max(tf.multiply(conv, attention_weights), axis=1)
         return weighted_average_nodes, attention_weights
 
 def pooling_layer(nodes):
