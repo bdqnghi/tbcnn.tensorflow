@@ -218,11 +218,13 @@ def aggregation_layer(conv, w_attention, output_size, aggregation_type):
         batch_size = tf.shape(conv)[0]
         max_tree_size = tf.shape(conv)[1]
 
+        # (batch_size * max_tree_size, output_size)
         flat_conv = tf.reshape(conv, [-1, output_size])
         aggregated_vector = tf.matmul(flat_conv, w_attention)
 
         attention_score = tf.reshape(aggregated_vector, [-1, max_tree_size, 1])
-        attention_weights = tf.nn.softmax(attention_score, dim=1)
+        attention_weights = tf.nn.sigmoid(attention_score)
+        # attention_weights = tf.nn.softmax(attention_score,dim=1)
 
         # TODO: reduce_max vs reduce_sum vs reduce_mean
         if aggregation_type == 1:
