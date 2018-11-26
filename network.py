@@ -226,9 +226,15 @@ def aggregation_layer(conv, w_attention, output_size, aggregation_type):
 
         # TODO: reduce_max vs reduce_sum vs reduce_mean
         if aggregation_type == 1:
+            print("Using tf.reduce_sum...........")
             weighted_average_nodes = tf.reduce_sum(tf.multiply(conv, attention_weights), axis=1)
-        else:
+        if aggregation_type == 2:
+            print("Using tf.reduce_max...........")
             weighted_average_nodes = tf.reduce_max(tf.multiply(conv, attention_weights), axis=1)
+        if aggregation_type == 3:
+            print("Using tf.reduce_mean...........")
+            weighted_average_nodes = tf.reduce_mean(tf.multiply(conv, attention_weights), axis=1)
+
         return weighted_average_nodes, attention_weights
 
 def pooling_layer(nodes):

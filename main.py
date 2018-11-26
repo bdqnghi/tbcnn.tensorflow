@@ -28,15 +28,15 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--train_batch_size', type=int, default=15, help='train batch size')
 parser.add_argument('--test_batch_size', type=int, default=10, help='test batch size')
 parser.add_argument('--val_batch_size', type=int, default=10, help='val batch size')
-parser.add_argument('--niter', type=int, default=300, help='number of epochs to train for')
+parser.add_argument('--niter', type=int, default=1000, help='number of epochs to train for')
 parser.add_argument('--lr', type=float, default=0.01, help='learning rate')
 parser.add_argument('--cuda', action='store_true', help='enables cuda')
 parser.add_argument('--verbal', type=bool, default=True, help='print training info or not')
 parser.add_argument('--manualSeed', type=int, help='manual seed')
-parser.add_argument('--n_classes', type=int, default=10, help='manual seed')
-parser.add_argument('--train_directory', default="github_java_sort_pkl_train_test_val/train", help='train program data')
-parser.add_argument('--test_directory', default="github_java_sort_pkl_train_test_val/test", help='test program data')
-parser.add_argument('--val_directory', default="github_java_sort_pkl_train_test_val/val", help='validation program data')
+parser.add_argument('--n_classes', type=int, default=19, help='manual seed')
+parser.add_argument('--train_directory', default="github_java_pkl_train_test_val/train", help='train program data')
+parser.add_argument('--test_directory', default="github_java_pkl_train_test_val/test", help='test program data')
+parser.add_argument('--val_directory', default="github_java_pkl_train_test_val/val", help='validation program data')
 parser.add_argument('--model_path', default="model/3_pku", help='path to save the model')
 parser.add_argument('--n_hidden', type=int, default=50, help='number of hidden layers')
 parser.add_argument('--training', action="store_true",help='is training')
@@ -45,7 +45,7 @@ parser.add_argument('--training_percentage', type=float, default=1.0 ,help='perc
 parser.add_argument('--log_path', default="" ,help='log path for tensorboard')
 parser.add_argument('--epoch', type=int, default=0, help='epoch to test')
 parser.add_argument('--feature_size', type=int, default=100, help='epoch to test')
-parser.add_argument('--aggregation', type=int, default=1, help='0 for max pooling, 1 for attention with sum pooling, 2 for attention with max pooling')
+parser.add_argument('--aggregation', type=int, default=1, help='0 for max pooling, 1 for attention with sum pooling, 2 for attention with max pooling, 3 for attention with average pooling')
 parser.add_argument('--embeddings_directory', default="embedding/fast_pretrained_vectors.pkl", help='pretrained embeddings url, there are 2 objects in this file, the first object is the embedding matrix, the other is the lookup dictionary')
 
 opt = parser.parse_args()
@@ -58,6 +58,8 @@ if opt.aggregation == 1:
     print("Using attention with sum pooling...........")
 if opt.aggregation == 2:
     print("Using attention with max pooling...........")
+if opt.aggregation == 3:
+    print("Using attention with average pooling...........")
 # def train_model(opt):
 def train_model(train_trees, val_trees, labels, embeddings, embedding_lookup, opt):
     """Train a classifier to label ASTs"""
