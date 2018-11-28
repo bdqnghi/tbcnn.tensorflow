@@ -47,6 +47,15 @@ parser.add_argument('--embeddings_directory', default="embedding/fast_pretrained
 
 opt = parser.parse_args()
 
+if opt.aggregation == 0:
+    print("Using max pooling...........")
+if opt.aggregation == 1:
+    print("Using attention with sum pooling...........")
+if opt.aggregation == 2:
+    print("Using attention with max pooling...........")
+if opt.aggregation == 3:
+    print("Using attention with average pooling...........")
+
 if not os.path.isdir("cached"):
     os.mkdir("cached")
 
