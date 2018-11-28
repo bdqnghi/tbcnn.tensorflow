@@ -45,7 +45,7 @@ parser.add_argument('--training_percentage', type=float, default=1.0 ,help='perc
 parser.add_argument('--log_path', default="" ,help='log path for tensorboard')
 parser.add_argument('--epoch', type=int, default=0, help='epoch to test')
 parser.add_argument('--feature_size', type=int, default=100, help='epoch to test')
-parser.add_argument('--aggregation', type=int, default=1, help='0 for max pooling, 1 for attention with sum pooling, 2 for attention with max pooling, 3 for attention with average pooling')
+parser.add_argument('--aggregation', type=int, default=1, choices=range(0,4), help='0 for max pooling, 1 for attention with sum pooling, 2 for attention with max pooling, 3 for attention with average pooling')
 parser.add_argument('--embeddings_directory', default="embedding/fast_pretrained_vectors.pkl", help='pretrained embeddings url, there are 2 objects in this file, the first object is the embedding matrix, the other is the lookup dictionary')
 
 opt = parser.parse_args()
@@ -115,7 +115,7 @@ def train_model(train_trees, val_trees, labels, embeddings, embedding_lookup, op
     if opt.training:
         print("Begin training..........")
 
-        with tf.Session(config=tf.ConfigProto(log_device_placement=True)) as sess:
+        with tf.Session() as sess:
 
             sess.run(init)
             
