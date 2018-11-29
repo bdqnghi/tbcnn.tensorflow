@@ -17,6 +17,7 @@ def init_net(feature_size, label_size, output_size, weights, biases, aggregation
         #conv2 = conv_layer(1, 10, conv1, children, 100)
 
         if aggregation_type == 0:
+            print("Using max pooling...........")
             aggregation = pooling_layer(conv1)
             attention_score = None
         else:

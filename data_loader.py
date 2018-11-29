@@ -56,7 +56,6 @@ def load_single_program(file_path):
     label = splits[len(splits)-2]
     # print(label)
     ast_representation = build_tree(file_path)
-
     if ast_representation.HasField("element"):
         root = ast_representation.element
         tree, size, node_ids, node_types = _traverse_tree(root)
