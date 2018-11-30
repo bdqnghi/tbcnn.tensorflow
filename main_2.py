@@ -29,7 +29,6 @@ parser.add_argument('--test_batch_size', type=int, default=10, help='test batch 
 parser.add_argument('--val_batch_size', type=int, default=10, help='val batch size')
 parser.add_argument('--niter', type=int, default=300, help='number of epochs to train for')
 parser.add_argument('--lr', type=float, default=0.01, help='learning rate')
-parser.add_argument('--cuda', action='store_true', help='enables cuda')
 parser.add_argument('--verbal', type=bool, default=True, help='print training info or not')
 parser.add_argument('--manualSeed', type=int, help='manual seed')
 parser.add_argument('--n_classes', type=int, default=3, help='manual seed')
