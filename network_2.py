@@ -21,6 +21,7 @@ def init_net(feature_size, label_size, aggregation_type):
             aggregation = pooling_layer(conv1)
             attention_score = None
         else:
+            print("Using attention with pooling as the aggregation...........")
             aggregation, attention_score = aggregation_layer(conv1, 100)
         hidden = hidden_layer(aggregation, 100, label_size)
 
