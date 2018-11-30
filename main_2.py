@@ -45,8 +45,14 @@ parser.add_argument('--log_path', default="" ,help='log path for tensorboard')
 parser.add_argument('--epoch', type=int, default=0, help='epoch to test')
 parser.add_argument('--aggregation', type=int, default=0, help='0 for max pooling, 1 for global attention')
 parser.add_argument('--embeddings_directory', default="embedding/fast_pretrained_vectors.pkl", help='pretrained embeddings url, there are 2 objects in this file, the first object is the embedding matrix, the other is the lookup dictionary')
+parser.add_argument('--cuda', default="0",type=str, help='enables cuda')
 
 opt = parser.parse_args()
+
+os.environ['CUDA_VISIBLE_DEVICES'] = opt.cuda
+
+if not os.path.isdir("cached"):
+    os.mkdir("cached")
 
 if opt.aggregation == 0:
     print("Using max pooling...........")
@@ -90,114 +96,64 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
     optimizer = tf.train.AdamOptimizer(LEARN_RATE)
     train_step = optimizer.minimize(loss_node)
     
+     ### init the graph
+    sess = tf.Session()#config=tf.ConfigProto(device_count={'GPU':0}))
+    sess.run(tf.global_variables_initializer())
+
     # Initialize the variables (i.e. assign their default value)
     init = tf.global_variables_initializer()
 
-    saver = tf.train.Saver(save_relative_paths=True)
-        
+     with tf.name_scope('saver'):
+        saver = tf.train.Saver()
+        ckpt = tf.train.get_checkpoint_state(logdir)
+        if ckpt and ckpt.model_checkpoint_path:
+            print("Continue training with old model")
+            saver.restore(sess, ckpt.model_checkpoint_path)
+            for i, var in enumerate(saver._var_list):
+                print('Var {}: {}'.format(i, var))
+
     checkfile = os.path.join(logdir, 'cnn_tree.ckpt')
-    
-    ckpt = tf.train.get_checkpoint_state(logdir)
-    if ckpt and ckpt.model_checkpoint_path:
-        meta_file = os.path.join(logdir, "cnn_tree.ckpt.meta")
-        print("Restoring graph..........")
-        saver = tf.train.import_meta_graph(meta_file)
 
     if opt.training:
         print("Begin training..........")
+        num_batches = len(train_trees) // batch_size + (1 if len(train_trees) % batch_size != 0 else 0)
+        for epoch in range(1, epochs+1):
+            for i, batch in enumerate(sampling.batch_samples(
+                sampling.gen_samples(train_trees, labels, embeddings, embedding_lookup), batch_size
+            )):
+                nodes, children, batch_labels = batch
+                # print(len(batch_labels))
+                # print(len(batch_labels[0]))
+                step = (epoch - 1) * num_batches + i * BATCH_SIZE
 
-        with tf.Session() as sess:
+                if not nodes:
+                    continue # don't try to train on an empty batch
+                # print(batch_labels)
+                _, err, out = sess.run(
+                    [train_step, loss_node, out_node],
+                    feed_dict={
+                        nodes_node: nodes,
+                        children_node: children,
+                        labels_node: batch_labels
+                    }
+                )
+             
+                print('Epoch:', epoch, 'Step:', step, 'Loss:', err, 'Max nodes:', len(nodes[0]))
+                # print(attention_score[0])
+                # print(len(attention_score[0]))
+                # print(pooling_output.shape)
 
-            sess.run(init)
-            if ckpt and ckpt.model_checkpoint_path:
-                print("Continue training with old model")
-                print("Checkpoint path : " + str(ckpt.model_checkpoint_path))
-                saver.restore(sess, checkfile)
-            # saved_model.loader.load(sess, [tag_constants.TRAINING], savedmodel_path)
-
-            num_batches = len(train_trees) // batch_size + (1 if len(train_trees) % batch_size != 0 else 0)
-            for epoch in range(1, epochs+1):
-                for i, batch in enumerate(sampling.batch_samples(
-                    sampling.gen_samples(train_trees, labels, embeddings, embedding_lookup), batch_size
-                )):
-                    nodes, children, batch_labels = batch
-                    # print(len(batch_labels))
-                    # print(len(batch_labels[0]))
-                    step = (epoch - 1) * num_batches + i * BATCH_SIZE
-
-                    if not nodes:
-                        continue # don't try to train on an empty batch
-                    # print(batch_labels)
-                    _, err, out = sess.run(
-                        [train_step, loss_node, out_node],
-                        feed_dict={
-                            nodes_node: nodes,
-                            children_node: children,
-                            labels_node: batch_labels
-                        }
-                    )
+                if step % CHECKPOINT_EVERY == 0:
+                    # save state so we can resume later
+                    saver.save(sess, checkfile)
+                    # shutil.rmtree(savedmodel_path)
                  
-                    print('Epoch:', epoch, 'Step:', step, 'Loss:', err, 'Max nodes:', len(nodes[0]))
-                    # print(attention_score[0])
-                    # print(len(attention_score[0]))
-                    # print(pooling_output.shape)
-
-                    if step % CHECKPOINT_EVERY == 0:
-                        # save state so we can resume later
-                        saver.save(sess, checkfile)
-                        # shutil.rmtree(savedmodel_path)
-                     
-                        print('Checkpoint saved, epoch:' + str(epoch) + ', step: ' + str(step) + ', loss: ' + str(err) + '.')
-
-                correct_labels = []
-                predictions = []
-                for batch in sampling.batch_samples(
-                    sampling.gen_samples(val_trees, labels, embeddings, embedding_lookup), 1
-                ):
-                    nodes, children, batch_labels = batch
-                    output = sess.run([out_node],
-                        feed_dict={
-                            nodes_node: nodes,
-                            children_node: children,
-                        }
-                    )
-                    # print(output)
-                    correct_labels.append(np.argmax(batch_labels))
-                    predictions.append(np.argmax(output))
-
-                target_names = list(labels)
-                print('Accuracy:', accuracy_score(correct_labels, predictions))
-                print(classification_report(correct_labels, predictions, target_names=target_names))
-                print(confusion_matrix(correct_labels, predictions))
-
-            print("Finish all iters, storring the whole model..........")
-            saver.save(sess, checkfile)
-            # builder = saved_model.builder.SavedModelBuilder(savedmodel_path)
-            # signature = predict_signature_def(inputs={'nodes': nodes_node, "children": children_node},
-            #                                   outputs={'labels': labels_node})
-            # # using custom tag instead of: tags=[tag_constants.SERVING]
-            # builder.add_meta_graph_and_variables(sess=sess,
-            #                                      tags=[tag_constants.TRAINING],
-            #                                      signature_def_map={'predict': signature})
-            # builder.save()
-            # saved_model.simple_save(sess,savedmodel_path,inputs={'nodes': nodes_node, "children": children_node},
-                                              # outputs={'labels': labels_node})
-
-    if opt.testing:
-          with tf.Session() as sess:
-
-            sess.run(init)
-            ckpt = tf.train.get_checkpoint_state(logdir)
-            if ckpt and ckpt.model_checkpoint_path:
-                print("Continue training with old model")
-                print("Checkpoint path : " + str(ckpt.model_checkpoint_path))
-                saver.restore(sess, ckpt.model_checkpoint_path)
+                    print('Checkpoint saved, epoch:' + str(epoch) + ', step: ' + str(step) + ', loss: ' + str(err) + '.')
 
             correct_labels = []
             predictions = []
-            print('Computing training accuracy...')
             for batch in sampling.batch_samples(
-                sampling.gen_samples(test_trees, labels, embeddings, embedding_lookup), 1
+                sampling.gen_samples(val_trees, labels, embeddings, embedding_lookup), 1
             ):
                 nodes, children, batch_labels = batch
                 output = sess.run([out_node],
@@ -214,6 +170,20 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
             print('Accuracy:', accuracy_score(correct_labels, predictions))
             print(classification_report(correct_labels, predictions, target_names=target_names))
             print(confusion_matrix(correct_labels, predictions))
+
+        print("Finish all iters, storring the whole model..........")
+        saver.save(sess, checkfile)
+        # builder = saved_model.builder.SavedModelBuilder(savedmodel_path)
+        # signature = predict_signature_def(inputs={'nodes': nodes_node, "children": children_node},
+        #                                   outputs={'labels': labels_node})
+        # # using custom tag instead of: tags=[tag_constants.SERVING]
+        # builder.add_meta_graph_and_variables(sess=sess,
+        #                                      tags=[tag_constants.TRAINING],
+        #                                      signature_def_map={'predict': signature})
+        # builder.save()
+        # saved_model.simple_save(sess,savedmodel_path,inputs={'nodes': nodes_node, "children": children_node},
+                                          # outputs={'labels': labels_node})
+
 
 # def test_model(trees, labels, embeddings, embedding_lookup, opt):
     
