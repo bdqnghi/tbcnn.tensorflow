@@ -103,7 +103,7 @@ def train_model(train_trees, test_trees, val_trees, labels, embeddings, embeddin
     # Initialize the variables (i.e. assign their default value)
     init = tf.global_variables_initializer()
 
-     with tf.name_scope('saver'):
+    with tf.name_scope('saver'):
         saver = tf.train.Saver()
         ckpt = tf.train.get_checkpoint_state(logdir)
         if ckpt and ckpt.model_checkpoint_path:
