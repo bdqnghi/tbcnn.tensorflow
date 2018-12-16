@@ -5,7 +5,7 @@ import math
 import tensorflow as tf
 
 
-def init_net(feature_size, label_size, output_size, weights, biases, aggregation_type):
+def init_net(feature_size, label_size, output_size, weights, biases, aggregation_type, distributed_function):
     """Initialize an empty network."""
 
     with tf.name_scope('inputs'):
@@ -21,7 +21,7 @@ def init_net(feature_size, label_size, output_size, weights, biases, aggregation
             aggregation = pooling_layer(conv1)
             attention_score = None
         else:
-            aggregation, attention_score = aggregation_layer(conv1, weights["w_attention"], output_size, aggregation_type)
+            aggregation, attention_score = aggregation_layer(conv1, weights["w_attention"], output_size, aggregation_type, distributed_function)
         hidden = hidden_layer(aggregation, 100, label_size)
 
     return nodes, children, hidden, attention_score

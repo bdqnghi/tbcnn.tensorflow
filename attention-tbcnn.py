@@ -103,7 +103,8 @@ def train_model(train_trees, val_trees, labels, embeddings, embedding_lookup, op
         opt.feature_size,
         weights,
         biases,
-        opt.aggregation
+        opt.aggregation,
+        opt.distributed_function
     )
    
     out_node = network.out_layer(hidden_node)
