@@ -27,6 +27,26 @@ def init_net(feature_size, label_size, aggregation_type):
 
     return nodes, children, hidden, attention_score
 
+def init_net_for_siamese(feature_size, aggregation_type):
+    """Initialize an empty network."""
+
+    with tf.name_scope("inputs"):
+        nodes = tf.placeholder(tf.float32, shape=(None, None, feature_size), name='tree')
+        children = tf.placeholder(tf.int32, shape=(None, None, None), name='children')
+
+    with tf.name_scope("network"):
+        conv1 = conv_layer(1, 100, nodes, children, feature_size)
+       
+        if aggregation_type == 0:
+            print("Using max pooling as the aggregation...........")
+            aggregation = pooling_layer(conv1)
+            attention_score = None
+        else:
+            print("Using attention with pooling as the aggregation...........")
+            aggregation, attention_score = aggregation_layer(conv1, 100, aggregation_type)
+     
+
+    return nodes, children, aggregation, attention_score
 
 
 def conv_layer(num_conv, output_size, nodes, children, feature_size):
@@ -44,15 +64,14 @@ def conv_layer(num_conv, output_size, nodes, children, feature_size):
 def conv_node(nodes, children, feature_size, output_size):
     """Perform convolutions over every batch sample."""
     with tf.name_scope('conv_node'):
-        std = 1.0 / math.sqrt(feature_size)
+        initializer = tf.contrib.layers.xavier_initializer()
         w_t, w_l, w_r = (
-            tf.Variable(tf.truncated_normal([feature_size, output_size], stddev=std), name='Wt'),
-            tf.Variable(tf.truncated_normal([feature_size, output_size], stddev=std), name='Wl'),
-            tf.Variable(tf.truncated_normal([feature_size, output_size], stddev=std), name='Wr'),
+            tf.Variable(initializer([feature_size, output_size]), name='Wt'),
+            tf.Variable(initializer([feature_size, output_size]), name='Wl'),
+            tf.Variable(initializer([feature_size, output_size]), name='Wr'),
         )
-        init = tf.truncated_normal([output_size,], stddev=math.sqrt(2.0/feature_size))
-        #init = tf.zeros([output_size,])
-        b_conv = tf.Variable(init, name='b_conv')
+        
+        b_conv = tf.Variable(initializer([output_size,]), name='b_conv')
 
         return conv_step(nodes, children, feature_size, w_t, w_r, w_l, b_conv)
 
@@ -231,8 +250,8 @@ def eta_l(children, coef_t, coef_r):
 def aggregation_layer(conv, output_size, aggregation_type):
     # conv is (batch_size, max_tree_size, output_size)
     with tf.name_scope("global_attention"):
-        init = tf.truncated_normal([output_size,1], stddev=math.sqrt(2.0/output_size))
-        w_attention = tf.Variable(init, name='w_attention')
+        initializer = tf.contrib.layers.xavier_initializer()
+        w_attention = tf.Variable(initializer([output_size,1]), name='w_attention')
 
         batch_size = tf.shape(conv)[0]
         max_tree_size = tf.shape(conv)[1]
@@ -269,19 +288,10 @@ def lrelu(x, alpha):
 def hidden_layer(pooled, input_size, output_size):
     """Create a hidden feedforward layer."""
     with tf.name_scope("hidden"):
-        weights = tf.Variable(
-            tf.truncated_normal(
-                [input_size, output_size], stddev=1.0 / math.sqrt(input_size)
-            ),
-            name='weights'
-        )
-
-        init = tf.truncated_normal([output_size,], stddev=math.sqrt(2.0/input_size))
-        #init = tf.zeros([output_size,])
-        biases = tf.Variable(init, name='biases')
-
-        # return tf.nn.lrelu(tf.matmul(pooled, weights) + biases)
-        return lrelu(tf.matmul(pooled, weights) + biases, 0.01)
+        initializer = tf.contrib.layers.xavier_initializer()
+        weights = tf.Variable(initializer([input_size, output_size]), name='weights')
+        biases = tf.Variable(initializer([output_size,]), name='biases')
+        return tf.nn.leaky_relu(tf.matmul(pooled, weights) + biases)
 
 
 def loss_layer(logits_node, label_size):

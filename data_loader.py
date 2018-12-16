@@ -9,6 +9,7 @@ from tqdm import *
 import random
 import pickle
 import msgpack
+import csv
 
 class MonoLanguageProgramData():
    
@@ -38,6 +39,44 @@ class MonoLanguageProgramData():
         self.trees = trees
         self.labels = labels
 
+class CrossLanguageProgramData():
+   
+    def __init__(self, path):
+        pairs = load_pairwise_programs(path)
+        random.shuffle(pairs)
+
+        left_trees = []
+        right_trees = []
+        labels = []
+        for i in trange(len(pairs)):
+            left_trees.append(pairs[i][0])
+            right_trees.append(pairs[i][1])
+            labels.append(pairs[i][2])
+
+        self.left_trees = left_trees
+        self.right_trees = right_trees
+        self.labels = labels
+
+
+def load_pairwise_programs(path):
+    print("Loading pairwise data............")
+    pairs = []
+    with open(path,"r") as f:
+      
+        csv_reader = csv.reader(f, delimiter=',')
+        count = 0
+        for row in tqdm(csv_reader):
+            if count < 5000:
+                left_path = row[0]
+                right_path = row[1]
+                left_tree = load_single_program(left_path)
+                right_tree = load_single_program(right_path)
+                pairs.append((left_tree,right_tree,int(row[2])))
+            count += 1
+            # print(count)
+            # labels.append(row[2])
+
+    return pairs
 
 def build_tree(script):
     """Builds an AST from a script."""
@@ -46,7 +85,23 @@ def build_tree(script):
         data_source = pickle.load(file_handler)
     return data_source
 
+
 def load_single_program(file_path):
+    splits = file_path.split("/")
+    label = splits[len(splits)-2]
+    # print(label)
+    ast_representation = build_tree(file_path)
+    if ast_representation.HasField("element"):
+        root = ast_representation.element
+        tree, size, node_ids, node_types = _traverse_tree(root)
+
+    result = {
+        'tree': tree, 'label': label
+    }
+  
+    return result
+
+def load_single_program_for_live_test(file_path):
     result = []
     labels = []
     nodes_ids_list = []
