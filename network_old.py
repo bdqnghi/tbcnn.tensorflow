@@ -5,7 +5,7 @@ import math
 import tensorflow as tf
 
 
-def init_net(feature_size, label_size, output_size, weights, biases, aggregation_type):
+def init_net(feature_size, label_size, aggregation_type, distributed_function):
     """Initialize an empty network."""
 
     with tf.name_scope('inputs'):
@@ -13,36 +13,83 @@ def init_net(feature_size, label_size, output_size, weights, biases, aggregation
         children = tf.placeholder(tf.int32, shape=(None, None, None), name='children')
 
     with tf.name_scope('network'):
-        conv1 = conv_layer(1, output_size, nodes, children, feature_size, weights["w_t"], weights["w_l"], weights["w_r"], biases["b_conv"])
+        conv1 = conv_layer(1, 100, nodes, children, feature_size)
         #conv2 = conv_layer(1, 10, conv1, children, 100)
 
         if aggregation_type == 0:
-            print("Using max pooling...........")
+            print("Using max pooling as the aggregation...........")
             aggregation = pooling_layer(conv1)
             attention_score = None
         else:
-            aggregation, attention_score = aggregation_layer(conv1, weights["w_attention"], output_size, aggregation_type)
-        hidden = hidden_layer(aggregation, weights["w_hidden"], biases["b_hidden"])
+            print("Using attention with pooling as the aggregation...........")
+            aggregation, attention_score = aggregation_layer(conv1, 100, aggregation_type, distributed_function)
+        hidden = hidden_layer(aggregation, 100, label_size)
 
     return nodes, children, hidden, attention_score
 
+def init_net_for_siamese(feature_size, aggregation_type, distributed_function):
+    """Initialize an empty network."""
+
+    with tf.name_scope("left_inputs"):
+        left_nodes = tf.placeholder(tf.float32, shape=(None, None, feature_size), name='tree')
+        left_children = tf.placeholder(tf.int32, shape=(None, None, None), name='children')
+
+    with tf.name_scope("right_inputs"):
+        right_nodes = tf.placeholder(tf.float32, shape=(None, None, feature_size), name='tree')
+        right_children = tf.placeholder(tf.int32, shape=(None, None, None), name='children')
+
+    with tf.name_scope("network"):
+        left_conv = conv_layer(1, 100, left_nodes, left_children, feature_size)
+        righ_conv = conv_layer(1, 100, left_nodes, left_children, feature_size)
+    left_aggregation_node, left_attention_score = extract_features(conv, left_nodes, left_children, feature_size, aggregation_type, distributed_function)
+    right_aggregation_node, right_attention_score = extract_features(left_nodes, left_children, feature_size, aggregation_type, distributed_function)
+
+    merge_node = tf.concat([left_aggregation_node, right_aggregation_node], -1)
+    hidden_node = hidden_layer(merge_node, 200, 2)
+
+    return left_nodes, left_children, right_nodes, right_children, hidden_node, left_attention_score, right_attention_score
 
 
-def conv_layer(num_conv, output_size, nodes, children, feature_size, w_t, w_r, w_l, b_conv):
+def extract_features(con, nodes, children, feature_size, aggregation_type, distributed_function):
+  
+    if aggregation_type == 0:
+        print("Using max pooling as the aggregation...........")
+        aggregation = pooling_layer(conv1)
+        attention_score = None
+    else:
+        print("Using attention with pooling as the aggregation...........")
+        aggregation, attention_score = aggregation_layer(conv, 100, aggregation_type, distributed_function)
+
+    return aggregation, attention_score
+
+def conv_layer(num_conv, output_size, nodes, children, feature_size):
     """Creates a convolution layer with num_conv convolutions merged together at
     the output. Final output will be a tensor with shape
     [batch_size, num_nodes, output_size * num_conv]"""
 
     with tf.name_scope('conv_layer'):
-        nodes = [           
-            conv_step(nodes, children, feature_size, w_t, w_r, w_l, b_conv)
+        nodes = [
+            conv_node(nodes, children, feature_size, output_size)
             for _ in range(num_conv)
         ]
         return tf.concat(nodes, axis=2)
 
+def conv_node(nodes, children, feature_size, output_size):
+    """Perform convolutions over every batch sample."""
+    with tf.name_scope('conv_node'):
+        initializer = tf.contrib.layers.xavier_initializer()
+        w_t, w_l, w_r = (
+            tf.Variable(initializer([feature_size, output_size]), name='w_t'),
+            tf.Variable(initializer([feature_size, output_size]), name='w_l'),
+            tf.Variable(initializer([feature_size, output_size]), name='w_r'),
+        )
+        
+        b_conv = tf.Variable(initializer([output_size,]), name='b_conv')
+
+        return conv_step(nodes, children, feature_size, w_t, w_r, w_l, b_conv)
+
 def conv_step(nodes, children, feature_size, w_t, w_r, w_l, b_conv):
     """Convolve a batch of nodes and children.
-
     Lots of high dimensional tensors in this function. Intuitively it makes
     more sense if we did this work with while loops, but computationally this
     is more efficient. Don't try to wrap your head around all the tensor dot
@@ -213,27 +260,26 @@ def eta_l(children, coef_t, coef_r):
             tf.multiply((1.0 - coef_t), (1.0 - coef_r)), mask, name='coef_l'
         )
 
-def aggregation_layer(conv, w_attention, output_size, aggregation_type):
+def aggregation_layer(conv, output_size, aggregation_type, distributed_function):
     # conv is (batch_size, max_tree_size, output_size)
     with tf.name_scope("global_attention"):
+        initializer = tf.contrib.layers.xavier_initializer()
+        w_attention = tf.Variable(initializer([output_size,1]), name='w_attention')
+
         batch_size = tf.shape(conv)[0]
         max_tree_size = tf.shape(conv)[1]
 
-        # (batch_size * max_tree_size, output_size)
         flat_conv = tf.reshape(conv, [-1, output_size])
         aggregated_vector = tf.matmul(flat_conv, w_attention)
 
         attention_score = tf.reshape(aggregated_vector, [-1, max_tree_size, 1])
 
-        """A note here: softmax will distributed the weights to all of the nodes (sum of node weghts = 1),
-        an interesting finding is that for some nodes, the attention score will be very very small, i.e e-12, 
-        thus making parts of aggregated vector becomes near zero and affect on the learning (very slow convergence
-        - Better to use sigmoid"""
+        if distributed_function == 0:
+            attention_weights = tf.nn.softmax(attention_score, dim=1)
+        if distributed_function == 1:
+            attention_weights = tf.nn.sigmoid(attention_score)
 
-        attention_weights = tf.nn.sigmoid(attention_score)
-        # attention_weights = tf.nn.softmax(attention_score,dim=1)
-
-        # TODO: reduce_max vs reduce_sum vs reduce_mean
+         # TODO: reduce_max vs reduce_sum vs reduce_mean
         if aggregation_type == 1:
             print("Using tf.reduce_sum...........")
             weighted_average_nodes = tf.reduce_sum(tf.multiply(conv, attention_weights), axis=1)
@@ -256,11 +302,13 @@ def pooling_layer(nodes):
 def lrelu(x, alpha):
     return tf.nn.relu(x) - alpha * tf.nn.relu(-x)
 
-def hidden_layer(pooled, w_hidden, b_hidden):
+def hidden_layer(pooled, input_size, output_size):
     """Create a hidden feedforward layer."""
     with tf.name_scope("hidden"):
-        # return tf.nn.lrelu(tf.matmul(pooled, weights) + biases)
-        return lrelu(tf.matmul(pooled, w_hidden) + b_hidden, 0.01)
+        initializer = tf.contrib.layers.xavier_initializer()
+        weights = tf.Variable(initializer([input_size, output_size]), name='weights')
+        biases = tf.Variable(initializer([output_size,]), name='biases')
+        return tf.nn.leaky_relu(tf.matmul(pooled, weights) + biases)
 
 
 def loss_layer(logits_node, label_size):

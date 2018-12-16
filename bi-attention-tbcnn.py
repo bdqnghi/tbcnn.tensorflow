@@ -18,7 +18,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--train_batch_size', type=int, default=10, help='train batch size')
 parser.add_argument('--test_batch_size', type=int, default=10, help='test batch size')
 parser.add_argument('--val_batch_size', type=int, default=10, help='val batch size')
-parser.add_argument('--niter', type=int, default=300, help='number of epochs to train for')
+parser.add_argument('--niter', type=int, default=1000, help='number of epochs to train for')
 parser.add_argument('--lr', type=float, default=0.01, help='learning rate')
 parser.add_argument('--verbal', type=bool, default=True, help='print training info or not')
 parser.add_argument('--manualSeed', type=int, help='manual seed')
@@ -33,6 +33,7 @@ parser.add_argument('--testing', action="store_true",help='is testing')
 parser.add_argument('--training_percentage', type=float, default=1.0 ,help='percentage of data use for training')
 parser.add_argument('--log_path', default="" ,help='log path for tensorboard')
 parser.add_argument('--aggregation', type=int, default=2, choices=range(0,4), help='0 for max pooling, 1 for attention with sum pooling, 2 for attention with max pooling, 3 for attention with average pooling')
+parser.add_argument('--distributed_function', type=int, default=1, choices=range(0,2), help='0 for softmax, 1 for sigmoid')
 parser.add_argument('--embeddings_directory', default="embedding/fast_pretrained_vectors.pkl", help='pretrained embeddings url, there are 2 objects in this file, the first object is the embedding matrix, the other is the lookup dictionary')
 parser.add_argument('--cuda', default="0",type=str, help='enables cuda')
 
@@ -51,6 +52,11 @@ if opt.aggregation == 2:
     print("Using attention with max pooling...........")
 if opt.aggregation == 3:
     print("Using attention with average pooling...........")
+
+if opt.distributed_function == 0:
+    print("Using softmax as the distributed_function...........")
+if opt.distributed_function == 1:
+    print("Using sigmoid as the distributed_function...........")
 
 
 def convert_labels_to_one_hot(labels):
@@ -81,23 +87,24 @@ def train_model(train_dataloader, embeddings, embedding_lookup, opt):
 
     num_feats = len(embeddings[0])
 
+    initializer = tf.contrib.layers.xavier_initializer()
+    weights = {
+        "w_t" : tf.Variable(initializer([node_embedding_size, opt.feature_size]), name="w_t"),
+        "w_l" : tf.Variable(initializer([node_embedding_size, opt.feature_size]), name="w_l"),
+        "w_r" : tf.Variable(initializer([node_embedding_size, opt.feature_size]), name="w_r"),
+    }
 
-    left_nodes_node, left_children_node, left_aggregation_node, left_score_node = network.init_net_for_siamese(
+
+    biases = {
+        "b_conv": tf.Variable(initializer([opt.feature_size,]), name="b_conv"),
+        "b_hidden": tf.Variable(initializer([len(labels),], stddev=math.sqrt(2.0/node_embedding_size)), name="b_hidden")
+    }
+
+    left_nodes_node, left_children_node, right_nodes_node, right_children_node, hidden_node, left_score_node, right_score_node = network.init_net_for_siamese(
         num_feats,
         opt.aggregation,
         opt.distributed_function
     )
-
-    right_nodes_node, right_children_node, right_aggregation_node, right_score_node  = network.init_net_for_siamese(
-        num_feats,
-        opt.aggregation,
-        opt.distributed_function
-    )
-
-    merge_node = tf.concat([left_aggregation_node, right_aggregation_node], -1)
-
-    # hidden_node = network.hidden_layer(merge_node, 200, )
-    hidden_node = network.hidden_layer(merge_node, 200, n_classess)
 
     out_node = network.out_layer(hidden_node)
 
@@ -105,7 +112,6 @@ def train_model(train_dataloader, embeddings, embedding_lookup, opt):
 
     optimizer = tf.train.AdamOptimizer(LEARN_RATE)
     train_step = optimizer.minimize(loss_node)
-
 
     sess = tf.Session()
 
@@ -118,6 +124,8 @@ def train_model(train_dataloader, embeddings, embedding_lookup, opt):
         if ckpt and ckpt.model_checkpoint_path:
             print("Continue training with old model")
             saver.restore(sess, ckpt.model_checkpoint_path)
+            for i, var in enumerate(saver._var_list):
+                print('Var {}: {}'.format(i, var))
         # else:
         #     raise 'Checkpoint not found.'
 
@@ -168,7 +176,7 @@ def main():
     with open(opt.embeddings_directory, 'rb') as fh:
         embeddings, embed_lookup = pickle.load(fh,encoding='latin1')
     
-    train_data_loader = CrossLanguageProgramData(opt.train_data)
+    train_data_loader = CrossLanguageProgramData(opt.val_data)
     # val_data_loader = CrossLanguageProgramData(opt.val_data)
  
   
