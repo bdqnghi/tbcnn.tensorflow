@@ -84,12 +84,14 @@ def train_model(train_dataloader, embeddings, embedding_lookup, opt):
 
     left_nodes_node, left_children_node, left_aggregation_node, left_score_node = network.init_net_for_siamese(
         num_feats,
-        opt.aggregation
+        opt.aggregation,
+        opt.distributed_function
     )
 
     right_nodes_node, right_children_node, right_aggregation_node, right_score_node  = network.init_net_for_siamese(
         num_feats,
-        opt.aggregation
+        opt.aggregation,
+        opt.distributed_function
     )
 
     merge_node = tf.concat([left_aggregation_node, right_aggregation_node], -1)

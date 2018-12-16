@@ -30,9 +30,9 @@ parser.add_argument('--lr', type=float, default=0.01, help='learning rate')
 parser.add_argument('--verbal', type=bool, default=True, help='print training info or not')
 parser.add_argument('--manualSeed', type=int, help='manual seed')
 parser.add_argument('--n_classes', type=int, default=3, help='manual seed')
-parser.add_argument('--train_directory', default="ProgramData_pkl_train_test_val/train", help='train program data')
-parser.add_argument('--test_directory', default="ProgramData_pkl_train_test_val/test", help='test program data')
-parser.add_argument('--val_directory', default="ProgramData_pkl_train_test_val/val", help='validation program data')
+parser.add_argument('--train_directory', default="github_java_sort_pkl_train_test_val/train", help='train program data')
+parser.add_argument('--test_directory', default="github_java_sort_pkl_train_test_val/test", help='test program data')
+parser.add_argument('--val_directory', default="github_java_sort_pkl_train_test_val/val", help='validation program data')
 parser.add_argument('--model_path', default="model/3_pku", help='path to save the model')
 parser.add_argument('--n_hidden', type=int, default=50, help='number of hidden layers')
 parser.add_argument('--training', action="store_true",help='is training')
@@ -41,6 +41,7 @@ parser.add_argument('--training_percentage', type=float, default=1.0 ,help='perc
 parser.add_argument('--log_path', default="" ,help='log path for tensorboard')
 parser.add_argument('--epoch', type=int, default=0, help='epoch to test')
 parser.add_argument('--aggregation', type=int, default=1, choices=range(0,4), help='0 for max pooling, 1 for attention with sum pooling, 2 for attention with max pooling, 3 for attention with average pooling')
+parser.add_argument('--distributed_function', type=int, default=1, choices=range(0,2), help='0 for softmax, 1 for sigmoid')
 parser.add_argument('--embeddings_directory', default="embedding/fast_pretrained_vectors.pkl", help='pretrained embeddings url, there are 2 objects in this file, the first object is the embedding matrix, the other is the lookup dictionary')
 parser.add_argument('--cuda', default="0",type=str, help='enables cuda')
 
@@ -61,6 +62,11 @@ if opt.aggregation == 3:
     print("Using attention with average pooling...........")
 
 
+if opt.distributed_function == 0:
+    print("Using softmax as the distributed_function...........")
+if opt.distributed_function == 1:
+    print("Using sigmoid as the distributed_function...........")
+
 def train_model(train_trees, val_trees, labels, embeddings, embedding_lookup, opt):
     """Train a classifier to label ASTs"""
    
@@ -75,7 +81,8 @@ def train_model(train_trees, val_trees, labels, embeddings, embedding_lookup, op
     nodes_node, children_node, hidden_node, attention_score_node = network.init_net(
         num_feats,
         len(labels),
-        opt.aggregation
+        opt.aggregation,
+        opt.distributed_function
     )
     hidden_node = tf.identity(hidden_node, name="hidden_node")
 
@@ -131,9 +138,7 @@ def train_model(train_trees, val_trees, labels, embeddings, embedding_lookup, op
 
             if step % CHECKPOINT_EVERY == 0:
                 # save state so we can resume later
-                saver.save(sess, checkfile)
-                # shutil.rmtree(savedmodel_path)
-             
+                saver.save(sess, checkfile)             
                 print('Checkpoint saved, epoch:' + str(epoch) + ', step: ' + str(step) + ', loss: ' + str(err) + '.')
 
         correct_labels = []
@@ -174,7 +179,8 @@ def test_model(test_trees, labels, embeddings, embedding_lookup, opt):
     nodes_node, children_node, hidden_node, pooling = network.init_net(
         num_feats,
         len(labels),
-        opt.aggregation
+        opt.aggregation,
+        opt.distributed_function
     )
 
     out_node = network.out_layer(hidden_node)

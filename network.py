@@ -5,7 +5,7 @@ import math
 import tensorflow as tf
 
 
-def init_net(feature_size, label_size, aggregation_type):
+def init_net(feature_size, label_size, aggregation_type, distributed_function):
     """Initialize an empty network."""
 
     with tf.name_scope('inputs'):
@@ -22,12 +22,12 @@ def init_net(feature_size, label_size, aggregation_type):
             attention_score = None
         else:
             print("Using attention with pooling as the aggregation...........")
-            aggregation, attention_score = aggregation_layer(conv1, 100, aggregation_type)
+            aggregation, attention_score = aggregation_layer(conv1, 100, aggregation_type, distributed_function)
         hidden = hidden_layer(aggregation, 100, label_size)
 
     return nodes, children, hidden, attention_score
 
-def init_net_for_siamese(feature_size, aggregation_type):
+def init_net_for_siamese(feature_size, aggregation_type, distributed_function):
     """Initialize an empty network."""
 
     with tf.name_scope("inputs"):
@@ -43,7 +43,7 @@ def init_net_for_siamese(feature_size, aggregation_type):
             attention_score = None
         else:
             print("Using attention with pooling as the aggregation...........")
-            aggregation, attention_score = aggregation_layer(conv1, 100, aggregation_type)
+            aggregation, attention_score = aggregation_layer(conv1, 100, aggregation_type, distributed_function)
      
 
     return nodes, children, aggregation, attention_score
@@ -66,9 +66,9 @@ def conv_node(nodes, children, feature_size, output_size):
     with tf.name_scope('conv_node'):
         initializer = tf.contrib.layers.xavier_initializer()
         w_t, w_l, w_r = (
-            tf.Variable(initializer([feature_size, output_size]), name='Wt'),
-            tf.Variable(initializer([feature_size, output_size]), name='Wl'),
-            tf.Variable(initializer([feature_size, output_size]), name='Wr'),
+            tf.Variable(initializer([feature_size, output_size]), name='w_t'),
+            tf.Variable(initializer([feature_size, output_size]), name='w_l'),
+            tf.Variable(initializer([feature_size, output_size]), name='w_r'),
         )
         
         b_conv = tf.Variable(initializer([output_size,]), name='b_conv')
@@ -247,7 +247,7 @@ def eta_l(children, coef_t, coef_r):
             tf.multiply((1.0 - coef_t), (1.0 - coef_r)), mask, name='coef_l'
         )
 
-def aggregation_layer(conv, output_size, aggregation_type):
+def aggregation_layer(conv, output_size, aggregation_type, distributed_function):
     # conv is (batch_size, max_tree_size, output_size)
     with tf.name_scope("global_attention"):
         initializer = tf.contrib.layers.xavier_initializer()
@@ -260,7 +260,11 @@ def aggregation_layer(conv, output_size, aggregation_type):
         aggregated_vector = tf.matmul(flat_conv, w_attention)
 
         attention_score = tf.reshape(aggregated_vector, [-1, max_tree_size, 1])
-        attention_weights = tf.nn.softmax(attention_score, dim=1)
+
+        if distributed_function == 0:
+            attention_weights = tf.nn.softmax(attention_score, dim=1)
+        if distributed_function == 1:
+            attention_weights = tf.nn.sigmoid(attention_score)
 
          # TODO: reduce_max vs reduce_sum vs reduce_mean
         if aggregation_type == 1:
