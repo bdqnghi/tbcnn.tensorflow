@@ -219,7 +219,7 @@ def test_model(test_trees, labels, embeddings, embedding_lookup, opt):
         opt.feature_size,
         weights,
         biases,
-        opt.aggregation
+        opt.aggregation,
         opt.distributed_function
     )
 
