@@ -32,6 +32,7 @@ parser.add_argument('--training', action="store_true",help='is training')
 parser.add_argument('--testing', action="store_true",help='is testing')
 parser.add_argument('--training_percentage', type=float, default=1.0 ,help='percentage of data use for training')
 parser.add_argument('--log_path', default="" ,help='log path for tensorboard')
+parser.add_argument('--feature_size', type=int, default=100, help='size of convolutional features')
 parser.add_argument('--aggregation', type=int, default=2, choices=range(0,4), help='0 for max pooling, 1 for attention with sum pooling, 2 for attention with max pooling, 3 for attention with average pooling')
 parser.add_argument('--distributed_function', type=int, default=1, choices=range(0,2), help='0 for softmax, 1 for sigmoid')
 parser.add_argument('--embeddings_directory', default="embedding/fast_pretrained_vectors.pkl", help='pretrained embeddings url, there are 2 objects in this file, the first object is the embedding matrix, the other is the lookup dictionary')
@@ -74,6 +75,7 @@ def train_model(train_dataloader, embeddings, embedding_lookup, opt):
     
     logdir = opt.model_path
     epochs = opt.niter
+    node_embedding_size = len(embeddings[0])
 
     train_left_trees = train_dataloader.left_trees
     train_right_trees = train_dataloader.right_trees
@@ -92,16 +94,19 @@ def train_model(train_dataloader, embeddings, embedding_lookup, opt):
         "w_t" : tf.Variable(initializer([node_embedding_size, opt.feature_size]), name="w_t"),
         "w_l" : tf.Variable(initializer([node_embedding_size, opt.feature_size]), name="w_l"),
         "w_r" : tf.Variable(initializer([node_embedding_size, opt.feature_size]), name="w_r"),
+        "w_attention" : tf.Variable(initializer([opt.feature_size,1]), name="w_attention")
     }
 
 
     biases = {
         "b_conv": tf.Variable(initializer([opt.feature_size,]), name="b_conv"),
-        "b_hidden": tf.Variable(initializer([len(labels),], stddev=math.sqrt(2.0/node_embedding_size)), name="b_hidden")
     }
 
     left_nodes_node, left_children_node, right_nodes_node, right_children_node, hidden_node, left_score_node, right_score_node = network.init_net_for_siamese(
         num_feats,
+        opt.feature_size,
+        weights, 
+        biases,
         opt.aggregation,
         opt.distributed_function
     )

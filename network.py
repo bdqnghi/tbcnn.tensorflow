@@ -13,7 +13,7 @@ def init_net(feature_size, label_size, output_size, weights, biases, aggregation
         children = tf.placeholder(tf.int32, shape=(None, None, None), name='children')
 
     with tf.name_scope('network'):
-        conv1 = conv_layer(1, output_size, nodes, children, feature_size, weights["w_t"], weights["w_l"], weights["w_r"], biases["b_conv"])
+        conv1 = conv_layer(1, nodes, children, feature_size, weights["w_t"], weights["w_l"], weights["w_r"], biases["b_conv"])
         #conv2 = conv_layer(1, 10, conv1, children, 100)
 
         if aggregation_type == 0:
@@ -26,9 +26,42 @@ def init_net(feature_size, label_size, output_size, weights, biases, aggregation
 
     return nodes, children, hidden, attention_score
 
+def init_net_for_siamese(feature_size, output_size, weights, biases, aggregation_type, distributed_function):
+    """Initialize an empty network."""
+
+    with tf.name_scope("left_inputs"):
+        left_nodes = tf.placeholder(tf.float32, shape=(None, None, feature_size), name='left_tree')
+        left_children = tf.placeholder(tf.int32, shape=(None, None, None), name='left_children')
+
+    with tf.name_scope("right_inputs"):
+        right_nodes = tf.placeholder(tf.float32, shape=(None, None, feature_size), name='right_tree')
+        right_children = tf.placeholder(tf.int32, shape=(None, None, None), name='right_children')
 
 
-def conv_layer(num_conv, output_size, nodes, children, feature_size, w_t, w_r, w_l, b_conv):
+    left_aggregation_node, left_attention_score = extract_features(left_nodes, left_children, weights, biases, output_size, feature_size, aggregation_type, distributed_function)
+    right_aggregation_node, right_attention_score = extract_features(right_nodes, right_children, weights, biases, output_size, feature_size, aggregation_type, distributed_function)
+
+    merge_node = tf.concat([left_aggregation_node, right_aggregation_node], -1)
+    hidden_node = hidden_layer(merge_node, 200, 2)
+
+    return left_nodes, left_children, right_nodes, right_children, hidden_node, left_attention_score, right_attention_score
+
+def extract_features(nodes, children, weights, biases, output_size, feature_size, aggregation_type, distributed_function):
+    with tf.name_scope('network'):
+        conv = conv_layer(1, nodes, children, feature_size, weights["w_t"], weights["w_l"], weights["w_r"], biases["b_conv"])
+
+    if aggregation_type == 0:
+        print("Using max pooling as the aggregation...........")
+        aggregation = pooling_layer(conv1)
+        attention_score = None
+    else:
+        print("Using attention with pooling as the aggregation...........")
+        aggregation, attention_score = aggregation_layer(conv, weights["w_attention"], output_size, aggregation_type, distributed_function)
+
+    return aggregation, attention_score
+
+
+def conv_layer(num_conv, nodes, children, feature_size, w_t, w_r, w_l, b_conv):
     """Creates a convolution layer with num_conv convolutions merged together at
     the output. Final output will be a tensor with shape
     [batch_size, num_nodes, output_size * num_conv]"""

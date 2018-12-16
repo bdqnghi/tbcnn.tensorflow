@@ -8,7 +8,7 @@ import logging
 import pickle
 import tensorflow as tf
 import numpy as np
-import network as network
+import network_old as network
 import sampling as sampling
 import sys
 import random

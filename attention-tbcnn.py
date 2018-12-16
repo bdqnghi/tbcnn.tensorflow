@@ -44,7 +44,7 @@ parser.add_argument('--testing', action="store_true",help='is testing')
 parser.add_argument('--training_percentage', type=float, default=1.0 ,help='percentage of data use for training')
 parser.add_argument('--log_path', default="" ,help='log path for tensorboard')
 parser.add_argument('--epoch', type=int, default=0, help='epoch to test')
-parser.add_argument('--feature_size', type=int, default=100, help='epoch to test')
+parser.add_argument('--feature_size', type=int, default=100, help='size of convolutional features')
 parser.add_argument('--aggregation', type=int, default=1, choices=range(0,4), help='0 for max pooling, 1 for attention with sum pooling, 2 for attention with max pooling, 3 for attention with average pooling')
 parser.add_argument('--distributed_function', type=int, default=1, choices=range(0,2), help='0 for softmax, 1 for sigmoid')
 parser.add_argument('--embeddings_directory', default="embedding/fast_pretrained_vectors.pkl", help='pretrained embeddings url, there are 2 objects in this file, the first object is the embedding matrix, the other is the lookup dictionary')
@@ -220,6 +220,7 @@ def test_model(test_trees, labels, embeddings, embedding_lookup, opt):
         weights,
         biases,
         opt.aggregation
+        opt.distributed_function
     )
 
     out_node = network.out_layer(hidden_node)
