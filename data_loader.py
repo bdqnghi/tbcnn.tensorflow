@@ -53,6 +53,8 @@ class CrossLanguageProgramData():
                 pairs = pickle.load(file_handler)
         else:
             pairs = load_pairwise_programs(path)
+            with open(saved_input_filename, 'wb') as file_handler:
+                pickle.dump(pairs, file_handler, protocol=pickle.HIGHEST_PROTOCOL)
 
         random.shuffle(pairs)
         left_trees = []
