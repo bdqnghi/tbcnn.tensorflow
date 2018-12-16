@@ -41,10 +41,20 @@ class MonoLanguageProgramData():
 
 class CrossLanguageProgramData():
    
-    def __init__(self, path):
-        pairs = load_pairwise_programs(path)
-        random.shuffle(pairs)
+    def __init__(self, path, train_test_val, n_classes):
+        cached_path = "cached"
 
+        
+        saved_input_filename = "%s/%s.pkl" % (cached_path, path.split("/")[-1].split(".")[0])
+    
+        print(saved_input_filename)
+        if os.path.exists(saved_input_filename):
+            with open(saved_input_filename, 'rb') as file_handler:
+                pairs = pickle.load(file_handler)
+        else:
+            pairs = load_pairwise_programs(path)
+
+        random.shuffle(pairs)
         left_trees = []
         right_trees = []
         labels = []
@@ -66,12 +76,12 @@ def load_pairwise_programs(path):
         csv_reader = csv.reader(f, delimiter=',')
         count = 0
         for row in tqdm(csv_reader):
-            if count < 5000:
-                left_path = row[0]
-                right_path = row[1]
-                left_tree = load_single_program(left_path)
-                right_tree = load_single_program(right_path)
-                pairs.append((left_tree,right_tree,int(row[2])))
+         
+            left_path = row[0]
+            right_path = row[1]
+            left_tree = load_single_program(left_path)
+            right_tree = load_single_program(right_path)
+            pairs.append((left_tree,right_tree,int(row[2])))
             count += 1
             # print(count)
             # labels.append(row[2])

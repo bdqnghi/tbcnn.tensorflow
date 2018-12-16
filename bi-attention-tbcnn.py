@@ -22,11 +22,11 @@ parser.add_argument('--niter', type=int, default=1000, help='number of epochs to
 parser.add_argument('--lr', type=float, default=0.01, help='learning rate')
 parser.add_argument('--verbal', type=bool, default=True, help='print training info or not')
 parser.add_argument('--manualSeed', type=int, help='manual seed')
-parser.add_argument('--n_classes', type=int, default=3, help='manual seed')
+parser.add_argument('--n_classes', type=int, default=10, help='number of classes')
 parser.add_argument('--train_data', default="pairwise/github_java_sort_pkl_train_test_val__train.txt", help='train program data')
 parser.add_argument('--test_data', default="pairwise/github_java_sort_pkl_train_test_val__test.txt", help='test program data')
 parser.add_argument('--val_data', default="pairwise/github_java_sort_pkl_train_test_val__val.txt", help='validation program data')
-parser.add_argument('--model_path', default="model/pairwise_java", help='path to save the model')
+parser.add_argument('--model_path', default="model/pairwise_java_sort", help='path to save the model')
 parser.add_argument('--n_hidden', type=int, default=50, help='number of hidden layers')
 parser.add_argument('--training', action="store_true",help='is training')
 parser.add_argument('--testing', action="store_true",help='is testing')
@@ -181,7 +181,7 @@ def main():
     with open(opt.embeddings_directory, 'rb') as fh:
         embeddings, embed_lookup = pickle.load(fh,encoding='latin1')
     
-    train_data_loader = CrossLanguageProgramData(opt.val_data)
+    train_data_loader = CrossLanguageProgramData(opt.train_data, 0,opt.n_classes)
     # val_data_loader = CrossLanguageProgramData(opt.val_data)
  
   
