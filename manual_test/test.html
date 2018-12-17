@@ -1,0 +1,76 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+import <font color='#ff0000' weight='1' id='6'>java.util.Arrays;</font>
+
+public class JavaBubbleSort<font color='#ff0000' weight='1' id='308'>{
+  <font color='#ff0000' weight='1' id='19'><font color='#ff0000' weight='1' id='18'>public static int counter = 0;</font>
+
+  </font><font color='#ff0000' weight='1' id='177'>public static <font color='#ff0000' weight='1' id='24'>int[]</font> bubbleSort(<font color='#ff0000' weight='1' id='33'><font color='#ff0000' weight='1' id='28'>int </font>arr[])</font><font color='#ff0000' weight='1' id='176'>{
+    int n = <font color='#ff0000' weight='1' id='41'>arr.length</font>;
+    <font color='#ff0000' weight='1' id='53'><font color='#ff0000' weight='1' id='52'>boolean swapped <font color='#ff0000' weight='1' id='51'>= <font color='#ff0000' weight='1' id='50'>false</font></font>;</font>
+    </font><font color='#ff0000' weight='1' id='172'>for<font color='#ff0000' weight='1' id='73'>(<font color='#ff0000' weight='1' id='61'><font color='#ff0000' weight='1' id='55'>int </font>i<font color='#ff0000' weight='1' id='59'>=0</font>;</font>i&lt;n-1;<font color='#ff0000' weight='1' id='72'>i++)</font></font><font color='#ff0000' weight='1' id='171'>{
+      <font color='#ff0000' weight='1' id='162'>for<font color='#ff0000' weight='1' id='95'>(int j<font color='#ff0000' weight='1' id='79'>=0</font>;j&lt;n-i-1;j++)</font><font color='#ff0000' weight='1' id='161'>{
+        <font color='#ff0000' weight='1' id='99'><font color='#ff0000' weight='1' id='98'>counter++;</font>
+        </font><font color='#ff0000' weight='1' id='160'>if<font color='#ff0000' weight='1' id='114'>(arr<font color='#ff0000' weight='1' id='103'>[<font color='#ff0000' weight='1' id='102'>j]</font></font>&gt;=arr[j+1])</font><font color='#ff0000' weight='1' id='159'><font color='#ff0000' weight='1' id='158'>{
+          <font color='#ff0000' weight='1' id='119'>swapped = true;
+          </font><font color='#ff0000' weight='1' id='131'>int temp = arr[j];
+          </font><font color='#ff0000' weight='1' id='146'>arr[j] = arr[j+1];
+          </font><font color='#ff0000' weight='1' id='157'>arr[j+1] = temp;
+        }</font></font></font>
+      }</font></font>
+      </font><font color='#ff0000' weight='1' id='169'>if<font color='#ff0000' weight='1' id='165'>(<font color='#ff0000' weight='1' id='164'>swapped)</font></font><font color='#ff0000' weight='1' id='168'><font color='#ff0000' weight='1' id='167'>break;</font></font></font>break;
+    }</font>
+
+    </font><font color='#ff0000' weight='1' id='175'>return <font color='#ff0000' weight='1' id='174'>arr;</font>
+  }</font></font>
+
+  </font><font color='#ff0000' weight='1' id='258'>public static  <font color='#ff0000' weight='1' id='181'>void </font>main<font color='#ff0000' weight='1' id='190'>(String[] args)</font><font color='#ff0000' weight='1' id='257'>{
+    <font color='#ff0000' weight='1' id='201'>JavaBubbleSort jbs = new JavaBubbleSort();
+    
+    </font><font color='#ff0000' weight='1' id='235'><font color='#ff0000' weight='1' id='234'><font color='#ff0000' weight='1' id='205'><font color='#ff0000' weight='1' id='204'>int[]</font> </font>inputs <font color='#ff0000' weight='1' id='233'>= <font color='#ff0000' weight='1' id='232'><font color='#ff0000' weight='1' id='231'>{<font color='#ff0000' weight='1' id='208'>2,</font><font color='#ff0000' weight='1' id='210'>3,</font><font color='#ff0000' weight='1' id='212'>4,</font><font color='#ff0000' weight='1' id='214'>5,</font><font color='#ff0000' weight='1' id='216'>6,</font><font color='#ff0000' weight='1' id='218'>7,</font><font color='#ff0000' weight='1' id='220'>8,</font><font color='#ff0000' weight='1' id='222'>9,</font><font color='#ff0000' weight='1' id='224'>10,</font><font color='#ff0000' weight='1' id='226'>11,</font><font color='#ff0000' weight='1' id='228'>12,</font><font color='#ff0000' weight='1' id='230'>13}</font></font></font></font>;</font>
+    </font><font color='#ff0000' weight='1' id='248'>inputs = jbs.bubbleSort<font color='#ff0000' weight='1' id='245'>(<font color='#ff0000' weight='1' id='244'><font color='#ff0000' weight='1' id='243'>inputs</font>)</font></font>;
+    </font><font color='#ff0000' weight='1' id='256'><font color='#ff0000' weight='1' id='255'><font color='#ff0000' weight='1' id='254'>print<font color='#ff0000' weight='1' id='253'>(<font color='#ff0000' weight='1' id='252'><font color='#ff0000' weight='1' id='251'>inputs</font>)</font></font></font>;</font>
+  }</font></font>
+
+  </font><font color='#ff0000' weight='1' id='307'>public static <font color='#ff0000' weight='1' id='262'>void </font>print<font color='#ff0000' weight='1' id='271'>(<font color='#ff0000' weight='1' id='270'><font color='#ff0000' weight='1' id='269'><font color='#ff0000' weight='1' id='265'>int </font><font color='#ff0000' weight='1' id='268'>arr[]</font></font>)</font></font><font color='#ff0000' weight='1' id='306'>{
+    <font color='#ff0000' weight='1' id='292'>System.out.println<font color='#ff0000' weight='1' id='289'>(<font color='#ff0000' weight='1' id='288'><font color='#ff0000' weight='1' id='287'><font color='#ff0000' weight='1' id='286'><font color='#ff0000' weight='1' id='281'>Arrays.toString</font><font color='#ff0000' weight='1' id='285'>(<font color='#ff0000' weight='1' id='284'><font color='#ff0000' weight='1' id='283'>arr</font>)</font></font></font></font>)</font></font>;
+    </font><font color='#ff0000' weight='1' id='305'>System.out.println<font color='#ff0000' weight='1' id='302'>(<font color='#ff0000' weight='1' id='301'><font color='#ff0000' weight='1' id='300'>counter</font>)</font></font>;
+  }</font></font>
+}</font></font>
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+public class SelectionSort <font color='#ff0000' weight='1' id='0'><font color='#ff0000' weight='1' id='0'>extends RandomArray</font> </font><font color='#ff0000' weight='1' id='0'>{
+
+    <font color='#ff0000' weight='1' id='0'>public SelectionSort<font color='#ff0000' weight='1' id='0'>(int n) </font><font color='#ff0000' weight='1' id='0'>{
+        <font color='#ff0000' weight='1' id='0'><font color='#ff0000' weight='1' id='0'><font color='#ff0000' weight='1' id='0'>super<font color='#ff0000' weight='1' id='0'>(<font color='#ff0000' weight='1' id='0'><font color='#ff0000' weight='1' id='0'>n</font>)</font></font></font>;</font>
+    }</font></font>
+
+    </font><font color='#ff0000' weight='1' id='0'>public <font color='#ff0000' weight='1' id='0'>void </font>sort() <font color='#ff0000' weight='1' id='0'>{
+        <font color='#ff0000' weight='1' id='0'>for (int i <font color='#ff0000' weight='1' id='0'>= 0</font>; i &lt; <font color='#ff0000' weight='1' id='0'>numbers.length</font>; i++) <font color='#ff0000' weight='1' id='0'>{
+            <font color='#ff0000' weight='1' id='0'><font color='#ff0000' weight='1' id='0'><font color='#ff0000' weight='1' id='0'>int </font>minIndex <font color='#ff0000' weight='1' id='0'>= <font color='#ff0000' weight='1' id='0'>i</font></font>;</font>
+
+            </font><font color='#ff0000' weight='1' id='0'>for (int j <font color='#ff0000' weight='1' id='0'>= i + 1</font>; j &lt; <font color='#ff0000' weight='1' id='0'>numbers.length</font>; j++) <font color='#ff0000' weight='1' id='0'>{
+                <font color='#ff0000' weight='1' id='0'>if (numbers[j] &lt; numbers[minIndex])<font color='#ff0000' weight='1' id='0'> <font color='#ff0000' weight='1' id='0'>{
+                    minIndex = j;
+                }</font></font>
+            }</font></font>
+
+            </font>int temp = numbers[i];
+            numbers[i] = numbers[minIndex];
+            numbers[minIndex] = temp;
+        }</font>
+    }</font></font>
+
+    </font><font color='#ff0000' weight='1' id='0'>public static void main(String [] args) <font color='#ff0000' weight='1' id='0'>{
+        SelectionSort selectionSort = new SelectionSort<font color='#ff0000' weight='1' id='0'>(<font color='#ff0000' weight='1' id='0'><font color='#ff0000' weight='1' id='0'>10</font>)</font></font>;
+
+        selectionSort.printNumbers();
+        <font color='#ff0000' weight='1' id='0'>selectionSort.sort()</font>;
+        selectionSort.printNumbers();
+    }</font>
+}</font></font>
+</font>
+</pre>
