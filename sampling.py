@@ -70,6 +70,74 @@ def batch_samples(gen, batch_size):
     if nodes:
         yield _pad_batch(nodes, children, labels)
 
+def batch_random_samples_2_sides(left_trees, right_trees, labels, vectors, vector_lookup, batch_size):
+    """Creates a generator that returns a tree in BFS order with each node
+    replaced by its vector embedding, and a child lookup table."""
+
+  
+    batch_left_nodes, batch_left_children, = [], []
+
+    batch_right_nodes, batch_right_children = [], []
+    samples = 0
+
+    batch_labels = []
+    for i in range(0,len(left_trees)):
+      
+        left_tree = left_trees[i]
+
+        left_nodes = []
+        left_children = []
+        left_queue = [(left_tree['tree'], -1)]
+        # print queue
+        while left_queue:   
+            node, parent_ind = left_queue.pop(0)    
+            node_ind = len(left_nodes)   
+            left_queue.extend([(child, node_ind) for child in node['children']])  
+            left_children.append([])    
+            if parent_ind > -1:
+                left_children[parent_ind].append(node_ind)  
+            
+            n = str(node['node'])
+            left_nodes.append(vectors[int(n)])
+        
+        if len(left_nodes) < 6000:
+            batch_left_nodes.append(left_nodes)
+            batch_left_children.append(left_children)
+        
+        right_tree = right_trees[i]
+        right_nodes = []
+        right_children = []
+        right_queue = [(right_tree['tree'], -1)]
+        # print queue
+        while right_queue:   
+            node, parent_ind = right_queue.pop(0)    
+            node_ind = len(right_nodes)   
+            right_queue.extend([(child, node_ind) for child in node['children']])  
+            right_children.append([])    
+            if parent_ind > -1:
+                right_children[parent_ind].append(node_ind)      
+            n = str(node['node'])
+            right_nodes.append(vectors[int(n)])
+      
+        if len(right_nodes) < 6000:
+            batch_right_nodes.append(right_nodes)
+            batch_right_children.append(right_children)
+
+        batch_labels.append(labels[i])
+        samples += 1
+        if samples >= batch_size:
+            yield _pad_batch_siamese_2_side(batch_left_nodes, batch_left_children, batch_right_nodes, batch_right_children, batch_labels)
+            batch_left_nodes, batch_left_children = [], []
+
+            batch_right_nodes, batch_right_children = [], []
+
+            batch_labels = []
+            samples = 0
+
+    if batch_left_nodes and batch_right_nodes:
+        yield _pad_batch_siamese_2_side(batch_left_nodes, batch_left_children, batch_right_nodes, batch_right_children, batch_labels)
+
+
 def _pad_batch(nodes, children, labels):
     if not nodes:
         return [], [], []
@@ -111,71 +179,4 @@ def _pad_batch_siamese(nodes, children):
 
     return nodes, children
 
-
-def batch_random_samples_2_sides(left_trees, right_trees, labels, vectors, vector_lookup, batch_size):
-    """Creates a generator that returns a tree in BFS order with each node
-    replaced by its vector embedding, and a child lookup table."""
-
-  
-    batch_left_nodes, batch_left_children, = [], []
-
-    batch_right_nodes, batch_right_children = [], []
-    samples = 0
-
-    batch_labels = []
-    for i in range(0,len(left_trees)):
-      
-        left_tree = left_trees[i]
-
-        left_nodes = []
-        left_children = []
-        left_queue = [(left_tree['tree'], -1)]
-        # print queue
-        while left_queue:   
-            node, parent_ind = left_queue.pop(0)    
-            node_ind = len(left_nodes)   
-            left_queue.extend([(child, node_ind) for child in node['children']])  
-            left_children.append([])    
-            if parent_ind > -1:
-                left_children[parent_ind].append(node_ind)  
-            
-            n = str(node['node'])
-            left_nodes.append(vectors[int(n)])
-      
-
-        batch_left_nodes.append(left_nodes)
-        batch_left_children.append(left_children)
-        
-        right_tree = right_trees[i]
-        right_nodes = []
-        right_children = []
-        right_queue = [(right_tree['tree'], -1)]
-        # print queue
-        while right_queue:   
-            node, parent_ind = right_queue.pop(0)    
-            node_ind = len(right_nodes)   
-            right_queue.extend([(child, node_ind) for child in node['children']])  
-            right_children.append([])    
-            if parent_ind > -1:
-                right_children[parent_ind].append(node_ind)      
-            n = str(node['node'])
-            right_nodes.append(vectors[int(n)])
-      
-
-        batch_right_nodes.append(right_nodes)
-        batch_right_children.append(right_children)
-
-        batch_labels.append(labels[i])
-        samples += 1
-        if samples >= batch_size:
-            yield _pad_batch_siamese_2_side(batch_left_nodes, batch_left_children, batch_right_nodes, batch_right_children, batch_labels)
-            batch_left_nodes, batch_left_children = [], []
-
-            batch_right_nodes, batch_right_children = [], []
-
-            batch_labels = []
-            samples = 0
-
-    if batch_left_nodes and batch_right_nodes:
-        yield _pad_batch_siamese_2_side(batch_left_nodes, batch_left_children, batch_right_nodes, batch_right_children, batch_labels)
 
