@@ -74,23 +74,26 @@ class CrossLanguageProgramData():
         self.labels = labels
 
 
-def load_pairwise_programs(path):
+def load_pairwise_programs(path, train_test_val):
     print("Loading pairwise data............")
     pairs = []
+    all_pairs_index = []
     with open(path,"r") as f:
-      
-        csv_reader = csv.reader(f, delimiter=',')
-        count = 0
-        for row in tqdm(csv_reader):
-         
-            left_path = row[0]
-            right_path = row[1]
-            left_tree = load_single_program(left_path)
-            right_tree = load_single_program(right_path)
-            pairs.append((left_tree,right_tree,int(row[2])))
-            count += 1
-            # print(count)
-            # labels.append(row[2])
+        data = f.readlines()
+        for line in data:
+            all_pairs_index.append(line.replace("\n",""))
+    
+    if train_test_val == 0:
+        all_pairs_index = random.sample(all_pairs_index, 10000)
+    
+
+    for pair in sample_pairs_index:
+        splits = pair.split(",")
+        left_path = splits[0]
+        right_path = splits[1]
+        left_tree = load_single_program(left_path)
+        right_tree = load_single_program(right_path)
+        pairs.append((left_tree,right_tree,int(splits[2])))
 
     return pairs
 
