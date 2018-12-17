@@ -87,7 +87,7 @@ def load_pairwise_programs(path, train_test_val):
         all_pairs_index = random.sample(all_pairs_index, 10000)
     
 
-    for pair in sample_pairs_index:
+    for pair in all_pairs_index:
         splits = pair.split(",")
         left_path = splits[0]
         right_path = splits[1]
