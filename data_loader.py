@@ -45,14 +45,14 @@ class CrossLanguageProgramData():
         cached_path = "cached"
 
         
-        saved_input_filename = "%s/%s.pkl" % (cached_path, path.split("/")[-1].split(".")[0])
+        saved_input_filename = "%s/pairwise_%s.pkl" % (cached_path, path.split("/")[-1].split(".")[0])
     
         print(saved_input_filename)
         if os.path.exists(saved_input_filename):
             with open(saved_input_filename, 'rb') as file_handler:
                 pairs = pickle.load(file_handler)
         else:
-            pairs = load_pairwise_programs(path)
+            pairs = load_pairwise_programs(path, train_test_val)
             with open(saved_input_filename, 'wb') as file_handler:
                 pickle.dump(pairs, file_handler, protocol=pickle.HIGHEST_PROTOCOL)
 
