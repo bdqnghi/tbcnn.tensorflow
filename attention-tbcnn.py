@@ -255,6 +255,7 @@ def test_model(test_trees, labels, embeddings, embedding_lookup, opt):
                 }
             )
 
+          
             # print(attention_score[0])
             # print(len(attention_score[0]))
          

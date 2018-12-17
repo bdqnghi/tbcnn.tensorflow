@@ -57,6 +57,10 @@ class CrossLanguageProgramData():
                 pickle.dump(pairs, file_handler, protocol=pickle.HIGHEST_PROTOCOL)
 
         random.shuffle(pairs)
+
+        if train_test_val == 0:
+            pairs = random.sample(pairs,10000)
+            
         left_trees = []
         right_trees = []
         labels = []

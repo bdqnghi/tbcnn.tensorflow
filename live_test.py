@@ -14,7 +14,7 @@ from parameters import LEARN_RATE, EPOCHS, CHECKPOINT_EVERY, BATCH_SIZE
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 from data_loader import load_program_data
 from data_loader import MonoLanguageProgramData
-from data_loader import load_single_program
+from data_loader import load_single_program_for_live_test
 from data_loader import build_tree
 import argparse
 import random
@@ -42,6 +42,7 @@ parser.add_argument('--log_path', default="" ,help='log path for tensorboard')
 parser.add_argument('--epoch', type=int, default=0, help='epoch to test')
 parser.add_argument('--feature_size', type=int, default=100, help='epoch to test')
 parser.add_argument('--aggregation', type=int, default=1, help='0 for max pooling, 1 for global attention')
+parser.add_argument('--distributed_function', type=int, default=1, choices=range(0,2), help='0 for softmax, 1 for sigmoid')
 parser.add_argument('--embeddings_directory', default="embedding/fast_pretrained_vectors.pkl", help='pretrained embeddings url, there are 2 objects in this file, the first object is the embedding matrix, the other is the lookup dictionary')
 
 
@@ -55,6 +56,14 @@ if opt.aggregation == 2:
     print("Using attention with max pooling...........")
 if opt.aggregation == 3:
     print("Using attention with average pooling...........")
+
+
+if opt.distributed_function == 0:
+    print("Using softmax as the distributed_function...........")
+if opt.distributed_function == 1:
+    print("Using sigmoid as the distributed_function...........")
+
+
 
 if not os.path.isdir("cached"):
     os.mkdir("cached")
@@ -105,18 +114,16 @@ def live_test(path, test_trees, labels, node_ids, node_types, embeddings, embedd
     checkfile = os.path.join(logdir, 'cnn_tree.ckpt')   
     ckpt = tf.train.get_checkpoint_state(logdir)
     
-    std = 1.0 / math.sqrt(node_embedding_size)
+    initializer = tf.contrib.layers.xavier_initializer()
     weights = {
-        "w_t" : tf.Variable(tf.truncated_normal([node_embedding_size, opt.feature_size], stddev=std), name="w_t"),
-        "w_l" : tf.Variable(tf.truncated_normal([node_embedding_size, opt.feature_size], stddev=std), name="w_l"),
-        "w_r" : tf.Variable(tf.truncated_normal([node_embedding_size, opt.feature_size], stddev=std), name="w_r"),
-        "w_attention" : tf.Variable(tf.truncated_normal([opt.feature_size,1], stddev=std), name="w_attention"),
-        "w_hidden": tf.Variable(tf.truncated_normal([opt.feature_size, len(labels)], stddev=1.0 / math.sqrt(opt.feature_size)),name="w_hidden")
+        "w_t" : tf.Variable(initializer([node_embedding_size, opt.feature_size]), name="w_t"),
+        "w_l" : tf.Variable(initializer([node_embedding_size, opt.feature_size]), name="w_l"),
+        "w_r" : tf.Variable(initializer([node_embedding_size, opt.feature_size]), name="w_r"),
+        "w_attention" : tf.Variable(initializer([opt.feature_size,1]), name="w_attention")
     }
 
     biases = {
-        "b_conv": tf.Variable(tf.truncated_normal([opt.feature_size,], stddev=math.sqrt(2.0/node_embedding_size)), name="b_conv"),
-        "b_hidden": tf.Variable(tf.truncated_normal([len(labels),], stddev=math.sqrt(2.0/node_embedding_size)), name="b_hidden")
+        "b_conv": tf.Variable(initializer([opt.feature_size,]), name="b_conv"),
     }
 
     nodes_node, children_node, hidden_node, attention_score_node = network.init_net(
@@ -125,10 +132,10 @@ def live_test(path, test_trees, labels, node_ids, node_types, embeddings, embedd
         opt.feature_size,
         weights,
         biases,
-        opt.aggregation
+        opt.aggregation,
+        opt.distributed_function
     )
-    hidden_node = tf.identity(hidden_node, name="hidden_node")
-
+   
     out_node = network.out_layer(hidden_node)
     labels_node, loss_node = network.loss_layer(hidden_node, len(labels))
 
@@ -147,7 +154,8 @@ def live_test(path, test_trees, labels, node_ids, node_types, embeddings, embedd
             print("Continue training with old model")
             print("Checkpoint path : " + str(ckpt.model_checkpoint_path))
             saver.restore(sess, ckpt.model_checkpoint_path)
-
+            for i, var in enumerate(saver._var_list):
+                print('Var {}: {}'.format(i, var))
        
         print('Computing training accuracy...')
         for batch in sampling.batch_samples(
@@ -160,10 +168,14 @@ def live_test(path, test_trees, labels, node_ids, node_types, embeddings, embedd
                     children_node: children,
                 }
             )
+
+            print(output)
+
             splits = path.split(".")
             node_ids = node_ids[0]
             node_types = node_types[0]
 
+           
             print("Actual classes : " + str(np.argmax(batch_labels)+1))
             print("Predicted classes : " + str(np.argmax(output)+1))
 
@@ -239,7 +251,7 @@ def main(opt):
     with open(ast_representation_path,"w") as f:
         f.write(str(ast_representation))    
     # an array of only 1 tree, just wrap it into 1 more dimension to make it consistent with the training process
-    test_trees, _ , node_ids, node_types = load_single_program(pkl_path)
+    test_trees, _ , node_ids, node_types = load_single_program_for_live_test(pkl_path)
     labels = [str(i) for i in range(1, opt.n_classes+1)]
 
     live_test(pkl_path, test_trees, labels, node_ids, node_types, embeddings, embed_lookup , opt)

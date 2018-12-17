@@ -117,7 +117,7 @@ def batch_random_samples_2_sides(left_trees, right_trees, labels, vectors, vecto
             n = str(node['node'])
             right_nodes.append(vectors[int(n)])
       
-        if len(left_nodes) < 7000 and len(right_nodes) < 7000:
+        if (len(left_nodes) < 7000 and len(left_nodes) > 500) and (len(right_nodes) < 7000 and len(right_nodes) > 500):
 
             batch_left_nodes.append(left_nodes)
             batch_left_children.append(left_children)
