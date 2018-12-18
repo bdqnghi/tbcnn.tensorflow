@@ -9,7 +9,7 @@ import itertools
 
 
 
-src_dir = "github_java_sort_pkl_train_test_val"
+src_dir = "github_cpp_sort_pkl_train_test_val"
 train_test_val_directories = os.listdir(src_dir)
 
 for i, task in enumerate(train_test_val_directories):

@@ -15,7 +15,7 @@ langs = ["cpp","java"]
 max_workers = 20
 def execute_command(src_path,tgt_path):
     # -S into -p for pb only
-    cmd = "docker run --rm -v $(pwd):/e -it yijun/fast:built " + src_path + " " + tgt_path
+    cmd = "docker run --rm -v $(pwd):/e -it yijun/fast " + src_path + " " + tgt_path
     print(cmd)
     os.system(cmd)
     # p = subprocess.Popen(cmd, shell=True)

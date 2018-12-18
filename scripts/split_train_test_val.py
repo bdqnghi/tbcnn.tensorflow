@@ -6,8 +6,8 @@ from shutil import copyfile
 from concurrent.futures import ThreadPoolExecutor
 
 # ROOT = "/home/nghibui/codes/bi-tbcnn/"
-src_dir = "github_java_pkl"
-tgt_dir = "github_java_pkl_train_test_val"
+src_dir = "github_java_sort_pkl"
+tgt_dir = "github_java_sort_pkl_train_test_val"
 
 algo_directories = os.listdir(src_dir)
 
