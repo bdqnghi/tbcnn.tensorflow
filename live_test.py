@@ -72,7 +72,7 @@ if not os.path.isdir("cached"):
 def generate_pb(src_path):
     splits = src_path.split(".")
     pb_path = os.path.join(splits[0] + ".pb")
-    cmd = "docker run --rm -v $(pwd):/e -it yijun/fast:built -p " + src_path + " " + pb_path
+    cmd = "docker run --rm -v $(pwd):/e -it yijun/fast -p " + src_path + " " + pb_path
     os.system(cmd)
     return pb_path
 
@@ -81,7 +81,7 @@ def generate_visualization_accumulation(pkl_path):
     attention_path = os.path.join(splits[0] + "_raw_attention_without_node_type.csv")
     pb_path = os.path.join(splits[0] + ".pb")
     html_path = os.path.join(splits[0] + "_accumulation.html")
-    cmd = "docker run --rm -v $(pwd):/e -it yijun/fast:built -H -a -t -y " + attention_path + " " + pb_path  + " > " + html_path
+    cmd = "docker run --rm -v $(pwd):/e -it yijun/fast -H -a -t -y " + attention_path + " " + pb_path  + " > " + html_path
     os.system(cmd)
     return html_path
 
@@ -90,14 +90,14 @@ def generate_visualization_normal(pkl_path):
     attention_path = os.path.join(splits[0] + "_scaled_attention_without_node_type.csv")
     pb_path = os.path.join(splits[0] + ".pb")
     html_path = os.path.join(splits[0] + "_normal.html")
-    cmd = "docker run --rm -v $(pwd):/e -it yijun/fast:built -H -t -y " + attention_path + " " + pb_path  + " > " + html_path
+    cmd = "docker run --rm -v $(pwd):/e -it yijun/fast -H -t -y " + attention_path + " " + pb_path  + " > " + html_path
     os.system(cmd)
     return html_path
 
 def generate_pkl(src_path):
     splits = src_path.split(".")
     pkl_path = os.path.join(splits[0] + ".pkl")
-    cmd = "docker run --rm -v $(pwd):/e -it yijun/fast:built " + src_path + " " + pkl_path
+    cmd = "docker run --rm -v $(pwd):/e -it yijun/fast " + src_path + " " + pkl_path
     os.system(cmd)
     return pkl_path
 
