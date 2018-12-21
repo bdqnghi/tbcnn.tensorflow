@@ -15,7 +15,7 @@ langs = ["cpp","java"]
 max_workers = 10
 def execute_command(src_path,tgt_path):
     # -S into -p for pb only
-    cmd = "docker run --rm -v $(pwd):/e -it yijun/fast:built -p " + src_path + " " + tgt_path
+    cmd = "docker run --rm -v $(pwd):/e -it yijun/fast -p " + src_path + " " + tgt_path
     print(cmd)
     # os.system(cmd)
     p = subprocess.Popen(cmd, shell=True)
@@ -46,7 +46,7 @@ with ProcessPoolExecutor(max_workers=max_workers) as executor:
 
             if not os.path.exists(pb_path):
                 future = executor.submit(execute_command, file_path, pb_path)
-                # cmd = "docker run --rm -v $(pwd):/e -it yijun/fast:built -p " + file_path + " " + pb_path
+                # cmd = "docker run --rm -v $(pwd):/e -it yijun/fast -p " + file_path + " " + pb_path
                 # print(cmd)
             
                 # p = subprocess.Popen(cmd, shell=True)
@@ -54,7 +54,7 @@ with ProcessPoolExecutor(max_workers=max_workers) as executor:
                 #     p.wait(1)
                 # except subprocess.TimeoutExpired:
                 #     p.kill()
-                # p = subprocess.Popen(["docker","run","--rm","-v","$(pwd):/e","-it","yijun/fast:built","-p","file_path","pb_path"])
+                # p = subprocess.Popen(["docker","run","--rm","-v","$(pwd):/e","-it","yijun/fast","-p","file_path","pb_path"])
                 # try:
                 #     p.wait(10)
                 # except subp.TimeoutExpired:
