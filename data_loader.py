@@ -58,8 +58,8 @@ class CrossLanguageProgramData():
 
         random.shuffle(pairs)
 
-        if train_test_val == 0:
-            pairs = random.sample(pairs,10000)
+        # if train_test_val == 0:
+        #     pairs = random.sample(pairs,10000)
             
         left_trees = []
         right_trees = []
@@ -84,7 +84,7 @@ def load_pairwise_programs(path, train_test_val):
             all_pairs_index.append(line.replace("\n",""))
     
     if train_test_val == 0:
-        all_pairs_index = random.sample(all_pairs_index, 10000)
+        all_pairs_index = random.sample(all_pairs_index, 50000)
     
 
     for i, pair in tqdm(enumerate(all_pairs_index)):
@@ -120,16 +120,16 @@ def load_single_program(file_path):
   
     return result
 
-def load_single_program_for_live_test(file_path):
+def load_single_program_for_live_test(file_pkl_path):
     result = []
     labels = []
     nodes_ids_list = []
     nodes_types_list = []
-    splits = file_path.split("/")
+    splits = file_pkl_path.split("/")
     
-    label = splits[len(splits)-2]
+    label = splits[len(splits)-3]
     # print(label)
-    ast_representation = build_tree(file_path)
+    ast_representation = build_tree(file_pkl_path)
     if ast_representation.HasField("element"):
         root = ast_representation.element
         tree, size, node_ids, node_types = _traverse_tree(root)
@@ -211,6 +211,64 @@ def _traverse_tree(root):
             # print current_node_json
   
     return root_json, num_nodes, node_ids, node_types
+
+def search_child_with_name(function_node, keyword):
+    children = [x for x in function_node.child]
+    found_correct_function = False
+    for child in children:
+        if "sort" in str(child.text.lower()):
+            found_correct_function = True
+    return found_correct_function
+
+def search_function_node(ast_representation, keyword):
+    function_node_id = None
+    if ast_representation.HasField("element"):
+        root = ast_representation.element
+        queue = [root]
+       
+        root_json = {
+            "node": str(root.kind),
+
+            "children": []
+        }
+        queue_json = [root_json]
+     
+       
+        while queue:
+          
+            current_node = queue.pop(0)
+            children = [x for x in current_node.child]
+
+            current_node_json = queue_json.pop(0)
+            # print(current_node.text.lower(), current_node.kind)
+
+            if current_node.kind == 12:
+                found_correct_function = search_child_with_name(current_node, keyword)
+                if found_correct_function:
+                    for child in children:
+                        if child.kind == 60:
+                            function_node_id = child.id
+                            return function_node_id
+
+
+            
+            queue.extend(children)
+           
+            for child in children:
+                # print "##################"
+                #print child.kind
+
+                child_json = {
+                    "node": str(child.kind),
+                    "children": []
+                }
+
+                current_node_json['children'].append(child_json)
+                queue_json.append(child_json)
+            
+            # print current_node_json
+  
+    return function_node_id
 
 
 # if __name__ == "__main__":
