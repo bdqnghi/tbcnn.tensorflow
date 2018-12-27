@@ -71,7 +71,7 @@ def convert_labels_to_one_hot(labels):
 
 
 
-def train_model(train_dataloader, embeddings, embedding_lookup, opt):
+def train_model(train_dataloader, val_dataloader, embeddings, embedding_lookup, opt):
     
     logdir = opt.model_path
     epochs = opt.niter
@@ -81,9 +81,9 @@ def train_model(train_dataloader, embeddings, embedding_lookup, opt):
     train_right_trees = train_dataloader.right_trees
     train_labels = train_dataloader.labels
 
-    # val_left_trees = val_dataloader.left_trees
-    # val_right_trees = val_dataloader.right_trees
-    # val_labels = val_dataloader.labels
+    val_left_trees = val_dataloader.left_trees
+    val_right_trees = val_dataloader.right_trees
+    val_labels = val_dataloader.labels
 
     n_classess = 2
 
@@ -142,12 +142,11 @@ def train_model(train_dataloader, embeddings, embedding_lookup, opt):
     # with tf.device(device):
     for epoch in range(1, epochs+1):
         print("----------------------------------------------------")
-        for batch_left_trees, batch_right_trees, batch_labels in sampling.batch_random_samples_2_sides(train_left_trees, train_right_trees, train_labels, embeddings, embedding_lookup, opt.train_batch_size):
+        for batch_left_trees, batch_right_trees, batch_labels in sampling.batch_random_samples_2_sides(train_left_trees, train_right_trees, val_labels, embeddings, embedding_lookup, opt.train_batch_size):
            
             left_nodes, left_children = batch_left_trees
-
             right_nodes, right_children = batch_right_trees
-            # print(batch_labels)
+            
             labels_one_hot = convert_labels_to_one_hot(batch_labels)
                 
             _, err, out = sess.run(
@@ -173,6 +172,37 @@ def train_model(train_dataloader, embeddings, embedding_lookup, opt):
     
             steps+=1
         steps = 0
+
+
+        correct_labels = []
+        predictions = []
+
+        for batch_left_trees, batch_right_trees, batch_labels in sampling.batch_random_samples_2_sides(val_left_trees, val_right_trees, val_labels, embeddings, embedding_lookup, opt.train_batch_size):
+
+            left_nodes, left_children = batch_left_trees
+            right_nodes, right_children = batch_right_trees
+            
+            labels_one_hot = convert_labels_to_one_hot(batch_labels)
+                
+            out = sess.run(
+                [out_node],
+                feed_dict={
+                    left_nodes_node: left_nodes,
+                    left_children_node: left_children,
+                    right_nodes_node: right_nodes,
+                    right_children_node: right_children,
+                    labels_node: labels_one_hot
+                }
+            )
+
+            correct_labels.append(np.argmax(batch_labels))
+            predictions.append(np.argmax(output))
+
+
+        print('Accuracy:', accuracy_score(correct_labels, predictions))
+        print(classification_report(correct_labels, predictions))
+        print(confusion_matrix(correct_labels, predictions))
+
 
 def main():
         
