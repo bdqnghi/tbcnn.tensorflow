@@ -83,8 +83,8 @@ def load_pairwise_programs(path, train_test_val):
         for line in data:
             all_pairs_index.append(line.replace("\n",""))
     
-    if train_test_val == 0:
-        all_pairs_index = random.sample(all_pairs_index, 50000)
+    # if train_test_val == 0:
+    #     all_pairs_index = random.sample(all_pairs_index, 100)
     
 
     for i, pair in tqdm(enumerate(all_pairs_index)):
