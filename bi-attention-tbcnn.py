@@ -142,7 +142,7 @@ def train_model(train_dataloader, val_dataloader, embeddings, embedding_lookup, 
     # with tf.device(device):
     for epoch in range(1, epochs+1):
         print("----------------------------------------------------")
-        for batch_left_trees, batch_right_trees, batch_labels in sampling.batch_random_samples_2_sides(train_left_trees, train_right_trees, val_labels, embeddings, embedding_lookup, opt.train_batch_size):
+        for batch_left_trees, batch_right_trees, batch_labels in sampling.batch_random_samples_2_sides(train_left_trees, train_right_trees, train_labels, embeddings, embedding_lookup, opt.train_batch_size):
            
             left_nodes, left_children = batch_left_trees
             right_nodes, right_children = batch_right_trees
@@ -184,7 +184,7 @@ def train_model(train_dataloader, val_dataloader, embeddings, embedding_lookup, 
             
             labels_one_hot = convert_labels_to_one_hot(batch_labels)
                 
-            out = sess.run(
+            output = sess.run(
                 [out_node],
                 feed_dict={
                     left_nodes_node: left_nodes,
@@ -194,14 +194,17 @@ def train_model(train_dataloader, val_dataloader, embeddings, embedding_lookup, 
                     labels_node: labels_one_hot
                 }
             )
+        
+            correct = np.argmax(labels_one_hot, axis=1)
+            predicted = np.argmax(output[0], axis=1)
 
-            correct_labels.append(np.argmax(batch_labels))
-            predictions.append(np.argmax(output))
-
+            correct_labels.extend(correct)
+            predictions.extend(predicted)
 
         print('Accuracy:', accuracy_score(correct_labels, predictions))
         print(classification_report(correct_labels, predictions))
         print(confusion_matrix(correct_labels, predictions))
+
 
 
 def main():
@@ -212,10 +215,10 @@ def main():
         embeddings, embed_lookup = pickle.load(fh,encoding='latin1')
     
     train_data_loader = CrossLanguageProgramData(opt.train_data, 0,opt.n_classes)
-    # val_data_loader = CrossLanguageProgramData(opt.val_data)
+    val_data_loader = CrossLanguageProgramData(opt.val_data, 2, opt.n_classes)
  
   
-    train_model(train_data_loader,  embeddings, embed_lookup, opt) 
+    train_model(train_data_loader, val_data_loader,  embeddings, embed_lookup, opt) 
 
 
 if __name__ == "__main__":
