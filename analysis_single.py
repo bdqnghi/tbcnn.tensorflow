@@ -104,26 +104,34 @@ def generate_pkl(pb_path):
         os.system(cmd)
     return pkl_path
 
-def generate_visualization_accumulation(pkl_path):
-    path_splits = src_path.split("/")
-    file_name = path_splits[len(path_splits)-1].split(".")[0]
-    attention_path = os.path.join(file_name + "_raw_attention_without_node_type.csv")
-    pb_path = os.path.join(file_name + ".pb")
-    html_path = os.path.join(file_name + "_" + aggregation_name + "_" + distributed_function_name + "_" + "accumulation.html")
-    cmd = "docker run --rm -v $(pwd):/e -it yijun/fast -H -a -t -y " + attention_path + " " + pb_path  + " > " + html_path
-    os.system(cmd)
-    return html_path
+# def generate_visualization_accumulation(pkl_path):
+#     path_splits = src_path.split("/")
+#     file_name = path_splits[len(path_splits)-1].split(".")[0]
+#     attention_path = os.path.join(file_name + "_raw_attention_without_node_type.csv")
+#     pb_path = os.path.join(file_name + ".pb")
+#     html_path = os.path.join(file_name + "_" + aggregation_name + "_" + distributed_function_name + "_" + "accumulation.html")
+#     cmd = "docker run --rm -v $(pwd):/e -it yijun/fast -H -a -t -y " + attention_path + " " + pb_path  + " > " + html_path
+#     os.system(cmd)
+#     return html_path
 
-def generate_visualization_normal(pkl_path):
+def generate_visualization(pkl_path):
   
     attention_path = os.path.join(pkl_path.split(".")[0] + "_" + aggregation_name + "_" + distributed_function_name + "_" +  "scaled_attention_without_node_type.csv")
     pb_path = os.path.join(pkl_path.split(".")[0] + ".pb")
-    html_path = os.path.join(pkl_path.split(".")[0] + "_" + aggregation_name + "_" + distributed_function_name + "_" +  "normal.html")
+    normal_html_path = os.path.join(pkl_path.split(".")[0] + "_" + aggregation_name + "_" + distributed_function_name + "_" +  "normal.html")
+    accumulation_html_path = os.path.join(pkl_path.split(".")[0] + "_" + aggregation_name + "_" + distributed_function_name + "_" +  "accumulation.html")
+    spreading_html_path = os.path.join(pkl_path.split(".")[0] + "_" + aggregation_name + "_" + distributed_function_name + "_" +  "spreading.html")
+    spreading_with_subtree_size_html_path = os.path.join(pkl_path.split(".")[0] + "_" + aggregation_name + "_" + distributed_function_name + "_" +  "spreading_with_weight.html")
 
-    cmd = "docker run --rm -v $(pwd):/e -it yijun/fast -H 0 -t -y " + attention_path + " " + pb_path  + " > " + html_path
-    print(cmd)
-    os.system(cmd)
-    return html_path
+    normal_cmd = "docker run --rm -v $(pwd):/e -it yijun/fast -H 0 -t -x " + attention_path + " " + pb_path  + " > " + normal_html_path
+    accumulation_cmd = "docker run --rm -v $(pwd):/e -it yijun/fast -H 0 -a 0 -x " + attention_path + " " + pb_path  + " > " + accumulation_html_path
+    spreading_cmd = "docker run --rm -v $(pwd):/e -it yijun/fast -H 0 -a 1 -x " + attention_path + " " + pb_path  + " > " + spreading_html_path
+    spreading__with_weight_cmd = "docker run --rm -v $(pwd):/e -it yijun/fast -H 0 -a 2 -x " + attention_path + " " + pb_path  + " > " + spreading_with_subtree_size_html_path
+    os.system(normal_cmd)
+    os.system(accumulation_cmd)
+    os.system(spreading_cmd)
+    os.system(spreading__with_weight_cmd)
+    return normal_html_path,accumulation_html_path, spreading_html_path, spreading_with_subtree_size_html_path
 
 def generate_sort_function_subtree_ids(pb_path, node_id):
     subtree_ids_path = os.path.join(pb_path.split(".")[0] + "_subtree_ids.txt")
@@ -164,7 +172,7 @@ def generate_attention_score(attention_score, attention_score_scaled, node_ids, 
 
     with open(attention_file_path_raw_with_node_type,"w") as f:
         for i, score in enumerate(attention_score):
-            subtree_ids = generate_subtree_ids(pb_path, node_ids[i])
+            # subtree_ids = generate_subtree_ids(pb_path, node_ids[i])
             # line = str(node_ids[i]) + "," + str(node_types[i]) + "," + str(len(subtree_ids)) + "," + str(score)
             line = str(node_ids[i]) + "," + str(node_types[i]) + "," + str(score)
             f.write("%s\n" % line)
@@ -176,7 +184,7 @@ def generate_attention_score(attention_score, attention_score_scaled, node_ids, 
 
     with open(attention_file_path_scaled_with_node_type,"w") as f1:
         for i, score in enumerate(attention_score_scaled):
-            subtree_ids = generate_subtree_ids(pb_path, node_ids[i])
+            # subtree_ids = generate_subtree_ids(pb_path, node_ids[i])
             # line = str(node_ids[i]) + "," + str(node_types[i]) + "," + str(len(subtree_ids)) + "," + str(score)
             line = str(node_ids[i]) + "," + str(node_types[i]) + "," + str(score)
             f1.write("%s\n" % line)
@@ -277,7 +285,7 @@ def predict(sess, out_node, attention_score_node, nodes_node, children_node, pkl
         print(cos_sim_oracle)
         print(cos_sim_reverse_oracle)
 
-        generate_visualization_normal(pkl_path)
+        generate_visualization(pkl_path)
         return cos_sim_oracle, cos_sim_reverse_oracle, ratio, actual, predicted
 
 def cosine_simlarity(a, b):
@@ -370,7 +378,7 @@ def main(opt):
             for i, var in enumerate(saver._var_list):
                 print('Var {}: {}'.format(i, var))
 
-        file_name = "max_sigmoid.csv"
+        file_name = aggregation_name + "_" + distributed_function_name + ".csv"
         with open("analysis_single/" + file_name,"a") as f:
             f.write("file,oracle_cosim,reverse_oracle_cosim,function_node_id,function_size,program_size,function_ratio,actual,predicted")
             f.write("\n")

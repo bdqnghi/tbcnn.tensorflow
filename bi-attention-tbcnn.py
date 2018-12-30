@@ -206,6 +206,101 @@ def train_model(train_dataloader, val_dataloader, embeddings, embedding_lookup, 
         print(confusion_matrix(correct_labels, predictions))
 
 
+def test_model(test_dataloader, embeddings, embedding_lookup, opt):
+
+    logdir = opt.model_path
+    epochs = opt.niter
+    node_embedding_size = len(embeddings[0])
+
+    test_left_trees = test_dataloader.left_trees
+    test_right_trees = test_dataloader.right_trees
+    test_labels = test_dataloader.labels
+
+    n_classess = 2
+
+    num_feats = len(embeddings[0])
+
+    initializer = tf.contrib.layers.xavier_initializer()
+    weights = {
+        "w_t" : tf.Variable(initializer([node_embedding_size, opt.feature_size]), name="w_t"),
+        "w_l" : tf.Variable(initializer([node_embedding_size, opt.feature_size]), name="w_l"),
+        "w_r" : tf.Variable(initializer([node_embedding_size, opt.feature_size]), name="w_r"),
+        "w_attention" : tf.Variable(initializer([opt.feature_size,1]), name="w_attention")
+    }
+
+
+    biases = {
+        "b_conv": tf.Variable(initializer([opt.feature_size,]), name="b_conv"),
+    }
+
+    left_nodes_node, left_children_node, right_nodes_node, right_children_node, hidden_node, left_score_node, right_score_node = network.init_net_for_siamese(
+        num_feats,
+        opt.feature_size,
+        weights, 
+        biases,
+        opt.aggregation,
+        opt.distributed_function
+    )
+
+    out_node = network.out_layer(hidden_node)
+
+    labels_node, loss_node = network.loss_layer(hidden_node, n_classess)
+
+    optimizer = tf.train.AdamOptimizer(LEARN_RATE)
+    train_step = optimizer.minimize(loss_node)
+
+    sess = tf.Session()
+
+    # sess = tf.Session()
+    sess.run(tf.global_variables_initializer())
+
+    with tf.name_scope('saver'):
+        saver = tf.train.Saver()
+        ckpt = tf.train.get_checkpoint_state(logdir)
+        if ckpt and ckpt.model_checkpoint_path:
+            print("Continue training with old model")
+            saver.restore(sess, ckpt.model_checkpoint_path)
+            for i, var in enumerate(saver._var_list):
+                print('Var {}: {}'.format(i, var))
+        # else:
+        #     raise 'Checkpoint not found.'
+
+    checkfile = os.path.join(logdir, 'cnn_tree.ckpt')
+    steps = 0   
+
+    print("Begin computing accuracy....")
+
+    correct_labels = []
+    predictions = []
+
+    for batch_left_trees, batch_right_trees, batch_labels in sampling.batch_random_samples_2_sides(test_left_trees, test_right_trees, test_labels, embeddings, embedding_lookup, opt.train_batch_size):
+
+        left_nodes, left_children = batch_left_trees
+        right_nodes, right_children = batch_right_trees
+        
+        labels_one_hot = convert_labels_to_one_hot(batch_labels)
+            
+        output = sess.run(
+            [out_node],
+            feed_dict={
+                left_nodes_node: left_nodes,
+                left_children_node: left_children,
+                right_nodes_node: right_nodes,
+                right_children_node: right_children,
+                labels_node: labels_one_hot
+            }
+        )
+    
+        correct = np.argmax(labels_one_hot, axis=1)
+        predicted = np.argmax(output[0], axis=1)
+
+        correct_labels.extend(correct)
+        predictions.extend(predicted)
+
+    print('Accuracy:', accuracy_score(correct_labels, predictions))
+    print(classification_report(correct_labels, predictions))
+    print(confusion_matrix(correct_labels, predictions))
+
 
 def main():
         
@@ -214,11 +309,16 @@ def main():
     with open(opt.embeddings_directory, 'rb') as fh:
         embeddings, embed_lookup = pickle.load(fh,encoding='latin1')
     
-    train_data_loader = CrossLanguageProgramData(opt.train_data, 0,opt.n_classes)
-    val_data_loader = CrossLanguageProgramData(opt.val_data, 2, opt.n_classes)
- 
-  
-    train_model(train_data_loader, val_data_loader,  embeddings, embed_lookup, opt) 
+    if opt.training:
+        train_dataloader = CrossLanguageProgramData(opt.train_data, 0,opt.n_classes)
+        val_dataloader = CrossLanguageProgramData(opt.val_data, 2, opt.n_classes)
+      
+        train_model(train_dataloader, val_dataloader,  embeddings, embed_lookup, opt) 
+    if opt.testing:
+        test_dataloader = CrossLanguageProgramData(opt.test_data, 1,opt.n_classes)
+      
+        test_model(test_dataloader,  embeddings, embed_lookup, opt) 
+
 
 
 if __name__ == "__main__":

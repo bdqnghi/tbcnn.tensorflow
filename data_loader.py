@@ -82,7 +82,7 @@ def load_pairwise_programs(path, train_test_val):
         data = f.readlines()
         for line in data:
             all_pairs_index.append(line.replace("\n",""))
-    
+  
     # if train_test_val == 0:
     #     all_pairs_index = random.sample(all_pairs_index, 100)
     
