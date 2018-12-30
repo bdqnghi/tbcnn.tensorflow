@@ -35,6 +35,7 @@ def scale_attention_score_by_group(attention_array):
     attention_array = np.array(attention_array)
   
     clusters = [list(g) for _, g in itertools.groupby(attention_array, lambda x: x)]
+
     average = float(1/len(clusters))
     # print(clusters)
     # print("Num clusters : " + str(len(clusters)))
