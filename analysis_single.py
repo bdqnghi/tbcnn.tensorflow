@@ -379,7 +379,11 @@ def main(opt):
                 print('Var {}: {}'.format(i, var))
 
         file_name = aggregation_name + "_" + distributed_function_name + ".csv"
-        with open("analysis_single/" + file_name,"a") as f:
+        analysis_file = "analysis_single/" + file_name
+
+        if os.path.exists(analysis_file):
+            os.remove(analysis_file)
+        with open(analysis_file,"a") as f:
             f.write("file,oracle_cosim,reverse_oracle_cosim,function_node_id,function_size,program_size,function_ratio,actual,predicted")
             f.write("\n")
 
@@ -396,7 +400,7 @@ def main(opt):
 
                     cos_sim_oracle, cos_sim_reverse_oracle, ratio, actual, predicted = predict(sess, out_node, attention_score_node, nodes_node, children_node, pkl_path, pb_path, subtree_ids, test_trees, labels, node_ids, node_types, embeddings, embed_lookup)
                     
-                    with open("analysis_single/" + file_name,"a") as f:
+                    with open(analysis_file,"a") as f:
                         f.write(file_path + "," + str(cos_sim_oracle) + "," + str(cos_sim_reverse_oracle) + "," + str(sort_function_id) + "," + str(len(subtree_ids)) + "," + str(len(node_ids[0])) + "," + str(ratio) + "," + str(actual) + "," + str(predicted))
                         f.write("\n")
 
