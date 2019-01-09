@@ -1,0 +1,1470 @@
+element {
+  kind: UNIT_KIND
+  child {
+    kind: FUNCTION
+    child {
+      kind: SPECIFIER
+      text: "protected"
+      child {
+        kind: POSITION
+        line: 1
+        column: 10
+        id: 1
+      }
+      tail: " "
+      line: 1
+      column: 1
+      id: 2
+    }
+    child {
+      kind: TYPE
+      child {
+        kind: NAME
+        text: "void"
+        child {
+          kind: POSITION
+          line: 1
+          column: 15
+          id: 3
+        }
+        line: 1
+        column: 11
+        id: 4
+      }
+      tail: " "
+      id: 5
+    }
+    child {
+      kind: NAME
+      text: "sort"
+      child {
+        kind: POSITION
+        line: 1
+        column: 20
+        id: 6
+      }
+      line: 1
+      column: 16
+      id: 7
+    }
+    child {
+      kind: PARAMETER_LIST
+      text: "("
+      child {
+        kind: PARAMETER
+        child {
+          kind: DECL
+          child {
+            kind: TYPE
+            child {
+              kind: NAME
+              child {
+                kind: NAME
+                text: "T"
+                child {
+                  kind: POSITION
+                  line: 1
+                  column: 22
+                  id: 8
+                }
+                line: 1
+                column: 21
+                id: 9
+              }
+              child {
+                kind: INDEX
+                text: "[]"
+                child {
+                  kind: POSITION
+                  line: 1
+                  column: 24
+                  id: 10
+                }
+                line: 1
+                column: 22
+                id: 11
+              }
+              id: 12
+            }
+            tail: " "
+            id: 13
+          }
+          child {
+            kind: NAME
+            text: "array"
+            child {
+              kind: POSITION
+              line: 1
+              column: 30
+              id: 14
+            }
+            line: 1
+            column: 25
+            id: 15
+          }
+          id: 16
+        }
+        tail: ", "
+        id: 17
+      }
+      child {
+        kind: PARAMETER
+        child {
+          kind: DECL
+          child {
+            kind: TYPE
+            child {
+              kind: NAME
+              text: "int"
+              child {
+                kind: POSITION
+                line: 1
+                column: 35
+                id: 18
+              }
+              line: 1
+              column: 32
+              id: 19
+            }
+            tail: " "
+            id: 20
+          }
+          child {
+            kind: NAME
+            text: "leftIndex"
+            child {
+              kind: POSITION
+              line: 1
+              column: 45
+              id: 21
+            }
+            line: 1
+            column: 36
+            id: 22
+          }
+          id: 23
+        }
+        tail: ", "
+        id: 24
+      }
+      child {
+        kind: PARAMETER
+        child {
+          kind: DECL
+          child {
+            kind: TYPE
+            child {
+              kind: NAME
+              text: "int"
+              child {
+                kind: POSITION
+                line: 1
+                column: 50
+                id: 25
+              }
+              line: 1
+              column: 47
+              id: 26
+            }
+            tail: " "
+            id: 27
+          }
+          child {
+            kind: NAME
+            text: "rightIndex"
+            child {
+              kind: POSITION
+              line: 1
+              column: 61
+              id: 28
+            }
+            line: 1
+            column: 51
+            id: 29
+          }
+          id: 30
+        }
+        tail: ")"
+        id: 31
+      }
+      child {
+        kind: POSITION
+        line: 1
+        column: 62
+        id: 32
+      }
+      tail: " "
+      line: 1
+      column: 20
+      id: 33
+    }
+    child {
+      kind: BLOCK
+      text: "{\n        \n        "
+      child {
+        kind: IF
+        text: "if "
+        child {
+          kind: CONDITION
+          text: "("
+          child {
+            kind: EXPR
+            child {
+              kind: NAME
+              child {
+                kind: NAME
+                text: "array"
+                child {
+                  kind: POSITION
+                  line: 3
+                  column: 18
+                  id: 34
+                }
+                line: 3
+                column: 13
+                id: 35
+              }
+              child {
+                kind: OPERATOR
+                text: "."
+                child {
+                  kind: POSITION
+                  line: 3
+                  column: 19
+                  id: 36
+                }
+                line: 3
+                column: 18
+                id: 37
+              }
+              child {
+                kind: NAME
+                text: "length"
+                child {
+                  kind: POSITION
+                  line: 3
+                  column: 25
+                  id: 38
+                }
+                line: 3
+                column: 19
+                id: 39
+              }
+              tail: " "
+              id: 40
+            }
+            child {
+              kind: OPERATOR
+              text: "&gt;"
+              child {
+                kind: POSITION
+                line: 3
+                column: 30
+                id: 41
+              }
+              tail: " "
+              line: 3
+              column: 26
+              id: 42
+            }
+            child {
+              kind: LITERAL
+              text: "1"
+              child {
+                kind: POSITION
+                line: 3
+                column: 29
+                id: 43
+              }
+              literal {
+                type: number_type
+              }
+              line: 3
+              column: 28
+              id: 44
+            }
+            tail: ")"
+            id: 45
+          }
+          child {
+            kind: POSITION
+            line: 3
+            column: 30
+            id: 46
+          }
+          line: 3
+          column: 12
+          id: 47
+        }
+        child {
+          kind: THEN
+          text: " "
+          child {
+            kind: BLOCK
+            text: "{\n            \n            "
+            child {
+              kind: DECL_STMT
+              child {
+                kind: DECL
+                child {
+                  kind: TYPE
+                  child {
+                    kind: NAME
+                    text: "T"
+                    child {
+                      kind: POSITION
+                      line: 5
+                      column: 14
+                      id: 48
+                    }
+                    line: 5
+                    column: 13
+                    id: 49
+                  }
+                  tail: " "
+                  id: 50
+                }
+                child {
+                  kind: NAME
+                  text: "aux"
+                  child {
+                    kind: POSITION
+                    line: 5
+                    column: 18
+                    id: 51
+                  }
+                  tail: " "
+                  line: 5
+                  column: 15
+                  id: 52
+                }
+                child {
+                  kind: INIT
+                  text: "= "
+                  child {
+                    kind: EXPR
+                    child {
+                      kind: NAME
+                      child {
+                        kind: NAME
+                        text: "array"
+                        child {
+                          kind: POSITION
+                          line: 5
+                          column: 26
+                          id: 53
+                        }
+                        line: 5
+                        column: 21
+                        id: 54
+                      }
+                      child {
+                        kind: INDEX
+                        text: "["
+                        child {
+                          kind: EXPR
+                          child {
+                            kind: NAME
+                            text: "leftIndex"
+                            child {
+                              kind: POSITION
+                              line: 5
+                              column: 36
+                              id: 55
+                            }
+                            line: 5
+                            column: 27
+                            id: 56
+                          }
+                          tail: "]"
+                          id: 57
+                        }
+                        child {
+                          kind: POSITION
+                          line: 5
+                          column: 37
+                          id: 58
+                        }
+                        line: 5
+                        column: 26
+                        id: 59
+                      }
+                      id: 60
+                    }
+                    id: 61
+                  }
+                  line: 5
+                  column: 19
+                  id: 62
+                }
+                tail: ";"
+                id: 63
+              }
+              child {
+                kind: POSITION
+                line: 5
+                column: 38
+                id: 64
+              }
+              tail: "\n            \n            "
+              id: 65
+            }
+            child {
+              kind: FOR
+              text: "for "
+              child {
+                kind: CONTROL
+                text: "("
+                child {
+                  kind: INIT
+                  child {
+                    kind: DECL
+                    child {
+                      kind: TYPE
+                      child {
+                        kind: NAME
+                        text: "int"
+                        child {
+                          kind: POSITION
+                          line: 7
+                          column: 21
+                          id: 66
+                        }
+                        line: 7
+                        column: 18
+                        id: 67
+                      }
+                      tail: " "
+                      id: 68
+                    }
+                    child {
+                      kind: NAME
+                      text: "i"
+                      child {
+                        kind: POSITION
+                        line: 7
+                        column: 23
+                        id: 69
+                      }
+                      tail: " "
+                      line: 7
+                      column: 22
+                      id: 70
+                    }
+                    child {
+                      kind: INIT
+                      text: "= "
+                      child {
+                        kind: EXPR
+                        child {
+                          kind: NAME
+                          text: "leftIndex"
+                          child {
+                            kind: POSITION
+                            line: 7
+                            column: 35
+                            id: 71
+                          }
+                          line: 7
+                          column: 26
+                          id: 72
+                        }
+                        id: 73
+                      }
+                      line: 7
+                      column: 24
+                      id: 74
+                    }
+                    tail: ";"
+                    id: 75
+                  }
+                  child {
+                    kind: POSITION
+                    line: 7
+                    column: 36
+                    id: 76
+                  }
+                  tail: " "
+                  id: 77
+                }
+                child {
+                  kind: CONDITION
+                  child {
+                    kind: EXPR
+                    child {
+                      kind: NAME
+                      text: "i"
+                      child {
+                        kind: POSITION
+                        line: 7
+                        column: 38
+                        id: 78
+                      }
+                      tail: " "
+                      line: 7
+                      column: 37
+                      id: 79
+                    }
+                    child {
+                      kind: OPERATOR
+                      text: "&lt;"
+                      child {
+                        kind: POSITION
+                        line: 7
+                        column: 43
+                        id: 80
+                      }
+                      tail: " "
+                      line: 7
+                      column: 39
+                      id: 81
+                    }
+                    child {
+                      kind: NAME
+                      text: "rightIndex"
+                      child {
+                        kind: POSITION
+                        line: 7
+                        column: 51
+                        id: 82
+                      }
+                      line: 7
+                      column: 41
+                      id: 83
+                    }
+                    tail: ";"
+                    id: 84
+                  }
+                  child {
+                    kind: POSITION
+                    line: 7
+                    column: 52
+                    id: 85
+                  }
+                  tail: " "
+                  id: 86
+                }
+                child {
+                  kind: INCR
+                  child {
+                    kind: EXPR
+                    child {
+                      kind: NAME
+                      text: "i"
+                      child {
+                        kind: POSITION
+                        line: 7
+                        column: 54
+                        id: 87
+                      }
+                      line: 7
+                      column: 53
+                      id: 88
+                    }
+                    child {
+                      kind: OPERATOR
+                      text: "++"
+                      child {
+                        kind: POSITION
+                        line: 7
+                        column: 56
+                        id: 89
+                      }
+                      line: 7
+                      column: 54
+                      id: 90
+                    }
+                    id: 91
+                  }
+                  tail: ")"
+                  id: 92
+                }
+                child {
+                  kind: POSITION
+                  line: 7
+                  column: 57
+                  id: 93
+                }
+                tail: " "
+                line: 7
+                column: 17
+                id: 94
+              }
+              child {
+                kind: BLOCK
+                text: "{\n                "
+                child {
+                  kind: FOR
+                  text: "for "
+                  child {
+                    kind: CONTROL
+                    text: "("
+                    child {
+                      kind: INIT
+                      child {
+                        kind: DECL
+                        child {
+                          kind: TYPE
+                          child {
+                            kind: NAME
+                            text: "int"
+                            child {
+                              kind: POSITION
+                              line: 8
+                              column: 25
+                              id: 95
+                            }
+                            line: 8
+                            column: 22
+                            id: 96
+                          }
+                          tail: " "
+                          id: 97
+                        }
+                        child {
+                          kind: NAME
+                          text: "j"
+                          child {
+                            kind: POSITION
+                            line: 8
+                            column: 27
+                            id: 98
+                          }
+                          tail: " "
+                          line: 8
+                          column: 26
+                          id: 99
+                        }
+                        child {
+                          kind: INIT
+                          text: "= "
+                          child {
+                            kind: EXPR
+                            child {
+                              kind: NAME
+                              text: "leftIndex"
+                              child {
+                                kind: POSITION
+                                line: 8
+                                column: 39
+                                id: 100
+                              }
+                              line: 8
+                              column: 30
+                              id: 101
+                            }
+                            id: 102
+                          }
+                          line: 8
+                          column: 28
+                          id: 103
+                        }
+                        tail: ";"
+                        id: 104
+                      }
+                      child {
+                        kind: POSITION
+                        line: 8
+                        column: 40
+                        id: 105
+                      }
+                      tail: " "
+                      id: 106
+                    }
+                    child {
+                      kind: CONDITION
+                      child {
+                        kind: EXPR
+                        child {
+                          kind: NAME
+                          text: "j"
+                          child {
+                            kind: POSITION
+                            line: 8
+                            column: 42
+                            id: 107
+                          }
+                          tail: " "
+                          line: 8
+                          column: 41
+                          id: 108
+                        }
+                        child {
+                          kind: OPERATOR
+                          text: "&lt;"
+                          child {
+                            kind: POSITION
+                            line: 8
+                            column: 47
+                            id: 109
+                          }
+                          tail: " "
+                          line: 8
+                          column: 43
+                          id: 110
+                        }
+                        child {
+                          kind: NAME
+                          text: "rightIndex"
+                          child {
+                            kind: POSITION
+                            line: 8
+                            column: 55
+                            id: 111
+                          }
+                          line: 8
+                          column: 45
+                          id: 112
+                        }
+                        tail: ";"
+                        id: 113
+                      }
+                      child {
+                        kind: POSITION
+                        line: 8
+                        column: 56
+                        id: 114
+                      }
+                      tail: " "
+                      id: 115
+                    }
+                    child {
+                      kind: INCR
+                      child {
+                        kind: EXPR
+                        child {
+                          kind: NAME
+                          text: "j"
+                          child {
+                            kind: POSITION
+                            line: 8
+                            column: 58
+                            id: 116
+                          }
+                          line: 8
+                          column: 57
+                          id: 117
+                        }
+                        child {
+                          kind: OPERATOR
+                          text: "++"
+                          child {
+                            kind: POSITION
+                            line: 8
+                            column: 60
+                            id: 118
+                          }
+                          line: 8
+                          column: 58
+                          id: 119
+                        }
+                        id: 120
+                      }
+                      tail: ")"
+                      id: 121
+                    }
+                    child {
+                      kind: POSITION
+                      line: 8
+                      column: 61
+                      id: 122
+                    }
+                    tail: " "
+                    line: 8
+                    column: 21
+                    id: 123
+                  }
+                  child {
+                    kind: BLOCK
+                    text: "{\n                    \n                    "
+                    child {
+                      kind: IF
+                      text: "if "
+                      child {
+                        kind: CONDITION
+                        text: "("
+                        child {
+                          kind: EXPR
+                          child {
+                            kind: NAME
+                            child {
+                              kind: NAME
+                              text: "array"
+                              child {
+                                kind: POSITION
+                                line: 10
+                                column: 30
+                                id: 124
+                              }
+                              line: 10
+                              column: 25
+                              id: 125
+                            }
+                            child {
+                              kind: INDEX
+                              text: "["
+                              child {
+                                kind: EXPR
+                                child {
+                                  kind: NAME
+                                  text: "j"
+                                  child {
+                                    kind: POSITION
+                                    line: 10
+                                    column: 32
+                                    id: 126
+                                  }
+                                  line: 10
+                                  column: 31
+                                  id: 127
+                                }
+                                tail: "]"
+                                id: 128
+                              }
+                              child {
+                                kind: POSITION
+                                line: 10
+                                column: 33
+                                id: 129
+                              }
+                              line: 10
+                              column: 30
+                              id: 130
+                            }
+                            id: 131
+                          }
+                          child {
+                            kind: OPERATOR
+                            text: "."
+                            child {
+                              kind: POSITION
+                              line: 10
+                              column: 34
+                              id: 132
+                            }
+                            line: 10
+                            column: 33
+                            id: 133
+                          }
+                          child {
+                            kind: CALL
+                            child {
+                              kind: NAME
+                              text: "compareTo"
+                              child {
+                                kind: POSITION
+                                line: 10
+                                column: 43
+                                id: 134
+                              }
+                              line: 10
+                              column: 34
+                              id: 135
+                            }
+                            child {
+                              kind: ARGUMENT_LIST
+                              text: "("
+                              child {
+                                kind: ARGUMENT
+                                child {
+                                  kind: EXPR
+                                  child {
+                                    kind: NAME
+                                    child {
+                                      kind: NAME
+                                      text: "array"
+                                      child {
+                                        kind: POSITION
+                                        line: 10
+                                        column: 49
+                                        id: 136
+                                      }
+                                      line: 10
+                                      column: 44
+                                      id: 137
+                                    }
+                                    child {
+                                      kind: INDEX
+                                      text: "["
+                                      child {
+                                        kind: EXPR
+                                        child {
+                                          kind: NAME
+                                          text: "j"
+                                          child {
+                                            kind: POSITION
+                                            line: 10
+                                            column: 51
+                                            id: 138
+                                          }
+                                          line: 10
+                                          column: 50
+                                          id: 139
+                                        }
+                                        child {
+                                          kind: OPERATOR
+                                          text: "+"
+                                          child {
+                                            kind: POSITION
+                                            line: 10
+                                            column: 52
+                                            id: 140
+                                          }
+                                          line: 10
+                                          column: 51
+                                          id: 141
+                                        }
+                                        child {
+                                          kind: LITERAL
+                                          text: "1"
+                                          child {
+                                            kind: POSITION
+                                            line: 10
+                                            column: 53
+                                            id: 142
+                                          }
+                                          literal {
+                                            type: number_type
+                                          }
+                                          line: 10
+                                          column: 52
+                                          id: 143
+                                        }
+                                        tail: "]"
+                                        id: 144
+                                      }
+                                      child {
+                                        kind: POSITION
+                                        line: 10
+                                        column: 54
+                                        id: 145
+                                      }
+                                      line: 10
+                                      column: 49
+                                      id: 146
+                                    }
+                                    id: 147
+                                  }
+                                  id: 148
+                                }
+                                tail: ")"
+                                id: 149
+                              }
+                              child {
+                                kind: POSITION
+                                line: 10
+                                column: 55
+                                id: 150
+                              }
+                              line: 10
+                              column: 43
+                              id: 151
+                            }
+                            tail: " "
+                            id: 152
+                          }
+                          child {
+                            kind: OPERATOR
+                            text: "&gt;"
+                            child {
+                              kind: POSITION
+                              line: 10
+                              column: 60
+                              id: 153
+                            }
+                            tail: " "
+                            line: 10
+                            column: 56
+                            id: 154
+                          }
+                          child {
+                            kind: LITERAL
+                            text: "0"
+                            child {
+                              kind: POSITION
+                              line: 10
+                              column: 59
+                              id: 155
+                            }
+                            literal {
+                              type: number_type
+                            }
+                            line: 10
+                            column: 58
+                            id: 156
+                          }
+                          tail: ")"
+                          id: 157
+                        }
+                        child {
+                          kind: POSITION
+                          line: 10
+                          column: 60
+                          id: 158
+                        }
+                        line: 10
+                        column: 24
+                        id: 159
+                      }
+                      child {
+                        kind: THEN
+                        text: " "
+                        child {
+                          kind: BLOCK
+                          text: "{\n                        "
+                          child {
+                            kind: EXPR_STMT
+                            child {
+                              kind: EXPR
+                              child {
+                                kind: NAME
+                                text: "aux"
+                                child {
+                                  kind: POSITION
+                                  line: 11
+                                  column: 28
+                                  id: 160
+                                }
+                                tail: " "
+                                line: 11
+                                column: 25
+                                id: 161
+                              }
+                              child {
+                                kind: OPERATOR
+                                text: "="
+                                child {
+                                  kind: POSITION
+                                  line: 11
+                                  column: 30
+                                  id: 162
+                                }
+                                tail: " "
+                                line: 11
+                                column: 29
+                                id: 163
+                              }
+                              child {
+                                kind: NAME
+                                child {
+                                  kind: NAME
+                                  text: "array"
+                                  child {
+                                    kind: POSITION
+                                    line: 11
+                                    column: 36
+                                    id: 164
+                                  }
+                                  line: 11
+                                  column: 31
+                                  id: 165
+                                }
+                                child {
+                                  kind: INDEX
+                                  text: "["
+                                  child {
+                                    kind: EXPR
+                                    child {
+                                      kind: NAME
+                                      text: "j"
+                                      child {
+                                        kind: POSITION
+                                        line: 11
+                                        column: 38
+                                        id: 166
+                                      }
+                                      line: 11
+                                      column: 37
+                                      id: 167
+                                    }
+                                    tail: "]"
+                                    id: 168
+                                  }
+                                  child {
+                                    kind: POSITION
+                                    line: 11
+                                    column: 39
+                                    id: 169
+                                  }
+                                  line: 11
+                                  column: 36
+                                  id: 170
+                                }
+                                id: 171
+                              }
+                              tail: ";"
+                              id: 172
+                            }
+                            child {
+                              kind: POSITION
+                              line: 11
+                              column: 40
+                              id: 173
+                            }
+                            tail: "\n                        "
+                            id: 174
+                          }
+                          child {
+                            kind: EXPR_STMT
+                            child {
+                              kind: EXPR
+                              child {
+                                kind: NAME
+                                child {
+                                  kind: NAME
+                                  text: "array"
+                                  child {
+                                    kind: POSITION
+                                    line: 12
+                                    column: 30
+                                    id: 175
+                                  }
+                                  line: 12
+                                  column: 25
+                                  id: 176
+                                }
+                                child {
+                                  kind: INDEX
+                                  text: "["
+                                  child {
+                                    kind: EXPR
+                                    child {
+                                      kind: NAME
+                                      text: "j"
+                                      child {
+                                        kind: POSITION
+                                        line: 12
+                                        column: 32
+                                        id: 177
+                                      }
+                                      line: 12
+                                      column: 31
+                                      id: 178
+                                    }
+                                    tail: "]"
+                                    id: 179
+                                  }
+                                  child {
+                                    kind: POSITION
+                                    line: 12
+                                    column: 33
+                                    id: 180
+                                  }
+                                  line: 12
+                                  column: 30
+                                  id: 181
+                                }
+                                tail: " "
+                                id: 182
+                              }
+                              child {
+                                kind: OPERATOR
+                                text: "="
+                                child {
+                                  kind: POSITION
+                                  line: 12
+                                  column: 35
+                                  id: 183
+                                }
+                                tail: " "
+                                line: 12
+                                column: 34
+                                id: 184
+                              }
+                              child {
+                                kind: NAME
+                                child {
+                                  kind: NAME
+                                  text: "array"
+                                  child {
+                                    kind: POSITION
+                                    line: 12
+                                    column: 41
+                                    id: 185
+                                  }
+                                  line: 12
+                                  column: 36
+                                  id: 186
+                                }
+                                child {
+                                  kind: INDEX
+                                  text: "["
+                                  child {
+                                    kind: EXPR
+                                    child {
+                                      kind: NAME
+                                      text: "j"
+                                      child {
+                                        kind: POSITION
+                                        line: 12
+                                        column: 43
+                                        id: 187
+                                      }
+                                      line: 12
+                                      column: 42
+                                      id: 188
+                                    }
+                                    child {
+                                      kind: OPERATOR
+                                      text: "+"
+                                      child {
+                                        kind: POSITION
+                                        line: 12
+                                        column: 44
+                                        id: 189
+                                      }
+                                      line: 12
+                                      column: 43
+                                      id: 190
+                                    }
+                                    child {
+                                      kind: LITERAL
+                                      text: "1"
+                                      child {
+                                        kind: POSITION
+                                        line: 12
+                                        column: 45
+                                        id: 191
+                                      }
+                                      literal {
+                                        type: number_type
+                                      }
+                                      line: 12
+                                      column: 44
+                                      id: 192
+                                    }
+                                    tail: "]"
+                                    id: 193
+                                  }
+                                  child {
+                                    kind: POSITION
+                                    line: 12
+                                    column: 46
+                                    id: 194
+                                  }
+                                  line: 12
+                                  column: 41
+                                  id: 195
+                                }
+                                id: 196
+                              }
+                              tail: ";"
+                              id: 197
+                            }
+                            child {
+                              kind: POSITION
+                              line: 12
+                              column: 47
+                              id: 198
+                            }
+                            tail: "\n                        "
+                            id: 199
+                          }
+                          child {
+                            kind: EXPR_STMT
+                            child {
+                              kind: EXPR
+                              child {
+                                kind: NAME
+                                child {
+                                  kind: NAME
+                                  text: "array"
+                                  child {
+                                    kind: POSITION
+                                    line: 13
+                                    column: 30
+                                    id: 200
+                                  }
+                                  line: 13
+                                  column: 25
+                                  id: 201
+                                }
+                                child {
+                                  kind: INDEX
+                                  text: "["
+                                  child {
+                                    kind: EXPR
+                                    child {
+                                      kind: NAME
+                                      text: "j"
+                                      child {
+                                        kind: POSITION
+                                        line: 13
+                                        column: 32
+                                        id: 202
+                                      }
+                                      line: 13
+                                      column: 31
+                                      id: 203
+                                    }
+                                    child {
+                                      kind: OPERATOR
+                                      text: "+"
+                                      child {
+                                        kind: POSITION
+                                        line: 13
+                                        column: 33
+                                        id: 204
+                                      }
+                                      line: 13
+                                      column: 32
+                                      id: 205
+                                    }
+                                    child {
+                                      kind: LITERAL
+                                      text: "1"
+                                      child {
+                                        kind: POSITION
+                                        line: 13
+                                        column: 34
+                                        id: 206
+                                      }
+                                      literal {
+                                        type: number_type
+                                      }
+                                      line: 13
+                                      column: 33
+                                      id: 207
+                                    }
+                                    tail: "]"
+                                    id: 208
+                                  }
+                                  child {
+                                    kind: POSITION
+                                    line: 13
+                                    column: 35
+                                    id: 209
+                                  }
+                                  line: 13
+                                  column: 30
+                                  id: 210
+                                }
+                                tail: " "
+                                id: 211
+                              }
+                              child {
+                                kind: OPERATOR
+                                text: "="
+                                child {
+                                  kind: POSITION
+                                  line: 13
+                                  column: 37
+                                  id: 212
+                                }
+                                tail: " "
+                                line: 13
+                                column: 36
+                                id: 213
+                              }
+                              child {
+                                kind: NAME
+                                text: "aux"
+                                child {
+                                  kind: POSITION
+                                  line: 13
+                                  column: 41
+                                  id: 214
+                                }
+                                line: 13
+                                column: 38
+                                id: 215
+                              }
+                              tail: ";"
+                              id: 216
+                            }
+                            child {
+                              kind: POSITION
+                              line: 13
+                              column: 42
+                              id: 217
+                            }
+                            tail: "\n                    }"
+                            id: 218
+                          }
+                          child {
+                            kind: POSITION
+                            line: 14
+                            column: 22
+                            id: 219
+                          }
+                          line: 10
+                          column: 61
+                          id: 220
+                        }
+                        line: 10
+                        column: 60
+                        id: 221
+                      }
+                      tail: "\n                    \n                }"
+                      line: 10
+                      column: 21
+                      id: 222
+                    }
+                    child {
+                      kind: POSITION
+                      line: 16
+                      column: 18
+                      id: 223
+                    }
+                    line: 8
+                    column: 62
+                    id: 224
+                  }
+                  tail: "\n            }"
+                  line: 8
+                  column: 17
+                  id: 225
+                }
+                child {
+                  kind: POSITION
+                  line: 17
+                  column: 14
+                  id: 226
+                }
+                line: 7
+                column: 58
+                id: 227
+              }
+              tail: "\n        }"
+              line: 7
+              column: 13
+              id: 228
+            }
+            child {
+              kind: POSITION
+              line: 18
+              column: 10
+              id: 229
+            }
+            line: 3
+            column: 31
+            id: 230
+          }
+          line: 3
+          column: 30
+          id: 231
+        }
+        tail: "\n        \n    }"
+        line: 3
+        column: 9
+        id: 232
+      }
+      child {
+        kind: POSITION
+        line: 20
+        column: 6
+        id: 233
+      }
+      line: 1
+      column: 63
+      id: 234
+    }
+    id: 235
+  }
+  unit {
+    filename: "/e/live_test/github_java/sort_function/5/81.java"
+    revision: "0.9.5"
+    language: JAVA
+  }
+  id: 236
+}
