@@ -38,19 +38,13 @@ def init_net_for_siamese(feature_size, output_size, weights, biases, aggregation
         right_children = tf.placeholder(tf.int32, shape=(None, None, None), name='right_children')
 
 
-    left_conv = extract_features(left_nodes, left_children, weights, biases, output_size, feature_size, aggregation_type, distributed_function)
-    right_conv = extract_features(right_nodes, right_children, weights, biases, output_size, feature_size, aggregation_type, distributed_function)
+    left_conv = conv_layer(1, left_nodes, left_children, feature_size, weights["w_t"], weights["w_l"], weights["w_r"], biases["b_conv"])
+    right_conv = conv_layer(1, right_nodes, right_children, feature_size, weights["w_t"], weights["w_l"], weights["w_r"], biases["b_conv"])
 
     two_side_conv, two_side_aggregation, attention_score = aggregation_layer_siamese(left_conv, right_conv, weights["w_attention"], output_size, aggregation_type, distributed_function)
     hidden_node = hidden_layer(two_side_aggregation, 100, 2)
 
     return left_nodes, left_children, right_nodes, right_children, hidden_node, two_side_conv, two_side_aggregation, attention_score
-
-def extract_features(nodes, children, weights, biases, output_size, feature_size, aggregation_type, distributed_function):
-    with tf.name_scope('network'):
-        conv = conv_layer(1, nodes, children, feature_size, weights["w_t"], weights["w_l"], weights["w_r"], biases["b_conv"])
-
-    return conv
 
 
 def conv_layer(num_conv, nodes, children, feature_size, w_t, w_r, w_l, b_conv):
@@ -246,6 +240,8 @@ def aggregation_layer_siamese(conv_left, conv_right, w_attention, output_size, a
         max_left_tree_size = tf.shape(conv_left)[1]
         max_right_tree_size = tf.shape(conv_right)[1]
 
+        print("Left : " + str(max_left_tree_size))
+        print("Right : " + str(max_right_tree_size))
 
         # merge the left_conve and right_conv: conv is (batch_size, max_left_size + max_right_tree_size, output_size)
         conv = tf.concat([conv_left,conv_right],1)
