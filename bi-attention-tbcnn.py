@@ -23,17 +23,17 @@ parser.add_argument('--lr', type=float, default=0.01, help='learning rate')
 parser.add_argument('--verbal', type=bool, default=True, help='print training info or not')
 parser.add_argument('--manualSeed', type=int, help='manual seed')
 parser.add_argument('--n_classes', type=int, default=10, help='number of classes')
-parser.add_argument('--train_data', default="pairwise/github_java_sort_pkl_train_test_val__train.txt", help='train program data')
-parser.add_argument('--test_data', default="pairwise/github_java_sort_pkl_train_test_val__test.txt", help='test program data')
-parser.add_argument('--val_data', default="pairwise/github_java_sort_pkl_train_test_val__val.txt", help='validation program data')
-parser.add_argument('--model_path', default="model/pairwise_java_sort", help='path to save the model')
+parser.add_argument('--train_data', default="pairwise/github_java_sort_function_pkl_train_test_val__train.txt", help='train program data')
+parser.add_argument('--test_data', default="pairwise/github_java_sort_function_pkl_train_test_val__test.txt", help='test program data')
+parser.add_argument('--val_data', default="pairwise/github_java_sort_function_pkl_train_test_val__val.txt", help='validation program data')
+parser.add_argument('--model_path', default="model/pairwise_java_sort_function_sum_softmax", help='path to save the model')
 parser.add_argument('--n_hidden', type=int, default=50, help='number of hidden layers')
 parser.add_argument('--training', action="store_true",help='is training')
 parser.add_argument('--testing', action="store_true",help='is testing')
 parser.add_argument('--training_percentage', type=float, default=1.0 ,help='percentage of data use for training')
 parser.add_argument('--log_path', default="" ,help='log path for tensorboard')
 parser.add_argument('--feature_size', type=int, default=100, help='size of convolutional features')
-parser.add_argument('--aggregation', type=int, default=2, choices=range(0,4), help='0 for max pooling, 1 for attention with sum pooling, 2 for attention with max pooling, 3 for attention with average pooling')
+parser.add_argument('--aggregation', type=int, default=1, choices=range(0,4), help='0 for max pooling, 1 for attention with sum pooling, 2 for attention with max pooling, 3 for attention with average pooling')
 parser.add_argument('--distributed_function', type=int, default=1, choices=range(0,2), help='0 for softmax, 1 for sigmoid')
 parser.add_argument('--embeddings_directory', default="embedding/fast_pretrained_vectors.pkl", help='pretrained embeddings url, there are 2 objects in this file, the first object is the embedding matrix, the other is the lookup dictionary')
 parser.add_argument('--cuda', default="0",type=str, help='enables cuda')
@@ -102,7 +102,7 @@ def train_model(train_dataloader, val_dataloader, embeddings, embedding_lookup, 
         "b_conv": tf.Variable(initializer([opt.feature_size,]), name="b_conv"),
     }
 
-    left_nodes_node, left_children_node, right_nodes_node, right_children_node, hidden_node, left_score_node, right_score_node = network.init_net_for_siamese(
+    left_nodes_node, left_children_node, right_nodes_node, right_children_node, hidden_node, conv, aggregation, attention_score = network.init_net_for_siamese(
         num_feats,
         opt.feature_size,
         weights, 
@@ -233,7 +233,7 @@ def test_model(test_dataloader, embeddings, embedding_lookup, opt):
         "b_conv": tf.Variable(initializer([opt.feature_size,]), name="b_conv"),
     }
 
-    left_nodes_node, left_children_node, right_nodes_node, right_children_node, hidden_node, left_score_node, right_score_node = network.init_net_for_siamese(
+    left_nodes_node, left_children_node, right_nodes_node, right_children_node, hidden_node, conv, aggregation, attention_score = network.init_net_for_siamese(
         num_feats,
         opt.feature_size,
         weights, 

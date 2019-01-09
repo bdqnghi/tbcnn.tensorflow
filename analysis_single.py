@@ -212,15 +212,18 @@ def predict(sess, out_node, attention_score_node, nodes_node, children_node, pkl
         node_ids = node_ids[0]
         node_types = node_types[0]
 
+        confidence_score = output[0]
         actual = str(np.argmax(batch_labels)+1)
         predicted = str(np.argmax(output)+1)
+
+        print("Probability : " + str(confidence_score))
         print("Actual classes : " + str(np.argmax(batch_labels)+1))
         print("Predicted classes : " + str(np.argmax(output)+1))
 
         max_node = len(nodes[0])
 
         attention_score = np.reshape(attention_score, (max_node))
-        print(attention_score)
+        # print(attention_score)
 
         attention_score_map = {}
         for i, score in enumerate(attention_score):
@@ -261,7 +264,7 @@ def predict(sess, out_node, attention_score_node, nodes_node, children_node, pkl
 
 
         ratio = float(len(subtree_ids)/len(node_ids))
-        print("Ratio : " + str(ratio))
+        # print("Ratio : " + str(ratio))
         # Produce 3 vectors
         oracle_vector = list()
         reverse_oracle_vector = list()
@@ -273,20 +276,20 @@ def predict(sess, out_node, attention_score_node, nodes_node, children_node, pkl
             oracle_vector.append(oracle_score_map[node_id])
             reverse_oracle_vector.append(reverse_oracle_score_map[node_id])
 
-        print(attention_vector)
-        print(reverse_oracle_vector)
-        print(oracle_vector)
+        # print(attention_vector)
+        # print(reverse_oracle_vector)
+        # print(oracle_vector)
 
         cos_sim_oracle = cosine_simlarity(np.array(attention_vector), np.array(oracle_vector))
         cos_sim_reverse_oracle = cosine_simlarity(np.array(attention_vector), np.array(reverse_oracle_vector))
 
         # cos_sim_oracle = cos_sim_oracle * ratio
         # cos_sim_reverse_oracle = cos_sim_reverse_oracle * (1 - ratio)
-        print(cos_sim_oracle)
-        print(cos_sim_reverse_oracle)
+        # print(cos_sim_oracle)
+        # print(cos_sim_reverse_oracle)
 
         generate_visualization(pkl_path)
-        return cos_sim_oracle, cos_sim_reverse_oracle, ratio, actual, predicted
+        return cos_sim_oracle, cos_sim_reverse_oracle, ratio, actual, predicted, confidence_score
 
 def cosine_simlarity(a, b):
     return dot(a, b)/(norm(a)*norm(b))
@@ -313,7 +316,8 @@ def load_program(file_path):
 
 def main(opt):
 
-    target_directory = "live_test/github_java/sort/"
+    target_directory = "live_test/github_java/sort_function/"
+    file_name = aggregation_name + "_" + distributed_function_name + "_function.csv"
 
     print("Loading embeddings....")
     with open(opt.embeddings_directory, 'rb') as fh:
@@ -378,13 +382,13 @@ def main(opt):
             for i, var in enumerate(saver._var_list):
                 print('Var {}: {}'.format(i, var))
 
-        file_name = aggregation_name + "_" + distributed_function_name + ".csv"
+        
         analysis_file = "analysis_single/" + file_name
 
         if os.path.exists(analysis_file):
             os.remove(analysis_file)
         with open(analysis_file,"a") as f:
-            f.write("file,oracle_cosim,reverse_oracle_cosim,function_node_id,function_size,program_size,function_ratio,actual,predicted")
+            f.write("file,oracle_cosim,reverse_oracle_cosim,function_node_id,function_size,program_size,function_ratio,actual,predicted,confidence_score")
             f.write("\n")
 
         for i in range(1, 11):
@@ -398,10 +402,10 @@ def main(opt):
 
                     test_trees, node_ids, node_types, subtree_ids, sort_function_id, pkl_path, pb_path = load_program(file_path)
 
-                    cos_sim_oracle, cos_sim_reverse_oracle, ratio, actual, predicted = predict(sess, out_node, attention_score_node, nodes_node, children_node, pkl_path, pb_path, subtree_ids, test_trees, labels, node_ids, node_types, embeddings, embed_lookup)
+                    cos_sim_oracle, cos_sim_reverse_oracle, ratio, actual, predicted, confidence_score = predict(sess, out_node, attention_score_node, nodes_node, children_node, pkl_path, pb_path, subtree_ids, test_trees, labels, node_ids, node_types, embeddings, embed_lookup)
                     
                     with open(analysis_file,"a") as f:
-                        f.write(file_path + "," + str(cos_sim_oracle) + "," + str(cos_sim_reverse_oracle) + "," + str(sort_function_id) + "," + str(len(subtree_ids)) + "," + str(len(node_ids[0])) + "," + str(ratio) + "," + str(actual) + "," + str(predicted))
+                        f.write(file_path + "," + str(cos_sim_oracle) + "," + str(cos_sim_reverse_oracle) + "," + str(sort_function_id) + "," + str(len(subtree_ids)) + "," + str(len(node_ids[0])) + "," + str(ratio) + "," + str(actual) + "," + str(predicted) + "," + str(" ".join(str(v) for v in confidence_score)))
                         f.write("\n")
 
 if __name__ == "__main__":

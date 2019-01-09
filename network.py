@@ -38,27 +38,19 @@ def init_net_for_siamese(feature_size, output_size, weights, biases, aggregation
         right_children = tf.placeholder(tf.int32, shape=(None, None, None), name='right_children')
 
 
-    left_aggregation_node, left_attention_score = extract_features(left_nodes, left_children, weights, biases, output_size, feature_size, aggregation_type, distributed_function)
-    right_aggregation_node, right_attention_score = extract_features(right_nodes, right_children, weights, biases, output_size, feature_size, aggregation_type, distributed_function)
+    left_conv = extract_features(left_nodes, left_children, weights, biases, output_size, feature_size, aggregation_type, distributed_function)
+    right_conv = extract_features(right_nodes, right_children, weights, biases, output_size, feature_size, aggregation_type, distributed_function)
 
-    merge_node = tf.concat([left_aggregation_node, right_aggregation_node], -1)
-    hidden_node = hidden_layer(merge_node, 200, 2)
+    two_side_conv, two_side_aggregation, attention_score = aggregation_layer_siamese(left_conv, right_conv, weights["w_attention"], output_size, aggregation_type, distributed_function)
+    hidden_node = hidden_layer(two_side_aggregation, 100, 2)
 
-    return left_nodes, left_children, right_nodes, right_children, hidden_node, left_attention_score, right_attention_score
+    return left_nodes, left_children, right_nodes, right_children, hidden_node, two_side_conv, two_side_aggregation, attention_score
 
 def extract_features(nodes, children, weights, biases, output_size, feature_size, aggregation_type, distributed_function):
     with tf.name_scope('network'):
         conv = conv_layer(1, nodes, children, feature_size, weights["w_t"], weights["w_l"], weights["w_r"], biases["b_conv"])
 
-    if aggregation_type == 0:
-        print("Using max pooling as the aggregation...........")
-        aggregation = pooling_layer(conv1)
-        attention_score = None
-    else:
-        print("Using attention with pooling as the aggregation...........")
-        aggregation, attention_score = aggregation_layer(conv, weights["w_attention"], output_size, aggregation_type, distributed_function)
-
-    return aggregation, attention_score
+    return conv
 
 
 def conv_layer(num_conv, nodes, children, feature_size, w_t, w_r, w_l, b_conv):
@@ -245,6 +237,42 @@ def eta_l(children, coef_t, coef_r):
         return tf.multiply(
             tf.multiply((1.0 - coef_t), (1.0 - coef_r)), mask, name='coef_l'
         )
+
+
+def aggregation_layer_siamese(conv_left, conv_right, w_attention, output_size, aggregation_type, distributed_function):
+   
+    with tf.name_scope("global_attention"):
+        batch_size = tf.shape(conv_left)[0]
+        max_left_tree_size = tf.shape(conv_left)[1]
+        max_right_tree_size = tf.shape(conv_right)[1]
+
+
+        # merge the left_conve and right_conv: conv is (batch_size, max_left_size + max_right_tree_size, output_size)
+        conv = tf.concat([conv_left,conv_right],1)
+
+        # (batch_size * max_tree_size, output_size)
+        flat_conv = tf.reshape(conv, [-1, output_size])
+        aggregated_vector = tf.matmul(flat_conv, w_attention)
+
+        attention_score = tf.reshape(aggregated_vector, [-1, max_left_tree_size + max_right_tree_size, 1])
+
+        if distributed_function == 0:
+            attention_weights = tf.nn.softmax(attention_score, dim=1)
+        if distributed_function == 1:
+            attention_weights = tf.nn.sigmoid(attention_score)
+
+        # TODO: reduce_max vs reduce_sum vs reduce_mean
+        if aggregation_type == 1:
+            print("Using tf.reduce_sum...........")
+            weighted_average_nodes = tf.reduce_sum(tf.multiply(conv, attention_weights), axis=1)
+        if aggregation_type == 2:
+            print("Using tf.reduce_max...........")
+            weighted_average_nodes = tf.reduce_max(tf.multiply(conv, attention_weights), axis=1)
+        if aggregation_type == 3:
+            print("Using tf.reduce_mean...........")
+            weighted_average_nodes = tf.reduce_mean(tf.multiply(conv, attention_weights), axis=1)
+
+        return conv, weighted_average_nodes, attention_weights
 
 def aggregation_layer(conv, w_attention, output_size, aggregation_type, distributed_function):
     # conv is (batch_size, max_tree_size, output_size)
