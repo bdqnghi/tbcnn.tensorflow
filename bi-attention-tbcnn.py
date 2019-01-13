@@ -179,8 +179,8 @@ def train_model(train_dataloader, val_dataloader, embeddings, embedding_lookup, 
 
         for batch_left_trees, batch_right_trees, batch_labels in sampling.batch_random_samples_2_sides(val_left_trees, val_right_trees, val_labels, embeddings, embedding_lookup, opt.train_batch_size):
 
-            left_nodes, left_children = batch_left_trees
-            right_nodes, right_children = batch_right_trees
+            left_nodes, left_children, _ = batch_left_trees
+            right_nodes, right_children, _ = batch_right_trees
             
             labels_one_hot = convert_labels_to_one_hot(batch_labels)
                 
