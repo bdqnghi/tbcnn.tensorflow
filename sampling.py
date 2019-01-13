@@ -71,7 +71,7 @@ def batch_samples(gen, batch_size):
     if nodes:
         yield _pad_batch(nodes, children, labels)
 
-def batch_random_samples_2_sides(left_trees, right_trees, labels, vectors, vector_lookup, batch_size):
+def batch_random_samples_2_sides(left_trees, right_trees, labels, vectors, vector_lookup, batch_size, batch_type="original"):
     """Creates a generator that returns a tree in BFS order with each node
     replaced by its vector embedding, and a child lookup table."""
 
@@ -131,7 +131,10 @@ def batch_random_samples_2_sides(left_trees, right_trees, labels, vectors, vecto
 
             samples += 1
         if samples >= batch_size:
-            yield _pad_batch_siamese_2_side(batch_left_nodes, batch_left_children, batch_right_nodes, batch_right_children, batch_labels)
+            if batch_type == "original": 
+                yield _pad_batch_siamese_2_side_original(batch_left_nodes, batch_left_children, batch_right_nodes, batch_right_children, batch_labels)
+            else:
+                yield _pad_batch_siamese_2_side(batch_left_nodes, batch_left_children, batch_right_nodes, batch_right_children, batch_labels)
             batch_left_nodes, batch_left_children = [], []
 
             batch_right_nodes, batch_right_children = [], []
@@ -140,7 +143,10 @@ def batch_random_samples_2_sides(left_trees, right_trees, labels, vectors, vecto
             samples = 0
 
     if batch_left_nodes and batch_right_nodes:
-        yield _pad_batch_siamese_2_side(batch_left_nodes, batch_left_children, batch_right_nodes, batch_right_children, batch_labels)
+        if batch_type == "original": 
+                yield _pad_batch_siamese_2_side_original(batch_left_nodes, batch_left_children, batch_right_nodes, batch_right_children, batch_labels)
+        else:
+            yield _pad_batch_siamese_2_side(batch_left_nodes, batch_left_children, batch_right_nodes, batch_right_children, batch_labels)
 
 
 def _pad_batch(nodes, children, labels):
@@ -217,4 +223,24 @@ def _pad_batch_siamese(nodes, children, max_nodes, max_children):
   
     return nodes, children
 
+
+def _pad_batch_siamese_2_side_original(batch_left_nodes, batch_left_children, batch_right_nodes, batch_right_children, labels):
+    return _pad_batch_siamese_original(batch_left_nodes, batch_left_children), _pad_batch_siamese_original(batch_right_nodes, batch_right_children), labels
+
+
+def _pad_batch_siamese_original(nodes, children):
+    if not nodes:
+        return [], [], []
+    max_nodes = max([len(x) for x in nodes])
+    max_children = max([len(x) for x in children])
+    feature_len = len(nodes[0][0])
+    child_len = max([len(c) for n in children for c in n])
+
+    nodes = [n + [[0] * feature_len] * (max_nodes - len(n)) for n in nodes]
+    # pad batches so that every batch has the same number of nodes
+    children = [n + ([[]] * (max_children - len(n))) for n in children]
+    # pad every child sample so every node has the same number of children
+    children = [[c + [0] * (child_len - len(c)) for c in sample] for sample in children]
+
+    return nodes, children
 
