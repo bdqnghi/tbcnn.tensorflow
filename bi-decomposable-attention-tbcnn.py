@@ -154,43 +154,44 @@ def train_model(train_dataloader, val_dataloader, embeddings, embedding_lookup, 
                 saver.save(sess, os.path.join(checkfile), steps)
                 print('Checkpoint saved.')
 
-    
+                correct_labels = []
+                predictions = []
+
+                for batch_left_trees, batch_right_trees, batch_labels in sampling.batch_random_samples_2_sides(val_left_trees, val_right_trees, val_labels, embeddings, embedding_lookup, opt.train_batch_size,opt.batch_type):
+
+                    left_nodes, left_children, left_masks = batch_left_trees
+                    right_nodes, right_children, right_masks = batch_right_trees
+                    
+                    labels_one_hot = convert_labels_to_one_hot(batch_labels)
+                        
+                    output = sess.run(
+                        [out_node],
+                        feed_dict={
+                            left_nodes_node: left_nodes,
+                            left_children_node: left_children,
+                            right_nodes_node: right_nodes,
+                            right_children_node: right_children,
+                            labels_node: labels_one_hot,
+                            left_mask_nodes: left_masks,
+                            right_mask_nodes: right_masks,
+                        }
+                    )
+                
+                    correct = np.argmax(labels_one_hot, axis=1)
+                    predicted = np.argmax(output[0], axis=1)
+
+                    correct_labels.extend(correct)
+                    predictions.extend(predicted)
+
+                print('Accuracy:', accuracy_score(correct_labels, predictions))
+                print(classification_report(correct_labels, predictions))
+                print(confusion_matrix(correct_labels, predictions))
+                
             steps+=1
         steps = 0
 
 
-        correct_labels = []
-        predictions = []
-
-        for batch_left_trees, batch_right_trees, batch_labels in sampling.batch_random_samples_2_sides(val_left_trees, val_right_trees, val_labels, embeddings, embedding_lookup, opt.train_batch_size,opt.batch_type):
-
-            left_nodes, left_children, left_masks = batch_left_trees
-            right_nodes, right_children, right_masks = batch_right_trees
-            
-            labels_one_hot = convert_labels_to_one_hot(batch_labels)
-                
-            output = sess.run(
-                [out_node],
-                feed_dict={
-                    left_nodes_node: left_nodes,
-                    left_children_node: left_children,
-                    right_nodes_node: right_nodes,
-                    right_children_node: right_children,
-                    labels_node: labels_one_hot,
-                    left_mask_nodes: left_masks,
-                    right_mask_nodes: right_masks,
-                }
-            )
-        
-            correct = np.argmax(labels_one_hot, axis=1)
-            predicted = np.argmax(output[0], axis=1)
-
-            correct_labels.extend(correct)
-            predictions.extend(predicted)
-
-        print('Accuracy:', accuracy_score(correct_labels, predictions))
-        print(classification_report(correct_labels, predictions))
-        print(confusion_matrix(correct_labels, predictions))
+       
 
 
 def test_model(test_dataloader, embeddings, embedding_lookup, opt):
@@ -277,7 +278,8 @@ def test_model(test_dataloader, embeddings, embedding_lookup, opt):
                 right_mask_nodes: right_masks,
             }
         )
-    
+        
+        print(output)
         correct = np.argmax(labels_one_hot, axis=1)
         predicted = np.argmax(output[0], axis=1)
 
