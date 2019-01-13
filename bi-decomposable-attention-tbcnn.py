@@ -92,8 +92,6 @@ def train_model(train_dataloader, val_dataloader, embeddings, embedding_lookup, 
         opt.feature_size,
         weights, 
         biases,
-        opt.aggregation,
-        opt.distributed_function
     )
 
     out_node = network.out_layer(logits_node)
@@ -225,8 +223,6 @@ def test_model(test_dataloader, embeddings, embedding_lookup, opt):
         opt.feature_size,
         weights, 
         biases,
-        opt.aggregation,
-        opt.distributed_function
     )
 
     out_node = network.out_layer(logits_node)
@@ -262,8 +258,8 @@ def test_model(test_dataloader, embeddings, embedding_lookup, opt):
 
     for batch_left_trees, batch_right_trees, batch_labels in sampling.batch_random_samples_2_sides(test_left_trees, test_right_trees, test_labels, embeddings, embedding_lookup, opt.train_batch_size):
 
-        left_nodes, left_children = batch_left_trees
-        right_nodes, right_children = batch_right_trees
+        left_nodes, left_children, left_masks = batch_left_trees
+        right_nodes, right_children, right_masks = batch_right_trees
         
         labels_one_hot = convert_labels_to_one_hot(batch_labels)
             
@@ -274,7 +270,9 @@ def test_model(test_dataloader, embeddings, embedding_lookup, opt):
                 left_children_node: left_children,
                 right_nodes_node: right_nodes,
                 right_children_node: right_children,
-                labels_node: labels_one_hot
+                labels_node: labels_one_hot,
+                left_mask_nodes: left_masks,
+                right_mask_nodes: right_masks,
             }
         )
     
