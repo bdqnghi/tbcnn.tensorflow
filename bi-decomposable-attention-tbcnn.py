@@ -34,8 +34,6 @@ parser.add_argument('--testing', action="store_true",help='is testing')
 parser.add_argument('--training_percentage', type=float, default=1.0 ,help='percentage of data use for training')
 parser.add_argument('--log_path', default="" ,help='log path for tensorboard')
 parser.add_argument('--feature_size', type=int, default=100, help='size of convolutional features')
-parser.add_argument('--aggregation', type=int, default=2, choices=range(0,4), help='0 for max pooling, 1 for attention with sum pooling, 2 for attention with max pooling, 3 for attention with average pooling')
-parser.add_argument('--distributed_function', type=int, default=1, choices=range(0,2), help='0 for softmax, 1 for sigmoid')
 parser.add_argument('--embeddings_directory', default="embedding/fast_pretrained_vectors.pkl", help='pretrained embeddings url, there are 2 objects in this file, the first object is the embedding matrix, the other is the lookup dictionary')
 parser.add_argument('--cuda', default="0",type=str, help='enables cuda')
 
@@ -45,20 +43,6 @@ os.environ['CUDA_VISIBLE_DEVICES'] = opt.cuda
 
 if not os.path.isdir("cached"):
     os.mkdir("cached")
-
-if opt.aggregation == 0:
-    print("Using max pooling...........")
-if opt.aggregation == 1:
-    print("Using attention with sum pooling...........")
-if opt.aggregation == 2:
-    print("Using attention with max pooling...........")
-if opt.aggregation == 3:
-    print("Using attention with average pooling...........")
-
-if opt.distributed_function == 0:
-    print("Using softmax as the distributed_function...........")
-if opt.distributed_function == 1:
-    print("Using sigmoid as the distributed_function...........")
 
 
 def convert_labels_to_one_hot(labels):
