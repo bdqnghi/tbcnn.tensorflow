@@ -91,14 +91,14 @@ def logits_op(left_conv, right_conv, left_mask, right_mask, hidden_size):
     return logits, e
 
 # feed forward unit
-def feed_forward_block(inputs, hidden_size):
+def feed_forward_block(inputs, scope, hidden_size):
     """
     :param inputs: tensor with shape (batch_size, seq_length, embedding_size)
     :param num_units: dimensions of each feed forward layer
     :param scope: scope name
     :return: output: tensor with shape (batch_size, hidden_size)
     """
-    with tf.name_scope("feed_forward_block"):
+    with tf.name_scope(scope):
        
         initializer = tf.contrib.layers.xavier_initializer()
 
@@ -129,8 +129,8 @@ def attend_block(left_conv, right_conv, left_mask, right_mask, hidden_size):
     # alpha = (10 x 1000 x 900) x (10 x 1000 x 100)
 
     with tf.name_scope("attend_block"):
-        F_a_bar  = feed_forward_block(left_conv, hidden_size)
-        F_b_bar = feed_forward_block(right_conv, hidden_size)
+        F_a_bar  = feed_forward_block(left_conv, "F", hidden_size)
+        F_b_bar = feed_forward_block(right_conv, "F", hidden_size)
         
         e_raw = tf.matmul(F_a_bar, tf.transpose(F_b_bar, [0, 2, 1]))
 
@@ -168,8 +168,8 @@ def compare_block(left_conv, right_conv, alpha, beta, hidden_size):
         a_beta = tf.concat([left_conv, beta], axis=2)
         b_alpha = tf.concat([right_conv, alpha], axis=2)
 
-        v_1 = feed_forward_block(a_beta, hidden_size)
-        v_2 = feed_forward_block(b_alpha, hidden_size)
+        v_1 = feed_forward_block(a_beta, "G" ,hidden_size)
+        v_2 = feed_forward_block(b_alpha, "G" ,hidden_size)
      
         return v_1, v_2
 
@@ -192,7 +192,7 @@ def aggregate_block(v_1, v_2, hidden_size):
     
         v = tf.concat([v1_sum, v2_sum], axis=1)
 
-        ff_outputs = feed_forward_block(v, hidden_size)
+        ff_outputs = feed_forward_block(v, "H", hidden_size)
         
         y_hat = tf.layers.dense(ff_outputs, 2)
             
