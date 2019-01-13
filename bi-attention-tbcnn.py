@@ -147,7 +147,7 @@ def train_model(train_dataloader, val_dataloader, embeddings, embedding_lookup, 
            
             if opt.batch_type == "original":
                 left_nodes, left_children = batch_left_trees
-                right_nodes, right_children, _ = batch_right_trees
+                right_nodes, right_children = batch_right_trees
             else:
                 left_nodes, left_children, _ = batch_left_trees
                 right_nodes, right_children, _ = batch_right_trees
@@ -186,7 +186,7 @@ def train_model(train_dataloader, val_dataloader, embeddings, embedding_lookup, 
 
             if opt.batch_type == "original":
                 left_nodes, left_children = batch_left_trees
-                right_nodes, right_children, _ = batch_right_trees
+                right_nodes, right_children = batch_right_trees
             else:
                 left_nodes, left_children, _ = batch_left_trees
                 right_nodes, right_children, _ = batch_right_trees
@@ -287,7 +287,7 @@ def test_model(test_dataloader, embeddings, embedding_lookup, opt):
 
         if opt.batch_type == "original":
             left_nodes, left_children = batch_left_trees
-            right_nodes, right_children, _ = batch_right_trees
+            right_nodes, right_children = batch_right_trees
         else:
             left_nodes, left_children, _ = batch_left_trees
             right_nodes, right_children, _ = batch_right_trees
