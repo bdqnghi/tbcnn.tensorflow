@@ -7,7 +7,7 @@ import numpy as np
 import network as network
 import sampling as sampling
 from parameters import LEARN_RATE, EPOCHS, CHECKPOINT_EVERY, BATCH_SIZE, DROP_OUT
-from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, precision_score, recall_score
 import random
 import sys
 import json
@@ -125,8 +125,9 @@ def train_model(train_dataloader, val_dataloader, embeddings, embedding_lookup, 
     print("Begin training....")
 
     # with tf.device(device):
+    temp_precision = 0.0
+    temp_recall = 0.0
     for epoch in range(1, epochs+1):
-        print("----------------------------------------------------")
         for batch_left_trees, batch_right_trees, batch_labels in sampling.batch_random_samples_2_sides(train_left_trees, train_right_trees, train_labels, embeddings, embedding_lookup, opt.train_batch_size,opt.batch_type):
            
             left_nodes, left_children, left_masks = batch_left_trees
@@ -147,12 +148,10 @@ def train_model(train_dataloader, val_dataloader, embeddings, embedding_lookup, 
                 }
             )
 
-            print('Epoch:', epoch,'Steps:', steps,'Loss:', err)
+            print('Epoch:', epoch,'Steps:', steps,'Loss:', err, "Val Precision:", temp_precision, "Val Recall", temp_recall)
 
             if steps % CHECKPOINT_EVERY == 0:
-                # save state so we can resume later
-                saver.save(sess, os.path.join(checkfile), steps)
-                print('Checkpoint saved.')
+                print("Checkpoint, validating.....")
 
                 correct_labels = []
                 predictions = []
@@ -183,10 +182,24 @@ def train_model(train_dataloader, val_dataloader, embeddings, embedding_lookup, 
                     correct_labels.extend(correct)
                     predictions.extend(predicted)
 
-                print('Accuracy:', accuracy_score(correct_labels, predictions))
+                accuracy = float(accuracy_score(correct_labels, predictions))
+                precision = float(precision_score(correct_labels, predictions))
+                recall = float(recall_score(correct_labels, predictions))
+                print('Accuracy:', accuracy)
                 print(classification_report(correct_labels, predictions))
                 print(confusion_matrix(correct_labels, predictions))
-                
+
+
+                if precision > temp_precision and recall > temp_recall:
+                    temp_precision = precision
+                    temp_recall = recall
+                    with open("validation.txt","w") as f:
+                        f.write(str(temp_precision) + "," + str(temp_recall))
+                    # save state so we can resume later
+                    saver.save(sess, os.path.join(checkfile), steps)
+                    print('Checkpoint saved.')
+
+
             steps+=1
         steps = 0
 
@@ -279,7 +292,7 @@ def test_model(test_dataloader, embeddings, embedding_lookup, opt):
             }
         )
         
-        print(output)
+        # print(output)
         correct = np.argmax(labels_one_hot, axis=1)
         predicted = np.argmax(output[0], axis=1)
 
