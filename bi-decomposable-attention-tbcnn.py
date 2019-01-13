@@ -133,7 +133,7 @@ def train_model(train_dataloader, val_dataloader, embeddings, embedding_lookup, 
             labels_one_hot = convert_labels_to_one_hot(batch_labels)
                 
             _, err, out = sess.run(
-                [train_step, loss_node, out_node, attention_matrix_nodes],
+                [train_step, loss_node, out_node],
                 feed_dict={
                     left_nodes_node: left_nodes,
                     left_children_node: left_children,
