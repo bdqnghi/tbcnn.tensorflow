@@ -47,7 +47,7 @@ def init_net_for_siamese(feature_size, output_size, weights, biases, aggregation
     return left_nodes, left_children, right_nodes, right_children, hidden_node, left_attention_score, right_attention_score
 
 
-def init_net_for_siamese_2(feature_size, output_size, weights, biases, aggregation_type, distributed_function):
+def init_net_for_siamese_2(feature_size, output_size, weights, biases):
     """Initialize an empty network."""
 
     with tf.name_scope("left_inputs"):
