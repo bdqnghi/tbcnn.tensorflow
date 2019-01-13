@@ -275,8 +275,8 @@ def test_model(test_dataloader, embeddings, embedding_lookup, opt):
 
     for batch_left_trees, batch_right_trees, batch_labels in sampling.batch_random_samples_2_sides(test_left_trees, test_right_trees, test_labels, embeddings, embedding_lookup, opt.train_batch_size):
 
-        left_nodes, left_children = batch_left_trees
-        right_nodes, right_children = batch_right_trees
+        left_nodes, left_children, _ = batch_left_trees
+        right_nodes, right_children, _ = batch_right_trees
         
         labels_one_hot = convert_labels_to_one_hot(batch_labels)
             
