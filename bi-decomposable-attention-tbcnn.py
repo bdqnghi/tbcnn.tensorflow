@@ -125,8 +125,9 @@ def train_model(train_dataloader, val_dataloader, embeddings, embedding_lookup, 
     print("Begin training....")
 
     # with tf.device(device):
-    temp_precision = 0.0
-    temp_recall = 0.0
+    # temp_precision = 0.0
+    # temp_recall = 0.0
+    temp_accuracy = 0.0
     for epoch in range(1, epochs+1):
         for batch_left_trees, batch_right_trees, batch_labels in sampling.batch_random_samples_2_sides(train_left_trees, train_right_trees, train_labels, embeddings, embedding_lookup, opt.train_batch_size,opt.batch_type):
            
@@ -148,7 +149,7 @@ def train_model(train_dataloader, val_dataloader, embeddings, embedding_lookup, 
                 }
             )
 
-            print('Epoch:', epoch,'Steps:', steps,'Loss:', err, "Val Precision:", temp_precision, "Val Recall", temp_recall)
+            print('Epoch:', epoch,'Steps:', steps,'Loss:', err, "Val Accuracy:", temp_accuracy)
 
             if steps % CHECKPOINT_EVERY == 0:
                 print("Checkpoint, validating.....")
@@ -190,11 +191,10 @@ def train_model(train_dataloader, val_dataloader, embeddings, embedding_lookup, 
                 print(confusion_matrix(correct_labels, predictions))
 
 
-                if precision > temp_precision and recall > temp_recall:
-                    temp_precision = precision
-                    temp_recall = recall
+                if accuracy > temp_accuracy:
+                    temp_accuracy = accuracy
                     with open("validation.txt","w") as f:
-                        f.write(str(temp_precision) + "," + str(temp_recall))
+                        f.write(str(temp_accuracy))
                     # save state so we can resume later
                     saver.save(sess, os.path.join(checkfile), steps)
                     print('Checkpoint saved.')
