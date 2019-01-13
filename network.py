@@ -46,6 +46,28 @@ def init_net_for_siamese(feature_size, output_size, weights, biases, aggregation
 
     return left_nodes, left_children, right_nodes, right_children, hidden_node, left_attention_score, right_attention_score
 
+
+def init_net_for_siamese_2(feature_size, output_size, weights, biases, aggregation_type, distributed_function):
+    """Initialize an empty network."""
+
+    with tf.name_scope("left_inputs"):
+        left_nodes = tf.placeholder(tf.float32, shape=(None, None, feature_size), name='left_tree')
+        left_children = tf.placeholder(tf.int32, shape=(None, None, None), name='left_children')
+
+    with tf.name_scope("right_inputs"):
+        right_nodes = tf.placeholder(tf.float32, shape=(None, None, feature_size), name='right_tree')
+        right_children = tf.placeholder(tf.int32, shape=(None, None, None), name='right_children')
+
+    left_mask = tf.placeholder(tf.float32, [None, None], "left_mask")
+    right_mask = tf.placeholder(tf.float32, [None, None], "right_mask")
+
+    left_conv = conv_layer(1, left_nodes, left_children, feature_size, weights["w_t"], weights["w_l"], weights["w_r"], biases["b_conv"])
+    right_conv = conv_layer(1, right_nodes, right_children, feature_size, weights["w_t"], weights["w_l"], weights["w_r"], biases["b_conv"])
+
+    logits, e = logits_op(left_conv, right_conv, left_mask, right_mask, 100)
+
+    return left_nodes, left_children, right_nodes, right_children, logits, left_mask, right_mask, e
+
 def extract_features(nodes, children, weights, biases, output_size, feature_size, aggregation_type, distributed_function):
     with tf.name_scope('network'):
         conv = conv_layer(1, nodes, children, feature_size, weights["w_t"], weights["w_l"], weights["w_r"], biases["b_conv"])
@@ -59,6 +81,122 @@ def extract_features(nodes, children, weights, biases, output_size, feature_size
         aggregation, attention_score = aggregation_layer(conv, weights["w_attention"], output_size, aggregation_type, distributed_function)
 
     return aggregation, attention_score
+
+
+# build graph
+def logits_op(left_conv, right_conv, left_mask, right_mask, hidden_size):
+    alpha, beta, e = attend_block(left_conv, right_conv, left_mask, right_mask, hidden_size)
+    v_1, v_2 = compare_block(left_conv, right_conv, alpha, beta, hidden_size)
+    logits = aggregate_block(v_1, v_2, hidden_size)
+    return logits, e
+
+# feed forward unit
+def feed_forward_block(inputs, hidden_size):
+    """
+    :param inputs: tensor with shape (batch_size, seq_length, embedding_size)
+    :param num_units: dimensions of each feed forward layer
+    :param scope: scope name
+    :return: output: tensor with shape (batch_size, hidden_size)
+    """
+    with tf.name_scope("feed_forward_block"):
+       
+        initializer = tf.contrib.layers.xavier_initializer()
+
+        # inputs = tf.nn.dropout(inputs, self.dropout_keep_prob)
+        outputs = tf.layers.dense(inputs, hidden_size, tf.nn.relu, kernel_initializer = initializer)
+   
+        # outputs = tf.nn.dropout(outputs, self.dropout_keep_prob)
+        resluts = tf.layers.dense(outputs, hidden_size, tf.nn.relu, kernel_initializer = initializer)
+        return resluts
+
+
+# decomposable attend block ("3.1 Attend" in paper)
+def attend_block(left_conv, right_conv, left_mask, right_mask, hidden_size):
+    
+
+    # Example of tensor transformation
+
+    # left_conv = 10 x 900 x 100
+    # right_conv = 10 x 1000 x 100
+    
+    # attetion_soft_b = 10 x 900 x 1000
+    # attention_soft_a = 10 x 1000 x 900
+
+    # beta = (10 x 900 x 1000) x (10 x 900 x 100)
+    # beta = (10 x 900 x 900) x (10 x 900 x 100)
+
+    # alpha = (10 x 1000 x 1000) x (10 x 1000 x 100)
+    # alpha = (10 x 1000 x 900) x (10 x 1000 x 100)
+
+    with tf.name_scope("attend_block"):
+        F_a_bar  = feed_forward_block(left_conv, hidden_size)
+        F_b_bar = feed_forward_block(right_conv, hidden_size)
+        
+        e_raw = tf.matmul(F_a_bar, tf.transpose(F_b_bar, [0, 2, 1]))
+
+        mask = tf.multiply(tf.expand_dims(left_mask, 2), tf.expand_dims(right_mask, 1))
+        
+        e = tf.multiply(e_raw, mask)
+        attentionSoft_a = tf.exp(e - tf.reduce_max(e_raw, axis=2, keepdims=True))
+        attentionSoft_b = tf.exp(e - tf.reduce_max(e_raw, axis=1, keepdims=True))
+        
+        attentionSoft_a = tf.multiply(attentionSoft_a, tf.expand_dims(left_mask, 1))
+        attentionSoft_b = tf.multiply(attentionSoft_b, tf.expand_dims(right_mask, 2))
+
+        attentionSoft_a = tf.divide(attentionSoft_a, tf.reduce_sum(attentionSoft_a, axis=2, keepdims=True))
+        attentionSoft_b = tf.divide(attentionSoft_b, tf.reduce_sum(attentionSoft_b, axis=1, keepdims=True))
+        attentionSoft_a = tf.multiply(attentionSoft_a, mask)
+        attentionSoft_b = tf.transpose(tf.multiply(attentionSoft_b, mask), [0, 2, 1])
+
+        alpha = tf.matmul(attentionSoft_a, right_conv)
+        beta = tf.matmul(attentionSoft_b, left_conv)
+        
+        return alpha, beta, e
+
+
+ # compare block ("3.2 Compare" in paper)
+def compare_block(left_conv, right_conv, alpha, beta, hidden_size):
+    """
+    :param alpha: context vectors, tensor with shape (batch_size, seq_length, embedding_size)
+    :param beta: context vectors, tensor with shape (batch_size, seq_length, embedding_size)
+    :param scope: scope name
+    a_beta, b_alpha: concat of [embeded_premise, beta], [embeded_hypothesis, alpha], tensor with shape (batch_size, seq_length, 2 * embedding_size)
+    :return: v_1: compare the aligned phrases, output of feed forward layer (G), tensor with shape (batch_size, seq_length, hidden_size)
+             v_2: compare the aligned phrases, output of feed forward layer (G), tensor with shape (batch_size, seq_length, hidden_size)
+    """
+    with tf.name_scope("compare_block"):
+        a_beta = tf.concat([left_conv, beta], axis=2)
+        b_alpha = tf.concat([right_conv, alpha], axis=2)
+
+        v_1 = feed_forward_block(a_beta, hidden_size)
+        v_2 = feed_forward_block(b_alpha, hidden_size)
+     
+        return v_1, v_2
+
+# composition block ("3.3 Aggregate" in paper)
+def aggregate_block(v_1, v_2, hidden_size):
+    """
+    :param v_1: compare the aligned phrases, output of feed forward layer (G), tensor with shape (batch_size, seq_length, hidden_size)
+    :param v_2: compare the aligned phrases, output of feed forward layer (G), tensor with shape (batch_size, seq_length, hidden_size)
+    :param scope: scope name
+    v1_sum, v2_sum: sum of the compared phrases (axis = seq_length), tensor with shape (batch_size, hidden_size)
+    v: concat of v1_sum, v2_sum, tensor with shape (batch_size, 2 * hidden_size)
+    ff_outputs: output of feed forward layer (H), tensor with shape (batch_size, hidden_size)
+    :return: y_hat: output of a linear layer, tensor with shape (batch_size, n_classes)
+    """
+    with tf.name_scope("aggregate_block"):
+        # v1 = \sum_{i=1}^l_a v_{1,i}
+        # v2 = \sum_{j=1}^l_b v_{2,j} (4)
+        v1_sum = tf.reduce_sum(v_1, axis=1)
+        v2_sum = tf.reduce_sum(v_2, axis=1)
+    
+        v = tf.concat([v1_sum, v2_sum], axis=1)
+
+        ff_outputs = feed_forward_block(v, hidden_size)
+        
+        y_hat = tf.layers.dense(ff_outputs, 2)
+            
+        return y_hat
 
 
 def conv_layer(num_conv, nodes, children, feature_size, w_t, w_r, w_l, b_conv):

@@ -5,6 +5,7 @@ import numpy as np
 import random
 from tqdm import *
 
+from keras.preprocessing.sequence import pad_sequences
 
 def gen_samples(trees, labels, vectors, vector_lookup):
     """Creates a generator that returns a tree in BFS order with each node
@@ -100,6 +101,7 @@ def batch_random_samples_2_sides(left_trees, right_trees, labels, vectors, vecto
             n = str(node['node'])
             left_nodes.append(vectors[int(n)])
         
+
         
         
         right_tree = right_trees[i]
@@ -117,7 +119,7 @@ def batch_random_samples_2_sides(left_trees, right_trees, labels, vectors, vecto
             n = str(node['node'])
             right_nodes.append(vectors[int(n)])
       
-        if (len(left_nodes) < 7000 and len(left_nodes) > 100) and (len(right_nodes) < 7000 and len(right_nodes) > 100):
+        if (len(left_nodes) < 7000 and len(left_nodes) > 50) and (len(right_nodes) < 7000 and len(right_nodes) > 50):
 
             batch_left_nodes.append(left_nodes)
             batch_left_children.append(left_children)
@@ -155,7 +157,7 @@ def _pad_batch(nodes, children, labels):
     # pad every child sample so every node has the same number of children
     children = [[c + [0] * (child_len - len(c)) for c in sample] for sample in children]
 
-    return nodes, children, labels
+    return nodes, children, label
 
 
 def _onehot(i, total):
@@ -163,14 +165,46 @@ def _onehot(i, total):
 
 
 def _pad_batch_siamese_2_side(batch_left_nodes, batch_left_children, batch_right_nodes, batch_right_children, labels):
-    return _pad_batch_siamese(batch_left_nodes, batch_left_children), _pad_batch_siamese(batch_right_nodes, batch_right_children), labels
+    max_left_nodes = max([len(x) for x in batch_left_nodes])
+    max_right_nodes = max([len(x) for x in batch_right_nodes])
 
+    max_left_children = max([len(x) for x in batch_left_children])
+    max_right_children = max([len(x) for x in batch_right_children])
 
-def _pad_batch_siamese(nodes, children):
+    max_nodes = max(max_left_nodes, max_right_nodes)
+    max_children = max(max_left_children, max_right_children)
+
+    left_masks, right_masks = _produce_mask_vector_2_side(batch_left_nodes, batch_right_nodes, max_left_nodes, max_right_nodes)
+    batch_left_nodes, batch_left_children = _pad_batch_siamese(batch_left_nodes, batch_left_children, max_nodes, max_children)
+    batch_right_nodes, batch_right_children = _pad_batch_siamese(batch_right_nodes, batch_right_children, max_nodes, max_children)
+
+    # return (_pad_batch_siamese(batch_left_nodes, batch_left_children),left_masks), (_pad_batch_siamese(batch_right_nodes, batch_right_children),right_masks), labels
+    return (batch_left_nodes, batch_left_children,left_masks), (batch_right_nodes, batch_right_children,right_masks), labels
+
+def _produce_mask_vector(nodes, max_nodes):
+
+    masks = []
+    mask = [1 for i in range(max_nodes)]
+    for n in nodes:        
+        masks.append(mask)
+
+    return masks
+
+def _produce_mask_vector_2_side(left_nodes, right_nodes, max_left_nodes, max_right_nodes):
+    # print(nodes)
+    
+    left_masks = _produce_mask_vector(left_nodes,max_left_nodes)
+    right_masks = _produce_mask_vector(right_nodes,max_right_nodes)
+    
+    left_masks.extend(right_masks)
+    all_padded = pad_sequences(left_masks, padding='post')
+    
+    return all_padded[:len(left_nodes), ...], all_padded[len(left_nodes):, ...]
+
+def _pad_batch_siamese(nodes, children, max_nodes, max_children):
     if not nodes:
         return [], [], []
-    max_nodes = max([len(x) for x in nodes])
-    max_children = max([len(x) for x in children])
+   
     feature_len = len(nodes[0][0])
     child_len = max([len(c) for n in children for c in n])
 
@@ -180,6 +214,7 @@ def _pad_batch_siamese(nodes, children):
     # pad every child sample so every node has the same number of children
     children = [[c + [0] * (child_len - len(c)) for c in sample] for sample in children]
 
+  
     return nodes, children
 
 
