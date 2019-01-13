@@ -34,11 +34,13 @@ parser.add_argument('--testing', action="store_true",help='is testing')
 parser.add_argument('--training_percentage', type=float, default=1.0 ,help='percentage of data use for training')
 parser.add_argument('--log_path', default="" ,help='log path for tensorboard')
 parser.add_argument('--feature_size', type=int, default=100, help='size of convolutional features')
+parser.add_argument('--batch_type', type=str, default="padding", help='batching type')
 parser.add_argument('--embeddings_directory', default="embedding/fast_pretrained_vectors.pkl", help='pretrained embeddings url, there are 2 objects in this file, the first object is the embedding matrix, the other is the lookup dictionary')
 parser.add_argument('--cuda', default="0",type=str, help='enables cuda')
 
 opt = parser.parse_args()
 
+print(opt)
 os.environ['CUDA_VISIBLE_DEVICES'] = opt.cuda
 
 if not os.path.isdir("cached"):
@@ -125,7 +127,7 @@ def train_model(train_dataloader, val_dataloader, embeddings, embedding_lookup, 
     # with tf.device(device):
     for epoch in range(1, epochs+1):
         print("----------------------------------------------------")
-        for batch_left_trees, batch_right_trees, batch_labels in sampling.batch_random_samples_2_sides(train_left_trees, train_right_trees, train_labels, embeddings, embedding_lookup, opt.train_batch_size):
+        for batch_left_trees, batch_right_trees, batch_labels in sampling.batch_random_samples_2_sides(train_left_trees, train_right_trees, train_labels, embeddings, embedding_lookup, opt.train_batch_size,opt.batch_type):
            
             left_nodes, left_children, left_masks = batch_left_trees
             right_nodes, right_children, right_masks = batch_right_trees
@@ -160,7 +162,7 @@ def train_model(train_dataloader, val_dataloader, embeddings, embedding_lookup, 
         correct_labels = []
         predictions = []
 
-        for batch_left_trees, batch_right_trees, batch_labels in sampling.batch_random_samples_2_sides(val_left_trees, val_right_trees, val_labels, embeddings, embedding_lookup, opt.train_batch_size):
+        for batch_left_trees, batch_right_trees, batch_labels in sampling.batch_random_samples_2_sides(val_left_trees, val_right_trees, val_labels, embeddings, embedding_lookup, opt.train_batch_size,opt.batch_type):
 
             left_nodes, left_children, left_masks = batch_left_trees
             right_nodes, right_children, right_masks = batch_right_trees
@@ -256,7 +258,7 @@ def test_model(test_dataloader, embeddings, embedding_lookup, opt):
     correct_labels = []
     predictions = []
 
-    for batch_left_trees, batch_right_trees, batch_labels in sampling.batch_random_samples_2_sides(test_left_trees, test_right_trees, test_labels, embeddings, embedding_lookup, opt.train_batch_size):
+    for batch_left_trees, batch_right_trees, batch_labels in sampling.batch_random_samples_2_sides(test_left_trees, test_right_trees, test_labels, embeddings, embedding_lookup, opt.train_batch_size,opt.batch_type):
 
         left_nodes, left_children, left_masks = batch_left_trees
         right_nodes, right_children, right_masks = batch_right_trees
