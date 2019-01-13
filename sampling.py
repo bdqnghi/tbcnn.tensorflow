@@ -144,7 +144,7 @@ def batch_random_samples_2_sides(left_trees, right_trees, labels, vectors, vecto
 
     if batch_left_nodes and batch_right_nodes:
         if batch_type == "original": 
-                yield _pad_batch_siamese_2_side_original(batch_left_nodes, batch_left_children, batch_right_nodes, batch_right_children, batch_labels)
+            yield _pad_batch_siamese_2_side_original(batch_left_nodes, batch_left_children, batch_right_nodes, batch_right_children, batch_labels)
         else:
             yield _pad_batch_siamese_2_side(batch_left_nodes, batch_left_children, batch_right_nodes, batch_right_children, batch_labels)
 
