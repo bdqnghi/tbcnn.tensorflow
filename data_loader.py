@@ -69,10 +69,12 @@ class CrossLanguageProgramData():
             right_trees.append(pairs[i][1])
             labels.append(pairs[i][2])
 
+
+        print("Number of all data : " + str(len(left_trees)))
         self.left_trees = left_trees
         self.right_trees = right_trees
         self.labels = labels
-
+        
 
 def load_pairwise_programs(path, train_test_val):
     print("Loading pairwise data............")
@@ -83,8 +85,8 @@ def load_pairwise_programs(path, train_test_val):
         for line in data:
             all_pairs_index.append(line.replace("\n",""))
   
-    # if train_test_val == 0:
-    #     all_pairs_index = random.sample(all_pairs_index, 100)
+    if train_test_val == 0:
+        all_pairs_index = random.sample(all_pairs_index, 100)
     
 
     for i, pair in tqdm(enumerate(all_pairs_index)):
