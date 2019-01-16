@@ -68,6 +68,24 @@ def init_net_for_siamese_2(feature_size, output_size, weights, biases):
 
     return left_nodes, left_children, right_nodes, right_children, logits, left_mask, right_mask, e
 
+def init_net_for_siamese_3(feature_size, output_size, weights, biases):
+    """Initialize an empty network."""
+
+    with tf.name_scope("left_inputs"):
+        left_nodes = tf.placeholder(tf.float32, shape=(None, None, feature_size), name='left_tree')
+        left_children = tf.placeholder(tf.int32, shape=(None, None, None), name='left_children')
+
+    with tf.name_scope("right_inputs"):
+        right_nodes = tf.placeholder(tf.float32, shape=(None, None, feature_size), name='right_tree')
+        right_children = tf.placeholder(tf.int32, shape=(None, None, None), name='right_children')
+
+    left_mask = tf.placeholder(tf.float32, [None, None], "left_mask")
+    right_mask = tf.placeholder(tf.float32, [None, None], "right_mask")
+
+    logits, e = logits_op(left_nodes, right_nodes, left_mask, right_mask, 100)
+
+    return left_nodes, left_children, right_nodes, right_children, logits, left_mask, right_mask, e
+
 def extract_features(nodes, children, weights, biases, output_size, feature_size, aggregation_type, distributed_function):
     with tf.name_scope('network'):
         conv = conv_layer(1, nodes, children, feature_size, weights["w_t"], weights["w_l"], weights["w_r"], biases["b_conv"])
