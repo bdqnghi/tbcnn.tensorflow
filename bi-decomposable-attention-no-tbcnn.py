@@ -91,9 +91,7 @@ def train_model(train_dataloader, val_dataloader, embeddings, embedding_lookup, 
 
     left_nodes_node, left_children_node, right_nodes_node, right_children_node, logits_node, left_mask_nodes, right_mask_nodes, attention_matrix_nodes = network.init_net_for_siamese_3(
         num_feats,
-        opt.feature_size,
-        weights, 
-        biases,
+        opt.feature_size
     )
 
     out_node = network.out_layer(logits_node)
