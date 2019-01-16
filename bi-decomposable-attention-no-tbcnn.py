@@ -195,7 +195,7 @@ def train_model(train_dataloader, val_dataloader, embeddings, embedding_lookup, 
 
                 if accuracy > temp_accuracy:
                     temp_accuracy = accuracy
-                    with open("validation.txt","w") as f:
+                    with open("no_tbcnn_validation.txt","w") as f:
                         f.write(str(temp_accuracy))
                     # save state so we can resume later
                     saver.save(sess, os.path.join(checkfile), steps)
