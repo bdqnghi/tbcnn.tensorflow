@@ -77,18 +77,7 @@ def train_model(train_dataloader, val_dataloader, embeddings, embedding_lookup, 
     num_feats = len(embeddings[0])
 
     initializer = tf.contrib.layers.xavier_initializer()
-    weights = {
-        "w_t" : tf.Variable(initializer([node_embedding_size, opt.feature_size]), name="w_t"),
-        "w_l" : tf.Variable(initializer([node_embedding_size, opt.feature_size]), name="w_l"),
-        "w_r" : tf.Variable(initializer([node_embedding_size, opt.feature_size]), name="w_r"),
-        "w_attention" : tf.Variable(initializer([opt.feature_size,1]), name="w_attention")
-    }
-
-
-    biases = {
-        "b_conv": tf.Variable(initializer([opt.feature_size,]), name="b_conv"),
-    }
-
+  
     left_nodes_node, left_children_node, right_nodes_node, right_children_node, logits_node, left_mask_nodes, right_mask_nodes, attention_matrix_nodes = network.init_net_for_siamese_3(
         num_feats,
         opt.feature_size
