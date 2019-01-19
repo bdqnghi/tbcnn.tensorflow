@@ -91,7 +91,7 @@ def generate_pkl(pb_path):
     return pkl_path
 
 def generate_visualization_accumulation(pkl_path):
-    path_splits = src_path.split("/")
+    path_splits = pkl_path.split("/")
     file_name = path_splits[len(path_splits)-1].split(".")[0]
     attention_path = os.path.join(file_name + "_raw_attention_without_node_type.csv")
     pb_path = os.path.join(file_name + ".pb")
@@ -101,7 +101,7 @@ def generate_visualization_accumulation(pkl_path):
     return html_path
 
 def generate_visualization_normal(pkl_path):
-    path_splits = src_path.split("/")
+    path_splits = pkl_path.split("/")
     file_name = path_splits[len(path_splits)-1].split(".")[0]
     attention_path = os.path.join(file_name + "_scaled_attention_without_node_type.csv")
     pb_path = os.path.join(file_name + ".pb")
@@ -201,8 +201,6 @@ def main(opt):
     print("Loading embeddings....")
     with open(opt.embeddings_directory, 'rb') as fh:
         embeddings, embed_lookup = pickle.load(fh,encoding='latin1')
-    
-
     logdir = opt.model_path
     batch_size = opt.test_batch_size
     epochs = opt.niter
