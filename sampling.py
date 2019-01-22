@@ -163,7 +163,7 @@ def _pad_batch(nodes, children, labels):
     # pad every child sample so every node has the same number of children
     children = [[c + [0] * (child_len - len(c)) for c in sample] for sample in children]
 
-    return nodes, children, label
+    return nodes, children, labels
 
 
 def _onehot(i, total):
