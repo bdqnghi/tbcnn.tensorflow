@@ -117,17 +117,26 @@ def generate_pkl(pb_path):
 def generate_visualization(pkl_path):
   
     attention_path = os.path.join(pkl_path.split(".")[0] + "_" + aggregation_name + "_" + distributed_function_name + "_" +  "scaled_attention_without_node_type.csv")
+    attention_path_all_1 = os.path.join(pkl_path.split(".")[0] + "_" + aggregation_name + "_" + distributed_function_name + "_" +  "attention_all_1.csv")
+    node_type_attention_path = os.path.join(pkl_path.split(".")[0] + "_" + aggregation_name + "_" + distributed_function_name + "_" +  "only_node_type.csv")
     pb_path = os.path.join(pkl_path.split(".")[0] + ".pb")
+   
     normal_html_path = os.path.join(pkl_path.split(".")[0] + "_" + aggregation_name + "_" + distributed_function_name + "_" +  "normal.html")
+    normal_node_html_path = os.path.join(pkl_path.split(".")[0] + "_" + aggregation_name + "_" + distributed_function_name + "_" +  "normal_node_type.html")
+
     accumulation_html_path = os.path.join(pkl_path.split(".")[0] + "_" + aggregation_name + "_" + distributed_function_name + "_" +  "accumulation.html")
     spreading_html_path = os.path.join(pkl_path.split(".")[0] + "_" + aggregation_name + "_" + distributed_function_name + "_" +  "spreading.html")
     spreading_with_subtree_size_html_path = os.path.join(pkl_path.split(".")[0] + "_" + aggregation_name + "_" + distributed_function_name + "_" +  "spreading_with_weight.html")
 
-    normal_cmd = "docker run --rm -v $(pwd):/e -it yijun/fast -H 0 -t -x " + attention_path + " " + pb_path  + " > " + normal_html_path
+    normal_node_id_cmd = "docker run --rm -v $(pwd):/e -it yijun/fast -H 0 -t -x " + attention_path + " " + pb_path  + " > " + normal_html_path
+    normal_node_type_cmd = "docker run --rm -v $(pwd):/e -it yijun/fast -H 0 -t -x " + attention_path_all_1 + " " + " -Y " + node_type_attention_path + " " + pb_path  + " > " + normal_node_html_path
+
     accumulation_cmd = "docker run --rm -v $(pwd):/e -it yijun/fast -H 0 -a 0 -x " + attention_path + " " + pb_path  + " > " + accumulation_html_path
     spreading_cmd = "docker run --rm -v $(pwd):/e -it yijun/fast -H 0 -a 1 -x " + attention_path + " " + pb_path  + " > " + spreading_html_path
     spreading__with_weight_cmd = "docker run --rm -v $(pwd):/e -it yijun/fast -H 0 -a 2 -x " + attention_path + " " + pb_path  + " > " + spreading_with_subtree_size_html_path
-    os.system(normal_cmd)
+    
+    os.system(normal_node_id_cmd)
+    os.system(normal_node_type_cmd)
     os.system(accumulation_cmd)
     os.system(spreading_cmd)
     os.system(spreading__with_weight_cmd)
@@ -166,8 +175,22 @@ def generate_attention_score(attention_score, attention_score_scaled, node_ids, 
     print("Generating attention score.......")
     attention_file_path_raw_with_node_type = os.path.join(pb_path.split(".")[0] + "_" + aggregation_name + "_" + distributed_function_name + "_" +  "raw_attention_with_node_type_and_subtree_size.csv")
     attention_file_path_raw_without_node_type = os.path.join(pb_path.split(".")[0] + "_" + aggregation_name + "_" + distributed_function_name + "_" +  "raw_attention_without_node_type.csv")
+    attention_file_path_all_1 = os.path.join(pb_path.split(".")[0] + "_" + aggregation_name + "_" + distributed_function_name + "_" +  "attention_all_1.csv")
     attention_file_path_scaled_with_node_type = os.path.join(pb_path.split(".")[0] + "_" + aggregation_name + "_" + distributed_function_name + "_" +  "scaled_attention_with_node_type_and_subtree_size.csv")
     attention_file_path_scaled_without_node_type = os.path.join(pb_path.split(".")[0] + "_" + aggregation_name + "_" + distributed_function_name + "_" +  "scaled_attention_without_node_type.csv")
+
+    attention_file_path_only_node_type = os.path.join(pb_path.split(".")[0] + "_" + aggregation_name + "_" + distributed_function_name + "_" +  "only_node_type.csv")
+
+    node_type_map = {}
+    for i, node_id in enumerate(node_ids):
+        type_of_node = node_types[i]
+        if type_of_node not in node_type_map:
+            node_type_map[type_of_node] = attention_score[i]
+        else:
+            node_type_map[type_of_node] += attention_score[i]
+
+    node_type_weights = node_type_map.values()
+    scaled_node_type_weights = scale_attention_score_by_group(list(node_type_weights))
 
 
     with open(attention_file_path_raw_with_node_type,"w") as f:
@@ -177,22 +200,32 @@ def generate_attention_score(attention_score, attention_score_scaled, node_ids, 
             line = str(node_ids[i]) + "," + str(node_types[i]) + "," + str(score)
             f.write("%s\n" % line)
 
-    with open(attention_file_path_raw_without_node_type,"w") as f:
+    with open(attention_file_path_raw_without_node_type,"w") as f1:
         for i, score in enumerate(attention_score):
             line = str(node_ids[i]) + "," + str(score)
-            f.write("%s\n" % line)
+            f1.write("%s\n" % line)
 
-    with open(attention_file_path_scaled_with_node_type,"w") as f1:
+    with open(attention_file_path_all_1,"w") as f1:
+        for i, score in enumerate(attention_score):
+            line = str(node_ids[i]) + "," + str(1)
+            f1.write("%s\n" % line)
+
+    with open(attention_file_path_scaled_with_node_type,"w") as f2:
         for i, score in enumerate(attention_score_scaled):
             # subtree_ids = generate_subtree_ids(pb_path, node_ids[i])
             # line = str(node_ids[i]) + "," + str(node_types[i]) + "," + str(len(subtree_ids)) + "," + str(score)
             line = str(node_ids[i]) + "," + str(node_types[i]) + "," + str(score)
-            f1.write("%s\n" % line)
+            f2.write("%s\n" % line)
 
-    with open(attention_file_path_scaled_without_node_type,"w") as f1:
+    with open(attention_file_path_scaled_without_node_type,"w") as f3:
         for i, score in enumerate(attention_score_scaled):
             line = str(node_ids[i]) + "," + str(score)
-            f1.write("%s\n" % line)
+            f3.write("%s\n" % line)
+
+    with open(attention_file_path_only_node_type,"w") as f4:
+        for i, node_type in enumerate(node_type_map.keys()):
+            line = str(node_type) + "," + str(scaled_node_type_weights[i])
+            f4.write("%s\n" % line)
 
 def predict(sess, out_node, attention_score_node, nodes_node, children_node, pkl_path, pb_path, subtree_ids, test_trees, labels, node_ids, node_types, embeddings, embedding_lookup):
     for batch in sampling.batch_samples(
@@ -209,8 +242,8 @@ def predict(sess, out_node, attention_score_node, nodes_node, children_node, pkl
         # print(output)
 
         splits = pkl_path.split(".")
-        node_ids = node_ids[0]
-        node_types = node_types[0]
+        # node_ids = node_ids[0]
+        # node_types = node_types[0]
 
         confidence_score = output[0]
         actual = str(np.argmax(batch_labels)+1)
@@ -398,6 +431,7 @@ def main(opt):
             for file in files:
               
                 file_path = os.path.join(algorithm_directory,file)
+                print(file_path)
                 if os.path.isfile(file_path):
 
                     test_trees, node_ids, node_types, subtree_ids, sort_function_id, pkl_path, pb_path = load_program(file_path)
@@ -405,7 +439,7 @@ def main(opt):
                     cos_sim_oracle, cos_sim_reverse_oracle, ratio, actual, predicted, confidence_score = predict(sess, out_node, attention_score_node, nodes_node, children_node, pkl_path, pb_path, subtree_ids, test_trees, labels, node_ids, node_types, embeddings, embed_lookup)
                     
                     with open(analysis_file,"a") as f:
-                        f.write(file_path + "," + str(cos_sim_oracle) + "," + str(cos_sim_reverse_oracle) + "," + str(sort_function_id) + "," + str(len(subtree_ids)) + "," + str(len(node_ids[0])) + "," + str(ratio) + "," + str(actual) + "," + str(predicted) + "," + str(" ".join(str(v) for v in confidence_score)))
+                        f.write(file_path + "," + str(cos_sim_oracle) + "," + str(cos_sim_reverse_oracle) + "," + str(sort_function_id) + "," + str(len(subtree_ids)) + "," + str(len(node_ids)) + "," + str(ratio) + "," + str(actual) + "," + str(predicted) + "," + str(" ".join(str(v) for v in confidence_score)))
                         f.write("\n")
 
 if __name__ == "__main__":
