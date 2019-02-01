@@ -134,10 +134,11 @@ def train_model(train_dataloader, val_dataloader, embeddings, embedding_lookup, 
             left_nodes, left_children, left_masks = batch_left_trees
             right_nodes, right_children, right_masks = batch_right_trees
 
+
             labels_one_hot = convert_labels_to_one_hot(batch_labels)
                 
-            _, err, out = sess.run(
-                [train_step, loss_node, out_node],
+            _, err, left_nodes_out, out = sess.run(
+                [train_step, loss_node, left_nodes_node, out_node],
                 feed_dict={
                     left_nodes_node: left_nodes,
                     left_children_node: left_children,
@@ -150,6 +151,7 @@ def train_model(train_dataloader, val_dataloader, embeddings, embedding_lookup, 
             )
 
             print('Epoch:', epoch,'Steps:', steps,'Loss:', err, "Val Accuracy:", temp_accuracy)
+            print(left_nodes_out.shape)
 
             if steps % CHECKPOINT_EVERY == 0:
                 print("Checkpoint, validating.....")
@@ -276,11 +278,11 @@ def test_model(test_dataloader, embeddings, embedding_lookup, opt):
 
         left_nodes, left_children, left_masks = batch_left_trees
         right_nodes, right_children, right_masks = batch_right_trees
-        
+
         labels_one_hot = convert_labels_to_one_hot(batch_labels)
             
-        output = sess.run(
-            [out_node],
+        matching_matrices, output = sess.run(
+            [attention_matrix_nodes, out_node],
             feed_dict={
                 left_nodes_node: left_nodes,
                 left_children_node: left_children,
@@ -292,9 +294,12 @@ def test_model(test_dataloader, embeddings, embedding_lookup, opt):
             }
         )
         
-        # print(output)
+        for i, matrix in enumerate(matching_matrices):
+            np.savetxt("matching_matrix/"  + str(i) + ".csv", matrix, delimiter=",")
+        print(output)
+        print(output.shape)
         correct = np.argmax(labels_one_hot, axis=1)
-        predicted = np.argmax(output[0], axis=1)
+        predicted = np.argmax(output, axis=1)
 
         correct_labels.extend(correct)
         predictions.extend(predicted)

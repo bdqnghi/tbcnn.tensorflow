@@ -171,6 +171,15 @@ def generate_subtree_ids(pb_path, node_id):
     # os.remove(subtree_ids_path)
     return subtree_ids
 
+def generate_histogram(pb_path):
+
+    histogram_path = os.path.join(pb_path.split(".")[0] + "_histogram.txt")
+
+    cmd = "docker run -v $(pwd):/e yijun/fast -d --histogram " + pb_path + " > " + histogram_path
+    os.system(cmd)
+
+    return histogram_path
+
 def generate_attention_score(attention_score, attention_score_scaled, node_ids, node_types, pb_path):
     print("Generating attention score.......")
     attention_file_path_raw_with_node_type = os.path.join(pb_path.split(".")[0] + "_" + aggregation_name + "_" + distributed_function_name + "_" +  "raw_attention_with_node_type_and_subtree_size.csv")
@@ -227,7 +236,7 @@ def generate_attention_score(attention_score, attention_score_scaled, node_ids, 
             line = str(node_type) + "," + str(scaled_node_type_weights[i])
             f4.write("%s\n" % line)
 
-def predict(sess, out_node, attention_score_node, nodes_node, children_node, pkl_path, pb_path, subtree_ids, test_trees, labels, node_ids, node_types, embeddings, embedding_lookup):
+def predict(sess, out_node, attention_score_node, nodes_node, children_node, pkl_path, pb_path, subtree_ids, test_trees, labels, node_ids, node_types, nodes_common_part_vector, embeddings, embedding_lookup):
     for batch in sampling.batch_samples(
             sampling.gen_samples(test_trees, labels, embeddings, embedding_lookup), 1
         ):
@@ -316,22 +325,57 @@ def predict(sess, out_node, attention_score_node, nodes_node, children_node, pkl
         cos_sim_oracle = cosine_simlarity(np.array(attention_vector), np.array(oracle_vector))
         cos_sim_reverse_oracle = cosine_simlarity(np.array(attention_vector), np.array(reverse_oracle_vector))
 
+        cos_sim_common_part = cosine_simlarity(np.array(attention_vector), np.array(reverse_oracle_vector))
         # cos_sim_oracle = cos_sim_oracle * ratio
         # cos_sim_reverse_oracle = cos_sim_reverse_oracle * (1 - ratio)
         # print(cos_sim_oracle)
         # print(cos_sim_reverse_oracle)
 
         generate_visualization(pkl_path)
-        return cos_sim_oracle, cos_sim_reverse_oracle, ratio, actual, predicted, confidence_score
+        return cos_sim_oracle, cos_sim_reverse_oracle, cos_sim_common_part, ratio, actual, predicted, confidence_score
 
 def cosine_simlarity(a, b):
     return dot(a, b)/(norm(a)*norm(b))
+
+
+def read_node_count(histogram_path):
+    node_count_map = {}
+    with open(histogram_path,"r") as f:
+        data = f.readlines()
+        for line in data:
+           
+            line = line.replace("\n","")
+            splits = line.split(",")
+            node_count_map[splits[1].split(":")[0]] = int(splits[1])
+    return node_count_map
+
+
+def read_common_part():
+    common_part = "github_java_sort_function_histogram/" 
+    common_part_map = {}
+    for i in range(1,10):
+        common_part_map[str(i)] = {}
+        path = common_part + str(i) + ".txt"
+        with open(path,"r") as f:
+            data = f.readlines()
+            for line in data:
+                line = line.replace("\n","")
+                splits = line.split(",")
+                common_part_map[str(i)][splits[1].split(":")[0]] = int(splits[1])
+
+    return common_part_map
+
 
 def load_program(file_path):
 
     pb_path = generate_pb(file_path)
     pkl_path = generate_pkl(pb_path)
     
+    histogram_path = generate_histogram(pb_path)
+    node_count_map = read_node_count(histogram_path)
+    common_part_map = read_common_part()
+    # print(common_part_map)
+
     ast_representation = build_tree(pkl_path)
     sort_function_id = search_function_node(ast_representation, "sort")
    
@@ -342,10 +386,14 @@ def load_program(file_path):
         with open(ast_representation_path,"w") as f:
             f.write(str(ast_representation))    
 
-    # an array of only 1 tree, just wrap it into 1 more dimension to make it consistent with the training process
-    test_trees, _ , node_ids, node_types = load_single_program_for_live_test(pkl_path)
 
-    return test_trees, node_ids, node_types, subtree_ids, sort_function_id, pkl_path, pb_path
+    label = file_path.split("/")[-2]
+
+    # print(label)
+    # an array of only 1 tree, just wrap it into 1 more dimension to make it consistent with the training process
+    test_trees, _ , node_ids, node_types, nodes_common_part_vector = load_single_program_for_live_test(pkl_path, common_part_map[label], node_count_map)
+    print(nodes_common_part_vector)
+    return test_trees, node_ids, node_types, nodes_common_part_vector, subtree_ids, sort_function_id, pkl_path, pb_path
 
 def main(opt):
 
@@ -421,7 +469,8 @@ def main(opt):
         if os.path.exists(analysis_file):
             os.remove(analysis_file)
         with open(analysis_file,"a") as f:
-            f.write("file,oracle_cosim,reverse_oracle_cosim,function_node_id,function_size,program_size,function_ratio,actual,predicted,confidence_score")
+            # f.write("file,oracle_cosim,reverse_oracle_cosim,function_node_id,function_size,program_size,function_ratio,actual,predicted,confidence_score")
+            f.write("file,common_part_cosim,actual,predicted,confidence_score")
             f.write("\n")
 
         for i in range(1, 11):
@@ -434,12 +483,13 @@ def main(opt):
                 print(file_path)
                 if os.path.isfile(file_path):
 
-                    test_trees, node_ids, node_types, subtree_ids, sort_function_id, pkl_path, pb_path = load_program(file_path)
+                    test_trees, node_ids, node_types, nodes_common_part_vector, subtree_ids, sort_function_id, pkl_path, pb_path = load_program(file_path)
 
-                    cos_sim_oracle, cos_sim_reverse_oracle, ratio, actual, predicted, confidence_score = predict(sess, out_node, attention_score_node, nodes_node, children_node, pkl_path, pb_path, subtree_ids, test_trees, labels, node_ids, node_types, embeddings, embed_lookup)
+                    cos_sim_oracle, cos_sim_reverse_oracle, cos_sim_common_part, ratio, actual, predicted, confidence_score = predict(sess, out_node, attention_score_node, nodes_node, children_node, pkl_path, pb_path, subtree_ids, test_trees, labels, node_ids, node_types, nodes_common_part_vector, embeddings, embed_lookup)
                     
                     with open(analysis_file,"a") as f:
-                        f.write(file_path + "," + str(cos_sim_oracle) + "," + str(cos_sim_reverse_oracle) + "," + str(sort_function_id) + "," + str(len(subtree_ids)) + "," + str(len(node_ids)) + "," + str(ratio) + "," + str(actual) + "," + str(predicted) + "," + str(" ".join(str(v) for v in confidence_score)))
+                        # f.write(file_path + "," + str(cos_sim_oracle) + "," + str(cos_sim_reverse_oracle) + "," + str(sort_function_id) + "," + str(len(subtree_ids)) + "," + str(len(node_ids)) + "," + str(ratio) + "," + str(actual) + "," + str(predicted) + "," + str(" ".join(str(v) for v in confidence_score)))
+                        f.write(file_path + "," + str(cos_sim_common_part) + "," + str(actual) + "," + str(predicted) + "," + str(" ".join(str(v) for v in confidence_score)))
                         f.write("\n")
 
 if __name__ == "__main__":

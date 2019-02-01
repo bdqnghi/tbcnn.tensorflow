@@ -56,7 +56,7 @@ class CrossLanguageProgramData():
             with open(saved_input_filename, 'wb') as file_handler:
                 pickle.dump(pairs, file_handler, protocol=pickle.HIGHEST_PROTOCOL)
 
-        random.shuffle(pairs)
+        # random.shuffle(pairs)
 
         # if train_test_val == 0:
         #     pairs = random.sample(pairs,10000)
@@ -75,6 +75,30 @@ class CrossLanguageProgramData():
         self.right_trees = right_trees
         self.labels = labels
         
+
+class CrossLanguageProgramDataForLiveTest():
+   
+    def __init__(self, path, train_test_val, n_classes):
+        cached_path = "cached"
+
+        
+        pairs, left_node_ids_list, right_node_ids_list = load_pairwise_programs_for_live_test(path, train_test_val)
+          
+        left_trees = []
+        right_trees = []
+        labels = []
+        for i in trange(len(pairs)):
+            left_trees.append(pairs[i][0])
+            right_trees.append(pairs[i][1])
+            labels.append(pairs[i][2])
+
+
+        print("Number of all data : " + str(len(left_trees)))
+        self.left_trees = left_trees
+        self.right_trees = right_trees
+        self.left_node_ids_list = left_node_ids_list
+        self.right_node_ids_list = right_node_ids_list
+        self.labels = labels
 
 def load_pairwise_programs(path, train_test_val):
     print("Loading pairwise data............")
@@ -99,6 +123,31 @@ def load_pairwise_programs(path, train_test_val):
 
     return pairs
 
+def load_pairwise_programs_for_live_test(path, train_test_val):
+    print("Loading pairwise data............")
+    pairs = []
+    all_pairs_index = []
+   
+    left_node_ids_list = []
+    right_node_ids_list = []
+    with open(path,"r") as f:
+        data = f.readlines()
+        for line in data:
+            print(line)
+            all_pairs_index.append(line.replace("\n",""))
+  
+    for i, pair in tqdm(enumerate(all_pairs_index)):
+        splits = pair.split(",")
+        left_path = splits[0]
+        right_path = splits[1]
+        left_tree, _ , left_node_ids, _, = load_single_program(left_path)
+        right_tree, _ , right_node_ids, _ = load_single_program(right_path)
+        pairs.append((left_tree,right_tree,int(splits[2])))
+        left_node_ids_list.append(left_node_ids)
+        right_node_ids_list.append(right_node_ids)
+
+    return pairs, left_node_ids_list, right_node_ids_list
+
 def build_tree(script):
     """Builds an AST from a script."""
    
@@ -120,13 +169,13 @@ def load_single_program(file_path):
         'tree': tree, 'label': label
     }
   
-    return result
+    return result, label, node_ids, node_types
 
-def load_single_program_for_live_test(file_pkl_path):
+def load_single_program_for_live_test(file_pkl_path, common_part, node_count):
     result = []
-    labels = []
-    nodes_ids_list = []
-    nodes_types_list = []
+    # labels = []
+    # nodes_ids_list = []
+    # nodes_types_list = []
     splits = file_pkl_path.split("/")
     
     label = splits[len(splits)-3]
@@ -134,16 +183,16 @@ def load_single_program_for_live_test(file_pkl_path):
     ast_representation = build_tree(file_pkl_path)
     if ast_representation.HasField("element"):
         root = ast_representation.element
-        tree, size, node_ids, node_types = _traverse_tree(root)
+        tree, size, node_ids, node_types, nodes_common_part_vector = _traverse_tree_2(root, common_part, node_count)
 
     result.append({
         'tree': tree, 'label': label
     })
-    labels.append(label)
-    nodes_ids_list.append(node_ids)
-    nodes_types_list.append(node_types)
-
-    return result, labels, nodes_ids_list, nodes_types_list
+    # labels.append(label)
+    # nodes_ids_list.append(node_ids)
+    # nodes_types_list.append(node_types)
+    return result, label, node_ids, node_types, nodes_common_part_vector
+    # return result, labels, nodes_ids_list, nodes_types_list
 
 def load_program_data(directory, n_classes):
 
@@ -213,6 +262,57 @@ def _traverse_tree(root):
             # print current_node_json
   
     return root_json, num_nodes, node_ids, node_types
+
+def _traverse_tree_2(root, common_part, node_count):
+    print(common_part)
+    print(node_count)
+    num_nodes = 1
+    queue = [root]
+
+    root_json = {
+        "node": str(root.kind),
+
+        "children": []
+    }
+    queue_json = [root_json]
+    node_ids = []
+    node_types = []
+    node_ids_vector = []
+    # nodes_id.append(root.id)
+    while queue:
+      
+        current_node = queue.pop(0)
+        num_nodes += 1
+        # print (_name(current_node))
+        current_node_json = queue_json.pop(0)
+
+        node_ids.append(current_node.id)
+        node_types.append(current_node.kind)
+       
+        if str(current_node.kind) in common_part.keys() and str(current_node.kind) in node_count.keys():
+            if node_count[str(current_node.kind)] <= common_part[str(current_node.kind)]:
+                node_ids_vector.append(1)
+        else:
+            node_ids_vector.append(0)
+        
+        children = [x for x in current_node.child]
+        queue.extend(children)
+       
+        for child in children:
+            # print "##################"
+            #print child.kind
+
+            child_json = {
+                "node": str(child.kind),
+                "children": []
+            }
+
+            current_node_json['children'].append(child_json)
+            queue_json.append(child_json)
+            
+            # print current_node_json
+  
+    return root_json, num_nodes, node_ids, node_types, node_ids_vector
 
 def search_child_with_name(function_node, keyword):
     children = [x for x in function_node.child]

@@ -4,7 +4,8 @@ from sklearn import preprocessing
 import os, itertools
 
 def scale_attention_score(attention_array, top_node):
-
+    # print(attention_array)
+    # print(top_node)
     attention_array = np.array(attention_array)
   
     top_n_idx = np.argsort(attention_array)[-top_node:][::-1]
