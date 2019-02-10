@@ -1,0 +1,61 @@
+- visualize the wrong data, which part of the attention is the sympton
+- differencing the trees, also to take the attention into account to decide which operator to do first
+- see how many subset of changes has the biggest impact on the output probability of a class (using attention to guide the change)
+- measure the visualization is good or bad 
+
+- classify at function level
+- add confidence score
+- common structures among the same algorithm, how many for , if , minus, etc
+- remove semicolon and braces for the visualization
+- mutate the AST: maintain the semantic
+- compare with AST2PATH
+
+
+---------------
+
+- node type vs node id, differentiate between nodes, node id produces better visualization, layman argument
+- single tbcnn : node type vs node id 
+- bilateral tbcnn with attention: 
+- the difference between a pair of 2 different approaches
+- a pair of program
+
+- single tbcnn for node id at program level
+- single tbcnn for node id at function level
+
+- single tbccn for node type at program level
+- single tbccn for node type at function level
+
+- bilateral tbccn for node id at program level
+- bilateral tbccn for node id at function level
+
+- bilateral tbccn for node type at program level
+- bilateral tbccn for node type at function level
+
+
+Storyline:
+
+- try program at node type single tbcnn ==> not good ==> improve by using program level at node id ==> not good ==> improve at function level using node type (or node id) ==> function level at node id is the best one 
+--> need comparison metric; based on "dispersion" of the attention scores with respect node type/id, program/function, (optionally) def-use slices, (optional) edges in GGNN.
+ --> e.g., use std:
+   ---> for each node type, std of the attention scores for all nodes of the type using node-type learning = 0; std of node-id learning the larger the better
+   ---> average all the std. 
+ --> or, try using entropy.
+
+==> (extra storyline) token level embedding ==> build the bilateral tbcnn for function level at node id ==> (try Bi-GGNN) ==> try GGNN / dtbcnn at the function level with node id ==> (ignore for now) try path in the tree ==> try edge embedding
+
+---------------
+- Produce pairwise visualization for Bi-TBCNN
+- need comparison metrics;
+- Visualize DTBCNN : node id
+- Visualize Bi-DTBCNN: node id
+- GGNN (optional): use the modulo one
+- Need human investigation
+
+
+- Title: 
+
+
+
+
+
+
