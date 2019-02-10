@@ -15,7 +15,11 @@ import argparse
 from data_loader import CrossLanguageProgramDataForLiveTest
 import pandas as pd
 from utils import scale_attention_score_by_group
+from utils import scale_attention_score
+from data_loader import load_single_pair_for_live_test
 import operator
+from tqdm import trange
+from tqdm import *
 # np.set_printoptions(threshold=np.nan)
 
 parser = argparse.ArgumentParser()
@@ -116,10 +120,70 @@ def generate_attention_score(attention_score, attention_score_scaled, node_ids, 
             line = str(node_type) + "," + str(scaled_node_type_weights[i])
             f4.write("%s\n" % line)
 
-def predict(sess, test_dataloader, out_node, left_score_node, right_score_node, left_nodes_node, left_children_node, right_nodes_node, right_children_node, labels_node, embeddings, embedding_lookup, opt):
-    test_left_trees = test_dataloader.left_trees
-    test_right_trees = test_dataloader.right_trees
-    test_labels = test_dataloader.labels
+def scale_attention(attention_score, max_node, node_ids):
+    # max_node = len(nodes[0])
+    node_ids = node_ids[0]
+
+    attention_score = np.reshape(attention_score, (max_node))
+
+    attention_score_map = {}
+    for i, score in enumerate(attention_score):
+        key = str(node_ids[i])
+        attention_score_map[key] = float(score)
+
+    
+    attention_score_sorted = sorted(attention_score_map.items(), key=operator.itemgetter(1))
+    attention_score_sorted.reverse() 
+
+    node_ids = []
+    attention_score = []
+    for element in attention_score_sorted:
+        node_ids.append(element[0])
+        attention_score.append(element[1])
+
+    attention_score_scaled = scale_attention_score_by_group(attention_score)
+
+    attention_score_scaled_map = {}
+    for i, score in enumerate(attention_score_scaled):
+        key = str(node_ids[i])
+        attention_score_scaled_map[key] = float(score)
+
+    score_str = []
+    for node_id, score in attention_score_scaled_map.items():
+        line = str(node_id) + ":" + str(score)
+        score_str.append(line)
+
+    # score_str = []
+    # for i, score in enumerate(attention_score):
+    #     print("ASDSDOPIhSPDSPDOIPHDIOHIOSHIODHSDSd")
+    #     line = str(node_ids[i]) + ":" + str(score)
+    #     print(line)
+    #     score_str.append(line)
+
+    return ",".join(score_str)
+
+
+def generate_pb(src_path):
+    # path_splits = src_path.split("/")
+  
+  
+    pb_path = os.path.join(src_path.replace(".java",".java.pb"))
+    if not os.path.exists(pb_path):
+        cmd = "docker run --rm -v $(pwd):/e -it yijun/fast -p " + src_path + " " + pb_path
+        os.system(cmd)
+    return pb_path
+
+
+# def generate_diff_visualization()
+def predict(sess, index, left_path, right_path, pairs, left_node_ids_list, right_node_ids_list, out_node, left_score_node, right_score_node, left_nodes_node, left_children_node, right_nodes_node, right_children_node, labels_node, embeddings, embedding_lookup, opt):
+    
+    test_left_trees = []
+    test_right_trees = []
+    test_labels = []
+    test_left_trees.append(pairs[0][0])
+    test_right_trees.append(pairs[0][1])
+    test_labels.append(pairs[0][2])
+
 
     for batch_left_trees, batch_right_trees, batch_labels in sampling.batch_random_samples_2_sides(test_left_trees, test_right_trees, test_labels, embeddings, embedding_lookup, opt.train_batch_size, opt.batch_type):
 
@@ -131,8 +195,8 @@ def predict(sess, test_dataloader, out_node, left_score_node, right_score_node, 
             right_nodes, right_children, _ = batch_right_trees
         
         labels_one_hot = convert_labels_to_one_hot(batch_labels)
-            
-        output, left_score, right_score = sess.run(
+        
+        output, left_attention_score, right_attention_score = sess.run(
             [out_node, left_score_node, right_score_node],
             feed_dict={
                 left_nodes_node: left_nodes,
@@ -143,9 +207,49 @@ def predict(sess, test_dataloader, out_node, left_score_node, right_score_node, 
             }
         )
 
-        print(left_score)
-    
-        
+        left_scaled_attention_score = scale_attention(left_attention_score, len(left_nodes[0]), left_node_ids_list)
+
+        right_scaled_attention_score = scale_attention(right_attention_score, len(right_nodes[0]), right_node_ids_list)
+
+        left_pb_path = left_path.replace("github_java_sort_function_pkl_train_test_val","github_java_sort_function_pb").replace(".pkl","").replace("/val","")
+        right_pb_path = right_path.replace("github_java_sort_function_pkl_train_test_val","github_java_sort_function_pb").replace(".pkl","").replace("/val","")
+
+        left_java_path = left_path.replace("github_java_sort_function_pkl_train_test_val","github_java_sort_function").replace(".pb.pkl","").replace("/val","")
+        right_java_path = right_path.replace("github_java_sort_function_pkl_train_test_val","github_java_sort_function").replace(".pb.pkl","").replace("/val","")
+
+        # print(cmd)
+       
+        temp_left_java_path = left_java_path.split("/")[-1]
+        temp_right_java_path = right_java_path.split("/")[-1]
+
+        temp_left_pb_path = left_pb_path.split("/")[-1]
+        temp_right_pb_path = right_pb_path.split("/")[-1]
+
+        # print(left_pb_path)
+        # print(right_pb_path)
+        from shutil import copyfile
+
+        copyfile(left_java_path, temp_left_java_path)
+        copyfile(right_java_path, temp_right_java_path)
+
+        generate_pb(temp_left_java_path)
+        generate_pb(temp_right_java_path)
+
+        save_file = "github_java_pairwise_visualization/" + "pair_" + str(index) + ".html"
+        cmd = "docker run -v $(pwd):/e yijun/fast -H 0 -a 0 -D " + temp_left_pb_path + " " + temp_right_pb_path + " -x " + "'" + left_scaled_attention_score + "'" + " -y " + "'" + right_scaled_attention_score + "'" + " > " + save_file
+        # cmd = "docker run -v $(pwd):/e yijun/fast -D -H -x " + "'" + left_scaled_attention_score + "'" + " -y " + "'" + right_scaled_attention_score + "'" + " -p " + temp_left_path + " " + temp_right_path
+        print(cmd)
+        os.system(cmd)
+        # gumtree_cmd = "docker run -v $(pwd):/e --entrypoint gumtree -it yijun/fast diff " + temp_left_path + " " + temp_right_path
+        # print(gumtree_cmd)
+
+        # os.system(gumtree_cmd)
+
+        if os.path.exists(temp_left_java_path):
+            os.remove(temp_left_java_path)
+
+        if os.path.exists(temp_right_java_path):
+            os.remove(temp_right_java_path)
 
 def main():
 
@@ -223,12 +327,25 @@ def main():
     #         line = line.replace("\n","")
 
 
-    test_dataloader = CrossLanguageProgramDataForLiveTest(test_file, 1,opt.n_classes)
-    test_left_trees = test_dataloader.left_trees
-    test_right_trees = test_dataloader.right_trees
-    test_labels = test_dataloader.labels
+    # test_dataloader = CrossLanguageProgramDataForLiveTest(test_file, 1,opt.n_classes)
+    # test_left_trees = test_dataloader.left_trees
+    # test_right_trees = test_dataloader.right_trees
+    # test_labels = test_dataloader.labels
+    all_pairs_index = []
+    with open(opt.test_data,"r") as f:
+        data = f.readlines()
+        for line in data:
+            print(line)
+            all_pairs_index.append(line.replace("\n",""))
+  
+    for i, pair in tqdm(enumerate(all_pairs_index)):
+        splits = pair.split(",")
+        left_path = splits[0]
+        right_path = splits[1]
+        label = splits[2]
 
-    predict(sess, test_dataloader, out_node, left_score_node, right_score_node, left_nodes_node, left_children_node, right_nodes_node, right_children_node, labels_node, embeddings, embed_lookup, opt)
+        pairs, left_node_ids_list, right_node_ids_list = load_single_pair_for_live_test(left_path, right_path, label)
+        predict(sess, i, left_path, right_path, pairs, left_node_ids_list, right_node_ids_list, out_node, left_score_node, right_score_node, left_nodes_node, left_children_node, right_nodes_node, right_children_node, labels_node, embeddings, embed_lookup, opt)
 
 if __name__ == "__main__":
     main()
