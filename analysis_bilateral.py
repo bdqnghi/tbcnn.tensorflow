@@ -27,15 +27,17 @@ parser.add_argument('--lr', type=float, default=0.01, help='learning rate')
 parser.add_argument('--verbal', type=bool, default=True, help='print training info or not')
 parser.add_argument('--manualSeed', type=int, help='manual seed')
 parser.add_argument('--n_classes', type=int, default=10, help='number of classes')
-parser.add_argument('--test_data', default="pairwise/github_java_sort_function_pkl_train_test_val__test.txt", help='test program data')
-parser.add_argument('--model_path', default="model/pairwise_java_sort_function_decomposable", help='path to save the model')
+parser.add_argument('--test_data', default="pairwise/github_java_sort_function_pkl_train_test_val__val.txt", help='test program data')
+parser.add_argument('--model_path', default="model//pairwise_java_sort_function_attention_sum_softmax", help='path to save the model')
 parser.add_argument('--n_hidden', type=int, default=50, help='number of hidden layers')
 parser.add_argument('--training', action="store_true",help='is training')
 parser.add_argument('--testing', action="store_true",help='is testing')
 parser.add_argument('--training_percentage', type=float, default=1.0 ,help='percentage of data use for training')
 parser.add_argument('--log_path', default="" ,help='log path for tensorboard')
 parser.add_argument('--feature_size', type=int, default=100, help='size of convolutional features')
-parser.add_argument('--batch_type', type=str, default="padding", help='batching type')
+parser.add_argument('--aggregation', type=int, default=1, choices=range(0,4), help='0 for max pooling, 1 for attention with sum pooling, 2 for attention with max pooling, 3 for attention with average pooling')
+parser.add_argument('--distributed_function', type=int, default=0, choices=range(0,2), help='0 for softmax, 1 for sigmoid')
+parser.add_argument('--batch_type', type=str, default="original", help='batching type')
 parser.add_argument('--embeddings_directory', default="embedding/fast_pretrained_vectors.pkl", help='pretrained embeddings url, there are 2 objects in this file, the first object is the embedding matrix, the other is the lookup dictionary')
 parser.add_argument('--cuda', default="0",type=str, help='enables cuda')
 
@@ -114,7 +116,10 @@ def generate_attention_score(attention_score, attention_score_scaled, node_ids, 
             line = str(node_type) + "," + str(scaled_node_type_weights[i])
             f4.write("%s\n" % line)
 
-def predict(test_left_trees, test_right_trees, test_labels, left_nodes_node, left_children_node, embeddings, right_nodes_node, right_children_node, labels_node, embedding_lookup, opt):
+def predict(sess, test_dataloader, out_node, left_score_node, right_score_node, left_nodes_node, left_children_node, right_nodes_node, right_children_node, labels_node, embeddings, embedding_lookup, opt):
+    test_left_trees = test_dataloader.left_trees
+    test_right_trees = test_dataloader.right_trees
+    test_labels = test_dataloader.labels
 
     for batch_left_trees, batch_right_trees, batch_labels in sampling.batch_random_samples_2_sides(test_left_trees, test_right_trees, test_labels, embeddings, embedding_lookup, opt.train_batch_size, opt.batch_type):
 
@@ -128,7 +133,7 @@ def predict(test_left_trees, test_right_trees, test_labels, left_nodes_node, lef
         labels_one_hot = convert_labels_to_one_hot(batch_labels)
             
         output, left_score, right_score = sess.run(
-            [out_node],
+            [out_node, left_score_node, right_score_node],
             feed_dict={
                 left_nodes_node: left_nodes,
                 left_children_node: left_children,
@@ -137,6 +142,8 @@ def predict(test_left_trees, test_right_trees, test_labels, left_nodes_node, lef
                 labels_node: labels_one_hot
             }
         )
+
+        print(left_score)
     
         
 
@@ -208,20 +215,20 @@ def main():
 
     print("Begin computing accuracy....")
 
-    test_files = "pairwise/github_java_sort_function_pkl_train_test_val__test.txt"
+    test_file = opt.test_data
 
-    with open(test_file, "r") as f:
-        data = f.readlines()
-        for line in data:
-            line = line.replace("\n","")
+    # with open(test_file, "r") as f:
+    #     data = f.readlines()
+    #     for line in data:
+    #         line = line.replace("\n","")
 
 
-    test_dataloader = CrossLanguageProgramDataForLiveTest(file, 1,opt.n_classes)
+    test_dataloader = CrossLanguageProgramDataForLiveTest(test_file, 1,opt.n_classes)
     test_left_trees = test_dataloader.left_trees
     test_right_trees = test_dataloader.right_trees
     test_labels = test_dataloader.labels
 
-
+    predict(sess, test_dataloader, out_node, left_score_node, right_score_node, left_nodes_node, left_children_node, right_nodes_node, right_children_node, labels_node, embeddings, embed_lookup, opt)
 
 if __name__ == "__main__":
     main()
