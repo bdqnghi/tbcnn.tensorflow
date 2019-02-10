@@ -1,0 +1,80 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+package linear;
+
+import java.util.Random;
+
+
+public class RadixSort {
+    
+    public static int[] sort(int[] input){
+        
+        for(int place=1; place &lt;= 1000000000; place *= 10){
+            
+            input = countingSort(input, place);
+        }
+
+        return input;
+    }
+
+    private static int[] countingSort(int[] input, int place)<font color='#ff0000' weight='1' id='453'>{
+        <font color='#ff0000' weight='1' id='166'><font color='#ff0000' weight='1' id='164'><font color='#ff0000' weight='1' id='144'><font color='#ff0000' weight='1' id='143'><font color='#ff0000' weight='1' id='140'>int</font><font color='#ff0000' weight='1' id='142'>[]</font></font> </font><font color='#ff0000' weight='1' id='146'>out<font color='#ff0000' weight='1' id='145'></font> </font><font color='#ff0000' weight='1' id='163'>= <font color='#ff0000' weight='1' id='162'><font color='#ff0000' weight='1' id='148'>new<font color='#ff0000' weight='1' id='147'></font> </font><font color='#ff0000' weight='1' id='161'><font color='#ff0000' weight='1' id='150'>int<font color='#ff0000' weight='1' id='149'></font></font><font color='#ff0000' weight='1' id='160'>[<font color='#ff0000' weight='1' id='158'><font color='#ff0000' weight='1' id='157'><font color='#ff0000' weight='1' id='152'>input<font color='#ff0000' weight='1' id='151'></font></font><font color='#ff0000' weight='1' id='154'>.<font color='#ff0000' weight='1' id='153'></font></font><font color='#ff0000' weight='1' id='156'>length<font color='#ff0000' weight='1' id='155'></font></font></font>]</font><font color='#ff0000' weight='1' id='159'></font></font></font></font></font>;</font><font color='#ff0000' weight='1' id='165'></font>
+
+        </font><font color='#ff0000' weight='1' id='189'><font color='#ff0000' weight='1' id='187'><font color='#ff0000' weight='1' id='172'><font color='#ff0000' weight='1' id='171'><font color='#ff0000' weight='1' id='168'>int<font color='#ff0000' weight='1' id='167'></font></font><font color='#ff0000' weight='1' id='170'>[]<font color='#ff0000' weight='1' id='169'></font></font></font> </font><font color='#ff0000' weight='1' id='174'>count<font color='#ff0000' weight='1' id='173'></font> </font><font color='#ff0000' weight='1' id='186'>= <font color='#ff0000' weight='1' id='185'><font color='#ff0000' weight='1' id='176'>new<font color='#ff0000' weight='1' id='175'></font> </font><font color='#ff0000' weight='1' id='184'><font color='#ff0000' weight='1' id='178'>int<font color='#ff0000' weight='1' id='177'></font></font><font color='#ff0000' weight='1' id='183'>[<font color='#ff0000' weight='1' id='181'><font color='#ff0000' weight='1' id='180'>10</font>]</font><font color='#ff0000' weight='1' id='182'></font></font></font></font></font>;</font><font color='#ff0000' weight='1' id='188'></font>
+
+        </font><font color='#ff0000' weight='1' id='270'>for<font color='#ff0000' weight='1' id='223'>(<font color='#ff0000' weight='1' id='192'><font color='#ff0000' weight='1' id='191'>int</font> </font><font color='#ff0000' weight='1' id='194'>i<font color='#ff0000' weight='1' id='193'></font></font><font color='#ff0000' weight='1' id='198'>=0</font>; i &lt; <font color='#ff0000' weight='1' id='212'><font color='#ff0000' weight='1' id='207'>input</font>.length</font>; i<font color='#ff0000' weight='1' id='219'>++<font color='#ff0000' weight='1' id='218'></font></font>)</font><font color='#ff0000' weight='1' id='269'>{
+            <font color='#ff0000' weight='1' id='252'>int <font color='#ff0000' weight='1' id='228'>digit </font>= <font color='#ff0000' weight='1' id='248'><font color='#ff0000' weight='1' id='247'><font color='#ff0000' weight='1' id='230'>getDigit<font color='#ff0000' weight='1' id='229'></font></font><font color='#ff0000' weight='1' id='246'>(<font color='#ff0000' weight='1' id='240'><font color='#ff0000' weight='1' id='239'><font color='#ff0000' weight='1' id='238'><font color='#ff0000' weight='1' id='232'>input<font color='#ff0000' weight='1' id='231'></font></font><font color='#ff0000' weight='1' id='237'>[<font color='#ff0000' weight='1' id='235'><font color='#ff0000' weight='1' id='234'>i</font>]</font><font color='#ff0000' weight='1' id='236'></font></font></font></font>, </font><font color='#ff0000' weight='1' id='244'><font color='#ff0000' weight='1' id='243'><font color='#ff0000' weight='1' id='242'>place<font color='#ff0000' weight='1' id='241'></font></font></font>)</font><font color='#ff0000' weight='1' id='245'></font></font></font></font>;
+            </font><font color='#ff0000' weight='1' id='267'><font color='#ff0000' weight='1' id='265'><font color='#ff0000' weight='1' id='260'><font color='#ff0000' weight='1' id='254'>count<font color='#ff0000' weight='1' id='253'></font></font><font color='#ff0000' weight='1' id='259'>[<font color='#ff0000' weight='1' id='257'><font color='#ff0000' weight='1' id='256'>digit<font color='#ff0000' weight='1' id='255'></font></font>]</font><font color='#ff0000' weight='1' id='258'></font></font> </font><font color='#ff0000' weight='1' id='262'>+=<font color='#ff0000' weight='1' id='261'></font> </font><font color='#ff0000' weight='1' id='264'>1<font color='#ff0000' weight='1' id='263'></font></font>;</font><font color='#ff0000' weight='1' id='266'></font>
+        }</font><font color='#ff0000' weight='1' id='268'></font></font>
+
+        </font><font color='#ff0000' weight='1' id='332'>for<font color='#ff0000' weight='1' id='304'>(<font color='#ff0000' weight='1' id='282'><font color='#ff0000' weight='1' id='273'>int </font><font color='#ff0000' weight='1' id='275'>i<font color='#ff0000' weight='1' id='274'></font></font><font color='#ff0000' weight='1' id='279'>=<font color='#ff0000' weight='1' id='277'>1</font></font>;<font color='#ff0000' weight='1' id='281'></font> </font><font color='#ff0000' weight='1' id='284'>i </font><font color='#ff0000' weight='1' id='286'>&lt; </font><font color='#ff0000' weight='1' id='293'><font color='#ff0000' weight='1' id='288'>count</font><font color='#ff0000' weight='1' id='290'>.<font color='#ff0000' weight='1' id='289'></font></font>length<font color='#ff0000' weight='1' id='291'></font></font>;<font color='#ff0000' weight='1' id='295'></font> <font color='#ff0000' weight='1' id='302'><font color='#ff0000' weight='1' id='301'><font color='#ff0000' weight='1' id='298'>i<font color='#ff0000' weight='1' id='297'></font></font><font color='#ff0000' weight='1' id='300'>++<font color='#ff0000' weight='1' id='299'></font></font></font>)</font><font color='#ff0000' weight='1' id='303'></font></font><font color='#ff0000' weight='1' id='331'>{
+            <font color='#ff0000' weight='1' id='329'><font color='#ff0000' weight='1' id='327'><font color='#ff0000' weight='1' id='312'><font color='#ff0000' weight='1' id='306'>count<font color='#ff0000' weight='1' id='305'></font></font><font color='#ff0000' weight='1' id='311'>[<font color='#ff0000' weight='1' id='309'><font color='#ff0000' weight='1' id='308'>i<font color='#ff0000' weight='1' id='307'></font></font>]</font><font color='#ff0000' weight='1' id='310'></font></font> </font><font color='#ff0000' weight='1' id='314'>+= </font><font color='#ff0000' weight='1' id='326'><font color='#ff0000' weight='1' id='316'>count<font color='#ff0000' weight='1' id='315'></font></font>[<font color='#ff0000' weight='1' id='318'>i<font color='#ff0000' weight='1' id='317'></font></font><font color='#ff0000' weight='1' id='320'>-<font color='#ff0000' weight='1' id='319'></font></font><font color='#ff0000' weight='1' id='322'>1<font color='#ff0000' weight='1' id='321'></font></font>]</font>;</font><font color='#ff0000' weight='1' id='328'></font>
+        }</font><font color='#ff0000' weight='1' id='330'></font></font>
+
+        </font><font color='#ff0000' weight='1' id='446'>for<font color='#ff0000' weight='1' id='370'>(<font color='#ff0000' weight='1' id='353'><font color='#ff0000' weight='1' id='351'><font color='#ff0000' weight='1' id='335'><font color='#ff0000' weight='1' id='334'>int<font color='#ff0000' weight='1' id='333'></font></font> </font><font color='#ff0000' weight='1' id='337'>i<font color='#ff0000' weight='1' id='336'></font> </font><font color='#ff0000' weight='1' id='350'>= <font color='#ff0000' weight='1' id='349'><font color='#ff0000' weight='1' id='344'><font color='#ff0000' weight='1' id='339'>input<font color='#ff0000' weight='1' id='338'></font></font><font color='#ff0000' weight='1' id='341'>.<font color='#ff0000' weight='1' id='340'></font></font><font color='#ff0000' weight='1' id='343'>length<font color='#ff0000' weight='1' id='342'></font></font></font><font color='#ff0000' weight='1' id='346'>-<font color='#ff0000' weight='1' id='345'></font></font><font color='#ff0000' weight='1' id='348'>1<font color='#ff0000' weight='1' id='347'></font></font></font></font>;</font><font color='#ff0000' weight='1' id='352'></font> </font><font color='#ff0000' weight='1' id='362'><font color='#ff0000' weight='1' id='360'><font color='#ff0000' weight='1' id='355'>i<font color='#ff0000' weight='1' id='354'></font> </font><font color='#ff0000' weight='1' id='357'>&gt;=<font color='#ff0000' weight='1' id='356'></font> </font><font color='#ff0000' weight='1' id='359'>0<font color='#ff0000' weight='1' id='358'></font></font>;</font><font color='#ff0000' weight='1' id='361'></font> </font><font color='#ff0000' weight='1' id='368'><font color='#ff0000' weight='1' id='367'><font color='#ff0000' weight='1' id='364'>i<font color='#ff0000' weight='1' id='363'></font></font><font color='#ff0000' weight='1' id='366'>--<font color='#ff0000' weight='1' id='365'></font></font></font>)</font><font color='#ff0000' weight='1' id='369'></font></font><font color='#ff0000' weight='1' id='445'>{
+            <font color='#ff0000' weight='1' id='399'>int <font color='#ff0000' weight='1' id='375'>digit </font>= <font color='#ff0000' weight='1' id='395'><font color='#ff0000' weight='1' id='394'><font color='#ff0000' weight='1' id='377'>getDigit<font color='#ff0000' weight='1' id='376'></font></font><font color='#ff0000' weight='1' id='393'>(<font color='#ff0000' weight='1' id='387'><font color='#ff0000' weight='1' id='386'><font color='#ff0000' weight='1' id='385'><font color='#ff0000' weight='1' id='379'>input</font>[i]</font></font>, </font><font color='#ff0000' weight='1' id='391'><font color='#ff0000' weight='1' id='390'><font color='#ff0000' weight='1' id='389'>place<font color='#ff0000' weight='1' id='388'></font></font></font>)</font><font color='#ff0000' weight='1' id='392'></font></font></font></font>;
+
+            </font><font color='#ff0000' weight='1' id='430'><font color='#ff0000' weight='1' id='417'><font color='#ff0000' weight='1' id='401'>out<font color='#ff0000' weight='1' id='400'></font></font><font color='#ff0000' weight='1' id='416'>[<font color='#ff0000' weight='1' id='414'><font color='#ff0000' weight='1' id='409'><font color='#ff0000' weight='1' id='403'>count</font>[<font color='#ff0000' weight='1' id='405'>digit</font>]</font><font color='#ff0000' weight='1' id='411'>-<font color='#ff0000' weight='1' id='410'></font></font><font color='#ff0000' weight='1' id='413'>1<font color='#ff0000' weight='1' id='412'></font></font>]</font><font color='#ff0000' weight='1' id='415'></font></font> </font>= <font color='#ff0000' weight='1' id='421'>input</font>[<font color='#ff0000' weight='1' id='423'>i</font>];
+            </font><font color='#ff0000' weight='1' id='443'><font color='#ff0000' weight='1' id='432'>count</font>[<font color='#ff0000' weight='1' id='434'>digit</font>]<font color='#ff0000' weight='1' id='440'>--</font>;
+        }</font><font color='#ff0000' weight='1' id='444'></font></font>
+
+        </font><font color='#ff0000' weight='1' id='451'>return <font color='#ff0000' weight='1' id='449'><font color='#ff0000' weight='1' id='448'>out<font color='#ff0000' weight='1' id='447'></font></font>;</font><font color='#ff0000' weight='1' id='450'></font>
+
+    }</font><font color='#ff0000' weight='1' id='452'></font></font>
+
+    private static int getDigit(int value, int digitPlace){
+        return ((value/digitPlace ) % 10);
+    }
+
+   
+}
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public class Selectionsort {
+    public static void main(String []args){
+        
+        int []numbers = new int[]{32,43,53,54,32,65,63,98,43,23};
+
+        
+        for(int i = 0; i &lt; numbers.length; ++i){
+            int min = i;
+            for(int j = i + 1; j &lt; numbers.length; ++j) {
+                if (numbers[min] &gt; numbers[j]) {
+                    min = j;
+                }
+            }
+            int temp = numbers[i];
+            numbers[i] = numbers[min];
+            numbers[min] = temp;
+        }
+
+        
+        for(int i = 1; <font color='#ff0000' weight='1' id='281'><font color='#ff0000' weight='1' id='279'><font color='#ff0000' weight='1' id='269'>i </font><font color='#ff0000' weight='1' id='271'>&lt;<font color='#ff0000' weight='1' id='270'></font> </font><font color='#ff0000' weight='1' id='278'><font color='#ff0000' weight='1' id='273'>numbers</font><font color='#ff0000' weight='1' id='275'>.<font color='#ff0000' weight='1' id='274'></font></font><font color='#ff0000' weight='1' id='277'>length</font></font>;</font><font color='#ff0000' weight='1' id='280'></font> </font>++i)
+            System.out.println(numbers[i]);
+
+    }
+}
+</font>
+</pre>

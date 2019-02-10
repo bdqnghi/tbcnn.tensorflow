@@ -1,0 +1,92 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+  private static int[] sort(char[] a) <font color='#ff0000' weight='1' id='402'>{
+        <font color='#ff0000' weight='1' id='27'><font color='#ff0000' weight='1' id='26'>int</font> </font>n = a.<font color='#ff0000' weight='1' id='32'></font>length;
+        <font color='#ff0000' weight='1' id='64'>int[] order <font color='#ff0000' weight='1' id='61'>= new int<font color='#ff0000' weight='1' id='58'>[n]</font></font>;<font color='#ff0000' weight='1' id='63'></font>
+        </font><font color='#ff0000' weight='1' id='91'>int[]<font color='#ff0000' weight='1' id='67'></font> count = new int[R + 1]; 
+        </font><font color='#ff0000' weight='1' id='114'>char[] <font color='#ff0000' weight='1' id='99'>sorted </font>= new char[n];<font color='#ff0000' weight='1' id='113'></font>
+        
+        </font><font color='#ff0000' weight='1' id='179'>for (int<font color='#ff0000' weight='1' id='115'></font> <font color='#ff0000' weight='1' id='119'>i<font color='#ff0000' weight='1' id='118'></font> </font><font color='#ff0000' weight='1' id='123'>= <font color='#ff0000' weight='1' id='121'>0</font></font>;<font color='#ff0000' weight='1' id='125'></font> i<font color='#ff0000' weight='1' id='127'></font> &lt; <font color='#ff0000' weight='1' id='132'>n</font>; i++) <font color='#ff0000' weight='1' id='178'>{
+            count[(<font color='#ff0000' weight='1' id='146'></font>(<font color='#ff0000' weight='1' id='151'>int<font color='#ff0000' weight='1' id='150'></font></font>)<font color='#ff0000' weight='1' id='152'></font> <font color='#ff0000' weight='1' id='161'><font color='#ff0000' weight='1' id='155'>a</font><font color='#ff0000' weight='1' id='160'>[i<font color='#ff0000' weight='1' id='156'></font>]<font color='#ff0000' weight='1' id='159'></font></font></font><font color='#ff0000' weight='1' id='163'>) </font><font color='#ff0000' weight='1' id='165'>+<font color='#ff0000' weight='1' id='164'></font> </font>1]++;<font color='#ff0000' weight='1' id='175'></font>
+        }</font>
+        
+        </font><font color='#ff0000' weight='1' id='236'>for (<font color='#ff0000' weight='1' id='182'>int<font color='#ff0000' weight='1' id='180'></font> </font><font color='#ff0000' weight='1' id='184'>i </font>= <font color='#ff0000' weight='1' id='187'>1</font>; i <font color='#ff0000' weight='1' id='195'>&lt;= </font>R; i<font color='#ff0000' weight='1' id='201'></font>++) {
+            count[i] += count[i - 1];
+        }
+        
+        
+        </font><font color='#ff0000' weight='1' id='342'>for (int i = <font color='#ff0000' weight='1' id='243'>0</font>; i <font color='#ff0000' weight='1' id='252'>&lt; </font><font color='#ff0000' weight='1' id='254'>n<font color='#ff0000' weight='1' id='253'></font></font>; i<font color='#ff0000' weight='1' id='261'>++</font>) {
+            <font color='#ff0000' weight='1' id='267'>order</font>[count[(<font color='#ff0000' weight='1' id='273'>int<font color='#ff0000' weight='1' id='272'></font></font><font color='#ff0000' weight='1' id='275'>)<font color='#ff0000' weight='1' id='274'></font> </font><font color='#ff0000' weight='1' id='277'>a</font>[i]]] = <font color='#ff0000' weight='1' id='295'>i</font>;
+            <font color='#ff0000' weight='1' id='300'>sorted</font>[<font color='#ff0000' weight='1' id='320'><font color='#ff0000' weight='1' id='302'>count<font color='#ff0000' weight='1' id='301'></font></font><font color='#ff0000' weight='1' id='319'>[<font color='#ff0000' weight='1' id='317'><font color='#ff0000' weight='1' id='304'>(</font><font color='#ff0000' weight='1' id='306'>int<font color='#ff0000' weight='1' id='305'></font></font><font color='#ff0000' weight='1' id='308'>)<font color='#ff0000' weight='1' id='307'></font> </font><font color='#ff0000' weight='1' id='316'><font color='#ff0000' weight='1' id='310'>a</font>[i]</font>]</font><font color='#ff0000' weight='1' id='318'></font></font></font><font color='#ff0000' weight='1' id='322'>++</font>] <font color='#ff0000' weight='1' id='328'>= </font><font color='#ff0000' weight='1' id='336'><font color='#ff0000' weight='1' id='330'>a<font color='#ff0000' weight='1' id='329'></font></font><font color='#ff0000' weight='1' id='335'>[<font color='#ff0000' weight='1' id='333'><font color='#ff0000' weight='1' id='332'>i<font color='#ff0000' weight='1' id='331'></font></font>]</font><font color='#ff0000' weight='1' id='334'></font></font></font>;            
+        }
+        
+        </font><font color='#ff0000' weight='1' id='395'>for (int i = 0; i &lt; <font color='#ff0000' weight='1' id='360'>n</font>; i++) {
+            <font color='#ff0000' weight='1' id='373'>a</font>[i] = <font color='#ff0000' weight='1' id='383'>sorted</font>[i];
+        }        
+        </font><font color='#ff0000' weight='1' id='400'>return <font color='#ff0000' weight='1' id='398'><font color='#ff0000' weight='1' id='397'>order<font color='#ff0000' weight='1' id='396'></font></font>;</font><font color='#ff0000' weight='1' id='399'></font>
+    }</font><font color='#ff0000' weight='1' id='401'></font></font>
+    
+    private static void sort(char[] a, int[] b) {
+        assert(a.length == b.length);
+        int n = a.length;
+        int[] order = sort(a);
+        int[] tmp = new int[n];
+        for (int i = 0; i &lt; n; i++) {
+            tmp[i] = b[order[i]];
+        }
+        for (int i = 0; i &lt; n; i++) {
+            b[i] = tmp[i];
+        }        
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+package array._20170807;
+
+import java.util.Arrays;
+
+
+public class RadixSort {
+
+    
+    public static void sort(int[] arr) {
+        int m = getMax(arr);
+        for (int exp = 1; m / exp &gt; 0; exp *= 10) {
+            countSort(arr, exp);
+        }
+        System.out.println(Arrays.toString(arr));
+    }
+
+    private static void countSort(int[] arr, int exp) <font color='#ff0000' weight='1' id='538'>{
+        <font color='#ff0000' weight='1' id='201'><font color='#ff0000' weight='1' id='199'><font color='#ff0000' weight='1' id='187'><font color='#ff0000' weight='1' id='186'>int<font color='#ff0000' weight='1' id='185'></font></font> </font><font color='#ff0000' weight='1' id='189'>length<font color='#ff0000' weight='1' id='188'></font> </font>= arr<font color='#ff0000' weight='1' id='193'>.<font color='#ff0000' weight='1' id='192'></font></font><font color='#ff0000' weight='1' id='195'>length</font>;</font>
+        </font>int[] output = new int[length];
+        int[] <font color='#ff0000' weight='1' id='232'>count </font>= new int[<font color='#ff0000' weight='1' id='238'>10<font color='#ff0000' weight='1' id='237'></font></font>];
+        for (int i = 0; i &lt; <font color='#ff0000' weight='1' id='265'>length</font>; i++) {
+            count[(arr[i] <font color='#ff0000' weight='1' id='290'>/<font color='#ff0000' weight='1' id='289'></font> </font><font color='#ff0000' weight='1' id='292'>exp<font color='#ff0000' weight='1' id='291'></font></font>) % 10]++;
+        }
+        for (int i = 1; i <font color='#ff0000' weight='1' id='326'>&lt; </font><font color='#ff0000' weight='1' id='328'>10<font color='#ff0000' weight='1' id='327'></font></font>; i++) {
+            count[i] += count[i - 1];
+        }
+        for (int i = <font color='#ff0000' weight='1' id='374'>length<font color='#ff0000' weight='1' id='373'></font> </font><font color='#ff0000' weight='1' id='376'>-<font color='#ff0000' weight='1' id='375'></font> </font><font color='#ff0000' weight='1' id='378'>1</font>; i <font color='#ff0000' weight='1' id='387'>&gt;= </font><font color='#ff0000' weight='1' id='389'>0<font color='#ff0000' weight='1' id='388'></font></font>; i<font color='#ff0000' weight='1' id='396'>--</font>) {
+            <font color='#ff0000' weight='1' id='402'>output</font>[count[(<font color='#ff0000' weight='1' id='408'>arr</font>[i] <font color='#ff0000' weight='1' id='416'>/<font color='#ff0000' weight='1' id='415'></font> </font><font color='#ff0000' weight='1' id='418'>exp<font color='#ff0000' weight='1' id='417'></font></font><font color='#ff0000' weight='1' id='420'>)<font color='#ff0000' weight='1' id='419'></font> </font><font color='#ff0000' weight='1' id='422'>%<font color='#ff0000' weight='1' id='421'></font> </font><font color='#ff0000' weight='1' id='424'>10<font color='#ff0000' weight='1' id='423'></font></font>] <font color='#ff0000' weight='1' id='430'>-<font color='#ff0000' weight='1' id='429'></font> </font><font color='#ff0000' weight='1' id='432'>1<font color='#ff0000' weight='1' id='431'></font></font>] = <font color='#ff0000' weight='1' id='446'><font color='#ff0000' weight='1' id='440'>arr<font color='#ff0000' weight='1' id='439'></font></font><font color='#ff0000' weight='1' id='445'>[<font color='#ff0000' weight='1' id='443'>i]</font><font color='#ff0000' weight='1' id='444'></font></font></font>;
+            <font color='#ff0000' weight='1' id='451'>count</font>[<font color='#ff0000' weight='1' id='472'>(<font color='#ff0000' weight='1' id='455'>arr</font>[i] <font color='#ff0000' weight='1' id='463'>/<font color='#ff0000' weight='1' id='462'></font> </font><font color='#ff0000' weight='1' id='465'>exp<font color='#ff0000' weight='1' id='464'></font></font><font color='#ff0000' weight='1' id='467'>) </font><font color='#ff0000' weight='1' id='469'>%<font color='#ff0000' weight='1' id='468'></font> </font><font color='#ff0000' weight='1' id='471'>10<font color='#ff0000' weight='1' id='470'></font></font>]</font><font color='#ff0000' weight='1' id='477'>--</font>;
+        }
+        for (int i = 0; i &lt; <font color='#ff0000' weight='1' id='501'>length</font>; i++) {
+            <font color='#ff0000' weight='1' id='514'>arr</font>[i] = <font color='#ff0000' weight='1' id='524'>output</font>[i];
+        }
+    }<font color='#ff0000' weight='1' id='537'></font></font>
+
+    private static int getMax(int[] arr) {
+        int max = arr[0];
+        for (int i = 1; i &lt; arr.length; i++) {
+            if (arr[i] &gt; max) {
+                max = arr[i];
+            }
+        }
+        return max;
+    }
+
+
+}
+</font>
+</pre>

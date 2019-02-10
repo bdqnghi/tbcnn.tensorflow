@@ -1,0 +1,129 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+   public void sort(Object[] arr, Comparator comparator)
+    {
+        int low = 0;
+        int high = arr.length - 1;
+
+        Object[] aux = new Object[arr.length];
+
+        sort(comparator, arr, aux, low, high);
+    }
+
+    private void sort(Comparator c, Object[] arr, Object[] aux, int low, int high)
+    {
+        if (high &lt;= low)
+        {
+            return;
+        }
+
+        int mid = low + (high - low) / 2;
+        sort(c, arr, aux, low, mid);
+        sort(<font color='#ff0000' weight='1' id='245'>c<font color='#ff0000' weight='1' id='242'></font>, </font>arr, aux, mid + 1, high);
+
+        if (!less(c, arr[mid + 1], arr[mid]))
+        {
+            return;
+        }
+
+        merge(c, arr, aux, low, mid, high);
+    }
+
+    private void merge(Comparator c, Object[] arr, Object[] aux, int low, int mid, int high)
+    {
+        assert isSorted(c, arr, low, mid);
+        assert isSorted(c, arr, mid + 1, high);
+
+        for (int k = low; k &lt;= high; k++)
+        {
+            aux[k] = arr[k];
+        }
+
+        int i = low;
+        int j = mid + 1;
+
+        for (int k = low; k &lt;= high; k++)
+        {
+            if (i &gt; mid)
+            {
+                arr[k] = aux[j++];
+            }
+            else if (j &gt; high)
+            {
+                arr[k] = aux[i++];
+            }
+            else if (less(c, aux[j], aux[i]))
+            {
+                arr[k] = aux[j++];
+            }
+            else
+            {
+                arr[k] = aux[i++];
+            }
+        }
+
+        assert isSorted(c, arr, low, high);
+    }
+
+    private Boolean isSorted(Comparator c, Object[] arr, int low, int high)
+    {
+        for (int i = low + 1; i &lt;= high; i++)
+        {
+            if (less(c, arr[i], arr[i - 1]))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.Stack;
+class HSort
+{
+	int a[];
+
+	
+	void heapify(int a[], int p, int n)
+	{
+		int t = a[p],i;
+		for(i=2*p+1; i&lt;n; i=2*i+1)
+		{
+			if(<font color='#ff0000' weight='1' id='188'><font color='#ff0000' weight='1' id='151'>(</font><font color='#ff0000' weight='1' id='153'>i</font><font color='#ff0000' weight='1' id='155'>+<font color='#ff0000' weight='1' id='154'></font></font><font color='#ff0000' weight='1' id='157'>1<font color='#ff0000' weight='1' id='156'></font></font><font color='#ff0000' weight='1' id='159'>)<font color='#ff0000' weight='1' id='158'></font></font><font color='#ff0000' weight='1' id='161'>&lt;<font color='#ff0000' weight='1' id='160'></font></font><font color='#ff0000' weight='1' id='163'>n </font><font color='#ff0000' weight='1' id='165'>&amp;&amp;<font color='#ff0000' weight='1' id='164'></font> </font><font color='#ff0000' weight='1' id='167'>a</font>[<font color='#ff0000' weight='1' id='169'>i</font>]<font color='#ff0000' weight='1' id='175'>&lt;<font color='#ff0000' weight='1' id='174'></font></font><font color='#ff0000' weight='1' id='177'>a</font>[<font color='#ff0000' weight='1' id='179'>i</font><font color='#ff0000' weight='1' id='181'>+<font color='#ff0000' weight='1' id='180'></font></font><font color='#ff0000' weight='1' id='183'>1<font color='#ff0000' weight='1' id='182'></font></font>])</font>
+				i++;
+
+			if(a[i]&gt;t)
+				a[(i-1)/2]=a[i];
+			else
+				break;
+		}
+
+		a[(i-1)/2]=t;
+	}
+
+	void heapSort(int a[])
+	{
+		for(int i=a.length/2-1; i&gt;=0; i--)
+		{
+			heapify(a,i,a.length);
+			System.out.println(Arrays.toString(a));
+		}
+
+		for(int i=a.length-1; i&gt;0; i--)
+		{
+			int t=a[0];
+			a[0]=a[i];
+			a[i]=t;
+			heapify(a,0,i);
+			System.out.println(Arrays.toString(a));
+		}
+	}
+
+}
+
+</font>
+</pre>

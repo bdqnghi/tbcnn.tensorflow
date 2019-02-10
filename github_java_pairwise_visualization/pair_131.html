@@ -1,0 +1,62 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static ArrayList&lt;Integer&gt; bucketsort(ArrayList&lt;Integer&gt; arr, int k) {
+        <font color='#ff0000' weight='1' id='86'><font color='#ff0000' weight='1' id='46'><font color='#ff0000' weight='1' id='39'>ArrayList</font><font color='#ff0000' weight='1' id='44'>&lt;<font color='#ff0000' weight='1' id='42'>Integer&gt;</font></font> </font><font color='#ff0000' weight='1' id='48'>counts </font>= new<font color='#ff0000' weight='1' id='49'></font> <font color='#ff0000' weight='1' id='52'>ArrayList<font color='#ff0000' weight='1' id='51'></font></font><font color='#ff0000' weight='1' id='57'>&lt;<font color='#ff0000' weight='1' id='55'><font color='#ff0000' weight='1' id='54'>Integer<font color='#ff0000' weight='1' id='53'></font></font>&gt;</font></font>(<font color='#ff0000' weight='1' id='65'><font color='#ff0000' weight='1' id='60'>Collections</font><font color='#ff0000' weight='1' id='62'>.<font color='#ff0000' weight='1' id='61'></font></font>nCopies</font>(k,0));
+        </font><font color='#ff0000' weight='1' id='139'>for (<font color='#ff0000' weight='1' id='88'>Integer<font color='#ff0000' weight='1' id='87'></font></font> <font color='#ff0000' weight='1' id='91'>x<font color='#ff0000' weight='1' id='90'></font> </font>: arr<font color='#ff0000' weight='1' id='92'></font>) {
+            <font color='#ff0000' weight='1' id='106'>counts.<font color='#ff0000' weight='1' id='102'></font>set<font color='#ff0000' weight='1' id='104'></font></font><font color='#ff0000' weight='1' id='132'>(<font color='#ff0000' weight='1' id='110'><font color='#ff0000' weight='1' id='109'>x</font>,</font><font color='#ff0000' weight='1' id='130'><font color='#ff0000' weight='1' id='124'><font color='#ff0000' weight='1' id='112'>counts<font color='#ff0000' weight='1' id='111'></font></font><font color='#ff0000' weight='1' id='114'>.</font><font color='#ff0000' weight='1' id='116'>get<font color='#ff0000' weight='1' id='115'></font></font>(<font color='#ff0000' weight='1' id='120'>x<font color='#ff0000' weight='1' id='118'></font></font>)<font color='#ff0000' weight='1' id='122'></font></font>+<font color='#ff0000' weight='1' id='125'></font>1<font color='#ff0000' weight='1' id='127'></font>)</font><font color='#ff0000' weight='1' id='131'></font></font>;
+        }
+
+        </font><font color='#ff0000' weight='1' id='172'><font color='#ff0000' weight='1' id='170'><font color='#ff0000' weight='1' id='148'><font color='#ff0000' weight='1' id='141'>ArrayList</font>&lt;Integer&gt; </font><font color='#ff0000' weight='1' id='150'>sorted_arr </font><font color='#ff0000' weight='1' id='169'>= <font color='#ff0000' weight='1' id='152'>new </font>ArrayList&lt;<font color='#ff0000' weight='1' id='157'><font color='#ff0000' weight='1' id='156'>Integer</font>&gt;</font>(<font color='#ff0000' weight='1' id='162'>100</font>)</font>;</font><font color='#ff0000' weight='1' id='171'></font>
+    </font><font color='#ff0000' weight='1' id='184'><font color='#ff0000' weight='1' id='175'><font color='#ff0000' weight='1' id='174'>int<font color='#ff0000' weight='1' id='173'></font></font> </font><font color='#ff0000' weight='1' id='177'>i<font color='#ff0000' weight='1' id='176'></font> </font><font color='#ff0000' weight='1' id='181'>= <font color='#ff0000' weight='1' id='179'>0</font></font>;
+        </font>for <font color='#ff0000' weight='1' id='197'>(<font color='#ff0000' weight='1' id='194'><font color='#ff0000' weight='1' id='187'><font color='#ff0000' weight='1' id='186'>Integer</font> </font><font color='#ff0000' weight='1' id='189'>count </font><font color='#ff0000' weight='1' id='193'>: <font color='#ff0000' weight='1' id='192'><font color='#ff0000' weight='1' id='191'>arr<font color='#ff0000' weight='1' id='190'></font></font></font></font></font>)<font color='#ff0000' weight='1' id='196'></font> </font>{ 
+        <font color='#ff0000' weight='1' id='199'>sorted_arr<font color='#ff0000' weight='1' id='198'></font></font><font color='#ff0000' weight='1' id='201'>.<font color='#ff0000' weight='1' id='200'></font></font><font color='#ff0000' weight='1' id='203'>addAll<font color='#ff0000' weight='1' id='202'></font></font>(<font color='#ff0000' weight='1' id='206'>Collections<font color='#ff0000' weight='1' id='205'></font></font><font color='#ff0000' weight='1' id='208'>.<font color='#ff0000' weight='1' id='207'></font></font>nCopies<font color='#ff0000' weight='1' id='209'></font><font color='#ff0000' weight='1' id='221'>(<font color='#ff0000' weight='1' id='214'>count</font>, i)</font>);
+        <font color='#ff0000' weight='1' id='237'>i<font color='#ff0000' weight='1' id='234'>++</font>;
+        }</font>
+
+        return sorted_arr;
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+private static void heapSort(int[] a) {
+        
+        
+        for (int i = a.length / 2 - 1; i &gt;= 0; i--) {
+            heapify(a, a.length-1, i);
+        }
+        
+        for(int i=0;i&lt;a.length-1;i++)
+        {
+            heapify(a, a.length-1, i);
+        }
+        
+        
+
+    }
+
+    private static void heapify(int[] a,int n, int i) {
+        
+
+        int l = 2 * i+1;
+        int r = 2 * i + 2;
+
+        int min = i;
+
+        if (l &lt;= n &amp;&amp; a[i] &gt; a[l]) {
+            min = l;
+        }
+
+        if (r &lt;= n &amp;&amp; a[r] &lt; a[min]) {
+            min = r;
+        }
+
+        if (min != i) {
+            int temp = a[i];
+            a[i] = a[min];
+            a[min] = temp;
+            heapify(a, n ,min);
+        }
+
+    }
+</font>
+</pre>

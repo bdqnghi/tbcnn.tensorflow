@@ -1,0 +1,69 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+private static void heapSort(int[] a) {
+        
+        
+        for (int i = a.length / 2 - 1; i &gt;= 0; i--) {
+            heapify(a, a.length-1, i);
+        }
+        
+        for(int i=0;i&lt;a.length-1;i++)
+        {
+            heapify(a, a.length-1, i);
+        }
+        
+        
+
+    }
+
+    private static void heapify(int[] a,int n, int i) {
+        
+
+        int l = 2 * i+1;
+        int r = 2 * i + 2;
+
+        int min = i;
+
+        if (l &lt;= n &amp;&amp; a[i] &gt; a[l]) {
+            min = l;
+        }
+
+        if (r &lt;= n &amp;&amp; a[r] &lt; a[min]) {
+            min = r;
+        }
+
+        if (min != i) {
+            int temp = a[i];
+            a[i] = a[min];
+            a[min] = temp;
+            heapify(a, n ,min);
+        }
+
+    }
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void shellSort(int[] arr) {
+      int inner, outer;
+      int temp;
+
+      int h = 1;
+      while (h &lt;= arr.length / 3) {
+         h = h * 3 + 1;
+      }
+      while (h &gt; 0) {
+         for (outer = h; outer &lt; arr.length; outer++) {
+            temp = arr[outer];
+            inner = outer;
+
+            while (inner &gt; h - 1 &amp;&amp; arr[inner - h] &gt;= temp) {
+               arr[inner] = arr[inner - h];
+               inner -= h;
+            }
+            arr[inner] = temp;
+         }
+         h = (h - 1) / 3;
+      }
+   }  </font>
+</pre>

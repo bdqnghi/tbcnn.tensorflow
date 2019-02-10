@@ -1,0 +1,93 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+private static void heapSort(int[] a) {
+        
+        
+        for (int i = a.length / 2 - 1; i &gt;= 0; i--) {
+            heapify(a, a.length-1, i);
+        }
+        
+        for(int i=0;i&lt;a.length-1;i++)
+        {
+            heapify(a, a.length-1, i);
+        }
+        
+        
+
+    }
+
+    private static void heapify(int[] a,int n, int i) <font color='#ff0000' weight='1' id='428'>{
+        
+
+        <font color='#ff0000' weight='1' id='221'><font color='#ff0000' weight='1' id='206'><font color='#ff0000' weight='1' id='205'>int</font> </font><font color='#ff0000' weight='1' id='208'>l </font><font color='#ff0000' weight='1' id='220'>= <font color='#ff0000' weight='1' id='219'>2 * i<font color='#ff0000' weight='1' id='213'></font>+1</font></font>;</font>
+        int<font color='#ff0000' weight='1' id='224'></font> r = <font color='#ff0000' weight='1' id='239'><font color='#ff0000' weight='1' id='230'>2 </font><font color='#ff0000' weight='1' id='232'>* </font><font color='#ff0000' weight='1' id='234'>i<font color='#ff0000' weight='1' id='233'></font> </font><font color='#ff0000' weight='1' id='236'>+<font color='#ff0000' weight='1' id='235'></font> </font>2</font>;
+
+        <font color='#ff0000' weight='1' id='255'><font color='#ff0000' weight='1' id='253'><font color='#ff0000' weight='1' id='246'>int </font><font color='#ff0000' weight='1' id='248'>min </font>= <font color='#ff0000' weight='1' id='251'><font color='#ff0000' weight='1' id='250'>i<font color='#ff0000' weight='1' id='249'></font></font></font>;</font>
+
+        </font>if <font color='#ff0000' weight='1' id='284'>(<font color='#ff0000' weight='1' id='282'><font color='#ff0000' weight='1' id='257'>l </font><font color='#ff0000' weight='1' id='259'>&lt;=<font color='#ff0000' weight='1' id='258'></font> </font><font color='#ff0000' weight='1' id='261'>n<font color='#ff0000' weight='1' id='260'></font> </font>&amp;&amp; <font color='#ff0000' weight='1' id='271'><font color='#ff0000' weight='1' id='265'>a</font><font color='#ff0000' weight='1' id='270'>[<font color='#ff0000' weight='1' id='267'>i</font>]<font color='#ff0000' weight='1' id='269'></font></font> </font><font color='#ff0000' weight='1' id='273'>&gt;<font color='#ff0000' weight='1' id='272'></font> </font><font color='#ff0000' weight='1' id='275'>a<font color='#ff0000' weight='1' id='274'></font></font><font color='#ff0000' weight='1' id='280'>[<font color='#ff0000' weight='1' id='278'><font color='#ff0000' weight='1' id='277'>l<font color='#ff0000' weight='1' id='276'></font></font>]</font><font color='#ff0000' weight='1' id='279'></font></font>)</font><font color='#ff0000' weight='1' id='283'></font></font> {
+            <font color='#ff0000' weight='1' id='293'><font color='#ff0000' weight='1' id='291'><font color='#ff0000' weight='1' id='286'>min<font color='#ff0000' weight='1' id='285'></font> </font><font color='#ff0000' weight='1' id='288'>=<font color='#ff0000' weight='1' id='287'></font> </font>l;</font>
+        }</font>
+
+        <font color='#ff0000' weight='1' id='339'>if (<font color='#ff0000' weight='1' id='299'>r<font color='#ff0000' weight='1' id='298'></font> </font><font color='#ff0000' weight='1' id='301'>&lt;=<font color='#ff0000' weight='1' id='300'></font> </font>n<font color='#ff0000' weight='1' id='302'></font> &amp;&amp; <font color='#ff0000' weight='1' id='313'>a<font color='#ff0000' weight='1' id='312'>[r<font color='#ff0000' weight='1' id='308'></font>]<font color='#ff0000' weight='1' id='311'></font></font> </font><font color='#ff0000' weight='1' id='315'>&lt;<font color='#ff0000' weight='1' id='314'></font> </font><font color='#ff0000' weight='1' id='323'><font color='#ff0000' weight='1' id='317'>a<font color='#ff0000' weight='1' id='316'></font></font><font color='#ff0000' weight='1' id='322'>[<font color='#ff0000' weight='1' id='320'>min]</font><font color='#ff0000' weight='1' id='321'></font></font></font>)<font color='#ff0000' weight='1' id='338'> {
+            <font color='#ff0000' weight='1' id='333'><font color='#ff0000' weight='1' id='328'>min </font><font color='#ff0000' weight='1' id='330'>=<font color='#ff0000' weight='1' id='329'></font> </font><font color='#ff0000' weight='1' id='332'>r</font>;</font><font color='#ff0000' weight='1' id='334'></font>
+        }</font>
+
+        </font><font color='#ff0000' weight='1' id='426'>if (<font color='#ff0000' weight='1' id='346'><font color='#ff0000' weight='1' id='341'>min </font><font color='#ff0000' weight='1' id='343'>!= </font><font color='#ff0000' weight='1' id='345'>i<font color='#ff0000' weight='1' id='344'></font></font>)</font><font color='#ff0000' weight='1' id='425'> <font color='#ff0000' weight='1' id='424'>{
+            <font color='#ff0000' weight='1' id='366'><font color='#ff0000' weight='1' id='364'><font color='#ff0000' weight='1' id='351'>int<font color='#ff0000' weight='1' id='349'></font> </font><font color='#ff0000' weight='1' id='353'>temp<font color='#ff0000' weight='1' id='352'></font> </font><font color='#ff0000' weight='1' id='363'>= <font color='#ff0000' weight='1' id='361'>a[<font color='#ff0000' weight='1' id='357'>i<font color='#ff0000' weight='1' id='356'></font></font>]<font color='#ff0000' weight='1' id='359'></font></font></font>;</font><font color='#ff0000' weight='1' id='365'></font>
+            </font><font color='#ff0000' weight='1' id='387'><font color='#ff0000' weight='1' id='374'><font color='#ff0000' weight='1' id='368'>a<font color='#ff0000' weight='1' id='367'></font></font>[<font color='#ff0000' weight='1' id='370'>i<font color='#ff0000' weight='1' id='369'></font></font>]<font color='#ff0000' weight='1' id='372'></font> </font><font color='#ff0000' weight='1' id='376'>= </font>a[<font color='#ff0000' weight='1' id='380'>min<font color='#ff0000' weight='1' id='379'></font></font>]<font color='#ff0000' weight='1' id='382'></font>;
+            </font><font color='#ff0000' weight='1' id='402'><font color='#ff0000' weight='1' id='400'><font color='#ff0000' weight='1' id='395'><font color='#ff0000' weight='1' id='389'>a</font><font color='#ff0000' weight='1' id='394'>[<font color='#ff0000' weight='1' id='391'>min<font color='#ff0000' weight='1' id='390'></font></font>]<font color='#ff0000' weight='1' id='393'></font></font> </font>=<font color='#ff0000' weight='1' id='396'></font> <font color='#ff0000' weight='1' id='399'>temp<font color='#ff0000' weight='1' id='398'></font></font>;</font><font color='#ff0000' weight='1' id='401'></font>
+            </font><font color='#ff0000' weight='1' id='422'><font color='#ff0000' weight='1' id='419'><font color='#ff0000' weight='1' id='404'>heapify<font color='#ff0000' weight='1' id='403'></font></font>(<font color='#ff0000' weight='1' id='408'><font color='#ff0000' weight='1' id='407'><font color='#ff0000' weight='1' id='406'>a<font color='#ff0000' weight='1' id='405'></font></font></font>, </font><font color='#ff0000' weight='1' id='411'><font color='#ff0000' weight='1' id='410'>n<font color='#ff0000' weight='1' id='409'></font></font></font> ,<font color='#ff0000' weight='1' id='414'>min</font>)<font color='#ff0000' weight='1' id='417'></font></font>;
+        }</font><font color='#ff0000' weight='1' id='423'></font></font></font>
+
+    }</font><font color='#ff0000' weight='1' id='427'></font></font>
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.Stack;
+class HSort
+{
+	int a[];
+
+	
+	void heapify(int a[], int p, int n)
+	{
+		int t = a[p],i;
+		for(i=2*p+1; i&lt;n; i=2*i+1)
+		{
+			if(<font color='#ff0000' weight='1' id='188'><font color='#ff0000' weight='1' id='151'>(</font><font color='#ff0000' weight='1' id='153'>i</font>+1<font color='#ff0000' weight='1' id='159'>)<font color='#ff0000' weight='1' id='158'></font></font><font color='#ff0000' weight='1' id='161'>&lt;<font color='#ff0000' weight='1' id='160'></font></font><font color='#ff0000' weight='1' id='163'>n<font color='#ff0000' weight='1' id='162'></font> </font><font color='#ff0000' weight='1' id='165'>&amp;&amp;<font color='#ff0000' weight='1' id='164'></font> </font><font color='#ff0000' weight='1' id='173'><font color='#ff0000' weight='1' id='167'>a</font><font color='#ff0000' weight='1' id='172'>[<font color='#ff0000' weight='1' id='170'><font color='#ff0000' weight='1' id='169'>i</font>]</font><font color='#ff0000' weight='1' id='171'></font></font></font>&lt;<font color='#ff0000' weight='1' id='187'>a<font color='#ff0000' weight='1' id='186'>[<font color='#ff0000' weight='1' id='184'><font color='#ff0000' weight='1' id='179'>i</font>+1]</font><font color='#ff0000' weight='1' id='185'></font></font></font>)</font>
+				i++;
+
+			if(a[i]&gt;t)
+				a[(i-1)/2]=a[i];
+			else
+				break;
+		}
+
+		a[(i-1)/2]=t;
+	}
+
+	void heapSort(int a[])
+	{
+		for(int i=a.length/2-1; i&gt;=0; i--)
+		{
+			heapify(a,i,a.length);
+			System.out.println(Arrays.toString(a));
+		}
+
+		for(int i=a.length-1; i&gt;0; i--)
+		{
+			int t=a[0];
+			a[0]=a[i];
+			a[i]=t;
+			heapify(a,0,i);
+			System.out.println(Arrays.toString(a));
+		}
+	}
+
+}
+
+</font>
+</pre>

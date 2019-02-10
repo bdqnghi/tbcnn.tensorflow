@@ -1,0 +1,56 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+package de.novensa.cs.performance.macadamia.management.jvm;
+
+import de.novensa.cs.performance.macadamia.management.jvm.resources.AbstractCrucialJvmResources;
+import de.novensa.cs.performance.macadamia.management.jvm.resources.JvmResourceDetails;
+
+import javax.annotation.Nullable;
+import java.util.concurrent.TimeUnit;
+
+
+public class UniformDistributedCrucialJvmResources extends AbstractCrucialJvmResources {
+
+
+    @Override
+    public void scheduleUpdates() {
+        this.add(new JvmResourceDetails());
+    }
+
+
+    
+    public UniformDistributedCrucialJvmResources(long initDelay, long period, @Nullable TimeUnit timeUnit) {
+        super(initDelay, <font color='#ff0000' weight='1' id='217'><font color='#ff0000' weight='1' id='216'>period<font color='#ff0000' weight='1' id='215'></font></font></font>, timeUnit);
+    }
+}
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+<font color='#ff0000' weight='1' id='227'><font color='#ff0000' weight='1' id='2'>public<font color='#ff0000' weight='1' id='1'></font> </font><font color='#ff0000' weight='1' id='4'>static<font color='#ff0000' weight='1' id='3'></font> </font><font color='#ff0000' weight='1' id='7'><font color='#ff0000' weight='1' id='6'>void</font> </font><font color='#ff0000' weight='1' id='9'>selectionSort</font><font color='#ff0000' weight='1' id='21'>(<font color='#ff0000' weight='1' id='19'><font color='#ff0000' weight='1' id='18'><font color='#ff0000' weight='1' id='15'><font color='#ff0000' weight='1' id='14'>int<font color='#ff0000' weight='1' id='13'>[]<font color='#ff0000' weight='1' id='12'></font></font></font> </font><font color='#ff0000' weight='1' id='17'>array</font></font>)</font><font color='#ff0000' weight='1' id='20'></font>
+    </font><font color='#ff0000' weight='1' id='226'>{
+        <font color='#ff0000' weight='1' id='41'><font color='#ff0000' weight='1' id='27'><font color='#ff0000' weight='1' id='24'><font color='#ff0000' weight='1' id='23'>int</font> </font><font color='#ff0000' weight='1' id='26'>startScan<font color='#ff0000' weight='1' id='25'></font></font>, </font><font color='#ff0000' weight='1' id='31'><font color='#ff0000' weight='1' id='28'></font><font color='#ff0000' weight='1' id='30'>index</font>, </font><font color='#ff0000' weight='1' id='35'><font color='#ff0000' weight='1' id='32'></font><font color='#ff0000' weight='1' id='34'>minIndex<font color='#ff0000' weight='1' id='33'></font></font>, </font><font color='#ff0000' weight='1' id='39'><font color='#ff0000' weight='1' id='36'></font><font color='#ff0000' weight='1' id='38'>minValue</font>;</font><font color='#ff0000' weight='1' id='40'></font>
+        
+        </font><font color='#ff0000' weight='1' id='224'>for <font color='#ff0000' weight='1' id='80'>(<font color='#ff0000' weight='1' id='50'><font color='#ff0000' weight='1' id='48'><font color='#ff0000' weight='1' id='43'>startScan </font><font color='#ff0000' weight='1' id='45'>= </font><font color='#ff0000' weight='1' id='47'>0<font color='#ff0000' weight='1' id='46'></font></font>;</font><font color='#ff0000' weight='1' id='49'></font> </font><font color='#ff0000' weight='1' id='72'><font color='#ff0000' weight='1' id='70'><font color='#ff0000' weight='1' id='52'>startScan </font><font color='#ff0000' weight='1' id='54'>&lt; </font><font color='#ff0000' weight='1' id='56'>(</font><font color='#ff0000' weight='1' id='63'>array.length</font><font color='#ff0000' weight='1' id='65'>-</font><font color='#ff0000' weight='1' id='67'>1<font color='#ff0000' weight='1' id='66'></font></font><font color='#ff0000' weight='1' id='69'>)</font>;</font><font color='#ff0000' weight='1' id='71'></font> </font><font color='#ff0000' weight='1' id='78'><font color='#ff0000' weight='1' id='77'><font color='#ff0000' weight='1' id='74'>startScan</font><font color='#ff0000' weight='1' id='76'>++</font></font>)</font><font color='#ff0000' weight='1' id='79'></font>
+            </font><font color='#ff0000' weight='1' id='223'>{
+                <font color='#ff0000' weight='1' id='89'><font color='#ff0000' weight='1' id='87'><font color='#ff0000' weight='1' id='82'>minIndex </font><font color='#ff0000' weight='1' id='84'>= </font><font color='#ff0000' weight='1' id='86'>startScan</font>;</font><font color='#ff0000' weight='1' id='88'></font>
+                </font><font color='#ff0000' weight='1' id='104'><font color='#ff0000' weight='1' id='102'><font color='#ff0000' weight='1' id='91'>minValue </font><font color='#ff0000' weight='1' id='93'>= </font><font color='#ff0000' weight='1' id='101'>array<font color='#ff0000' weight='1' id='100'>[<font color='#ff0000' weight='1' id='98'><font color='#ff0000' weight='1' id='97'>startScan</font>]</font><font color='#ff0000' weight='1' id='99'></font></font></font>;</font><font color='#ff0000' weight='1' id='103'></font>
+                
+                </font><font color='#ff0000' weight='1' id='185'>for <font color='#ff0000' weight='1' id='139'>(<font color='#ff0000' weight='1' id='117'><font color='#ff0000' weight='1' id='115'><font color='#ff0000' weight='1' id='106'>index </font><font color='#ff0000' weight='1' id='108'>= </font><font color='#ff0000' weight='1' id='110'>startScan </font><font color='#ff0000' weight='1' id='112'>+ </font><font color='#ff0000' weight='1' id='114'>1<font color='#ff0000' weight='1' id='113'></font></font>;</font><font color='#ff0000' weight='1' id='116'></font> </font><font color='#ff0000' weight='1' id='131'><font color='#ff0000' weight='1' id='129'><font color='#ff0000' weight='1' id='119'>index </font><font color='#ff0000' weight='1' id='121'>&lt; </font><font color='#ff0000' weight='1' id='128'>array.length</font>;</font><font color='#ff0000' weight='1' id='130'></font> </font><font color='#ff0000' weight='1' id='137'><font color='#ff0000' weight='1' id='136'><font color='#ff0000' weight='1' id='133'>index</font><font color='#ff0000' weight='1' id='135'>++</font></font>)</font><font color='#ff0000' weight='1' id='138'></font>
+                </font><font color='#ff0000' weight='1' id='184'>{           
+                    <font color='#ff0000' weight='1' id='182'>if <font color='#ff0000' weight='1' id='154'>(<font color='#ff0000' weight='1' id='152'><font color='#ff0000' weight='1' id='147'>array<font color='#ff0000' weight='1' id='146'>[<font color='#ff0000' weight='1' id='144'><font color='#ff0000' weight='1' id='143'>index</font>]</font><font color='#ff0000' weight='1' id='145'></font></font> </font><font color='#ff0000' weight='1' id='149'>&lt;<font color='#ff0000' weight='1' id='148'></font> </font><font color='#ff0000' weight='1' id='151'>minValue</font>)</font><font color='#ff0000' weight='1' id='153'></font></font><font color='#ff0000' weight='1' id='181'>
+                    <font color='#ff0000' weight='1' id='180'>{
+                        <font color='#ff0000' weight='1' id='169'><font color='#ff0000' weight='1' id='167'><font color='#ff0000' weight='1' id='156'>minValue </font><font color='#ff0000' weight='1' id='158'>=<font color='#ff0000' weight='1' id='157'></font> </font><font color='#ff0000' weight='1' id='166'><font color='#ff0000' weight='1' id='160'>array</font><font color='#ff0000' weight='1' id='165'>[<font color='#ff0000' weight='1' id='163'><font color='#ff0000' weight='1' id='162'>index</font>]</font><font color='#ff0000' weight='1' id='164'></font></font></font>;</font><font color='#ff0000' weight='1' id='168'></font>
+                        </font><font color='#ff0000' weight='1' id='171'>minIndex </font><font color='#ff0000' weight='1' id='173'>= </font><font color='#ff0000' weight='1' id='175'>index</font>;
+                    }</font></font>
+                    
+                }</font><font color='#ff0000' weight='1' id='183'></font></font>
+    
+                
+                </font><font color='#ff0000' weight='1' id='206'><font color='#ff0000' weight='1' id='204'><font color='#ff0000' weight='1' id='193'><font color='#ff0000' weight='1' id='187'>array</font><font color='#ff0000' weight='1' id='192'>[<font color='#ff0000' weight='1' id='190'><font color='#ff0000' weight='1' id='189'>minIndex</font>]</font><font color='#ff0000' weight='1' id='191'></font></font> </font><font color='#ff0000' weight='1' id='195'>=<font color='#ff0000' weight='1' id='194'></font> </font><font color='#ff0000' weight='1' id='203'><font color='#ff0000' weight='1' id='197'>array</font><font color='#ff0000' weight='1' id='202'>[<font color='#ff0000' weight='1' id='200'><font color='#ff0000' weight='1' id='199'>startScan</font>]</font><font color='#ff0000' weight='1' id='201'></font></font></font>;</font><font color='#ff0000' weight='1' id='205'></font>
+                </font><font color='#ff0000' weight='1' id='219'><font color='#ff0000' weight='1' id='214'><font color='#ff0000' weight='1' id='208'>array</font><font color='#ff0000' weight='1' id='213'>[<font color='#ff0000' weight='1' id='211'><font color='#ff0000' weight='1' id='210'>startScan</font>]</font><font color='#ff0000' weight='1' id='212'></font></font> </font><font color='#ff0000' weight='1' id='216'>=<font color='#ff0000' weight='1' id='215'></font> </font><font color='#ff0000' weight='1' id='218'>minValue</font>;</font>
+                
+            }</font>
+        
+    }</font></font></font></font>
+</pre>

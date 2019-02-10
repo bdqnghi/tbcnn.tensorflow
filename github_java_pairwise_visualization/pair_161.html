@@ -1,0 +1,71 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+package de.novensa.cs.performance.macadamia.management.jvm;
+
+import de.novensa.cs.performance.macadamia.management.jvm.resources.AbstractCrucialJvmResources;
+import de.novensa.cs.performance.macadamia.management.jvm.resources.JvmResourceDetails;
+
+import javax.annotation.Nullable;
+import java.util.concurrent.TimeUnit;
+
+
+public class UniformDistributedCrucialJvmResources extends AbstractCrucialJvmResources {
+
+
+    @Override
+    public void scheduleUpdates() {
+        this.add(new JvmResourceDetails());
+    }
+
+
+    
+    public UniformDistributedCrucialJvmResources(long initDelay, long period, @Nullable TimeUnit timeUnit) {
+        super(initDelay, <font color='#ff0000' weight='1' id='216'>period</font>, timeUnit);
+    }
+}
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+private static void heapSort(int[] a) {
+        
+        
+        for (int i = a.length / 2 - 1; i &gt;= 0; i--) {
+            heapify(a, a.length-1, i);
+        }
+        
+        for(int i=0;i&lt;a.length-1;i++)
+        {
+            heapify(a, a.length-1, i);
+        }
+        
+        
+
+    }
+
+    private static void heapify(int[] a,int n, int i) {
+        
+
+        int l = 2 * i+1;
+        int r = 2 * i + 2;
+
+        int min = i;
+
+        if (l &lt;= n &amp;&amp; a[i] &gt; a[l]) {
+            min = l;
+        }
+
+        if (r &lt;= n &amp;&amp; a[r] &lt; a[min]) {
+            min = r;
+        }
+
+        if (min != i) {
+            int temp = a[i];
+            a[i] = a[min];
+            a[min] = temp;
+            heapify(a, n ,min);
+        }
+
+    }
+</font>
+</pre>

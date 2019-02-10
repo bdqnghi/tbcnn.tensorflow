@@ -1,0 +1,101 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static <font color='#ff0000' weight='1' id='7'>void </font><font color='#ff0000' weight='1' id='9'>shellSortMarca</font><font color='#ff0000' weight='1' id='28'>(<font color='#ff0000' weight='1' id='12'>Automovil </font><font color='#ff0000' weight='1' id='14'>A<font color='#ff0000' weight='1' id='13'></font></font>[]<font color='#ff0000' weight='1' id='15'></font>, int numAle)</font>{
+        <font color='#ff0000' weight='1' id='40'><font color='#ff0000' weight='1' id='34'>int <font color='#ff0000' weight='1' id='33'>salto</font>, </font><font color='#ff0000' weight='1' id='38'><font color='#ff0000' weight='1' id='35'></font><font color='#ff0000' weight='1' id='37'>j</font>;</font><font color='#ff0000' weight='1' id='39'></font>
+        </font><font color='#ff0000' weight='1' id='48'>Automovil aux;
+        </font><font color='#ff0000' weight='1' id='54'><font color='#ff0000' weight='1' id='50'>boolean</font> cambios<font color='#ff0000' weight='1' id='52'></font>;</font><font color='#ff0000' weight='1' id='55'></font>
+        for<font color='#ff0000' weight='1' id='88'>(<font color='#ff0000' weight='1' id='69'>salto=numAle<font color='#ff0000' weight='1' id='61'></font><font color='#ff0000' weight='1' id='64'>/<font color='#ff0000' weight='1' id='63'></font></font>2; </font>salto!=0; salto<font color='#ff0000' weight='1' id='82'>/=</font><font color='#ff0000' weight='1' id='84'>2<font color='#ff0000' weight='1' id='83'></font></font>)</font>{
+            <font color='#ff0000' weight='1' id='97'>cambios=true<font color='#ff0000' weight='1' id='93'></font>;
+            </font>while(cambios<font color='#ff0000' weight='1' id='101'>==</font>true)<font color='#ff0000' weight='1' id='105'></font>{ 
+                cambios=<font color='#ff0000' weight='1' id='112'>false<font color='#ff0000' weight='1' id='111'></font></font>;<font color='#ff0000' weight='1' id='114'></font>
+                for<font color='#ff0000' weight='1' id='141'>(j<font color='#ff0000' weight='1' id='116'></font>=salto; <font color='#ff0000' weight='1' id='131'>j&lt; numAle;</font> j<font color='#ff0000' weight='1' id='137'>++</font>) 
+                    </font>if((A<font color='#ff0000' weight='1' id='154'>[<font color='#ff0000' weight='1' id='147'>j</font>-<font color='#ff0000' weight='1' id='151'>salto<font color='#ff0000' weight='1' id='150'></font></font>]</font><font color='#ff0000' weight='1' id='157'>.<font color='#ff0000' weight='1' id='156'></font></font>getMarca<font color='#ff0000' weight='1' id='158'></font><font color='#ff0000' weight='1' id='161'>()</font><font color='#ff0000' weight='1' id='164'>.<font color='#ff0000' weight='1' id='163'></font></font>compareTo<font color='#ff0000' weight='1' id='165'></font>(<font color='#ff0000' weight='1' id='183'><font color='#ff0000' weight='1' id='174'>A<font color='#ff0000' weight='1' id='167'></font>[j]</font>.getMarca<font color='#ff0000' weight='1' id='177'></font>())</font>)<font color='#ff0000' weight='1' id='187'></font>&gt;0){ 
+                        aux=A[j];<font color='#ff0000' weight='1' id='209'></font> 
+                        A[j<font color='#ff0000' weight='1' id='213'></font>]=A[j-salto];
+                        <font color='#ff0000' weight='1' id='237'>A<font color='#ff0000' weight='1' id='236'></font></font>[j-salto]=aux;
+                        cambios=true; 
+                    }
+            }
+        }
+    }<font color='#ff0000' weight='1' id='276'></font></font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+   public void sort(Object[] arr, Comparator comparator)
+    {
+        int low = 0;
+        int high = arr.length - 1;
+
+        Object[] aux = new Object[arr.length];
+
+        sort(comparator, arr, aux, low, high);
+    }
+
+    private void sort(Comparator c, Object[] arr, Object[] aux, int low, int high)
+    {
+        if (high &lt;= low)
+        {
+            return;
+        }
+
+        int mid = low + (high - low) / 2;
+        sort(c, arr, aux, low, mid);
+        sort(<font color='#ff0000' weight='1' id='245'><font color='#ff0000' weight='1' id='244'>c</font>, </font>arr, aux, mid + 1, high);
+
+        if (!less(c, arr[mid + 1], arr[mid]))
+        {
+            return;
+        }
+
+        merge(c, arr, aux, low, mid, high);
+    }
+
+    private void merge(Comparator c, Object[] arr, Object[] aux, int low, int mid, int high)
+    {
+        assert isSorted(c, arr, low, mid);
+        assert isSorted(c, arr, mid + 1, high);
+
+        for (int k = low; k &lt;= high; k++)
+        {
+            aux[k] = arr[k];
+        }
+
+        int i = low;
+        int j = mid + 1;
+
+        for (int k = low; k &lt;= high; k++)
+        {
+            if (i &gt; mid)
+            {
+                arr[k] = aux[j++];
+            }
+            else if (j &gt; high)
+            {
+                arr[k] = aux[i++];
+            }
+            else if (less(c, aux[j], aux[i]))
+            {
+                arr[k] = aux[j++];
+            }
+            else
+            {
+                arr[k] = aux[i++];
+            }
+        }
+
+        assert isSorted(c, arr, low, high);
+    }
+
+    private Boolean isSorted(Comparator c, Object[] arr, int low, int high)
+    {
+        for (int i = low + 1; i &lt;= high; i++)
+        {
+            if (less(c, arr[i], arr[i - 1]))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }</font>
+</pre>

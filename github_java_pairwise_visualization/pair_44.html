@@ -1,0 +1,124 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void merge(Comparable[] a, Comparable[] aux, int lo, int mid, int hi) <font color='#ff0000' weight='1' id='378'>{
+
+        
+        assert isSorted(a<font color='#ff0000' weight='1' id='55'></font>, <font color='#ff0000' weight='1' id='61'>lo</font>, mid);<font color='#ff0000' weight='1' id='71'></font>
+        assert isSorted<font color='#ff0000' weight='1' id='73'></font>(a<font color='#ff0000' weight='1' id='75'></font>, <font color='#ff0000' weight='1' id='85'><font color='#ff0000' weight='1' id='80'>mid</font>+<font color='#ff0000' weight='1' id='81'></font>1</font>, hi);
+
+        
+        for <font color='#ff0000' weight='1' id='125'>(int k = lo;<font color='#ff0000' weight='1' id='107'></font> <font color='#ff0000' weight='1' id='117'>k &lt;= hi; </font>k++) </font>{
+            aux[k]<font color='#ff0000' weight='1' id='131'></font> = a[k]; 
+        }
+
+        
+        <font color='#ff0000' weight='1' id='159'>int<font color='#ff0000' weight='1' id='150'></font> i = lo, </font><font color='#ff0000' weight='1' id='171'>j = mid+1;</font><font color='#ff0000' weight='1' id='172'></font>
+        for (int k = lo<font color='#ff0000' weight='1' id='179'></font>;<font color='#ff0000' weight='1' id='184'></font> k &lt;= hi; k++) {
+            <font color='#ff0000' weight='1' id='353'>if      <font color='#ff0000' weight='1' id='211'>(i &gt; mid)</font><font color='#ff0000' weight='1' id='236'>              a[k] = aux[j++];
+            </font>else if (j &gt; hi)               a[k] = <font color='#ff0000' weight='1' id='265'>aux[i++]</font>;
+            else if (less(aux[j], aux[i]))<font color='#ff0000' weight='1' id='325'> a[k<font color='#ff0000' weight='1' id='303'></font>] = aux[j++];<font color='#ff0000' weight='1' id='322'></font></font>
+            <font color='#ff0000' weight='1' id='352'>else                           <font color='#ff0000' weight='1' id='351'><font color='#ff0000' weight='1' id='350'>a<font color='#ff0000' weight='1' id='334'>[k]</font> = aux<font color='#ff0000' weight='1' id='338'></font><font color='#ff0000' weight='1' id='346'>[i++<font color='#ff0000' weight='1' id='342'></font>]</font>;<font color='#ff0000' weight='1' id='349'></font></font></font></font>
+        }</font>
+
+        
+        assert isSorted(<font color='#ff0000' weight='1' id='360'>a</font>, <font color='#ff0000' weight='1' id='364'>lo</font>, <font color='#ff0000' weight='1' id='368'>hi</font>);
+    }</font>
+
+    
+    private static void sort(Comparable[] a, Comparable[] aux, int lo, int hi) {
+        if (hi &lt;= lo) return;
+        int mid = lo + (hi - lo) / 2;
+        sort(a, aux, lo, mid);
+        sort(a, aux, mid + 1, hi);
+        merge(a, aux, lo, mid, hi);
+    }
+
+    public static void sort(Comparable[] a) {
+        Comparable[] aux = new Comparable[a.length];
+        sort(a, aux, 0, a.length-1);
+        assert isSorted(a);
+    }
+
+
+   </font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+   public void sort(Object[] arr, Comparator comparator)
+    {
+        int low = 0;
+        int high = arr.length - 1;
+
+        Object[] aux = new Object[arr.length];
+
+        sort(comparator, arr, aux, low, high);
+    }
+
+    private void sort(Comparator c, Object[] arr, Object[] aux, int low, int high)
+    {
+        if (high &lt;= low)
+        {
+            return;
+        }
+
+        int mid = low + (high - low) / 2;
+        sort(c, arr, aux, low, mid);
+        sort(c, arr, aux, mid + 1, high);
+
+        if (!less(c, arr[mid + 1], arr[mid]))
+        {
+            return;
+        }
+
+        merge(c, arr, aux, low, mid, high);
+    }
+
+    private void merge(Comparator c, Object[] arr, Object[] aux, int low, int mid, int high)
+    <font color='#ff0000' weight='1' id='757'>{
+        assert isSorted(<font color='#ff0000' weight='1' id='413'><font color='#ff0000' weight='1' id='412'><font color='#ff0000' weight='1' id='411'>c<font color='#ff0000' weight='1' id='410'></font></font></font>, </font>arr, low, mid);
+        assert isSorted(<font color='#ff0000' weight='1' id='437'><font color='#ff0000' weight='1' id='436'><font color='#ff0000' weight='1' id='435'>c<font color='#ff0000' weight='1' id='434'></font></font></font>, </font>arr, mid + 1, high);
+
+        for (int k = low; k &lt;= high; k++)
+        {
+            aux[k] = arr[k];
+        }
+
+        <font color='#ff0000' weight='1' id='524'>int i = low;<font color='#ff0000' weight='1' id='523'></font>
+        </font><font color='#ff0000' weight='1' id='540'><font color='#ff0000' weight='1' id='526'>int<font color='#ff0000' weight='1' id='525'></font></font> j = mid + 1;
+
+        </font>for (int k = low; k &lt;= high; k++)
+        {
+            <font color='#ff0000' weight='1' id='728'>if (i &gt; mid)<font color='#ff0000' weight='1' id='604'>
+            {
+                arr[k] = aux[j++];
+            }<font color='#ff0000' weight='1' id='602'></font>
+            </font>else if (j &gt; high)
+            {
+                arr[k] = aux[i++];
+            }<font color='#ff0000' weight='1' id='637'></font>
+            else if (less(<font color='#ff0000' weight='1' id='647'><font color='#ff0000' weight='1' id='646'><font color='#ff0000' weight='1' id='645'>c<font color='#ff0000' weight='1' id='644'></font></font></font>, </font>aux[j], aux[i]))<font color='#ff0000' weight='1' id='699'>
+            {
+                arr[k] = aux[j++];
+            }<font color='#ff0000' weight='1' id='697'></font></font>
+            <font color='#ff0000' weight='1' id='727'>else
+            <font color='#ff0000' weight='1' id='726'>{
+                arr[k] = aux[i++];
+            }<font color='#ff0000' weight='1' id='725'></font></font></font>
+        }</font>
+
+        assert isSorted(<font color='#ff0000' weight='1' id='737'><font color='#ff0000' weight='1' id='736'><font color='#ff0000' weight='1' id='735'>c<font color='#ff0000' weight='1' id='734'></font></font></font>, </font><font color='#ff0000' weight='1' id='739'>arr</font>, <font color='#ff0000' weight='1' id='743'>low</font>, <font color='#ff0000' weight='1' id='747'>high</font>);
+    }</font>
+
+    private Boolean isSorted(Comparator c, Object[] arr, int low, int high)
+    {
+        for (int i = low + 1; i &lt;= high; i++)
+        {
+            if (less(c, arr[i], arr[i - 1]))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }</font>
+</pre>

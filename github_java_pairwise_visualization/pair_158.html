@@ -1,0 +1,114 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public <font color='#ff0000' weight='1' id='77'>static </font><font color='#ff0000' weight='1' id='80'>void </font><font color='#ff0000' weight='1' id='82'>main</font><font color='#ff0000' weight='1' id='94'>(<font color='#ff0000' weight='1' id='87'><font color='#ff0000' weight='1' id='84'>String</font>[]</font> args) </font>{
+      
+        for<font color='#ff0000' weight='1' id='123'>(int i=0;<font color='#ff0000' weight='1' id='115'>i&lt;n<font color='#ff0000' weight='1' id='111'></font>;</font><font color='#ff0000' weight='1' id='120'>i<font color='#ff0000' weight='1' id='116'></font><font color='#ff0000' weight='1' id='119'>++<font color='#ff0000' weight='1' id='118'></font></font></font>)<font color='#ff0000' weight='1' id='122'></font></font>{
+        	for<font color='#ff0000' weight='1' id='156'>(<font color='#ff0000' weight='1' id='125'>int<font color='#ff0000' weight='1' id='124'></font></font> <font color='#ff0000' weight='1' id='128'>j<font color='#ff0000' weight='1' id='127'></font></font><font color='#ff0000' weight='1' id='132'>=<font color='#ff0000' weight='1' id='131'><font color='#ff0000' weight='1' id='130'>0<font color='#ff0000' weight='1' id='129'></font></font></font></font>;<font color='#ff0000' weight='1' id='148'>j&lt;<font color='#ff0000' weight='1' id='138'></font>n<font color='#ff0000' weight='1' id='140'></font>-<font color='#ff0000' weight='1' id='142'></font>1;</font>j<font color='#ff0000' weight='1' id='152'>++</font>)</font>{
+        		if(<font color='#ff0000' weight='1' id='179'><font color='#ff0000' weight='1' id='164'>a[<font color='#ff0000' weight='1' id='161'>j<font color='#ff0000' weight='1' id='159'></font>]</font></font><font color='#ff0000' weight='1' id='166'>&gt;</font><font color='#ff0000' weight='1' id='168'>a<font color='#ff0000' weight='1' id='167'></font></font>[<font color='#ff0000' weight='1' id='170'>j</font>+<font color='#ff0000' weight='1' id='174'>1</font>])</font><font color='#ff0000' weight='1' id='180'></font>{
+        			<font color='#ff0000' weight='1' id='183'>temp<font color='#ff0000' weight='1' id='182'></font></font><font color='#ff0000' weight='1' id='185'>=</font><font color='#ff0000' weight='1' id='187'>a</font>[j];
+        			a[j]=a[j+<font color='#ff0000' weight='1' id='211'></font>1];
+        			a[j+1]=<font color='#ff0000' weight='1' id='237'>temp</font>;<font color='#ff0000' weight='1' id='239'></font>
+        			
+        			total++;
+        			swap=1;
+        		}
+        		
+        	}
+        	
+        	<font color='#ff0000' weight='1' id='277'>if(swap==0<font color='#ff0000' weight='1' id='268'></font>)<font color='#ff0000' weight='1' id='271'></font>break;
+        }</font><font color='#ff0000' weight='1' id='278'></font>
+
+    }
+
+
+}
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+   public void sort(Object[] arr, Comparator comparator)
+    {
+        int low = 0;
+        int high = arr.length - 1;
+
+        Object[] aux = new Object[arr.length];
+
+        sort(comparator, arr, aux, low, high);
+    }
+
+    private void sort(Comparator c, Object[] arr, Object[] aux, int low, int high)
+    {
+        if (high &lt;= low)
+        {
+            return;
+        }
+
+        int mid = low + (high - low) / 2;
+        sort(c, arr, aux, low, mid);
+        sort(<font color='#ff0000' weight='1' id='245'><font color='#ff0000' weight='1' id='244'><font color='#ff0000' weight='1' id='243'>c<font color='#ff0000' weight='1' id='242'></font></font></font>, </font>arr, aux, mid + 1, high);
+
+        if (!less(c, arr[mid + 1], arr[mid]))
+        {
+            return;
+        }
+
+        merge(c, arr, aux, low, mid, high);
+    }
+
+    private void merge(Comparator c, Object[] arr, Object[] aux, int low, int mid, int high)
+    {
+        assert isSorted(c, arr, low, mid);
+        assert isSorted(c, arr, mid + 1, high);
+
+        for (int k = low; k &lt;= high; k++)
+        {
+            aux[k] = arr[k];
+        }
+
+        int i = low;
+        int j = mid + 1;
+
+        for (int k = low; k &lt;= high; k++)
+        {
+            if (i &gt; mid)
+            {
+                arr[k] = aux[j++];
+            }
+            else if (j &gt; high)
+            {
+                arr[k] = aux[i++];
+            }
+            else if (less(c, aux[j], aux[i]))
+            {
+                arr[k] = aux[j++];
+            }
+            else
+            {
+                arr[k] = aux[i++];
+            }
+        }
+
+        assert isSorted(c, arr, low, high);
+    }
+
+    private Boolean isSorted(Comparator c, Object[] arr, int low, int high)
+    {
+        for (int i = low + 1; i &lt;= high; i++)
+        {
+            if (less(c, arr[i], arr[i - 1]))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }</font>
+</pre>

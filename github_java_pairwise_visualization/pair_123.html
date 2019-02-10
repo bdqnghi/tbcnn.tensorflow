@@ -1,0 +1,107 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+package de.novensa.cs.performance.macadamia.management.jvm;
+
+import de.novensa.cs.performance.macadamia.management.jvm.resources.AbstractCrucialJvmResources;
+import de.novensa.cs.performance.macadamia.management.jvm.resources.JvmResourceDetails;
+
+import javax.annotation.Nullable;
+import java.util.concurrent.TimeUnit;
+
+
+public class UniformDistributedCrucialJvmResources extends AbstractCrucialJvmResources {
+
+
+    @Override
+    public void scheduleUpdates() {
+        this.add(new JvmResourceDetails());
+    }
+
+
+    
+    public UniformDistributedCrucialJvmResources(long initDelay, long period, @Nullable TimeUnit timeUnit) {
+        super(initDelay, period, timeUnit);
+    }
+}
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+   public void sort(Object[] arr, Comparator comparator)
+    {
+        int low = 0;
+        int high = arr.length - 1;
+
+        Object[] aux = new Object[arr.length];
+
+        sort(comparator, arr, aux, low, high);
+    }
+
+    private void sort(Comparator c, Object[] arr, Object[] aux, int low, int high)
+    {
+        if (high &lt;= low)
+        {
+            return;
+        }
+
+        int mid = low + (high - low) / 2;
+        sort(c, arr, aux, low, mid);
+        sort(<font color='#ff0000' weight='1' id='245'><font color='#ff0000' weight='1' id='244'><font color='#ff0000' weight='1' id='243'>c<font color='#ff0000' weight='1' id='242'></font></font></font>, </font>arr, aux, mid + 1, high);
+
+        if (!less(c, arr[mid + 1], arr[mid]))
+        {
+            return;
+        }
+
+        merge(c, arr, aux, low, mid, high);
+    }
+
+    private void merge(Comparator c, Object[] arr, Object[] aux, int low, int mid, int high)
+    {
+        assert isSorted(c, arr, low, mid);
+        assert isSorted(c, arr, mid + 1, high);
+
+        for (int k = low; k &lt;= high; k++)
+        {
+            aux[k] = arr[k];
+        }
+
+        int i = low;
+        int j = mid + 1;
+
+        for (int k = low; k &lt;= high; k++)
+        {
+            if (i &gt; mid)
+            {
+                arr[k] = aux[j++];
+            }
+            else if (j &gt; high)
+            {
+                arr[k] = aux[i++];
+            }
+            else if (less(c, aux[j], aux[i]))
+            {
+                arr[k] = aux[j++];
+            }
+            else
+            {
+                arr[k] = aux[i++];
+            }
+        }
+
+        assert isSorted(c, arr, low, high);
+    }
+
+    private Boolean isSorted(Comparator c, Object[] arr, int low, int high)
+    {
+        for (int i = low + 1; i &lt;= high; i++)
+        {
+            if (less(c, arr[i], arr[i - 1]))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }</font>
+</pre>
