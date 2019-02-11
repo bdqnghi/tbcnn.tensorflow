@@ -1,0 +1,77 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static void quicksort(int[] a, int start, int end) {
+        if (start &gt;= end)
+            return;
+
+        int pavot = a[start];
+        int i = start;
+        int j = end;
+
+        while (i &lt; j) {
+            while (i &lt; j &amp;&amp; a[j] &gt; pavot)
+                j--;
+            while (i &lt; j &amp;&amp; a[i] &lt;= pavot)
+                i++;
+            if (i != j) {
+                int t = a[i];
+                a[i] = a[j];
+                a[j] = t;
+            }
+        }
+        if (i == j) {
+            int t = a[start];
+            a[start] = a[i];
+            a[j] = t;
+        }
+        quicksort(a, start, i - 1);
+        quicksort(a, i + 1, end);
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static int partition(int arr[], int low, int high)
+ <font color='#ff0000' weight='1' id='258'>{
+     int <font color='#0000ff' weight='9.38438e-05' id='40'>pivot </font>= arr[high]; 
+     int i = <font color='#0000ff' weight='1.87688e-05' id='60'>(</font>low<font color='#0000ff' weight='1.87688e-05' id='64'>-</font><font color='#0000ff' weight='1.87688e-05' id='66'>1</font><font color='#0000ff' weight='1.87688e-05' id='68'>)</font>; 
+     <font color='#003fff' weight='0.0625' id='185'>for <font color='#0008ff' weight='0.00788288' id='102'>(<font color='#0000ff' weight='0.000774212' id='85'><font color='#0000ff' weight='0.000316723' id='83'>int j<font color='#0000ff' weight='3.51914e-05' id='82'>=low</font>;</font> </font><font color='#0000ff' weight='0.000563063' id='94'><font color='#0000ff' weight='1.17305e-05' id='87'>j</font><font color='#0000ff' weight='1.17305e-05' id='89'>&lt;</font><font color='#0000ff' weight='1.17305e-05' id='91'>high</font>; </font><font color='#0000ff' weight='0.000351914' id='100'><font color='#0000ff' weight='0.000281532' id='99'>j<font color='#0000ff' weight='3.51914e-05' id='98'>++</font></font>)</font>
+     </font><font color='#0017ff' weight='0.0228041' id='184'>{
+         
+         
+         <font color='#000bff' weight='0.0111205' id='182'>if <font color='#0001ff' weight='0.00098536' id='117'>(<font color='#0000ff' weight='5.86524e-06' id='104'>arr</font>[<font color='#0000ff' weight='2.93262e-06' id='106'>j</font>] &lt;= <font color='#0000ff' weight='1.17305e-05' id='114'>pivot</font>)</font><font color='#0004ff' weight='0.00443412' id='181'>
+         <font color='#0004ff' weight='0.00436374' id='180'>{
+             i++;
+
+             
+             int <font color='#0000ff' weight='2.3461e-06' id='129'>temp </font>= <font color='#0000ff' weight='1.17305e-06' id='131'>arr</font>[i];
+             <font color='#0000ff' weight='1.17305e-06' id='144'>arr</font>[i] = <font color='#0000ff' weight='1.17305e-06' id='154'>arr</font>[j];
+             <font color='#0000ff' weight='1.17305e-06' id='165'>arr</font>[j] = <font color='#0000ff' weight='2.3461e-06' id='175'>temp</font>;
+         }</font></font>
+     }</font></font>
+
+     
+     </font>int <font color='#0000ff' weight='9.38438e-05' id='190'>temp </font>= <font color='#0000ff' weight='4.69219e-05' id='192'>arr</font>[<font color='#0000ff' weight='7.82032e-06' id='194'>i</font><font color='#0000ff' weight='7.82032e-06' id='196'>+</font><font color='#0000ff' weight='7.82032e-06' id='198'>1</font>];
+     <font color='#0000ff' weight='4.69219e-05' id='209'>arr</font>[<font color='#0000ff' weight='7.82032e-06' id='211'>i</font><font color='#0000ff' weight='7.82032e-06' id='213'>+</font><font color='#0000ff' weight='7.82032e-06' id='215'>1</font>] = <font color='#0000ff' weight='4.69219e-05' id='223'>arr</font>[<font color='#0000ff' weight='2.3461e-05' id='225'>high</font>];
+     <font color='#0000ff' weight='4.69219e-05' id='234'>arr</font>[<font color='#0000ff' weight='2.3461e-05' id='236'>high</font>] = <font color='#0000ff' weight='9.38438e-05' id='244'>temp</font>;
+
+     <font color='#0004ff' weight='0.0045045' id='256'>return <font color='#0001ff' weight='0.00168919' id='254'><font color='#0000ff' weight='9.38438e-05' id='249'>i</font><font color='#0000ff' weight='9.38438e-05' id='251'>+</font><font color='#0000ff' weight='9.38438e-05' id='253'>1</font>;</font>
+ }</font></font>
+
+
+ 
+ public static void sort(int arr[], int low, int high)
+ {
+     if (low &lt; high)
+     {
+         
+         int pi = partition(arr, low, high);
+
+         
+         
+         sort(arr, low, pi-1);
+         sort(arr, pi+1, high);
+     }
+ }
+
+ </font>
+</pre>
