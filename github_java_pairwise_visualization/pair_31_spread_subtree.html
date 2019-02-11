@@ -1,0 +1,56 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static void bubbleSort(int[] arr) <font color='#ff0000' weight='1' id='185'>{
+        int length = arr.length;
+        <font color='#0003ff' weight='0.00383436' id='44'>int <font color='#0000ff' weight='0.000383436' id='43'>k</font>;</font>
+
+        <font color='#00d4ff' weight='0.208589' id='183'>for <font color='#0015ff' weight='0.0214724' id='75'>(int i = <font color='#0000ff' weight='3.1953e-05' id='53'>length</font>; i &gt;= <font color='#0000ff' weight='3.1953e-05' id='64'>0</font>; <font color='#0000ff' weight='9.58589e-05' id='69'>i</font><font color='#0000ff' weight='9.58589e-05' id='71'>--</font>) </font><font color='#0052ff' weight='0.0812883' id='182'>{
+            <font color='#0017ff' weight='0.0235174' id='168'>for (<font color='#0000ff' weight='0.000351483' id='87'><font color='#0000ff' weight='5.32549e-06' id='77'>int</font> j = 0; </font>j &lt; length-<font color='#0000ff' weight='3.1953e-06' id='97'>1</font>; <font color='#0000ff' weight='1.59765e-05' id='102'>j</font>++) <font color='#0007ff' weight='0.00741309' id='167'>{
+                k = <font color='#0000ff' weight='4.2604e-06' id='114'>j </font><font color='#0000ff' weight='4.2604e-06' id='116'>+ </font>1;
+
+                <font color='#0001ff' weight='0.00183197' id='165'>if <font color='#0000ff' weight='0.00042604' id='142'>(<font color='#0000ff' weight='0.000191718' id='140'><font color='#0000ff' weight='2.48523e-05' id='129'>arr<font color='#0000ff' weight='7.10066e-06' id='128'>[<font color='#0000ff' weight='1.77516e-06' id='126'><font color='#0000ff' weight='8.87582e-07' id='125'>j</font>]</font></font> </font>&gt; <font color='#0000ff' weight='2.48523e-05' id='139'>arr<font color='#0000ff' weight='7.10066e-06' id='138'>[k]</font></font>)</font></font><font color='#0000ff' weight='0.000447341' id='164'>
+                    <font color='#0000ff' weight='0.00042604' id='163'><font color='#0000ff' weight='0.000404738' id='162'><font color='#0000ff' weight='0.000181067' id='160'><font color='#0000ff' weight='5.32549e-06' id='144'>swap</font><font color='#0000ff' weight='6.92314e-05' id='158'>(<font color='#0000ff' weight='1.33137e-06' id='146'>j</font>, <font color='#0000ff' weight='3.99412e-06' id='152'><font color='#0000ff' weight='1.33137e-06' id='150'>k</font>, </font><font color='#0000ff' weight='1.33137e-06' id='154'>arr</font>)</font>;</font></font></font></font>
+            }</font></font>
+            </font><font color='#0002ff' weight='0.00281186' id='180'><font color='#0001ff' weight='0.00102249' id='177'><font color='#0000ff' weight='6.39059e-05' id='170'>printArray</font><font color='#0000ff' weight='0.00031953' id='176'>(<font color='#0000ff' weight='9.58589e-05' id='174'><font color='#0000ff' weight='6.39059e-05' id='173'><font color='#0000ff' weight='3.1953e-05' id='172'>arr</font></font>)</font></font></font>;
+        }</font></font>
+    }</font></font>
+
+  
+
+    private static void swap(int j, int k, int[] arr) {
+        int temp = arr[j];
+        arr[j] = arr[k];
+        arr[k] = temp;
+
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void sort(Comparable[] a) {
+    int n = a.length;
+
+    
+    int h = 1;
+    while (h &lt; n/3) h = 3*h + 1;
+
+    while (h &gt;= 1) {
+      
+      for (int i = h; i &lt; n; i++) {
+        for (int j = i; j &gt;= h &amp;&amp; less(a[j], a[j-h]); j -= h) {
+          exch(a, j, j-h);
+        }
+      }
+      h /= 3;
+    }
+  }
+
+  private static boolean less(Comparable v, Comparable w) <font color='#ff0000' weight='1' id='275'>{
+    <font color='#00ff2e' weight='0.454545' id='273'>return <font color='#00d0ff' weight='0.204545' id='271'><font color='#0032ff' weight='0.0492424' id='266'><font color='#000bff' weight='0.0113636' id='259'><font color='#0000ff' weight='0.000631313' id='254'>v</font><font color='#0000ff' weight='0.000631313' id='256'>.</font><font color='#0000ff' weight='0.000631313' id='258'>compareTo</font></font><font color='#0009ff' weight='0.0094697' id='265'>(<font color='#0002ff' weight='0.00284091' id='263'><font color='#0001ff' weight='0.00189394' id='262'><font color='#0000ff' weight='0.00094697' id='261'>w</font></font>)</font></font> </font><font color='#0003ff' weight='0.00378788' id='268'>&lt; </font><font color='#0003ff' weight='0.00378788' id='270'>0</font>;</font>
+  }</font></font>
+
+  private static void exch(Object[] a, int i, int j) {
+    Object swap = a[i];
+    a[i] = a[j];
+    a[j] = swap;
+  }</font>
+</pre>

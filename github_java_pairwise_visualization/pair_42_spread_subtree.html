@@ -1,0 +1,45 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ void sort(double arr[])
+    {
+        int n = arr.length;
+         for (int i = 0; i &lt; n-1; i++)
+        {
+            int min_idx = i;
+            for (int j = i+1; j &lt; n; j++)
+                if (arr[j] &lt; arr[min_idx])
+                    min_idx = j;
+ 
+
+            double temp = arr[min_idx];
+            arr[min_idx] = arr[i];
+            arr[i] = temp;
+        }
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static void bubbleSort(int[] arr) <font color='#ff0000' weight='1' id='185'>{
+        int length = arr.length;
+        <font color='#000aff' weight='0.0107362' id='46'><font color='#0003ff' weight='0.00383436' id='44'><font color='#0000ff' weight='0.000766871' id='41'><font color='#0000ff' weight='0.000383436' id='40'>int</font> </font><font color='#0000ff' weight='0.000383436' id='43'>k</font>;</font>
+
+        </font><font color='#00d4ff' weight='0.208589' id='183'>for (int i = <font color='#0000ff' weight='3.1953e-05' id='53'>length</font>; i &gt;= 0; i<font color='#0000ff' weight='9.58589e-05' id='71'>--</font>) <font color='#0052ff' weight='0.0812883' id='182'>{
+            for (int j = 0; j &lt; <font color='#0000ff' weight='3.1953e-06' id='93'>length</font><font color='#0000ff' weight='3.1953e-06' id='95'>-</font><font color='#0000ff' weight='3.1953e-06' id='97'>1</font>; j++) <font color='#0007ff' weight='0.00741309' id='167'>{
+                <font color='#0000ff' weight='0.000511247' id='121'><font color='#0000ff' weight='0.00021302' id='119'><font color='#0000ff' weight='4.2604e-06' id='110'>k </font><font color='#0000ff' weight='4.2604e-06' id='112'>= </font><font color='#0000ff' weight='4.2604e-06' id='114'>j </font><font color='#0000ff' weight='4.2604e-06' id='116'>+ </font><font color='#0000ff' weight='4.2604e-06' id='118'>1</font>;</font>
+
+                </font>if (arr[j] <font color='#0000ff' weight='3.55033e-06' id='131'>&gt; </font>arr[<font color='#0000ff' weight='8.87582e-07' id='135'>k</font>])
+                    <font color='#0000ff' weight='0.000170416' id='159'><font color='#0000ff' weight='5.32549e-06' id='144'>swap</font><font color='#0000ff' weight='6.92314e-05' id='158'>(<font color='#0000ff' weight='3.99412e-06' id='148'><font color='#0000ff' weight='2.66275e-06' id='147'>j</font>, </font><font color='#0000ff' weight='3.99412e-06' id='152'><font color='#0000ff' weight='2.66275e-06' id='151'><font color='#0000ff' weight='1.33137e-06' id='150'>k</font></font>, </font><font color='#0000ff' weight='3.99412e-06' id='156'><font color='#0000ff' weight='2.66275e-06' id='155'><font color='#0000ff' weight='1.33137e-06' id='154'>arr</font></font>)</font></font></font>;
+            }</font>
+            <font color='#0002ff' weight='0.00281186' id='180'><font color='#0001ff' weight='0.00115031' id='178'><font color='#0001ff' weight='0.00102249' id='177'><font color='#0000ff' weight='6.39059e-05' id='170'>printArray</font><font color='#0000ff' weight='0.00031953' id='176'>(<font color='#0000ff' weight='9.58589e-05' id='174'><font color='#0000ff' weight='6.39059e-05' id='173'><font color='#0000ff' weight='3.1953e-05' id='172'>arr</font></font>)</font></font></font>;</font>
+        }</font></font>
+    }</font></font>
+
+  
+
+    private static void swap(int j, int k, int[] arr) {
+        int temp = arr[j];
+        arr[j] = arr[k];
+        arr[k] = temp;
+
+    }</font>
+</pre>

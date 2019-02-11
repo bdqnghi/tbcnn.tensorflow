@@ -1,0 +1,74 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public void shellSort(int[] array) {
+        for(int gap = array.length / 2; gap &gt; 0; gap /= 2) {
+            for(int i = 0; i &lt; gap; i++) {
+                for(int j = i; j &lt; array.length; j += gap) {
+                    int min = j;
+                    for(int k = j + gap; k &lt; array.length; k += gap) <font color='#ff0000' weight='1' id='212'>{
+                        if<font color='#00ffff' weight='0.25' id='197'>(<font color='#007fff' weight='0.125' id='195'>array<font color='#0015ff' weight='0.0208333' id='177'></font><font color='#0015ff' weight='0.0208333' id='183'>[<font color='#000aff' weight='0.0104167' id='181'>k]</font><font color='#000aff' weight='0.0104167' id='182'></font></font> <font color='#002aff' weight='0.0416667' id='186'>&lt;<font color='#002aff' weight='0.0416667' id='185'></font> </font><font color='#0015ff' weight='0.0208333' id='188'>array<font color='#0015ff' weight='0.0208333' id='187'></font></font>[<font color='#000aff' weight='0.0104167' id='191'>min]</font>)</font><font color='#007fff' weight='0.125' id='196'></font></font><font color='#00ffff' weight='0.25' id='209'> <font color='#00ffff' weight='0.25' id='208'>{
+                            <font color='#007fff' weight='0.125' id='206'><font color='#003fff' weight='0.0625' id='204'><font color='#0015ff' weight='0.0208333' id='199'>min </font><font color='#0015ff' weight='0.0208333' id='201'>=<font color='#0015ff' weight='0.0208333' id='200'></font> </font>k<font color='#0015ff' weight='0.0208333' id='202'></font>;</font>
+                        }</font><font color='#007fff' weight='0.125' id='207'></font></font></font>
+                    }<font color='#00ff00' weight='0.5' id='211'></font></font>
+                    swap(array, j, min);
+                }
+            }
+        }
+    }
+
+    public void swap(int[] array, int a, int b) {
+        int temp = array[a];
+        array[a] = array[b];
+        array[b] = temp;
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+package org.hibernate.envers.internal.tools.graph;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+
+public class TopologicalSort&lt;R&gt; {
+	private List&lt;R&gt; sorted;
+	private int time;
+
+	private void process(Vertex&lt;R&gt; v) {
+		if ( v.getStartTime() != 0 ) {
+			
+			return;
+		}
+
+		v.setStartTime( time++ );
+
+		for ( Vertex&lt;R&gt; n : v.getNeighbours() ) {
+			process( n );
+		}
+
+		v.setEndTime( time++ );
+
+		sorted.add( v.getRepresentation() );
+	}
+
+	public List&lt;R&gt; sort(Collection&lt;Vertex&lt;R&gt;&gt; vertices) {
+		sorted = new ArrayList&lt;&gt;( vertices.size() );
+
+		time = 1;
+
+		for ( Vertex&lt;R&gt; v : vertices ) {
+			if ( v.getEndTime() == 0 ) {
+				process( v );
+			}
+		}
+
+		Collections.reverse( sorted );
+
+		return sorted;
+	}
+}
+</font>
+</pre>

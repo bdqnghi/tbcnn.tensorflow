@@ -1,0 +1,62 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static <font color='#ff0000' weight='1' id='7'>void </font><font color='#ff0000' weight='1' id='9'>sort</font><font color='#ff0000' weight='1' id='21'>(int<font color='#ff0000' weight='1' id='13'>[]<font color='#ff0000' weight='1' id='12'></font></font> <font color='#ff0000' weight='1' id='17'>data</font>) </font>{
+        for <font color='#ff0000' weight='1' id='59'>(int k = <font color='#ff0000' weight='1' id='33'>data<font color='#ff0000' weight='1' id='30'>.</font><font color='#ff0000' weight='1' id='32'>length</font> </font>- 1; k &gt; 0; k--<font color='#ff0000' weight='1' id='54'></font>) </font>{
+            <font color='#ff0000' weight='1' id='71'><font color='#ff0000' weight='1' id='62'>int </font>largestIdx = 0;
+            </font>for (int i = 0; i<font color='#ff0000' weight='1' id='84'></font> &lt;= k; <font color='#ff0000' weight='1' id='94'>i</font>++<font color='#ff0000' weight='1' id='95'></font>) {
+                <font color='#ff0000' weight='1' id='134'>if (data[i] &gt; <font color='#ff0000' weight='1' id='112'>data<font color='#ff0000' weight='1' id='111'></font></font>[<font color='#ff0000' weight='1' id='115'>largestIdx<font color='#ff0000' weight='1' id='113'></font>]</font>)<font color='#ff0000' weight='1' id='120'></font><font color='#ff0000' weight='1' id='133'> <font color='#ff0000' weight='1' id='132'>{
+                    largestIdx = i;<font color='#ff0000' weight='1' id='129'></font>
+                }<font color='#ff0000' weight='1' id='131'></font></font></font>
+            }</font>
+            <font color='#ff0000' weight='1' id='155'><font color='#ff0000' weight='1' id='140'>int<font color='#ff0000' weight='1' id='138'></font> </font>tmp = data[k];
+            </font><font color='#ff0000' weight='1' id='176'>data<font color='#ff0000' weight='1' id='156'></font>[k] = data<font color='#ff0000' weight='1' id='172'>[<font color='#ff0000' weight='1' id='170'>largestIdx]</font><font color='#ff0000' weight='1' id='171'></font></font>;
+            </font><font color='#ff0000' weight='1' id='191'><font color='#ff0000' weight='1' id='189'><font color='#ff0000' weight='1' id='178'>data</font>[largestIdx] = tmp;</font>
+        }</font><font color='#ff0000' weight='1' id='192'></font>
+    }
+
+}</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static void sort(int arr[])
+    {       
+        heapify(arr);        
+        for (int i = N; i &gt; 0; i--)
+        {
+            swap(arr,0, i);
+            N = N-1;
+            maxheap(arr, 0);
+        }
+    }     
+       
+    public static void heapify(int arr[])
+    {
+        N = arr.length-1;
+        for (int i = N/2; i &gt;= 0; i--)
+            maxheap(arr, i);        
+    }
+            
+    public static void maxheap(int arr[], int i)
+    { 
+        int left = 2*i ;
+        int right = 2*i + 1;
+        int max = i;
+        if (left &lt;= N &amp;&amp; arr[left] &gt; arr[i])
+            max = left;
+        if (right &lt;= N &amp;&amp; arr[right] &gt; arr[max])        
+            max = right;
+ 
+        if (max != i)
+        {
+            swap(arr, i, max);
+            maxheap(arr, max);
+        }
+    }    
+    
+    public static void swap(int arr[], int i, int j)
+    {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp; 
+    }    </font>
+</pre>

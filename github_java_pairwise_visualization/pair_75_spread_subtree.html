@@ -1,0 +1,45 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+    public static void insertionSort() {
+        int ii = 0, jj = 0;
+        for (ii = 1; ii &lt; InsertionSort.ITEMS.length; ii++) {
+            jj = ii;
+            while ((jj &gt; 0)
+                    &amp;&amp; (InsertionSort.ITEMS[jj] &lt; InsertionSort.ITEMS[jj - 1])) {
+                swap(jj, jj - 1);
+                jj -= 1;
+            }
+        }
+    }
+
+    public static void swap(final int ii, final int jj) {
+        final int temp = InsertionSort.ITEMS[ii];
+        InsertionSort.ITEMS[ii] = InsertionSort.ITEMS[jj];
+        InsertionSort.ITEMS[jj] = temp;
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public void shellSort(int[] array) {
+        for(int gap = array.length / 2; gap &gt; 0; gap /= 2) {
+            for(int i = 0; i &lt; gap; i++) {
+                for(int j = i; j &lt; array.length; j += gap) {
+                    int min = j;
+                    for(int k = j + gap; k &lt; array.length; k += gap) <font color='#ff0000' weight='1' id='212'>{
+                        <font color='#00ff1d' weight='0.471429' id='210'>if<font color='#0091ff' weight='0.142857' id='197'>(<font color='#0041ff' weight='0.0642857' id='195'><font color='#0008ff' weight='0.00833333' id='184'>array[k] </font>&lt; <font color='#0008ff' weight='0.00833333' id='194'>array<font color='#0002ff' weight='0.00238095' id='193'>[<font color='#0000ff' weight='0.000595238' id='191'><font color='#0000ff' weight='0.000297619' id='190'>min</font>]</font></font></font>)</font></font><font color='#0050ff' weight='0.0785714' id='209'> <font color='#0048ff' weight='0.0714286' id='208'>{
+                            <font color='#001dff' weight='0.0285714' id='206'><font color='#000aff' weight='0.0107143' id='204'>min = <font color='#0000ff' weight='0.000595238' id='203'>k</font>;</font>
+                        }</font></font></font>
+                    }</font></font>
+                    swap(array, j, min);
+                }
+            }
+        }
+    }
+
+    public void swap(int[] array, int a, int b) {
+        int temp = array[a];
+        array[a] = array[b];
+        array[b] = temp;
+    }</font>
+</pre>

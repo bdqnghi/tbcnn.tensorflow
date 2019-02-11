@@ -1,0 +1,57 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+<font color='#ff0000' weight='1' id='258'><font color='#ff0300' weight='0.996109' id='257'>public <font color='#0001ff' weight='0.00155642' id='5'><font color='#0000ff' weight='0.00077821' id='4'>void</font> </font><font color='#0000ff' weight='0.00077821' id='7'>bubbleSortFor</font><font color='#0008ff' weight='0.00856031' id='19'>(<font color='#0000ff' weight='0.000972763' id='13'>int[] </font><font color='#0000ff' weight='0.000194553' id='15'>array</font>) </font><font color='#00bbff' weight='0.183658' id='256'>{
+
+        <font color='#0006ff' weight='0.00622568' id='52'><font color='#0002ff' weight='0.00291829' id='50'><font color='#0000ff' weight='0.000486381' id='30'>System.<font color='#0000ff' weight='9.72763e-06' id='25'>out</font><font color='#0000ff' weight='9.72763e-06' id='27'>.</font>println</font>(<font color='#0000ff' weight='0.000340467' id='45'><font color='#0000ff' weight='4.05318e-06' id='32'>Arrays</font>.<font color='#0000ff' weight='4.05318e-06' id='36'>toString</font>(array)</font>);</font>
+        </font><font color='#0001ff' weight='0.00136187' id='60'><font color='#0000ff' weight='0.000486381' id='58'>int aux;</font>
+
+        </font><font color='#0026ff' weight='0.0375486' id='254'>for <font color='#0003ff' weight='0.00321012' id='94'>(<font color='#0000ff' weight='8.10636e-06' id='63'><font color='#0000ff' weight='4.05318e-06' id='62'>int</font> </font>i = <font color='#0000ff' weight='2.83722e-05' id='73'>array<font color='#0000ff' weight='1.35106e-06' id='69'>.</font><font color='#0000ff' weight='1.35106e-06' id='71'>length</font></font>; <font color='#0000ff' weight='0.000194553' id='86'>i &gt; 0; </font><font color='#0000ff' weight='0.000121595' id='92'><font color='#0000ff' weight='9.72763e-05' id='91'>i<font color='#0000ff' weight='1.21595e-05' id='90'>--</font></font>)</font> </font><font color='#000fff' weight='0.0153696' id='253'>{
+            <font color='#0007ff' weight='0.00758755' id='251'>for <font color='#0000ff' weight='0.00077821' id='127'>(int j = 0; j &lt; i - 1; j++) </font><font color='#0003ff' weight='0.00296693' id='250'>{
+                if (<font color='#0000ff' weight='3.37765e-07' id='129'>array</font>[<font color='#0000ff' weight='1.68882e-07' id='131'>j</font>] &gt; array[<font color='#0000ff' weight='1.01329e-06' id='146'>j + 1]</font>)<font color='#0000ff' weight='0.000247244' id='214'> {
+                    aux = array[j];
+                    <font color='#0000ff' weight='2.43191e-05' id='192'><font color='#0000ff' weight='8.44412e-08' id='169'>array</font>[<font color='#0000ff' weight='8.44412e-08' id='172'><font color='#0000ff' weight='4.22206e-08' id='171'>j</font>]</font> = <font color='#0000ff' weight='8.44412e-08' id='179'>array</font>[<font color='#0000ff' weight='1.40735e-08' id='181'>j </font>+ 1];
+                    </font><font color='#0000ff' weight='1.82393e-05' id='211'><font color='#0000ff' weight='8.10636e-06' id='209'><font color='#0000ff' weight='8.44412e-08' id='194'>array</font>[j <font color='#0000ff' weight='1.40735e-08' id='198'>+ </font>1] <font color='#0000ff' weight='1.68882e-07' id='206'>= </font><font color='#0000ff' weight='1.68882e-07' id='208'>aux</font>;</font>
+                }</font></font>
+                <font color='#0000ff' weight='0.000259403' id='248'><font color='#0000ff' weight='0.000121595' id='246'><font color='#0000ff' weight='0.000117542' id='245'><font color='#0000ff' weight='4.05318e-07' id='217'>System</font><font color='#0000ff' weight='4.05318e-07' id='219'>.</font><font color='#0000ff' weight='4.05318e-07' id='221'>out</font><font color='#0000ff' weight='4.05318e-07' id='223'>.</font><font color='#0000ff' weight='4.05318e-07' id='225'>println</font><font color='#0000ff' weight='3.4452e-05' id='244'>(<font color='#0000ff' weight='3.03988e-06' id='233'>Arrays.<font color='#0000ff' weight='1.68882e-07' id='232'>toString</font></font>(<font color='#0000ff' weight='7.59971e-07' id='237'><font color='#0000ff' weight='5.06647e-07' id='236'><font color='#0000ff' weight='2.53324e-07' id='235'>array</font></font>)</font>)</font></font>;</font>
+            }</font></font>
+        }</font></font>
+    }</font></font>
+</font></font></font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public int[] sort(int num[]) {
+        
+        int h = 1;
+        
+        while (h &lt; num.length / 3)
+            h = h * 3 + 1;
+        for (; h &gt; 0; h /= 3) {
+            
+            for (int k = 0; k &lt; h; k++) {
+                
+                for (int i = h + k; i &lt; num.length; i += h) {
+                    int j = i;
+                    
+                    while (j &gt;= h &amp;&amp; num[j] &lt; num[j - h]) {
+                        swap(num, j, j - h);
+                        j -= h;
+                    }
+
+                }
+            }
+        }
+
+        return num;
+    }
+
+    
+    private void swap(int arg[], int i, int j) {
+        
+        if (i != j) {
+            arg[i] = arg[i] ^ arg[j];
+            arg[j] = arg[j] ^ arg[i];
+            arg[i] = arg[j] ^ arg[i];
+        }
+    }</font>
+</pre>

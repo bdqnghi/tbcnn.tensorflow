@@ -1,0 +1,47 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+   public <font color='#0091ff' weight='0.142853' id='4'>static </font>&lt;Key extends Comparable&lt;Key&gt;&gt; <font color='#0091ff' weight='0.142853' id='21'>void </font><font color='#0091ff' weight='0.142853' id='23'>sort</font><font color='#0091ff' weight='0.142853' id='35'>(Key[] a) </font>{
+        <font color='#0030ff' weight='0.0476141' id='52'><font color='#0018ff' weight='0.0238045' id='50'>int n = a.length;</font>
+        </font>for (int i = <font color='#0001ff' weight='0.000986902' id='60'><font color='#0001ff' weight='0.000986902' id='59'>0</font></font>; <font color='#0003ff' weight='0.00297104' id='71'>i &lt; <font color='#0001ff' weight='0.000986902' id='70'>n<font color='#0001ff' weight='0.000986902' id='69'></font></font>;</font><font color='#0003ff' weight='0.00297104' id='72'></font> <font color='#0006ff' weight='0.00594724' id='79'><font color='#0006ff' weight='0.00594724' id='78'>i++<font color='#0003ff' weight='0.00297104' id='76'></font></font>)</font><font color='#0006ff' weight='0.00594724' id='80'></font> {
+            <font color='#0001ff' weight='0.000986902' id='84'>int<font color='#0001ff' weight='0.000986902' id='82'></font> </font><font color='#0001ff' weight='0.000986902' id='86'>exchanges </font><font color='#0001ff' weight='0.000986902' id='90'>= <font color='#0001ff' weight='0.000986902' id='89'>0</font></font>;
+            for <font color='#0003ff' weight='0.00297104' id='126'>(int j = n - 1; j &gt; i; j<font color='#0000ff' weight='0.000366859' id='122'>--<font color='#0000ff' weight='0.000366859' id='121'></font></font>) </font>{
+                if (less<font color='#0000ff' weight='0.000180846' id='127'></font>(<font color='#0000ff' weight='5.68373e-05' id='137'><font color='#0000ff' weight='5.68373e-05' id='136'>a<font color='#0000ff' weight='2.58351e-05' id='129'></font><font color='#0000ff' weight='2.58351e-05' id='135'>[<font color='#0000ff' weight='1.0334e-05' id='133'><font color='#0000ff' weight='1.0334e-05' id='132'>j</font>]</font><font color='#0000ff' weight='1.0334e-05' id='134'></font></font></font></font>, <font color='#0000ff' weight='2.58351e-05' id='140'>a<font color='#0000ff' weight='2.58351e-05' id='139'></font></font>[j - 1])) {
+                    <font color='#0000ff' weight='0.00024285' id='182'><font color='#0000ff' weight='5.68373e-05' id='160'>exch<font color='#0000ff' weight='5.68373e-05' id='159'></font></font><font color='#0000ff' weight='5.68373e-05' id='178'>(a, j, <font color='#0000ff' weight='1.0334e-05' id='175'>j - 1</font>)<font color='#0000ff' weight='1.0334e-05' id='177'></font></font>;
+                    </font><font color='#0000ff' weight='0.00024285' id='189'><font color='#0000ff' weight='5.68373e-05' id='184'>exchanges</font><font color='#0000ff' weight='5.68373e-05' id='186'>++</font>;
+                }</font><font color='#0000ff' weight='0.00024285' id='190'></font>
+            }<font color='#0001ff' weight='0.00148294' id='194'></font>
+            <font color='#0006ff' weight='0.00594724' id='210'>if (<font color='#0000ff' weight='0.000490867' id='198'>exchanges<font color='#0000ff' weight='0.000490867' id='197'></font> </font>==<font color='#0000ff' weight='0.000490867' id='199'></font> <font color='#0000ff' weight='0.000490867' id='202'>0</font>) break;
+        }</font>
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void sort(Comparable[] a){
+        int N = a.length;               
+        int h = 1;                      
+        while(h &lt; N / 3) h = 3*h + 1;   
+        while(h &gt;= 1){                  
+            for(int i = h; i &lt; N; i++){
+                
+                for(int j = i; j &gt;= h &amp;&amp; less(a[j], a[j - <font color='#0054ff' weight='0.0833333' id='160'>h<font color='#0054ff' weight='0.0833333' id='159'></font></font>]); j-= h)
+                    exch(a, j, j - h);
+            } 
+            h = h / 3;                  
+        }                              
+    }
+    
+    
+    
+    
+    
+    
+    public static boolean less(Comparable v, Comparable w)
+    {    return v.compareTo(w) &lt; 0; }
+    
+    
+    private static void exch(Comparable[] a, int i, int j){
+        Comparable swap = a[i];
+        a[i] = a[j];
+        a[j] = swap;
+    }</font>
+</pre>

@@ -1,0 +1,101 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+
+public class AcyclicSP {
+
+    private double[] distTo;    
+    private DirectedEdge[] edgeTo;  
+
+    
+    
+    public AcyclicSP(EdgeWeightedDigraph G, int s) {
+        distTo = new double[G.V()];
+        edgeTo = new DirectedEdge[G.V()];
+
+        validateVertex(s);
+
+        for (int v = 0; v &lt; G.V(); v++) {
+            distTo[v] = Double.POSITIVE_INFINITY;
+        }
+        distTo[s] = 0.0;
+
+        
+        Topological topological = new Topological<font color='#ff0000' weight='1' id='202'>(<font color='#00ffcb' weight='0.3' id='200'><font color='#00cbff' weight='0.2' id='199'><font color='#0066ff' weight='0.1' id='198'>G</font></font>)</font></font>;
+        if (!topological.hasOrder()) {
+            throw new IllegalArgumentException("Digraph is not acyclic.");
+        }
+        for (int v : topological.order()) {
+            for (DirectedEdge e : G.adj(v)) {
+                relax(e);
+            }
+        }
+    }
+
+    
+    private void relax(DirectedEdge e) {
+        int v = e.from(), w = e.to();
+        if (distTo[w] &gt; distTo[v] + e.weight()) {
+            distTo[w] = distTo[v] + e.weight();
+            edgeTo[w] = e;
+        }
+    }
+
+    
+    public double distTo(int v) {
+        validateVertex(v);
+        return distTo[v];
+    }
+
+    
+    public boolean hasPathTo(int v) {
+        validateVertex(v);
+        return distTo[v] &lt; Double.POSITIVE_INFINITY;
+    }
+
+    
+    public Iterable&lt;DirectedEdge&gt; pathTo(int v) {
+        validateVertex(v);
+        if (!hasPathTo(v)) {
+            return null;
+        }
+        Stack&lt;DirectedEdge&gt; path = new Stack&lt;DirectedEdge&gt;();
+        for (DirectedEdge e = edgeTo[v]; e != null; e = edgeTo[e.from()]) {
+            path.push(e);
+        }
+        return path;
+    }
+
+    
+    private void validateVertex(int v) {
+        int V = distTo.length;
+        if (v &lt; 0 || v &gt;= V) {
+            throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V - 1));
+        }
+    }
+
+
+}
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void bubbleSort(int arr[]) {
+      int len = arr.length;
+      for (int i = len; i &gt;= 0; i--) {
+         for (int j = 0; j &lt; len - 1; j++) <font color='#ff0000' weight='1' id='163'>{
+            int <font color='#0000ff' weight='0.000896057' id='105'>k </font>= <font color='#0000ff' weight='0.000298686' id='107'>j </font><font color='#0000ff' weight='0.000298686' id='109'>+ </font><font color='#0000ff' weight='0.000298686' id='111'>1</font>;
+            if (<font color='#0000ff' weight='0.000224014' id='118'>arr</font>[<font color='#0000ff' weight='0.000112007' id='120'>j</font>] &gt; <font color='#0000ff' weight='0.000224014' id='128'>arr</font>[<font color='#0000ff' weight='0.000112007' id='130'>k</font>]) <font color='#0039ff' weight='0.0564516' id='159'>{
+               <font color='#000aff' weight='0.0107527' id='154'><font color='#0000ff' weight='0.000336022' id='139'>swapNumbers</font><font color='#0004ff' weight='0.00436828' id='153'>(<font color='#0000ff' weight='0.000252016' id='143'><font color='#0000ff' weight='0.000168011' id='142'><font color='#0000ff' weight='8.40054e-05' id='141'>j</font></font>, </font><font color='#0000ff' weight='0.000252016' id='147'><font color='#0000ff' weight='0.000168011' id='146'><font color='#0000ff' weight='8.40054e-05' id='145'>k</font></font>, </font><font color='#0000ff' weight='0.000252016' id='151'><font color='#0000ff' weight='0.000168011' id='150'><font color='#0000ff' weight='8.40054e-05' id='149'>arr</font></font>)</font></font></font>;
+            }</font>
+         }</font>
+      }
+   }
+
+   private static void swapNumbers(int i, int j, int[] arr) {
+      int temp;
+      temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
+   }</font>
+</pre>
