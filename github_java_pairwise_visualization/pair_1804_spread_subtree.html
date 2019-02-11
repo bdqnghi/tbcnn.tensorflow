@@ -1,0 +1,116 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public void shellSort_1() <font color='#ff0000' weight='1' id='386'>{
+        
+        <font color='#0006ff' weight='0.00631649' id='29'><font color='#0000ff' weight='5.54078e-05' id='11'>long</font> <font color='#0000ff' weight='5.54078e-05' id='14'>begin </font>= <font color='#0000ff' weight='9.23464e-06' id='16'>System</font>.<font color='#0000ff' weight='9.23464e-06' id='20'>nanoTime</font>();
+        </font><font color='#0003ff' weight='0.00365691' id='41'>int step = 0;
+        
+        </font>while<font color='#0001ff' weight='0.00132979' id='50'>(step &lt;= n) </font>{
+            <font color='#0001ff' weight='0.00132979' id='67'><font color='#0000ff' weight='0.000581782' id='65'><font color='#0000ff' weight='5.93655e-06' id='52'>step </font><font color='#0000ff' weight='5.93655e-06' id='54'>= </font>3 * step + 1;</font>
+        }</font>
+
+        <font color='#001cff' weight='0.028258' id='156'>if <font color='#0001ff' weight='0.00177305' id='87'>(<font color='#0000ff' weight='0.000775709' id='85'><font color='#0000ff' weight='7.9154e-06' id='72'>step </font><font color='#0000ff' weight='7.9154e-06' id='74'>== </font><font color='#0000ff' weight='7.9154e-06' id='76'>1 </font>|| step == 4)</font></font><font color='#0001ff' weight='0.00121897' id='99'> <font color='#0001ff' weight='0.00110816' id='98'>{
+            <font color='#0000ff' weight='0.000443262' id='96'><font color='#0000ff' weight='0.000166223' id='94'><font color='#0000ff' weight='9.23463e-06' id='89'>step </font>= <font color='#0000ff' weight='9.23463e-06' id='93'>1</font>;</font>
+        }</font></font>
+        </font><font color='#0006ff' weight='0.00609486' id='155'>else <font color='#0006ff' weight='0.00598404' id='154'>{
+            for (<font color='#0000ff' weight='3.11669e-05' id='109'><font color='#0000ff' weight='2.30866e-06' id='102'>int </font>i = <font color='#0000ff' weight='2.30866e-06' id='107'><font color='#0000ff' weight='1.15433e-06' id='106'>0</font></font>;</font> <font color='#0000ff' weight='1.15433e-06' id='113'>i </font>&lt; 2; i++) {
+                <font color='#0000ff' weight='0.000277039' id='149'>step = (step <font color='#0000ff' weight='7.69553e-07' id='138'>- </font>1) <font color='#0000ff' weight='7.69553e-07' id='144'>/ </font>3;
+            }</font>
+        }</font></font>
+        
+        
+        </font><font color='#0041ff' weight='0.0644947' id='351'>for (<font color='#0000ff' weight='1.38519e-05' id='159'><font color='#0000ff' weight='6.92597e-06' id='158'>int</font> </font>shell = step; <font color='#0000ff' weight='0.000332447' id='177'><font color='#0000ff' weight='0.000124668' id='175'>shell &gt; 0;</font> </font>shell = (<font color='#0000ff' weight='4.61732e-06' id='185'>shell </font>- 1) / <font color='#0000ff' weight='4.61732e-06' id='195'>3</font>) <font color='#0019ff' weight='0.0249335' id='350'>{
+            
+            <font color='#000cff' weight='0.0123005' id='348'>for (<font color='#0000ff' weight='3.46299e-06' id='202'>int </font><font color='#0000ff' weight='1.73149e-06' id='204'>i </font><font color='#0000ff' weight='5.19448e-06' id='208'>= <font color='#0000ff' weight='1.73149e-06' id='206'>shell</font></font>; <font color='#0000ff' weight='8.31117e-05' id='220'><font color='#0000ff' weight='1.73149e-06' id='213'>i </font><font color='#0000ff' weight='1.73149e-06' id='215'>&lt; </font><font color='#0000ff' weight='1.73149e-06' id='217'>n</font>; </font><font color='#0000ff' weight='3.46299e-06' id='222'>i </font><font color='#0000ff' weight='3.46299e-06' id='224'>+= </font>1) {
+
+                <font color='#0000ff' weight='1.3852e-06' id='232'>int</font> temp = <font color='#0000ff' weight='1.10816e-05' id='244'><font color='#0000ff' weight='9.69637e-06' id='243'>array<font color='#0000ff' weight='2.77039e-06' id='242'>[i]</font></font></font>;
+                int j;
+                
+                for <font color='#0000ff' weight='0.000187001' id='302'>(<font color='#0000ff' weight='3.11669e-06' id='263'>j <font color='#0000ff' weight='1.73149e-07' id='260'>= </font><font color='#0000ff' weight='1.73149e-07' id='262'>i</font>;</font> <font color='#0000ff' weight='1.24668e-05' id='290'>j &gt;= shell &amp;&amp; <font color='#0000ff' weight='8.16276e-07' id='285'>array<font color='#0000ff' weight='2.96828e-07' id='284'>[j - shell]</font> </font><font color='#0000ff' weight='7.42069e-08' id='287'>&gt; </font><font color='#0000ff' weight='7.42069e-08' id='289'>temp</font>;</font> <font color='#0000ff' weight='3.46299e-07' id='294'>j </font><font color='#0000ff' weight='3.46299e-07' id='296'>-= </font><font color='#0000ff' weight='3.46299e-07' id='298'>shell</font>) </font><font color='#0000ff' weight='0.000108045' id='329'>{
+                    <font color='#0000ff' weight='4.9867e-05' id='327'><font color='#0000ff' weight='2.28557e-05' id='325'><font color='#0000ff' weight='1.73149e-07' id='304'>array</font><font color='#0000ff' weight='6.92598e-07' id='309'>[<font color='#0000ff' weight='1.73149e-07' id='307'><font color='#0000ff' weight='8.65747e-08' id='306'>j</font>]</font></font> <font color='#0000ff' weight='3.46299e-07' id='312'>= </font><font color='#0000ff' weight='1.73149e-07' id='314'>array</font>[<font color='#0000ff' weight='2.88582e-08' id='316'>j </font><font color='#0000ff' weight='2.88582e-08' id='318'>- </font><font color='#0000ff' weight='2.88582e-08' id='320'>shell</font>];</font>
+                }</font></font>
+
+                <font color='#0000ff' weight='0.000116356' id='345'><font color='#0000ff' weight='9.69637e-06' id='338'><font color='#0000ff' weight='6.92598e-07' id='332'>array</font><font color='#0000ff' weight='2.77039e-06' id='337'>[<font color='#0000ff' weight='6.92598e-07' id='335'>j]</font></font> </font>= <font color='#0000ff' weight='1.3852e-06' id='342'>temp</font>;
+            }</font>
+        }</font></font>
+        
+        </font><font color='#0006ff' weight='0.00631649' id='371'><font color='#0000ff' weight='0.000110816' id='354'><font color='#0000ff' weight='5.54078e-05' id='353'>long</font> </font><font color='#0000ff' weight='5.54078e-05' id='356'>end </font>= System<font color='#0000ff' weight='9.23464e-06' id='360'>.</font>nanoTime();
+        </font><font color='#0004ff' weight='0.00398936' id='384'><font color='#0001ff' weight='0.00166223' id='382'><font color='#0000ff' weight='3.32447e-05' id='373'>time </font>= end <font color='#0000ff' weight='3.32447e-05' id='379'>- </font><font color='#0000ff' weight='3.32447e-05' id='381'>begin</font>;</font>
+        
+    }</font></font> 
+    </font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ 
+  public static void sort(double[] a)
+  {
+    int n = a.length;
+    temp = new double[n];
+    recursiveSort(a, 0, n-1);
+  }
+
+  
+  private static void recursiveSort(double[] a, int from, int to)
+  {
+    if (to - from &lt; 2)       
+    {
+      if (to &gt; from &amp;&amp; a[to] &lt; a[from])
+      {
+        double aTemp = a[to];  
+        a[to] = a[from];
+        a[from] = aTemp;
+      }
+    }
+    else                     
+    {
+      int middle = (from + to) / 2;
+      recursiveSort(a, from, middle);
+      recursiveSort(a, middle + 1, to);
+      merge(a, from, middle, to);
+    }
+  }
+
+  
+  
+  private static void merge(double[] a, int from, <font color='#ff0000' weight='1' id='352'><font color='#ffaa00' weight='0.833333' id='351'><font color='#00a9ff' weight='0.166667' id='348'><font color='#0054ff' weight='0.0833333' id='347'>int</font> </font><font color='#0054ff' weight='0.0833333' id='350'>middle</font></font>, </font>int to)
+  {
+    int i = from, j = middle + 1, k = from;
+
+    
+    while (i &lt;= middle &amp;&amp; j &lt;= to)
+    {
+      if (a[i] &lt; a[j])
+      {
+        temp[k] = a[i];   
+        i++;
+      }
+      else
+      {
+        temp[k] = a[j];
+        j++;
+      }
+      k++;
+    }
+
+    
+    while (i &lt;= middle)
+    {
+      temp[k] = a[i];     
+      i++;
+      k++;
+    }
+
+    
+    while (j &lt;= to)
+    {
+      temp[k] = a[j];     
+      j++;
+      k++;
+    }
+
+    
+    for (k = from; k &lt;= to; k++)
+      a[k] = temp[k];
+  }</font>
+</pre>

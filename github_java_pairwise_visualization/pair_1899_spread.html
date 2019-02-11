@@ -1,0 +1,75 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public ListNode insertionSortList(ListNode head) {      
+    
+        if (head == null)
+            return null;
+        if (head.next == null) {
+            return head;
+        }
+        ListNode first = head;
+        ListNode testNode = head;
+
+        while (testNode.next != null) <font color='#ff0000' weight='1' id='357'>{
+            ListNode insertNode <font color='#0022ff' weight='0.0333333' id='108'>= <font color='#000bff' weight='0.0111111' id='101'>testNode<font color='#000bff' weight='0.0111111' id='100'></font></font><font color='#000bff' weight='0.0111111' id='103'>.</font>next</font>;
+            
+            if (<font color='#0010ff' weight='0.0166667' id='118'><font color='#0005ff' weight='0.00555556' id='113'>testNode</font>.<font color='#0005ff' weight='0.00555556' id='114'></font><font color='#0005ff' weight='0.00555556' id='117'>val<font color='#0005ff' weight='0.00555556' id='116'></font></font> </font>&lt;= insertNode.val) <font color='#0066ff' weight='0.1' id='148'>{
+                <font color='#0022ff' weight='0.0333333' id='144'><font color='#0010ff' weight='0.0166667' id='142'><font color='#0005ff' weight='0.00555556' id='132'>testNode<font color='#0005ff' weight='0.00555556' id='131'></font> </font>=<font color='#0005ff' weight='0.00555556' id='133'></font> testNode<font color='#0001ff' weight='0.00185185' id='135'></font><font color='#0001ff' weight='0.00185185' id='138'>.</font>next<font color='#0001ff' weight='0.00185185' id='139'></font>;</font><font color='#0010ff' weight='0.0166667' id='143'></font>
+                </font><font color='#0022ff' weight='0.0333333' id='146'>continue;<font color='#0022ff' weight='0.0333333' id='145'></font>
+            }</font><font color='#0022ff' weight='0.0333333' id='147'></font></font>
+            
+            <font color='#00cbff' weight='0.2' id='217'>if (<font color='#0033ff' weight='0.05' id='167'><font color='#0005ff' weight='0.00555556' id='152'>insertNode<font color='#0005ff' weight='0.00555556' id='151'></font></font>.<font color='#0005ff' weight='0.00555556' id='153'></font>val<font color='#0005ff' weight='0.00555556' id='155'></font> <font color='#0010ff' weight='0.0166667' id='159'>&lt;= </font><font color='#0010ff' weight='0.0166667' id='166'><font color='#0005ff' weight='0.00555556' id='161'>first<font color='#0005ff' weight='0.00555556' id='160'></font></font><font color='#0005ff' weight='0.00555556' id='163'>.</font><font color='#0005ff' weight='0.00555556' id='165'>val</font></font>)</font><font color='#0066ff' weight='0.1' id='216'> {
+                <font color='#000aff' weight='0.01' id='186'><font color='#0001ff' weight='0.00111111' id='171'>testNode</font>.next <font color='#0003ff' weight='0.00333333' id='178'>= </font><font color='#0001ff' weight='0.00111111' id='180'>insertNode<font color='#0001ff' weight='0.00111111' id='179'></font></font><font color='#0001ff' weight='0.00111111' id='182'>.</font>next;</font>
+                <font color='#0014ff' weight='0.02' id='202'><font color='#000aff' weight='0.01' id='200'><font color='#0003ff' weight='0.00333333' id='195'><font color='#0001ff' weight='0.00111111' id='190'>insertNode<font color='#0001ff' weight='0.00111111' id='189'></font></font>.<font color='#0001ff' weight='0.00111111' id='191'></font><font color='#0001ff' weight='0.00111111' id='194'>next<font color='#0001ff' weight='0.00111111' id='193'></font></font> </font><font color='#0003ff' weight='0.00333333' id='197'>= </font><font color='#0003ff' weight='0.00333333' id='199'>first<font color='#0003ff' weight='0.00333333' id='198'></font></font>;</font>
+                </font><font color='#0014ff' weight='0.02' id='211'><font color='#0003ff' weight='0.00333333' id='204'>first </font>= insertNode;
+                </font><font color='#0014ff' weight='0.02' id='213'>continue;<font color='#0014ff' weight='0.02' id='212'></font>
+            }</font></font>
+
+            </font><font color='#00cbff' weight='0.2' id='355'>for <font color='#0066ff' weight='0.1' id='253'>(<font color='#0019ff' weight='0.025' id='229'><font color='#0004ff' weight='0.00416667' id='220'><font color='#0004ff' weight='0.00416667' id='219'>ListNode<font color='#0004ff' weight='0.00416667' id='218'></font></font> </font><font color='#0004ff' weight='0.00416667' id='222'>pointer<font color='#0004ff' weight='0.00416667' id='221'></font> </font><font color='#0004ff' weight='0.00416667' id='226'>= first</font>;<font color='#000cff' weight='0.0125' id='228'></font> </font>pointer<font color='#0004ff' weight='0.00416667' id='230'></font> <font color='#0004ff' weight='0.00416667' id='233'>!=<font color='#0004ff' weight='0.00416667' id='232'></font> </font><font color='#0004ff' weight='0.00416667' id='235'>testNode<font color='#0004ff' weight='0.00416667' id='234'></font></font>; <font color='#0019ff' weight='0.025' id='251'><font color='#0019ff' weight='0.025' id='250'><font color='#0008ff' weight='0.00833333' id='240'>pointer<font color='#0008ff' weight='0.00833333' id='239'></font> </font><font color='#0008ff' weight='0.00833333' id='242'>= </font><font color='#0008ff' weight='0.00833333' id='249'><font color='#0002ff' weight='0.00277778' id='244'>pointer<font color='#0002ff' weight='0.00277778' id='243'></font></font>.<font color='#0002ff' weight='0.00277778' id='248'>next</font></font></font>)</font><font color='#0019ff' weight='0.025' id='252'></font> </font><font color='#0066ff' weight='0.1' id='354'>{
+                <font color='#0033ff' weight='0.05' id='352'>if <font color='#0019ff' weight='0.025' id='294'>(<font color='#0001ff' weight='0.00178571' id='260'>pointer<font color='#0000ff' weight='0.000595238' id='254'></font>.<font color='#0000ff' weight='0.000595238' id='256'></font><font color='#0000ff' weight='0.000595238' id='259'>val<font color='#0000ff' weight='0.000595238' id='258'></font></font> </font><font color='#0001ff' weight='0.00178571' id='262'>&lt;=<font color='#0001ff' weight='0.00178571' id='261'></font> </font><font color='#0000ff' weight='0.000595238' id='264'>insertNode<font color='#0000ff' weight='0.000595238' id='263'></font></font><font color='#0000ff' weight='0.000595238' id='266'>.<font color='#0000ff' weight='0.000595238' id='265'></font></font><font color='#0000ff' weight='0.000595238' id='268'>val</font>
+                        <font color='#0001ff' weight='0.00178571' id='271'>&amp;&amp; </font><font color='#0001ff' weight='0.00178571' id='278'><font color='#0000ff' weight='0.000595238' id='273'>insertNode<font color='#0000ff' weight='0.000595238' id='272'></font></font>.<font color='#0000ff' weight='0.000595238' id='277'>val</font> </font><font color='#0001ff' weight='0.00178571' id='280'>&lt;=<font color='#0001ff' weight='0.00178571' id='279'></font> </font><font color='#0000ff' weight='0.000357143' id='282'>pointer</font><font color='#0000ff' weight='0.000357143' id='284'>.</font><font color='#0000ff' weight='0.000357143' id='286'>next</font>.<font color='#0000ff' weight='0.000357143' id='287'></font>val<font color='#0000ff' weight='0.000357143' id='289'></font>)</font><font color='#0019ff' weight='0.025' id='351'> <font color='#0019ff' weight='0.025' id='350'>{
+                    <font color='#0005ff' weight='0.005' id='313'><font color='#0002ff' weight='0.0025' id='311'><font color='#0000ff' weight='0.000277778' id='296'>testNode</font>.<font color='#0000ff' weight='0.000277778' id='300'>next<font color='#0000ff' weight='0.000277778' id='299'></font></font> <font color='#0000ff' weight='0.000833333' id='303'>=<font color='#0000ff' weight='0.000833333' id='302'></font> </font><font color='#0000ff' weight='0.000833333' id='310'><font color='#0000ff' weight='0.000277778' id='305'>insertNode</font><font color='#0000ff' weight='0.000277778' id='307'>.</font><font color='#0000ff' weight='0.000277778' id='309'>next</font></font>;</font><font color='#0002ff' weight='0.0025' id='312'></font>
+                    </font><font color='#0005ff' weight='0.005' id='332'><font color='#0000ff' weight='0.000833333' id='320'><font color='#0000ff' weight='0.000277778' id='315'>insertNode</font><font color='#0000ff' weight='0.000277778' id='317'>.<font color='#0000ff' weight='0.000277778' id='316'></font></font><font color='#0000ff' weight='0.000277778' id='319'>next</font> </font><font color='#0000ff' weight='0.000833333' id='322'>=<font color='#0000ff' weight='0.000833333' id='321'></font> </font><font color='#0000ff' weight='0.000833333' id='329'><font color='#0000ff' weight='0.000277778' id='324'>pointer</font><font color='#0000ff' weight='0.000277778' id='326'>.</font><font color='#0000ff' weight='0.000277778' id='328'>next</font></font>;
+                    </font><font color='#0005ff' weight='0.005' id='346'><font color='#0002ff' weight='0.0025' id='344'><font color='#0000ff' weight='0.000833333' id='339'><font color='#0000ff' weight='0.000277778' id='334'>pointer</font><font color='#0000ff' weight='0.000277778' id='336'>.</font><font color='#0000ff' weight='0.000277778' id='338'>next<font color='#0000ff' weight='0.000277778' id='337'></font></font> </font><font color='#0000ff' weight='0.000833333' id='341'>=<font color='#0000ff' weight='0.000833333' id='340'></font> </font><font color='#0000ff' weight='0.000833333' id='343'>insertNode<font color='#0000ff' weight='0.000833333' id='342'></font></font>;</font><font color='#0002ff' weight='0.0025' id='345'></font>
+                    </font><font color='#0005ff' weight='0.005' id='348'>break;<font color='#0005ff' weight='0.005' id='347'></font>
+                }</font><font color='#0005ff' weight='0.005' id='349'></font></font></font>
+            }</font><font color='#0033ff' weight='0.05' id='353'></font></font>
+        }</font><font color='#00cbff' weight='0.2' id='356'></font></font>
+
+        return first;
+    }
+
+    </font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void sort(int[] arr) {
+        int max = Integer.MAX_VALUE;
+        int min = Integer.MIN_VALUE;
+
+        for (int i = 0; i &lt; arr.length; i++) {
+            max = Math.max(max, arr[i]);
+            min = Math.min(min, arr[i]);
+        }
+        
+        
+        int bucketNum = (max - min) / arr.length + 1;
+        ArrayList&lt;ArrayList&lt;Integer&gt;&gt; bucketArr = new ArrayList&lt;&gt;(bucketNum);
+        for (int i = 0; i &lt; bucketNum; i++) {
+            bucketArr.add(new ArrayList&lt;&gt;());
+        }
+
+        
+        for (int i = 0; i &lt; arr.length; i++) {
+            int num = (arr[i] - min) / (arr.length);
+            bucketArr.get(num).add(arr[i]);
+        }
+
+        
+        for (int i = 0; i &lt; bucketArr.size(); i++) {
+            Collections.sort(bucketArr.get(i));
+        }
+
+        System.out.println(bucketArr.toString());
+    }</font>
+</pre>

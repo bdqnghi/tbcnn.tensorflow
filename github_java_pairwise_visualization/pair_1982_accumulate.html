@@ -1,0 +1,87 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+package PukyungUniv;
+
+import static org.junit.Assert.assertEquals;
+
+import java.util.Arrays;
+
+import org.junit.Test;
+
+public class Sort_HeapSort {
+
+    private static int getLeftChildIdx(int parent) {
+        return (parent + 1) * 2 - 1;
+    }
+
+    private int getParentIdx(int child) {
+        if (child &lt; 1) {
+            return -1;
+        } else {
+            return (child + 1) / 2 - 1;
+        }
+    }
+
+    private static void maxHeapify(int[] data, int i, int end) {
+        int leftChild = getLeftChildIdx(i);
+        while (leftChild &lt;= end) {
+            int largeChild;
+            if (leftChild == end) {
+                largeChild = leftChild;
+            } else {
+                largeChild = data[leftChild] &gt; data[leftChild + 1] ? leftChild : leftChild + 1;
+            }
+            if (data[i] &gt;= data[largeChild]) {
+                return;
+            }
+            swap(data, i, largeChild);
+            i = largeChild;
+            leftChild = getLeftChildIdx(i);
+        }
+    }
+
+    private static void swap(int[] data, int i, int j) {
+        int t = data[i];
+        data[i] = data[j];
+        data[j] = t;
+    }
+
+    public static void sort(int[] data) {
+        makeHeap(data);
+        sortFromHeap(data);
+    }
+
+    private static void makeHeap(int[] data) {
+        for (int i = data.length / 2 - 1; i &gt;= 0; i--) {
+            maxHeapify(data, i, data.length - 1);
+        }
+    }
+
+    private static void sortFromHeap(int[] data) {
+        int last = data.length - 1;
+        while (last &gt; 0) {
+            swap(data, 0, last);
+            last--;
+            maxHeapify(data, 0, last);
+        }
+    }
+
+}
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static &lt;T extends Comparable&lt;T&gt;&gt; void sort(List&lt;T&gt; itemsToSort) {
+        for (int i = 0; i &lt; itemsToSort.size(); i++) {
+            for (int j = itemsToSort.size() - 1; j &gt; 0; j--) <font color='#ff0000' weight='1' id='241'>{
+                <font color='#ff0000' weight='1' id='140'><font color='#ff0000' weight='1' id='138'><font color='#ff0000' weight='1' id='119'><font color='#ff0000' weight='1' id='118'>T</font> </font><font color='#ff0000' weight='1' id='121'>secondItem </font><font color='#ff0000' weight='1' id='137'>= <font color='#ff0000' weight='1' id='136'><font color='#ff0000' weight='1' id='135'><font color='#ff0000' weight='1' id='128'><font color='#ff0000' weight='1' id='123'>itemsToSort</font>.<font color='#ff0000' weight='1' id='127'>get</font></font><font color='#ff0000' weight='1' id='134'>(<font color='#ff0000' weight='1' id='132'><font color='#ff0000' weight='1' id='131'><font color='#ff0000' weight='1' id='130'>j<font color='#ff0000' weight='1' id='129'></font></font></font>)</font><font color='#ff0000' weight='1' id='133'></font></font></font></font></font>;</font><font color='#ff0000' weight='1' id='139'></font>
+                </font><font color='#ff0000' weight='1' id='142'>T</font> <font color='#ff0000' weight='1' id='145'>firstItem </font>= <font color='#ff0000' weight='1' id='163'><font color='#ff0000' weight='1' id='152'><font color='#ff0000' weight='1' id='147'>itemsToSort</font>.<font color='#ff0000' weight='1' id='151'>get</font></font><font color='#ff0000' weight='1' id='162'>(<font color='#ff0000' weight='1' id='160'><font color='#ff0000' weight='1' id='159'><font color='#ff0000' weight='1' id='154'>j<font color='#ff0000' weight='1' id='153'></font> </font>- 1</font>)</font><font color='#ff0000' weight='1' id='161'></font></font></font>;
+
+                <font color='#ff0000' weight='1' id='239'>if <font color='#ff0000' weight='1' id='189'>(<font color='#ff0000' weight='1' id='182'><font color='#ff0000' weight='1' id='175'><font color='#ff0000' weight='1' id='170'>secondItem</font><font color='#ff0000' weight='1' id='172'>.<font color='#ff0000' weight='1' id='171'></font></font><font color='#ff0000' weight='1' id='174'>compareTo<font color='#ff0000' weight='1' id='173'></font></font></font><font color='#ff0000' weight='1' id='181'>(<font color='#ff0000' weight='1' id='179'><font color='#ff0000' weight='1' id='178'><font color='#ff0000' weight='1' id='177'>firstItem<font color='#ff0000' weight='1' id='176'></font></font></font>)</font><font color='#ff0000' weight='1' id='180'></font></font> </font><font color='#ff0000' weight='1' id='184'>&lt; </font>0)</font><font color='#ff0000' weight='1' id='238'> <font color='#ff0000' weight='1' id='237'>{
+                    <font color='#ff0000' weight='1' id='196'><font color='#ff0000' weight='1' id='191'>itemsToSort<font color='#ff0000' weight='1' id='190'></font></font><font color='#ff0000' weight='1' id='193'>.<font color='#ff0000' weight='1' id='192'></font></font><font color='#ff0000' weight='1' id='195'>set</font></font>(<font color='#ff0000' weight='1' id='198'>j</font>, <font color='#ff0000' weight='1' id='202'>firstItem</font>);
+                    <font color='#ff0000' weight='1' id='235'><font color='#ff0000' weight='1' id='233'><font color='#ff0000' weight='1' id='232'><font color='#ff0000' weight='1' id='217'><font color='#ff0000' weight='1' id='212'>itemsToSort</font><font color='#ff0000' weight='1' id='214'>.</font><font color='#ff0000' weight='1' id='216'>set</font></font>(<font color='#ff0000' weight='1' id='219'>j </font><font color='#ff0000' weight='1' id='221'>-<font color='#ff0000' weight='1' id='220'></font> </font><font color='#ff0000' weight='1' id='223'>1<font color='#ff0000' weight='1' id='222'></font></font>, <font color='#ff0000' weight='1' id='227'>secondItem</font>)</font>;</font>
+                }</font></font></font>
+            }</font></font>
+        }
+    }</font>
+</pre>

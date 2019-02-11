@@ -1,0 +1,71 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static int partition(int arr[], int low, int high)
+ <font color='#ff0000' weight='1' id='258'>{
+     <font color='#ff0000' weight='1' id='51'>int pivot <font color='#ff0000' weight='1' id='50'>= <font color='#ff0000' weight='1' id='48'><font color='#ff0000' weight='1' id='42'>arr</font>[<font color='#ff0000' weight='1' id='44'>high<font color='#ff0000' weight='1' id='43'></font></font>]</font></font>;</font><font color='#ff0000' weight='1' id='52'></font> 
+     <font color='#ff0000' weight='1' id='73'>int<font color='#ff0000' weight='1' id='54'></font> <font color='#ff0000' weight='1' id='58'>i<font color='#ff0000' weight='1' id='57'></font> </font>= (<font color='#ff0000' weight='1' id='59'></font>low<font color='#ff0000' weight='1' id='61'></font><font color='#ff0000' weight='1' id='64'>-</font><font color='#ff0000' weight='1' id='66'>1<font color='#ff0000' weight='1' id='65'></font></font><font color='#ff0000' weight='1' id='68'>)<font color='#ff0000' weight='1' id='67'></font></font>;<font color='#ff0000' weight='1' id='72'></font> 
+     </font><font color='#ff0000' weight='1' id='185'>for <font color='#ff0000' weight='1' id='102'>(int<font color='#ff0000' weight='1' id='74'></font> j<font color='#ff0000' weight='1' id='82'>=<font color='#ff0000' weight='1' id='81'>low</font></font>; j&lt;<font color='#ff0000' weight='1' id='91'>high<font color='#ff0000' weight='1' id='90'></font></font>;<font color='#ff0000' weight='1' id='93'></font> j++<font color='#ff0000' weight='1' id='97'></font>)<font color='#ff0000' weight='1' id='101'></font>
+     </font><font color='#ff0000' weight='1' id='184'>{
+         
+         
+         <font color='#ff0000' weight='1' id='182'>if <font color='#ff0000' weight='1' id='117'>(<font color='#ff0000' weight='1' id='115'><font color='#ff0000' weight='1' id='110'><font color='#ff0000' weight='1' id='104'>arr</font>[j] </font><font color='#ff0000' weight='1' id='112'>&lt;= </font><font color='#ff0000' weight='1' id='114'>pivot<font color='#ff0000' weight='1' id='113'></font></font>)</font><font color='#ff0000' weight='1' id='116'></font></font><font color='#ff0000' weight='1' id='181'>
+         <font color='#ff0000' weight='1' id='180'>{
+             <font color='#ff0000' weight='1' id='124'><font color='#ff0000' weight='1' id='122'><font color='#ff0000' weight='1' id='119'>i</font><font color='#ff0000' weight='1' id='121'>++</font>;</font><font color='#ff0000' weight='1' id='123'></font>
+
+             
+             </font><font color='#ff0000' weight='1' id='142'>int temp = <font color='#ff0000' weight='1' id='137'><font color='#ff0000' weight='1' id='131'>arr</font><font color='#ff0000' weight='1' id='136'>[<font color='#ff0000' weight='1' id='133'>i<font color='#ff0000' weight='1' id='132'></font></font>]</font></font>;
+             </font><font color='#ff0000' weight='1' id='163'><font color='#ff0000' weight='1' id='161'><font color='#ff0000' weight='1' id='150'><font color='#ff0000' weight='1' id='144'>arr<font color='#ff0000' weight='1' id='143'></font></font><font color='#ff0000' weight='1' id='149'>[<font color='#ff0000' weight='1' id='147'><font color='#ff0000' weight='1' id='146'>i<font color='#ff0000' weight='1' id='145'></font></font>]</font><font color='#ff0000' weight='1' id='148'></font></font> </font><font color='#ff0000' weight='1' id='152'>=<font color='#ff0000' weight='1' id='151'></font> </font><font color='#ff0000' weight='1' id='160'><font color='#ff0000' weight='1' id='154'>arr</font>[j]</font>;</font><font color='#ff0000' weight='1' id='162'></font>
+             </font><font color='#ff0000' weight='1' id='178'><font color='#ff0000' weight='1' id='176'><font color='#ff0000' weight='1' id='171'><font color='#ff0000' weight='1' id='165'>arr<font color='#ff0000' weight='1' id='164'></font></font><font color='#ff0000' weight='1' id='170'>[<font color='#ff0000' weight='1' id='168'><font color='#ff0000' weight='1' id='167'>j<font color='#ff0000' weight='1' id='166'></font></font>]</font><font color='#ff0000' weight='1' id='169'></font></font> </font><font color='#ff0000' weight='1' id='173'>= </font><font color='#ff0000' weight='1' id='175'>temp<font color='#ff0000' weight='1' id='174'></font></font>;</font><font color='#ff0000' weight='1' id='177'></font>
+         }</font><font color='#ff0000' weight='1' id='179'></font></font></font>
+     }</font><font color='#ff0000' weight='1' id='183'></font></font>
+
+     
+     </font><font color='#ff0000' weight='1' id='207'><font color='#ff0000' weight='1' id='205'><font color='#ff0000' weight='1' id='188'><font color='#ff0000' weight='1' id='187'>int<font color='#ff0000' weight='1' id='186'></font></font> </font><font color='#ff0000' weight='1' id='190'>temp<font color='#ff0000' weight='1' id='189'></font> </font><font color='#ff0000' weight='1' id='204'>= <font color='#ff0000' weight='1' id='203'><font color='#ff0000' weight='1' id='202'><font color='#ff0000' weight='1' id='192'>arr</font>[<font color='#ff0000' weight='1' id='194'>i</font>+1]<font color='#ff0000' weight='1' id='200'></font></font></font></font>;</font><font color='#ff0000' weight='1' id='206'></font>
+     </font><font color='#ff0000' weight='1' id='232'><font color='#ff0000' weight='1' id='209'>arr<font color='#ff0000' weight='1' id='208'></font></font>[<font color='#ff0000' weight='1' id='211'>i<font color='#ff0000' weight='1' id='210'></font></font><font color='#ff0000' weight='1' id='213'>+</font><font color='#ff0000' weight='1' id='215'>1<font color='#ff0000' weight='1' id='214'></font></font>] = <font color='#ff0000' weight='1' id='229'><font color='#ff0000' weight='1' id='223'>arr<font color='#ff0000' weight='1' id='222'></font></font><font color='#ff0000' weight='1' id='228'>[<font color='#ff0000' weight='1' id='226'><font color='#ff0000' weight='1' id='225'>high<font color='#ff0000' weight='1' id='224'></font></font>]</font><font color='#ff0000' weight='1' id='227'></font></font></font>;
+     </font><font color='#ff0000' weight='1' id='247'><font color='#ff0000' weight='1' id='245'><font color='#ff0000' weight='1' id='240'><font color='#ff0000' weight='1' id='234'>arr<font color='#ff0000' weight='1' id='233'></font></font><font color='#ff0000' weight='1' id='239'>[<font color='#ff0000' weight='1' id='237'><font color='#ff0000' weight='1' id='236'>high<font color='#ff0000' weight='1' id='235'></font></font>]</font><font color='#ff0000' weight='1' id='238'></font></font> </font><font color='#ff0000' weight='1' id='242'>=<font color='#ff0000' weight='1' id='241'></font> </font><font color='#ff0000' weight='1' id='244'>temp<font color='#ff0000' weight='1' id='243'></font></font>;</font><font color='#ff0000' weight='1' id='246'></font>
+
+     </font><font color='#ff0000' weight='1' id='256'>return <font color='#ff0000' weight='1' id='254'><font color='#ff0000' weight='1' id='249'>i<font color='#ff0000' weight='1' id='248'></font></font><font color='#ff0000' weight='1' id='251'>+<font color='#ff0000' weight='1' id='250'></font></font><font color='#ff0000' weight='1' id='253'>1<font color='#ff0000' weight='1' id='252'></font></font>;</font><font color='#ff0000' weight='1' id='255'></font>
+ }</font><font color='#ff0000' weight='1' id='257'></font></font>
+
+
+ 
+ public static void sort(int arr[], int low, int high)
+ {
+     if (low &lt; high)
+     {
+         
+         int pi = partition(arr, low, high);
+
+         
+         
+         sort(arr, low, pi-1);
+         sort(arr, pi+1, high);
+     }
+ }
+
+ </font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+import java.util.*;
+
+class BSorting{
+    public static void main(String[]args){
+     
+
+        for(int i = 0; i &lt;= numbers.length - 1; i++){
+            for(int j = 0; j &lt; numbers.length - 1; j++){
+                if(numbers[j] &gt; numbers[j + 1]){
+                    int temp = numbers[j];
+                    numbers[j] = numbers[j + 1];
+                    numbers[j + 1] = temp;
+                }
+            }
+        
+        }
+
+   
+    }
+}
+</font>
+</pre>

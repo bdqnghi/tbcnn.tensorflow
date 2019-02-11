@@ -1,0 +1,67 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+private <font color='#00cbff' weight='0.199981' id='5'>void<font color='#00cbff' weight='0.199981' id='3'></font> </font><font color='#00cbff' weight='0.199981' id='7'>insertionSort</font><font color='#00cbff' weight='0.199981' id='26'>(<font color='#0043ff' weight='0.0666451' id='17'>int[] a, </font>int len) </font>{
+        
+        for (<font color='#0006ff' weight='0.006227' id='36'>int i<font color='#0002ff' weight='0.00206023' id='30'></font> = <font color='#0002ff' weight='0.00206023' id='33'>1</font>;</font> <font color='#0006ff' weight='0.006227' id='45'><font color='#0002ff' weight='0.00206023' id='40'>i </font><font color='#0002ff' weight='0.00206023' id='42'>&lt;<font color='#0002ff' weight='0.00206023' id='41'></font> </font>len;</font> <font color='#000cff' weight='0.0124771' id='53'>i<font color='#0006ff' weight='0.006227' id='51'>++<font color='#0006ff' weight='0.006227' id='50'></font></font>)</font> {
+            <font color='#000aff' weight='0.00997708' id='73'>int <font color='#0001ff' weight='0.00164356' id='60'>value </font>= a[i];   
+            </font><font color='#000aff' weight='0.00997708' id='85'>int<font color='#0001ff' weight='0.00164356' id='74'></font> <font color='#0001ff' weight='0.00164356' id='78'>position<font color='#0001ff' weight='0.00164356' id='77'></font> </font>= <font color='#0001ff' weight='0.00164356' id='81'><font color='#0001ff' weight='0.00164356' id='80'>i</font></font>;   
+            
+            
+            </font>while <font color='#0005ff' weight='0.00497697' id='112'>(<font color='#0002ff' weight='0.00247691' id='110'>position &gt; 0 &amp;&amp; <font color='#0000ff' weight='0.000334002' id='105'><font color='#0000ff' weight='0.000155427' id='95'>a</font><font color='#0000ff' weight='0.000155427' id='104'>[<font color='#0000ff' weight='6.61391e-05' id='102'>position-1]</font></font> </font><font color='#0000ff' weight='0.000334002' id='107'>&gt; </font><font color='#0000ff' weight='0.000334002' id='109'>value</font>)</font><font color='#0002ff' weight='0.00247691' id='111'></font> </font>{
+                <font color='#0000ff' weight='0.000254635' id='120'><font color='#0000ff' weight='0.000115743' id='114'>a</font>[position] </font><font color='#0000ff' weight='0.000254635' id='122'>= </font><font color='#0000ff' weight='0.000115743' id='124'>a<font color='#0000ff' weight='0.000115743' id='123'></font></font>[position-1];    
+                <font color='#0001ff' weight='0.00164356' id='144'>position--;                     
+            }</font>
+            
+            
+            <font color='#000aff' weight='0.00997708' id='162'>a[position] = value;<font color='#0005ff' weight='0.00497697' id='161'></font>
+        }</font><font color='#000aff' weight='0.00997708' id='163'></font>
+    }<font color='#0065ff' weight='0.0999792' id='166'></font>
+    </font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static int partition(int arr[], int low, int high)
+ {
+     int pivot = arr[high]; 
+     int i = (low-1); 
+     for (int j=low; j&lt;high; j++)
+     {
+         
+         
+         if (arr[j] &lt;= pivot)
+         {
+             i++;
+
+             
+             int temp = arr[i];
+             arr[i] = arr[j];
+             arr[j] = temp;
+         }
+     }
+
+     
+     int temp = arr[i+1];
+     arr[i+1] = arr[high];
+     arr[high] = temp;
+
+     return i+1;
+ }
+
+
+ 
+ public static void sort(int arr[]<font color='#ff0000' weight='1' id='274'></font>, int low, int high)
+ {
+     if (low &lt; high)
+     {
+         
+         int pi = partition(arr, low, high);
+
+         
+         
+         sort(arr, low, pi-1);
+         sort(arr, pi+1, high);
+     }
+ }
+
+ </font>
+</pre>

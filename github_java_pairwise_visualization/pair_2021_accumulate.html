@@ -1,0 +1,51 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void sort(Comparable[] a){
+        int N = a.length;               
+        int h = 1;                      
+        while(h &lt; N / 3) h = 3*h + 1;   
+        while(h &gt;= 1){                  
+            for(int i = h; i &lt; N; i++){
+                
+                for(int j = i; j &gt;= h &amp;&amp; less(a[j], a[j - h]); j-= h)
+                    exch(a, j, j - h);
+            } 
+            h = h / 3;                  
+        }                              
+    }
+    
+    
+    
+    
+    
+    
+    public static boolean less(Comparable v, Comparable w)
+    <font color='#ff0000' weight='1' id='278'>{    <font color='#ff0000' weight='1' id='276'>return <font color='#ff0000' weight='1' id='274'><font color='#ff0000' weight='1' id='269'><font color='#ff0000' weight='1' id='262'><font color='#ff0000' weight='1' id='257'>v<font color='#ff0000' weight='1' id='256'></font></font><font color='#ff0000' weight='1' id='259'>.<font color='#ff0000' weight='1' id='258'></font></font><font color='#ff0000' weight='1' id='261'>compareTo</font></font><font color='#ff0000' weight='1' id='268'>(<font color='#ff0000' weight='1' id='266'><font color='#ff0000' weight='1' id='265'><font color='#ff0000' weight='1' id='264'>w</font></font>)</font><font color='#ff0000' weight='1' id='267'></font></font> </font><font color='#ff0000' weight='1' id='271'>&lt;<font color='#ff0000' weight='1' id='270'></font> </font><font color='#ff0000' weight='1' id='273'>0<font color='#ff0000' weight='1' id='272'></font></font>;</font><font color='#ff0000' weight='1' id='275'></font> }</font><font color='#ff0000' weight='1' id='277'></font></font>
+    
+    
+    private static void exch(Comparable[] a, int i, int j){
+        Comparable swap = a[i];
+        a[i] = a[j];
+        a[j] = swap;
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public void bubbleSortFor(int[] array) {
+
+        System.out.println(Arrays.toString(array));
+        int aux;
+
+        for (int i = array.length; i &gt; 0; i--) {
+            for (int j = 0; j &lt; i - 1; j++) {
+                if (array[j] &gt; array[j + 1]) {
+                    aux = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = aux;
+                }
+                System.out.println(Arrays.toString(array));
+            }
+        }
+    }
+</font>
+</pre>

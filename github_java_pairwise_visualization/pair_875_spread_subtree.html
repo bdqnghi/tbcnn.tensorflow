@@ -1,0 +1,40 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ <font color='#ff0500' weight='0.995049' id='202'><font color='#0002ff' weight='0.00247525' id='3'><font color='#0001ff' weight='0.00123762' id='2'>void</font> </font>bubbleSort<font color='#000dff' weight='0.0136139' id='17'>(<font color='#0005ff' weight='0.00556931' id='15'><font color='#0005ff' weight='0.0049505' id='14'><font color='#0000ff' weight='0.000618812' id='8'><font color='#0000ff' weight='0.000309406' id='7'>int</font> </font><font color='#0001ff' weight='0.00123762' id='13'>arr<font color='#0000ff' weight='0.000154703' id='12'>[]</font></font></font>)</font> 
+    </font><font color='#00e7ff' weight='0.226485' id='201'>{ 
+        <font color='#0006ff' weight='0.00660066' id='34'><font color='#0002ff' weight='0.00288779' id='32'><font color='#0000ff' weight='6.87569e-05' id='19'>int</font> n = <font color='#0000ff' weight='0.000481298' id='30'><font color='#0000ff' weight='0.000412541' id='29'><font color='#0000ff' weight='2.2919e-05' id='24'>arr</font>.<font color='#0000ff' weight='2.2919e-05' id='28'>length</font></font></font>;</font> 
+        </font><font color='#0045ff' weight='0.0676568' id='199'>for (<font color='#0000ff' weight='8.59461e-06' id='36'>int</font> i = 0; <font color='#0000ff' weight='0.000618812' id='59'>i <font color='#0000ff' weight='5.15677e-06' id='50'>&lt; </font><font color='#0000ff' weight='5.15677e-06' id='52'>n</font>-1; </font>i++) 
+            <font color='#001bff' weight='0.0268152' id='198'><font color='#001bff' weight='0.0266089' id='197'>for (int j = 0; j &lt; <font color='#0000ff' weight='1.8417e-06' id='85'>n</font><font color='#0000ff' weight='1.8417e-06' id='87'>-</font><font color='#0000ff' weight='1.8417e-06' id='89'>i</font>-1; j++) 
+                <font color='#0009ff' weight='0.00938531' id='196'><font color='#0009ff' weight='0.00928218' id='195'>if (<font color='#0000ff' weight='4.29731e-06' id='106'>arr</font>[j] &gt; <font color='#0000ff' weight='4.29731e-06' id='116'>arr</font>[j+1])<font color='#0003ff' weight='0.00330033' id='194'> 
+                <font color='#0003ff' weight='0.00324876' id='193'>{ 
+                    
+                    int temp = <font color='#0000ff' weight='1.07433e-06' id='136'>arr</font>[j]; 
+                    <font color='#0000ff' weight='1.07433e-06' id='149'>arr</font>[j] = <font color='#0000ff' weight='1.07433e-06' id='159'>arr</font>[j+1]; 
+                    <font color='#0000ff' weight='1.07433e-06' id='174'>arr</font>[j+1] = temp; 
+                }</font></font></font></font></font></font> 
+    }</font></font> </font></font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+import java.util.*;
+
+class BSorting{
+    public static void main(String[]args){
+     
+
+        for(int i = 0; i &lt;= numbers.length - 1; i++){
+            for(int j = 0; j &lt; numbers.length - 1; j++){
+                if(numbers[j] &gt; numbers[j + 1]){
+                    int temp = numbers[j];
+                    numbers[j] = numbers[j + 1];
+                    numbers[j + 1] = temp;
+                }
+            }
+        
+        }
+
+   
+    }
+}
+</font>
+</pre>

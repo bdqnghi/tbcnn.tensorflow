@@ -1,0 +1,51 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+    public static int[] swap(int numbers[], int i, int j) {
+        int temp = numbers[i];
+        numbers[i] = numbers[j];
+        numbers[j] = temp;
+        return numbers;
+    }
+
+    public static int[] sort(int numbers[]) {
+        for (int i = 0; i &lt; numbers.length; i++) {
+            for (int j = 0; j &lt; numbers.length - 1; j++) <font color='#ff0000' weight='1' id='255'>{
+                <font color='#00ff00' weight='0.5' id='253'>if <font color='#00ffff' weight='0.25' id='221'>(<font color='#007fff' weight='0.125' id='219'><font color='#002aff' weight='0.0416667' id='208'><font color='#0015ff' weight='0.0208333' id='198'>numbers<font color='#0015ff' weight='0.0208333' id='197'></font></font><font color='#0015ff' weight='0.0208333' id='207'>[<font color='#0003ff' weight='0.00347222' id='200'>j<font color='#0003ff' weight='0.00347222' id='199'></font> </font>+ 1]<font color='#000aff' weight='0.0104167' id='206'></font></font> </font><font color='#002aff' weight='0.0416667' id='210'>&lt; </font><font color='#002aff' weight='0.0416667' id='218'><font color='#0015ff' weight='0.0208333' id='212'>numbers<font color='#0015ff' weight='0.0208333' id='211'></font></font>[<font color='#000aff' weight='0.0104167' id='214'>j</font>]</font>)</font><font color='#007fff' weight='0.125' id='220'></font></font><font color='#00ffff' weight='0.25' id='252'> <font color='#00ffff' weight='0.25' id='251'>{
+                    <font color='#007fff' weight='0.125' id='249'><font color='#003fff' weight='0.0625' id='247'><font color='#0015ff' weight='0.0208333' id='223'>numbers<font color='#0015ff' weight='0.0208333' id='222'></font> </font><font color='#0015ff' weight='0.0208333' id='225'>=<font color='#0015ff' weight='0.0208333' id='224'></font> </font><font color='#0015ff' weight='0.0208333' id='246'><font color='#000aff' weight='0.0104167' id='227'>swap<font color='#000aff' weight='0.0104167' id='226'></font></font><font color='#000aff' weight='0.0104167' id='245'>(<font color='#0002ff' weight='0.00260417' id='230'><font color='#0002ff' weight='0.00260417' id='229'>numbers<font color='#0002ff' weight='0.00260417' id='228'></font></font></font>, <font color='#0002ff' weight='0.00260417' id='234'><font color='#0002ff' weight='0.00260417' id='233'>j</font></font>, <font color='#0002ff' weight='0.00260417' id='243'><font color='#0000ff' weight='0.000868056' id='237'>j </font><font color='#0000ff' weight='0.000868056' id='239'>+ </font>1<font color='#0000ff' weight='0.000868056' id='240'></font>)</font></font></font>;</font><font color='#003fff' weight='0.0625' id='248'></font>
+                }</font><font color='#007fff' weight='0.125' id='250'></font></font></font>
+            }</font><font color='#00ff00' weight='0.5' id='254'></font></font>
+        }
+        return numbers;
+    }
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static void quicksort(int[] a, int start, int end) {
+        if (start &gt;= end)
+            return;
+
+        int pavot = a[start];
+        int i = start;
+        int j = end;
+
+        while (i &lt; j) {
+            while (i &lt; j &amp;&amp; a[j] &gt; pavot)
+                j--;
+            while (i &lt; j &amp;&amp; a[i] &lt;= pavot)
+                i++;
+            if (i != j) {
+                int t = a[i];
+                a[i] = a[j];
+                a[j] = t;
+            }
+        }
+        if (i == j) {
+            int t = a[start];
+            a[start] = a[i];
+            a[j] = t;
+        }
+        quicksort(<font color='#ff0000' weight='1' id='305'>a</font>, start, i - 1);
+        quicksort(a, i + 1, end);
+    }</font>
+</pre>

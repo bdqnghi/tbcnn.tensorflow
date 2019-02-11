@@ -1,0 +1,70 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public int[] sort(int num[]) {
+        
+        int h = 1;
+        
+        while (h &lt; num.length / 3)
+            h = h * 3 + 1;
+        for (; h &gt; 0; h /= 3) {
+            
+            for (int k = 0; k &lt; h; k++) {
+                
+                for (int i = h + k; i &lt; num.length; i += h) {
+                    int j = i;
+                    
+                    while (j &gt;= h &amp;&amp; num[j] &lt; num[j - h]) {
+                        swap(num, j, j - h);
+                        j -= h;
+                    }
+
+                }
+            }
+        }
+
+        return num;
+    }
+
+    
+    private void swap(int arg[], int i, int j) {
+        
+        if (i != j) {
+            arg[i] = arg[i] ^ arg[j];
+            arg[j] = arg[j] ^ arg[i];
+            arg[i] = arg[j] ^ arg[i];
+        }
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void shellSort(DataWrapShellSort[] data) {
+        System.out.println("å¼å§æåºï¼");
+        int arrayLength = data.length;
+        
+        int h = 1;
+        
+        while (h &lt;= arrayLength / 3) {
+            h = h * 3 + 1;
+        }
+        while (h &gt; 0) {
+            System.out.println("===hçå¼:" + h + "===");
+            for (int i = h; i &lt; arrayLength; i++) <font color='#ff0000' weight='1' id='381'>{
+                
+                <font color='#ff0000' weight='1' id='173'>DataWrapShellSort</font> <font color='#ff0000' weight='1' id='176'>tmp </font>= <font color='#ff0000' weight='1' id='185'><font color='#ff0000' weight='1' id='184'><font color='#ff0000' weight='1' id='178'>data<font color='#ff0000' weight='1' id='177'></font></font><font color='#ff0000' weight='1' id='183'>[<font color='#ff0000' weight='1' id='181'>i]</font><font color='#ff0000' weight='1' id='182'></font></font></font></font>;
+                
+                
+                <font color='#ff0000' weight='1' id='338'>if <font color='#ff0000' weight='1' id='225'>(<font color='#ff0000' weight='1' id='191'>data</font>[<font color='#ff0000' weight='1' id='193'>i</font>]<font color='#ff0000' weight='1' id='199'>.</font><font color='#ff0000' weight='1' id='218'><font color='#ff0000' weight='1' id='201'>compareTo<font color='#ff0000' weight='1' id='200'></font></font><font color='#ff0000' weight='1' id='217'>(<font color='#ff0000' weight='1' id='215'><font color='#ff0000' weight='1' id='214'><font color='#ff0000' weight='1' id='203'>data</font>[<font color='#ff0000' weight='1' id='205'>i </font>- h]</font>)</font><font color='#ff0000' weight='1' id='216'></font></font> </font><font color='#ff0000' weight='1' id='220'>&lt;<font color='#ff0000' weight='1' id='219'></font> </font><font color='#ff0000' weight='1' id='222'>0<font color='#ff0000' weight='1' id='221'></font></font>)</font><font color='#ff0000' weight='1' id='337'> <font color='#ff0000' weight='1' id='336'>{
+                    <font color='#ff0000' weight='1' id='241'><font color='#ff0000' weight='1' id='239'><font color='#ff0000' weight='1' id='228'><font color='#ff0000' weight='1' id='227'>int</font> </font><font color='#ff0000' weight='1' id='230'>j </font><font color='#ff0000' weight='1' id='238'>= <font color='#ff0000' weight='1' id='237'><font color='#ff0000' weight='1' id='232'>i </font>- h</font></font>;</font><font color='#ff0000' weight='1' id='240'></font>
+                    
+                    </font><font color='#ff0000' weight='1' id='315'>for <font color='#ff0000' weight='1' id='287'>(<font color='#ff0000' weight='1' id='243'>;<font color='#ff0000' weight='1' id='242'></font> </font><font color='#ff0000' weight='1' id='277'><font color='#ff0000' weight='1' id='275'>j <font color='#ff0000' weight='1' id='247'>&gt;= </font><font color='#ff0000' weight='1' id='249'>0<font color='#ff0000' weight='1' id='248'></font> </font><font color='#ff0000' weight='1' id='251'>&amp;&amp;<font color='#ff0000' weight='1' id='250'></font> </font><font color='#ff0000' weight='1' id='259'><font color='#ff0000' weight='1' id='253'>data<font color='#ff0000' weight='1' id='252'></font></font><font color='#ff0000' weight='1' id='258'>[<font color='#ff0000' weight='1' id='256'><font color='#ff0000' weight='1' id='255'>j</font>]</font><font color='#ff0000' weight='1' id='257'></font></font></font><font color='#ff0000' weight='1' id='261'>.<font color='#ff0000' weight='1' id='260'></font></font><font color='#ff0000' weight='1' id='270'><font color='#ff0000' weight='1' id='263'>compareTo</font><font color='#ff0000' weight='1' id='269'>(<font color='#ff0000' weight='1' id='267'><font color='#ff0000' weight='1' id='266'><font color='#ff0000' weight='1' id='265'>tmp</font></font>)</font><font color='#ff0000' weight='1' id='268'></font></font> </font><font color='#ff0000' weight='1' id='272'>&gt;<font color='#ff0000' weight='1' id='271'></font> </font><font color='#ff0000' weight='1' id='274'>0<font color='#ff0000' weight='1' id='273'></font></font>;</font><font color='#ff0000' weight='1' id='276'></font> </font><font color='#ff0000' weight='1' id='285'><font color='#ff0000' weight='1' id='284'><font color='#ff0000' weight='1' id='279'>j </font><font color='#ff0000' weight='1' id='281'>-= </font><font color='#ff0000' weight='1' id='283'>h</font></font>)</font><font color='#ff0000' weight='1' id='286'></font> </font><font color='#ff0000' weight='1' id='314'>{
+                        <font color='#ff0000' weight='1' id='312'><font color='#ff0000' weight='1' id='310'><font color='#ff0000' weight='1' id='289'>data</font>[<font color='#ff0000' weight='1' id='291'>j </font><font color='#ff0000' weight='1' id='293'>+<font color='#ff0000' weight='1' id='292'></font> </font><font color='#ff0000' weight='1' id='295'>h<font color='#ff0000' weight='1' id='294'></font></font>] = <font color='#ff0000' weight='1' id='303'>data</font>[<font color='#ff0000' weight='1' id='305'>j</font>];</font><font color='#ff0000' weight='1' id='311'></font>
+                    }</font><font color='#ff0000' weight='1' id='313'></font></font>
+                    
+                    </font><font color='#ff0000' weight='1' id='334'><font color='#ff0000' weight='1' id='332'><font color='#ff0000' weight='1' id='317'>data</font>[j <font color='#ff0000' weight='1' id='321'>+<font color='#ff0000' weight='1' id='320'></font> </font><font color='#ff0000' weight='1' id='323'>h<font color='#ff0000' weight='1' id='322'></font></font>] <font color='#ff0000' weight='1' id='329'>=<font color='#ff0000' weight='1' id='328'></font> </font><font color='#ff0000' weight='1' id='331'>tmp<font color='#ff0000' weight='1' id='330'></font></font>;</font><font color='#ff0000' weight='1' id='333'></font>
+                }</font><font color='#ff0000' weight='1' id='335'></font></font></font>
+                </font><font color='#ff0000' weight='1' id='376'><font color='#ff0000' weight='1' id='349'><font color='#ff0000' weight='1' id='340'>System</font><font color='#ff0000' weight='1' id='342'>.<font color='#ff0000' weight='1' id='341'></font></font><font color='#ff0000' weight='1' id='344'>out</font><font color='#ff0000' weight='1' id='346'>.<font color='#ff0000' weight='1' id='345'></font></font><font color='#ff0000' weight='1' id='348'>println<font color='#ff0000' weight='1' id='347'></font></font></font><font color='#ff0000' weight='1' id='375'>(<font color='#ff0000' weight='1' id='373'><font color='#ff0000' weight='1' id='372'><font color='#ff0000' weight='1' id='371'><font color='#ff0000' weight='1' id='364'><font color='#ff0000' weight='1' id='351'>java<font color='#ff0000' weight='1' id='350'></font></font><font color='#ff0000' weight='1' id='353'>.</font><font color='#ff0000' weight='1' id='355'>util</font><font color='#ff0000' weight='1' id='357'>.<font color='#ff0000' weight='1' id='356'></font></font><font color='#ff0000' weight='1' id='359'>Arrays</font><font color='#ff0000' weight='1' id='361'>.</font><font color='#ff0000' weight='1' id='363'>toString</font></font><font color='#ff0000' weight='1' id='370'>(<font color='#ff0000' weight='1' id='368'><font color='#ff0000' weight='1' id='367'><font color='#ff0000' weight='1' id='366'>data</font></font>)</font><font color='#ff0000' weight='1' id='369'></font></font></font></font>)</font><font color='#ff0000' weight='1' id='374'></font></font></font>;
+            }<font color='#ff0000' weight='1' id='380'></font></font>
+            h = (h - 1) / 3;
+        }
+    }</font>
+</pre>

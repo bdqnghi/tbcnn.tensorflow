@@ -1,0 +1,68 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public void shellSort(int[] array) {
+        for(int gap = array.length / 2; gap &gt; 0; gap /= 2) {
+            for(int i = 0; i &lt; gap; i++) {
+                for(int j = i; j &lt; array.length; j += gap) {
+                    int min = j;
+                    for(int k = j + gap; k &lt; array.length; k += gap) <font color='#ff0000' weight='1' id='212'>{
+                        <font color='#00ff1d' weight='0.471429' id='210'>if<font color='#0091ff' weight='0.142857' id='197'>(<font color='#0041ff' weight='0.0642857' id='195'>array<font color='#0002ff' weight='0.00238095' id='183'>[k]</font> <font color='#0001ff' weight='0.00119048' id='186'>&lt; </font><font color='#0000ff' weight='0.000595238' id='188'>array</font><font color='#0002ff' weight='0.00238095' id='193'>[<font color='#0000ff' weight='0.000297619' id='190'>min</font>]</font>)</font></font><font color='#0050ff' weight='0.0785714' id='209'> <font color='#0048ff' weight='0.0714286' id='208'>{
+                            <font color='#001dff' weight='0.0285714' id='206'>min <font color='#0000ff' weight='0.000595238' id='201'>= </font>k;
+                        }</font></font></font>
+                    }</font></font>
+                    swap(array, j, min);
+                }
+            }
+        }
+    }
+
+    public void swap(int[] array, int a, int b) {
+        int temp = array[a];
+        array[a] = array[b];
+        array[b] = temp;
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+    public static void sort(int[] a) {
+        
+        shuffleArray(a);
+        sort(a, 0, a.length - 1);
+    }
+
+    private static void sort(int[] a, int lo, int hi) {
+        
+        if(hi &lt;= lo)    return;
+        int j = partition(a, lo, hi);
+        sort(a, lo, j - 1);
+        sort(a, j + 1, hi);
+    }
+
+    private static int partition(int[] a, int lo, int hi) {
+        int i = lo, j = hi + 1;
+        while(true)<font color='#ff0000' weight='1' id='372'>{
+            
+            <font color='#0045ff' weight='0.0678261' id='296'>while<font color='#0013ff' weight='0.0191304' id='279'>(<font color='#0001ff' weight='0.00101449' id='264'><font color='#0000ff' weight='7.24638e-05' id='258'>a</font><font color='#0000ff' weight='0.000289855' id='263'>[<font color='#0000ff' weight='7.24638e-05' id='261'><font color='#0000ff' weight='3.62319e-05' id='260'>lo</font>]</font></font> </font>&gt; a<font color='#0000ff' weight='0.000434783' id='275'>[<font color='#0000ff' weight='0.000144928' id='273'><font color='#0000ff' weight='1.81159e-05' id='270'>++</font><font color='#0000ff' weight='1.81159e-05' id='272'>i</font>]</font></font>) </font><font color='#000dff' weight='0.0130435' id='295'>{
+                <font color='#0005ff' weight='0.00565217' id='293'>if<font color='#0001ff' weight='0.00173913' id='288'>(<font color='#0000ff' weight='0.000652174' id='286'>i == hi)</font></font><font color='#0000ff' weight='0.000652174' id='292'> <font color='#0000ff' weight='0.000434783' id='291'><font color='#0000ff' weight='0.000217391' id='290'>break;</font></font></font>
+            }</font></font>
+            
+            </font><font color='#0045ff' weight='0.0678261' id='336'>while<font color='#0013ff' weight='0.0191304' id='319'>(a[lo] &lt; a[<font color='#0000ff' weight='1.81159e-05' id='310'>--</font>j]) </font><font color='#000dff' weight='0.0130435' id='335'>{
+                <font color='#0005ff' weight='0.00565217' id='333'>if<font color='#0001ff' weight='0.00173913' id='328'>(<font color='#0000ff' weight='0.000652174' id='326'>j == lo)</font></font><font color='#0000ff' weight='0.000652174' id='332'> <font color='#0000ff' weight='0.000434783' id='331'><font color='#0000ff' weight='0.000217391' id='330'>break;</font></font></font>
+            }</font></font>
+            
+            </font><font color='#0017ff' weight='0.0226087' id='350'>if<font color='#0007ff' weight='0.00695652' id='345'>(<font color='#0002ff' weight='0.0026087' id='343'><font color='#0000ff' weight='0.000144928' id='338'>j </font><font color='#0000ff' weight='0.000144928' id='340'>&lt;= </font><font color='#0000ff' weight='0.000144928' id='342'>i</font>)</font></font><font color='#0002ff' weight='0.0026087' id='349'> <font color='#0001ff' weight='0.00173913' id='348'><font color='#0000ff' weight='0.000869565' id='347'>break;</font></font></font>
+            
+            </font><font color='#0000ff' weight='0.000434783' id='352'>exch</font>(a, i, j);
+        }</font>
+        
+        exch(a, lo, j);
+        return j;
+    }
+
+    private static void exch(int[] a, int i, int j) {
+        int temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+    }</font>
+</pre>

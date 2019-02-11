@@ -1,0 +1,64 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void sort(Comparable[] a){
+        int N = a.length;               
+        int h = 1;                      
+        while(h &lt; N / 3) h = 3*h + 1;   
+        while(h &gt;= 1){                  
+            for(int i = h; i &lt; N; i++){
+                
+                for(int j = i; j &gt;= h &amp;&amp; less(a[j], a[j - h]); j-= h)
+                    exch(a, j, j - h);
+            } 
+            h = h / 3;                  
+        }                              
+    }
+    
+    
+    
+    
+    
+    
+    public static boolean less(Comparable v, Comparable w)
+    <font color='#ff0000' weight='1' id='278'>{    <font color='#ff0000' weight='1' id='276'>return <font color='#ff0000' weight='1' id='274'><font color='#ff0000' weight='1' id='269'><font color='#ff0000' weight='1' id='262'><font color='#ff0000' weight='1' id='257'>v<font color='#ff0000' weight='1' id='256'></font></font><font color='#ff0000' weight='1' id='259'>.<font color='#ff0000' weight='1' id='258'></font></font><font color='#ff0000' weight='1' id='261'>compareTo<font color='#ff0000' weight='1' id='260'></font></font></font><font color='#ff0000' weight='1' id='268'>(<font color='#ff0000' weight='1' id='266'><font color='#ff0000' weight='1' id='265'><font color='#ff0000' weight='1' id='264'>w<font color='#ff0000' weight='1' id='263'></font></font></font>)</font><font color='#ff0000' weight='1' id='267'></font></font> </font><font color='#ff0000' weight='1' id='271'>&lt;<font color='#ff0000' weight='1' id='270'></font> </font><font color='#ff0000' weight='1' id='273'>0<font color='#ff0000' weight='1' id='272'></font></font>;</font><font color='#ff0000' weight='1' id='275'></font> }</font><font color='#ff0000' weight='1' id='277'></font></font>
+    
+    
+    private static void exch(Comparable[] a, int i, int j){
+        Comparable swap = a[i];
+        a[i] = a[j];
+        a[j] = swap;
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static int[] shellSort(int[] arr) {
+        if (arr == null || arr.length == 0) <font color='#ff0000' weight='1' id='53'>{
+            <font color='#ff0000' weight='1' id='51'>return <font color='#ff0000' weight='1' id='49'><font color='#ff0000' weight='1' id='48'>arr<font color='#ff0000' weight='1' id='47'></font></font>;</font><font color='#ff0000' weight='1' id='50'></font>
+        }</font><font color='#ff0000' weight='1' id='52'></font></font>
+        shell(arr);
+        return arr;
+    }
+
+    public static void shell(int[] arr) {
+        int cur = 0;
+        for (int i = arr.length / 2; i &gt; 0; i--) {    
+            for (int j = i; j &lt; arr.length; j++) {
+                cur = j;
+                for (int k = j - i; k &gt;= 0; k -= i) {
+                    if (arr[cur] &gt;= arr[k]) {
+                        break;
+                    } else {
+                        swap(arr, cur, k);
+                        cur = k;
+                    }
+                }
+            }
+        }
+    }
+
+    public static void swap(int[] arr, int index1, int index2) {
+        int temp = arr[index1];
+        arr[index1] = arr[index2];
+        arr[index2] = temp;
+    }</font>
+</pre>

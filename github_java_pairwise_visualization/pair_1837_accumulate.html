@@ -1,0 +1,39 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+<font color='#ff0000' weight='1' id='197'>public <font color='#ff0000' weight='1' id='4'>static </font><font color='#ff0000' weight='1' id='7'>void </font><font color='#ff0000' weight='1' id='9'>sort</font><font color='#ff0000' weight='1' id='21'>(int<font color='#ff0000' weight='1' id='13'>[]<font color='#ff0000' weight='1' id='12'></font></font> <font color='#ff0000' weight='1' id='17'>data</font>) </font><font color='#ff0000' weight='1' id='196'>{
+        <font color='#ff0000' weight='1' id='194'>for (<font color='#ff0000' weight='1' id='42'><font color='#ff0000' weight='1' id='40'>int k <font color='#ff0000' weight='1' id='39'>= <font color='#ff0000' weight='1' id='38'>data.length - <font color='#ff0000' weight='1' id='37'>1</font></font></font>;</font><font color='#ff0000' weight='1' id='41'></font> </font><font color='#ff0000' weight='1' id='51'>k<font color='#ff0000' weight='1' id='43'></font> <font color='#ff0000' weight='1' id='46'>&gt;<font color='#ff0000' weight='1' id='45'></font> </font>0<font color='#ff0000' weight='1' id='47'></font>;<font color='#ff0000' weight='1' id='50'></font> </font><font color='#ff0000' weight='1' id='57'>k--)</font><font color='#ff0000' weight='1' id='58'></font> <font color='#ff0000' weight='1' id='193'>{
+            int largestIdx = 0;
+            <font color='#ff0000' weight='1' id='137'>for (int i = 0; <font color='#ff0000' weight='1' id='85'>i </font><font color='#ff0000' weight='1' id='87'>&lt;= </font><font color='#ff0000' weight='1' id='89'>k</font>; <font color='#ff0000' weight='1' id='94'>i</font>++) <font color='#ff0000' weight='1' id='136'>{
+                if (<font color='#ff0000' weight='1' id='102'>data</font>[<font color='#ff0000' weight='1' id='104'>i</font>] &gt; <font color='#ff0000' weight='1' id='112'>data</font>[<font color='#ff0000' weight='1' id='114'>largestIdx</font>]<font color='#ff0000' weight='1' id='116'></font>) <font color='#ff0000' weight='1' id='132'>{
+                    <font color='#ff0000' weight='1' id='123'>largestIdx<font color='#ff0000' weight='1' id='122'></font> </font><font color='#ff0000' weight='1' id='125'>=<font color='#ff0000' weight='1' id='124'></font> </font><font color='#ff0000' weight='1' id='127'>i</font>;
+                }</font>
+            }</font>
+            </font><font color='#ff0000' weight='1' id='155'><font color='#ff0000' weight='1' id='153'><font color='#ff0000' weight='1' id='140'>int </font><font color='#ff0000' weight='1' id='142'>tmp </font><font color='#ff0000' weight='1' id='152'>= <font color='#ff0000' weight='1' id='151'><font color='#ff0000' weight='1' id='150'><font color='#ff0000' weight='1' id='144'>data</font>[<font color='#ff0000' weight='1' id='146'>k</font>]</font></font></font>;</font><font color='#ff0000' weight='1' id='154'></font>
+            </font><font color='#ff0000' weight='1' id='176'><font color='#ff0000' weight='1' id='157'>data</font>[<font color='#ff0000' weight='1' id='159'>k</font>] = <font color='#ff0000' weight='1' id='173'><font color='#ff0000' weight='1' id='167'>data<font color='#ff0000' weight='1' id='166'></font></font>[<font color='#ff0000' weight='1' id='169'>largestIdx</font>]<font color='#ff0000' weight='1' id='171'></font></font>;
+            </font><font color='#ff0000' weight='1' id='191'><font color='#ff0000' weight='1' id='189'><font color='#ff0000' weight='1' id='178'>data</font>[<font color='#ff0000' weight='1' id='180'>largestIdx</font>] <font color='#ff0000' weight='1' id='186'>=<font color='#ff0000' weight='1' id='185'></font> </font><font color='#ff0000' weight='1' id='188'>tmp<font color='#ff0000' weight='1' id='187'></font></font>;</font><font color='#ff0000' weight='1' id='190'></font>
+        }</font><font color='#ff0000' weight='1' id='192'></font></font>
+    }</font><font color='#ff0000' weight='1' id='195'></font></font>
+
+}</font></font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void bubbleSort(int arr[]) {
+      int len = arr.length;
+      for (int i = len; i &gt;= 0; i--) {
+         for (int j = 0; j &lt; len - 1; j++) <font color='#ff0000' weight='1' id='163'>{
+            <font color='#ff0000' weight='1' id='116'><font color='#ff0000' weight='1' id='114'><font color='#ff0000' weight='1' id='103'><font color='#ff0000' weight='1' id='102'>int<font color='#ff0000' weight='1' id='101'></font></font> </font><font color='#ff0000' weight='1' id='105'>k<font color='#ff0000' weight='1' id='104'></font> </font><font color='#ff0000' weight='1' id='113'>= <font color='#ff0000' weight='1' id='112'><font color='#ff0000' weight='1' id='107'>j<font color='#ff0000' weight='1' id='106'></font> </font><font color='#ff0000' weight='1' id='109'>+<font color='#ff0000' weight='1' id='108'></font> </font><font color='#ff0000' weight='1' id='111'>1<font color='#ff0000' weight='1' id='110'></font></font></font></font>;</font><font color='#ff0000' weight='1' id='115'></font>
+            </font>if (<font color='#ff0000' weight='1' id='118'>arr</font>[<font color='#ff0000' weight='1' id='120'>j</font>] &gt; <font color='#ff0000' weight='1' id='128'>arr</font>[<font color='#ff0000' weight='1' id='130'>k</font>]) <font color='#ff0000' weight='1' id='159'>{
+               <font color='#ff0000' weight='1' id='154'><font color='#ff0000' weight='1' id='139'>swapNumbers</font><font color='#ff0000' weight='1' id='153'>(<font color='#ff0000' weight='1' id='143'><font color='#ff0000' weight='1' id='142'><font color='#ff0000' weight='1' id='141'>j<font color='#ff0000' weight='1' id='140'></font></font></font>, </font><font color='#ff0000' weight='1' id='147'><font color='#ff0000' weight='1' id='146'><font color='#ff0000' weight='1' id='145'>k</font></font>, </font><font color='#ff0000' weight='1' id='151'><font color='#ff0000' weight='1' id='150'><font color='#ff0000' weight='1' id='149'>arr<font color='#ff0000' weight='1' id='148'></font></font></font>)</font><font color='#ff0000' weight='1' id='152'></font></font></font>;
+            }</font>
+         }</font>
+      }
+   }
+
+   private static void swapNumbers(int i, int j, int[] arr) {
+      int temp;
+      temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
+   }</font>
+</pre>

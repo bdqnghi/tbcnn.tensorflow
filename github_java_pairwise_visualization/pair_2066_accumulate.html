@@ -1,0 +1,60 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+private static void selectionsort(double tablica[], int ile_liczb) {
+    int min,i,j;
+    double temp;
+    for (i=0;i&lt;ile_liczb-1;i++)  {
+    min=i;
+    for (j=i+1;j&lt;ile_liczb;j++)
+    if (tablica[j]&lt;tablica[min])
+    min=j;
+    temp=tablica[min];
+    tablica[min]=tablica[i];
+    tablica[i]=temp;
+    }
+}</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static void sort(int arr[])
+    {       
+        heapify(arr);        
+        for (int i = N; i &gt; 0; i--)
+        {
+            swap(arr,0, i);
+            N = N-1;
+            maxheap(arr, 0);
+        }
+    }     
+       
+    public static void heapify(int arr[])
+    {
+        N = arr.length-1;
+        for (int i = N/2; <font color='#ff0000' weight='1' id='179'><font color='#ff0000' weight='1' id='174'>i<font color='#ff0000' weight='1' id='173'></font> </font><font color='#ff0000' weight='1' id='176'>&gt;=<font color='#ff0000' weight='1' id='175'></font> </font><font color='#ff0000' weight='1' id='178'>0<font color='#ff0000' weight='1' id='177'></font></font>;</font> i--)
+            maxheap(arr, i);        
+    }
+            
+    public static void maxheap(int arr[], int i)
+    { 
+        int left = 2*i ;
+        int right = 2*i + 1;
+        int max = i;
+        if (left &lt;= N &amp;&amp; arr[left] &gt; arr[i])
+            max = left;
+        if (right &lt;= N &amp;&amp; arr[right] &gt; arr[max])        
+            max = right;
+ 
+        if (max != i)
+        {
+            swap(arr, i, max);
+            maxheap(arr, max);
+        }
+    }    
+    
+    public static void swap(int arr[], int i, int j)
+    {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp; 
+    }    </font>
+</pre>

@@ -1,0 +1,103 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ 
+  public static void sort(double[] a)
+  {
+    int n = a.length;
+    temp = new double[n];
+    recursiveSort(a, 0, n-1);
+  }
+
+  
+  private static void recursiveSort(double[] a, int from, int to)
+  {
+    if (to - from &lt; 2)       
+    {
+      if (to &gt; from &amp;&amp; a[to] &lt; a[from])
+      {
+        double aTemp = a[to];  
+        a[to] = a[from];
+        a[from] = aTemp;
+      }
+    }
+    else                     
+    {
+      int middle = (from + to) / 2;
+      recursiveSort(a, from, middle);
+      recursiveSort(a, middle + 1, to);
+      merge(a, from, middle, to);
+    }
+  }
+
+  
+  
+  private static void merge(double[] a, int from, <font color='#ff0000' weight='1' id='352'><font color='#ff0000' weight='1' id='351'><font color='#ff0000' weight='1' id='348'>int </font><font color='#ff0000' weight='1' id='350'>middle</font></font>, </font>int to)
+  {
+    int i = from, j = middle + 1, k = from;
+
+    
+    while (i &lt;= middle &amp;&amp; j &lt;= to)
+    {
+      if (a[i] &lt; a[j])
+      {
+        temp[k] = a[i];   
+        i++;
+      }
+      else
+      {
+        temp[k] = a[j];
+        j++;
+      }
+      k++;
+    }
+
+    
+    while (i &lt;= middle)
+    {
+      temp[k] = a[i];     
+      i++;
+      k++;
+    }
+
+    
+    while (j &lt;= to)
+    {
+      temp[k] = a[j];     
+      j++;
+      k++;
+    }
+
+    
+    for (k = from; k &lt;= to; k++)
+      a[k] = temp[k];
+  }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static void sort(long[] valuesArray, int[] gapsArray) throws SortException <font color='#ff0000' weight='1' id='296'>{
+
+        <font color='#ff0000' weight='1' id='67'>if(<font color='#ff0000' weight='1' id='43'><font color='#ff0000' weight='1' id='38'>gapsArray</font><font color='#ff0000' weight='1' id='40'>.</font><font color='#ff0000' weight='1' id='42'>length</font> </font><font color='#ff0000' weight='1' id='45'>== </font><font color='#ff0000' weight='1' id='47'>0<font color='#ff0000' weight='1' id='46'></font></font>)<font color='#ff0000' weight='1' id='66'> <font color='#ff0000' weight='1' id='65'><font color='#ff0000' weight='1' id='64'>throw <font color='#ff0000' weight='1' id='62'><font color='#ff0000' weight='1' id='52'>new </font><font color='#ff0000' weight='1' id='61'><font color='#ff0000' weight='1' id='54'>EmptyArrayException</font><font color='#ff0000' weight='1' id='60'>(<font color='#ff0000' weight='1' id='58'><font color='#ff0000' weight='1' id='57'><font color='#ff0000' weight='1' id='56'>"Gaps array can not by empty"<font color='#ff0000' weight='1' id='55'></font></font></font>)</font><font color='#ff0000' weight='1' id='59'></font></font></font>;</font><font color='#ff0000' weight='1' id='63'></font></font></font></font>
+
+        </font>int <font color='#ff0000' weight='1' id='72'>endGap </font>= <font color='#ff0000' weight='1' id='89'><font color='#ff0000' weight='1' id='74'>gapsArray<font color='#ff0000' weight='1' id='73'></font></font><font color='#ff0000' weight='1' id='88'>[<font color='#ff0000' weight='1' id='86'><font color='#ff0000' weight='1' id='81'><font color='#ff0000' weight='1' id='76'>gapsArray</font><font color='#ff0000' weight='1' id='78'>.</font><font color='#ff0000' weight='1' id='80'>length</font></font><font color='#ff0000' weight='1' id='83'>-</font><font color='#ff0000' weight='1' id='85'>1<font color='#ff0000' weight='1' id='84'></font></font>]</font><font color='#ff0000' weight='1' id='87'></font></font></font>;
+        <font color='#ff0000' weight='1' id='120'>if<font color='#ff0000' weight='1' id='103'>(<font color='#ff0000' weight='1' id='101'><font color='#ff0000' weight='1' id='96'>endGap </font><font color='#ff0000' weight='1' id='98'>!= </font>1)</font><font color='#ff0000' weight='1' id='102'></font></font><font color='#ff0000' weight='1' id='119'> <font color='#ff0000' weight='1' id='118'><font color='#ff0000' weight='1' id='117'>throw <font color='#ff0000' weight='1' id='115'><font color='#ff0000' weight='1' id='105'>new<font color='#ff0000' weight='1' id='104'></font> </font><font color='#ff0000' weight='1' id='107'>InvalidGapSequenceException</font>(<font color='#ff0000' weight='1' id='109'>"Gaps sequence must end with 1"<font color='#ff0000' weight='1' id='108'></font></font>)<font color='#ff0000' weight='1' id='112'></font>;</font><font color='#ff0000' weight='1' id='116'></font></font></font></font>
+
+
+        </font><font color='#ff0000' weight='1' id='137'><font color='#ff0000' weight='1' id='135'><font color='#ff0000' weight='1' id='123'><font color='#ff0000' weight='1' id='122'>int</font> </font><font color='#ff0000' weight='1' id='125'>valuesArraySize </font><font color='#ff0000' weight='1' id='134'>= <font color='#ff0000' weight='1' id='133'><font color='#ff0000' weight='1' id='132'><font color='#ff0000' weight='1' id='127'>valuesArray</font><font color='#ff0000' weight='1' id='129'>.<font color='#ff0000' weight='1' id='128'></font></font><font color='#ff0000' weight='1' id='131'>length</font></font></font></font>;</font><font color='#ff0000' weight='1' id='136'></font>
+
+        </font><font color='#ff0000' weight='1' id='294'>for <font color='#ff0000' weight='1' id='150'>(<font color='#ff0000' weight='1' id='148'><font color='#ff0000' weight='1' id='147'>int <font color='#ff0000' weight='1' id='142'>gap </font><font color='#ff0000' weight='1' id='146'>: <font color='#ff0000' weight='1' id='145'><font color='#ff0000' weight='1' id='144'>gapsArray</font></font></font></font>)</font><font color='#ff0000' weight='1' id='149'></font> </font><font color='#ff0000' weight='1' id='293'>{
+
+            <font color='#ff0000' weight='1' id='291'>for <font color='#ff0000' weight='1' id='179'>(<font color='#ff0000' weight='1' id='162'><font color='#ff0000' weight='1' id='160'>int i = <font color='#ff0000' weight='1' id='157'>gap</font>;</font><font color='#ff0000' weight='1' id='161'></font> </font><font color='#ff0000' weight='1' id='171'>i <font color='#ff0000' weight='1' id='166'>&lt; </font><font color='#ff0000' weight='1' id='168'>valuesArraySize</font>; </font><font color='#ff0000' weight='1' id='177'><font color='#ff0000' weight='1' id='176'>i<font color='#ff0000' weight='1' id='175'>++</font></font>)</font><font color='#ff0000' weight='1' id='178'></font> </font><font color='#ff0000' weight='1' id='290'>{
+
+                <font color='#ff0000' weight='1' id='197'><font color='#ff0000' weight='1' id='195'><font color='#ff0000' weight='1' id='182'><font color='#ff0000' weight='1' id='181'>long</font> </font><font color='#ff0000' weight='1' id='184'>value </font><font color='#ff0000' weight='1' id='194'>= <font color='#ff0000' weight='1' id='193'><font color='#ff0000' weight='1' id='186'>valuesArray</font>[i]</font></font>;</font><font color='#ff0000' weight='1' id='196'></font>
+                </font><font color='#ff0000' weight='1' id='209'><font color='#ff0000' weight='1' id='207'><font color='#ff0000' weight='1' id='200'><font color='#ff0000' weight='1' id='199'>int</font> </font><font color='#ff0000' weight='1' id='202'>j </font><font color='#ff0000' weight='1' id='206'>= <font color='#ff0000' weight='1' id='205'><font color='#ff0000' weight='1' id='204'>i</font></font></font>;</font><font color='#ff0000' weight='1' id='208'></font>
+
+                </font><font color='#ff0000' weight='1' id='273'>while <font color='#ff0000' weight='1' id='236'>(<font color='#ff0000' weight='1' id='234'>j <font color='#ff0000' weight='1' id='213'>&gt;= </font><font color='#ff0000' weight='1' id='215'>gap </font><font color='#ff0000' weight='1' id='217'>&amp;&amp; </font><font color='#ff0000' weight='1' id='229'><font color='#ff0000' weight='1' id='219'>valuesArray</font><font color='#ff0000' weight='1' id='228'>[<font color='#ff0000' weight='1' id='226'><font color='#ff0000' weight='1' id='221'>j </font><font color='#ff0000' weight='1' id='223'>- </font><font color='#ff0000' weight='1' id='225'>gap</font>]</font><font color='#ff0000' weight='1' id='227'></font></font> </font><font color='#ff0000' weight='1' id='231'>&gt; </font><font color='#ff0000' weight='1' id='233'>value</font>)</font> </font><font color='#ff0000' weight='1' id='272'>{
+                    <font color='#ff0000' weight='1' id='238'>valuesArray</font>[<font color='#ff0000' weight='1' id='240'>j</font>] = <font color='#ff0000' weight='1' id='248'>valuesArray</font>[j <font color='#ff0000' weight='1' id='252'>-<font color='#ff0000' weight='1' id='251'></font> </font><font color='#ff0000' weight='1' id='254'>gap<font color='#ff0000' weight='1' id='253'></font></font>];
+                    j <font color='#ff0000' weight='1' id='265'>-= </font><font color='#ff0000' weight='1' id='267'>gap<font color='#ff0000' weight='1' id='266'></font></font>;
+                }<font color='#ff0000' weight='1' id='271'></font></font>
+
+                </font><font color='#ff0000' weight='1' id='275'>valuesArray</font>[<font color='#ff0000' weight='1' id='277'>j</font>] = <font color='#ff0000' weight='1' id='285'>value</font>;
+            }</font>
+        }</font><font color='#ff0000' weight='1' id='292'></font></font>
+    }</font><font color='#ff0000' weight='1' id='295'></font></font></font>
+</pre>

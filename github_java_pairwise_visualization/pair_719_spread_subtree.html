@@ -1,0 +1,70 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+protected void <font color='#0000ff' weight='0.000851064' id='7'>sort</font>(<font color='#0001ff' weight='0.00191489' id='17'>T[] array, </font><font color='#0001ff' weight='0.0012766' id='24'>int leftIndex, </font><font color='#0001ff' weight='0.00106383' id='30'><font color='#0000ff' weight='0.000212766' id='27'>int </font>rightIndex</font>) <font color='#00adff' weight='0.170213' id='234'>{
+        
+        <font color='#0055ff' weight='0.0842553' id='232'>if <font color='#0002ff' weight='0.00276596' id='47'>(array<font color='#0000ff' weight='1.18203e-05' id='37'>.</font><font color='#0000ff' weight='1.18203e-05' id='39'>length</font> <font color='#0000ff' weight='3.5461e-05' id='42'>&gt; </font>1)</font><font color='#0027ff' weight='0.0389362' id='231'> <font color='#0027ff' weight='0.0387234' id='230'>{
+            
+            T <font color='#0000ff' weight='1.18203e-05' id='52'>aux </font>= <font color='#0000ff' weight='8.27423e-05' id='60'><font color='#0000ff' weight='5.91017e-06' id='54'>array</font>[<font color='#0000ff' weight='2.95508e-06' id='56'>leftIndex</font>]</font>;
+            
+            <font color='#000bff' weight='0.0114894' id='228'>for <font color='#0001ff' weight='0.000992908' id='94'>(<font color='#0000ff' weight='9.75177e-05' id='77'><font color='#0000ff' weight='3.98936e-05' id='75'><font color='#0000ff' weight='1.47754e-06' id='67'>int</font> <font color='#0000ff' weight='1.47754e-06' id='70'>i </font>= <font color='#0000ff' weight='2.95508e-06' id='73'><font color='#0000ff' weight='1.47754e-06' id='72'>leftIndex</font></font>;</font> </font><font color='#0000ff' weight='1.47754e-06' id='79'>i </font>&lt; rightIndex; <font color='#0000ff' weight='4.43262e-05' id='92'><font color='#0000ff' weight='3.5461e-05' id='91'><font color='#0000ff' weight='4.43262e-06' id='88'>i</font>++</font>)</font> </font><font color='#0004ff' weight='0.00468085' id='227'>{
+                <font color='#0002ff' weight='0.00230496' id='225'>for <font color='#0000ff' weight='0.000248227' id='123'>(<font color='#0000ff' weight='2.43794e-05' id='106'>int <font color='#0000ff' weight='3.69385e-07' id='99'>j </font>= <font color='#0000ff' weight='3.69385e-07' id='101'>leftIndex</font>; </font><font color='#0000ff' weight='6.64894e-06' id='113'>j <font color='#0000ff' weight='3.69385e-07' id='110'>&lt; </font>rightIndex;</font> <font color='#0000ff' weight='1.10816e-05' id='121'><font color='#0000ff' weight='8.86525e-06' id='120'>j++</font>)</font> </font><font color='#0000ff' weight='0.000886525' id='224'>{
+                    
+                    <font color='#0000ff' weight='0.000434397' id='222'>if <font color='#0000ff' weight='7.75709e-05' id='159'>(<font color='#0000ff' weight='1.10816e-07' id='125'>array</font>[j]<font color='#0000ff' weight='2.21631e-07' id='133'>.</font><font color='#0000ff' weight='1.10816e-07' id='135'>compareTo</font>(array[j+1]) <font color='#0000ff' weight='2.21631e-07' id='154'>&gt; </font>0)</font><font color='#0000ff' weight='0.000135195' id='221'> <font color='#0000ff' weight='0.000132979' id='220'>{
+                        <font color='#0000ff' weight='7.75709e-06' id='174'><font color='#0000ff' weight='9.23463e-08' id='161'>aux </font>= <font color='#0000ff' weight='4.61732e-08' id='165'>array</font>[<font color='#0000ff' weight='2.30866e-08' id='167'>j</font>];
+                        </font><font color='#0000ff' weight='1.32979e-05' id='199'><font color='#0000ff' weight='4.61732e-08' id='176'>array</font>[<font color='#0000ff' weight='4.61732e-08' id='179'><font color='#0000ff' weight='2.30866e-08' id='178'>j</font>]</font> = <font color='#0000ff' weight='1.01581e-06' id='196'><font color='#0000ff' weight='4.61732e-08' id='186'>array</font>[<font color='#0000ff' weight='1.3852e-07' id='193'><font color='#0000ff' weight='7.69553e-09' id='188'>j</font>+1]</font></font>;
+                        </font><font color='#0000ff' weight='9.9734e-06' id='218'><font color='#0000ff' weight='4.61732e-08' id='201'>array</font><font color='#0000ff' weight='3.69385e-07' id='210'>[<font color='#0000ff' weight='1.38519e-07' id='208'><font color='#0000ff' weight='7.69553e-09' id='203'>j</font><font color='#0000ff' weight='7.69553e-09' id='205'>+</font><font color='#0000ff' weight='7.69553e-09' id='207'>1</font>]</font></font> <font color='#0000ff' weight='9.23463e-08' id='213'>= </font><font color='#0000ff' weight='9.23463e-08' id='215'>aux</font>;
+                    }</font></font></font>
+                    
+                }</font></font>
+            }</font></font>
+        }</font></font></font>
+        
+    }</font></font></font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+    void ordenaArray(int iz, int de) {
+
+        int i, j, x, w;
+
+        i = iz;
+        j = de;
+
+        x = vector[(iz + de) / 2];
+
+        do {
+
+            while (vector[i] &lt; x) {
+                i++; 
+            }
+
+            while (x &lt; vector[j]) {
+                j--; 
+            }
+
+            if (i &lt;= j) {
+
+                w = vector[i];
+
+                vector[i] = vector[j];
+
+                vector[j] = w;
+                i++;  
+                j--; 
+            }
+        } while (i &lt;= j);
+
+
+        w = vector[i];
+        vector[i] = vector[de];
+        vector[de] = w;
+
+        if (iz &lt; j) {
+            ordenaArray(iz, j);
+        }
+        if (i &lt; de) {
+            ordenaArray(i, de);
+        }
+    }</font>
+</pre>

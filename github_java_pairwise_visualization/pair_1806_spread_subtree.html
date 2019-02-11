@@ -1,0 +1,43 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+<font color='#ff0000' weight='1' id='198'>  <font color='#ff0500' weight='0.994924' id='197'>public <font color='#0000ff' weight='0.000846024' id='4'>static </font><font color='#0004ff' weight='0.00423012' id='10'>int[] </font><font color='#0000ff' weight='0.000846024' id='12'>doInsertionSort</font><font color='#0009ff' weight='0.00930626' id='24'>(int[] input)</font><font color='#0093ff' weight='0.14467' id='196'>{
+         
+        <font color='#0001ff' weight='0.00148054' id='32'><font color='#0000ff' weight='0.000105753' id='27'>int </font>temp;
+        </font><font color='#0021ff' weight='0.0329949' id='189'>for <font color='#0003ff' weight='0.00348985' id='66'>(<font color='#0000ff' weight='0.000118972' id='42'>int i = <font color='#0000ff' weight='8.81275e-06' id='40'><font color='#0000ff' weight='4.40637e-06' id='39'>1</font></font>;</font> i &lt; input.length; i++) </font><font color='#000dff' weight='0.0127961' id='188'>{
+            <font color='#0006ff' weight='0.0062923' id='186'>for<font color='#0000ff' weight='0.000740271' id='95'>(int j = i ; j <font color='#0000ff' weight='1.10159e-06' id='82'>&gt; </font>0 ; j<font color='#0000ff' weight='3.30478e-06' id='91'>--</font>)</font><font color='#0002ff' weight='0.002353' id='185'>{
+                <font color='#0001ff' weight='0.00115006' id='183'>if<font color='#0000ff' weight='0.000158629' id='120'>(input[j] &lt; input[j-1])</font><font color='#0000ff' weight='0.000403183' id='182'><font color='#0000ff' weight='0.000396574' id='181'>{
+                    <font color='#0000ff' weight='2.31335e-05' id='135'><font color='#0000ff' weight='9.91434e-06' id='133'>temp = <font color='#0000ff' weight='1.92779e-06' id='132'><font color='#0000ff' weight='1.37699e-07' id='126'>input</font>[j]</font>;</font>
+                    </font><font color='#0000ff' weight='3.96574e-05' id='160'><font color='#0000ff' weight='1.37699e-07' id='137'>input</font>[j] = <font color='#0000ff' weight='3.02938e-06' id='157'><font color='#0000ff' weight='1.37699e-07' id='147'>input</font>[<font color='#0000ff' weight='2.29499e-08' id='149'>j</font><font color='#0000ff' weight='2.29499e-08' id='151'>-</font><font color='#0000ff' weight='2.29499e-08' id='153'>1</font>]</font>;
+                    </font><font color='#0000ff' weight='2.9743e-05' id='179'><font color='#0000ff' weight='3.02938e-06' id='172'><font color='#0000ff' weight='1.37699e-07' id='162'>input</font>[<font color='#0000ff' weight='2.29499e-08' id='164'>j</font><font color='#0000ff' weight='2.29499e-08' id='166'>-</font><font color='#0000ff' weight='2.29499e-08' id='168'>1</font>] </font><font color='#0000ff' weight='2.75398e-07' id='174'>= </font>temp;
+                }</font></font></font>
+            }</font></font>
+        }</font></font>
+        </font><font color='#0000ff' weight='0.000846024' id='194'>return <font color='#0000ff' weight='0.000211506' id='192'><font color='#0000ff' weight='0.000105753' id='191'>input</font>;</font>
+    }</font></font></font></font></font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static void bubbleSort(int[] arr) {
+        int length = arr.length;
+        int k;
+
+        for (int i = length; i &gt;= 0; i--) {
+            for (int j = 0; j &lt; length-1; j++) {
+                k = j + 1;
+
+                if (arr[j] &gt; arr[k])
+                    swap(j, k, arr);
+            }
+            printArray(arr);
+        }
+    }
+
+  
+
+    private static void swap(int j, int k, int[] arr) {
+        int temp = arr[j];
+        arr[j] = arr[k];
+        arr[k] = temp;
+
+    }</font>
+</pre>

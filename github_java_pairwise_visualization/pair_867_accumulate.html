@@ -1,0 +1,97 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static int[] sortiereIterativ(int[] a) {
+        
+        int i = 0;
+        int position <font color='#ff0000' weight='1' id='45'>= 0</font>;
+        
+        for (<font color='#ff0000' weight='1' id='51'>int </font><font color='#ff0000' weight='1' id='53'>sortiert </font>= 0<font color='#ff0000' weight='1' id='54'></font>; sortiert &lt; a.length; sortiert++) {
+            
+            
+            <font color='#ff0000' weight='1' id='91'><font color='#ff0000' weight='1' id='89'><font color='#ff0000' weight='1' id='84'>i </font><font color='#ff0000' weight='1' id='86'>= </font><font color='#ff0000' weight='1' id='88'>sortiert<font color='#ff0000' weight='1' id='87'></font></font>;</font>
+            </font><font color='#ff0000' weight='1' id='93'>position<font color='#ff0000' weight='1' id='92'></font> </font><font color='#ff0000' weight='1' id='95'>=<font color='#ff0000' weight='1' id='94'></font> </font>sortiert;
+            
+            
+            while (<font color='#ff0000' weight='1' id='112'>i <font color='#ff0000' weight='1' id='104'>&lt; </font>a<font color='#ff0000' weight='1' id='105'></font>.length)</font> {
+                if (<font color='#ff0000' weight='1' id='133'><font color='#ff0000' weight='1' id='122'>a[i] </font><font color='#ff0000' weight='1' id='124'>&lt; </font><font color='#ff0000' weight='1' id='126'>a<font color='#ff0000' weight='1' id='125'></font></font>[position])</font><font color='#ff0000' weight='1' id='146'> <font color='#ff0000' weight='1' id='142'>position<font color='#ff0000' weight='1' id='136'></font> <font color='#ff0000' weight='1' id='139'>= </font><font color='#ff0000' weight='1' id='141'>i<font color='#ff0000' weight='1' id='140'></font></font>;</font></font>
+                <font color='#ff0000' weight='1' id='154'>i<font color='#ff0000' weight='1' id='148'></font>++;<font color='#ff0000' weight='1' id='153'></font>
+            }</font><font color='#ff0000' weight='1' id='155'></font>
+            
+            
+            a[0] = a[sortiert];
+            <font color='#ff0000' weight='1' id='186'>a<font color='#ff0000' weight='1' id='185'>[sortiert]</font> </font>= a[position];
+            a[position] = a[0]; 
+        }
+        
+        <font color='#ff0000' weight='1' id='240'>a[0] = <font color='#ff0000' weight='1' id='235'>-<font color='#ff0000' weight='1' id='234'></font></font>1<font color='#ff0000' weight='1' id='236'></font>;
+        
+        </font><font color='#ff0000' weight='1' id='245'>return <font color='#ff0000' weight='1' id='242'>a</font>;
+    }</font><font color='#ff0000' weight='1' id='246'></font></font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+    public static &lt;T extends Comparable&lt;T&gt;&gt; void sort(List&lt;T&gt; a) {
+        Collections.shuffle(a);
+        sort(a, 0, a.size() - 1);
+    }
+
+    private static &lt;T extends Comparable&lt;T&gt;&gt; void sort(List&lt;T&gt; a, int lo, int hi) {
+        if (hi &lt;= lo + M) {
+            Insertion.sort(a, lo, hi);
+            return;
+        }
+
+        int j = partition(a, lo, hi);
+
+        sort(a, lo, j - 1);
+        sort(a, j + 1, hi);
+    }
+
+    
+    public static &lt;T extends Comparable&lt;T&gt;&gt; void mediansort(List&lt;T&gt; a) {
+        Collections.shuffle(a);
+        mediansort(a, 0, a.size() - 1);
+    }
+
+    private static &lt;T extends Comparable&lt;T&gt;&gt; void mediansort(List&lt;T&gt; a, int lo, int hi) {
+        if (hi &lt;= lo + M) {
+            Insertion.sort(a, lo, hi);
+            return;
+        }
+
+        T pivot = SortUtils.median(a, lo, hi);
+        int i = lo, j = hi - 1; 
+
+        for (; ; ) {
+            while (a.get(++i).compareTo(pivot) &lt; 0) ;
+            while (pivot.compareTo(a.get(--j)) &lt; 0) ;
+            if (i &lt; j)
+                SortUtils.exchange(a, i, j);
+            else break;
+        }
+
+        SortUtils.exchange(a, i, hi - 1); 
+
+        mediansort(a, lo, i - 1);
+        mediansort(a, i + 1, hi);
+    }
+
+    private static &lt;T extends Comparable&lt;T&gt;&gt; int partition(List&lt;T&gt; a, int lo, int hi) {
+        int i = lo;
+        int j = hi + 1;
+
+        T v = a.get(lo);
+
+        while (true) {
+            while (SortUtils.less(a.get(++i), v)) if (i == hi) break;
+            while (SortUtils.less(v, a.get(--j))) if (j == lo) break;
+
+            if (i &gt;= j) break;
+            SortUtils.exchange(a, i, j);
+        }
+
+        SortUtils.exchange(a, lo, j);
+
+        return j;
+    }</font>
+</pre>

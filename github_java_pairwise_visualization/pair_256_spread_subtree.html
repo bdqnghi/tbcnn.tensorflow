@@ -1,0 +1,109 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+  
+    int sort<font color='#000cff' weight='0.0120614' id='17'>(<font color='#0005ff' weight='0.00493421' id='15'><font color='#0004ff' weight='0.00438596' id='14'>int arr[]</font>)</font>
+    </font>{
+        <font color='#0004ff' weight='0.00438596' id='34'>int n = arr.length;
+ 
+        
+        </font><font color='#0033ff' weight='0.0507127' id='220'>for (int gap = <font color='#0000ff' weight='3.42654e-05' id='46'><font color='#0000ff' weight='1.90363e-06' id='41'>n</font>/2</font>; <font color='#0000ff' weight='0.000102796' id='57'><font color='#0000ff' weight='5.71089e-06' id='52'>gap </font><font color='#0000ff' weight='5.71089e-06' id='54'>&gt; </font>0;</font> gap /= 2)
+        <font color='#0014ff' weight='0.0204222' id='219'>{
+            
+            
+            
+            
+            for (<font color='#0000ff' weight='9.42297e-05' id='81'>int <font color='#0000ff' weight='1.42772e-06' id='74'>i </font>= <font color='#0000ff' weight='2.85545e-06' id='77'><font color='#0000ff' weight='1.42772e-06' id='76'>gap</font></font>; </font><font color='#0000ff' weight='1.42772e-06' id='83'>i </font>&lt; <font color='#0000ff' weight='1.42772e-06' id='87'>n</font>; <font color='#0000ff' weight='5.99644e-05' id='98'><font color='#0000ff' weight='5.1398e-05' id='97'>i += 1</font>)</font>
+            {
+                
+                
+                
+                <font color='#0000ff' weight='2.28436e-06' id='103'>int </font>temp = <font color='#0000ff' weight='9.13743e-06' id='114'>arr<font color='#0000ff' weight='2.28436e-06' id='112'>[i]</font></font>;
+ 
+                
+                
+                int <font color='#0000ff' weight='1.71327e-06' id='123'>j</font>;
+                for (<font color='#0000ff' weight='1.42772e-07' id='128'>j </font><font color='#0000ff' weight='1.42772e-07' id='130'>= </font>i; j &gt;= gap &amp;&amp; arr[j - gap] &gt; temp; j -= gap)
+                    <font color='#0000ff' weight='8.22369e-05' id='197'>arr[j] = arr[j - gap];</font>
+ 
+                
+                
+                <font color='#0000ff' weight='9.5943e-05' id='214'>arr[j] = temp;
+            }</font>
+        }</font>
+        </font>return 0;
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ 
+  public static void sort(double[] a)
+  {
+    int n = a.length;
+    temp = new double[n];
+    recursiveSort(a, 0, n-1);
+  }
+
+  
+  private static void recursiveSort(double[] a, int from, int to)
+  {
+    if (to - from &lt; 2)       
+    {
+      if (to &gt; from &amp;&amp; a[to] &lt; a[from])
+      {
+        double aTemp = a[to];  
+        a[to] = a[from];
+        a[from] = aTemp;
+      }
+    }
+    else                     
+    {
+      int middle = (from + to) / 2;
+      recursiveSort(a, from, middle);
+      recursiveSort(a, middle + 1, to);
+      merge(a, from, middle, to);
+    }
+  }
+
+  
+  
+  private static void merge(double[] a, int from, <font color='#ff0000' weight='1' id='352'><font color='#ffaa00' weight='0.833333' id='351'><font color='#00a9ff' weight='0.166667' id='348'><font color='#0054ff' weight='0.0833333' id='347'>int</font> </font><font color='#0054ff' weight='0.0833333' id='350'>middle</font></font>, </font>int to)
+  {
+    int i = from, j = middle + 1, k = from;
+
+    
+    while (i &lt;= middle &amp;&amp; j &lt;= to)
+    {
+      if (a[i] &lt; a[j])
+      {
+        temp[k] = a[i];   
+        i++;
+      }
+      else
+      {
+        temp[k] = a[j];
+        j++;
+      }
+      k++;
+    }
+
+    
+    while (i &lt;= middle)
+    {
+      temp[k] = a[i];     
+      i++;
+      k++;
+    }
+
+    
+    while (j &lt;= to)
+    {
+      temp[k] = a[j];     
+      j++;
+      k++;
+    }
+
+    
+    for (k = from; k &lt;= to; k++)
+      a[k] = temp[k];
+  }</font>
+</pre>

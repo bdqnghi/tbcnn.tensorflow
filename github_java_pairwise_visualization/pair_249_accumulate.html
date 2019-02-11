@@ -1,0 +1,66 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+   public static void mergeSort(int[] arr) {
+      if (arr.length &gt; 1) {
+         int[] left = leftHalf(arr);
+         int[] right = rightHalf(arr);
+
+         mergeSort(left);
+         mergeSort(right);
+
+         mergeArrays(arr, left, right);
+      }
+   }
+
+   public static int[] leftHalf(int[] arr) {
+      int size = arr.length / 2;
+      int[] left = new int[size];
+      for (int i = 0; i &lt; size; i++) {
+         left[i] = arr[i];
+      }
+      return left;
+   }
+
+   public static int[] rightHalf(int[] arr) {
+      int size1 = arr.length / 2;
+      int size2 = arr.length - size1;
+      int[] right = new int[size2];
+      for (int i = 0; i &lt; size2; i++) {
+         right[i] = arr[i + size1];
+      }
+      return right;
+   }
+
+   public static void mergeArrays(int[] arr, int[] left, int[] right) {
+      int i1 = 0;
+      int i2 = 0;
+
+      for (int i = 0; i &lt; arr.length; i++) {
+         if (i2 &gt;= right.length || (i1 &lt; left.length &amp;&amp; left[i1] &lt;= right[i2])) {
+            arr[i] = left[i1];
+            i1++;
+         } else {
+            arr[i] = right[i2];
+            i2++;
+         }
+      }
+   }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+<font color='#ff0000' weight='1' id='197'>public static void <font color='#ff0000' weight='1' id='9'>sort</font>(int[] <font color='#ff0000' weight='1' id='17'>data</font>) <font color='#ff0000' weight='1' id='196'>{
+        <font color='#ff0000' weight='1' id='194'>for <font color='#ff0000' weight='1' id='59'>(<font color='#ff0000' weight='1' id='42'><font color='#ff0000' weight='1' id='40'>int <font color='#ff0000' weight='1' id='26'>k </font>= <font color='#ff0000' weight='1' id='28'>data</font>.length <font color='#ff0000' weight='1' id='35'>- </font><font color='#ff0000' weight='1' id='37'>1</font>;</font><font color='#ff0000' weight='1' id='41'></font> </font><font color='#ff0000' weight='1' id='44'>k </font><font color='#ff0000' weight='1' id='46'>&gt; </font><font color='#ff0000' weight='1' id='48'>0<font color='#ff0000' weight='1' id='47'></font></font>; <font color='#ff0000' weight='1' id='53'>k</font><font color='#ff0000' weight='1' id='55'>--</font>) </font><font color='#ff0000' weight='1' id='193'>{
+            int <font color='#ff0000' weight='1' id='64'>largestIdx </font>= <font color='#ff0000' weight='1' id='66'>0</font>;
+            <font color='#ff0000' weight='1' id='137'>for (int i = 0; i <font color='#ff0000' weight='1' id='87'>&lt;= </font><font color='#ff0000' weight='1' id='89'>k</font>; i++) <font color='#ff0000' weight='1' id='136'>{
+                <font color='#ff0000' weight='1' id='134'>if <font color='#ff0000' weight='1' id='121'>(<font color='#ff0000' weight='1' id='119'><font color='#ff0000' weight='1' id='102'>data</font>[i] <font color='#ff0000' weight='1' id='110'>&gt; </font><font color='#ff0000' weight='1' id='112'>data</font>[<font color='#ff0000' weight='1' id='114'>largestIdx</font>])</font><font color='#ff0000' weight='1' id='120'></font></font><font color='#ff0000' weight='1' id='133'> <font color='#ff0000' weight='1' id='132'>{
+                    <font color='#ff0000' weight='1' id='130'><font color='#ff0000' weight='1' id='128'><font color='#ff0000' weight='1' id='123'>largestIdx </font><font color='#ff0000' weight='1' id='125'>=<font color='#ff0000' weight='1' id='124'></font> </font><font color='#ff0000' weight='1' id='127'>i</font>;</font><font color='#ff0000' weight='1' id='129'></font>
+                }</font><font color='#ff0000' weight='1' id='131'></font></font></font>
+            }</font><font color='#ff0000' weight='1' id='135'></font></font>
+            </font><font color='#ff0000' weight='1' id='155'><font color='#ff0000' weight='1' id='153'>int <font color='#ff0000' weight='1' id='142'>tmp </font><font color='#ff0000' weight='1' id='152'>= <font color='#ff0000' weight='1' id='151'><font color='#ff0000' weight='1' id='144'>data</font>[<font color='#ff0000' weight='1' id='146'>k</font>]</font></font>;</font><font color='#ff0000' weight='1' id='154'></font>
+            </font><font color='#ff0000' weight='1' id='157'>data</font>[<font color='#ff0000' weight='1' id='159'>k</font>] = <font color='#ff0000' weight='1' id='167'>data</font>[<font color='#ff0000' weight='1' id='169'>largestIdx</font>];
+            <font color='#ff0000' weight='1' id='178'>data</font>[<font color='#ff0000' weight='1' id='180'>largestIdx</font>] = <font color='#ff0000' weight='1' id='188'>tmp</font>;
+        }<font color='#ff0000' weight='1' id='192'></font></font>
+    }</font><font color='#ff0000' weight='1' id='195'></font></font>
+
+}</font></font>
+</pre>

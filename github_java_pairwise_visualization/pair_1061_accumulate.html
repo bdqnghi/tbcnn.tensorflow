@@ -1,0 +1,115 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+package algorithms.sort;
+
+public class SortInsertionSort <font color='#ff0000' weight='1' id='340'>{
+	
+	
+<font color='#ff0000' weight='1' id='15'>public </font><font color='#ff0000' weight='1' id='17'>static </font><font color='#ff0000' weight='1' id='20'><font color='#ff0000' weight='1' id='19'>void<font color='#ff0000' weight='1' id='18'></font></font> </font><font color='#ff0000' weight='1' id='22'>main<font color='#ff0000' weight='1' id='21'></font></font>(<font color='#ff0000' weight='1' id='32'><font color='#ff0000' weight='1' id='31'><font color='#ff0000' weight='1' id='25'><font color='#ff0000' weight='1' id='24'>String</font> </font><font color='#ff0000' weight='1' id='30'><font color='#ff0000' weight='1' id='27'>args<font color='#ff0000' weight='1' id='26'></font></font>[]</font></font>)</font>{
+		
+		<font color='#ff0000' weight='1' id='91'><font color='#ff0000' weight='1' id='89'><font color='#ff0000' weight='1' id='37'>int<font color='#ff0000' weight='1' id='35'></font> </font><font color='#ff0000' weight='1' id='42'><font color='#ff0000' weight='1' id='39'>arr<font color='#ff0000' weight='1' id='38'></font></font><font color='#ff0000' weight='1' id='41'>[]</font> </font><font color='#ff0000' weight='1' id='88'>= {<font color='#ff0000' weight='1' id='44'>30</font>,<font color='#ff0000' weight='1' id='47'>6</font>,2,3,4,6,7,8,10,<font color='#ff0000' weight='1' id='71'>20<font color='#ff0000' weight='1' id='70'></font></font>,<font color='#ff0000' weight='1' id='75'><font color='#ff0000' weight='1' id='74'>11</font>,</font>5,<font color='#ff0000' weight='1' id='81'><font color='#ff0000' weight='1' id='80'>5<font color='#ff0000' weight='1' id='79'></font></font>,</font>30}</font>;</font><font color='#ff0000' weight='1' id='90'></font>
+		
+	    </font><font color='#ff0000' weight='1' id='108'><font color='#ff0000' weight='1' id='94'><font color='#ff0000' weight='1' id='93'>int<font color='#ff0000' weight='1' id='92'></font></font> </font><font color='#ff0000' weight='1' id='96'>n<font color='#ff0000' weight='1' id='95'></font> </font>= <font color='#ff0000' weight='1' id='104'><font color='#ff0000' weight='1' id='103'>arr<font color='#ff0000' weight='1' id='97'></font><font color='#ff0000' weight='1' id='100'>.<font color='#ff0000' weight='1' id='99'></font></font>length<font color='#ff0000' weight='1' id='101'></font></font></font>;<font color='#ff0000' weight='1' id='107'></font>
+	    
+	    
+	    </font>for (<font color='#ff0000' weight='1' id='118'><font color='#ff0000' weight='1' id='111'>int<font color='#ff0000' weight='1' id='109'></font> </font><font color='#ff0000' weight='1' id='113'>i<font color='#ff0000' weight='1' id='112'></font></font>=<font color='#ff0000' weight='1' id='116'>1</font>;</font> i&lt;n<font color='#ff0000' weight='1' id='125'></font>; i++)
+        {
+            <font color='#ff0000' weight='1' id='153'>int key <font color='#ff0000' weight='1' id='152'>= arr[i]</font>;</font><font color='#ff0000' weight='1' id='154'></font> 
+             
+            <font color='#ff0000' weight='1' id='169'><font color='#ff0000' weight='1' id='158'>int<font color='#ff0000' weight='1' id='156'></font> </font><font color='#ff0000' weight='1' id='160'>j<font color='#ff0000' weight='1' id='159'></font> </font>= <font color='#ff0000' weight='1' id='167'><font color='#ff0000' weight='1' id='162'>i</font><font color='#ff0000' weight='1' id='164'>-<font color='#ff0000' weight='1' id='163'></font></font>1<font color='#ff0000' weight='1' id='165'></font></font>;</font>
+            
+            
+            while (j<font color='#ff0000' weight='1' id='175'>&gt;=</font>0 &amp;&amp;<font color='#ff0000' weight='1' id='178'></font> <font color='#ff0000' weight='1' id='187'>arr[j<font color='#ff0000' weight='1' id='182'></font>]<font color='#ff0000' weight='1' id='185'></font> </font><font color='#ff0000' weight='1' id='189'>&gt;<font color='#ff0000' weight='1' id='188'></font> </font><font color='#ff0000' weight='1' id='191'>key<font color='#ff0000' weight='1' id='190'></font></font>)  
+            {
+                <font color='#ff0000' weight='1' id='219'>arr[j+1] <font color='#ff0000' weight='1' id='208'>= </font><font color='#ff0000' weight='1' id='210'>arr<font color='#ff0000' weight='1' id='209'></font></font>[j];
+                
+                </font><font color='#ff0000' weight='1' id='226'>j--<font color='#ff0000' weight='1' id='222'></font>;
+            }</font><font color='#ff0000' weight='1' id='227'></font>
+            
+            <font color='#ff0000' weight='1' id='248'>arr[j+<font color='#ff0000' weight='1' id='234'></font>1] = <font color='#ff0000' weight='1' id='245'>key</font>;<font color='#ff0000' weight='1' id='247'></font>            
+        }</font><font color='#ff0000' weight='1' id='249'></font>
+	    
+	    
+	  System<font color='#ff0000' weight='1' id='252'></font>.out.println(" Sorted Array: " );<font color='#ff0000' weight='1' id='271'></font>  
+	  
+	  for<font color='#ff0000' weight='1' id='301'>(int m=0; m &lt; n; <font color='#ff0000' weight='1' id='298'>m<font color='#ff0000' weight='1' id='297'>++<font color='#ff0000' weight='1' id='296'></font></font></font>)</font>{
+		  
+		  System.out.print(<font color='#ff0000' weight='1' id='325'><font color='#ff0000' weight='1' id='314'>" "</font>+ <font color='#ff0000' weight='1' id='324'><font color='#ff0000' weight='1' id='318'>arr<font color='#ff0000' weight='1' id='317'></font></font>[m]</font></font>);
+	  }
+	  			
+	}<font color='#ff0000' weight='1' id='336'></font>
+
+}<font color='#ff0000' weight='1' id='339'></font></font>
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+package PukyungUniv;
+
+import static org.junit.Assert.assertEquals;
+
+import java.util.Arrays;
+
+import org.junit.Test;
+
+public class Sort_HeapSort {
+
+    private static int getLeftChildIdx(int parent) {
+        return (parent + 1) * 2 - 1;
+    }
+
+    private int getParentIdx(int child) {
+        if (child &lt; 1) {
+            return -1;
+        } else {
+            return (child + 1) / 2 - 1;
+        }
+    }
+
+    private static void maxHeapify(int[] data, int i, int end) {
+        int leftChild = getLeftChildIdx(i);
+        while (leftChild &lt;= end) {
+            int largeChild;
+            if (leftChild == end) {
+                largeChild = leftChild;
+            } else {
+                largeChild = data[leftChild] &gt; data[leftChild + 1] ? leftChild : leftChild + 1;
+            }
+            if (data[i] &gt;= data[largeChild]) {
+                return;
+            }
+            swap(data, i, largeChild);
+            i = largeChild;
+            leftChild = getLeftChildIdx(i);
+        }
+    }
+
+    private static void swap(int[] data, int i, int j) {
+        int t = data[i];
+        data[i] = data[j];
+        data[j] = t;
+    }
+
+    public static void sort(int[] data) {
+        makeHeap(data);
+        sortFromHeap(data);
+    }
+
+    private static void makeHeap(int[] data) {
+        for (int i = data.length / 2 - 1; i &gt;= 0; i--) {
+            maxHeapify(data, i, data.length - 1);
+        }
+    }
+
+    private static void sortFromHeap(int[] data) {
+        int last = data.length - 1;<font color='#ff0000' weight='1' id='655'></font>
+        while (last &gt; 0) {
+            swap(data, 0, last);
+            last--;
+            maxHeapify(data, 0, last);
+        }
+    }
+
+}
+</font>
+</pre>

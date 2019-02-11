@@ -1,0 +1,117 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+package heap;
+
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Heap {
+
+    
+
+        
+        
+    private int array[];
+    public static int n; 
+    
+    public static void sort(int arr[])  
+    {
+            buildMaxHeap(arr);
+            
+            for(int i=arr<font color='#00ffa9' weight='0.333333' id='137'></font>.<font color='#00ffa9' weight='0.333333' id='139'></font>length-1; i&gt;=0; i--){
+                int temp=arr[0];
+                arr[0] = arr[i];
+                arr[i]= temp;
+
+                n--;
+                
+                maxHeapify(arr,0);
+		}
+    }
+    
+    public static void maxHeapify(int[] arr, int i) 
+    {
+		int leftChild= (2*i)+1;
+		int rightChild=(2*i)+2;
+		
+                int max;
+                
+                if((leftChild &lt; n) &amp;&amp; (arr[leftChild] &gt; arr[i])) 
+			max=leftChild;
+                else max = i;
+                
+		if( (rightChild &lt; n) &amp;&amp; (arr[rightChild] &gt; arr[max])) 
+			max=rightChild;
+		
+                if(max!=i){
+			int temp = arr[max];
+			arr[max] = arr[i];
+			arr[i] = temp;
+                        maxHeapify(arr, max);
+		}
+	}  
+    
+    
+    
+    public static void buildMaxHeap(int [] array){
+    
+        n=array.length;
+        
+        for(int i=array.length/2; i&gt;=0; i--){
+            maxHeapify(array, i);
+        }
+    }
+}
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+    public static void buildheap(int []a){
+        n=a.length-1;
+        for(int i=n/2;i&gt;=0;i--){
+            maxheap(a,i);
+        }
+    }
+    
+    public static void maxheap(int[] a, int i){ 
+        left=2*i;
+        right=2*i+1;
+        if(left &lt;= n &amp;&amp; a[left] &gt; a[i]){
+            largest=left;
+        }
+        else{
+            largest=i;
+        }
+        
+        if<font color='#ff0000' weight='1' id='235'>(<font color='#0048ff' weight='0.0714286' id='208'>right </font><font color='#0048ff' weight='0.0714286' id='210'>&lt;= </font>n &amp;&amp; <font color='#0024ff' weight='0.0357143' id='216'>a</font>[<font color='#0012ff' weight='0.0178571' id='218'>right</font>] &gt; <font color='#0024ff' weight='0.0357143' id='226'>a</font>[<font color='#0012ff' weight='0.0178571' id='228'>largest</font>])</font>{
+            largest=right;
+        }
+        if(largest!=i){
+            exchange(i,largest);
+            maxheap(a, largest);
+        }
+    }
+    
+    public static void exchange(int i, int j){
+        int t=a[i];
+        a[i]=a[j];
+        a[j]=t; 
+        }
+    
+    public static void sort(int []a0){
+        a=a0;
+        buildheap(a);
+        
+        for(int i=n;i&gt;0;i--){
+            exchange(0, i);
+            n=n-1;
+            maxheap(a, 0);
+        }
+    }</font>
+</pre>

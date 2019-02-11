@@ -1,0 +1,111 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static int partition(int arr[], int low, int high)
+ {
+     int pivot = arr[high]; 
+     int i = (low-1); 
+     for (int j=low; j&lt;high; j++)
+     {
+         
+         
+         if (arr[j] &lt;= pivot)
+         {
+             i++;
+
+             
+             int temp = arr[i];
+             arr[i] = arr[j];
+             arr[j] = temp;
+         }
+     }
+
+     
+     int temp = arr[i+1];
+     arr[i+1] = arr[high];
+     arr[high] = temp;
+
+     return i+1;
+ }
+
+
+ 
+ public static void sort(int arr[], int low, int high)
+ {
+     if (low &lt; high)
+     {
+         
+         int pi = partition(arr, low, high);
+
+         
+         
+         sort(arr, low, pi-1);
+         sort(arr, pi+1, high);
+     }
+ }
+
+ </font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+import java.util.Arrays;
+class SortingHeap{
+
+void heapify(int arr[],int size,int i)
+<font color='#ff0000' weight='1' id='271'>{
+	int swapwith<font color='#0000ff' weight='0.000318878' id='55'>=<font color='#0000ff' weight='0.000212585' id='54'>i</font></font>;
+	int <font color='#0000ff' weight='0.000106293' id='63'>l</font><font color='#0001ff' weight='0.00116922' id='75'>=<font color='#0000ff' weight='2.12585e-05' id='65'>2</font>*i+1</font>;
+	<font color='#000cff' weight='0.0121173' id='98'><font color='#0005ff' weight='0.00542092' id='96'>int <font color='#0000ff' weight='0.000106293' id='83'>r</font>=<font color='#0000ff' weight='2.12585e-05' id='85'>2</font><font color='#0000ff' weight='2.12585e-05' id='87'>*</font>i<font color='#0000ff' weight='2.12585e-05' id='91'>+</font><font color='#0000ff' weight='2.12585e-05' id='93'>2</font>;</font>
+	
+	
+	
+	</font><font color='#001aff' weight='0.026148' id='140'>if<font color='#0009ff' weight='0.00892857' id='127'>(<font color='#0004ff' weight='0.00414541' id='125'><font color='#0001ff' weight='0.00135523' id='116'><font color='#0000ff' weight='3.98597e-05' id='100'>l</font><font color='#0000ff' weight='0.000558036' id='115'>&lt;<font color='#0000ff' weight='0.000239158' id='113'><font color='#0000ff' weight='6.64328e-06' id='102'>size </font><font color='#0000ff' weight='6.64328e-06' id='104'>&amp;&amp; </font><font color='#0000ff' weight='4.6503e-05' id='112'><font color='#0000ff' weight='3.32164e-06' id='106'>arr</font><font color='#0000ff' weight='1.32866e-05' id='111'>[<font color='#0000ff' weight='3.32164e-06' id='109'>l]</font></font></font>&gt;</font></font></font>arr[swapwith])</font></font><font color='#0003ff' weight='0.00350765' id='139'> 
+	<font color='#0003ff' weight='0.00318878' id='138'>{
+		<font color='#0001ff' weight='0.00127551' id='136'><font color='#0000ff' weight='0.000478316' id='134'>swapwith<font color='#0000ff' weight='2.65731e-05' id='131'>=</font>l;</font>
+	}</font></font></font>
+	</font><font color='#001aff' weight='0.026148' id='182'>if<font color='#0009ff' weight='0.00892857' id='169'>(<font color='#0004ff' weight='0.00414541' id='167'><font color='#0001ff' weight='0.00135523' id='158'><font color='#0000ff' weight='3.98597e-05' id='142'>r</font><font color='#0000ff' weight='0.000558036' id='157'>&lt;<font color='#0000ff' weight='0.000239158' id='155'><font color='#0000ff' weight='6.64328e-06' id='144'>size </font><font color='#0000ff' weight='6.64328e-06' id='146'>&amp;&amp; </font><font color='#0000ff' weight='4.6503e-05' id='154'>arr[r]</font>&gt;</font></font></font>arr[swapwith])</font></font><font color='#0003ff' weight='0.00350765' id='181'> 
+	<font color='#0003ff' weight='0.00318878' id='180'>{
+		<font color='#0001ff' weight='0.00127551' id='178'><font color='#0000ff' weight='0.000478316' id='176'><font color='#0000ff' weight='2.65731e-05' id='171'>swapwith</font>=<font color='#0000ff' weight='2.65731e-05' id='175'>r</font>;</font>
+	}</font></font></font>	
+	
+	</font><font color='#0037ff' weight='0.0548469' id='269'>if<font color='#0002ff' weight='0.00255102' id='191'>(<font color='#0000ff' weight='0.000956633' id='189'><font color='#0000ff' weight='5.31463e-05' id='184'>swapwith </font><font color='#0000ff' weight='5.31463e-05' id='186'>!= </font><font color='#0000ff' weight='5.31463e-05' id='188'>i</font>)</font></font><font color='#0018ff' weight='0.0242347' id='268'>
+	<font color='#0018ff' weight='0.0239158' id='267'>{
+		int <font color='#0000ff' weight='1.06293e-05' id='196'>tmp </font><font color='#0000ff' weight='9.56633e-05' id='206'>=arr[i]</font>;
+		arr[i] = arr[<font color='#0000ff' weight='2.65731e-06' id='223'>swapwith</font>];
+		arr[<font color='#0000ff' weight='2.65731e-06' id='234'>swapwith</font>] = <font color='#0000ff' weight='1.06293e-05' id='242'>tmp</font>;
+
+		<font color='#0001ff' weight='0.00121173' id='265'><font color='#0000ff' weight='0.000542092' id='263'><font color='#0000ff' weight='0.000510204' id='262'><font color='#0000ff' weight='1.59439e-05' id='247'>heapify</font><font color='#0000ff' weight='0.00020727' id='261'>(<font color='#0000ff' weight='1.19579e-05' id='251'><font color='#0000ff' weight='7.97194e-06' id='250'><font color='#0000ff' weight='3.98597e-06' id='249'>arr</font></font>,</font><font color='#0000ff' weight='1.19579e-05' id='255'><font color='#0000ff' weight='7.97194e-06' id='254'><font color='#0000ff' weight='3.98597e-06' id='253'>size</font></font>,</font><font color='#0000ff' weight='1.19579e-05' id='259'><font color='#0000ff' weight='7.97194e-06' id='258'><font color='#0000ff' weight='3.98597e-06' id='257'>swapwith</font></font>)</font></font></font>;</font> 
+	}</font></font></font>	
+		
+}</font></font>	
+void sort(int arr[],int size)
+{
+	for(int i=(size/2)-1;i&gt;=0;i--)
+	{
+		
+		heapify(arr,size,i);
+	}
+	
+	for (int i=size-1; i&gt;=0; i--)
+    {
+        
+        
+		int tmp =arr[0];
+		arr[0] = arr[i];
+		arr[i] = tmp;
+		
+		
+        
+        heapify(arr, i, 0);
+    }	
+	 
+	 
+		 
+		 
+		 
+		
+		 
+	 
+}
+}
+</font>
+</pre>

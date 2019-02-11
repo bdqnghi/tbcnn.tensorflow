@@ -1,0 +1,61 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+  private static void merge(Comparable[] a, Comparable[] aux, int lo, int mid, int hi) {
+
+        
+        assert isSorted(a, lo, mid);
+        assert isSorted(a, mid+1, hi);
+
+        
+        for (int k = lo; k &lt;= hi; k++) {
+            aux[k] = a[k]; 
+        }
+
+        
+        int i = lo, j = mid+1;
+        for (int k = lo; k &lt;= hi; k++) {
+            if      (i &gt; mid)              a[k] = aux[j++];   
+            else if (j &gt; hi)               a[k] = aux[i++];
+            else if (<font color='#ff0000' weight='1' id='297'><font color='#00ff00' weight='0.5' id='274'>less<font color='#00ff00' weight='0.5' id='273'></font></font><font color='#00ff00' weight='0.5' id='296'>(<font color='#00aaff' weight='0.166667' id='284'><font color='#00aaff' weight='0.166667' id='283'><font color='#00aaff' weight='0.166667' id='282'><font color='#0054ff' weight='0.0833333' id='276'>aux<font color='#0054ff' weight='0.0833333' id='275'></font></font><font color='#0054ff' weight='0.0833333' id='281'>[<font color='#002aff' weight='0.0416667' id='279'><font color='#002aff' weight='0.0416667' id='278'>j<font color='#002aff' weight='0.0416667' id='277'></font></font>]</font><font color='#002aff' weight='0.0416667' id='280'></font></font></font></font>, </font><font color='#00aaff' weight='0.166667' id='294'><font color='#00aaff' weight='0.166667' id='293'><font color='#00aaff' weight='0.166667' id='292'><font color='#0054ff' weight='0.0833333' id='286'>aux</font>[i]</font></font>)</font><font color='#00aaff' weight='0.166667' id='295'></font></font></font>) a[k] = aux[j++];
+            else                           a[k] = aux[i++];
+        }
+
+        
+        assert isSorted(a, lo, hi);
+    }
+
+    
+    private static void sort(Comparable[] a, Comparable[] aux, int lo, int hi) {
+        if (hi &lt;= lo) return;
+        int mid = lo + (hi - lo) / 2;
+        sort(a, aux, lo, mid);
+        sort(a, aux, mid + 1, hi);
+        merge(a, aux, lo, mid, hi);
+    }
+
+    
+    public static void sort(Comparable[] a) {
+        Comparable[] aux = new Comparable[a.length];
+        sort(a, aux, 0, a.length-1);
+        assert isSorted(a);
+    }
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public void topSort(Graph g) {
+        initDfs(g);
+        for (int i = 1; i &lt;= g.numV; i++) {
+            if (!mDiscovered[i]) {
+                idfs(i, g);
+            }
+            if (mFinished) return;
+        }
+        while (mSorted.size() &gt; 0) {
+            out(mSorted.pop() + " ");
+        }
+        outln("");
+    }
+
+    </font>
+</pre>

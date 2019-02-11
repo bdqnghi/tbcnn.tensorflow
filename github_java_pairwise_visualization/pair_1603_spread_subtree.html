@@ -1,0 +1,89 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+<font color='#0000ff' weight='0.000561167' id='2'>public </font><font color='#0000ff' weight='0.000561167' id='4'>static </font><font color='#0000ff' weight='0.000561167' id='6'>void</font> <font color='#0000ff' weight='0.000561167' id='9'>selsort</font>(<font color='#0002ff' weight='0.00252525' id='19'><font color='#0002ff' weight='0.00224467' id='18'><font color='#0000ff' weight='0.000280584' id='12'><font color='#0000ff' weight='0.000140292' id='11'>int</font> </font><font color='#0000ff' weight='0.000561167' id='17'>a<font color='#0000ff' weight='7.01459e-05' id='16'>[]</font></font></font>)</font>{
+        <font color='#0001ff' weight='0.00128267' id='38'><font color='#0000ff' weight='0.000561167' id='36'><font color='#0000ff' weight='1.33611e-05' id='23'>int</font> n=<font color='#0000ff' weight='9.35279e-05' id='34'><font color='#0000ff' weight='4.45371e-06' id='28'>a</font><font color='#0000ff' weight='4.45371e-06' id='30'>.</font><font color='#0000ff' weight='4.45371e-06' id='32'>length</font></font>;</font>
+        </font><font color='#0000ff' weight='2.00417e-05' id='40'>int</font> <font color='#0000ff' weight='2.00417e-05' id='43'>temp</font>;
+        <font color='#0000ff' weight='0.000881834' id='58'><font color='#0000ff' weight='2.67222e-05' id='49'>int </font>pos=<font color='#0000ff' weight='1.33611e-05' id='53'>0</font>;
+        </font>for(<font color='#0000ff' weight='1.67014e-06' id='60'>int</font> i=0;<font color='#0000ff' weight='1.67014e-06' id='72'>i</font>&lt;<font color='#0000ff' weight='1.67014e-06' id='76'>n</font>;i++){
+            <font color='#0000ff' weight='0.000545134' id='156'>for(<font color='#0000ff' weight='1.50313e-05' id='103'><font color='#0000ff' weight='3.34028e-07' id='90'><font color='#0000ff' weight='1.67014e-07' id='89'>int</font> </font><font color='#0000ff' weight='1.67014e-07' id='92'>j</font><font color='#0000ff' weight='1.1691e-06' id='100'>=i+1</font>;</font><font color='#0000ff' weight='8.01667e-06' id='112'><font color='#0000ff' weight='3.00625e-06' id='110'>j<font color='#0000ff' weight='1.67014e-07' id='107'>&lt;</font>n;</font></font><font color='#0000ff' weight='5.01042e-06' id='118'><font color='#0000ff' weight='5.01042e-07' id='114'>j</font><font color='#0000ff' weight='5.01042e-07' id='116'>++</font>)</font><font color='#0000ff' weight='0.000136283' id='155'>{
+                <font color='#0000ff' weight='6.41334e-05' id='153'>if(<font color='#0000ff' weight='9.01876e-06' id='139'><font color='#0000ff' weight='8.3507e-08' id='122'>a</font><font color='#0000ff' weight='3.34028e-07' id='127'>[<font color='#0000ff' weight='8.3507e-08' id='125'><font color='#0000ff' weight='4.17535e-08' id='124'>i</font>]</font></font>&gt;<font color='#0000ff' weight='1.1691e-06' id='138'>a<font color='#0000ff' weight='3.34028e-07' id='137'>[j]</font></font>)</font><font color='#0000ff' weight='1.00208e-05' id='152'>
+                    <font color='#0000ff' weight='9.01876e-06' id='151'><font color='#0000ff' weight='1.67014e-07' id='143'>pos</font><font color='#0000ff' weight='1.67014e-07' id='145'>=</font><font color='#0000ff' weight='1.67014e-07' id='147'>j</font>;</font></font>
+            }</font></font>
+           </font><font color='#0000ff' weight='4.81e-05' id='169'>temp=a<font color='#0000ff' weight='2.67222e-06' id='167'>[<font color='#0000ff' weight='6.68056e-07' id='165'>i]</font></font>;</font>
+           a[i]<font color='#0000ff' weight='1.33611e-06' id='181'>=</font><font color='#0000ff' weight='9.35279e-06' id='189'>a[pos]</font>;
+           <font color='#0000ff' weight='9.35279e-06' id='200'>a<font color='#0000ff' weight='2.67222e-06' id='199'>[<font color='#0000ff' weight='6.68056e-07' id='197'>pos]</font></font></font><font color='#0000ff' weight='1.33611e-06' id='202'>=</font><font color='#0000ff' weight='1.33611e-06' id='204'>temp</font>;
+        }
+      
+         System<font color='#0000ff' weight='4.00834e-06' id='214'>.</font>out.println<font color='#0000ff' weight='0.000100208' id='227'>(<font color='#0000ff' weight='2.00417e-05' id='224'><font color='#0000ff' weight='1.00208e-05' id='223'>"the sorted array is "</font></font>)</font>;
+         for(<font color='#0000ff' weight='1.67014e-06' id='233'>int</font> i=0;i&lt;n;<font color='#0000ff' weight='5.01042e-06' id='254'>i</font>++){
+             <font color='#0000ff' weight='0.000601251' id='291'>System.out<font color='#0000ff' weight='1.00208e-06' id='268'>.</font>print(a[i]+ " ");
+         }</font>
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+package Graph;
+
+import java.util.Iterator;
+import java.util.LinkedList;
+
+import java.util.ArrayList;
+import java.util.Stack;
+
+
+public class TopologicalSort {
+    private int vertex;
+    private LinkedList&lt;Integer&gt; adj[];
+
+    public TopologicalSort(int v) {
+        vertex = v;
+        adj = new LinkedList[v];
+        for (int i = 0; i &lt;<font color='#ff0000' weight='1' id='143'></font> v; i++) {
+            adj[i] = new LinkedList&lt;&gt;();
+        }
+    }
+    void addEdge(int v, int e) {
+        adj[v].add(e);
+    }
+
+   
+
+    public  void topologicalSort() {
+        Stack stack=new Stack();
+        boolean visited[]=new boolean[vertex];
+        for(int i=0;i&lt;vertex;i++) {
+            visited[i]=false;
+        }
+        for(int j=0;j&lt;vertex;j++) {
+            if(visited[j]==false) {
+                topologicalSortUtil(visited,stack,j);
+            }
+        }
+        while(stack.empty()==false) {
+            System.out.println(stack.pop() + " ");
+        }
+    }
+
+    public void topologicalSortUtil(boolean[] visited, Stack stack,int vertexData) {
+        
+            visited[vertexData] = true;
+            
+           
+            Iterator&lt;Integer&gt; iterator = adj[vertexData].iterator();
+            while (iterator.hasNext()) {
+                
+                int nextData = iterator.next();
+                
+                if (!visited[nextData]) {
+                    topologicalSortUtil(visited, stack, nextData);
+                }
+                
+
+            }
+            stack.push(vertexData);
+        
+    }
+
+}
+</font>
+</pre>

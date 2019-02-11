@@ -1,0 +1,94 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static void sort(long[] valuesArray, int[] gapsArray) throws SortException {
+
+        <font color='#0013ff' weight='0.019305' id='67'>if<font color='#0004ff' weight='0.00418275' id='50'>(<font color='#0001ff' weight='0.00176963' id='48'><font color='#0000ff' weight='0.00032175' id='43'><font color='#0000ff' weight='1.7875e-05' id='38'>gapsArray</font><font color='#0000ff' weight='1.7875e-05' id='40'>.</font><font color='#0000ff' weight='1.7875e-05' id='42'>length</font> </font><font color='#0000ff' weight='5.36251e-05' id='45'>== </font><font color='#0000ff' weight='5.36251e-05' id='47'>0</font>)</font></font><font color='#0004ff' weight='0.00482625' id='66'> <font color='#0004ff' weight='0.00418275' id='64'>throw <font color='#0001ff' weight='0.00176963' id='62'><font color='#0000ff' weight='8.04376e-05' id='52'>new </font><font color='#0000ff' weight='0.000643501' id='61'><font color='#0000ff' weight='4.02188e-05' id='54'>EmptyArrayException</font><font color='#0000ff' weight='0.000201094' id='60'>(<font color='#0000ff' weight='6.03282e-05' id='58'><font color='#0000ff' weight='4.02188e-05' id='57'>"Gaps array can not by empty"</font>)</font></font></font>;</font></font></font>
+
+        </font><font color='#0011ff' weight='0.016731' id='94'><font color='#0007ff' weight='0.00772201' id='92'>int <font color='#0000ff' weight='0.00010725' id='72'>endGap </font>= gapsArray[gapsArray<font color='#0000ff' weight='2.97917e-06' id='78'>.</font><font color='#0000ff' weight='2.97917e-06' id='80'>length</font><font color='#0000ff' weight='8.93751e-06' id='83'>-</font>1];</font>
+        </font>if(<font color='#0000ff' weight='5.36251e-05' id='96'>endGap </font>!= 1)<font color='#0004ff' weight='0.00482626' id='119'> <font color='#0004ff' weight='0.0045045' id='118'>throw <font color='#0001ff' weight='0.00176963' id='115'>new <font color='#0000ff' weight='0.000643501' id='114'>InvalidGapSequenceException(<font color='#0000ff' weight='4.02188e-05' id='110'><font color='#0000ff' weight='2.01094e-05' id='109'>"Gaps sequence must end with 1"</font></font>)</font>;</font></font></font>
+
+
+        <font color='#000aff' weight='0.010296' id='137'><font color='#0004ff' weight='0.0045045' id='135'>int <font color='#0000ff' weight='0.00010725' id='125'>valuesArraySize </font><font color='#0000ff' weight='0.000858001' id='134'>= <font color='#0000ff' weight='0.000750751' id='133'><font color='#0000ff' weight='0.000643501' id='132'><font color='#0000ff' weight='3.575e-05' id='127'>valuesArray</font><font color='#0000ff' weight='3.575e-05' id='129'>.</font><font color='#0000ff' weight='3.575e-05' id='131'>length</font></font></font></font>;</font>
+
+        </font><font color='#0066ff' weight='0.100386' id='294'>for (<font color='#0001ff' weight='0.00144788' id='147'>int gap : gapsArray</font>) <font color='#002eff' weight='0.0456885' id='293'>{
+
+            <font color='#0016ff' weight='0.0225225' id='291'>for <font color='#0002ff' weight='0.00225225' id='179'>(<font color='#0000ff' weight='0.000221203' id='162'><font color='#0000ff' weight='9.04923e-05' id='160'><font color='#0000ff' weight='3.35157e-06' id='152'>int</font> i = <font color='#0000ff' weight='6.70313e-06' id='158'>gap</font>;</font> </font><font color='#0000ff' weight='0.000160875' id='171'><font color='#0000ff' weight='3.35157e-06' id='164'>i </font><font color='#0000ff' weight='3.35157e-06' id='166'>&lt; </font>valuesArraySize; </font><font color='#0000ff' weight='0.000100547' id='177'>i<font color='#0000ff' weight='1.00547e-05' id='175'>++</font>)</font> </font><font color='#0009ff' weight='0.00884813' id='290'>{
+
+                <font color='#0000ff' weight='0.000273488' id='197'><font color='#0000ff' weight='0.000120656' id='195'><font color='#0000ff' weight='5.36251e-06' id='182'>long </font><font color='#0000ff' weight='2.68125e-06' id='184'>value </font><font color='#0000ff' weight='2.41313e-05' id='194'>= <font color='#0000ff' weight='1.34063e-06' id='186'>valuesArray</font><font color='#0000ff' weight='5.36251e-06' id='191'>[<font color='#0000ff' weight='6.70313e-07' id='188'>i</font>]</font></font>;</font>
+                </font><font color='#0000ff' weight='7.23938e-05' id='207'>int j = i;</font>
+
+                while <font color='#0000ff' weight='0.000209138' id='236'>(j &gt;= gap &amp;&amp; valuesArray<font color='#0000ff' weight='2.29822e-06' id='228'>[<font color='#0000ff' weight='8.61831e-07' id='226'>j - gap]</font></font> &gt; <font color='#0000ff' weight='5.74554e-07' id='233'>value</font>) </font>{
+                    <font color='#0000ff' weight='6.43501e-05' id='261'><font color='#0000ff' weight='3.12813e-06' id='244'>valuesArray[j] </font><font color='#0000ff' weight='4.46875e-07' id='246'>= </font><font color='#0000ff' weight='2.23438e-07' id='248'>valuesArray</font>[<font color='#0000ff' weight='3.72396e-08' id='250'>j </font><font color='#0000ff' weight='3.72396e-08' id='252'>- </font>gap];
+                    </font>j -= gap;
+                }
+
+                <font color='#0000ff' weight='0.000225225' id='288'><font color='#0000ff' weight='9.65251e-05' id='286'>valuesArray[j] <font color='#0000ff' weight='2.68125e-06' id='283'>= </font>value;</font>
+            }</font></font>
+        }</font></font>
+    }</font></font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+package search.search;
+
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Stack;
+
+public class Topological {
+	
+	private int vertices;
+    private LinkedList&lt;Integer&gt; adj[];
+	
+	Topological(Graph g) {
+		vertices = g.getVertices();
+		adj = g.getAdjacencyList();
+	}
+
+    
+    void topologicalSortUtil(int v, boolean visited[],
+                             Stack&lt;Integer&gt; stack)
+    {
+        
+        visited[v] = true;
+        Integer i;
+ 
+        
+        
+        Iterator&lt;Integer&gt; it = adj[v].iterator();
+        while (it.hasNext())
+        {
+            i = it.next();
+            if (!visited[i])
+                topologicalSortUtil(i, visited, stack);
+        }
+ 
+        
+        stack.push(new Integer(v));
+    }
+ 
+    
+    
+    public void topologicalSort()
+    {
+        Stack&lt;Integer&gt; stack = new Stack&lt;Integer&gt;();
+ 
+        
+        boolean visited[] = new boolean[vertices];
+        for (int i = 0; i &lt; vertices; i++)
+            <font color='#ff0000' weight='1' id='421'>visited[i] <font color='#001cff' weight='0.0277778' id='418'>= </font><font color='#001cff' weight='0.0277778' id='420'>false</font>;</font>
+ 
+        
+        
+        
+        for (int i = 0; i &lt; vertices; i++)
+            if (visited[i] == false)
+                topologicalSortUtil(i, visited, stack);
+ 
+        
+        while (stack.empty()==false)
+            System.out.print(stack.pop() + " ");
+    }
+}
+</font>
+</pre>

@@ -1,0 +1,112 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public int[] mergesort(int[] arr) {
+    <font color='#ff0000' weight='1' id='39'><font color='#ff0000' weight='1' id='37'><font color='#ff0000' weight='1' id='25'>int<font color='#ff0000' weight='1' id='23'></font> </font><font color='#ff0000' weight='1' id='27'>len </font><font color='#ff0000' weight='1' id='36'>= <font color='#ff0000' weight='1' id='35'><font color='#ff0000' weight='1' id='34'><font color='#ff0000' weight='1' id='29'>arr<font color='#ff0000' weight='1' id='28'></font></font><font color='#ff0000' weight='1' id='31'>.<font color='#ff0000' weight='1' id='30'></font></font><font color='#ff0000' weight='1' id='33'>length<font color='#ff0000' weight='1' id='32'></font></font></font></font></font>;</font><font color='#ff0000' weight='1' id='38'></font> 
+    </font>if (<font color='#ff0000' weight='1' id='46'><font color='#ff0000' weight='1' id='41'>len<font color='#ff0000' weight='1' id='40'></font> </font><font color='#ff0000' weight='1' id='43'>&lt;=<font color='#ff0000' weight='1' id='42'></font> </font><font color='#ff0000' weight='1' id='45'>1<font color='#ff0000' weight='1' id='44'></font></font>)</font><font color='#ff0000' weight='1' id='47'></font><font color='#ff0000' weight='1' id='55'>
+      <font color='#ff0000' weight='1' id='54'><font color='#ff0000' weight='1' id='53'>return <font color='#ff0000' weight='1' id='51'><font color='#ff0000' weight='1' id='50'>arr<font color='#ff0000' weight='1' id='49'></font></font>;</font></font></font></font> 
+    int<font color='#ff0000' weight='1' id='57'></font> alen = len / 2;<font color='#ff0000' weight='1' id='71'></font> 
+    <font color='#ff0000' weight='1' id='88'><font color='#ff0000' weight='1' id='86'><font color='#ff0000' weight='1' id='75'><font color='#ff0000' weight='1' id='74'>int</font> </font>blen = <font color='#ff0000' weight='1' id='79'>len<font color='#ff0000' weight='1' id='78'></font> </font>- alen<font color='#ff0000' weight='1' id='82'></font>;</font><font color='#ff0000' weight='1' id='87'></font> 
+    </font><font color='#ff0000' weight='1' id='109'><font color='#ff0000' weight='1' id='94'><font color='#ff0000' weight='1' id='93'><font color='#ff0000' weight='1' id='90'>int<font color='#ff0000' weight='1' id='89'></font></font><font color='#ff0000' weight='1' id='92'>[]<font color='#ff0000' weight='1' id='91'></font></font></font> </font>a <font color='#ff0000' weight='1' id='108'>= <font color='#ff0000' weight='1' id='107'><font color='#ff0000' weight='1' id='98'>new </font>int<font color='#ff0000' weight='1' id='105'>[<font color='#ff0000' weight='1' id='103'><font color='#ff0000' weight='1' id='102'>alen</font>]</font></font></font></font>;</font>
+    <font color='#ff0000' weight='1' id='134'>int[] b = new<font color='#ff0000' weight='1' id='120'></font> int[<font color='#ff0000' weight='1' id='126'>blen]</font>; 
+    </font>for <font color='#ff0000' weight='1' id='163'>(<font color='#ff0000' weight='1' id='146'><font color='#ff0000' weight='1' id='137'>int<font color='#ff0000' weight='1' id='135'></font> </font>i = 0;<font color='#ff0000' weight='1' id='145'></font> </font><font color='#ff0000' weight='1' id='155'><font color='#ff0000' weight='1' id='153'><font color='#ff0000' weight='1' id='148'>i </font><font color='#ff0000' weight='1' id='150'>&lt;<font color='#ff0000' weight='1' id='149'></font> </font><font color='#ff0000' weight='1' id='152'>alen<font color='#ff0000' weight='1' id='151'></font></font>;</font><font color='#ff0000' weight='1' id='154'></font> </font><font color='#ff0000' weight='1' id='160'><font color='#ff0000' weight='1' id='157'>i<font color='#ff0000' weight='1' id='156'></font></font><font color='#ff0000' weight='1' id='159'>++<font color='#ff0000' weight='1' id='158'></font></font></font>)<font color='#ff0000' weight='1' id='162'></font> 
+      </font><font color='#ff0000' weight='1' id='185'><font color='#ff0000' weight='1' id='182'><font color='#ff0000' weight='1' id='165'>a<font color='#ff0000' weight='1' id='164'></font></font>[i] = <font color='#ff0000' weight='1' id='181'><font color='#ff0000' weight='1' id='175'>arr</font><font color='#ff0000' weight='1' id='180'>[<font color='#ff0000' weight='1' id='178'>i<font color='#ff0000' weight='1' id='176'></font>]</font></font></font>;</font></font>
+    <font color='#ff0000' weight='1' id='242'>for (<font color='#ff0000' weight='1' id='198'><font color='#ff0000' weight='1' id='189'>int<font color='#ff0000' weight='1' id='187'></font> </font><font color='#ff0000' weight='1' id='191'>i<font color='#ff0000' weight='1' id='190'></font> </font>= <font color='#ff0000' weight='1' id='193'>0</font>; </font><font color='#ff0000' weight='1' id='205'>i &lt; <font color='#ff0000' weight='1' id='204'>blen<font color='#ff0000' weight='1' id='203'></font></font>;</font> <font color='#ff0000' weight='1' id='212'>i<font color='#ff0000' weight='1' id='211'>++</font></font>)<font color='#ff0000' weight='1' id='214'></font>
+      <font color='#ff0000' weight='1' id='241'><font color='#ff0000' weight='1' id='217'>b<font color='#ff0000' weight='1' id='216'></font></font>[<font color='#ff0000' weight='1' id='219'>i<font color='#ff0000' weight='1' id='218'></font></font>] <font color='#ff0000' weight='1' id='225'>= </font><font color='#ff0000' weight='1' id='227'>arr<font color='#ff0000' weight='1' id='226'></font></font><font color='#ff0000' weight='1' id='236'>[alen + i]</font>;</font>
+    </font><font color='#ff0000' weight='1' id='272'>return <font color='#ff0000' weight='1' id='244'>merge<font color='#ff0000' weight='1' id='243'></font></font>(<font color='#ff0000' weight='1' id='246'>mergesort<font color='#ff0000' weight='1' id='245'></font></font>(<font color='#ff0000' weight='1' id='248'>a</font>), <font color='#ff0000' weight='1' id='264'>mergesort(<font color='#ff0000' weight='1' id='261'>b)</font></font>)<font color='#ff0000' weight='1' id='267'></font>;<font color='#ff0000' weight='1' id='271'></font>
+  }</font><font color='#ff0000' weight='1' id='273'></font>
+  
+  public int[] merge(int[] a, int[] b) {
+    int alen = a.length; 
+    int blen = b.length; 
+    int len = alen + blen; 
+    int[] arr = new int[len];
+    int i = 0, j = 0, k = 0; 
+    while (k &lt; len) { 
+      while (i &lt; alen &amp;&amp; j &lt; blen) 
+        if (a[i] &lt; b[j])  
+          arr[k++] = a[i++];
+        else if (a[i] &gt; b[j]) 
+          arr[k++] = b[j++];
+        else { 
+          arr[k++] = a[i++]; 
+          arr[k++] = b[j++];
+        }
+        while (i &lt; alen)  
+          arr[k++] = a[i++];
+        while (j &lt; blen)
+          arr[k++] = b[j++];
+    }
+    return arr; 
+  }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+package PukyungUniv;
+
+import static org.junit.Assert.assertEquals;
+
+import java.util.Arrays;
+
+import org.junit.Test;
+
+public class Sort_HeapSort {
+
+    private static int getLeftChildIdx(int parent) {
+        return (parent + 1) * 2 - 1;
+    }
+
+    private int getParentIdx(int child) {
+        if (child &lt; 1) {
+            return -1;
+        } else {
+            return (child + 1) / 2 - 1;
+        }
+    }
+
+    private static void maxHeapify(int[] data, int i, int end) {
+        int leftChild = getLeftChildIdx(i);
+        while (leftChild &lt;= end) {
+            int largeChild;
+            if (leftChild == end) {
+                largeChild = leftChild;
+            } else {
+                largeChild = data[leftChild] &gt; data[leftChild + 1] ? leftChild : leftChild + 1;
+            }
+            if (data[i] &gt;= data[largeChild]) {
+                return;
+            }
+            swap(data, i, largeChild);
+            i = largeChild;
+            leftChild = getLeftChildIdx(i);
+        }
+    }
+
+    private static void swap(int[] data, int i, int j) {
+        int t = data[i];
+        data[i] = data[j];
+        data[j] = t;
+    }
+
+    public static void sort(int[] data) {
+        makeHeap(data);
+        sortFromHeap(data);
+    }
+
+    private static void makeHeap(int[] data) {
+        for (int i = data.length / 2 - 1; i &gt;= 0; i--) {
+            maxHeapify(data, i, data.length - 1);
+        }
+    }
+
+    private static void sortFromHeap(int[] data) {
+        int last = data.length - 1;
+        while (last &gt; 0) {
+            swap(data, 0, last);
+            last--;
+            maxHeapify(data, 0, last);
+        }
+    }
+
+}
+</font>
+</pre>

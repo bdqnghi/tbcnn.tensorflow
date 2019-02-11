@@ -1,0 +1,53 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+<font color='#ff0000' weight='1' id='168'>  public void sort(<font color='#0043ff' weight='0.0666565' id='17'>Object[] a, </font>Comparator comparator)
+    <font color='#00cbff' weight='0.199991' id='166'>{
+        <font color='#0065ff' weight='0.0999902' id='164'>for <font color='#0032ff' weight='0.0499897' id='60'>(int i <font color='#0002ff' weight='0.00207251' id='35'>= <font color='#0002ff' weight='0.00207251' id='33'>1</font></font>; <font color='#0006ff' weight='0.00623922' id='50'>i &lt; <font color='#0002ff' weight='0.00207251' id='49'>a.length<font color='#0000ff' weight='0.000683601' id='47'></font></font>;</font> <font color='#0006ff' weight='0.00623922' id='54'>i</font>++)
+        </font><font color='#0032ff' weight='0.0499897' id='163'>{
+            <font color='#0019ff' weight='0.0249894' id='161'>for <font color='#000cff' weight='0.0124893' id='89'>(int j = i; j &gt;= 1; j--)
+            </font><font color='#000cff' weight='0.0124893' id='160'>{
+                if (<font color='#0001ff' weight='0.00103083' id='123'><font color='#0001ff' weight='0.00103083' id='122'>less<font color='#0000ff' weight='0.000509988' id='90'></font><font color='#0000ff' weight='0.000509988' id='121'>(<font color='#0000ff' weight='0.000119359' id='93'>comparator<font color='#0000ff' weight='0.000119359' id='92'></font></font>, a[<font color='#0000ff' weight='2.17016e-05' id='100'>j]</font>, <font color='#0000ff' weight='0.000119359' id='119'><font color='#0000ff' weight='0.000119359' id='118'>a<font color='#0000ff' weight='5.42541e-05' id='116'>[j - 1]</font></font>)</font></font></font>)</font>
+                {
+                    <font color='#0001ff' weight='0.00103083' id='149'><font color='#0000ff' weight='0.000509988' id='147'>exchange(<font color='#0000ff' weight='5.42541e-05' id='131'>a, </font>j, j - 1);</font>
+                }</font><font color='#0001ff' weight='0.00103083' id='150'></font>
+                else
+                {
+                    break;<font color='#0001ff' weight='0.00103083' id='153'></font>
+                }
+            }</font>
+        }</font><font color='#0019ff' weight='0.0249894' id='162'></font></font>
+    }</font><font color='#0065ff' weight='0.0999902' id='165'></font></font>
+</font></font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void sort(int[] arr) {
+        int max = Integer.MAX_VALUE;
+        int min = Integer.MIN_VALUE;
+
+        for (int i = 0; i &lt; arr.length; i++) {
+            max = Math.max(max, arr[i]);
+            min = Math.min(min, arr[i]);
+        }
+        
+        
+        int bucketNum = (max - min) / arr.length + 1;
+        ArrayList&lt;ArrayList&lt;Integer&gt;&gt; bucketArr = new ArrayList&lt;&gt;(bucketNum);
+        for (int i = 0; i &lt; bucketNum; i++) {
+            bucketArr.add(new ArrayList&lt;&gt;());
+        }
+
+        
+        for (int i = 0; i &lt; arr.length; i++) {
+            int num = (arr[i] - min) / (arr.length);
+            bucketArr.get(num).add(arr[i]);
+        }
+
+        
+        for (int i = 0; i &lt; bucketArr.size(); i++) {
+            Collections.sort(bucketArr.get(i));
+        }
+
+        System.out.println(bucketArr.toString());
+    }</font>
+</pre>

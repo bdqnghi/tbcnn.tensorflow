@@ -1,0 +1,218 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+package heap;
+
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Heap {
+
+    
+
+        
+        
+    private int array[];
+    public static int n; 
+    
+    public static void sort(int arr[])  
+    {
+            buildMaxHeap(arr);
+            
+            for(int i=arr.length-1; i&gt;=0; i--){
+                int temp=arr[0];
+                arr[0] = arr[i];
+                arr[i]= temp;
+
+                n--;
+                
+                maxHeapify(arr,0);
+		}
+    }
+    
+    public static void maxHeapify(int[] arr, int i) 
+    {
+		int leftChild= (2*i)+1;
+		int rightChild=(2*i)+2;
+		
+                int max;
+                
+                if((leftChild &lt; n) &amp;&amp; (arr[leftChild] &gt; arr[i])) 
+			max=leftChild;
+                else max = i;
+                
+		if( (rightChild &lt; n) &amp;&amp; (arr<font color='#ff0000' weight='1' id='417'>[<font color='#ff0000' weight='1' id='415'>rightChild<font color='#ff0000' weight='1' id='413'></font>]</font><font color='#ff0000' weight='1' id='416'></font></font> &gt; arr[max])) 
+			max=rightChild;
+		
+                if(max!=i){
+			int temp = arr[max];
+			arr[max] = arr[i];
+			arr[i] = temp;
+                        maxHeapify(arr, max);
+		}
+	}  
+    
+    
+    
+    public static void buildMaxHeap(int [] array){
+    
+        n=array.length;
+        
+        for(int i=array.length/2; i&gt;=0; i--){
+            maxHeapify(array, i);
+        }
+    }
+}
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class RadixSort extends Sort {
+
+    private static final double LOG2 = Math.log(2);
+
+    private int temp[];
+    private ArrayList&lt;Integer&gt; tempSorted;
+    
+    private int b,r,k,d,n;
+
+    public RadixSort(boolean type, int size, int scope) {
+        super(type, size, scope);
+        n = size;
+        
+        b = (int)Math.ceil(log2(scope));
+        
+        if (b &lt; Math.floor(log2(n))){
+            r = b;
+        } else {
+            r = (int) Math.floor(log2(n));
+        }
+        k = (int) Math.pow(2,r); 
+        d = (int) Math.ceil((double)b/(double)r);
+    }
+
+    public void sort() {
+        temp = new int[k];
+        for (int position=0; position&lt;d; position++) {
+            countingSort(data.size(), position);
+        }
+    }
+
+
+    private void countingSort(int n, int position) {
+        tempSorted = new ArrayList&lt;&gt;(data);
+        Arrays.fill(temp, 0);
+
+        for (int j=0; j&lt;n; j++) {
+            
+            
+            temp[(data.get(j) &gt;&gt; r*position) % k]++;
+        }
+
+        for (int i=1; i&lt;k; i++) {
+            
+            
+            
+            temp[i] += temp[i-1];
+        }
+
+        for (int j=n-1; j&gt;=0; j--) {
+            
+            
+            tempSorted.set(temp[(data.get(j) &gt;&gt; r*position) % k] - 1, data.get(j));
+            
+            
+            
+            temp[(data.get(j) &gt;&gt; r*position) % k]--;
+        }
+
+        for (int i=0; i&lt;dataSize; i++) {
+            if (compare(tempSorted.get(i), data.get(i)) != 0) {
+                data.set(i, tempSorted.get(i));
+                swaps++;
+            }
+        }
+    }
+
+    public void sortLog() {
+        print_log("radix sort is starting");
+        temp = new int[k];
+        for (int position=0; position&lt;d; position++) {
+            print_log("position = " + position);
+            countingSortLog(data.size(), position);
+        }
+    }
+
+    private void countingSortLog(int n, int position) <font color='#ff0000' weight='1' id='1581'>{
+        <font color='#ff0000' weight='1' id='1063'><font color='#ff0000' weight='1' id='1061'><font color='#ff0000' weight='1' id='1060'><font color='#ff0000' weight='1' id='1053'>print_log</font><font color='#ff0000' weight='1' id='1059'>(<font color='#ff0000' weight='1' id='1057'><font color='#ff0000' weight='1' id='1056'><font color='#ff0000' weight='1' id='1055'>"counting sort is starting"<font color='#ff0000' weight='1' id='1054'></font></font></font>)</font><font color='#ff0000' weight='1' id='1058'></font></font></font>;</font><font color='#ff0000' weight='1' id='1062'></font>
+
+        </font><font color='#ff0000' weight='1' id='1084'><font color='#ff0000' weight='1' id='1082'><font color='#ff0000' weight='1' id='1065'>tempSorted </font>= new <font color='#ff0000' weight='1' id='1081'><font color='#ff0000' weight='1' id='1074'><font color='#ff0000' weight='1' id='1071'>ArrayList</font><font color='#ff0000' weight='1' id='1073'>&lt;&gt;<font color='#ff0000' weight='1' id='1072'></font></font></font><font color='#ff0000' weight='1' id='1080'>(<font color='#ff0000' weight='1' id='1078'><font color='#ff0000' weight='1' id='1077'><font color='#ff0000' weight='1' id='1076'>data<font color='#ff0000' weight='1' id='1075'></font></font></font>)</font><font color='#ff0000' weight='1' id='1079'></font></font></font>;</font><font color='#ff0000' weight='1' id='1083'></font>
+        </font><font color='#ff0000' weight='1' id='1105'><font color='#ff0000' weight='1' id='1103'><font color='#ff0000' weight='1' id='1102'><font color='#ff0000' weight='1' id='1091'><font color='#ff0000' weight='1' id='1086'>Arrays<font color='#ff0000' weight='1' id='1085'></font></font><font color='#ff0000' weight='1' id='1088'>.</font><font color='#ff0000' weight='1' id='1090'>fill<font color='#ff0000' weight='1' id='1089'></font></font></font><font color='#ff0000' weight='1' id='1101'>(<font color='#ff0000' weight='1' id='1095'><font color='#ff0000' weight='1' id='1094'><font color='#ff0000' weight='1' id='1093'>temp<font color='#ff0000' weight='1' id='1092'></font></font></font>, </font><font color='#ff0000' weight='1' id='1099'><font color='#ff0000' weight='1' id='1098'>0</font>)</font><font color='#ff0000' weight='1' id='1100'></font></font></font>;</font><font color='#ff0000' weight='1' id='1104'></font>
+
+        </font><font color='#ff0000' weight='1' id='1117'><font color='#ff0000' weight='1' id='1115'><font color='#ff0000' weight='1' id='1114'><font color='#ff0000' weight='1' id='1107'>print_log<font color='#ff0000' weight='1' id='1106'></font></font><font color='#ff0000' weight='1' id='1113'>(<font color='#ff0000' weight='1' id='1111'><font color='#ff0000' weight='1' id='1110'><font color='#ff0000' weight='1' id='1109'>"temp array is filled with 0's now"<font color='#ff0000' weight='1' id='1108'></font></font></font>)</font><font color='#ff0000' weight='1' id='1112'></font></font></font>;</font><font color='#ff0000' weight='1' id='1116'></font>
+
+        </font><font color='#ff0000' weight='1' id='1190'>for <font color='#ff0000' weight='1' id='1146'>(<font color='#ff0000' weight='1' id='1129'><font color='#ff0000' weight='1' id='1127'>int j<font color='#ff0000' weight='1' id='1126'>=<font color='#ff0000' weight='1' id='1125'><font color='#ff0000' weight='1' id='1124'>0<font color='#ff0000' weight='1' id='1123'></font></font></font></font>;</font><font color='#ff0000' weight='1' id='1128'></font> </font><font color='#ff0000' weight='1' id='1138'><font color='#ff0000' weight='1' id='1136'><font color='#ff0000' weight='1' id='1131'>j<font color='#ff0000' weight='1' id='1130'></font></font><font color='#ff0000' weight='1' id='1133'>&lt;<font color='#ff0000' weight='1' id='1132'></font></font><font color='#ff0000' weight='1' id='1135'>n<font color='#ff0000' weight='1' id='1134'></font></font>;</font><font color='#ff0000' weight='1' id='1137'></font> </font><font color='#ff0000' weight='1' id='1144'><font color='#ff0000' weight='1' id='1143'><font color='#ff0000' weight='1' id='1140'>j<font color='#ff0000' weight='1' id='1139'></font></font><font color='#ff0000' weight='1' id='1142'>++<font color='#ff0000' weight='1' id='1141'></font></font></font>)</font><font color='#ff0000' weight='1' id='1145'></font> </font><font color='#ff0000' weight='1' id='1189'>{
+            <font color='#ff0000' weight='1' id='1187'><font color='#ff0000' weight='1' id='1185'><font color='#ff0000' weight='1' id='1182'><font color='#ff0000' weight='1' id='1148'>temp<font color='#ff0000' weight='1' id='1147'></font></font><font color='#ff0000' weight='1' id='1181'>[<font color='#ff0000' weight='1' id='1179'>(<font color='#ff0000' weight='1' id='1164'><font color='#ff0000' weight='1' id='1157'><font color='#ff0000' weight='1' id='1152'>data<font color='#ff0000' weight='1' id='1151'></font></font><font color='#ff0000' weight='1' id='1154'>.<font color='#ff0000' weight='1' id='1153'></font></font><font color='#ff0000' weight='1' id='1156'>get<font color='#ff0000' weight='1' id='1155'></font></font></font><font color='#ff0000' weight='1' id='1163'>(<font color='#ff0000' weight='1' id='1161'><font color='#ff0000' weight='1' id='1160'><font color='#ff0000' weight='1' id='1159'>j<font color='#ff0000' weight='1' id='1158'></font></font></font>)</font><font color='#ff0000' weight='1' id='1162'></font></font> </font><font color='#ff0000' weight='1' id='1166'>&gt;&gt;<font color='#ff0000' weight='1' id='1165'></font> </font><font color='#ff0000' weight='1' id='1168'>r<font color='#ff0000' weight='1' id='1167'></font></font>*position) % <font color='#ff0000' weight='1' id='1178'>k<font color='#ff0000' weight='1' id='1177'></font></font>]</font><font color='#ff0000' weight='1' id='1180'></font></font></font><font color='#ff0000' weight='1' id='1184'>++<font color='#ff0000' weight='1' id='1183'></font></font>;</font><font color='#ff0000' weight='1' id='1186'></font>
+        }</font><font color='#ff0000' weight='1' id='1188'></font></font>
+
+        </font><font color='#ff0000' weight='1' id='1247'>for <font color='#ff0000' weight='1' id='1219'>(<font color='#ff0000' weight='1' id='1202'><font color='#ff0000' weight='1' id='1200'>int i<font color='#ff0000' weight='1' id='1199'>=<font color='#ff0000' weight='1' id='1198'><font color='#ff0000' weight='1' id='1197'>1<font color='#ff0000' weight='1' id='1196'></font></font></font></font>;</font><font color='#ff0000' weight='1' id='1201'></font> </font><font color='#ff0000' weight='1' id='1211'><font color='#ff0000' weight='1' id='1209'>i&lt;k;</font><font color='#ff0000' weight='1' id='1210'></font> </font><font color='#ff0000' weight='1' id='1217'><font color='#ff0000' weight='1' id='1216'><font color='#ff0000' weight='1' id='1213'>i<font color='#ff0000' weight='1' id='1212'></font></font>++</font>)</font><font color='#ff0000' weight='1' id='1218'></font> </font><font color='#ff0000' weight='1' id='1246'>{
+            <font color='#ff0000' weight='1' id='1244'><font color='#ff0000' weight='1' id='1242'>temp[i] += temp[i<font color='#ff0000' weight='1' id='1235'>-<font color='#ff0000' weight='1' id='1234'></font></font><font color='#ff0000' weight='1' id='1237'>1<font color='#ff0000' weight='1' id='1236'></font></font>];</font><font color='#ff0000' weight='1' id='1243'></font>
+        }</font><font color='#ff0000' weight='1' id='1245'></font></font>
+
+        </font><font color='#ff0000' weight='1' id='1395'>for <font color='#ff0000' weight='1' id='1280'>(<font color='#ff0000' weight='1' id='1263'><font color='#ff0000' weight='1' id='1261'><font color='#ff0000' weight='1' id='1250'><font color='#ff0000' weight='1' id='1249'>int<font color='#ff0000' weight='1' id='1248'></font></font> </font><font color='#ff0000' weight='1' id='1252'>j<font color='#ff0000' weight='1' id='1251'></font></font><font color='#ff0000' weight='1' id='1260'>=<font color='#ff0000' weight='1' id='1259'><font color='#ff0000' weight='1' id='1254'>n<font color='#ff0000' weight='1' id='1253'></font></font>-<font color='#ff0000' weight='1' id='1258'>1<font color='#ff0000' weight='1' id='1257'></font></font></font></font>;</font><font color='#ff0000' weight='1' id='1262'></font> </font><font color='#ff0000' weight='1' id='1272'><font color='#ff0000' weight='1' id='1270'>j&gt;=<font color='#ff0000' weight='1' id='1269'>0<font color='#ff0000' weight='1' id='1268'></font></font>;</font><font color='#ff0000' weight='1' id='1271'></font> </font><font color='#ff0000' weight='1' id='1278'><font color='#ff0000' weight='1' id='1277'>j--</font>)</font><font color='#ff0000' weight='1' id='1279'></font> </font><font color='#ff0000' weight='1' id='1394'>{
+            <font color='#ff0000' weight='1' id='1351'><font color='#ff0000' weight='1' id='1349'><font color='#ff0000' weight='1' id='1348'><font color='#ff0000' weight='1' id='1287'><font color='#ff0000' weight='1' id='1282'>tempSorted</font><font color='#ff0000' weight='1' id='1284'>.<font color='#ff0000' weight='1' id='1283'></font></font><font color='#ff0000' weight='1' id='1286'>set<font color='#ff0000' weight='1' id='1285'></font></font></font><font color='#ff0000' weight='1' id='1347'>(<font color='#ff0000' weight='1' id='1329'><font color='#ff0000' weight='1' id='1328'><font color='#ff0000' weight='1' id='1323'><font color='#ff0000' weight='1' id='1289'>temp<font color='#ff0000' weight='1' id='1288'></font></font><font color='#ff0000' weight='1' id='1322'>[<font color='#ff0000' weight='1' id='1320'>(<font color='#ff0000' weight='1' id='1305'><font color='#ff0000' weight='1' id='1298'><font color='#ff0000' weight='1' id='1293'>data</font><font color='#ff0000' weight='1' id='1295'>.<font color='#ff0000' weight='1' id='1294'></font></font><font color='#ff0000' weight='1' id='1297'>get<font color='#ff0000' weight='1' id='1296'></font></font></font><font color='#ff0000' weight='1' id='1304'>(<font color='#ff0000' weight='1' id='1302'><font color='#ff0000' weight='1' id='1301'><font color='#ff0000' weight='1' id='1300'>j<font color='#ff0000' weight='1' id='1299'></font></font></font>)</font><font color='#ff0000' weight='1' id='1303'></font></font> </font>&gt;&gt; <font color='#ff0000' weight='1' id='1309'>r<font color='#ff0000' weight='1' id='1308'></font></font><font color='#ff0000' weight='1' id='1311'>*<font color='#ff0000' weight='1' id='1310'></font></font>position) % <font color='#ff0000' weight='1' id='1319'>k<font color='#ff0000' weight='1' id='1318'></font></font>]</font><font color='#ff0000' weight='1' id='1321'></font></font> </font><font color='#ff0000' weight='1' id='1325'>-<font color='#ff0000' weight='1' id='1324'></font> </font><font color='#ff0000' weight='1' id='1327'>1<font color='#ff0000' weight='1' id='1326'></font></font></font>, </font><font color='#ff0000' weight='1' id='1345'><font color='#ff0000' weight='1' id='1344'><font color='#ff0000' weight='1' id='1343'><font color='#ff0000' weight='1' id='1336'><font color='#ff0000' weight='1' id='1331'>data<font color='#ff0000' weight='1' id='1330'></font></font><font color='#ff0000' weight='1' id='1333'>.<font color='#ff0000' weight='1' id='1332'></font></font><font color='#ff0000' weight='1' id='1335'>get<font color='#ff0000' weight='1' id='1334'></font></font></font><font color='#ff0000' weight='1' id='1342'>(<font color='#ff0000' weight='1' id='1340'><font color='#ff0000' weight='1' id='1339'><font color='#ff0000' weight='1' id='1338'>j<font color='#ff0000' weight='1' id='1337'></font></font></font>)</font><font color='#ff0000' weight='1' id='1341'></font></font></font></font>)</font><font color='#ff0000' weight='1' id='1346'></font></font></font>;</font><font color='#ff0000' weight='1' id='1350'></font>
+            </font><font color='#ff0000' weight='1' id='1392'><font color='#ff0000' weight='1' id='1390'><font color='#ff0000' weight='1' id='1387'><font color='#ff0000' weight='1' id='1353'>temp<font color='#ff0000' weight='1' id='1352'></font></font><font color='#ff0000' weight='1' id='1386'>[<font color='#ff0000' weight='1' id='1384'>(<font color='#ff0000' weight='1' id='1369'><font color='#ff0000' weight='1' id='1362'>data<font color='#ff0000' weight='1' id='1359'>.<font color='#ff0000' weight='1' id='1358'></font></font><font color='#ff0000' weight='1' id='1361'>get<font color='#ff0000' weight='1' id='1360'></font></font></font><font color='#ff0000' weight='1' id='1368'>(<font color='#ff0000' weight='1' id='1366'><font color='#ff0000' weight='1' id='1365'>j</font>)</font><font color='#ff0000' weight='1' id='1367'></font></font> </font>&gt;&gt; <font color='#ff0000' weight='1' id='1373'>r</font><font color='#ff0000' weight='1' id='1375'>*<font color='#ff0000' weight='1' id='1374'></font></font>position) <font color='#ff0000' weight='1' id='1381'>%<font color='#ff0000' weight='1' id='1380'></font> </font>k]</font><font color='#ff0000' weight='1' id='1385'></font></font></font>--;</font><font color='#ff0000' weight='1' id='1391'></font>
+        }</font><font color='#ff0000' weight='1' id='1393'></font></font>
+
+        </font><font color='#ff0000' weight='1' id='1547'>for <font color='#ff0000' weight='1' id='1424'>(<font color='#ff0000' weight='1' id='1407'><font color='#ff0000' weight='1' id='1405'><font color='#ff0000' weight='1' id='1398'><font color='#ff0000' weight='1' id='1397'>int</font> </font><font color='#ff0000' weight='1' id='1400'>i<font color='#ff0000' weight='1' id='1399'></font></font><font color='#ff0000' weight='1' id='1404'>=<font color='#ff0000' weight='1' id='1403'><font color='#ff0000' weight='1' id='1402'>0<font color='#ff0000' weight='1' id='1401'></font></font></font></font>;</font><font color='#ff0000' weight='1' id='1406'></font> </font><font color='#ff0000' weight='1' id='1416'>i&lt;dataSize; </font><font color='#ff0000' weight='1' id='1422'><font color='#ff0000' weight='1' id='1421'><font color='#ff0000' weight='1' id='1418'>i</font><font color='#ff0000' weight='1' id='1420'>++<font color='#ff0000' weight='1' id='1419'></font></font></font>)</font><font color='#ff0000' weight='1' id='1423'></font> </font><font color='#ff0000' weight='1' id='1546'>{
+            <font color='#ff0000' weight='1' id='1544'>if <font color='#ff0000' weight='1' id='1468'>(<font color='#ff0000' weight='1' id='1466'><font color='#ff0000' weight='1' id='1461'><font color='#ff0000' weight='1' id='1426'>compare<font color='#ff0000' weight='1' id='1425'></font></font><font color='#ff0000' weight='1' id='1460'>(<font color='#ff0000' weight='1' id='1442'><font color='#ff0000' weight='1' id='1441'><font color='#ff0000' weight='1' id='1440'><font color='#ff0000' weight='1' id='1433'><font color='#ff0000' weight='1' id='1428'>tempSorted</font><font color='#ff0000' weight='1' id='1430'>.<font color='#ff0000' weight='1' id='1429'></font></font><font color='#ff0000' weight='1' id='1432'>get<font color='#ff0000' weight='1' id='1431'></font></font></font><font color='#ff0000' weight='1' id='1439'>(<font color='#ff0000' weight='1' id='1437'><font color='#ff0000' weight='1' id='1436'><font color='#ff0000' weight='1' id='1435'>i<font color='#ff0000' weight='1' id='1434'></font></font></font>)</font><font color='#ff0000' weight='1' id='1438'></font></font></font></font>, </font><font color='#ff0000' weight='1' id='1458'><font color='#ff0000' weight='1' id='1457'><font color='#ff0000' weight='1' id='1456'><font color='#ff0000' weight='1' id='1449'>data<font color='#ff0000' weight='1' id='1446'>.<font color='#ff0000' weight='1' id='1445'></font></font><font color='#ff0000' weight='1' id='1448'>get<font color='#ff0000' weight='1' id='1447'></font></font></font><font color='#ff0000' weight='1' id='1455'>(<font color='#ff0000' weight='1' id='1453'><font color='#ff0000' weight='1' id='1452'>i</font>)</font><font color='#ff0000' weight='1' id='1454'></font></font></font></font>)</font><font color='#ff0000' weight='1' id='1459'></font></font> </font><font color='#ff0000' weight='1' id='1463'>!=<font color='#ff0000' weight='1' id='1462'></font> </font><font color='#ff0000' weight='1' id='1465'>0<font color='#ff0000' weight='1' id='1464'></font></font>)</font><font color='#ff0000' weight='1' id='1467'></font></font><font color='#ff0000' weight='1' id='1543'> <font color='#ff0000' weight='1' id='1542'>{
+                <font color='#ff0000' weight='1' id='1498'><font color='#ff0000' weight='1' id='1475'>data<font color='#ff0000' weight='1' id='1472'>.<font color='#ff0000' weight='1' id='1471'></font></font><font color='#ff0000' weight='1' id='1474'>set<font color='#ff0000' weight='1' id='1473'></font></font></font><font color='#ff0000' weight='1' id='1497'>(<font color='#ff0000' weight='1' id='1479'><font color='#ff0000' weight='1' id='1478'>i</font>, </font><font color='#ff0000' weight='1' id='1495'><font color='#ff0000' weight='1' id='1494'><font color='#ff0000' weight='1' id='1493'><font color='#ff0000' weight='1' id='1486'><font color='#ff0000' weight='1' id='1481'>tempSorted<font color='#ff0000' weight='1' id='1480'></font></font><font color='#ff0000' weight='1' id='1483'>.</font>get</font><font color='#ff0000' weight='1' id='1492'>(<font color='#ff0000' weight='1' id='1490'><font color='#ff0000' weight='1' id='1489'>i</font>)</font><font color='#ff0000' weight='1' id='1491'></font></font></font></font>)</font><font color='#ff0000' weight='1' id='1496'></font></font></font>;
+                <font color='#ff0000' weight='1' id='1531'><font color='#ff0000' weight='1' id='1530'><font color='#ff0000' weight='1' id='1503'>print_log<font color='#ff0000' weight='1' id='1502'></font></font><font color='#ff0000' weight='1' id='1529'>(<font color='#ff0000' weight='1' id='1527'><font color='#ff0000' weight='1' id='1526'><font color='#ff0000' weight='1' id='1517'><font color='#ff0000' weight='1' id='1510'>tempSorted<font color='#ff0000' weight='1' id='1507'>.<font color='#ff0000' weight='1' id='1506'></font></font><font color='#ff0000' weight='1' id='1509'>get<font color='#ff0000' weight='1' id='1508'></font></font></font><font color='#ff0000' weight='1' id='1516'>(<font color='#ff0000' weight='1' id='1514'><font color='#ff0000' weight='1' id='1513'>i</font>)</font><font color='#ff0000' weight='1' id='1515'></font></font> </font>+ <font color='#ff0000' weight='1' id='1521'>" was swapped, now on index "<font color='#ff0000' weight='1' id='1520'></font> </font><font color='#ff0000' weight='1' id='1523'>+<font color='#ff0000' weight='1' id='1522'></font> </font>i</font>)</font><font color='#ff0000' weight='1' id='1528'></font></font></font>;</font><font color='#ff0000' weight='1' id='1532'></font>
+                <font color='#ff0000' weight='1' id='1540'><font color='#ff0000' weight='1' id='1538'><font color='#ff0000' weight='1' id='1535'>swaps<font color='#ff0000' weight='1' id='1534'></font></font><font color='#ff0000' weight='1' id='1537'>++<font color='#ff0000' weight='1' id='1536'></font></font>;</font><font color='#ff0000' weight='1' id='1539'></font>
+            }</font><font color='#ff0000' weight='1' id='1541'></font></font></font>
+        }</font><font color='#ff0000' weight='1' id='1545'></font></font>
+
+        </font><font color='#ff0000' weight='1' id='1579'>for <font color='#ff0000' weight='1' id='1560'>(<font color='#ff0000' weight='1' id='1558'><font color='#ff0000' weight='1' id='1557'><font color='#ff0000' weight='1' id='1550'><font color='#ff0000' weight='1' id='1549'>int<font color='#ff0000' weight='1' id='1548'></font></font> </font><font color='#ff0000' weight='1' id='1552'>i<font color='#ff0000' weight='1' id='1551'></font> </font><font color='#ff0000' weight='1' id='1556'>: <font color='#ff0000' weight='1' id='1555'><font color='#ff0000' weight='1' id='1554'>data<font color='#ff0000' weight='1' id='1553'></font></font></font></font></font>)</font><font color='#ff0000' weight='1' id='1559'></font> </font><font color='#ff0000' weight='1' id='1578'>{
+            print_log(i <font color='#ff0000' weight='1' id='1566'>+<font color='#ff0000' weight='1' id='1565'></font> </font><font color='#ff0000' weight='1' id='1568'>""<font color='#ff0000' weight='1' id='1567'></font></font>)<font color='#ff0000' weight='1' id='1571'></font>;
+        }</font>
+    }</font></font>
+
+    private double log2(double a) {
+        return Math.log(a)/LOG2;
+    }
+
+    public static void main(String[] args) {
+        boolean type;
+        if(Integer.parseInt(args[0]) &lt;= 0)
+            type = false;
+        else
+            type = true;
+
+        int size = Integer.parseInt(args[1]);
+        int scope = Integer.parseInt(args[2]);
+        
+        RadixSort rs = new RadixSort(type, size, scope);
+        rs.sortLog();
+
+        System.out.println("data is now sorted (" + rs.compares + " compares, " + rs.swaps + " swaps)!");
+        System.out.println("");
+        System.out.println("b - liczba bitÃ³w w sÅowie: " + rs.b);
+        System.out.println("r - liczba bitÃ³w w 'cyfrze': " + rs.r);
+        System.out.println("k - iloÅÄ wartoÅci jakie moÅ¼e przyjmowaÄ cyfra: " + rs.k);
+        System.out.println("d - iloÅÄ cyfr w sÅowie: " + rs.d);
+        System.out.println("n - iloÅÄ danych do posortowania: " + rs.n);
+        rs.printBinary(rs.b);
+        rs.print();
+        
+    }
+
+}
+</font>
+</pre>

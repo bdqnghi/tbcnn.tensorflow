@@ -1,0 +1,32 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+private static void selectionsort(double tablica[], int ile_liczb) {
+    int min,i,j;
+    double temp;
+    for (i=0;i&lt;ile_liczb-1;i++)  {
+    min=i;
+    for (j=i+1;j&lt;ile_liczb;j++)
+    if (tablica[j]&lt;tablica[min])
+    min=j;
+    temp=tablica[min];
+    tablica[min]=tablica[i];
+    tablica[i]=temp;
+    }
+}</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+   public static &lt;Key extends Comparable&lt;Key&gt;&gt; void sort(Key[] a) {
+        int n = a.length;
+        for (int i = 0; i &lt; n; i++) {
+            int exchanges = 0;
+            for (int j = n - 1; j &gt; i; j--) {
+                if (less(a[j], a[j - 1])) {
+                    exch(a, j, j - 1);
+                    exchanges++;
+                }
+            }
+            if (exchanges == 0) break;
+        }
+    }</font>
+</pre>

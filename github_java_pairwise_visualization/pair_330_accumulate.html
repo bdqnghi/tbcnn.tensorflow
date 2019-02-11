@@ -1,0 +1,79 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+private List&lt;Stmt&gt; topologicalSort(StmtList stmts) {
+
+        List&lt;Stmt&gt; out = new ArrayList&lt;Stmt&gt;(stmts.getSize());
+        Stack&lt;Stmt&gt; stack = new Stack&lt;Stmt&gt;();
+        stack.push(stmts.getFirst());
+
+        boolean visitedFlag = false;
+
+        while (!stack.empty()) {
+            Stmt stmt = stack.pop();
+            if (stmt._cfg_visited == visitedFlag) {
+                continue;
+            }
+            if (stmt._cfg_froms.size() == 0 || stack.size() == 0) {
+                stmt._cfg_visited = visitedFlag;
+                out.add(stmt);
+                for (Stmt t : stmt._cfg_tos) {
+                    t._cfg_froms.remove(stmt);
+                    if (t._cfg_visited != visitedFlag) {
+                        stack.push(t);
+                    }
+                }
+            }
+        }
+        return out;
+    }
+
+    </font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+   public static void mergeSort(int[] arr) {
+      if (arr.length &gt; 1) {
+         int[] left = leftHalf(arr);
+         int[] right = rightHalf(arr);
+
+         mergeSort(left);
+         mergeSort(right);
+
+         mergeArrays(arr, left, right);
+      }
+   }
+
+   public static int[] leftHalf(int[] arr) {
+      int size = arr.length / 2;
+      int[] left = new int[size];
+      for (int i = 0; i &lt; size; i++) {
+         left[i] = arr[i];
+      }
+      return left;
+   }
+
+   public static int[] rightHalf(int[] arr) {
+      int size1 = arr.length / 2;
+      int size2 = arr.length - size1;
+      int[] right = new int[size2];
+      for (int i = 0; i &lt; size2; i++) {
+         right[i] = arr[i + size1];
+      }
+      return right;
+   }
+
+   public static void mergeArrays(int[] arr, int[] left, int[] right) {
+      int i1 = 0;
+      int i2 = 0;
+
+      for (int i = 0; i &lt; arr.length; i++) {
+         if (i2 &gt;= right.length || (i1 &lt; left.length &amp;&amp; left[i1] &lt;= right[i2])) {
+            arr[i] = left[i1];
+            i1++;
+         } else {
+            arr[i] = right[i2];
+            i2++;
+         }
+      }
+   }</font>
+</pre>

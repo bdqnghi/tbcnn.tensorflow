@@ -1,0 +1,89 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public void topSort(Graph g) {
+        initDfs(g);
+        for (int i = 1; i &lt;= g.numV; i++) {
+            if (!mDiscovered[i]) {
+                idfs(i, g);
+            }
+            if (mFinished) return;
+        }
+        while (mSorted.size() &gt; 0) {
+            out(mSorted.pop() + " ");
+        }
+        outln("");
+    }
+
+    </font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+package heap;
+
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Heap {
+
+    
+
+        
+        
+    private int array[];
+    public static int n; 
+    
+    public static void sort(int arr[])  
+    {
+            buildMaxHeap(arr);
+            
+            for(int i=arr.length-1; i&gt;=0; i--){
+                int temp=arr[0];
+                arr[0] = arr[i];
+                arr[i]= temp;
+
+                n--;
+                
+                maxHeapify(arr,0);
+		}
+    }
+    
+    public static void maxHeapify(int[] arr, int i) 
+    {
+		int leftChild= (2*i)+1;
+		int rightChild=(2*i)+2;
+		
+                int max;
+                
+                if((leftChild &lt; n) &amp;&amp; (arr[leftChild] &gt; arr[i])) 
+			max=leftChild;
+                else max = i;
+                
+		if( (rightChild &lt; n) &amp;&amp; (arr<font color='#ff0000' weight='1' id='417'>[<font color='#00ff00' weight='0.5' id='415'><font color='#00ff00' weight='0.5' id='414'>rightChild<font color='#00ff00' weight='0.5' id='413'></font></font>]</font><font color='#00ff00' weight='0.5' id='416'></font></font> &gt; arr[max])) 
+			max=rightChild;
+		
+                if(max!=i){
+			int temp = arr[max];
+			arr[max] = arr[i];
+			arr[i] = temp;
+                        maxHeapify(arr, max);
+		}
+	}  
+    
+    
+    
+    public static void buildMaxHeap(int [] array){
+    
+        n=array.length;
+        
+        for(int i=array.length/2; i&gt;=0; i--){
+            maxHeapify(array, i);
+        }
+    }
+}
+</font>
+</pre>

@@ -1,0 +1,60 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+import java.util.*;
+
+class TopologicalSort<font color='#ff0000' weight='1' id='392'>{
+ <font color='#ff0000' weight='1' id='32'>static <font color='#ff0000' weight='1' id='19'>LinkedList<font color='#ff0000' weight='1' id='18'></font></font>&lt;<font color='#ff0000' weight='1' id='22'><font color='#ff0000' weight='1' id='21'>Integer<font color='#ff0000' weight='1' id='20'></font></font>&gt;</font> <font color='#ff0000' weight='1' id='31'>arr<font color='#ff0000' weight='1' id='27'></font>[]<font color='#ff0000' weight='1' id='29'></font></font>;</font>
+ <font color='#ff0000' weight='1' id='47'><font color='#ff0000' weight='1' id='36'>static<font color='#ff0000' weight='1' id='35'></font> </font><font color='#ff0000' weight='1' id='38'>boolean</font> visited[];
+ </font><font color='#ff0000' weight='1' id='63'><font color='#ff0000' weight='1' id='49'>static </font><font color='#ff0000' weight='1' id='57'>Stack<font color='#ff0000' weight='1' id='50'></font><font color='#ff0000' weight='1' id='56'>&lt;Integer&gt;</font></font> <font color='#ff0000' weight='1' id='60'>stack</font>;<font color='#ff0000' weight='1' id='62'></font>
+ </font><font color='#ff0000' weight='1' id='65'>TopologicalSort<font color='#ff0000' weight='1' id='64'></font></font>(int v)<font color='#ff0000' weight='1' id='194'>{
+  arr <font color='#ff0000' weight='1' id='78'>=<font color='#ff0000' weight='1' id='77'></font> </font>new<font color='#ff0000' weight='1' id='79'></font> <font color='#ff0000' weight='1' id='88'><font color='#ff0000' weight='1' id='82'>LinkedList</font>[v]</font>;
+  <font color='#ff0000' weight='1' id='108'><font color='#ff0000' weight='1' id='106'><font color='#ff0000' weight='1' id='93'>visited </font><font color='#ff0000' weight='1' id='95'>= </font><font color='#ff0000' weight='1' id='97'>new<font color='#ff0000' weight='1' id='96'></font> </font><font color='#ff0000' weight='1' id='99'>boolean<font color='#ff0000' weight='1' id='98'></font></font>[v];</font>
+  </font><font color='#ff0000' weight='1' id='125'><font color='#ff0000' weight='1' id='123'>stack<font color='#ff0000' weight='1' id='109'></font> =<font color='#ff0000' weight='1' id='111'></font> new <font color='#ff0000' weight='1' id='122'><font color='#ff0000' weight='1' id='116'>Stack</font>&lt;&gt;<font color='#ff0000' weight='1' id='117'></font><font color='#ff0000' weight='1' id='121'>()</font></font>;</font>
+  </font><font color='#ff0000' weight='1' id='192'>for(int i<font color='#ff0000' weight='1' id='134'>=0</font>;<font color='#ff0000' weight='1' id='146'>i<font color='#ff0000' weight='1' id='141'>&lt;</font><font color='#ff0000' weight='1' id='143'>v</font>;<font color='#ff0000' weight='1' id='145'></font></font>i++)<font color='#ff0000' weight='1' id='191'>{
+   <font color='#ff0000' weight='1' id='162'>arr[<font color='#ff0000' weight='1' id='158'>i</font>] </font><font color='#ff0000' weight='1' id='164'>= </font>new LinkedList();<font color='#ff0000' weight='1' id='173'></font>
+   <font color='#ff0000' weight='1' id='176'>visited</font><font color='#ff0000' weight='1' id='181'>[<font color='#ff0000' weight='1' id='178'>i</font>]</font> = false;
+  }</font>
+ }</font><font color='#ff0000' weight='1' id='193'></font></font>
+ public <font color='#ff0000' weight='1' id='199'>void<font color='#ff0000' weight='1' id='198'></font></font> <font color='#ff0000' weight='1' id='202'>addEdge<font color='#ff0000' weight='1' id='201'></font></font>(<font color='#ff0000' weight='1' id='205'><font color='#ff0000' weight='1' id='204'>int<font color='#ff0000' weight='1' id='203'></font></font> </font><font color='#ff0000' weight='1' id='207'>src<font color='#ff0000' weight='1' id='206'></font></font>, <font color='#ff0000' weight='1' id='216'><font color='#ff0000' weight='1' id='215'>int<font color='#ff0000' weight='1' id='210'></font> dest<font color='#ff0000' weight='1' id='213'></font></font>)</font><font color='#ff0000' weight='1' id='242'>{
+  <font color='#ff0000' weight='1' id='240'><font color='#ff0000' weight='1' id='238'><font color='#ff0000' weight='1' id='226'><font color='#ff0000' weight='1' id='220'>arr<font color='#ff0000' weight='1' id='219'></font></font>[src<font color='#ff0000' weight='1' id='221'></font>]<font color='#ff0000' weight='1' id='224'></font></font><font color='#ff0000' weight='1' id='228'>.<font color='#ff0000' weight='1' id='227'></font></font><font color='#ff0000' weight='1' id='230'>add<font color='#ff0000' weight='1' id='229'></font></font>(<font color='#ff0000' weight='1' id='234'><font color='#ff0000' weight='1' id='233'><font color='#ff0000' weight='1' id='232'>dest</font></font>)</font><font color='#ff0000' weight='1' id='235'></font>;</font>
+ }</font><font color='#ff0000' weight='1' id='241'></font></font>
+ <font color='#ff0000' weight='1' id='390'><font color='#ff0000' weight='1' id='245'>public<font color='#ff0000' weight='1' id='244'></font> </font><font color='#ff0000' weight='1' id='248'><font color='#ff0000' weight='1' id='247'>void<font color='#ff0000' weight='1' id='246'></font></font> </font><font color='#ff0000' weight='1' id='250'>sort<font color='#ff0000' weight='1' id='249'></font></font><font color='#ff0000' weight='1' id='259'>(<font color='#ff0000' weight='1' id='253'><font color='#ff0000' weight='1' id='252'>int<font color='#ff0000' weight='1' id='251'></font></font> </font><font color='#ff0000' weight='1' id='255'>i<font color='#ff0000' weight='1' id='254'></font></font>)</font><font color='#ff0000' weight='1' id='389'>{
+  <font color='#ff0000' weight='1' id='274'><font color='#ff0000' weight='1' id='272'><font color='#ff0000' weight='1' id='267'><font color='#ff0000' weight='1' id='261'>visited<font color='#ff0000' weight='1' id='260'></font></font><font color='#ff0000' weight='1' id='266'>[<font color='#ff0000' weight='1' id='264'><font color='#ff0000' weight='1' id='263'>i<font color='#ff0000' weight='1' id='262'></font></font>]</font><font color='#ff0000' weight='1' id='265'></font></font> </font><font color='#ff0000' weight='1' id='269'>=<font color='#ff0000' weight='1' id='268'></font> </font><font color='#ff0000' weight='1' id='271'>true<font color='#ff0000' weight='1' id='270'></font></font>;</font><font color='#ff0000' weight='1' id='273'></font>
+  </font><font color='#ff0000' weight='1' id='305'><font color='#ff0000' weight='1' id='303'><font color='#ff0000' weight='1' id='283'><font color='#ff0000' weight='1' id='282'><font color='#ff0000' weight='1' id='276'>Iterator</font><font color='#ff0000' weight='1' id='281'>&lt;<font color='#ff0000' weight='1' id='279'>Integer&gt;</font></font></font> </font><font color='#ff0000' weight='1' id='285'>ite </font><font color='#ff0000' weight='1' id='302'>= <font color='#ff0000' weight='1' id='301'><font color='#ff0000' weight='1' id='293'><font color='#ff0000' weight='1' id='287'>arr</font><font color='#ff0000' weight='1' id='292'>[<font color='#ff0000' weight='1' id='290'><font color='#ff0000' weight='1' id='289'>i<font color='#ff0000' weight='1' id='288'></font></font>]</font><font color='#ff0000' weight='1' id='291'></font></font></font><font color='#ff0000' weight='1' id='295'>.</font><font color='#ff0000' weight='1' id='300'><font color='#ff0000' weight='1' id='297'>listIterator</font>()</font></font></font>;</font><font color='#ff0000' weight='1' id='304'></font>
+  </font><font color='#ff0000' weight='1' id='370'>while<font color='#ff0000' weight='1' id='318'>(<font color='#ff0000' weight='1' id='316'><font color='#ff0000' weight='1' id='315'><font color='#ff0000' weight='1' id='312'><font color='#ff0000' weight='1' id='307'>ite</font>.<font color='#ff0000' weight='1' id='311'>hasNext</font></font>()</font>)</font><font color='#ff0000' weight='1' id='317'></font></font><font color='#ff0000' weight='1' id='369'>{
+   <font color='#ff0000' weight='1' id='338'><font color='#ff0000' weight='1' id='336'><font color='#ff0000' weight='1' id='321'><font color='#ff0000' weight='1' id='320'>int<font color='#ff0000' weight='1' id='319'></font></font> </font><font color='#ff0000' weight='1' id='323'>item<font color='#ff0000' weight='1' id='322'></font> </font><font color='#ff0000' weight='1' id='335'>= <font color='#ff0000' weight='1' id='334'><font color='#ff0000' weight='1' id='333'><font color='#ff0000' weight='1' id='330'><font color='#ff0000' weight='1' id='325'>ite</font><font color='#ff0000' weight='1' id='327'>.</font><font color='#ff0000' weight='1' id='329'>next<font color='#ff0000' weight='1' id='328'></font></font></font><font color='#ff0000' weight='1' id='332'>()<font color='#ff0000' weight='1' id='331'></font></font></font></font></font>;</font><font color='#ff0000' weight='1' id='337'></font>
+   </font><font color='#ff0000' weight='1' id='367'>if<font color='#ff0000' weight='1' id='351'>(<font color='#ff0000' weight='1' id='349'><font color='#ff0000' weight='1' id='340'>!</font><font color='#ff0000' weight='1' id='348'><font color='#ff0000' weight='1' id='342'>visited<font color='#ff0000' weight='1' id='341'></font></font><font color='#ff0000' weight='1' id='347'>[<font color='#ff0000' weight='1' id='345'><font color='#ff0000' weight='1' id='344'>item<font color='#ff0000' weight='1' id='343'></font></font>]</font><font color='#ff0000' weight='1' id='346'></font></font></font>)</font><font color='#ff0000' weight='1' id='350'></font></font><font color='#ff0000' weight='1' id='366'><font color='#ff0000' weight='1' id='365'>{
+     <font color='#ff0000' weight='1' id='363'><font color='#ff0000' weight='1' id='361'><font color='#ff0000' weight='1' id='360'><font color='#ff0000' weight='1' id='353'>sort</font>(<font color='#ff0000' weight='1' id='355'>item</font>)</font>;</font><font color='#ff0000' weight='1' id='362'></font>
+   }</font><font color='#ff0000' weight='1' id='364'></font></font></font>
+  }</font><font color='#ff0000' weight='1' id='368'></font></font>
+  </font><font color='#ff0000' weight='1' id='387'><font color='#ff0000' weight='1' id='385'><font color='#ff0000' weight='1' id='384'><font color='#ff0000' weight='1' id='377'><font color='#ff0000' weight='1' id='372'>stack<font color='#ff0000' weight='1' id='371'></font></font><font color='#ff0000' weight='1' id='374'>.<font color='#ff0000' weight='1' id='373'></font></font><font color='#ff0000' weight='1' id='376'>push<font color='#ff0000' weight='1' id='375'></font></font></font><font color='#ff0000' weight='1' id='383'>(<font color='#ff0000' weight='1' id='381'><font color='#ff0000' weight='1' id='380'><font color='#ff0000' weight='1' id='379'>i<font color='#ff0000' weight='1' id='378'></font></font></font>)</font><font color='#ff0000' weight='1' id='382'></font></font></font>;</font><font color='#ff0000' weight='1' id='386'></font>
+ }</font></font>
+
+}</font><font color='#ff0000' weight='1' id='391'></font></font>
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public int[] sort(int[] arrayToSort) {
+        int max = getMaxFromArray(arrayToSort);
+        Map&lt;Integer, Integer&gt; bucketMap = new HashMap&lt;&gt;();
+        for (int i = 0; i &lt;= max; i++) {
+            bucketMap.put(i, 0);
+        }
+        for (int i = 0; i &lt; arrayToSort.length; i++) {
+            bucketMap.put(arrayToSort[i], bucketMap.get(arrayToSort[i])+1);
+        }
+        int sortedArrayIndex = 0;
+        for (Map.Entry&lt;Integer, Integer&gt; entry: bucketMap.entrySet()) {
+            for (int i = 0; i &lt; entry.getValue(); i++) {
+                arrayToSort[sortedArrayIndex++] = entry.getKey();
+            }
+        }
+        return arrayToSort;
+    }
+
+    protected int getMaxFromArray(int[] arrayToSort) {
+        List&lt;Integer&gt; numbers = Arrays.stream(arrayToSort).boxed().collect(Collectors.toList());
+        return numbers.stream().mapToInt(Integer::intValue).max().getAsInt();
+    }</font>
+</pre>

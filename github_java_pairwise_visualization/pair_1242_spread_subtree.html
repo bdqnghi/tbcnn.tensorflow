@@ -1,0 +1,70 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public List&lt;Integer&gt; sort(List&lt;Integer&gt; list){
+
+        
+        
+        
+        int n = list.size();
+        
+        while(n != 0){
+            
+            int swappy = 0;
+            for (int i = 1;i&lt;n;i++){
+                
+                if(<font color='#001eff' weight='0.0294118' id='105'>list<font color='#0001ff' weight='0.00163399' id='102'>.</font><font color='#0001ff' weight='0.00163399' id='104'>get</font></font>(<font color='#0000ff' weight='0.000816993' id='107'>i</font>-1) <font color='#000aff' weight='0.00980392' id='118'>&gt; </font>list.get(i)){
+                    int temp = list.get(i-1);
+                    list.set(i-1,list.get(i));
+                    list.set(i,temp);
+                    
+                    swappy = i;
+                }
+            }
+            
+            n = swappy;
+        }
+        return list;
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static int[] bucketSort(int[] input, int bucketCount) {
+        if (input == null || input.length &lt;= 1) {
+            return input;
+        }
+        int[] output = new int[input.length];
+        int lowerBound = Integer.MAX_VALUE;
+        int upperBound = Integer.MIN_VALUE;
+        for (int i = 0; i &lt; input.length; i++) {
+            upperBound = Math.max(upperBound, input[i]);
+            lowerBound = Math.min(lowerBound, input[i]);
+        }
+        
+        double interval = (double)(upperBound - lowerBound + 1)/bucketCount;
+
+        ArrayList&lt;ArrayList&lt;Integer&gt;&gt; buckets = new ArrayList&lt;ArrayList&lt;Integer&gt;&gt;();
+        
+        
+        for (int i = <font color='#ff0000' weight='1' id='302'>0</font>; i &lt; bucketCount; i++) {
+            ArrayList&lt;Integer&gt; line = new ArrayList&lt;Integer&gt;();
+            buckets.add(line);
+        }
+        for (int i = 0; i &lt; input.length; i++) {    
+            int pos = (int) ((input[i] - lowerBound)/interval);
+            buckets.get(pos).add(input[i]);
+        }
+        
+        
+        for (int i = 0; i &lt; bucketCount; i++) {
+            Collections.sort(buckets.get(i));
+        }
+        int pointer = 0;
+        for (int i = 0; i &lt; bucketCount; i++) {
+            for (int j = 0; j &lt; buckets.get(i).size(); j++) {
+                output[pointer] = buckets.get(i).get(j);
+                pointer ++;
+            }
+        }
+        return output;
+    }</font>
+</pre>

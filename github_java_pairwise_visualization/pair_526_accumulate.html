@@ -1,0 +1,54 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void sort(Comparable[] a) {
+    int n = a.length;
+
+    
+    int h = 1;
+    while (h &lt; n/3) h = 3*h + 1;
+
+    while (h &gt;= 1) {
+      
+      for (int i = h; i &lt; n; i++) {
+        for (int j = i; j &gt;= h &amp;&amp; less(a[j], a[j-h]); j -= h) {
+          exch(a, j, j-h);
+        }
+      }
+      h /= 3;
+    }
+  }
+
+  private static boolean less(Comparable v, Comparable w) <font color='#ff0000' weight='1' id='275'>{
+    <font color='#ff0000' weight='1' id='273'>return <font color='#ff0000' weight='1' id='271'><font color='#ff0000' weight='1' id='266'><font color='#ff0000' weight='1' id='259'><font color='#ff0000' weight='1' id='254'>v<font color='#ff0000' weight='1' id='253'></font></font><font color='#ff0000' weight='1' id='256'>.<font color='#ff0000' weight='1' id='255'></font></font><font color='#ff0000' weight='1' id='258'>compareTo<font color='#ff0000' weight='1' id='257'></font></font></font><font color='#ff0000' weight='1' id='265'>(<font color='#ff0000' weight='1' id='261'>w</font>)<font color='#ff0000' weight='1' id='264'></font></font> </font><font color='#ff0000' weight='1' id='268'>&lt;<font color='#ff0000' weight='1' id='267'></font> </font><font color='#ff0000' weight='1' id='270'>0<font color='#ff0000' weight='1' id='269'></font></font>;</font><font color='#ff0000' weight='1' id='272'></font>
+  }</font><font color='#ff0000' weight='1' id='274'></font></font>
+
+  private static void exch(Object[] a, int i, int j) {
+    Object swap = a[i];
+    a[i] = a[j];
+    a[j] = swap;
+  }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public void shellSort(int[] array) {
+        for(int gap = array.length / 2; gap &gt; 0; gap /= 2) {
+            for(int i = 0; i &lt; gap; i++) {
+                for(int j = i; j &lt; array.length; j += gap) {
+                    int min = j;
+                    for(int k = j + gap; k &lt; array.length; k += gap) <font color='#ff0000' weight='1' id='212'>{
+                        <font color='#ff0000' weight='1' id='210'>if<font color='#ff0000' weight='1' id='197'>(<font color='#ff0000' weight='1' id='195'><font color='#ff0000' weight='1' id='184'><font color='#ff0000' weight='1' id='178'>array<font color='#ff0000' weight='1' id='177'></font></font><font color='#ff0000' weight='1' id='183'>[<font color='#ff0000' weight='1' id='181'><font color='#ff0000' weight='1' id='180'>k<font color='#ff0000' weight='1' id='179'></font></font>]</font><font color='#ff0000' weight='1' id='182'></font></font> </font><font color='#ff0000' weight='1' id='186'>&lt;<font color='#ff0000' weight='1' id='185'></font> </font><font color='#ff0000' weight='1' id='194'><font color='#ff0000' weight='1' id='188'>array</font><font color='#ff0000' weight='1' id='193'>[<font color='#ff0000' weight='1' id='191'><font color='#ff0000' weight='1' id='190'>min</font>]</font><font color='#ff0000' weight='1' id='192'></font></font></font>)</font><font color='#ff0000' weight='1' id='196'></font></font><font color='#ff0000' weight='1' id='209'> <font color='#ff0000' weight='1' id='208'>{
+                            <font color='#ff0000' weight='1' id='206'><font color='#ff0000' weight='1' id='204'><font color='#ff0000' weight='1' id='199'>min </font><font color='#ff0000' weight='1' id='201'>=<font color='#ff0000' weight='1' id='200'></font> </font><font color='#ff0000' weight='1' id='203'>k</font>;</font><font color='#ff0000' weight='1' id='205'></font>
+                        }</font><font color='#ff0000' weight='1' id='207'></font></font></font>
+                    }</font><font color='#ff0000' weight='1' id='211'></font></font>
+                    swap(array, j, min);
+                }
+            }
+        }
+    }
+
+    public void swap(int[] array, int a, int b) {
+        int temp = array[a];
+        array[a] = array[b];
+        array[b] = temp;
+    }</font>
+</pre>

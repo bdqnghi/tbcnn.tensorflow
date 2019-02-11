@@ -1,0 +1,80 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public int[] sort(int num[]) {
+        
+        int h = 1;
+        
+        while (h &lt; num.length / 3)
+            h = h * 3 + 1;
+        for (; h &gt; 0; h /= 3) {
+            
+            for (int k = 0; k &lt; h; k++) {
+                
+                for (int i = h + k; i &lt; num.length; i += h) {
+                    int j = i;
+                    
+                    while (j &gt;= h &amp;&amp; num[j] &lt; num[j - h]) {
+                        swap(num, j, j - h);
+                        j -= h;
+                    }
+
+                }
+            }
+        }
+
+        return num;
+    }
+
+    
+    private void swap(int arg[], int i, int j) {
+        
+        if (i != j) {
+            arg[i] = arg[i] ^ arg[j];
+            arg[j] = arg[j] ^ arg[i];
+            arg[i] = arg[j] ^ arg[i];
+        }
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+  private static void merge(Comparable[] a, Comparable[] aux, int lo, int mid, int hi) {
+
+        
+        assert isSorted(a, lo, mid);
+        assert isSorted(a, mid+1, hi);
+
+        
+        for (int k = lo; k &lt;= hi; k++) {
+            aux[k] = a[k]; 
+        }
+
+        
+        int i = lo, j = mid+1;
+        for (int k = lo; k &lt;= hi; k++) {
+            if      (i &gt; mid)              a[k] = aux[j++];   
+            else if (j &gt; hi)               a[k] = aux[i++];
+            else if (<font color='#ff2800' weight='0.96' id='297'><font color='#0014ff' weight='0.02' id='274'>less</font><font color='#00ff51' weight='0.42' id='296'>(<font color='#003dff' weight='0.06' id='284'><font color='#0036ff' weight='0.0533333' id='283'>aux[j]</font>, </font><font color='#003dff' weight='0.06' id='294'><font color='#0036ff' weight='0.0533333' id='293'>aux[i]</font>)</font></font></font>) a[k] = aux[j++];
+            else                           a[k] = aux[i++];
+        }
+
+        
+        assert isSorted(a, lo, hi);
+    }
+
+    
+    private static void sort(Comparable[] a, Comparable[] aux, int lo, int hi) {
+        if (hi &lt;= lo) return;
+        int mid = lo + (hi - lo) / 2;
+        sort(a, aux, lo, mid);
+        sort(a, aux, mid + 1, hi);
+        merge(a, aux, lo, mid, hi);
+    }
+
+    
+    public static void sort(Comparable[] a) {
+        Comparable[] aux = new Comparable[a.length];
+        sort(a, aux, 0, a.length-1);
+        assert isSorted(a);
+    }
+</font>
+</pre>

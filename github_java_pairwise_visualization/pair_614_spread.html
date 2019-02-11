@@ -1,0 +1,78 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public void bubbleSortFor(int[] array) {
+
+        System.out.println(Arrays.toString(array));
+        int aux;
+
+        for (int i = array.length; i &gt; 0; i--) {
+            for (int j = 0; j &lt; i - 1; j++) {
+                if (array[j] &gt; array[j + 1]) {
+                    aux = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = aux;
+                }
+                System.out.println(Arrays.toString(array));
+            }
+        }
+    }
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+package com.dreamskiale.basic_algorithms.search;
+
+import java.util.Deque;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+
+import com.dreamskiale.basic_algorithms.pojos.Vertex;
+
+public class DepthFirstSearchRecursive&lt;T&gt; implements GraphSearch&lt;T&gt; {
+
+  private Set&lt;Vertex&lt;T&gt;&gt; visited = new LinkedHashSet&lt;&gt;();
+  private Deque&lt;Vertex&lt;T&gt;&gt; topologicalSort = new LinkedList&lt;&gt;();
+
+  @Override
+  public Iterable&lt;Vertex&lt;T&gt;&gt; search(Vertex&lt;T&gt; head) {
+    visited.clear();
+    topologicalSort.clear();
+    dfsRecursive(head);
+    return visited;
+  }
+  
+  public Iterable&lt;Vertex&lt;T&gt;&gt; dfs(List&lt;Vertex&lt;T&gt;&gt; graph) {
+    visited.clear();
+    topologicalSort.clear();
+    for (Vertex&lt;T&gt; v : graph) {
+      if (!visited.contains(v)) {
+        dfsRecursive(v);
+      }
+    }
+    return visited;
+  }
+  
+  private void dfsRecursive(Vertex&lt;T&gt; vertex) {
+    visit(vertex);
+    List&lt;Vertex&lt;T&gt;&gt; adj = vertex.getAdjacent();
+    for (Vertex&lt;T&gt; a : adj) {
+      if (!visited.contains(a)) {
+        <font color='#ff0000' weight='1' id='521'><font color='#00ff00' weight='0.5' id='519'><font color='#00ff00' weight='0.5' id='518'><font color='#00ffff' weight='0.25' id='511'>dfsRecursive</font><font color='#00ffff' weight='0.25' id='517'>(<font color='#007fff' weight='0.125' id='515'><font color='#007fff' weight='0.125' id='514'>a</font>)</font><font color='#007fff' weight='0.125' id='516'></font></font></font>;</font><font color='#00ff00' weight='0.5' id='520'></font>
+      }</font>
+    }
+    topologicalSort.addFirst(vertex);
+  }
+  
+  
+  public Deque&lt;Vertex&lt;T&gt;&gt; getTopologicalSort() {
+    return topologicalSort;
+  }
+  
+  private void visit(Vertex&lt;T&gt; v) {
+    visited.add(v);
+  }
+
+}</font>
+</pre>

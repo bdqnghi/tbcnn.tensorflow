@@ -1,0 +1,76 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static void selection_sort(int[]arr,int bi,int ei){
+        if <font color='#0009ff' weight='0.00965909' id='53'>(<font color='#0004ff' weight='0.00426136' id='51'>bi==<font color='#0000ff' weight='1.89394e-05' id='41'>arr</font><font color='#0000ff' weight='1.89394e-05' id='43'>.</font><font color='#0000ff' weight='1.89394e-05' id='45'>length</font>-<font color='#0000ff' weight='5.68182e-05' id='50'>1</font>)</font></font><font color='#0002ff' weight='0.00227273' id='58'><font color='#0001ff' weight='0.00170455' id='57'>{
+            <font color='#0000ff' weight='0.000284091' id='55'>return;
+        }</font></font></font>
+        <font color='#0036ff' weight='0.0534091' id='107'>if (ei<font color='#0000ff' weight='9.4697e-05' id='63'>==</font><font color='#0000ff' weight='3.15657e-05' id='65'>arr</font><font color='#0000ff' weight='3.15657e-05' id='67'>.</font><font color='#0000ff' weight='3.15657e-05' id='69'>length</font>)<font color='#0011ff' weight='0.0176136' id='105'>{
+            <font color='#0002ff' weight='0.00227273' id='98'><font color='#0000ff' weight='4.73485e-05' id='75'>selection_sort</font><font color='#0001ff' weight='0.000994318' id='97'>(<font color='#0000ff' weight='3.55114e-05' id='79'><font color='#0000ff' weight='1.18371e-05' id='77'>arr</font>,</font><font color='#0000ff' weight='8.28599e-05' id='87'><font color='#0000ff' weight='7.10227e-05' id='86'>bi<font color='#0000ff' weight='3.94571e-06' id='83'>+</font>1</font>,</font><font color='#0000ff' weight='8.28599e-05' id='95'><font color='#0000ff' weight='3.94571e-06' id='89'>bi</font>+<font color='#0000ff' weight='3.94571e-06' id='93'>2</font>)</font></font></font>;
+            <font color='#0000ff' weight='0.000189394' id='103'>return;
+        }</font></font>
+        </font>if <font color='#000bff' weight='0.0113636' id='128'>(<font color='#0005ff' weight='0.00511364' id='126'><font color='#0000ff' weight='0.000662879' id='115'><font color='#0000ff' weight='4.73485e-05' id='109'>arr</font><font color='#0000ff' weight='0.000189394' id='114'>[bi]</font></font><font color='#0000ff' weight='9.4697e-05' id='117'>&gt;</font><font color='#0000ff' weight='0.000662879' id='125'><font color='#0000ff' weight='4.73485e-05' id='119'>arr</font>[<font color='#0000ff' weight='4.73485e-05' id='122'><font color='#0000ff' weight='2.36742e-05' id='121'>ei</font>]</font></font>)</font></font><font color='#001fff' weight='0.03125' id='184'>{
+            <font color='#0002ff' weight='0.00241477' id='146'><font color='#0001ff' weight='0.00106534' id='144'><font color='#0000ff' weight='4.73485e-05' id='131'><font color='#0000ff' weight='2.36742e-05' id='130'>int</font> </font><font color='#0000ff' weight='2.36742e-05' id='133'>temp </font>= <font color='#0000ff' weight='0.000189394' id='142'><font color='#0000ff' weight='0.00016572' id='141'><font color='#0000ff' weight='1.18371e-05' id='135'>arr</font><font color='#0000ff' weight='4.73485e-05' id='140'>[<font color='#0000ff' weight='5.91856e-06' id='137'>bi</font>]</font></font></font>;</font>
+            </font><font color='#0002ff' weight='0.00284091' id='167'><font color='#0001ff' weight='0.00127841' id='165'>arr[<font color='#0000ff' weight='1.18371e-05' id='151'><font color='#0000ff' weight='5.91856e-06' id='150'>bi</font>]</font> <font color='#0000ff' weight='2.36742e-05' id='156'>= </font><font color='#0000ff' weight='1.18371e-05' id='158'>arr</font>[ei];</font>
+            </font><font color='#0002ff' weight='0.00198864' id='182'><font color='#0000ff' weight='0.00016572' id='175'><font color='#0000ff' weight='1.18371e-05' id='169'>arr</font><font color='#0000ff' weight='4.73485e-05' id='174'>[<font color='#0000ff' weight='1.18371e-05' id='172'><font color='#0000ff' weight='5.91856e-06' id='171'>ei</font>]</font></font> </font><font color='#0000ff' weight='2.36742e-05' id='177'>= </font><font color='#0000ff' weight='2.36742e-05' id='179'>temp</font>;
+        
+        }</font></font>
+        <font color='#001aff' weight='0.0261364' id='210'>selection_sort(<font color='#0000ff' weight='0.000213068' id='192'>arr,</font><font color='#0000ff' weight='0.000213068' id='196'><font color='#0000ff' weight='7.10227e-05' id='194'>bi</font>,</font><font color='#0000ff' weight='0.000497159' id='204'><font color='#0000ff' weight='0.000426136' id='203'>ei<font color='#0000ff' weight='2.36742e-05' id='200'>+</font><font color='#0000ff' weight='2.36742e-05' id='202'>1</font></font>)</font>;
+    }</font>
+    public static void display(int[] arr) {
+        for (int val : arr) {
+            
+            System.out.print(val + ",");
+        }
+        System.out.println("end");
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+package org.hibernate.envers.internal.tools.graph;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+
+public class TopologicalSort&lt;R&gt; {
+	private List&lt;R&gt; sorted;
+	private int time;
+
+	private void process(Vertex&lt;R&gt; v) {
+		if ( v.getStartTime() != 0 ) {
+			
+			return;
+		}
+
+		v.setStartTime( time++ );
+
+		for ( Vertex&lt;R&gt; n : v.getNeighbours() ) {
+			process( n );
+		}
+
+		v.setEndTime( time++ );
+
+		sorted.add( v.getRepresentation() );
+	}
+
+	public List&lt;R&gt; sort(Collection&lt;Vertex&lt;R&gt;&gt; vertices) {
+		sorted = new ArrayList&lt;&gt;( vertices.size() );
+
+		time = 1;
+
+		for ( Vertex&lt;R&gt; v : vertices ) {
+			if ( v.getEndTime() == 0 ) {
+				process( v );
+			}
+		}
+
+		Collections.reverse( sorted );
+
+		return sorted;
+	}
+}
+</font>
+</pre>

@@ -1,0 +1,51 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+<font color='#ff0600' weight='0.994048' id='168'>private <font color='#0001ff' weight='0.00119048' id='4'>void</font> <font color='#0001ff' weight='0.00119048' id='7'>insertionSort</font><font color='#0015ff' weight='0.0214286' id='26'>(<font color='#0003ff' weight='0.00357143' id='17'>int[] <font color='#0000ff' weight='0.000198413' id='15'>a</font>, </font><font color='#0002ff' weight='0.00238095' id='24'>int len)</font> </font><font color='#00aaff' weight='0.166667' id='167'>{
+        
+        for <font color='#0008ff' weight='0.00833333' id='55'>(<font color='#0000ff' weight='2.48016e-05' id='29'><font color='#0000ff' weight='1.24008e-05' id='28'>int</font> </font><font color='#0000ff' weight='1.24008e-05' id='31'>i </font><font color='#0000ff' weight='3.72024e-05' id='35'>= <font color='#0000ff' weight='2.48016e-05' id='34'>1</font></font>; <font color='#0000ff' weight='1.24008e-05' id='40'>i </font><font color='#0000ff' weight='1.24008e-05' id='42'>&lt; </font>len; i++) </font>{
+            <font color='#0001ff' weight='0.0010119' id='73'><font color='#0000ff' weight='0.000446429' id='71'><font color='#0000ff' weight='1.98413e-05' id='58'><font color='#0000ff' weight='9.92063e-06' id='57'>int</font> </font><font color='#0000ff' weight='9.92063e-06' id='60'>value </font><font color='#0000ff' weight='8.92857e-05' id='70'>= <font color='#0000ff' weight='7.93651e-05' id='69'><font color='#0000ff' weight='6.94444e-05' id='68'><font color='#0000ff' weight='4.96032e-06' id='62'>a</font><font color='#0000ff' weight='1.98413e-05' id='67'>[<font color='#0000ff' weight='2.48016e-06' id='64'>i</font>]</font></font></font></font>;</font>   
+            </font><font color='#0000ff' weight='0.000654762' id='85'><font color='#0000ff' weight='0.000267857' id='83'><font color='#0000ff' weight='1.98413e-05' id='76'><font color='#0000ff' weight='9.92063e-06' id='75'>int</font> </font><font color='#0000ff' weight='9.92063e-06' id='78'>position </font><font color='#0000ff' weight='2.97619e-05' id='82'>= i</font>;</font>   
+            
+            
+            </font>while (<font color='#0000ff' weight='0.000357143' id='110'><font color='#0000ff' weight='2.12585e-06' id='87'>position </font>&gt; 0 <font color='#0000ff' weight='2.12585e-06' id='93'>&amp;&amp; </font><font color='#0000ff' weight='1.06293e-06' id='95'>a</font>[<font color='#0000ff' weight='1.77154e-07' id='97'>position</font><font color='#0000ff' weight='1.77154e-07' id='99'>-</font>1] &gt; value)</font> {
+                <font color='#0000ff' weight='0.000238095' id='137'><font color='#0000ff' weight='0.000109127' id='135'>a<font color='#0000ff' weight='3.30688e-06' id='119'>[<font color='#0000ff' weight='4.1336e-07' id='116'>position</font>]</font> = a<font color='#0000ff' weight='6.61376e-06' id='133'>[<font color='#0000ff' weight='2.48016e-06' id='131'><font color='#0000ff' weight='1.37787e-07' id='126'>position</font>-1]</font></font>;</font>    
+                </font><font color='#0000ff' weight='5.95238e-05' id='144'><font color='#0000ff' weight='1.98413e-05' id='142'>position<font color='#0000ff' weight='2.48016e-06' id='141'>--</font>;</font>                     
+            }</font>
+            
+            
+            a[position] = <font color='#0000ff' weight='9.92063e-06' id='159'>value</font>;
+        }
+    }</font>
+    </font></font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+private List&lt;Stmt&gt; topologicalSort(StmtList stmts) {
+
+        List&lt;Stmt&gt; out = new ArrayList&lt;Stmt&gt;(stmts.getSize());
+        Stack&lt;Stmt&gt; stack = new Stack&lt;Stmt&gt;();
+        stack.push(stmts.getFirst());
+
+        boolean visitedFlag = false;
+
+        while (!stack.empty()) {
+            Stmt stmt = stack.pop();
+            if (<font color='#ff0000' weight='1' id='176'><font color='#00b9ff' weight='0.181818' id='171'><font color='#000aff' weight='0.010101' id='166'>stmt</font><font color='#000aff' weight='0.010101' id='168'>.</font><font color='#000aff' weight='0.010101' id='170'>_cfg_visited</font> </font><font color='#001eff' weight='0.030303' id='173'>== </font>visitedFlag)</font> {
+                continue;
+            }
+            if (stmt._cfg_froms.size() == 0 || stack.size() == 0) {
+                stmt._cfg_visited = visitedFlag;
+                out.add(stmt);
+                for (Stmt t : stmt._cfg_tos) {
+                    t._cfg_froms.remove(stmt);
+                    if (t._cfg_visited != visitedFlag) {
+                        stack.push(t);
+                    }
+                }
+            }
+        }
+        return out;
+    }
+
+    </font>
+</pre>

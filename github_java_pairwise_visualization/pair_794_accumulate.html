@@ -1,0 +1,98 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+private List&lt;Stmt&gt; topologicalSort(StmtList stmts) {
+
+        List&lt;Stmt&gt; out = new ArrayList&lt;Stmt&gt;(stmts.getSize());
+        Stack&lt;Stmt&gt; stack = new Stack&lt;Stmt&gt;();
+        stack.push(stmts.getFirst());
+
+        boolean visitedFlag = false;
+
+        while (!stack.empty()) {
+            Stmt <font color='#ff0000' weight='1' id='149'>stmt </font>= <font color='#ff0000' weight='1' id='151'>stack<font color='#ff0000' weight='1' id='150'></font></font><font color='#ff0000' weight='1' id='153'>.</font><font color='#ff0000' weight='1' id='155'>pop</font>();
+            <font color='#ff0000' weight='1' id='184'>if <font color='#ff0000' weight='1' id='178'>(stmt._cfg_visited == visitedFlag)</font> <font color='#ff0000' weight='1' id='182'>{
+                continue;<font color='#ff0000' weight='1' id='179'></font>
+            }<font color='#ff0000' weight='1' id='181'></font></font>
+            </font>if (<font color='#ff0000' weight='1' id='219'><font color='#ff0000' weight='1' id='186'>stmt<font color='#ff0000' weight='1' id='185'></font></font>._cfg_froms.size() == 0 || <font color='#ff0000' weight='1' id='214'>stack<font color='#ff0000' weight='1' id='208'>.</font>size() </font>== 0)</font> {
+                <font color='#ff0000' weight='1' id='223'>stmt</font>._cfg_visited = visitedFlag<font color='#ff0000' weight='1' id='231'></font>;
+                <font color='#ff0000' weight='1' id='252'><font color='#ff0000' weight='1' id='237'>out<font color='#ff0000' weight='1' id='236'></font></font>.add(stmt);
+                </font>for <font color='#ff0000' weight='1' id='270'>(<font color='#ff0000' weight='1' id='268'><font color='#ff0000' weight='1' id='267'><font color='#ff0000' weight='1' id='255'>Stmt </font><font color='#ff0000' weight='1' id='257'>t </font><font color='#ff0000' weight='1' id='266'>: <font color='#ff0000' weight='1' id='265'><font color='#ff0000' weight='1' id='264'>stmt<font color='#ff0000' weight='1' id='258'></font><font color='#ff0000' weight='1' id='261'>.</font><font color='#ff0000' weight='1' id='263'>_cfg_tos<font color='#ff0000' weight='1' id='262'></font></font></font></font></font></font>)</font><font color='#ff0000' weight='1' id='269'></font> </font>{
+                    <font color='#ff0000' weight='1' id='281'><font color='#ff0000' weight='1' id='272'>t<font color='#ff0000' weight='1' id='271'></font></font>._cfg_froms<font color='#ff0000' weight='1' id='275'></font><font color='#ff0000' weight='1' id='278'>.</font>remove<font color='#ff0000' weight='1' id='279'></font></font>(<font color='#ff0000' weight='1' id='285'><font color='#ff0000' weight='1' id='283'>stmt<font color='#ff0000' weight='1' id='282'></font></font>)</font><font color='#ff0000' weight='1' id='286'></font>;
+                    if (t._cfg_visited<font color='#ff0000' weight='1' id='296'></font> !=<font color='#ff0000' weight='1' id='299'></font> visitedFlag) {
+                        <font color='#ff0000' weight='1' id='322'><font color='#ff0000' weight='1' id='319'>stack.push(t)</font>;
+                    }</font><font color='#ff0000' weight='1' id='323'></font>
+                }
+            }
+        }
+        return out;
+    }
+
+    </font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+    public static &lt;T extends Comparable&lt;T&gt;&gt; void sort(List&lt;T&gt; a) {
+        Collections.shuffle(a);
+        sort(a, 0, a.size() - 1);
+    }
+
+    private static &lt;T extends Comparable&lt;T&gt;&gt; void sort(List&lt;T&gt; a, int lo, int hi) {
+        if (hi &lt;= lo + M) {
+            Insertion.sort(a, lo, hi);
+            return;
+        }
+
+        int j = partition(a, lo, hi);
+
+        sort(a, lo, j - 1);
+        sort(a, j + 1, hi);
+    }
+
+    
+    public static &lt;T extends Comparable&lt;T&gt;&gt; void mediansort(List&lt;T&gt; a) {
+        Collections.shuffle(a);
+        mediansort(a, 0, a.size() - 1);
+    }
+
+    private static &lt;T extends Comparable&lt;T&gt;&gt; void mediansort(List&lt;T&gt; a, int lo, int hi) {
+        if (hi &lt;= lo + M) {
+            Insertion.sort(a, lo, hi);
+            return;
+        }
+
+        T pivot = SortUtils.median(a, lo, hi);
+        int i = lo, j = hi - 1; 
+
+        for (; ; ) {
+            while (a.get(++i).compareTo(pivot) &lt; 0) ;
+            while (pivot.compareTo(a.get(--j)) &lt; 0) ;
+            if (i &lt; j)
+                SortUtils.exchange(a, i, j);
+            else break;
+        }
+
+        SortUtils.exchange(a, i, hi - 1); 
+
+        mediansort(a, lo, i - 1);
+        mediansort(a, i + 1, hi);
+    }
+
+    private static &lt;T extends Comparable&lt;T&gt;&gt; int partition(List&lt;T&gt; a, int lo, int hi) {
+        int i = lo;
+        int j = hi + 1;
+
+        T v = a.get(lo);
+
+        while (true) {
+            while (SortUtils.less(a.get(++i), v)) if (i == hi) break;
+            while (SortUtils.less(v, a.get(--j))) if (j == lo) break;
+
+            if (i &gt;= j) break;
+            SortUtils.exchange(a, i, j);
+        }
+
+        SortUtils.exchange(a, lo, j);
+
+        return j;
+    }</font>
+</pre>

@@ -1,0 +1,68 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+   public static void mergeSort(int[] arr) {
+      if (arr.length &gt; 1) {
+         int[] left = leftHalf(arr);
+         int[] right = rightHalf(arr);
+
+         mergeSort(left);
+         mergeSort(right);
+
+         mergeArrays(arr, left, right);
+      }
+   }
+
+   public static int[] leftHalf(int[] arr) {
+      int size = arr.length / 2;
+      int[] left = new int[size];
+      for (int i = 0; i &lt; size; i++) {
+         left<font color='#ff0000' weight='1' id='228'></font>[i] = arr[i];
+      }
+      return left;
+   }
+
+   public static int[] rightHalf(int[] arr) {
+      int size1 = arr.length / 2;
+      int size2 = arr.length - size1;
+      int[] right = new int[size2];
+      for (int i = 0; i &lt; size2; i++) {
+         right[i] = arr[i + size1];
+      }
+      return right;
+   }
+
+   public static void mergeArrays(int[] arr, int[] left, int[] right) {
+      int i1 = 0;
+      int i2 = 0;
+
+      for (int i = 0; i &lt; arr.length; i++) {
+         if (i2 &gt;= right.length || (i1 &lt; left.length &amp;&amp; left[i1] &lt;= right[i2])) {
+            arr[i] = left[i1];
+            i1++;
+         } else {
+            arr[i] = right[i2];
+            i2++;
+         }
+      }
+   }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+<font color='#ff0600' weight='0.994048' id='168'><font color='#0001ff' weight='0.00119048' id='2'>private </font>void <font color='#0001ff' weight='0.00119048' id='7'>insertionSort</font><font color='#0015ff' weight='0.0214286' id='26'>(int[] <font color='#0000ff' weight='0.000198413' id='15'>a</font>, <font color='#0000ff' weight='0.000198413' id='19'>int</font> <font color='#0000ff' weight='0.000198413' id='22'>len</font>) </font><font color='#00aaff' weight='0.166667' id='167'>{
+        
+        <font color='#0053ff' weight='0.0821429' id='165'>for (int i = <font color='#0000ff' weight='1.24008e-05' id='33'>1</font>; i &lt; <font color='#0000ff' weight='1.24008e-05' id='44'>len</font>; i++) <font color='#0020ff' weight='0.0321429' id='164'>{
+            <font color='#0000ff' weight='9.92063e-06' id='57'>int</font> <font color='#0000ff' weight='9.92063e-06' id='60'>value </font>= <font color='#0000ff' weight='4.96032e-06' id='62'>a</font>[<font color='#0000ff' weight='2.48016e-06' id='64'>i</font>];   
+            int <font color='#0000ff' weight='9.92063e-06' id='78'>position </font>= <font color='#0000ff' weight='9.92063e-06' id='80'>i</font>;   
+            
+            
+            <font color='#0003ff' weight='0.00363095' id='147'>while <font color='#0000ff' weight='0.00077381' id='112'>(<font color='#0000ff' weight='2.12585e-06' id='87'>position </font><font color='#0000ff' weight='2.12585e-06' id='89'>&gt; </font><font color='#0000ff' weight='2.12585e-06' id='91'>0 </font>&amp;&amp; <font color='#0000ff' weight='1.06293e-06' id='95'>a</font>[<font color='#0000ff' weight='1.77154e-07' id='97'>position</font><font color='#0000ff' weight='1.77154e-07' id='99'>-</font><font color='#0000ff' weight='1.77154e-07' id='101'>1</font>] <font color='#0000ff' weight='2.12585e-06' id='107'>&gt; </font><font color='#0000ff' weight='2.12585e-06' id='109'>value</font>) </font><font color='#0001ff' weight='0.000982143' id='146'>{
+                <font color='#0000ff' weight='8.26719e-07' id='114'>a</font>[<font color='#0000ff' weight='4.1336e-07' id='116'>position</font>] = <font color='#0000ff' weight='8.26719e-07' id='124'>a</font>[<font color='#0000ff' weight='1.37787e-07' id='126'>position</font><font color='#0000ff' weight='1.37787e-07' id='128'>-</font><font color='#0000ff' weight='1.37787e-07' id='130'>1</font>];    
+                <font color='#0000ff' weight='2.48016e-06' id='139'>position</font><font color='#0000ff' weight='2.48016e-06' id='141'>--</font>;                     
+            }</font>
+            
+            
+            </font><font color='#0000ff' weight='4.96032e-06' id='149'>a</font>[<font color='#0000ff' weight='2.48016e-06' id='151'>position</font>] = <font color='#0000ff' weight='9.92063e-06' id='159'>value</font>;
+        }</font>
+    }</font></font>
+    </font></font>
+</pre>

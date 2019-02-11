@@ -1,0 +1,47 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static &lt;T extends Comparable&lt;T&gt;&gt; void sort(List&lt;T&gt; itemsToSort) {
+        for (int i = 0; i &lt; itemsToSort.size(); i++) {
+            for (int j = itemsToSort.size() - 1; j &gt; 0; j--) {
+                <font color='#ff0000' weight='1' id='138'>T secondItem = itemsToSort.<font color='#ff0000' weight='1' id='127'>get<font color='#ff0000' weight='1' id='126'></font></font><font color='#ff0000' weight='1' id='134'>(<font color='#ff0000' weight='1' id='132'><font color='#ff0000' weight='1' id='131'>j<font color='#ff0000' weight='1' id='129'></font></font>)</font></font>;</font>
+                <font color='#ff0000' weight='1' id='143'><font color='#ff0000' weight='1' id='142'>T<font color='#ff0000' weight='1' id='141'></font></font> </font>firstItem<font color='#ff0000' weight='1' id='144'></font> <font color='#ff0000' weight='1' id='165'>= <font color='#ff0000' weight='1' id='164'><font color='#ff0000' weight='1' id='147'>itemsToSort</font><font color='#ff0000' weight='1' id='149'>.<font color='#ff0000' weight='1' id='148'></font></font><font color='#ff0000' weight='1' id='151'>get<font color='#ff0000' weight='1' id='150'></font></font>(<font color='#ff0000' weight='1' id='154'>j </font>- 1)</font></font>;
+
+                <font color='#ff0000' weight='1' id='239'>if (<font color='#ff0000' weight='1' id='187'><font color='#ff0000' weight='1' id='182'><font color='#ff0000' weight='1' id='175'><font color='#ff0000' weight='1' id='170'>secondItem<font color='#ff0000' weight='1' id='169'></font></font><font color='#ff0000' weight='1' id='172'>.<font color='#ff0000' weight='1' id='171'></font></font>compareTo</font><font color='#ff0000' weight='1' id='181'>(<font color='#ff0000' weight='1' id='179'><font color='#ff0000' weight='1' id='178'>firstItem</font>)</font></font> </font><font color='#ff0000' weight='1' id='184'>&lt; </font><font color='#ff0000' weight='1' id='186'>0<font color='#ff0000' weight='1' id='185'></font></font>)</font><font color='#ff0000' weight='1' id='188'></font><font color='#ff0000' weight='1' id='238'> <font color='#ff0000' weight='1' id='237'>{
+                    <font color='#ff0000' weight='1' id='208'><font color='#ff0000' weight='1' id='191'>itemsToSort<font color='#ff0000' weight='1' id='190'></font></font>.<font color='#ff0000' weight='1' id='192'></font>set<font color='#ff0000' weight='1' id='194'></font><font color='#ff0000' weight='1' id='206'>(<font color='#ff0000' weight='1' id='198'>j<font color='#ff0000' weight='1' id='197'></font></font>, <font color='#ff0000' weight='1' id='204'><font color='#ff0000' weight='1' id='202'>firstItem</font>)</font><font color='#ff0000' weight='1' id='205'></font></font>;</font><font color='#ff0000' weight='1' id='209'></font>
+                    <font color='#ff0000' weight='1' id='235'><font color='#ff0000' weight='1' id='233'><font color='#ff0000' weight='1' id='232'><font color='#ff0000' weight='1' id='217'>itemsToSort<font color='#ff0000' weight='1' id='211'></font>.<font color='#ff0000' weight='1' id='213'></font><font color='#ff0000' weight='1' id='216'>set<font color='#ff0000' weight='1' id='215'></font></font></font><font color='#ff0000' weight='1' id='231'>(<font color='#ff0000' weight='1' id='225'><font color='#ff0000' weight='1' id='224'><font color='#ff0000' weight='1' id='219'>j </font>- 1</font>, </font><font color='#ff0000' weight='1' id='229'><font color='#ff0000' weight='1' id='228'><font color='#ff0000' weight='1' id='227'>secondItem<font color='#ff0000' weight='1' id='226'></font></font></font>)</font></font></font>;</font><font color='#ff0000' weight='1' id='234'></font>
+                }</font><font color='#ff0000' weight='1' id='236'></font></font></font>
+            }</font>
+        }
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void sort(Comparable[] a){
+        int N = a.length;               
+        int h = 1;                      
+        while(h &lt; N / 3) h = 3*h + 1;   
+        while(h &gt;= 1){                  
+            for(int i = h; i &lt; N; i++){
+                
+                for(int j = i; j &gt;= h &amp;&amp; less(a[j], <font color='#ff0000' weight='1' id='164'><font color='#ff0000' weight='1' id='154'>a<font color='#ff0000' weight='1' id='153'></font></font><font color='#ff0000' weight='1' id='163'>[<font color='#ff0000' weight='1' id='161'><font color='#ff0000' weight='1' id='156'>j<font color='#ff0000' weight='1' id='155'></font> </font><font color='#ff0000' weight='1' id='158'>-<font color='#ff0000' weight='1' id='157'></font> </font><font color='#ff0000' weight='1' id='160'>h<font color='#ff0000' weight='1' id='159'></font></font>]</font><font color='#ff0000' weight='1' id='162'></font></font></font>); j-= h)
+                    exch(a, j, j - h);
+            } 
+            h = h / 3;                  
+        }                              
+    }
+    
+    
+    
+    
+    
+    
+    public static boolean less(Comparable v, Comparable w)
+    {    return v.compareTo(w) &lt; 0; }
+    
+    
+    private static void exch(Comparable[] a, int i, int j){
+        Comparable swap = a[i];
+        a[i] = a[j];
+        a[j] = swap;
+    }</font>
+</pre>

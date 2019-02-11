@@ -1,0 +1,93 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ 
+  public static void sort(double[] a)
+  {
+    int n = a.length;
+    temp = new double[n];
+    recursiveSort(a, 0, n-1);
+  }
+
+  
+  private static void recursiveSort(double[] a, int from, int to)
+  {
+    if (to - from &lt; 2)       
+    {
+      if (to &gt; from &amp;&amp; a[to] &lt; a[from])
+      {
+        double aTemp = a[to];  
+        a[to] = a[from];
+        a[from] = aTemp;
+      }
+    }
+    else                     
+    {
+      int middle = (from + to) / 2;
+      recursiveSort(a, from, middle);
+      recursiveSort(a, middle + 1, to);
+      merge(a, from, middle, to);
+    }
+  }
+
+  
+  
+  private static void merge(double[] a, int from, <font color='#ff0000' weight='1' id='352'><font color='#ffaa00' weight='0.833333' id='351'><font color='#00a9ff' weight='0.166667' id='348'><font color='#0054ff' weight='0.0833333' id='347'>int</font> </font><font color='#0054ff' weight='0.0833333' id='350'>middle</font></font>, </font>int to)
+  {
+    int i = from, j = middle + 1, k = from;
+
+    
+    while (i &lt;= middle &amp;&amp; j &lt;= to)
+    {
+      if (a[i] &lt; a[j])
+      {
+        temp[k] = a[i];   
+        i++;
+      }
+      else
+      {
+        temp[k] = a[j];
+        j++;
+      }
+      k++;
+    }
+
+    
+    while (i &lt;= middle)
+    {
+      temp[k] = a[i];     
+      i++;
+      k++;
+    }
+
+    
+    while (j &lt;= to)
+    {
+      temp[k] = a[j];     
+      j++;
+      k++;
+    }
+
+    
+    for (k = from; k &lt;= to; k++)
+      a[k] = temp[k];
+  }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ <font color='#ff0400' weight='0.995169' id='207'>void sort(<font color='#0000ff' weight='0.000301932' id='7'>double</font> <font color='#0001ff' weight='0.00120773' id='13'><font color='#0000ff' weight='0.000150966' id='10'>arr</font><font color='#0000ff' weight='0.000150966' id='12'>[]</font></font>)
+    <font color='#00e7ff' weight='0.227053' id='206'>{
+        int n = arr.length;
+         <font color='#0045ff' weight='0.0680354' id='204'>for <font color='#0006ff' weight='0.00644122' id='67'>(<font color='#0000ff' weight='0.000553543' id='46'><font color='#0000ff' weight='0.000226449' id='44'>int <font color='#0000ff' weight='8.38701e-06' id='39'>i </font><font color='#0000ff' weight='2.5161e-05' id='43'>= <font color='#0000ff' weight='1.6774e-05' id='42'><font color='#0000ff' weight='8.38701e-06' id='41'>0</font></font></font>;</font> </font><font color='#0000ff' weight='0.000603865' id='59'><font color='#0000ff' weight='5.03221e-06' id='48'>i </font><font color='#0000ff' weight='5.03221e-06' id='50'>&lt; </font><font color='#0000ff' weight='5.03221e-06' id='52'>n</font><font color='#0000ff' weight='5.03221e-06' id='54'>-</font><font color='#0000ff' weight='5.03221e-06' id='56'>1</font>; </font><font color='#0000ff' weight='0.00025161' id='65'><font color='#0000ff' weight='0.000201288' id='64'><font color='#0000ff' weight='2.5161e-05' id='61'>i</font><font color='#0000ff' weight='2.5161e-05' id='63'>++</font></font>)</font>
+        </font><font color='#001bff' weight='0.0271739' id='203'>{
+            int <font color='#0000ff' weight='5.59134e-06' id='72'>min_idx </font>= <font color='#0000ff' weight='5.59134e-06' id='74'>i</font>;
+            <font color='#0002ff' weight='0.00224772' id='147'>for <font color='#0000ff' weight='0.000536769' id='112'>(<font color='#0000ff' weight='6.29026e-05' id='95'><font color='#0000ff' weight='2.72578e-05' id='93'>int j = <font color='#0000ff' weight='2.32973e-07' id='86'>i</font>+1;</font> </font><font color='#0000ff' weight='3.3548e-05' id='104'><font color='#0000ff' weight='1.25805e-05' id='102'><font color='#0000ff' weight='6.98918e-07' id='97'>j </font><font color='#0000ff' weight='6.98918e-07' id='99'>&lt; </font><font color='#0000ff' weight='6.98918e-07' id='101'>n</font>;</font> </font><font color='#0000ff' weight='2.09675e-05' id='110'><font color='#0000ff' weight='1.6774e-05' id='109'>j<font color='#0000ff' weight='2.09675e-06' id='108'>++</font></font>)</font>
+                </font><font color='#0000ff' weight='0.000553543' id='146'>if (<font color='#0000ff' weight='6.98918e-07' id='114'>arr</font>[<font color='#0000ff' weight='3.49459e-07' id='116'>j</font>] &lt; <font color='#0000ff' weight='6.98918e-07' id='124'>arr</font>[<font color='#0000ff' weight='3.49459e-07' id='126'>min_idx</font>])<font color='#0000ff' weight='8.38701e-05' id='144'>
+                    <font color='#0000ff' weight='7.54831e-05' id='143'><font color='#0000ff' weight='1.39784e-06' id='135'>min_idx </font>= <font color='#0000ff' weight='1.39784e-06' id='139'>j</font>;</font></font></font>
+ 
+
+            </font><font color='#0000ff' weight='0.000570317' id='165'><font color='#0000ff' weight='0.00025161' id='163'><font color='#0000ff' weight='1.11827e-05' id='150'><font color='#0000ff' weight='5.59134e-06' id='149'>double</font> </font><font color='#0000ff' weight='5.59134e-06' id='152'>temp </font><font color='#0000ff' weight='5.03221e-05' id='162'>= <font color='#0000ff' weight='4.47307e-05' id='161'><font color='#0000ff' weight='2.79567e-06' id='154'>arr</font>[<font color='#0000ff' weight='1.39784e-06' id='156'>min_idx</font>]</font></font>;</font>
+            </font><font color='#0000ff' weight='2.79567e-06' id='167'>arr</font>[<font color='#0000ff' weight='1.39784e-06' id='169'>min_idx</font>] = <font color='#0000ff' weight='2.79567e-06' id='177'>arr</font>[<font color='#0000ff' weight='1.39784e-06' id='179'>i</font>];
+            <font color='#0000ff' weight='2.79567e-06' id='188'>arr</font>[<font color='#0000ff' weight='1.39784e-06' id='190'>i</font>] = <font color='#0000ff' weight='5.59134e-06' id='198'>temp</font>;
+        }</font>
+    }</font></font></font></font>
+</pre>

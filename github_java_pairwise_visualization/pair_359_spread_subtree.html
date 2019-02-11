@@ -1,0 +1,68 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static void selection_sort(int[]arr,int bi,int ei){
+        <font color='#001aff' weight='0.0261364' id='59'>if (<font color='#0000ff' weight='5.68182e-05' id='37'>bi</font><font color='#0000ff' weight='5.68182e-05' id='39'>==</font>arr.length-1)<font color='#0002ff' weight='0.00227273' id='58'><font color='#0001ff' weight='0.00170455' id='57'>{
+            return;
+        }</font></font>
+        </font><font color='#0036ff' weight='0.0534091' id='107'>if (<font color='#0003ff' weight='0.003125' id='71'>ei<font color='#0000ff' weight='9.4697e-05' id='63'>==</font><font color='#0000ff' weight='3.15657e-05' id='65'>arr</font><font color='#0000ff' weight='3.15657e-05' id='67'>.</font><font color='#0000ff' weight='3.15657e-05' id='69'>length</font>)</font>{
+            <font color='#0005ff' weight='0.00511364' id='101'><font color='#0002ff' weight='0.00236742' id='99'>selection_sort<font color='#0001ff' weight='0.000994318' id='97'>(arr,<font color='#0000ff' weight='7.10227e-05' id='86'>bi<font color='#0000ff' weight='3.94571e-06' id='83'>+</font><font color='#0000ff' weight='3.94571e-06' id='85'>1</font></font>,<font color='#0000ff' weight='7.10227e-05' id='94'>bi+<font color='#0000ff' weight='3.94571e-06' id='93'>2</font></font>)</font>;</font>
+            </font><font color='#0000ff' weight='0.000189394' id='103'>return;
+        }</font>
+        </font>if <font color='#000bff' weight='0.0113636' id='128'>(<font color='#0005ff' weight='0.00511364' id='126'><font color='#0000ff' weight='4.73485e-05' id='109'>arr</font><font color='#0000ff' weight='0.000189394' id='114'>[<font color='#0000ff' weight='2.36742e-05' id='111'>bi</font>]</font>&gt;<font color='#0000ff' weight='4.73485e-05' id='119'>arr</font>[<font color='#0000ff' weight='4.73485e-05' id='122'>ei]</font>)</font></font>{
+            <font color='#0002ff' weight='0.00241477' id='146'>int temp = <font color='#0000ff' weight='1.18371e-05' id='135'>arr</font>[bi];
+            </font><font color='#0002ff' weight='0.00284091' id='167'>arr<font color='#0000ff' weight='4.73485e-05' id='153'>[<font color='#0000ff' weight='1.18371e-05' id='151'><font color='#0000ff' weight='5.91856e-06' id='150'>bi</font>]</font></font> = arr[<font color='#0000ff' weight='5.91856e-06' id='160'>ei</font>];
+            </font>arr[ei] = temp;
+        
+        }
+        <font color='#001aff' weight='0.0261364' id='210'><font color='#0000ff' weight='0.000284091' id='188'>selection_sort</font>(<font color='#0000ff' weight='0.000213068' id='192'><font color='#0000ff' weight='7.10227e-05' id='190'>arr</font>,</font>bi,ei<font color='#0000ff' weight='2.36742e-05' id='200'>+</font>1);
+    }</font>
+    public static void display(int[] arr) {
+        for (int val : arr) {
+            
+            System.out.print(val + ",");
+        }
+        System.out.println("end");
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static int[] bucketSort(int[] input, int bucketCount) {
+        if (input == null || input.length &lt;= 1) {
+            return input;
+        }
+        int[] output = new int[input.length];
+        int lowerBound = Integer.MAX_VALUE;
+        int upperBound = Integer.MIN_VALUE;
+        for (int i = 0; i &lt; input.length; i++) {
+            upperBound = Math.max(upperBound, input[i]);
+            lowerBound = Math.min(lowerBound, input[i]);
+        }
+        
+        double interval = (double)(upperBound - lowerBound + 1)/bucketCount;
+
+        ArrayList&lt;ArrayList&lt;Integer&gt;&gt; buckets = new ArrayList&lt;ArrayList&lt;Integer&gt;&gt;();
+        
+        
+        for (int i = <font color='#ff0000' weight='1' id='302'>0</font>; i &lt; bucketCount; i++) {
+            ArrayList&lt;Integer&gt; line = new ArrayList&lt;Integer&gt;();
+            buckets.add(line);
+        }
+        for (int i = 0; i &lt; input.length; i++) {    
+            int pos = (int) ((input[i] - lowerBound)/interval);
+            buckets.get(pos).add(input[i]);
+        }
+        
+        
+        for (int i = 0; i &lt; bucketCount; i++) {
+            Collections.sort(buckets.get(i));
+        }
+        int pointer = 0;
+        for (int i = 0; i &lt; bucketCount; i++) {
+            for (int j = 0; j &lt; buckets.get(i).size(); j++) {
+                output[pointer] = buckets.get(i).get(j);
+                pointer ++;
+            }
+        }
+        return output;
+    }</font>
+</pre>

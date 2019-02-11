@@ -1,0 +1,59 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+package org.burstsort4j;
+
+
+public class Shellsort {
+
+    private Shellsort() {
+    }
+
+    
+    public static &lt;T extends Comparable&lt;? super T&gt;&gt; void sort(T[] input) {
+        if (input == null || input.length &lt; 2) <font color='#ff0000' weight='1' id='86'>{
+            <font color='#00aaff' weight='0.166667' id='84'>return;
+        }</font></font>
+
+        int inc = input.length / 2;
+        while (inc &gt; 0) {
+            for (int ii = inc; ii &lt; input.length; ii++) {
+                T temp = input[ii];
+                int jj = ii;
+                while (jj &gt;= inc &amp;&amp; input[jj - inc].compareTo(temp) &gt; 0) {
+                    input[jj] = input[jj - inc];
+                    jj -= inc;
+                }
+                input[jj] = temp;
+            }
+            
+            inc = inc == 2 ? 1 : inc * 5 / 11;
+        }
+    }
+}
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+import java.util.*;
+
+class BSorting{
+    public static void main(String[]args){
+     
+
+        for(int i = 0; i &lt;= numbers.length - 1; i++){
+            for(int j = 0; j &lt; numbers.length - 1; j++){
+                if(numbers[j] &gt; numbers[j + 1]){
+                    int temp = numbers[j];
+                    numbers[j] = numbers[j + 1];
+                    numbers[j + 1] = temp;
+                }
+            }
+        
+        }
+
+   
+    }
+}
+</font>
+</pre>

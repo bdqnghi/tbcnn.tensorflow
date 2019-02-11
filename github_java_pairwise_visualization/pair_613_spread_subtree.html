@@ -1,0 +1,77 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+    public static int[] swap(int numbers[], int i, int j) {
+        int temp = numbers[i];
+        numbers[i] = numbers[j];
+        numbers[j] = temp;
+        return numbers;
+    }
+
+    public static int[] sort(int numbers[]) {
+        for (int i = 0; i &lt; numbers.length; i++) {
+            for (int j = 0; j &lt; numbers.length - 1; j++) {
+                if (<font color='#0000ff' weight='0.000359195' id='198'>numbers</font>[j + 1] <font color='#0000ff' weight='0.000718391' id='210'>&lt; </font>numbers[j]) {
+                    <font color='#0000ff' weight='0.000359195' id='223'>numbers </font>= swap(numbers, <font color='#0000ff' weight='0.000134698' id='235'><font color='#0000ff' weight='4.48994e-05' id='233'>j</font>, </font>j + 1);
+                }
+            }
+        }
+        return numbers;
+    }
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ static int[] mergeSort(int[] a){
+        int n = a.length;
+        int[] left;
+        int[] right;
+
+        if(n % 2 == 0){
+            left  = new int[n / 2];
+            right = new int[n / 2];
+        } else {
+            left  = new int[n / 2];
+            right = new int[n / 2 + 1];
+        }
+
+        for(int i = 0; i &lt; n; i++){
+            if<font color='#ff0000' weight='1' id='211'>(<font color='#00ff55' weight='0.416667' id='209'><font color='#0008ff' weight='0.00833333' id='200'>i </font><font color='#0008ff' weight='0.00833333' id='202'>&lt; </font><font color='#0008ff' weight='0.00833333' id='204'>n</font><font color='#0008ff' weight='0.00833333' id='206'>/</font><font color='#0008ff' weight='0.00833333' id='208'>2</font>)</font></font>{
+                left[i] = a[i];
+            } else {
+                right[i - n/2] = a[i];
+            }
+        }
+
+        left = mergeSort(left);
+        right = mergeSort(right);
+
+        return merge(left, right);
+
+    }
+
+    static int[] merge(int[] left, int[] right){
+        int[] result = new int[left.length + right.length];
+        
+        int i = 0;
+        int j = 0;
+        int index = 0;
+
+        while(i &lt; left.length &amp;&amp; j &lt; right.length){
+            if(left[i] &lt; right[i]){
+                result[index++] = left[i++];
+            } else {
+                result[index++] = right[j++];
+            }
+        }
+
+        while(i &lt; left.length){
+            result[index++] = left[i++];
+        }
+
+        while (j &lt; right.length) {
+            result[index++] = right[j++];
+        }
+        
+        return result;
+    }</font>
+</pre>

@@ -1,0 +1,40 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ void sort(double arr[])
+    {
+        int n = arr.length;
+         for (int i = 0; i &lt; n-1; i++)
+        {
+            int min_idx = i;
+            for (int j = i+1; j &lt; n; j++)
+                if (arr[j] &lt; arr[min_idx])
+                    min_idx = j;
+ 
+
+            double temp = arr[min_idx];
+            arr[min_idx] = arr[i];
+            arr[i] = temp;
+        }
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+  <font color='#ff0000' weight='1' id='2'>public<font color='#ff0000' weight='1' id='1'></font> </font>void sort<font color='#ff0000' weight='1' id='26'>(<font color='#ff0000' weight='1' id='13'><font color='#ff0000' weight='1' id='12'>Object[]</font> </font><font color='#ff0000' weight='1' id='15'>a<font color='#ff0000' weight='1' id='14'></font></font>, <font color='#ff0000' weight='1' id='24'><font color='#ff0000' weight='1' id='23'><font color='#ff0000' weight='1' id='19'>Comparator</font> <font color='#ff0000' weight='1' id='22'>comparator</font></font>)</font><font color='#ff0000' weight='1' id='25'></font>
+    </font><font color='#ff0000' weight='1' id='166'>{
+        for (int i = <font color='#ff0000' weight='1' id='33'>1</font>; i &lt; <font color='#ff0000' weight='1' id='49'><font color='#ff0000' weight='1' id='44'>a</font><font color='#ff0000' weight='1' id='46'>.</font><font color='#ff0000' weight='1' id='48'>length<font color='#ff0000' weight='1' id='47'></font></font></font>; i++)
+        {
+            <font color='#ff0000' weight='1' id='161'>for (int j = i; j <font color='#ff0000' weight='1' id='76'>&gt;= </font><font color='#ff0000' weight='1' id='78'>1<font color='#ff0000' weight='1' id='77'></font></font>; j<font color='#ff0000' weight='1' id='85'>--</font>)
+            <font color='#ff0000' weight='1' id='160'>{
+                <font color='#ff0000' weight='1' id='158'>if <font color='#ff0000' weight='1' id='125'>(<font color='#ff0000' weight='1' id='123'><font color='#ff0000' weight='1' id='122'><font color='#ff0000' weight='1' id='91'>less</font><font color='#ff0000' weight='1' id='121'>(<font color='#ff0000' weight='1' id='95'><font color='#ff0000' weight='1' id='94'><font color='#ff0000' weight='1' id='93'>comparator</font></font>, </font><font color='#ff0000' weight='1' id='105'><font color='#ff0000' weight='1' id='104'><font color='#ff0000' weight='1' id='97'>a</font>[<font color='#ff0000' weight='1' id='99'>j</font>]</font>, </font><font color='#ff0000' weight='1' id='119'><font color='#ff0000' weight='1' id='118'><font color='#ff0000' weight='1' id='107'>a</font>[<font color='#ff0000' weight='1' id='109'>j </font><font color='#ff0000' weight='1' id='111'>-<font color='#ff0000' weight='1' id='110'></font> </font><font color='#ff0000' weight='1' id='113'>1<font color='#ff0000' weight='1' id='112'></font></font>]</font>)</font><font color='#ff0000' weight='1' id='120'></font></font></font>)</font><font color='#ff0000' weight='1' id='124'></font></font><font color='#ff0000' weight='1' id='152'>
+                <font color='#ff0000' weight='1' id='151'>{
+                    <font color='#ff0000' weight='1' id='146'><font color='#ff0000' weight='1' id='127'>exchange</font><font color='#ff0000' weight='1' id='145'>(<font color='#ff0000' weight='1' id='131'><font color='#ff0000' weight='1' id='130'><font color='#ff0000' weight='1' id='129'>a</font></font>, </font><font color='#ff0000' weight='1' id='135'><font color='#ff0000' weight='1' id='134'><font color='#ff0000' weight='1' id='133'>j</font></font>, </font><font color='#ff0000' weight='1' id='143'><font color='#ff0000' weight='1' id='142'><font color='#ff0000' weight='1' id='137'>j </font><font color='#ff0000' weight='1' id='139'>-<font color='#ff0000' weight='1' id='138'></font> </font><font color='#ff0000' weight='1' id='141'>1<font color='#ff0000' weight='1' id='140'></font></font></font>)</font><font color='#ff0000' weight='1' id='144'></font></font></font>;
+                }<font color='#ff0000' weight='1' id='150'></font></font>
+                </font><font color='#ff0000' weight='1' id='157'>else
+                <font color='#ff0000' weight='1' id='156'>{
+                    <font color='#ff0000' weight='1' id='154'>break;<font color='#ff0000' weight='1' id='153'></font>
+                }</font><font color='#ff0000' weight='1' id='155'></font></font></font>
+            }</font><font color='#ff0000' weight='1' id='159'></font></font>
+        }</font><font color='#ff0000' weight='1' id='162'></font>
+    }</font>
+</font>
+</pre>

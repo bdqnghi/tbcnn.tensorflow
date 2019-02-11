@@ -1,0 +1,61 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public ListNode insertionSortList(ListNode head) {      
+    
+        if (head == null)
+            return null;
+        if (head.next == null) {
+            return head;
+        }
+        ListNode first = head;
+        ListNode testNode = head;
+
+        while (testNode.next != null) {
+            ListNode insertNode = testNode.next;
+            
+            if (testNode.val &lt;= insertNode.val) {
+                testNode = testNode.next;
+                continue;
+            }
+            
+            if (insertNode.val &lt;= first.val) {
+                testNode.next = insertNode.next;
+                insertNode.next = first;
+                first = insertNode;
+                continue;
+            }
+
+            for (ListNode pointer = first; pointer != testNode; pointer = pointer.next) {
+                if (pointer.val &lt;= insertNode.val
+                        &amp;&amp; insertNode.val &lt;= pointer.next.val) {
+                    testNode.next = insertNode.next;
+                    insertNode.next = pointer.next;
+                    pointer.next = insertNode;
+                    break;
+                }
+            }
+        }
+
+        return first;
+    }
+
+    </font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public <font color='#0000ff' weight='0.000846024' id='4'>static </font><font color='#0000ff' weight='0.000846024' id='6'>void</font> <font color='#0000ff' weight='0.000846024' id='9'>sort</font>(<font color='#0000ff' weight='0.000846024' id='14'><font color='#0000ff' weight='0.000105753' id='11'>int</font><font color='#0000ff' weight='0.000105753' id='13'>[]</font></font> <font color='#0000ff' weight='0.000211506' id='17'>data</font>) <font color='#0096ff' weight='0.147208' id='196'>{
+        <font color='#004aff' weight='0.072758' id='194'>for <font color='#0007ff' weight='0.00782572' id='59'>(<font color='#0001ff' weight='0.00105753' id='42'><font color='#0000ff' weight='0.000475888' id='40'><font color='#0000ff' weight='1.76255e-05' id='24'><font color='#0000ff' weight='8.81275e-06' id='23'>int</font> </font><font color='#0000ff' weight='8.81275e-06' id='26'>k </font><font color='#0000ff' weight='0.000105753' id='39'>= <font color='#0000ff' weight='9.69402e-05' id='38'>data.length - 1</font></font>;</font> </font><font color='#0000ff' weight='0.000423012' id='51'><font color='#0000ff' weight='0.000158629' id='49'><font color='#0000ff' weight='8.81275e-06' id='44'>k </font><font color='#0000ff' weight='8.81275e-06' id='46'>&gt; </font><font color='#0000ff' weight='8.81275e-06' id='48'>0</font>;</font> </font><font color='#0000ff' weight='0.000264382' id='57'><font color='#0000ff' weight='0.000211506' id='56'><font color='#0000ff' weight='2.64382e-05' id='53'>k</font><font color='#0000ff' weight='2.64382e-05' id='55'>--</font></font>)</font> </font><font color='#001cff' weight='0.0281303' id='193'>{
+            <font color='#0000ff' weight='5.87516e-06' id='61'>int</font> <font color='#0000ff' weight='5.87516e-06' id='64'>largestIdx </font>= <font color='#0000ff' weight='5.87516e-06' id='66'>0</font>;
+            <font color='#0002ff' weight='0.00229131' id='137'>for <font color='#0000ff' weight='0.000493514' id='100'>(<font color='#0000ff' weight='4.84701e-05' id='83'><font color='#0000ff' weight='1.98287e-05' id='81'><font color='#0000ff' weight='7.34396e-07' id='73'>int</font> <font color='#0000ff' weight='7.34396e-07' id='76'>i </font>= <font color='#0000ff' weight='7.34396e-07' id='78'>0</font>;</font> </font><font color='#0000ff' weight='3.5251e-05' id='92'><font color='#0000ff' weight='7.34396e-07' id='85'>i </font>&lt;= <font color='#0000ff' weight='7.34396e-07' id='89'>k</font>; </font><font color='#0000ff' weight='2.20319e-05' id='98'><font color='#0000ff' weight='1.76255e-05' id='97'><font color='#0000ff' weight='2.20319e-06' id='94'>i</font><font color='#0000ff' weight='2.20319e-06' id='96'>++</font></font>)</font> </font><font color='#0000ff' weight='0.000616892' id='136'>{
+                if (<font color='#0000ff' weight='3.67198e-07' id='102'>data</font><font color='#0000ff' weight='1.46879e-06' id='107'>[<font color='#0000ff' weight='3.67198e-07' id='105'><font color='#0000ff' weight='1.83599e-07' id='104'>i</font>]</font></font> <font color='#0000ff' weight='7.34396e-07' id='110'>&gt; </font><font color='#0000ff' weight='3.67198e-07' id='112'>data</font><font color='#0000ff' weight='1.46879e-06' id='117'>[<font color='#0000ff' weight='3.67198e-07' id='115'><font color='#0000ff' weight='1.83599e-07' id='114'>largestIdx</font>]</font></font>) <font color='#0000ff' weight='4.40637e-05' id='132'>{
+                    <font color='#0000ff' weight='3.67198e-07' id='123'>largestIdx </font>= <font color='#0000ff' weight='3.67198e-07' id='127'>i</font>;
+                }</font>
+            }</font>
+            </font><font color='#0000ff' weight='0.000599267' id='155'><font color='#0000ff' weight='0.000264382' id='153'><font color='#0000ff' weight='1.17503e-05' id='140'><font color='#0000ff' weight='5.87517e-06' id='139'>int</font> </font><font color='#0000ff' weight='5.87517e-06' id='142'>tmp </font><font color='#0000ff' weight='5.28765e-05' id='152'>= <font color='#0000ff' weight='4.70013e-05' id='151'><font color='#0000ff' weight='2.93758e-06' id='144'>data</font><font color='#0000ff' weight='1.17503e-05' id='149'>[<font color='#0000ff' weight='2.93758e-06' id='147'><font color='#0000ff' weight='1.46879e-06' id='146'>k</font>]</font></font></font></font>;</font>
+            </font><font color='#0000ff' weight='2.93758e-06' id='157'>data</font><font color='#0000ff' weight='1.17503e-05' id='162'>[<font color='#0000ff' weight='2.93758e-06' id='160'><font color='#0000ff' weight='1.46879e-06' id='159'>k</font>]</font></font> = <font color='#0000ff' weight='2.93758e-06' id='167'>data</font><font color='#0000ff' weight='1.17503e-05' id='172'>[<font color='#0000ff' weight='2.93758e-06' id='170'><font color='#0000ff' weight='1.46879e-06' id='169'>largestIdx</font>]</font></font>;
+            <font color='#0000ff' weight='2.93758e-06' id='178'>data</font><font color='#0000ff' weight='1.17503e-05' id='183'>[<font color='#0000ff' weight='2.93758e-06' id='181'><font color='#0000ff' weight='1.46879e-06' id='180'>largestIdx</font>]</font></font> = <font color='#0000ff' weight='5.87516e-06' id='188'>tmp</font>;
+        }</font>
+    }</font></font>
+
+}</font>
+</pre>

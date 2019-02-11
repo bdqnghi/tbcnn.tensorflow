@@ -1,0 +1,114 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static void sort(Comparable[] data){
+        long start = System.nanoTime();
+        int len = data.length-1;
+        mergeSort(data,0,len);
+        long end = System.nanoTime();
+        System.out.println("\nMergeSort Execute time:"+(end-start));
+    }
+
+    private static void mergeSort(Comparable[] data, int begin, int end) {
+        if(begin&lt;end){
+            int mid = (begin+end)/2;
+            mergeSort(data, begin, mid);
+            mergeSort(data, mid+1, end);
+            merge(data,begin,mid,end);
+        }
+    }
+
+    private static void merge(Comparable[] data, int begin, int mid, int end) {
+        int leftIndex = begin;
+        int rightIndex = mid+1;
+        Comparable[] tmp = new Comparable[end-begin+1];
+        int tmpIndex = 0;
+        while (leftIndex&lt;=mid &amp;&amp; rightIndex&lt;=end) {
+            if(data[leftIndex].compareTo(data[rightIndex])&gt;0)
+            {
+                tmp[tmpIndex] = data[rightIndex];
+                rightIndex++;
+            }else{
+                tmp[tmpIndex] = data[leftIndex];
+                leftIndex++;
+            }
+            tmpIndex++;         
+        }
+        while(leftIndex&lt;=mid){
+            tmp[tmpIndex]=data[leftIndex];
+            tmpIndex++;
+            leftIndex++;
+        }
+        while(rightIndex&lt;=end){
+            tmp[tmpIndex]=data[rightIndex];
+            tmpIndex++;
+            rightIndex++;
+        }
+        for(int i=0;i&lt;tmpIndex;i++)
+        {
+            data[begin+i] = tmp[i];
+        }
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+void insertNum(int[] a, int num) {
+        n++;
+        a[n] = num;
+        int son = n;
+        int temp;
+        int father = (son-1)/d;
+        while (son != 0) {
+            if (a[son]&gt;a[father]) {
+                temp = a[son];
+                a[son] = a[father];
+                a[father] = temp;
+                son = father;
+                father = (son - 1)/d;
+            } else break;
+            
+        }
+    }
+    
+    void increaseKey(int[] a, int i, int key) {
+        if (a[i] &gt;= key) return;
+        a[i] = key;
+        int temp;
+        int son = i;    
+        int father = (son-1)/d;
+        while (son != 0) {
+            if (a[son]&gt;a[father]) {
+                temp = a[son];
+                a[son] = a[father];
+                a[father] = temp;
+                son = father;
+                father = (son - 1)/d;
+            } else break;
+            
+        }
+    }
+    int getMaxNum(int[] a) <font color='#ff0000' weight='1' id='763'>{
+        <font color='#ff0000' weight='1' id='485'><font color='#ff0000' weight='1' id='483'>int <font color='#ff0000' weight='1' id='472'>ans </font><font color='#ff0000' weight='1' id='482'>= <font color='#ff0000' weight='1' id='481'><font color='#ff0000' weight='1' id='480'><font color='#ff0000' weight='1' id='474'>a<font color='#ff0000' weight='1' id='473'></font></font><font color='#ff0000' weight='1' id='479'>[<font color='#ff0000' weight='1' id='477'><font color='#ff0000' weight='1' id='476'>0<font color='#ff0000' weight='1' id='475'></font></font>]</font><font color='#ff0000' weight='1' id='478'></font></font></font></font></font>;</font><font color='#ff0000' weight='1' id='484'></font>
+        </font><font color='#ff0000' weight='1' id='506'><font color='#ff0000' weight='1' id='504'><font color='#ff0000' weight='1' id='493'><font color='#ff0000' weight='1' id='487'>a</font><font color='#ff0000' weight='1' id='492'>[<font color='#ff0000' weight='1' id='490'><font color='#ff0000' weight='1' id='489'>0<font color='#ff0000' weight='1' id='488'></font></font>]</font><font color='#ff0000' weight='1' id='491'></font></font> </font><font color='#ff0000' weight='1' id='495'>=<font color='#ff0000' weight='1' id='494'></font> </font><font color='#ff0000' weight='1' id='503'><font color='#ff0000' weight='1' id='497'>a</font><font color='#ff0000' weight='1' id='502'>[<font color='#ff0000' weight='1' id='500'><font color='#ff0000' weight='1' id='499'>n</font>]</font><font color='#ff0000' weight='1' id='501'></font></font></font>;</font><font color='#ff0000' weight='1' id='505'></font>
+        </font><font color='#ff0000' weight='1' id='513'><font color='#ff0000' weight='1' id='511'><font color='#ff0000' weight='1' id='508'>n</font><font color='#ff0000' weight='1' id='510'>--<font color='#ff0000' weight='1' id='509'></font></font>;</font><font color='#ff0000' weight='1' id='512'></font>
+        </font>int <font color='#ff0000' weight='1' id='518'>father </font>= <font color='#ff0000' weight='1' id='520'>0<font color='#ff0000' weight='1' id='519'></font></font>;
+        int <font color='#ff0000' weight='1' id='530'>temp</font>;
+        <font color='#ff0000' weight='1' id='535'>int</font> <font color='#ff0000' weight='1' id='538'>son </font>= <font color='#ff0000' weight='1' id='549'><font color='#ff0000' weight='1' id='540'>father </font><font color='#ff0000' weight='1' id='542'>* </font><font color='#ff0000' weight='1' id='544'>d </font>+ 1</font>;
+        <font color='#ff0000' weight='1' id='756'>while <font color='#ff0000' weight='1' id='562'>(<font color='#ff0000' weight='1' id='560'><font color='#ff0000' weight='1' id='555'>son<font color='#ff0000' weight='1' id='554'></font></font><font color='#ff0000' weight='1' id='557'>&lt;=<font color='#ff0000' weight='1' id='556'></font></font><font color='#ff0000' weight='1' id='559'>n<font color='#ff0000' weight='1' id='558'></font></font>)</font><font color='#ff0000' weight='1' id='561'></font> </font><font color='#ff0000' weight='1' id='755'>{
+            int <font color='#ff0000' weight='1' id='567'>j </font>= <font color='#ff0000' weight='1' id='569'>son<font color='#ff0000' weight='1' id='568'></font> </font><font color='#ff0000' weight='1' id='571'>+<font color='#ff0000' weight='1' id='570'></font> </font><font color='#ff0000' weight='1' id='573'>1</font>;
+            <font color='#ff0000' weight='1' id='647'>while(<font color='#ff0000' weight='1' id='580'>j</font>&lt;=<font color='#ff0000' weight='1' id='584'>n </font>&amp;&amp; <font color='#ff0000' weight='1' id='588'>j </font>&lt;= <font color='#ff0000' weight='1' id='592'>father<font color='#ff0000' weight='1' id='591'></font> </font><font color='#ff0000' weight='1' id='594'>*<font color='#ff0000' weight='1' id='593'></font> </font><font color='#ff0000' weight='1' id='596'>d </font><font color='#ff0000' weight='1' id='598'>+<font color='#ff0000' weight='1' id='597'></font> </font><font color='#ff0000' weight='1' id='600'>d<font color='#ff0000' weight='1' id='599'></font></font> ) <font color='#ff0000' weight='1' id='646'>{
+                <font color='#ff0000' weight='1' id='637'>if (<font color='#ff0000' weight='1' id='622'><font color='#ff0000' weight='1' id='605'>a</font>[<font color='#ff0000' weight='1' id='607'>j</font>] <font color='#ff0000' weight='1' id='613'>&gt; </font><font color='#ff0000' weight='1' id='615'>a</font>[<font color='#ff0000' weight='1' id='617'>son</font>])</font><font color='#ff0000' weight='1' id='636'> <font color='#ff0000' weight='1' id='635'>{
+                    <font color='#ff0000' weight='1' id='626'>son </font>= <font color='#ff0000' weight='1' id='630'>j</font>;
+                }<font color='#ff0000' weight='1' id='634'></font></font></font>
+                </font><font color='#ff0000' weight='1' id='639'>j</font>++;
+            }</font>
+            </font><font color='#ff0000' weight='1' id='753'>if <font color='#ff0000' weight='1' id='668'>(<font color='#ff0000' weight='1' id='666'><font color='#ff0000' weight='1' id='649'>a</font>[<font color='#ff0000' weight='1' id='651'>son</font>] <font color='#ff0000' weight='1' id='657'>&gt; </font><font color='#ff0000' weight='1' id='659'>a</font>[<font color='#ff0000' weight='1' id='661'>father</font>])</font><font color='#ff0000' weight='1' id='667'></font></font><font color='#ff0000' weight='1' id='748'> <font color='#ff0000' weight='1' id='747'>{
+                <font color='#ff0000' weight='1' id='683'><font color='#ff0000' weight='1' id='681'><font color='#ff0000' weight='1' id='670'>temp </font><font color='#ff0000' weight='1' id='672'>= </font><font color='#ff0000' weight='1' id='680'><font color='#ff0000' weight='1' id='674'>a<font color='#ff0000' weight='1' id='673'></font></font><font color='#ff0000' weight='1' id='679'>[<font color='#ff0000' weight='1' id='677'><font color='#ff0000' weight='1' id='676'>son</font>]</font><font color='#ff0000' weight='1' id='678'></font></font></font>;</font><font color='#ff0000' weight='1' id='682'></font>
+                </font><font color='#ff0000' weight='1' id='685'>a</font>[<font color='#ff0000' weight='1' id='687'>son</font>] = <font color='#ff0000' weight='1' id='695'>a</font>[<font color='#ff0000' weight='1' id='697'>father</font>];
+                <font color='#ff0000' weight='1' id='719'><font color='#ff0000' weight='1' id='717'><font color='#ff0000' weight='1' id='712'><font color='#ff0000' weight='1' id='706'>a</font><font color='#ff0000' weight='1' id='711'>[<font color='#ff0000' weight='1' id='709'><font color='#ff0000' weight='1' id='708'>father</font>]</font><font color='#ff0000' weight='1' id='710'></font></font> </font><font color='#ff0000' weight='1' id='714'>=<font color='#ff0000' weight='1' id='713'></font> </font><font color='#ff0000' weight='1' id='716'>temp</font>;</font><font color='#ff0000' weight='1' id='718'></font>
+                </font><font color='#ff0000' weight='1' id='728'><font color='#ff0000' weight='1' id='726'><font color='#ff0000' weight='1' id='721'>father </font><font color='#ff0000' weight='1' id='723'>= </font><font color='#ff0000' weight='1' id='725'>son</font>;</font><font color='#ff0000' weight='1' id='727'></font>
+                </font><font color='#ff0000' weight='1' id='745'><font color='#ff0000' weight='1' id='743'><font color='#ff0000' weight='1' id='730'>son </font><font color='#ff0000' weight='1' id='732'>= </font><font color='#ff0000' weight='1' id='734'>father<font color='#ff0000' weight='1' id='733'></font> </font><font color='#ff0000' weight='1' id='736'>*<font color='#ff0000' weight='1' id='735'></font> </font><font color='#ff0000' weight='1' id='738'>d </font>+ <font color='#ff0000' weight='1' id='742'>1<font color='#ff0000' weight='1' id='741'></font></font>;</font><font color='#ff0000' weight='1' id='744'></font>
+            }</font><font color='#ff0000' weight='1' id='746'></font></font> </font><font color='#ff0000' weight='1' id='752'>else <font color='#ff0000' weight='1' id='751'><font color='#ff0000' weight='1' id='750'>break;<font color='#ff0000' weight='1' id='749'></font></font></font></font>
+        }</font><font color='#ff0000' weight='1' id='754'></font></font>
+        </font><font color='#ff0000' weight='1' id='761'>return <font color='#ff0000' weight='1' id='759'><font color='#ff0000' weight='1' id='758'>ans</font>;</font><font color='#ff0000' weight='1' id='760'></font>
+    }</font><font color='#ff0000' weight='1' id='762'></font></font></font>
+</pre>

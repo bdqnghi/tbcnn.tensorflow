@@ -1,0 +1,49 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+private List&lt;Stmt&gt; topologicalSort(StmtList stmts) {
+
+        List&lt;Stmt&gt; out = new ArrayList&lt;Stmt&gt;(stmts.getSize());
+        Stack&lt;Stmt&gt; stack = new Stack&lt;Stmt&gt;();
+        stack.push(stmts.getFirst());
+
+        boolean visitedFlag = false;
+
+        while (!stack.empty()) {
+            Stmt stmt = stack.pop();
+            if (stmt._cfg_visited == visitedFlag) {
+                continue;
+            }
+            if (stmt._cfg_froms.size() == 0 || stack.size() == 0) {
+                stmt._cfg_visited = visitedFlag;
+                out.add(stmt);
+                for (Stmt t : stmt._cfg_tos) {
+                    t._cfg_froms.remove(stmt);
+                    if (t._cfg_visited != visitedFlag) {
+                        stack.push(t);
+                    }
+                }
+            }
+        }
+        return out;
+    }
+
+    </font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public void bubbleSort(){
+        for(int i=0; i&lt;length-1;i++){
+            for(int j=0;<font color='#ff0000' weight='1' id='69'><font color='#000aff' weight='0.0102041' id='56'>j</font><font color='#000aff' weight='0.0102041' id='58'>&lt;</font><font color='#000aff' weight='0.0102041' id='60'>length</font><font color='#000aff' weight='0.0102041' id='62'>-</font><font color='#000aff' weight='0.0102041' id='64'>1</font>-<font color='#000aff' weight='0.0102041' id='68'>i</font>;</font>j++){
+                compare(j,j+1);
+            }
+        }
+    }
+    public void compare(int x, int y){
+        int z=0;
+        if(a[x]&gt;a[y]){
+            z=a[x];
+            a[x]=a[y];
+            a[y]=z;
+        }   
+    }</font>
+</pre>

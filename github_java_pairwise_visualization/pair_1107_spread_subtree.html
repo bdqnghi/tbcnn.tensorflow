@@ -1,0 +1,91 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public int[] mergesort(int[] arr) {
+    int len = arr.length; 
+    if (len &lt;= 1)
+      return arr; 
+    int alen = len / 2; 
+    int blen = len - alen; 
+    int[] a = new int[alen];
+    int[] b = new int[blen]; 
+    for (int i = 0; i &lt; alen; i++) 
+      a[i] = arr[i];
+    for (int i = 0; i &lt; blen; i++)
+      b[i] = arr[alen + i];
+    return merge(mergesort(a), mergesort(b));
+  }
+  
+  public int[] merge(int[] a, int[] b) {
+    int alen = a.length; 
+    int blen = b.length; 
+    int len = alen + blen; 
+    int[] arr = new int[len];
+    int i = 0, j = 0, k = 0; 
+    while (k &lt; len) { 
+      while (i &lt; alen &amp;&amp; j &lt; blen) 
+        if (a[i] &lt; b[j])  
+          arr[k++] = a[i++];
+        else if (a[i] &gt; b[j])<font color='#ff0000' weight='1' id='502'></font> 
+          arr[k++] = b[j++];
+        else { 
+          arr[k++] = a[i++]; 
+          arr[k++] = b[j++];
+        }
+        while (i &lt; alen)  
+          arr[k++] = a[i++];
+        while (j &lt; blen)
+          arr[k++] = b[j++];
+    }
+    return arr; 
+  }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+package org.hibernate.envers.internal.tools.graph;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+
+public class TopologicalSort&lt;R&gt; {
+	private List&lt;R&gt; sorted;
+	private int time;
+
+	private void process(Vertex&lt;R&gt; v) {
+		if ( v.getStartTime() != 0 ) {
+			
+			return;
+		}
+
+		v.setStartTime( time++ );
+
+		for ( Vertex&lt;R&gt; n : v.getNeighbours() ) {
+			process( n );
+		}
+
+		v.setEndTime( time++ );
+
+		sorted.add( v.getRepresentation() );
+	}
+
+	public List&lt;R&gt; sort(Collection&lt;Vertex&lt;R&gt;&gt; vertices) {
+		sorted = new ArrayList&lt;&gt;( vertices.size() );
+
+		time = 1;
+
+		for ( Vertex&lt;R&gt; v : vertices ) {
+			if ( v.getEndTime() == 0 ) {
+				process( v );
+			}
+		}
+
+		Collections.reverse( sorted );
+
+		return sorted;
+	}
+}
+</font>
+</pre>

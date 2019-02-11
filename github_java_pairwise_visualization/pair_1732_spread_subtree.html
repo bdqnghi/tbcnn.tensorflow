@@ -1,0 +1,61 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static void quicksort(int[] a, int start, int end) {
+        if (start &gt;= end)
+            return;
+
+        int pavot = a[start];
+        int i = start;
+        int j = end;
+
+        while (i &lt; j) {
+            while (i &lt; j &amp;&amp; a[j] &gt; pavot)
+                j--;
+            while (i &lt; j &amp;&amp; a[i] &lt;= pavot)
+                i++;
+            if (i != j) {
+                int t = a[i];
+                a[i] = a[j];
+                a[j] = t;
+            }
+        }
+        if (i == j) {
+            int t = a[start];
+            a[start] = a[i];
+            a[j] = t;
+        }
+        quicksort(<font color='#ff0000' weight='1' id='307'><font color='#aaff00' weight='0.666667' id='306'><font color='#00ffa9' weight='0.333333' id='305'>a</font></font>, </font>start, i - 1);
+        quicksort(a, i + 1, end);
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void sort(Comparable[] a){
+        int N = a.length;               
+        int h = 1;                      
+        while(h &lt; N / 3) h = 3*h + 1;   
+        while(h &gt;= 1){                  
+            for(int i = h; i &lt; N; i++){
+                
+                for(int j = i; j &gt;= h &amp;&amp; less(a[j], <font color='#ff0000' weight='1' id='164'><font color='#002eff' weight='0.0454545' id='154'>a</font><font color='#00ff8b' weight='0.363636' id='163'>[<font color='#008bff' weight='0.136364' id='161'>j - <font color='#0007ff' weight='0.00757576' id='160'>h</font>]</font></font></font>); j-= h)
+                    exch(a, j, j - h);
+            } 
+            h = h / 3;                  
+        }                              
+    }
+    
+    
+    
+    
+    
+    
+    public static boolean less(Comparable v, Comparable w)
+    {    return v.compareTo(w) &lt; 0; }
+    
+    
+    private static void exch(Comparable[] a, int i, int j){
+        Comparable swap = a[i];
+        a[i] = a[j];
+        a[j] = swap;
+    }</font>
+</pre>

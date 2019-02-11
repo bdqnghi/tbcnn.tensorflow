@@ -1,0 +1,59 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+private static void selectionsort(double tablica[], int ile_liczb) {
+    int min,i,j;
+    double temp;
+    for (i=0;i&lt;ile_liczb-1;i++)  {
+    min=i;
+    for (j=i+1;j&lt;ile_liczb;j++)
+    if (tablica[j]&lt;tablica[min])
+    min=j;
+    temp=tablica[min];
+    tablica[min]=tablica[i];
+    tablica[i]=temp;
+    }
+}</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public ListNode insertionSortList(ListNode head) {      
+    
+        if (head == null)
+            return null;
+        if (head.next == null) {
+            return head;
+        }
+        ListNode first = head;
+        ListNode testNode = head;
+
+        while (testNode.next !=<font color='#ff0000' weight='1' id='88'></font> null) {
+            ListNode insertNode = testNode.next;
+            
+            if (testNode.val &lt;= insertNode.val) {
+                testNode = testNode.next;
+                continue;
+            }
+            
+            if (insertNode.val &lt;= first.val) {
+                testNode.next = insertNode.next;
+                insertNode.next = first;
+                first = insertNode;
+                continue;
+            }
+
+            for (ListNode pointer = first; pointer != testNode; pointer = pointer.next) {
+                if (pointer.val &lt;= insertNode.val
+                        &amp;&amp; insertNode.val &lt;= pointer.next.val) {
+                    testNode.next = insertNode.next;
+                    insertNode.next = pointer.next;
+                    pointer.next = insertNode;
+                    break;
+                }
+            }
+        }
+
+        return first;
+    }
+
+    </font>
+</pre>

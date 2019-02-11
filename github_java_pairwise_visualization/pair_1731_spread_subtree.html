@@ -1,0 +1,133 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ static int[] mergeSort(int[] a)<font color='#ff0000' weight='1' id='321'>{
+        <font color='#0002ff' weight='0.00260999' id='37'><font color='#0000ff' weight='0.000124285' id='25'><font color='#0000ff' weight='6.21427e-05' id='24'>int</font> </font><font color='#0000ff' weight='6.21427e-05' id='27'>n </font><font color='#0000ff' weight='0.000497141' id='36'>= <font color='#0000ff' weight='0.000434999' id='35'><font color='#0000ff' weight='2.07142e-05' id='29'>a</font><font color='#0000ff' weight='2.07142e-05' id='31'>.</font>length</font></font>;</font>
+        int[] left;
+        <font color='#0003ff' weight='0.00372856' id='61'><font color='#0000ff' weight='0.00046607' id='56'><font color='#0000ff' weight='0.000372856' id='55'>int<font color='#0000ff' weight='4.6607e-05' id='54'>[]</font></font> </font><font color='#0000ff' weight='9.3214e-05' id='58'>right</font>;
+
+        </font>if<font color='#0001ff' weight='0.00149142' id='74'>(<font color='#0000ff' weight='0.000621427' id='72'><font color='#0000ff' weight='1.24285e-05' id='63'>n </font>% 2 <font color='#0000ff' weight='1.24285e-05' id='69'>== </font><font color='#0000ff' weight='1.24285e-05' id='71'>0</font>)</font></font><font color='#0005ff' weight='0.00546856' id='119'><font color='#0005ff' weight='0.00534427' id='118'>{
+            <font color='#0000ff' weight='0.000828569' id='95'><font color='#0000ff' weight='0.000372856' id='93'><font color='#0000ff' weight='5.17856e-06' id='76'>left  </font>= <font color='#0000ff' weight='5.17856e-06' id='80'>new </font>int[n / 2];</font>
+            </font><font color='#0000ff' weight='0.000828569' id='116'>right <font color='#0000ff' weight='5.17856e-06' id='99'>= </font>new <font color='#0000ff' weight='2.58928e-06' id='103'>int</font>[<font color='#0000ff' weight='4.31546e-07' id='105'>n </font>/ 2];
+        }</font></font> </font>else {
+            left  = new <font color='#0000ff' weight='2.58928e-06' id='127'>int</font><font color='#0000ff' weight='2.07142e-05' id='136'>[n / 2]</font>;
+            right = <font color='#0000ff' weight='5.17856e-06' id='146'>new </font><font color='#0000ff' weight='7.76783e-05' id='162'>int[n / 2 + 1]</font>;
+        }
+
+        <font color='#0026ff' weight='0.0376585' id='271'>for(<font color='#0000ff' weight='0.000512677' id='181'><font color='#0000ff' weight='0.000209732' id='179'><font color='#0000ff' weight='1.55357e-05' id='172'>int </font><font color='#0000ff' weight='7.76784e-06' id='174'>i </font><font color='#0000ff' weight='2.33035e-05' id='178'>= 0</font>;</font> </font><font color='#0000ff' weight='7.76784e-06' id='183'>i </font>&lt; <font color='#0000ff' weight='7.76784e-06' id='187'>n</font>; i++)<font color='#000dff' weight='0.0132364' id='270'>{
+            if<font color='#0000ff' weight='0.000372856' id='211'>(i <font color='#0000ff' weight='3.10713e-06' id='202'>&lt; </font><font color='#0000ff' weight='3.10713e-06' id='204'>n</font>/<font color='#0000ff' weight='3.10713e-06' id='208'>2</font>)</font><font color='#0000ff' weight='0.000714641' id='235'><font color='#0000ff' weight='0.000683569' id='234'>{
+                <font color='#0000ff' weight='0.000310713' id='232'><font color='#0000ff' weight='1.81249e-05' id='219'><font color='#0000ff' weight='1.29464e-06' id='213'>left</font>[i] </font><font color='#0000ff' weight='2.58928e-06' id='221'>= </font><font color='#0000ff' weight='1.29464e-06' id='223'>a</font>[i];
+            }</font></font> </font>else {
+                <font color='#0000ff' weight='3.88392e-05' id='251'><font color='#0000ff' weight='1.29464e-06' id='237'>right</font>[<font color='#0000ff' weight='1.29464e-07' id='239'>i </font><font color='#0000ff' weight='1.29464e-07' id='241'>- </font><font color='#0000ff' weight='1.29464e-07' id='243'>n</font>/2] </font>= a[i];
+            }
+        }</font>
+
+        </font>left = mergeSort(left);
+        <font color='#0005ff' weight='0.00559284' id='303'><font color='#0002ff' weight='0.00242356' id='301'><font color='#0000ff' weight='6.21427e-05' id='289'>right </font><font color='#0000ff' weight='6.21427e-05' id='291'>= </font><font color='#0000ff' weight='0.000497141' id='300'>mergeSort<font color='#0000ff' weight='0.000155357' id='299'>(right)</font></font>;</font>
+
+        </font><font color='#0005ff' weight='0.00559284' id='319'>return <font color='#0002ff' weight='0.00242356' id='317'><font color='#0002ff' weight='0.00223714' id='316'><font color='#0000ff' weight='9.3214e-05' id='305'>merge</font><font color='#0000ff' weight='0.000838926' id='315'>(<font color='#0000ff' weight='9.3214e-05' id='309'><font color='#0000ff' weight='6.21427e-05' id='308'><font color='#0000ff' weight='3.10713e-05' id='307'>left</font></font>, </font><font color='#0000ff' weight='9.3214e-05' id='313'><font color='#0000ff' weight='6.21427e-05' id='312'><font color='#0000ff' weight='3.10713e-05' id='311'>right</font></font>)</font></font></font>;</font>
+
+    }</font></font>
+
+    static int[] merge(int[] left, int[] right){
+        int[] result = new int[left.length + right.length];
+        
+        int i = 0;
+        int j = 0;
+        int index = 0;
+
+        while(i &lt; left.length &amp;&amp; j &lt; right.length){
+            if(left[i] &lt; right[i]){
+                result[index++] = left[i++];
+            } else {
+                result[index++] = right[j++];
+            }
+        }
+
+        while(i &lt; left.length){
+            result[index++] = left[i++];
+        }
+
+        while (j &lt; right.length) {
+            result[index++] = right[j++];
+        }
+        
+        return result;
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+    void merge(int arr[], int l, int m, int r)
+    <font color='#ff0000' weight='1' id='475'>{
+        
+        <font color='#0003ff' weight='0.0036315' id='58'><font color='#0001ff' weight='0.00162462' id='56'><font color='#0000ff' weight='3.18553e-05' id='40'>int</font> <font color='#0000ff' weight='3.18553e-05' id='43'>n1 </font><font color='#0000ff' weight='0.000350408' id='55'>= <font color='#0000ff' weight='0.000318553' id='54'>m - <font color='#0000ff' weight='6.37105e-06' id='49'>l </font>+ 1</font></font>;</font>
+        </font><font color='#0002ff' weight='0.00286697' id='74'><font color='#0001ff' weight='0.00124235' id='72'><font color='#0000ff' weight='6.37105e-05' id='61'><font color='#0000ff' weight='3.18553e-05' id='60'>int</font> </font><font color='#0000ff' weight='3.18553e-05' id='63'>n2 </font><font color='#0000ff' weight='0.000222987' id='71'>= <font color='#0000ff' weight='0.000191132' id='70'>r - <font color='#0000ff' weight='1.06184e-05' id='69'>m</font></font></font>;</font>
+
+        
+        </font><font color='#0004ff' weight='0.00420489' id='97'><font color='#0001ff' weight='0.00191132' id='95'><font color='#0000ff' weight='6.37105e-05' id='77'><font color='#0000ff' weight='3.18553e-05' id='76'>int</font> </font><font color='#0000ff' weight='0.000127421' id='82'><font color='#0000ff' weight='1.59276e-05' id='79'>L</font><font color='#0000ff' weight='1.59276e-05' id='81'>[]</font> </font><font color='#0000ff' weight='0.000350408' id='94'>= <font color='#0000ff' weight='0.000318553' id='93'>new int [n1]</font></font>;</font>
+        </font><font color='#0004ff' weight='0.00420489' id='120'><font color='#0001ff' weight='0.00191132' id='118'><font color='#0000ff' weight='6.37105e-05' id='100'><font color='#0000ff' weight='3.18553e-05' id='99'>int</font> </font><font color='#0000ff' weight='0.000127421' id='105'><font color='#0000ff' weight='1.59276e-05' id='102'>R</font><font color='#0000ff' weight='1.59276e-05' id='104'>[]</font> </font><font color='#0000ff' weight='0.000350408' id='117'>= <font color='#0000ff' weight='0.000318553' id='116'>new int [n2]</font></font>;</font>
+
+        
+        </font><font color='#000aff' weight='0.0105122' id='176'>for (int i<font color='#0000ff' weight='1.19457e-05' id='129'>=0</font>; i&lt;<font color='#0000ff' weight='3.98191e-06' id='138'>n1</font>; <font color='#0000ff' weight='1.19457e-05' id='143'>++</font>i)
+            <font color='#0002ff' weight='0.00238914' id='175'><font color='#0002ff' weight='0.00229358' id='174'><font color='#0001ff' weight='0.00105122' id='172'><font color='#0000ff' weight='7.96381e-06' id='151'>L</font>[i] = <font color='#0000ff' weight='7.96381e-06' id='161'>arr</font>[<font color='#0000ff' weight='1.3273e-06' id='163'>l </font><font color='#0000ff' weight='1.3273e-06' id='165'>+ </font><font color='#0000ff' weight='1.3273e-06' id='167'>i</font>];</font></font></font>
+        </font><font color='#000bff' weight='0.0112768' id='236'>for <font color='#0002ff' weight='0.00267584' id='205'>(<font color='#0000ff' weight='0.000262806' id='188'><font color='#0000ff' weight='0.000107511' id='186'><font color='#0000ff' weight='7.96381e-06' id='179'><font color='#0000ff' weight='3.98191e-06' id='178'>int</font> </font><font color='#0000ff' weight='3.98191e-06' id='181'>j</font><font color='#0000ff' weight='1.19457e-05' id='185'>=<font color='#0000ff' weight='7.96381e-06' id='184'><font color='#0000ff' weight='3.98191e-06' id='183'>0</font></font></font>;</font> </font><font color='#0000ff' weight='0.000191132' id='197'><font color='#0000ff' weight='7.16743e-05' id='195'><font color='#0000ff' weight='3.98191e-06' id='190'>j</font><font color='#0000ff' weight='3.98191e-06' id='192'>&lt;</font><font color='#0000ff' weight='3.98191e-06' id='194'>n2</font>;</font> </font><font color='#0000ff' weight='0.000119457' id='203'><font color='#0000ff' weight='9.55658e-05' id='202'><font color='#0000ff' weight='1.19457e-05' id='199'>++</font><font color='#0000ff' weight='1.19457e-05' id='201'>j</font></font>)</font>
+            </font><font color='#0002ff' weight='0.00277141' id='235'><font color='#0002ff' weight='0.00267584' id='234'><font color='#0001ff' weight='0.00124235' id='232'><font color='#0000ff' weight='0.000111493' id='213'><font color='#0000ff' weight='7.96381e-06' id='207'>R</font><font color='#0000ff' weight='3.18553e-05' id='212'>[<font color='#0000ff' weight='7.96381e-06' id='210'><font color='#0000ff' weight='3.98191e-06' id='209'>j</font>]</font></font> </font><font color='#0000ff' weight='1.59276e-05' id='215'>= </font><font color='#0000ff' weight='7.96381e-06' id='217'>arr</font>[<font color='#0000ff' weight='7.96381e-07' id='219'>m </font><font color='#0000ff' weight='7.96381e-07' id='221'>+ </font><font color='#0000ff' weight='7.96381e-07' id='223'>1</font>+ <font color='#0000ff' weight='7.96381e-07' id='227'>j</font>];</font></font></font>
+
+
+        
+
+        
+        </font><font color='#0003ff' weight='0.0036315' id='256'>int i = 0, j = 0;
+
+        
+        </font>int <font color='#0000ff' weight='3.18552e-05' id='261'>k </font>= <font color='#0000ff' weight='3.18552e-05' id='263'>l</font>;
+        <font color='#0015ff' weight='0.0210245' id='379'>while (i &lt; <font color='#0000ff' weight='6.82613e-06' id='274'>n1 </font>&amp;&amp; j &lt; <font color='#0000ff' weight='6.82613e-06' id='282'>n2</font>)
+        {
+            <font color='#0002ff' weight='0.00264399' id='369'>if (<font color='#0000ff' weight='8.84868e-07' id='287'>L</font>[i] <font color='#0000ff' weight='1.76974e-06' id='295'>&lt;= </font><font color='#0000ff' weight='8.84868e-07' id='297'>R</font>[<font color='#0000ff' weight='4.42434e-07' id='299'>j</font>])<font color='#0000ff' weight='0.000318552' id='337'>
+            {
+                <font color='#0000ff' weight='2.94956e-07' id='308'>arr</font>[<font color='#0000ff' weight='1.47478e-07' id='310'>k</font>] = <font color='#0000ff' weight='2.94956e-07' id='318'>L</font>[i];
+                <font color='#0000ff' weight='2.12368e-05' id='334'><font color='#0000ff' weight='7.07894e-06' id='332'><font color='#0000ff' weight='8.84868e-07' id='329'>i</font><font color='#0000ff' weight='8.84868e-07' id='331'>++</font>;</font>
+            }</font>
+            </font><font color='#0000ff' weight='0.000318552' id='368'>else
+            {
+                <font color='#0000ff' weight='2.94956e-07' id='339'>arr</font>[<font color='#0000ff' weight='1.47478e-07' id='341'>k</font>] = <font color='#0000ff' weight='2.94956e-07' id='349'>R</font>[j];
+                <font color='#0000ff' weight='2.12368e-05' id='365'><font color='#0000ff' weight='7.07894e-06' id='363'><font color='#0000ff' weight='8.84868e-07' id='360'>j</font><font color='#0000ff' weight='8.84868e-07' id='362'>++</font>;</font>
+            }</font></font>
+            </font><font color='#0000ff' weight='0.000191132' id='376'><font color='#0000ff' weight='6.37105e-05' id='374'><font color='#0000ff' weight='7.96381e-06' id='371'>k</font><font color='#0000ff' weight='7.96381e-06' id='373'>++</font>;</font>
+        }</font>
+
+        
+        </font><font color='#0008ff' weight='0.00879205' id='426'>while (i &lt; <font color='#0000ff' weight='1.59276e-05' id='385'>n1</font>)
+        {
+            <font color='#0000ff' weight='1.99095e-06' id='390'>arr</font>[<font color='#0000ff' weight='9.95477e-07' id='392'>k</font>] = <font color='#0000ff' weight='1.99095e-06' id='400'>L</font>[i];
+            <font color='#0000ff' weight='0.000143349' id='416'><font color='#0000ff' weight='4.77829e-05' id='414'><font color='#0000ff' weight='5.97286e-06' id='411'>i</font><font color='#0000ff' weight='5.97286e-06' id='413'>++</font>;</font>
+            </font><font color='#0000ff' weight='0.000143349' id='423'><font color='#0000ff' weight='4.77829e-05' id='421'><font color='#0000ff' weight='5.97286e-06' id='418'>k</font><font color='#0000ff' weight='5.97286e-06' id='420'>++</font>;</font>
+        }</font>
+
+        
+        </font>while (j &lt; <font color='#0000ff' weight='1.59276e-05' id='432'>n2</font>)
+        {
+            <font color='#0000ff' weight='1.99095e-06' id='437'>arr</font>[<font color='#0000ff' weight='9.95477e-07' id='439'>k</font>] = <font color='#0000ff' weight='1.99095e-06' id='447'>R</font>[j];
+            <font color='#0000ff' weight='0.000143349' id='463'><font color='#0000ff' weight='4.77829e-05' id='461'><font color='#0000ff' weight='5.97286e-06' id='458'>j</font><font color='#0000ff' weight='5.97286e-06' id='460'>++</font>;</font>
+            </font><font color='#0000ff' weight='0.000143349' id='470'><font color='#0000ff' weight='4.77829e-05' id='468'><font color='#0000ff' weight='5.97286e-06' id='465'>k</font><font color='#0000ff' weight='5.97286e-06' id='467'>++</font>;</font>
+        }</font>
+    }</font>
+
+    
+    
+    void sort(int arr[], int l, int r)
+    {
+        if (l &lt; r)
+        {
+            
+            int m = (l+r)/2;
+
+            
+            sort(arr, l, m);
+            sort(arr , m+1, r);
+
+            
+            merge(arr, l, m, r);
+        }
+    }
+</font>
+</pre>

@@ -1,0 +1,73 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void sort(int[] arr) <font color='#ff0000' weight='1' id='490'>{
+        <font color='#0003ff' weight='0.0034188' id='38'>int max = Integer.MAX_VALUE;
+        </font><font color='#0003ff' weight='0.0034188' id='55'><font color='#0000ff' weight='7.12251e-05' id='41'>int </font>min <font color='#0000ff' weight='0.0002849' id='52'>= Integer.<font color='#0000ff' weight='1.18708e-05' id='49'>MIN_VALUE</font></font>;
+
+        </font>for <font color='#0003ff' weight='0.00352564' id='89'>(<font color='#0000ff' weight='0.000293803' id='67'><font color='#0000ff' weight='0.000120192' id='65'><font color='#0000ff' weight='4.45157e-06' id='57'>int</font> i <font color='#0000ff' weight='1.33547e-05' id='64'>= 0</font>;</font> </font><font color='#0000ff' weight='0.000146902' id='79'>i &lt; arr.length;</font> <font color='#0000ff' weight='1.33547e-05' id='83'>i</font>++) </font>{
+            <font color='#0001ff' weight='0.00106838' id='120'><font color='#0000ff' weight='0.000498576' id='118'><font color='#0000ff' weight='5.93542e-06' id='91'>max </font><font color='#0000ff' weight='5.93542e-06' id='93'>= </font><font color='#0000ff' weight='1.78063e-05' id='100'><font color='#0000ff' weight='9.89237e-07' id='95'>Math</font>.<font color='#0000ff' weight='9.89237e-07' id='99'>max</font></font><font color='#0000ff' weight='4.45157e-05' id='116'>(<font color='#0000ff' weight='9.89237e-07' id='102'>max</font>, <font color='#0000ff' weight='8.90314e-06' id='114'><font color='#0000ff' weight='7.9139e-06' id='113'><font color='#0000ff' weight='6.92466e-06' id='112'><font color='#0000ff' weight='4.94619e-07' id='106'>arr</font>[i]</font></font>)</font></font>;</font>
+            </font><font color='#0000ff' weight='5.93542e-06' id='122'>min </font><font color='#0000ff' weight='5.93542e-06' id='124'>= </font><font color='#0000ff' weight='1.78063e-05' id='131'><font color='#0000ff' weight='9.89237e-07' id='126'>Math</font>.<font color='#0000ff' weight='9.89237e-07' id='130'>min</font></font><font color='#0000ff' weight='4.45157e-05' id='147'>(min, arr[i])</font>;
+        }
+        
+        
+        <font color='#0006ff' weight='0.00683761' id='187'>int bucketNum <font color='#0000ff' weight='0.000854701' id='184'>= <font color='#0000ff' weight='0.000819088' id='183'>(max - <font color='#0000ff' weight='3.95695e-06' id='167'>min</font><font color='#0000ff' weight='3.95695e-06' id='169'>) </font><font color='#0000ff' weight='3.95695e-06' id='171'>/ </font><font color='#0000ff' weight='2.37417e-05' id='178'>arr.length </font>+ <font color='#0000ff' weight='3.95695e-06' id='182'>1</font></font></font>;
+        </font><font color='#0007ff' weight='0.00747863' id='223'>ArrayList<font color='#0000ff' weight='0.000178063' id='200'>&lt;<font color='#0000ff' weight='7.12251e-05' id='198'><font color='#0000ff' weight='6.23219e-05' id='197'>ArrayList&lt;<font color='#0000ff' weight='2.22578e-06' id='193'>Integer</font>&gt;</font>&gt;</font></font> <font color='#0000ff' weight='3.56125e-05' id='204'>bucketArr </font>= <font color='#0000ff' weight='1.78063e-05' id='206'>new </font><font color='#0000ff' weight='3.56125e-05' id='211'>ArrayList&lt;&gt;</font>(<font color='#0000ff' weight='8.90313e-06' id='214'><font color='#0000ff' weight='4.45157e-06' id='213'>bucketNum</font></font>);
+        </font>for <font color='#0003ff' weight='0.00299145' id='252'>(<font color='#0000ff' weight='0.000293803' id='235'><font color='#0000ff' weight='0.000120192' id='233'><font color='#0000ff' weight='8.90313e-06' id='226'><font color='#0000ff' weight='4.45157e-06' id='225'>int</font> </font><font color='#0000ff' weight='4.45157e-06' id='228'>i </font><font color='#0000ff' weight='1.33547e-05' id='232'>= 0</font>;</font> </font><font color='#0000ff' weight='0.000213675' id='244'><font color='#0000ff' weight='8.01282e-05' id='242'><font color='#0000ff' weight='4.45157e-06' id='237'>i </font><font color='#0000ff' weight='4.45157e-06' id='239'>&lt; </font><font color='#0000ff' weight='4.45157e-06' id='241'>bucketNum</font>;</font> </font><font color='#0000ff' weight='0.000133547' id='250'><font color='#0000ff' weight='0.000106838' id='249'><font color='#0000ff' weight='1.33547e-05' id='246'>i</font><font color='#0000ff' weight='1.33547e-05' id='248'>++</font></font>)</font> </font><font color='#0002ff' weight='0.00277778' id='279'>{
+            <font color='#0001ff' weight='0.00128205' id='277'><font color='#0000ff' weight='0.000560897' id='274'>bucketArr.add(<font color='#0000ff' weight='7.34509e-05' id='271'><font color='#0000ff' weight='3.33868e-06' id='261'>new </font>ArrayList&lt;&gt;())</font></font>;
+        }</font></font>
+
+        
+        for <font color='#0003ff' weight='0.00352564' id='314'>(<font color='#0000ff' weight='0.000120192' id='290'><font color='#0000ff' weight='8.90313e-06' id='283'>int </font><font color='#0000ff' weight='4.45157e-06' id='285'>i </font><font color='#0000ff' weight='1.33547e-05' id='289'>= <font color='#0000ff' weight='4.45157e-06' id='287'>0</font></font>;</font> <font color='#0000ff' weight='0.000146902' id='304'><font color='#0000ff' weight='4.45157e-06' id='294'>i </font><font color='#0000ff' weight='4.45157e-06' id='296'>&lt; </font><font color='#0000ff' weight='1.48386e-06' id='298'>arr</font><font color='#0000ff' weight='1.48386e-06' id='300'>.</font><font color='#0000ff' weight='1.48386e-06' id='302'>length</font>;</font> <font color='#0000ff' weight='1.33547e-05' id='308'>i</font>++) </font>{
+            <font color='#0001ff' weight='0.00135328' id='353'><font color='#0000ff' weight='1.18708e-05' id='317'>int </font><font color='#0000ff' weight='5.93542e-06' id='319'>num </font>= (<font color='#0000ff' weight='4.61644e-06' id='329'><font color='#0000ff' weight='3.29746e-07' id='323'>arr</font>[i] </font>- min) <font color='#0000ff' weight='6.59492e-07' id='337'>/ </font><font color='#0000ff' weight='6.59492e-07' id='339'>(</font><font color='#0000ff' weight='3.95695e-06' id='346'>arr<font color='#0000ff' weight='2.1983e-07' id='343'>.</font>length</font><font color='#0000ff' weight='6.59492e-07' id='348'>)</font>;
+            </font>bucketArr.get(<font color='#0000ff' weight='1.48386e-06' id='362'>num</font>)<font color='#0000ff' weight='5.93542e-06' id='369'>.</font>add(<font color='#0000ff' weight='1.0387e-05' id='379'><font color='#0000ff' weight='7.41928e-07' id='373'>arr</font>[<font color='#0000ff' weight='3.70964e-07' id='375'>i</font>]</font>);
+        }
+
+        
+        <font color='#000eff' weight='0.0145299' id='459'>for (<font color='#0000ff' weight='0.000120192' id='400'><font color='#0000ff' weight='8.90313e-06' id='393'><font color='#0000ff' weight='4.45157e-06' id='392'>int</font> </font><font color='#0000ff' weight='4.45157e-06' id='395'>i </font><font color='#0000ff' weight='1.33547e-05' id='399'>= <font color='#0000ff' weight='4.45157e-06' id='397'>0</font></font>;</font> i <font color='#0000ff' weight='4.45157e-06' id='406'>&lt; </font><font color='#0000ff' weight='7.41928e-07' id='408'>bucketArr</font>.size(); <font color='#0000ff' weight='1.33547e-05' id='421'>i</font><font color='#0000ff' weight='1.33547e-05' id='423'>++</font>) <font color='#0003ff' weight='0.00320513' id='458'>{
+            <font color='#0001ff' weight='0.00149573' id='456'><font color='#0000ff' weight='0.000694444' id='454'><font color='#0000ff' weight='0.000667735' id='453'><font color='#0000ff' weight='8.01282e-05' id='434'><font color='#0000ff' weight='4.45157e-06' id='429'>Collections</font><font color='#0000ff' weight='4.45157e-06' id='431'>.</font><font color='#0000ff' weight='4.45157e-06' id='433'>sort</font></font><font color='#0000ff' weight='0.00022703' id='452'>(<font color='#0000ff' weight='0.00010016' id='450'><font color='#0000ff' weight='9.34829e-05' id='449'><font color='#0000ff' weight='8.68056e-05' id='448'><font color='#0000ff' weight='2.00321e-05' id='441'><font color='#0000ff' weight='1.11289e-06' id='436'>bucketArr</font><font color='#0000ff' weight='1.11289e-06' id='438'>.</font><font color='#0000ff' weight='1.11289e-06' id='440'>get</font></font><font color='#0000ff' weight='1.66934e-05' id='447'>(<font color='#0000ff' weight='5.00801e-06' id='445'><font color='#0000ff' weight='3.33868e-06' id='444'><font color='#0000ff' weight='1.66934e-06' id='443'>i</font></font>)</font></font></font></font>)</font></font></font>;</font>
+        }</font></font>
+
+        </font><font color='#0006ff' weight='0.00598291' id='488'><font color='#0002ff' weight='0.00277778' id='486'><font color='#0002ff' weight='0.00267094' id='485'><font color='#0000ff' weight='0.000534188' id='470'><font color='#0000ff' weight='1.06838e-05' id='461'>System</font><font color='#0000ff' weight='1.06838e-05' id='463'>.</font><font color='#0000ff' weight='1.06838e-05' id='465'>out</font><font color='#0000ff' weight='1.06838e-05' id='467'>.</font><font color='#0000ff' weight='1.06838e-05' id='469'>println</font></font><font color='#0000ff' weight='0.000694444' id='484'>(<font color='#0000ff' weight='0.000293803' id='482'><font color='#0000ff' weight='0.000267094' id='481'><font color='#0000ff' weight='0.000240385' id='480'><font color='#0000ff' weight='8.01282e-05' id='477'><font color='#0000ff' weight='4.45157e-06' id='472'>bucketArr</font><font color='#0000ff' weight='4.45157e-06' id='474'>.</font><font color='#0000ff' weight='4.45157e-06' id='476'>toString</font></font><font color='#0000ff' weight='1.33547e-05' id='479'>()</font></font></font>)</font></font></font>;</font>
+    }</font></font></font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public int[] mergesort(int[] arr) {
+    int len = arr.length; 
+    if (len &lt;= 1)
+      return arr; 
+    int alen = len / 2; 
+    int blen = len - alen; 
+    int[] a = new int[alen];
+    int[] b = new int[blen]; 
+    for (int i = 0; i &lt; alen; i++) 
+      a[i] = arr[i];
+    for (int i = 0; i &lt; blen; i++)
+      b[i] = arr[alen + i];
+    return merge(mergesort(a), mergesort(b));
+  }
+  
+  public int[] merge(int[] a, int[] b) {
+    int alen = a.length; 
+    int blen = b.length; 
+    int len = alen + blen; 
+    int[] arr = new int[len];
+    int i = 0, j = 0, k = 0; 
+    while (k &lt; len) { 
+      while (i &lt; alen &amp;&amp; j &lt; blen)<font color='#ff0000' weight='1' id='433'></font> 
+        if (a[i] &lt; b[j])  
+          arr[k++] = a[i++];
+        else if (a[i] &gt; b[j]) 
+          arr[k++] = b[j++];
+        else { 
+          arr[k++] = a[i++]; 
+          arr[k++] = b[j++];
+        }
+        while (i &lt; alen)  
+          arr[k++] = a[i++];
+        while (j &lt; blen)
+          arr[k++] = b[j++];
+    }
+    return arr; 
+  }</font>
+</pre>

@@ -1,0 +1,51 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static &lt;T extends Comparable&lt;T&gt;&gt; void sort(List&lt;T&gt; itemsToSort) {
+        for (int i = 0; i &lt; itemsToSort.size(); i++) {
+            for (int j = itemsToSort.size() - 1; j &gt; 0; j--) <font color='#ff0000' weight='1' id='241'>{
+                <font color='#ff0000' weight='1' id='118'>T<font color='#ff0000' weight='1' id='117'></font></font> <font color='#ff0000' weight='1' id='121'>secondItem </font>= itemsToSort.get(j);
+                <font color='#ff0000' weight='1' id='143'><font color='#ff0000' weight='1' id='142'>T</font> </font><font color='#ff0000' weight='1' id='145'>firstItem </font>= <font color='#ff0000' weight='1' id='164'><font color='#ff0000' weight='1' id='163'>itemsToSort.<font color='#ff0000' weight='1' id='148'></font><font color='#ff0000' weight='1' id='151'>get</font>(j - 1)</font></font>;
+
+                <font color='#ff0000' weight='1' id='239'>if <font color='#ff0000' weight='1' id='189'>(<font color='#ff0000' weight='1' id='187'><font color='#ff0000' weight='1' id='182'>secondItem.<font color='#ff0000' weight='1' id='171'></font>compareTo<font color='#ff0000' weight='1' id='173'></font><font color='#ff0000' weight='1' id='181'>(firstItem)<font color='#ff0000' weight='1' id='180'></font></font> </font><font color='#ff0000' weight='1' id='184'>&lt; </font><font color='#ff0000' weight='1' id='186'>0</font>)</font><font color='#ff0000' weight='1' id='188'></font></font><font color='#ff0000' weight='1' id='238'> <font color='#ff0000' weight='1' id='237'>{
+                    <font color='#ff0000' weight='1' id='210'><font color='#ff0000' weight='1' id='207'><font color='#ff0000' weight='1' id='196'><font color='#ff0000' weight='1' id='191'>itemsToSort</font><font color='#ff0000' weight='1' id='193'>.<font color='#ff0000' weight='1' id='192'></font></font><font color='#ff0000' weight='1' id='195'>set</font></font><font color='#ff0000' weight='1' id='206'>(<font color='#ff0000' weight='1' id='200'><font color='#ff0000' weight='1' id='199'><font color='#ff0000' weight='1' id='198'>j</font></font>, </font><font color='#ff0000' weight='1' id='204'><font color='#ff0000' weight='1' id='203'><font color='#ff0000' weight='1' id='202'>firstItem</font></font>)</font><font color='#ff0000' weight='1' id='205'></font></font></font>;
+                    </font><font color='#ff0000' weight='1' id='235'><font color='#ff0000' weight='1' id='233'><font color='#ff0000' weight='1' id='232'><font color='#ff0000' weight='1' id='217'><font color='#ff0000' weight='1' id='212'>itemsToSort<font color='#ff0000' weight='1' id='211'></font></font><font color='#ff0000' weight='1' id='214'>.<font color='#ff0000' weight='1' id='213'></font></font><font color='#ff0000' weight='1' id='216'>set<font color='#ff0000' weight='1' id='215'></font></font></font><font color='#ff0000' weight='1' id='231'>(<font color='#ff0000' weight='1' id='225'><font color='#ff0000' weight='1' id='224'><font color='#ff0000' weight='1' id='219'>j<font color='#ff0000' weight='1' id='218'></font> </font><font color='#ff0000' weight='1' id='221'>-<font color='#ff0000' weight='1' id='220'></font> </font><font color='#ff0000' weight='1' id='223'>1<font color='#ff0000' weight='1' id='222'></font></font></font>, </font><font color='#ff0000' weight='1' id='229'><font color='#ff0000' weight='1' id='228'><font color='#ff0000' weight='1' id='227'>secondItem<font color='#ff0000' weight='1' id='226'></font></font></font>)</font><font color='#ff0000' weight='1' id='230'></font></font></font>;</font><font color='#ff0000' weight='1' id='234'></font>
+                }</font><font color='#ff0000' weight='1' id='236'></font></font></font>
+            }</font><font color='#ff0000' weight='1' id='240'></font></font>
+        }
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+package org.burstsort4j;
+
+
+public class Shellsort {
+
+    private Shellsort() {
+    }
+
+    
+    public static &lt;T extends Comparable&lt;? super T&gt;&gt; void sort(T[] input) {
+        if (input == null || input.length &lt; 2) {
+            return;
+        }
+
+        int inc = input.length / 2;
+        while (inc &gt; 0) {
+            for (int ii = inc; ii &lt; input.length; ii++) {
+                T temp = input[ii];
+                int jj = ii;
+                while (jj &gt;= inc &amp;&amp; input[jj - inc].compareTo(temp) &gt; 0) {
+                    input[jj] = input[jj - inc];
+                    jj -= inc;
+                }
+                input[jj] = temp;
+            }
+            
+            inc = inc == 2 ? 1 : inc * 5 / 11;
+        }
+    }
+}
+</font>
+</pre>

@@ -1,0 +1,52 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+private List&lt;Stmt&gt; topologicalSort(StmtList stmts) {
+
+        List&lt;Stmt&gt; out = new ArrayList&lt;Stmt&gt;(stmts.getSize());
+        Stack&lt;Stmt&gt; stack = new Stack&lt;Stmt&gt;();
+        stack.push(stmts.getFirst());
+
+        boolean visitedFlag = false;
+
+        while (!stack.empty()) {
+            Stmt stmt = stack.pop();
+            if (<font color='#ff0000' weight='1' id='176'><font color='#00ffa9' weight='0.333333' id='171'><font color='#0071ff' weight='0.111111' id='166'>stmt<font color='#0071ff' weight='0.111111' id='165'></font></font><font color='#0071ff' weight='0.111111' id='168'>.<font color='#0071ff' weight='0.111111' id='167'></font></font><font color='#0071ff' weight='0.111111' id='170'>_cfg_visited<font color='#0071ff' weight='0.111111' id='169'></font></font> </font><font color='#00ffa9' weight='0.333333' id='173'>== </font><font color='#00ffa9' weight='0.333333' id='175'>visitedFlag<font color='#00ffa9' weight='0.333333' id='174'></font></font>)</font> {
+                continue;
+            }
+            if (stmt._cfg_froms.size() == 0 || stack.size() == 0) {
+                stmt._cfg_visited = visitedFlag;
+                out.add(stmt);
+                for (Stmt t : stmt._cfg_tos) {
+                    t._cfg_froms.remove(stmt);
+                    if (t._cfg_visited != visitedFlag) {
+                        stack.push(t);
+                    }
+                }
+            }
+        }
+        return out;
+    }
+
+    </font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+  <font color='#00cbff' weight='0.2' id='2'>public </font><font color='#00cbff' weight='0.2' id='4'>void</font> <font color='#00cbff' weight='0.2' id='7'>sort</font><font color='#00cbff' weight='0.2' id='26'>(<font color='#0022ff' weight='0.0333333' id='12'><font color='#0010ff' weight='0.0166667' id='9'>Object</font><font color='#0010ff' weight='0.0166667' id='11'>[]<font color='#0010ff' weight='0.0166667' id='10'></font></font></font> <font color='#0022ff' weight='0.0333333' id='15'>a</font>, <font color='#0043ff' weight='0.0666667' id='24'><font color='#0043ff' weight='0.0666667' id='23'><font color='#0022ff' weight='0.0333333' id='19'>Comparator</font> <font color='#0022ff' weight='0.0333333' id='22'>comparator</font></font>)</font><font color='#0043ff' weight='0.0666667' id='25'></font>
+    </font><font color='#00cbff' weight='0.2' id='166'>{
+        <font color='#0066ff' weight='0.1' id='164'>for <font color='#0033ff' weight='0.05' id='60'>(<font color='#000cff' weight='0.0125' id='38'><font color='#0006ff' weight='0.00625' id='36'><font color='#0002ff' weight='0.00208333' id='28'>int</font> <font color='#0002ff' weight='0.00208333' id='31'>i </font>= <font color='#0002ff' weight='0.00208333' id='33'>1<font color='#0002ff' weight='0.00208333' id='32'></font></font>;</font><font color='#0006ff' weight='0.00625' id='37'></font> </font><font color='#000cff' weight='0.0125' id='52'><font color='#0006ff' weight='0.00625' id='50'><font color='#0002ff' weight='0.00208333' id='40'>i </font><font color='#0002ff' weight='0.00208333' id='42'>&lt; </font><font color='#0002ff' weight='0.00208333' id='49'><font color='#0000ff' weight='0.000694444' id='44'>a</font>.<font color='#0000ff' weight='0.000694444' id='48'>length</font></font>;</font><font color='#0006ff' weight='0.00625' id='51'></font> </font><font color='#000cff' weight='0.0125' id='58'><font color='#000cff' weight='0.0125' id='57'><font color='#0006ff' weight='0.00625' id='54'>i</font><font color='#0006ff' weight='0.00625' id='56'>++</font></font>)</font><font color='#000cff' weight='0.0125' id='59'></font>
+        </font><font color='#0033ff' weight='0.05' id='163'>{
+            <font color='#0019ff' weight='0.025' id='161'>for <font color='#000cff' weight='0.0125' id='89'>(<font color='#0003ff' weight='0.003125' id='72'><font color='#0001ff' weight='0.0015625' id='70'><font color='#0000ff' weight='0.000520833' id='62'>int</font> <font color='#0000ff' weight='0.000520833' id='65'>j </font>= <font color='#0000ff' weight='0.000520833' id='67'>i</font>;</font><font color='#0001ff' weight='0.0015625' id='71'></font> </font><font color='#0003ff' weight='0.003125' id='81'><font color='#0000ff' weight='0.000520833' id='74'>j </font><font color='#0000ff' weight='0.000520833' id='76'>&gt;= </font><font color='#0000ff' weight='0.000520833' id='78'>1<font color='#0000ff' weight='0.000520833' id='77'></font></font>; </font><font color='#0003ff' weight='0.003125' id='87'><font color='#0003ff' weight='0.003125' id='86'><font color='#0001ff' weight='0.0015625' id='83'>j</font><font color='#0001ff' weight='0.0015625' id='85'>--</font></font>)</font><font color='#0003ff' weight='0.003125' id='88'></font>
+            </font><font color='#000cff' weight='0.0125' id='160'>{
+                <font color='#0006ff' weight='0.00625' id='158'>if <font color='#0002ff' weight='0.00208333' id='125'>(<font color='#0001ff' weight='0.00104167' id='123'><font color='#0001ff' weight='0.00104167' id='122'><font color='#0000ff' weight='0.000520833' id='91'>less</font><font color='#0000ff' weight='0.000520833' id='121'>(<font color='#0000ff' weight='0.000130208' id='95'><font color='#0000ff' weight='0.000130208' id='94'><font color='#0000ff' weight='0.000130208' id='93'>comparator</font></font>, </font><font color='#0000ff' weight='0.000130208' id='105'><font color='#0000ff' weight='0.000130208' id='104'><font color='#0000ff' weight='0.000130208' id='103'><font color='#0000ff' weight='6.51042e-05' id='97'>a</font><font color='#0000ff' weight='6.51042e-05' id='102'>[<font color='#0000ff' weight='3.25521e-05' id='100'><font color='#0000ff' weight='3.25521e-05' id='99'>j</font>]</font><font color='#0000ff' weight='3.25521e-05' id='101'></font></font></font></font>, </font><font color='#0000ff' weight='0.000130208' id='119'><font color='#0000ff' weight='0.000130208' id='118'><font color='#0000ff' weight='0.000130208' id='117'><font color='#0000ff' weight='6.51042e-05' id='107'>a</font><font color='#0000ff' weight='6.51042e-05' id='116'>[<font color='#0000ff' weight='3.25521e-05' id='114'><font color='#0000ff' weight='1.08507e-05' id='109'>j </font><font color='#0000ff' weight='1.08507e-05' id='111'>- </font><font color='#0000ff' weight='1.08507e-05' id='113'>1<font color='#0000ff' weight='1.08507e-05' id='112'></font></font>]</font><font color='#0000ff' weight='3.25521e-05' id='115'></font></font></font></font>)</font><font color='#0000ff' weight='0.000130208' id='120'></font></font></font>)</font><font color='#0001ff' weight='0.00104167' id='124'></font></font><font color='#0002ff' weight='0.00208333' id='152'>
+                <font color='#0002ff' weight='0.00208333' id='151'>{
+                    <font color='#0001ff' weight='0.00104167' id='149'><font color='#0000ff' weight='0.000520833' id='147'><font color='#0000ff' weight='0.000520833' id='146'><font color='#0000ff' weight='0.000260417' id='127'>exchange</font><font color='#0000ff' weight='0.000260417' id='145'>(<font color='#0000ff' weight='6.51042e-05' id='131'><font color='#0000ff' weight='6.51042e-05' id='130'><font color='#0000ff' weight='6.51042e-05' id='129'>a</font></font>, </font><font color='#0000ff' weight='6.51042e-05' id='133'>j</font>, <font color='#0000ff' weight='6.51042e-05' id='143'><font color='#0000ff' weight='6.51042e-05' id='142'><font color='#0000ff' weight='2.17014e-05' id='137'>j </font><font color='#0000ff' weight='2.17014e-05' id='139'>- </font><font color='#0000ff' weight='2.17014e-05' id='141'>1<font color='#0000ff' weight='2.17014e-05' id='140'></font></font></font>)</font><font color='#0000ff' weight='6.51042e-05' id='144'></font></font></font>;</font><font color='#0000ff' weight='0.000520833' id='148'></font>
+                }</font><font color='#0001ff' weight='0.00104167' id='150'></font></font>
+                </font><font color='#0002ff' weight='0.00208333' id='157'>else
+                <font color='#0002ff' weight='0.00208333' id='156'>{
+                    <font color='#0001ff' weight='0.00104167' id='154'>break;<font color='#0001ff' weight='0.00104167' id='153'></font>
+                }</font><font color='#0001ff' weight='0.00104167' id='155'></font></font></font>
+            }</font></font>
+        }</font></font>
+    }</font><font color='#0066ff' weight='0.1' id='165'></font></font>
+</font>
+</pre>

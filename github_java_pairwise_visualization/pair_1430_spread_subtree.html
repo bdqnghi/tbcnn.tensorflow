@@ -1,0 +1,117 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+package heap;
+
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Heap {
+
+    
+
+        
+        
+    private int array[];
+    public static int n; 
+    
+    public static void sort(int arr[])  
+    {
+            buildMaxHeap(arr);
+            
+            for(int i=arr.length-1; i&gt;=0; i--){
+                int temp=arr[0];
+                arr[0] = arr[i];
+                arr[i]= temp;
+
+                n--;
+                
+                maxHeapify(arr,0);
+		}
+    }
+    
+    public static void maxHeapify(int[] arr, int i) 
+    {
+		int leftChild= (2*i)+1;
+		int rightChild=(2*i)+2;
+		
+                int max;
+                
+                if((leftChild &lt; n) &amp;&amp; (arr[leftChild] &gt; arr[i])) 
+			max=leftChild;
+                else max = i;
+                
+		if( (rightChild &lt; n) &amp;&amp; (arr[rightChild] &gt; arr[max])) 
+			max=rightChild;
+		
+                if(max!=i){
+			int temp = arr[max];
+			arr[max] = arr[i];
+			arr[i] = temp;
+                        maxHeapify(arr, max);
+		}
+	}  
+    
+    
+    
+    public static void buildMaxHeap(int [] array){
+    
+        n=array.length;
+        
+        for(int i=array.length/2; i&gt;=0; i--){
+            maxHeapify(array, i);
+        }
+    }
+}
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+    public static void buildheap(int []a){
+        n=a.length-1;
+        for(int i=n/2;i&gt;=0;i--){
+            maxheap(a,i);
+        }
+    }
+    
+    public static void maxheap(int[] a, int i)<font color='#ff0000' weight='1' id='295'>{ 
+        <font color='#000bff' weight='0.0116279' id='135'><font color='#0004ff' weight='0.00484496' id='133'><font color='#0000ff' weight='9.68992e-05' id='124'>left</font><font color='#0000ff' weight='9.68992e-05' id='126'>=</font>2*i;</font>
+        </font><font color='#000fff' weight='0.0155039' id='152'><font color='#0006ff' weight='0.00678295' id='150'><font color='#0000ff' weight='6.92137e-05' id='137'>right</font><font color='#0000ff' weight='6.92137e-05' id='139'>=</font>2*i+<font color='#0000ff' weight='6.92137e-05' id='149'>1</font>;</font>
+        </font>if(<font color='#0000ff' weight='2.30712e-05' id='154'>left </font><font color='#0000ff' weight='2.30712e-05' id='156'>&lt;= </font>n &amp;&amp; <font color='#0000ff' weight='1.15356e-05' id='162'>a</font>[<font color='#0000ff' weight='5.76781e-06' id='164'>left</font>] &gt; <font color='#0000ff' weight='1.15356e-05' id='172'>a</font>[i])<font color='#0003ff' weight='0.00355297' id='193'><font color='#0003ff' weight='0.00322997' id='192'>{
+            <font color='#0000ff' weight='2.69165e-05' id='183'>largest</font>=<font color='#0000ff' weight='2.69165e-05' id='187'>left</font>;
+        }</font>
+        </font><font color='#0003ff' weight='0.00355297' id='205'>else<font color='#0003ff' weight='0.00322997' id='204'>{
+            <font color='#0000ff' weight='2.69165e-05' id='195'>largest</font>=i;
+        }</font></font>
+        
+        if<font color='#000dff' weight='0.0135659' id='235'>(<font color='#0000ff' weight='3.46069e-05' id='208'>right </font><font color='#0000ff' weight='3.46069e-05' id='210'>&lt;= </font>n &amp;&amp; <font color='#0000ff' weight='1.73034e-05' id='216'>a</font>[<font color='#0000ff' weight='8.65172e-06' id='218'>right</font>] &gt; <font color='#0000ff' weight='1.73034e-05' id='226'>a</font>[<font color='#0000ff' weight='8.65172e-06' id='228'>largest</font>])</font><font color='#0005ff' weight='0.00532946' id='247'><font color='#0004ff' weight='0.00484496' id='246'>{
+            <font color='#0000ff' weight='4.03747e-05' id='237'>largest</font>=<font color='#0000ff' weight='4.03747e-05' id='241'>right</font>;
+        }</font></font>
+        <font color='#002bff' weight='0.0426357' id='293'>if(<font color='#0000ff' weight='8.07494e-05' id='250'>largest</font>!=i)<font color='#0010ff' weight='0.0164729' id='292'><font color='#0010ff' weight='0.0159884' id='291'>{
+            <font color='#0002ff' weight='0.00242248' id='273'><font color='#0001ff' weight='0.00104974' id='271'><font color='#0000ff' weight='0.000968992' id='270'><font color='#0000ff' weight='4.03747e-05' id='259'>exchange</font><font color='#0000ff' weight='0.000363372' id='269'>(<font color='#0000ff' weight='4.03747e-05' id='263'><font color='#0000ff' weight='2.69165e-05' id='262'><font color='#0000ff' weight='1.34582e-05' id='261'>i</font></font>,</font><font color='#0000ff' weight='4.03747e-05' id='267'><font color='#0000ff' weight='2.69165e-05' id='266'><font color='#0000ff' weight='1.34582e-05' id='265'>largest</font></font>)</font></font></font>;</font>
+            </font><font color='#0002ff' weight='0.00242248' id='289'><font color='#0001ff' weight='0.00104974' id='287'><font color='#0000ff' weight='0.000968992' id='286'><font color='#0000ff' weight='4.03747e-05' id='275'>maxheap</font><font color='#0000ff' weight='0.000363372' id='285'>(<font color='#0000ff' weight='4.03747e-05' id='279'><font color='#0000ff' weight='2.69165e-05' id='278'><font color='#0000ff' weight='1.34582e-05' id='277'>a</font></font>, </font><font color='#0000ff' weight='4.03747e-05' id='283'><font color='#0000ff' weight='2.69165e-05' id='282'><font color='#0000ff' weight='1.34582e-05' id='281'>largest</font></font>)</font></font></font>;</font>
+        }</font></font></font>
+    }</font></font>
+    
+    public static void exchange(int i, int j){
+        int t=a[i];
+        a[i]=a[j];
+        a[j]=t; 
+        }
+    
+    public static void sort(int []a0){
+        a=a0;
+        buildheap(a);
+        
+        for(int i=n;i&gt;0;i--){
+            exchange(0, i);
+            n=n-1;
+            maxheap(a, 0);
+        }
+    }</font>
+</pre>

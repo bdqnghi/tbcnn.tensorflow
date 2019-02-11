@@ -1,0 +1,99 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void sort(int[] arr) {
+        int max = Integer.MAX_VALUE;
+        int min = Integer.MIN_VALUE;
+
+        for (int i = 0; i &lt; arr.length; i++) {
+            max = Math.max(max, arr[i]);
+            min = Math.min(min, arr[i]);
+        }
+        
+        
+        int bucketNum = (max - min) / arr.length + 1;
+        ArrayList&lt;ArrayList&lt;Integer&gt;&gt; bucketArr = new ArrayList&lt;&gt;(bucketNum);
+        for (int i = 0; i &lt; bucketNum; i++) {
+            bucketArr.add(new ArrayList&lt;&gt;());
+        }
+
+        
+        for (int i = 0; i &lt; arr.length; i++) {
+            int num = (arr[i] - min) / (arr.length);
+            bucketArr.get(num).add(arr[i]);
+        }
+
+        
+        for (int i = 0; i &lt; bucketArr.size(); i++) {
+            Collections.sort(bucketArr.get(i));
+        }
+
+        System.out.println(bucketArr.toString());
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+package Graph;
+
+import java.util.Iterator;
+import java.util.LinkedList;
+
+import java.util.ArrayList;
+import java.util.Stack;
+
+
+public class TopologicalSort {
+    private int vertex;
+    private LinkedList&lt;Integer&gt; adj[];
+
+    public TopologicalSort(int v) {
+        vertex = v;
+        adj = new LinkedList[v];
+        for (int i = 0; i &lt; v; i++) {
+            adj[i] = new LinkedList&lt;&gt;();
+        }
+    }
+    void addEdge(int v, int e) {
+        adj[v].add(e);
+    }
+
+   
+
+    public  void topologicalSort() {
+        Stack stack=new Stack();
+        boolean visited[]=new boolean[vertex];
+        for(int i=0;i&lt;vertex;i++) {
+            visited[i]=false;
+        }
+        for(int j=0;j&lt;vertex;j++) {
+            if(visited[j]==false) {
+                topologicalSortUtil(visited,stack,j);
+            }
+        }
+        while(stack.empty()==false) {
+            System.out.println(stack.pop() + " ");
+        }
+    }
+
+    public void topologicalSortUtil(boolean[] visited, Stack stack,int vertexData) {
+        
+            visited[vertexData] = true;
+            
+           
+            Iterator&lt;Integer&gt; iterator = adj[vertexData].iterator();
+            while (iterator.hasNext()) {
+                
+                int nextData = iterator.next();
+                
+                if (!visited[nextData]) {
+                    topologicalSortUtil(visited, stack, nextData);
+                }
+                
+
+            }
+            stack.push(vertexData);
+        
+    }
+
+}
+</font>
+</pre>

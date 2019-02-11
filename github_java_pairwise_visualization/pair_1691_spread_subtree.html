@@ -1,0 +1,47 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public void <font color='#0001ff' weight='0.0011976' id='7'>sort</font>(<font color='#0003ff' weight='0.00359281' id='17'>Object[] a, </font>Comparator comparator)
+    <font color='#00a9ff' weight='0.166467' id='166'>{
+        <font color='#0053ff' weight='0.0820359' id='164'>for (<font color='#0000ff' weight='2.49501e-05' id='29'>int </font><font color='#0000ff' weight='1.24751e-05' id='31'>i </font><font color='#0000ff' weight='3.74252e-05' id='35'>= 1</font>; <font color='#0000ff' weight='0.000973054' id='52'>i &lt; a.length; </font>i++)
+        {
+            for (<font color='#0000ff' weight='6.23752e-06' id='63'>int </font>j = i; <font color='#0000ff' weight='0.000149701' id='81'>j &gt;= 1; </font>j--)
+            {
+                if (less(comparator, a[j], <font color='#0000ff' weight='1.0136e-05' id='119'>a<font color='#0000ff' weight='3.11876e-06' id='116'>[j - 1]</font>)</font>)<font color='#0000ff' weight='0.000324351' id='152'>
+                <font color='#0000ff' weight='0.000311876' id='151'>{
+                    exchange(a, j, j - 1);
+                }</font>
+                </font><font color='#0000ff' weight='4.99002e-05' id='157'>else
+                {
+                    break;
+                }</font>
+            }
+        }
+    }</font></font>
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static void bubbleSort(int[] arr) {
+        int length = arr.length;
+        int k;
+
+        for (int i = length; i &gt;= 0; i--) {
+            for (int j = 0; j &lt; length-1; j++) {
+                k = j + 1;
+
+                if (arr[j] &gt; arr[k])
+                    swap(j, k, arr);
+            }
+            printArray(arr);
+        }
+    }
+
+  
+
+    private static void swap(int j, int k, int[] arr) {
+        int temp = arr[j];
+        arr[j] = arr[k];
+        arr[k] = temp;
+
+    }</font>
+</pre>

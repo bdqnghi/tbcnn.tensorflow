@@ -1,0 +1,39 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+    public static void insertionSort() {
+        int ii = 0, jj = 0;
+        for (ii = 1; ii &lt; InsertionSort.ITEMS.length; ii++) {
+            jj = ii;
+            while ((jj &gt; 0)
+                    &amp;&amp; (InsertionSort.ITEMS[jj] &lt; <font color='#ff0000' weight='1' id='119'><font color='#0010ff' weight='0.0166667' id='105'>InsertionSort</font><font color='#0010ff' weight='0.0166667' id='107'>.</font><font color='#0010ff' weight='0.0166667' id='109'>ITEMS</font><font color='#0087ff' weight='0.133333' id='118'>[<font color='#0033ff' weight='0.05' id='116'><font color='#0002ff' weight='0.00277778' id='111'>jj </font><font color='#0002ff' weight='0.00277778' id='113'>- </font><font color='#0002ff' weight='0.00277778' id='115'>1</font>]</font></font></font>)) {
+                swap(jj, jj - 1);
+                jj -= 1;
+            }
+        }
+    }
+
+    public static void swap(final int ii, final int jj) {
+        final int temp = InsertionSort.ITEMS[ii];
+        InsertionSort.ITEMS[ii] = InsertionSort.ITEMS[jj];
+        InsertionSort.ITEMS[jj] = temp;
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public void bubbleSort(){
+        for(int i=0; i&lt;length-1;i++){
+            for(int j=0;j&lt;length-1-i;j++){
+                compare(j,j+1);
+            }
+        }
+    }
+    public void compare(int x, int y){
+        int z=0;
+        if(a[x]&gt;a[y]){
+            z=a[x];
+            a[x]=a[y];
+            a[y]=z;
+        }   
+    }</font>
+</pre>

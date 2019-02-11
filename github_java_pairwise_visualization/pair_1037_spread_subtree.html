@@ -1,0 +1,73 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+    public static void sort(Comparable[] a) {
+        
+        final int N  = a.length; int h = 1;
+        while(h &lt; N/3) h = 3*h + 1;
+        
+        
+        while(h &gt;= 1) {
+        
+            
+            
+            for(int i = h; i &lt; N; i++) {
+            
+                
+                
+                for(int j = i; j &gt;= h &amp;&amp; less(a[j], a[j-h]); j -= h) exch(a, j, j-h);
+                
+            }
+            h /= 3;
+        }
+        
+        
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static int partition(int arr[], int low, int high)
+ {
+     int pivot = arr[high]; 
+     int i = (low-1); 
+     for (int j=low; j&lt;high; j++)
+     {
+         
+         
+         if (arr[j] &lt;= pivot)
+         {
+             i++;
+
+             
+             int temp = arr[i];
+             arr[i] = arr[j];
+             arr[j] = temp;
+         }
+     }
+
+     
+     int temp = arr[i+1];
+     arr[i+1] = arr[high];
+     arr[high] = temp;
+
+     return i+1;
+ }
+
+
+ 
+ public static void sort(int arr[]<font color='#ff0000' weight='1' id='274'></font>, int low, int high)
+ {
+     if (low &lt; high)
+     {
+         
+         int pi = partition(arr, low, high);
+
+         
+         
+         sort(arr, low, pi-1);
+         sort(arr, pi+1, high);
+     }
+ }
+
+ </font>
+</pre>

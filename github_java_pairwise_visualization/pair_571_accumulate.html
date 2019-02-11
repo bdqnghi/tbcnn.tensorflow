@@ -1,0 +1,43 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public void bubbleSortWhile(int[] array) {
+
+        System.out.println(Arrays.toString(array));
+        int aux;
+        int i = array.length;
+
+        while (i &gt; 0) {
+            int j = 0;
+            while (j &lt; i - 1) <font color='#ff0000' weight='1' id='241'>{
+                <font color='#ff0000' weight='1' id='199'>if (array[j] &gt; array[j + 1]) {
+                    aux = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = aux;
+                }
+                </font><font color='#ff0000' weight='1' id='206'><font color='#ff0000' weight='1' id='204'><font color='#ff0000' weight='1' id='201'>j<font color='#ff0000' weight='1' id='200'></font></font><font color='#ff0000' weight='1' id='203'>++<font color='#ff0000' weight='1' id='202'></font></font>;</font><font color='#ff0000' weight='1' id='205'></font>
+                </font><font color='#ff0000' weight='1' id='239'>System.out.println(Arrays.toString(array));
+            }</font><font color='#ff0000' weight='1' id='240'></font></font>
+            i--;
+        }
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public void <font color='#ff0000' weight='1' id='7'>bubbleSortFor</font>(int[] array) {
+
+        System.out.println(Arrays.toString(array));
+        int aux;
+
+        <font color='#ff0000' weight='1' id='254'>for <font color='#ff0000' weight='1' id='94'>(<font color='#ff0000' weight='1' id='77'><font color='#ff0000' weight='1' id='75'>int i = array.length;</font><font color='#ff0000' weight='1' id='76'></font> </font><font color='#ff0000' weight='1' id='86'>i &gt; 0; </font><font color='#ff0000' weight='1' id='92'><font color='#ff0000' weight='1' id='91'><font color='#ff0000' weight='1' id='88'>i<font color='#ff0000' weight='1' id='87'></font></font><font color='#ff0000' weight='1' id='90'>--<font color='#ff0000' weight='1' id='89'></font></font></font>)</font><font color='#ff0000' weight='1' id='93'></font> </font><font color='#ff0000' weight='1' id='253'>{
+            <font color='#ff0000' weight='1' id='251'>for <font color='#ff0000' weight='1' id='127'>(<font color='#ff0000' weight='1' id='106'><font color='#ff0000' weight='1' id='104'>int j = 0;</font><font color='#ff0000' weight='1' id='105'></font> </font><font color='#ff0000' weight='1' id='119'>j &lt; i - 1; </font><font color='#ff0000' weight='1' id='125'><font color='#ff0000' weight='1' id='124'><font color='#ff0000' weight='1' id='121'>j<font color='#ff0000' weight='1' id='120'></font></font><font color='#ff0000' weight='1' id='123'>++<font color='#ff0000' weight='1' id='122'></font></font></font>)</font><font color='#ff0000' weight='1' id='126'></font> </font><font color='#ff0000' weight='1' id='250'>{
+                if (array[j] &gt; array[j + 1]) {
+                    aux = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = aux;
+                }
+                System.out.println(Arrays.toString(array));
+            }</font>
+        }</font><font color='#ff0000' weight='1' id='252'></font></font>
+    }</font>
+</font>
+</pre>

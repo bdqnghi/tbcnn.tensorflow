@@ -1,0 +1,112 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+import java.util.Arrays;
+class SortingHeap{
+
+void heapify(int arr[],int size,int i)
+<font color='#ff0000' weight='1' id='271'>{
+	<font color='#0091ff' weight='0.142857' id='58'><font color='#0048ff' weight='0.0714286' id='56'><font color='#0018ff' weight='0.0238095' id='49'>int </font><font color='#0018ff' weight='0.0238095' id='51'>swapwith<font color='#0018ff' weight='0.0238095' id='50'></font></font><font color='#0018ff' weight='0.0238095' id='55'>=i<font color='#0018ff' weight='0.0238095' id='52'></font></font>;</font><font color='#0048ff' weight='0.0714286' id='57'></font>
+	</font><font color='#0091ff' weight='0.142857' id='78'><font color='#0018ff' weight='0.0238095' id='61'><font color='#0018ff' weight='0.0238095' id='60'>int<font color='#0018ff' weight='0.0238095' id='59'></font></font> </font>l=<font color='#0018ff' weight='0.0238095' id='74'>2<font color='#0004ff' weight='0.0047619' id='67'>*<font color='#0004ff' weight='0.0047619' id='66'></font></font>i<font color='#0004ff' weight='0.0047619' id='71'>+<font color='#0004ff' weight='0.0047619' id='70'></font></font>1<font color='#0004ff' weight='0.0047619' id='72'></font></font>;<font color='#0048ff' weight='0.0714286' id='77'></font>
+	</font><font color='#0018ff' weight='0.0238095' id='80'>int</font> r<font color='#0018ff' weight='0.0238095' id='82'></font><font color='#0018ff' weight='0.0238095' id='95'>=<font color='#0018ff' weight='0.0238095' id='94'><font color='#0004ff' weight='0.0047619' id='85'>2<font color='#0004ff' weight='0.0047619' id='84'></font></font>*<font color='#0004ff' weight='0.0047619' id='86'></font><font color='#0004ff' weight='0.0047619' id='89'>i</font>+<font color='#0004ff' weight='0.0047619' id='90'></font>2</font></font>;<font color='#0048ff' weight='0.0714286' id='97'></font>
+	
+	
+	
+	<font color='#0091ff' weight='0.142857' id='140'>if<font color='#0048ff' weight='0.0714286' id='127'>(<font color='#0012ff' weight='0.0178571' id='116'>l<font color='#0009ff' weight='0.00892857' id='115'>&lt;<font color='#0004ff' weight='0.00446429' id='113'><font color='#0001ff' weight='0.0014881' id='102'>size<font color='#0001ff' weight='0.0014881' id='101'></font> </font><font color='#0001ff' weight='0.0014881' id='104'>&amp;&amp;<font color='#0001ff' weight='0.0014881' id='103'></font> </font><font color='#0001ff' weight='0.0014881' id='112'><font color='#0000ff' weight='0.000744048' id='106'>arr</font>[<font color='#0000ff' weight='0.000372024' id='109'>l]</font></font>&gt;</font></font></font><font color='#0012ff' weight='0.0178571' id='124'><font color='#0009ff' weight='0.00892857' id='118'>arr</font><font color='#0009ff' weight='0.00892857' id='123'>[<font color='#0004ff' weight='0.00446429' id='121'><font color='#0004ff' weight='0.00446429' id='120'>swapwith<font color='#0004ff' weight='0.00446429' id='119'></font></font>]</font></font></font>)<font color='#0024ff' weight='0.0357143' id='126'></font></font><font color='#0048ff' weight='0.0714286' id='139'> 
+	{
+		<font color='#0024ff' weight='0.0357143' id='136'><font color='#0012ff' weight='0.0178571' id='134'><font color='#0006ff' weight='0.00595238' id='129'>swapwith<font color='#0006ff' weight='0.00595238' id='128'></font></font><font color='#0006ff' weight='0.00595238' id='131'>=<font color='#0006ff' weight='0.00595238' id='130'></font></font><font color='#0006ff' weight='0.00595238' id='133'>l<font color='#0006ff' weight='0.00595238' id='132'></font></font>;</font>
+	}</font><font color='#0024ff' weight='0.0357143' id='137'></font></font>
+	</font>if<font color='#0048ff' weight='0.0714286' id='169'>(<font color='#0024ff' weight='0.0357143' id='167'><font color='#0009ff' weight='0.00892857' id='142'>r</font>&lt;<font color='#0001ff' weight='0.0014881' id='144'>size<font color='#0001ff' weight='0.0014881' id='143'></font> </font>&amp;&amp;<font color='#0001ff' weight='0.0014881' id='145'></font> <font color='#0001ff' weight='0.0014881' id='154'>arr<font color='#0000ff' weight='0.000744048' id='147'></font>[r]</font>&gt;<font color='#0012ff' weight='0.0178571' id='166'>arr<font color='#0009ff' weight='0.00892857' id='159'></font><font color='#0009ff' weight='0.00892857' id='165'>[<font color='#0004ff' weight='0.00446429' id='163'><font color='#0004ff' weight='0.00446429' id='162'>swapwith<font color='#0004ff' weight='0.00446429' id='161'></font></font>]</font><font color='#0004ff' weight='0.00446429' id='164'></font></font></font>)</font><font color='#0024ff' weight='0.0357143' id='168'></font></font> 
+	<font color='#0048ff' weight='0.0714286' id='180'>{
+		<font color='#0024ff' weight='0.0357143' id='178'>swapwith<font color='#0006ff' weight='0.00595238' id='170'></font>=r;<font color='#0012ff' weight='0.0178571' id='177'></font>
+	}</font><font color='#0024ff' weight='0.0357143' id='179'></font></font>	
+	
+	<font color='#0091ff' weight='0.142857' id='269'>if<font color='#0048ff' weight='0.0714286' id='191'>(<font color='#0024ff' weight='0.0357143' id='189'>swapwith != <font color='#000cff' weight='0.0119048' id='188'>i<font color='#000cff' weight='0.0119048' id='187'></font></font>)</font><font color='#0024ff' weight='0.0357143' id='190'></font></font>
+	{
+		<font color='#000eff' weight='0.0142857' id='209'><font color='#0002ff' weight='0.00238095' id='193'>int<font color='#0002ff' weight='0.00238095' id='192'></font></font> <font color='#0002ff' weight='0.00238095' id='196'>tmp </font><font color='#0002ff' weight='0.00238095' id='206'>=arr[i]</font>;<font color='#0007ff' weight='0.00714286' id='208'></font>
+		</font><font color='#0002ff' weight='0.00238095' id='217'>arr[i] </font><font color='#0002ff' weight='0.00238095' id='219'>=<font color='#0002ff' weight='0.00238095' id='218'></font> </font>arr<font color='#0001ff' weight='0.00119048' id='226'>[<font color='#0000ff' weight='0.000595238' id='224'><font color='#0000ff' weight='0.000595238' id='223'>swapwith<font color='#0000ff' weight='0.000595238' id='222'></font></font>]</font><font color='#0000ff' weight='0.000595238' id='225'></font></font>;
+		<font color='#0002ff' weight='0.00238095' id='238'>arr[<font color='#0000ff' weight='0.000595238' id='235'>swapwith]</font><font color='#0000ff' weight='0.000595238' id='236'></font> </font><font color='#0002ff' weight='0.00238095' id='240'>= </font>tmp;
+
+		<font color='#0007ff' weight='0.00714286' id='263'>heapify<font color='#0003ff' weight='0.00357143' id='246'></font><font color='#0003ff' weight='0.00357143' id='261'>(<font color='#0000ff' weight='0.000892857' id='251'><font color='#0000ff' weight='0.000892857' id='250'><font color='#0000ff' weight='0.000892857' id='249'>arr<font color='#0000ff' weight='0.000892857' id='248'></font></font></font>,</font><font color='#0000ff' weight='0.000892857' id='255'><font color='#0000ff' weight='0.000892857' id='254'>size</font>,</font><font color='#0000ff' weight='0.000892857' id='259'><font color='#0000ff' weight='0.000892857' id='258'><font color='#0000ff' weight='0.000892857' id='257'>swapwith<font color='#0000ff' weight='0.000892857' id='256'></font></font></font>)</font><font color='#0000ff' weight='0.000892857' id='260'></font></font>;</font> 
+	}<font color='#000eff' weight='0.0142857' id='266'></font>	
+		
+}</font></font>	
+void sort(int arr[],int size)
+{
+	for(int i=(size/2)-1;i&gt;=0;i--)
+	{
+		
+		heapify(arr,size,i);
+	}
+	
+	for (int i=size-1; i&gt;=0; i--)
+    {
+        
+        
+		int tmp =arr[0];
+		arr[0] = arr[i];
+		arr[i] = tmp;
+		
+		
+        
+        heapify(arr, i, 0);
+    }	
+	 
+	 
+		 
+		 
+		 
+		
+		 
+	 
+}
+}
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+   public static void mergeSort(int[] arr) {
+      if (arr.length &gt; 1) {
+         int[] left = leftHalf(arr);
+         int[] right = rightHalf(arr);
+
+         mergeSort(left);
+         mergeSort(right);
+
+         mergeArrays(arr, left, right);
+      }
+   }
+
+   public static int[] leftHalf(int[] arr) {
+      int size = arr.length / 2;
+      int[] left = new int[size];
+      for (int i = 0; i &lt; size; i++) {
+         left[i] = arr[i];
+      }
+      return left;
+   }
+
+   public static int[] rightHalf(int[] arr) {
+      int size1 = arr.length / 2;
+      int size2 = arr.length - size1;
+      int[] right = new int[size2];
+      for (int i = 0; i &lt; size2; i++) {
+         right[i] = arr[i + size1];
+      }
+      return right;
+   }
+
+   public static void mergeArrays(int[] arr, int[] left, int[] right) {
+      int i1 = 0;
+      int i2 = 0;
+
+      for (int i = 0; i &lt; arr.length; i++) {
+         if (i2 &gt;= right.length || (i1 &lt; left.length &amp;&amp; left[i1] &lt;= right[i2])) {
+            arr[i] = left[i1];
+            i1++;
+         } else {
+            arr[i] = right[i2];
+            i2++;
+         }
+      }
+   }</font>
+</pre>

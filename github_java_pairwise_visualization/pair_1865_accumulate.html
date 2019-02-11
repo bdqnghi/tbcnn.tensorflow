@@ -1,0 +1,59 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+   public static &lt;Key extends Comparable&lt;Key&gt;&gt; void sort(Key[] a) {
+        int n = a.length;
+        for (int i = 0; i &lt; n; i++) {
+            int exchanges = 0;
+            for (int j = n - 1; j &gt; i; j--) {
+                if (less(a[j], a[j - 1])) {
+                    exch(a, j, j - 1);
+                    exchanges++;
+                }
+            }
+            if (exchanges == 0) break;
+        }
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+  private static void merge(Comparable[] a, Comparable[] aux, int lo, int mid, int hi) {
+
+        
+        assert isSorted(a, lo, mid);
+        assert isSorted(a, mid+1, hi);
+
+        
+        for (int k = lo; k &lt;= hi; k++) {
+            aux[k] = a[k]; 
+        }
+
+        
+        int i = lo, j = mid+1;
+        for (int k = lo; k &lt;= hi; k++) {
+            if      (i &gt; mid)              a[k] = aux[j++];   
+            else if (j &gt; hi)               a[k] = aux[i++];
+            else if (less(aux[j], aux[i])) a[k] = aux[j++];
+            else                           a[k] = aux[i++];
+        }
+
+        
+        assert isSorted(a, lo, hi);
+    }
+
+    
+    private static void sort(Comparable[] a, Comparable[] aux, int lo, int hi) {
+        if (hi &lt;= lo) return;
+        int mid = lo + (hi - lo) / 2;
+        sort(a, aux, lo, mid);
+        sort(a, aux, mid + 1, hi);
+        merge(a, aux, lo, mid, hi);
+    }
+
+    
+    public static void sort(Comparable[] a) {
+        Comparable[] aux = new Comparable[a.length];
+        sort(a, aux, 0, a.length-1);
+        assert isSorted(a);
+    }
+</font>
+</pre>

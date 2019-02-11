@@ -1,0 +1,92 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void bubbleSort(int arr[]) {
+      int len = arr.length;
+      for (int i = len; i &gt;= 0; i--) {
+         for (int j = 0; j &lt; len - 1; j++) {
+            int k = j + 1;
+            <font color='#00f1ff' weight='0.236559' id='161'>if (arr[<font color='#0000ff' weight='0.000224014' id='121'>j]</font> &gt; <font color='#0000ff' weight='0.000224014' id='128'>arr</font>[<font color='#0000ff' weight='0.000112007' id='130'>k</font>])<font color='#003cff' weight='0.0591398' id='160'> {
+               swapNumbers(j, k, arr);
+            }</font>
+         }</font>
+      }
+   }
+
+   private static void swapNumbers(int i, int j, int[] arr) {
+      int temp;
+      temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
+   }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+package heap;
+
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Heap {
+
+    
+
+        
+        
+    private int array[];
+    public static int n; 
+    
+    public static void sort(int arr[])  
+    {
+            buildMaxHeap(arr);
+            
+            for(int i=<font color='#ff0000' weight='1' id='143'><font color='#0038ff' weight='0.0555556' id='138'>arr</font><font color='#0038ff' weight='0.0555556' id='140'>.</font><font color='#0038ff' weight='0.0555556' id='142'>length</font></font>-1; i&gt;=0; i--){
+                int temp=arr[0];
+                arr[0] = arr[i];
+                arr[i]= temp;
+
+                n--;
+                
+                maxHeapify(arr,0);
+		}
+    }
+    
+    public static void maxHeapify(int[] arr, int i) 
+    {
+		int leftChild= (2*i)+1;
+		int rightChild=(2*i)+2;
+		
+                int max;
+                
+                if((leftChild &lt; n) &amp;&amp; (arr[leftChild] &gt; arr[i])) 
+			max=leftChild;
+                else max = i;
+                
+		if( (rightChild &lt; n) &amp;&amp; (arr[rightChild] &gt; arr[max])) 
+			max=rightChild;
+		
+                if(max!=i){
+			int temp = arr[max];
+			arr[max] = arr[i];
+			arr[i] = temp;
+                        maxHeapify(arr, max);
+		}
+	}  
+    
+    
+    
+    public static void buildMaxHeap(int [] array){
+    
+        n=array.length;
+        
+        for(int i=array.length/2; i&gt;=0; i--){
+            maxHeapify(array, i);
+        }
+    }
+}
+</font>
+</pre>

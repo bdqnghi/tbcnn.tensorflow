@@ -1,0 +1,77 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+    void ordenaArray(int iz, int de) {
+
+        int i, j, x, w;
+
+        i = iz;
+        j = de;
+
+        x = vector[(iz + de) / 2];
+
+        do {
+
+            while (vector[i] &lt; x) {
+                i++; 
+            }
+
+            while (x &lt; vector[j]) {
+                j--; 
+            }
+
+            if (i &lt;= j) {
+
+                w = vector[i];
+
+                vector[i] = vector[j];
+
+                vector[j] = w;
+                i++;  
+                j--; 
+            }
+        } while (i &lt;= j);
+
+
+        w = vector[i];
+        vector[i] = vector[de];
+        vector[de] = w;
+
+        if (iz &lt; j) {
+            ordenaArray(iz, j);
+        }
+        if (i &lt; de) {
+            ordenaArray(i, de);
+        }
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void sort(Comparable[] a) {
+    int n = a.length;
+
+    
+    int h = 1;
+    while (h &lt; n/3) h = 3*h + 1;
+
+    while (h &gt;= 1) {
+      
+      for (int i = h; i &lt; n; i++) {
+        for (int j = i; j &gt;= h &amp;&amp; less(a[j], a[j-h]); j -= h) {
+          exch(a, j, j-h);
+        }<font color='#ff0000' weight='1' id='207'></font>
+      }
+      h /= 3;
+    }
+  }
+
+  private static boolean less(Comparable v, Comparable w) {
+    return v.compareTo(w) &lt; 0;
+  }
+
+  private static void exch(Object[] a, int i, int j) {
+    Object swap = a[i];
+    a[i] = a[j];
+    a[j] = swap;
+  }</font>
+</pre>

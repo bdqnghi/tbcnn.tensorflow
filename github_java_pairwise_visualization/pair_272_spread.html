@@ -1,0 +1,61 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static void quicksort(int[] a, int start, int end) {
+        if (start &gt;= end)
+            return;
+
+        int pavot = a[start];
+        int i = start;
+        int j = end;
+
+        while (i &lt; j) {
+            while (i &lt; j &amp;&amp; a[j] &gt; pavot)
+                j--;
+            while (i &lt; j &amp;&amp; a[i] &lt;= pavot)
+                i++;
+            if (i != j) {
+                int t = a[i];
+                a[i] = a[j];
+                a[j] = t;
+            }
+        }
+        if (i == j) {
+            int t = a[start];
+            a[start] = a[i];
+            a[j] = t;
+        }
+        quicksort(a, start, i - 1);
+        quicksort(a, i + 1, end);
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void bucketSort(int[] a) {
+        int n = a.length;
+        
+        List&lt;List&lt;Integer&gt;&gt; bucket = new ArrayList&lt;&gt;();
+        
+        for (int i = 0; i &lt; n; i++) {
+            bucket.add(new ArrayList&lt;&gt;());
+        }
+
+        
+        for (int i = 0; i &lt; n; i++) {
+            bucket.get(f(i)).add(a[i]);
+        }
+
+        
+        for (int i = 0; i &lt; bucket.size(); i++) {
+            if (!bucket.get(i).isEmpty())
+                Collections.sort(bucket.get(i)); 
+        }
+
+        
+        int k = 0;
+        for (int i = 0; i &lt; bucket.size(); i++) {
+            for (int item : bucket.get(i)) {
+                a[k++] = item;
+            }
+        }
+    }</font>
+</pre>

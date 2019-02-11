@@ -1,0 +1,52 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static void sort(int[] a, int maxVal) <font color='#ff0000' weight='1' id='269'>{
+          <font color='#0012ff' weight='0.0180556' id='55'><font color='#0000ff' weight='0.000462963' id='33'>int <font color='#0000ff' weight='5.78704e-05' id='32'>[]</font></font> bucket=new int[<font color='#0000ff' weight='8.68056e-05' id='47'><font color='#0000ff' weight='4.82253e-06' id='42'>maxVal</font><font color='#0000ff' weight='4.82253e-06' id='44'>+</font><font color='#0000ff' weight='4.82253e-06' id='46'>1</font>]</font>;
+     
+          </font><font color='#0024ff' weight='0.0354167' id='107'>for <font color='#000bff' weight='0.0114583' id='89'>(<font color='#0000ff' weight='0.000954861' id='67'><font color='#0000ff' weight='0.000390625' id='65'><font color='#0000ff' weight='1.44676e-05' id='57'>int</font> <font color='#0000ff' weight='1.44676e-05' id='60'>i</font><font color='#0000ff' weight='4.34028e-05' id='64'>=<font color='#0000ff' weight='1.44676e-05' id='62'>0</font></font>;</font> </font><font color='#0000ff' weight='1.44676e-05' id='69'>i</font>&lt;bucket.length; i++) </font>{
+             <font color='#0000ff' weight='1.44676e-05' id='91'>bucket</font>[i]=0;
+          }
+     
+          </font><font color='#0026ff' weight='0.0381944' id='163'>for (<font color='#0000ff' weight='1.44676e-05' id='109'>int</font> <font color='#0000ff' weight='1.44676e-05' id='112'>i</font>=<font color='#0000ff' weight='1.44676e-05' id='114'>0</font>; <font color='#0000ff' weight='0.000477431' id='131'>i<font color='#0000ff' weight='1.44676e-05' id='123'>&lt;</font><font color='#0000ff' weight='4.82253e-06' id='125'>a</font><font color='#0000ff' weight='4.82253e-06' id='127'>.</font><font color='#0000ff' weight='4.82253e-06' id='129'>length</font>;</font> <font color='#0000ff' weight='4.34028e-05' id='135'>i</font><font color='#0000ff' weight='4.34028e-05' id='137'>++</font>) <font color='#0007ff' weight='0.00694444' id='162'>{
+             <font color='#0003ff' weight='0.003125' id='160'><font color='#0001ff' weight='0.00138889' id='158'><font color='#0000ff' weight='0.000564236' id='155'>bucket<font color='#0000ff' weight='0.000217014' id='154'>[<font color='#0000ff' weight='8.68056e-05' id='152'><font color='#0000ff' weight='7.59549e-05' id='151'>a<font color='#0000ff' weight='2.17014e-05' id='150'>[<font color='#0000ff' weight='5.42535e-06' id='148'><font color='#0000ff' weight='2.71267e-06' id='147'>i</font>]</font></font></font>]</font></font></font><font color='#0000ff' weight='4.34028e-05' id='157'>++</font>;</font>
+          }</font></font>
+     
+          </font><font color='#0007ff' weight='0.00763889' id='175'><font color='#0003ff' weight='0.003125' id='173'><font color='#0000ff' weight='0.000231481' id='166'><font color='#0000ff' weight='0.000115741' id='165'>int</font> </font><font color='#0000ff' weight='0.000115741' id='168'>outPos</font><font color='#0000ff' weight='0.000347222' id='172'>=<font color='#0000ff' weight='0.000231482' id='171'><font color='#0000ff' weight='0.000115741' id='170'>0</font></font></font>;</font>
+          </font><font color='#0040ff' weight='0.0631944' id='267'>for <font color='#000bff' weight='0.0114583' id='209'>(<font color='#0000ff' weight='0.000954861' id='187'><font color='#0000ff' weight='0.000390625' id='185'><font color='#0000ff' weight='2.89352e-05' id='178'><font color='#0000ff' weight='1.44676e-05' id='177'>int</font> </font><font color='#0000ff' weight='1.44676e-05' id='180'>i</font><font color='#0000ff' weight='4.34028e-05' id='184'>=<font color='#0000ff' weight='2.89352e-05' id='183'><font color='#0000ff' weight='1.44676e-05' id='182'>0</font></font></font>;</font> </font><font color='#0001ff' weight='0.00112847' id='201'><font color='#0000ff' weight='0.000477431' id='199'><font color='#0000ff' weight='1.44676e-05' id='189'>i</font><font color='#0000ff' weight='1.44676e-05' id='191'>&lt;</font><font color='#0000ff' weight='8.68056e-05' id='198'><font color='#0000ff' weight='4.82253e-06' id='193'>bucket</font><font color='#0000ff' weight='4.82253e-06' id='195'>.</font><font color='#0000ff' weight='4.82253e-06' id='197'>length</font></font>;</font> </font><font color='#0000ff' weight='0.000434028' id='207'><font color='#0000ff' weight='0.000347222' id='206'><font color='#0000ff' weight='4.34028e-05' id='203'>i</font><font color='#0000ff' weight='4.34028e-05' id='205'>++</font></font>)</font> </font><font color='#0013ff' weight='0.0194444' id='266'>{
+             <font color='#0009ff' weight='0.009375' id='264'>for <font color='#0003ff' weight='0.00295139' id='244'>(<font color='#0000ff' weight='0.000238715' id='221'><font color='#0000ff' weight='9.76563e-05' id='219'><font color='#0000ff' weight='7.2338e-06' id='212'><font color='#0000ff' weight='3.6169e-06' id='211'>int</font> </font><font color='#0000ff' weight='3.6169e-06' id='214'>j</font><font color='#0000ff' weight='1.08507e-05' id='218'>=<font color='#0000ff' weight='7.2338e-06' id='217'><font color='#0000ff' weight='3.6169e-06' id='216'>0</font></font></font>;</font> </font><font color='#0000ff' weight='0.000303819' id='236'><font color='#0000ff' weight='0.000130208' id='234'><font color='#0000ff' weight='3.6169e-06' id='223'>j</font><font color='#0000ff' weight='3.6169e-06' id='225'>&lt;</font><font color='#0000ff' weight='2.53183e-05' id='233'><font color='#0000ff' weight='1.80845e-06' id='227'>bucket</font><font color='#0000ff' weight='7.2338e-06' id='232'>[<font color='#0000ff' weight='1.80845e-06' id='230'><font color='#0000ff' weight='9.04225e-07' id='229'>i</font>]</font></font></font>;</font> </font><font color='#0000ff' weight='0.000108507' id='242'><font color='#0000ff' weight='8.68056e-05' id='241'><font color='#0000ff' weight='1.08507e-05' id='238'>j</font><font color='#0000ff' weight='1.08507e-05' id='240'>++</font></font>)</font> </font><font color='#0001ff' weight='0.0015625' id='263'>{
+                <font color='#0000ff' weight='0.000694444' id='261'><font color='#0000ff' weight='6.51042e-05' id='254'><font color='#0000ff' weight='3.6169e-06' id='246'>a</font><font color='#0000ff' weight='2.17014e-05' id='253'>[<font color='#0000ff' weight='7.2338e-06' id='251'><font color='#0000ff' weight='9.04225e-07' id='248'>outPos</font><font color='#0000ff' weight='9.04225e-07' id='250'>++</font>]</font></font></font>=<font color='#0000ff' weight='7.2338e-06' id='258'>i</font>;
+             }</font></font>
+          }</font></font>
+       }</font></font>
+     
+     
+       </font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public List&lt;Integer&gt; sort(List&lt;Integer&gt; list){
+
+        
+        
+        
+        int n = list.size();
+        
+        while(n != 0){
+            
+            int swappy = 0;
+            for (int i = 1;i&lt;n;i++){
+                
+                if(<font color='#ff0000' weight='1' id='133'><font color='#00aaff' weight='0.166667' id='116'><font color='#001eff' weight='0.0294118' id='105'><font color='#0001ff' weight='0.00163399' id='100'>list</font><font color='#0001ff' weight='0.00163399' id='102'>.</font><font color='#0001ff' weight='0.00163399' id='104'>get</font></font><font color='#002cff' weight='0.0441176' id='115'>(<font color='#0011ff' weight='0.0171569' id='113'><font color='#000fff' weight='0.0147059' id='112'><font color='#0000ff' weight='0.000816993' id='107'>i</font><font color='#0000ff' weight='0.000816993' id='109'>-</font><font color='#0000ff' weight='0.000816993' id='111'>1</font></font>)</font></font> </font><font color='#000aff' weight='0.00980392' id='118'>&gt; </font><font color='#0082ff' weight='0.127451' id='132'><font color='#001eff' weight='0.0294118' id='125'><font color='#0001ff' weight='0.00163399' id='120'>list</font>.<font color='#0001ff' weight='0.00163399' id='124'>get</font></font><font color='#0018ff' weight='0.0245098' id='131'>(<font color='#0007ff' weight='0.00735294' id='129'><font color='#0004ff' weight='0.00490196' id='128'>i</font>)</font></font></font>)</font>{
+                    int temp = list.get(i-1);
+                    list.set(i-1,list.get(i));
+                    list.set(i,temp);
+                    
+                    swappy = i;
+                }
+            }
+            
+            n = swappy;
+        }
+        return list;
+    }</font>
+</pre>

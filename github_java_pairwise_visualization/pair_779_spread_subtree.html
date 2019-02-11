@@ -1,0 +1,124 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+
+import java.util.*;
+import java.nio.file.*;
+import java.io.*;
+
+public class Radix{
+
+    
+    
+    
+    public static int[] B;
+    public static long t;
+    public static void main(String[] args) throws IOException{
+        
+        Scanner in = new Scanner(Paths.get("../input/input_integers.txt"), "UTF-8");
+        PrintWriter outTime = new PrintWriter("../output/radix_sort/time.txt", "UTF-8");
+        
+        int[] origin=new int[1&lt;&lt;<font color='#ff0000' weight='1' id='177'></font>17];
+        for(int i = 0; i &lt; 1&lt;&lt;23; i++){
+            origin[i] = in.nextInt();
+        }
+
+        int[] exp={2, 5, 8, 11, 14, 17};
+        
+        
+        for(int index : exp){
+            int[] partArray = Arrays.copyOf(origin, 1&lt;&lt;index);
+            
+            
+            long enduration = sort(partArray)/1000;
+            partArray = B;
+            
+            outTime.println("index: " + index + "\ntime: " + enduration + "\tmicroseconds.");
+            outTime.flush();
+
+            
+            System.out.println("index: " + index + "\ntime: " + enduration + "\tmicroseconds.\n");
+            
+            PrintWriter outSort = new PrintWriter("../output/radix_sort/result_"+index+".txt", "UTF-8");
+            for(int j = 0; j &lt; 1&lt;&lt;index; j++){
+                
+                outSort.println(partArray[j]);
+                outSort.flush();
+            }
+        }
+    }
+    
+    
+    public static long sort(int[] A){
+        
+        long startTime = System.nanoTime();
+        
+        
+        radix_sort(A, 4);
+
+        
+        long endTime = System.nanoTime();
+        return endTime - startTime;
+    }
+
+    public static void radix_sort(int[] A, int d){
+        for(int i = 1; i &lt;= d; i++){
+            counting_sort(A, i);
+            A = B;
+        }
+    }
+
+    
+    
+    public static int digit(int num, int d){
+        
+        
+        return (num &gt;&gt; (4*(d-1))) &amp; 0x0f;
+    }
+
+    public static void counting_sort(int[] A, int d){
+        int tmp;
+        int l = A.length;
+        B = new int[l];
+        int[] C = new int[16];
+
+        for(int i = 0; i &lt; l; i++){
+            C[digit(A[i], d)]++;
+        }
+        
+
+        for(int i = 1; i &lt; 16; i++){
+            C[i] += C[i-1];
+        }
+        
+
+        for(int i = l-1; i &gt;= 0; i--){
+            B[C[digit(A[i], d)]-1] = A[i];
+            C[digit(A[i], d)] --;
+        }
+    }
+}
+
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+    <font color='#ff0500' weight='0.994898' id='196'><font color='#0000ff' weight='0.00085034' id='2'>public </font><font color='#0000ff' weight='0.00085034' id='4'>static </font>void <font color='#0000ff' weight='0.00085034' id='9'>selectionSortLargest</font>(<font color='#0000ff' weight='0.000106293' id='11'>double</font>[] <font color='#0000ff' weight='0.000212585' id='17'>array</font>)
+    <font color='#0096ff' weight='0.147109' id='195'>{
+        <font color='#004aff' weight='0.0727041' id='193'>for <font color='#0008ff' weight='0.00786565' id='59'>(<font color='#0001ff' weight='0.00106293' id='42'><font color='#0000ff' weight='0.000478316' id='40'><font color='#0000ff' weight='8.85771e-06' id='23'>int</font> <font color='#0000ff' weight='8.85771e-06' id='26'>r </font>= <font color='#0000ff' weight='9.74348e-05' id='38'><font color='#0000ff' weight='1.77154e-05' id='33'><font color='#0000ff' weight='9.8419e-07' id='28'>array</font>.<font color='#0000ff' weight='9.8419e-07' id='32'>length</font> </font><font color='#0000ff' weight='2.95257e-06' id='35'>- </font>1</font>;</font> </font><font color='#0000ff' weight='0.00042517' id='51'><font color='#0000ff' weight='0.000159439' id='49'><font color='#0000ff' weight='8.85771e-06' id='44'>r </font><font color='#0000ff' weight='8.85771e-06' id='46'>&gt; </font><font color='#0000ff' weight='8.85771e-06' id='48'>0</font>;</font> </font><font color='#0000ff' weight='0.000265731' id='57'><font color='#0000ff' weight='0.000212585' id='56'><font color='#0000ff' weight='2.65731e-05' id='53'>--</font><font color='#0000ff' weight='2.65731e-05' id='55'>r</font></font>)</font>
+        </font><font color='#001cff' weight='0.0280612' id='192'>{
+            <font color='#0000ff' weight='5.90514e-06' id='61'>int</font> <font color='#0000ff' weight='5.90514e-06' id='64'>largestElementIndex </font>= <font color='#0000ff' weight='5.90514e-06' id='66'>r</font>;
+            
+            <font color='#0002ff' weight='0.00226757' id='136'>for (int <font color='#0000ff' weight='7.38142e-07' id='76'>l </font>= 0; <font color='#0000ff' weight='7.38142e-07' id='85'>l </font>&lt; <font color='#0000ff' weight='7.38142e-07' id='89'>r</font>; ++<font color='#0000ff' weight='2.21443e-06' id='96'>l</font>)
+            <font color='#0000ff' weight='0.000602324' id='135'>{
+                <font color='#0000ff' weight='0.000283447' id='133'>if <font color='#0000ff' weight='8.85771e-05' id='121'>(<font color='#0000ff' weight='3.98597e-05' id='119'><font color='#0000ff' weight='3.69071e-07' id='102'>array</font>[<font color='#0000ff' weight='1.84536e-07' id='104'>l</font>] <font color='#0000ff' weight='7.38142e-07' id='110'>&gt; </font><font color='#0000ff' weight='5.167e-06' id='118'><font color='#0000ff' weight='3.69071e-07' id='112'>array</font><font color='#0000ff' weight='1.47628e-06' id='117'>[<font color='#0000ff' weight='3.69071e-07' id='115'><font color='#0000ff' weight='1.84536e-07' id='114'>largestElementIndex</font>]</font></font></font>)</font></font><font color='#0000ff' weight='4.42885e-05' id='132'>
+                    <font color='#0000ff' weight='3.98597e-05' id='131'><font color='#0000ff' weight='7.38142e-07' id='123'>largestElementIndex </font>= <font color='#0000ff' weight='7.38142e-07' id='127'>l</font>;</font></font>
+            }</font></font>
+            
+            
+            </font><font color='#0000ff' weight='5.90514e-06' id='138'>double</font> <font color='#0000ff' weight='5.90514e-06' id='141'>temp </font>= <font color='#0000ff' weight='2.95257e-06' id='143'>array</font>[<font color='#0000ff' weight='1.47629e-06' id='145'>r</font>];
+            <font color='#0000ff' weight='2.95257e-06' id='156'>array</font>[<font color='#0000ff' weight='1.47628e-06' id='158'>r</font>] <font color='#0000ff' weight='5.90514e-06' id='164'>= </font><font color='#0000ff' weight='2.95257e-06' id='166'>array</font>[<font color='#0000ff' weight='1.47628e-06' id='168'>largestElementIndex</font>];
+            <font color='#0000ff' weight='0.000212585' id='188'><font color='#0000ff' weight='2.95257e-06' id='177'>array</font>[<font color='#0000ff' weight='1.47628e-06' id='179'>largestElementIndex</font>] = <font color='#0000ff' weight='5.90514e-06' id='187'>temp</font>;</font>
+        }</font>
+    }</font></font></font></font>
+</pre>

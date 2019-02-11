@@ -1,0 +1,53 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+    public static int[] swap(int numbers[], int i, int j) {
+        int temp = numbers[i];
+        numbers[i] = numbers[j];
+        numbers[j] = temp;
+        return numbers;
+    }
+
+    public static int[] sort(int array[]) {
+        for (int index = 1; index &lt; array.length; index++) {
+            for (int indexj = 0; indexj &lt; index-1; indexj++)
+                <font color='#ff0000' weight='1' id='241'>if (<font color='#0054ff' weight='0.0833333' id='199'><font color='#002aff' weight='0.0416667' id='193'>array<font color='#002aff' weight='0.0416667' id='192'></font></font><font color='#002aff' weight='0.0416667' id='198'>[<font color='#0015ff' weight='0.0208333' id='196'><font color='#0015ff' weight='0.0208333' id='195'>indexj<font color='#0015ff' weight='0.0208333' id='194'></font></font>]</font><font color='#0015ff' weight='0.0208333' id='197'></font></font> </font><font color='#0054ff' weight='0.0833333' id='201'>&gt; </font><font color='#002aff' weight='0.0416667' id='203'>array<font color='#002aff' weight='0.0416667' id='202'></font></font>[<font color='#0015ff' weight='0.0208333' id='205'>index<font color='#0015ff' weight='0.0208333' id='204'></font></font>]) <font color='#00ff00' weight='0.5' id='238'>{
+                    <font color='#00ffff' weight='0.25' id='236'><font color='#007fff' weight='0.125' id='234'><font color='#002aff' weight='0.0416667' id='214'>array<font color='#002aff' weight='0.0416667' id='213'></font> </font><font color='#002aff' weight='0.0416667' id='216'>=<font color='#002aff' weight='0.0416667' id='215'></font> </font><font color='#002aff' weight='0.0416667' id='233'><font color='#0015ff' weight='0.0208333' id='218'>swap<font color='#0015ff' weight='0.0208333' id='217'></font></font><font color='#0015ff' weight='0.0208333' id='232'>(<font color='#0005ff' weight='0.00520833' id='222'><font color='#0005ff' weight='0.00520833' id='221'><font color='#0005ff' weight='0.00520833' id='220'>array<font color='#0005ff' weight='0.00520833' id='219'></font></font></font>, </font><font color='#0005ff' weight='0.00520833' id='226'><font color='#0005ff' weight='0.00520833' id='225'><font color='#0005ff' weight='0.00520833' id='224'>indexj<font color='#0005ff' weight='0.00520833' id='223'></font></font></font>, </font><font color='#0005ff' weight='0.00520833' id='230'><font color='#0005ff' weight='0.00520833' id='229'><font color='#0005ff' weight='0.00520833' id='228'>index</font></font>)</font><font color='#0005ff' weight='0.00520833' id='231'></font></font></font>;</font><font color='#007fff' weight='0.125' id='235'></font>
+                }</font><font color='#00ffff' weight='0.25' id='237'></font></font></font>
+        }
+        return array;
+    }
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public void sort(int a[]) {
+
+        if(a == null || a.length &lt;= 1) {
+            return;
+        }
+
+        insertNumberAtIndexInSortedArray(a, 1);
+    }
+
+    private void insertNumberAtIndexInSortedArray(int a[], int index) {
+
+        if (index == a.length) <font color='#ff0000' weight='1' id='110'>{
+            <font color='#00ff00' weight='0.5' id='108'>return;<font color='#00ff00' weight='0.5' id='107'></font>
+        }</font><font color='#00ff00' weight='0.5' id='109'></font></font>
+
+        int number = a[index];
+        int i;
+        for (i=index-1; i &gt;= 0; i--) {
+            if (number &lt; a[i]) {
+                a[i+1] = a[i];
+            } else {
+                break;
+            }
+        }
+
+        a[i+1] = number;
+
+        insertNumberAtIndexInSortedArray(a, index+1);
+    }
+</font>
+</pre>

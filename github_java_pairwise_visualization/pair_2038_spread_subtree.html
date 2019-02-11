@@ -1,0 +1,92 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+    public static void sort(int[] a) {
+        
+        shuffleArray(a);
+        sort(a, 0, a.length - 1);
+    }
+
+    private static void sort(int[] a, int lo, int hi) {
+        
+        if(hi &lt;= lo)    return;
+        int j = partition(a, lo, hi);
+        sort(a, lo, j - 1);
+        sort(a, j + 1, hi);
+    }
+
+    private static int partition(int[] a, int lo, int hi) {
+        int i = lo, j = hi + 1;
+        while(true)<font color='#ff0000' weight='1' id='372'>{
+            
+            while<font color='#0013ff' weight='0.0191304' id='279'>(<font color='#0001ff' weight='0.00101449' id='264'><font color='#0000ff' weight='7.24638e-05' id='258'>a</font>[<font color='#0000ff' weight='3.62319e-05' id='260'>lo</font>] </font><font color='#0000ff' weight='0.000144928' id='266'>&gt; </font><font color='#0001ff' weight='0.00130435' id='276'><font color='#0000ff' weight='7.24638e-05' id='268'>a</font>[<font color='#0000ff' weight='1.81159e-05' id='270'>++</font>i]</font>) </font><font color='#000dff' weight='0.0130435' id='295'>{
+                if<font color='#0001ff' weight='0.00173913' id='288'>(<font color='#0000ff' weight='0.000652174' id='286'><font color='#0000ff' weight='3.62319e-05' id='281'>i </font>== <font color='#0000ff' weight='3.62319e-05' id='285'>hi</font>)</font></font> <font color='#0000ff' weight='0.000217391' id='290'>break;</font>
+            }</font>
+            
+            while<font color='#0013ff' weight='0.0191304' id='319'>(<font color='#0008ff' weight='0.00869565' id='317'><font color='#0001ff' weight='0.00101449' id='304'><font color='#0000ff' weight='7.24638e-05' id='298'>a</font><font color='#0000ff' weight='0.000289855' id='303'>[<font color='#0000ff' weight='7.24638e-05' id='301'><font color='#0000ff' weight='3.62319e-05' id='300'>lo</font>]</font></font> </font>&lt; <font color='#0001ff' weight='0.00130435' id='316'>a<font color='#0000ff' weight='0.000434783' id='315'>[<font color='#0000ff' weight='0.000144928' id='313'>--j]</font></font></font>)</font> </font>{
+                <font color='#0005ff' weight='0.00565217' id='333'>if(<font color='#0000ff' weight='3.62319e-05' id='321'>j </font>== <font color='#0000ff' weight='3.62319e-05' id='325'>lo</font>) <font color='#0000ff' weight='0.000434783' id='331'><font color='#0000ff' weight='0.000217391' id='330'>break;</font></font>
+            }</font>
+            
+            if<font color='#0007ff' weight='0.00695652' id='345'>(<font color='#0000ff' weight='0.000144928' id='338'>j </font><font color='#0000ff' weight='0.000144928' id='340'>&lt;= </font>i)</font> <font color='#0001ff' weight='0.00173913' id='348'><font color='#0000ff' weight='0.000869565' id='347'>break;</font></font>
+            
+            <font color='#0021ff' weight='0.0330435' id='370'><font color='#000fff' weight='0.0147826' id='368'><font color='#000eff' weight='0.013913' id='367'>exch<font color='#0005ff' weight='0.00565217' id='366'>(<font color='#0000ff' weight='0.000326087' id='356'><font color='#0000ff' weight='0.000217391' id='355'>a</font>, </font><font color='#0000ff' weight='0.000326087' id='360'><font color='#0000ff' weight='0.000217391' id='359'><font color='#0000ff' weight='0.000108696' id='358'>i</font></font>, </font><font color='#0000ff' weight='0.000326087' id='364'><font color='#0000ff' weight='0.000217391' id='363'><font color='#0000ff' weight='0.000108696' id='362'>j</font></font>)</font></font></font>;</font>
+        }</font></font>
+        
+        exch(a, lo, j);
+        return j;
+    }
+
+    private static void exch(int[] a, int i, int j) {
+        int temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+   public static void mergeSort(int[] arr) {
+      if (arr.length &gt; 1) {
+         int[] left = leftHalf(arr);
+         int[] right = rightHalf(arr);
+
+         mergeSort(left);
+         mergeSort(right);
+
+         mergeArrays(arr, left, right);
+      }
+   }
+
+   public static int[] leftHalf(int[] arr) {
+      int size = arr.length / 2;
+      int[] left = new int[size];
+      for (int i = 0; i &lt; size; i++) {
+         left[i] = arr[i];
+      }
+      return left;
+   }
+
+   public static int[] rightHalf(int[] arr) {
+      int size1 = arr.length / 2;
+      int size2 = arr.length - size1;
+      int[] right = new int[size2];
+      for (int i = 0; i &lt; size2; i++) {
+         right[i] = arr[i + size1];
+      }
+      return right;
+   }
+
+   public static void mergeArrays(int[] arr, int[] left, int[] right) {
+      int i1 = 0;
+      int i2 = 0;
+
+      for (int i = 0; i &lt; arr.length; i++) {
+         if (i2 &gt;= right.length || (i1 &lt; left.length &amp;&amp; left[i1] &lt;= right[i2])) {
+            arr[i] = left[i1];
+            i1++;
+         } else {
+            arr[i] = right[i2];
+            i2++;
+         }
+      }
+   }</font>
+</pre>

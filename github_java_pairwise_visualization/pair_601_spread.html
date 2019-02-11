@@ -1,0 +1,78 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+private List&lt;Stmt&gt; topologicalSort(StmtList stmts) {
+
+        List&lt;Stmt&gt; out = new ArrayList&lt;Stmt&gt;(stmts.getSize());
+        Stack&lt;Stmt&gt; stack = new Stack&lt;Stmt&gt;();
+        stack.push(stmts.getFirst());
+
+        boolean visitedFlag = false;
+
+        while (!stack.empty()) {
+            Stmt stmt = stack.pop();
+            if (<font color='#0071ff' weight='0.111111' id='166'>stmt<font color='#0071ff' weight='0.111111' id='165'></font></font>.<font color='#0071ff' weight='0.111111' id='167'></font>_cfg_visited ==<font color='#00ffa9' weight='0.333333' id='172'></font> <font color='#00ffa9' weight='0.333333' id='175'>visitedFlag<font color='#00ffa9' weight='0.333333' id='174'></font></font>) {
+                continue;
+            }
+            if (stmt._cfg_froms.size() == 0 || stack.size() == 0) {
+                stmt._cfg_visited = visitedFlag;
+                out.add(stmt);
+                for (Stmt t : stmt._cfg_tos) {
+                    t._cfg_froms.remove(stmt);
+                    if (t._cfg_visited != visitedFlag) {
+                        stack.push(t);
+                    }
+                }
+            }
+        }
+        return out;
+    }
+
+    </font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+    void ordenaArray(int iz, int de) {
+
+        int i, j, x, w;
+
+        i = iz;
+        j = de;
+
+        x = vector[(iz + de) / 2];
+
+        do {
+
+            while (vector[i] &lt; x) {
+                i++; 
+            }
+
+            while (x &lt; vector[j]) {
+                j--; 
+            }
+
+            if (i &lt;= j) {
+
+                w = vector[i];
+
+                vector[i] = vector[j];
+
+                vector[j] = w;
+                i++;  
+                j--; 
+            }
+        } while (i &lt;= j);
+
+
+        w = vector[i];
+        vector[i] = vector[de];
+        vector[de] = w;
+
+        if (iz &lt; j) {
+            ordenaArray(iz, j);
+        }
+        if (i &lt; de) {
+            ordenaArray(i, de);
+        }
+    }</font>
+</pre>

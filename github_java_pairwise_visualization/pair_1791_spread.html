@@ -1,0 +1,107 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ void bubbleSort<font color='#00feff' weight='0.249973' id='17'>(<font color='#003fff' weight='0.0624661' id='8'>int </font><font color='#001fff' weight='0.031215' id='10'>arr</font><font color='#001fff' weight='0.031215' id='12'>[]</font>) 
+    </font>{ 
+        <font color='#000eff' weight='0.0138532' id='19'>int<font color='#000eff' weight='0.0138532' id='18'></font></font> <font color='#000eff' weight='0.0138532' id='22'>n<font color='#000eff' weight='0.0138532' id='21'></font> </font><font color='#000eff' weight='0.0138532' id='31'>= <font color='#000eff' weight='0.0138532' id='30'><font color='#000eff' weight='0.0138532' id='29'><font color='#0004ff' weight='0.00459363' id='24'>arr<font color='#0004ff' weight='0.00459363' id='23'></font></font><font color='#0004ff' weight='0.00459363' id='26'>.</font>length<font color='#0004ff' weight='0.00459363' id='27'></font></font></font></font>;<font color='#002aff' weight='0.041632' id='33'></font> 
+        for (<font color='#0001ff' weight='0.0017' id='36'>int<font color='#0001ff' weight='0.0017' id='35'></font></font> i = 0; <font color='#0001ff' weight='0.00100553' id='48'>i </font><font color='#0001ff' weight='0.00100553' id='50'>&lt;<font color='#0001ff' weight='0.00100553' id='49'></font> </font>n<font color='#0001ff' weight='0.00100553' id='51'></font>-<font color='#0001ff' weight='0.00100553' id='53'></font><font color='#0001ff' weight='0.00100553' id='56'>1<font color='#0001ff' weight='0.00100553' id='55'></font></font>; i++) 
+            for (int <font color='#0000ff' weight='0.000831917' id='72'>j </font>= 0; j &lt; n-i-1; j++) 
+                <font color='#0015ff' weight='0.0207979' id='196'>if (arr[j] &gt; arr[j+1])<font color='#000aff' weight='0.0103809' id='194'> 
+                <font color='#000aff' weight='0.0103809' id='193'>{ 
+                    
+                    <font color='#0002ff' weight='0.00256809' id='147'>int temp = arr[j]; 
+                    </font>arr[j] = arr[j+1]; 
+                    <font color='#0000ff' weight='0.000180851' id='174'>arr</font>[j+1] = temp; 
+                }<font color='#0002ff' weight='0.00256809' id='192'></font></font></font></font> 
+    } </font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+package com.xdc.basic.algorithm.basic.sort;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+
+public class RadixSort
+{
+    public static void sort(int[] n)
+    {
+        
+        ArrayList&lt;ArrayList&lt;Integer&gt;&gt; ll = new ArrayList&lt;ArrayList&lt;Integer&gt;&gt;();
+        for (int i = 0; i &lt; 10; i++)
+        {
+            ll.add(new ArrayList&lt;Integer&gt;());
+        }
+
+        
+        int maxPower = getMaxPower(n);
+
+        
+        for (int power = 0; power &lt;= maxPower; power++)
+        {
+            
+            distribute(n, ll, power);
+
+            
+            collect(n, ll);
+        }
+    }
+
+    
+    private static void collect(int[] n, ArrayList&lt;ArrayList&lt;Integer&gt;&gt; ll)
+    {
+        int k = 0;
+        for (ArrayList&lt;Integer&gt; l : ll)
+        {
+            for (Integer i : l)
+            {
+                n[k] = i;
+                k++;
+            }
+            l.clear();
+        }
+    }
+
+    
+    private static void distribute(int[] n, ArrayList&lt;ArrayList&lt;Integer&gt;&gt; ll, int power)
+    {
+        for (int i = 0; i &lt; n.length; i++)
+        {
+            int digit = (n[i] / ((int) (Math.pow(10, power)))) % 10;
+            ll.get(digit).add(n[i]);
+        }
+    }
+
+    
+    private static int getMaxPower(int[] n)
+    {
+        
+        int max = n[0];
+        for (int i = 1; i &lt; n.length; i++)
+        {
+            if (n[i] &gt; max)
+            {
+                max = n[i];
+            }
+        }
+
+        
+        int digitalCount = 0;
+        while (max != 0)
+        {
+            digitalCount++;
+            max /= 10;
+        }
+
+        return digitalCount;
+    }
+
+    public static void main(String[] args)
+    {
+        int[] n = new int[] <font color='#ff0000' weight='1' id='829'>{ <font color='#0030ff' weight='0.047619' id='770'><font color='#0030ff' weight='0.047619' id='769'>44<font color='#0030ff' weight='0.047619' id='768'></font></font>, </font><font color='#0030ff' weight='0.047619' id='773'><font color='#0030ff' weight='0.047619' id='772'>22<font color='#0030ff' weight='0.047619' id='771'></font></font>, </font><font color='#0030ff' weight='0.047619' id='776'><font color='#0030ff' weight='0.047619' id='775'>46<font color='#0030ff' weight='0.047619' id='774'></font></font>, </font><font color='#0030ff' weight='0.047619' id='779'><font color='#0030ff' weight='0.047619' id='778'>47<font color='#0030ff' weight='0.047619' id='777'></font></font>, </font><font color='#0030ff' weight='0.047619' id='782'><font color='#0030ff' weight='0.047619' id='781'>82<font color='#0030ff' weight='0.047619' id='780'></font></font>, </font><font color='#0030ff' weight='0.047619' id='785'><font color='#0030ff' weight='0.047619' id='784'>76<font color='#0030ff' weight='0.047619' id='783'></font></font>, </font><font color='#0030ff' weight='0.047619' id='788'><font color='#0030ff' weight='0.047619' id='787'>96<font color='#0030ff' weight='0.047619' id='786'></font></font>, </font><font color='#0030ff' weight='0.047619' id='791'><font color='#0030ff' weight='0.047619' id='790'>82<font color='#0030ff' weight='0.047619' id='789'></font></font>, </font><font color='#0030ff' weight='0.047619' id='794'><font color='#0030ff' weight='0.047619' id='793'>79<font color='#0030ff' weight='0.047619' id='792'></font></font>, </font><font color='#0030ff' weight='0.047619' id='797'><font color='#0030ff' weight='0.047619' id='796'>35<font color='#0030ff' weight='0.047619' id='795'></font></font>, </font><font color='#0030ff' weight='0.047619' id='800'><font color='#0030ff' weight='0.047619' id='799'>8<font color='#0030ff' weight='0.047619' id='798'></font></font>, </font><font color='#0030ff' weight='0.047619' id='803'><font color='#0030ff' weight='0.047619' id='802'>75<font color='#0030ff' weight='0.047619' id='801'></font></font>, </font><font color='#0030ff' weight='0.047619' id='806'><font color='#0030ff' weight='0.047619' id='805'>85<font color='#0030ff' weight='0.047619' id='804'></font></font>, </font><font color='#0030ff' weight='0.047619' id='809'><font color='#0030ff' weight='0.047619' id='808'>84<font color='#0030ff' weight='0.047619' id='807'></font></font>, </font><font color='#0030ff' weight='0.047619' id='812'><font color='#0030ff' weight='0.047619' id='811'>78<font color='#0030ff' weight='0.047619' id='810'></font></font>, </font><font color='#0030ff' weight='0.047619' id='815'><font color='#0030ff' weight='0.047619' id='814'>98<font color='#0030ff' weight='0.047619' id='813'></font></font>, </font><font color='#0030ff' weight='0.047619' id='818'><font color='#0030ff' weight='0.047619' id='817'>59<font color='#0030ff' weight='0.047619' id='816'></font></font>, </font><font color='#0030ff' weight='0.047619' id='821'><font color='#0030ff' weight='0.047619' id='820'>72<font color='#0030ff' weight='0.047619' id='819'></font></font>, </font><font color='#0030ff' weight='0.047619' id='824'><font color='#0030ff' weight='0.047619' id='823'>81<font color='#0030ff' weight='0.047619' id='822'></font></font>, </font><font color='#0030ff' weight='0.047619' id='827'><font color='#0030ff' weight='0.047619' id='826'>44<font color='#0030ff' weight='0.047619' id='825'></font></font> }</font><font color='#0030ff' weight='0.047619' id='828'></font></font>;
+        RadixSort.sort(n);
+        System.out.println(Arrays.toString(n));
+    }
+}
+</font>
+</pre>

@@ -1,0 +1,81 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+package org.hibernate.envers.internal.tools.graph;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+
+public class TopologicalSort&lt;R&gt; {
+	private List&lt;R&gt; sorted;
+	private int time;
+
+	private void process(Vertex&lt;R&gt; v) {
+		if ( v.getStartTime() != 0 ) {
+			
+			return;
+		}
+
+		v.setStartTime( time++ );
+
+		for ( Vertex&lt;R&gt; n : v.getNeighbours() ) {
+			process( n );
+		}
+
+		v.setEndTime( time++ );
+
+		sorted.add( v.getRepresentation() );
+	}
+
+	public List&lt;R&gt; sort(Collection&lt;Vertex&lt;R&gt;&gt; vertices) {
+		sorted = new ArrayList&lt;&gt;( vertices.size() );
+
+		time = 1;
+
+		for ( Vertex&lt;R&gt; v : vertices ) {
+			if ( v.getEndTime() == 0 ) {
+				process( v );
+			}
+		}
+
+		Collections.reverse( sorted );
+
+		return sorted;
+	}
+}
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+private List&lt;Stmt&gt; topologicalSort(StmtList stmts) {
+
+        List&lt;Stmt&gt; out = new ArrayList&lt;Stmt&gt;(stmts.getSize());
+        Stack&lt;Stmt&gt; stack = new Stack&lt;Stmt&gt;();
+        stack.push(stmts.getFirst());
+
+        boolean visitedFlag = false;
+
+        while (!stack.empty()) {
+            Stmt stmt = stack.pop();
+            if (stmt._cfg_visited == visitedFlag) {
+                continue;
+            }
+            if (stmt._cfg_froms.size() == 0 || stack.size() == 0) {
+                stmt._cfg_visited = visitedFlag;
+                out.add(stmt);
+                for (Stmt t : stmt._cfg_tos) {
+                    t._cfg_froms.remove(stmt);
+                    if (t._cfg_visited != visitedFlag) {
+                        stack.push(t);
+                    }
+                }
+            }
+        }
+        return out;
+    }
+
+    </font>
+</pre>

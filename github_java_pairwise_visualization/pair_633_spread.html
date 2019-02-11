@@ -1,0 +1,73 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static void sort(int arr[])
+    {       
+        heapify(arr);        
+        for (int i = N; i &gt; 0; i--)
+        {
+            swap(arr,0, i);
+            N = N-1;
+            maxheap(arr, 0);
+        }
+    }     
+       
+    public static void heapify(int arr[])
+    {
+        N = arr.length-1;
+        for (int i = N/2; <font color='#ff0000' weight='1' id='179'><font color='#00ffa9' weight='0.333333' id='174'>i </font><font color='#00ffa9' weight='0.333333' id='176'>&gt;= </font><font color='#00ffa9' weight='0.333333' id='178'>0<font color='#00ffa9' weight='0.333333' id='177'></font></font>;</font> i--)
+            maxheap(arr, i);        
+    }
+            
+    public static void maxheap(int arr[], int i)
+    { 
+        int left = 2*i ;
+        int right = 2*i + 1;
+        int max = i;
+        if (left &lt;= N &amp;&amp; arr[left] &gt; arr[i])
+            max = left;
+        if (right &lt;= N &amp;&amp; arr[right] &gt; arr[max])        
+            max = right;
+ 
+        if (max != i)
+        {
+            swap(arr, i, max);
+            maxheap(arr, max);
+        }
+    }    
+    
+    public static void swap(int arr[], int i, int j)
+    {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp; 
+    }    </font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static void sort(long[] valuesArray, int[] gapsArray) throws SortException {
+
+        if(gapsArray.length == 0) throw new EmptyArrayException("Gaps array can not by empty");
+
+        int endGap = gapsArray[gapsArray.length-1];
+        if(endGap != 1) throw new InvalidGapSequenceException("Gaps sequence must end with 1");
+
+
+        int valuesArraySize = valuesArray.length;
+
+        for (int gap : gapsArray) {
+
+            for (int i = gap; i &lt; valuesArraySize; i++) {
+
+                long value = valuesArray[i];
+                int j = i;
+
+                while (j &gt;= gap &amp;&amp; valuesArray[j - gap] &gt; value) {
+                    valuesArray[j] = valuesArray[j - gap];
+                    j -= gap;
+                }
+
+                valuesArray[j] = value;
+            }
+        }
+    }</font>
+</pre>

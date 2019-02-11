@@ -1,0 +1,51 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static void quicksort(int[] a, int start, int end) {
+        if (start &gt;= end)
+            return;
+
+        int pavot = a[start];
+        int i = start;
+        int j = end;
+
+        while (i &lt; j) {
+            while (i &lt; j &amp;&amp; a[j] &gt; pavot)
+                j--;
+            while (i &lt; j &amp;&amp; a[i] &lt;= pavot)
+                i++;
+            if (i != j) {
+                int t = a[i];
+                a[i] = a[j];
+                a[j] = t;
+            }
+        }
+        if (i == j) {
+            int t = a[start];
+            a[start] = a[i];
+            a[j] = t;
+        }
+        quicksort(a, start, i - 1);
+        quicksort(a, i + 1, end);
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+    public static void insertionSort() {
+        int ii = 0, jj = 0;
+        for (ii = 1; ii &lt; InsertionSort.ITEMS.length; ii++) {
+            jj = ii;
+            while ((jj &gt; 0)
+                    &amp;&amp; (InsertionSort.ITEMS[jj] &lt; InsertionSort.ITEMS[jj - 1])) {
+                swap(jj, jj - 1);
+                jj -= 1;
+            }
+        }
+    }
+
+    public static void swap(final int ii, final int jj) {
+        final int temp = InsertionSort.ITEMS[ii];
+        InsertionSort.ITEMS[ii] = InsertionSort.ITEMS[jj];
+        InsertionSort.ITEMS[jj] = temp;
+    }</font>
+</pre>

@@ -1,0 +1,100 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+    public static void sort(Comparable[] a) {
+        
+        final int N  = a.length; int h = 1;
+        while(h &lt; N/3) h = 3*h + 1;
+        
+        
+        while(h &gt;= 1) {
+        
+            
+            
+            for(int i = h; i &lt; N; i++) {
+            
+                
+                
+                for(int j = i; j &gt;= h &amp;&amp; less(a[j], a[j-h]); j -= h) exch(a, j, j-h);
+                
+            }
+            h /= 3;
+        }
+        
+        
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ 
+  public static void sort(double[] a)
+  {
+    int n = a.length;
+    temp = new double[n];
+    recursiveSort(a, 0, n-1);
+  }
+
+  
+  private static void recursiveSort(double[] a, int from, int to)
+  {
+    if (to - from &lt; 2)       
+    {
+      if (to &gt; from &amp;&amp; a[to] &lt; a[from])
+      {
+        double aTemp = a[to];  
+        a[to] = a[from];
+        a[from] = aTemp;
+      }
+    }
+    else                     
+    {
+      int middle = (from + to) / 2;
+      recursiveSort(a, from, middle);
+      recursiveSort(a, middle + 1, to);
+      merge(a, from, middle, to);
+    }
+  }
+
+  
+  
+  private static void merge(double[] a, int from, <font color='#ff0000' weight='1' id='352'><font color='#ff0000' weight='1' id='351'><font color='#ff0000' weight='1' id='348'><font color='#ff0000' weight='1' id='347'>int<font color='#ff0000' weight='1' id='346'></font></font> </font><font color='#ff0000' weight='1' id='350'>middle<font color='#ff0000' weight='1' id='349'></font></font></font>, </font>int to)
+  {
+    int i = from, j = middle + 1, k = from;
+
+    
+    while (i &lt;= middle &amp;&amp; j &lt;= to)
+    {
+      if (a[i] &lt; a[j])
+      {
+        temp[k] = a[i];   
+        i++;
+      }
+      else
+      {
+        temp[k] = a[j];
+        j++;
+      }
+      k++;
+    }
+
+    
+    while (i &lt;= middle)
+    {
+      temp[k] = a[i];     
+      i++;
+      k++;
+    }
+
+    
+    while (j &lt;= to)
+    {
+      temp[k] = a[j];     
+      j++;
+      k++;
+    }
+
+    
+    for (k = from; k &lt;= to; k++)
+      a[k] = temp[k];
+  }</font>
+</pre>

@@ -1,0 +1,49 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+    public static int[] swap(int numbers[], int i, int j) {
+        int temp = numbers[i];
+        numbers[i] = numbers[j];
+        numbers[j] = temp;
+        return numbers;
+    }
+
+    public static int[] sort(int array[]) {
+        for (int index = 1; index &lt; array.length; index++) {
+            for (int indexj = 0; indexj &lt; index-1; indexj++)
+                <font color='#ff0000' weight='1' id='241'><font color='#ff1400' weight='0.979592' id='240'>if <font color='#00d0ff' weight='0.204082' id='212'>(<font color='#005dff' weight='0.0918367' id='210'><font color='#000cff' weight='0.0119048' id='199'><font color='#0000ff' weight='0.00085034' id='193'>array</font>[<font color='#0000ff' weight='0.00085034' id='196'><font color='#0000ff' weight='0.00042517' id='195'>indexj</font>]</font> </font><font color='#0001ff' weight='0.00170068' id='201'>&gt; </font><font color='#000cff' weight='0.0119048' id='209'><font color='#0000ff' weight='0.00085034' id='203'>array</font><font color='#0003ff' weight='0.00340136' id='208'>[<font color='#0000ff' weight='0.00042517' id='205'>index</font>]</font></font>)</font></font><font color='#00ffef' weight='0.265306' id='239'> <font color='#00fff9' weight='0.255102' id='238'>{
+                    <font color='#0077ff' weight='0.117347' id='236'><font color='#0036ff' weight='0.0535714' id='234'><font color='#0000ff' weight='0.00085034' id='214'>array </font><font color='#0000ff' weight='0.00085034' id='216'>= </font><font color='#000dff' weight='0.0136054' id='233'><font color='#0000ff' weight='0.00042517' id='218'>swap</font><font color='#0005ff' weight='0.00552721' id='232'>(<font color='#0000ff' weight='0.000318878' id='222'><font color='#0000ff' weight='0.000212585' id='221'><font color='#0000ff' weight='0.000106293' id='220'>array</font></font>, </font><font color='#0000ff' weight='0.000318878' id='226'><font color='#0000ff' weight='0.000212585' id='225'><font color='#0000ff' weight='0.000106293' id='224'>indexj</font></font>, </font><font color='#0000ff' weight='0.000318878' id='230'><font color='#0000ff' weight='0.000212585' id='229'><font color='#0000ff' weight='0.000106293' id='228'>index</font></font>)</font></font></font>;</font>
+                }</font></font></font></font></font>
+        }
+        return array;
+    }
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static void sort(long[] valuesArray, int[] gapsArray) throws SortException {
+
+        if(gapsArray.length == 0) throw new EmptyArrayException("Gaps array can not by empty");
+
+        int endGap = gapsArray[gapsArray.length-1];
+        if(endGap != 1) throw new InvalidGapSequenceException("Gaps sequence must end with 1");
+
+
+        int valuesArraySize = valuesArray.length;
+
+        for (int gap : gapsArray) {
+
+            for (int i = gap; i &lt; valuesArraySize; i++) {
+
+                long value = valuesArray[i];
+                int j = i;
+
+                while (j &gt;= gap &amp;&amp; valuesArray[j - gap] &gt; value) {
+                    valuesArray[j] = valuesArray[j - gap];
+                    j -= gap;
+                }
+
+                valuesArray[j] = value;
+            }
+        }
+    }</font>
+</pre>

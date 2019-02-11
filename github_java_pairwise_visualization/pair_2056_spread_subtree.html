@@ -1,0 +1,89 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public int[] mergesort(int[] arr) {
+    <font color='#0006ff' weight='0.0063745' id='39'><font color='#0002ff' weight='0.00278884' id='37'>int len = <font color='#0000ff' weight='0.000464807' id='35'>arr.length</font>;</font> 
+    </font>if (len &lt;= <font color='#0000ff' weight='3.32005e-05' id='45'>1</font>)
+      return <font color='#0000ff' weight='0.000199203' id='51'><font color='#0000ff' weight='9.96016e-05' id='50'>arr</font>;</font> 
+    <font color='#0006ff' weight='0.0059761' id='72'><font color='#0002ff' weight='0.00258964' id='70'>int alen = len / <font color='#0000ff' weight='2.21337e-05' id='67'>2</font>;</font> 
+    </font><font color='#0006ff' weight='0.0059761' id='88'>int blen = <font color='#0000ff' weight='0.000398406' id='84'>len - <font color='#0000ff' weight='2.21337e-05' id='83'>alen</font></font>; 
+    </font><font color='#0000ff' weight='0.000332005' id='94'>int[] </font><font color='#0000ff' weight='6.64011e-05' id='96'>a </font><font color='#0000ff' weight='0.000730412' id='108'>= <font color='#0000ff' weight='0.000664011' id='107'>new <font color='#0000ff' weight='1.66003e-05' id='100'>int</font>[<font color='#0000ff' weight='1.66003e-05' id='103'>alen]</font></font></font>;
+    <font color='#0004ff' weight='0.00398406' id='132'><font color='#0000ff' weight='0.000332005' id='117'><font color='#0000ff' weight='0.000265604' id='116'>int[]</font> </font>b <font color='#0000ff' weight='0.000730412' id='131'>= <font color='#0000ff' weight='3.32005e-05' id='121'>new </font><font color='#0000ff' weight='0.000232404' id='129'><font color='#0000ff' weight='1.66003e-05' id='123'>int</font><font color='#0000ff' weight='6.64011e-05' id='128'>[<font color='#0000ff' weight='1.66003e-05' id='126'>blen]</font></font></font></font>;</font> 
+    for (<font color='#0000ff' weight='1.66003e-05' id='137'>int </font><font color='#0000ff' weight='8.30013e-06' id='139'>i </font>= 0; <font color='#0000ff' weight='8.30013e-06' id='148'>i </font><font color='#0000ff' weight='8.30013e-06' id='150'>&lt; </font><font color='#0000ff' weight='8.30013e-06' id='152'>alen</font>; <font color='#0000ff' weight='0.000249004' id='161'>i++)</font> 
+      <font color='#0000ff' weight='0.000232404' id='171'><font color='#0000ff' weight='1.66003e-05' id='165'>a</font><font color='#0000ff' weight='6.64011e-05' id='170'>[<font color='#0000ff' weight='1.66003e-05' id='168'>i]</font></font> </font><font color='#0000ff' weight='3.32005e-05' id='173'>= </font><font color='#0000ff' weight='0.000232404' id='181'>arr[i]</font>;
+    <font color='#0016ff' weight='0.0219124' id='242'>for (<font color='#0000ff' weight='0.000224104' id='196'>int i <font color='#0000ff' weight='2.49004e-05' id='195'>= 0</font>;</font> i &lt; <font color='#0000ff' weight='8.30013e-06' id='204'>blen</font>; i++)
+      <font color='#0005ff' weight='0.00498008' id='241'><font color='#0000ff' weight='1.66003e-05' id='217'>b</font>[i] = arr[alen + i];</font>
+    </font><font color='#000bff' weight='0.0115538' id='272'>return merge(<font color='#0000ff' weight='0.000332005' id='255'><font color='#0000ff' weight='0.000298805' id='254'><font color='#0000ff' weight='0.000265604' id='253'>mergesort(<font color='#0000ff' weight='1.66003e-05' id='249'>a</font>)</font></font>, </font>mergesort(<font color='#0000ff' weight='8.30013e-06' id='259'>b</font>));
+  }</font>
+  
+  public int[] merge(int[] a, int[] b) {
+    int alen = a.length; 
+    int blen = b.length; 
+    int len = alen + blen; 
+    int[] arr = new int[len];
+    int i = 0, j = 0, k = 0; 
+    while (k &lt; len) { 
+      while (i &lt; alen &amp;&amp; j &lt; blen) 
+        if (a[i] &lt; b[j])  
+          arr[k++] = a[i++];
+        else if (a[i] &gt; b[j]) 
+          arr[k++] = b[j++];
+        else { 
+          arr[k++] = a[i++]; 
+          arr[k++] = b[j++];
+        }
+        while (i &lt; alen)  
+          arr[k++] = a[i++];
+        while (j &lt; blen)
+          arr[k++] = b[j++];
+    }
+    return arr; 
+  }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+   public static void mergeSort(int[] arr) {
+      if (arr.length &gt; 1) {
+         int[] left = leftHalf(arr);
+         int[] right = rightHalf(arr);
+
+         mergeSort(left);
+         mergeSort(right);
+
+         mergeArrays(arr, left, right);
+      }
+   }
+
+   public static int[] leftHalf(int[] arr) {
+      int size = arr.length / 2;
+      int[] left = new int[size];
+      for (int i = 0; i &lt; size; i++) {
+         left[i] = arr[i];
+      }
+      return left;
+   }
+
+   public static int[] rightHalf(int[] arr) <font color='#ff0000' weight='1' id='412'>{
+      int <font color='#0000ff' weight='0.000217014' id='288'>size1 </font>= <font color='#0000ff' weight='2.41127e-05' id='290'>arr</font>.length <font color='#0000ff' weight='7.2338e-05' id='297'>/ </font><font color='#0000ff' weight='7.2338e-05' id='299'>2</font>;
+      int <font color='#0000ff' weight='0.000217014' id='309'>size2 </font>= <font color='#0000ff' weight='2.41127e-05' id='311'>arr</font>.length <font color='#0000ff' weight='7.2338e-05' id='318'>- </font><font color='#0000ff' weight='7.2338e-05' id='320'>size1</font>;
+      int[] <font color='#0000ff' weight='0.000217014' id='333'>right </font>= new int[<font color='#0000ff' weight='2.71267e-05' id='339'>size2</font>];
+      <font color='#004aff' weight='0.0729167' id='405'>for <font color='#0012ff' weight='0.0182292' id='377'>(<font color='#0001ff' weight='0.00179036' id='360'><font color='#0000ff' weight='0.000732422' id='358'>int i = 0;</font> </font><font color='#0001ff' weight='0.00130208' id='369'><font color='#0000ff' weight='2.71267e-05' id='362'>i </font>&lt; <font color='#0000ff' weight='2.71267e-05' id='366'>size2</font>; </font><font color='#0000ff' weight='0.000813802' id='375'><font color='#0000ff' weight='0.000651042' id='374'>i<font color='#0000ff' weight='8.13802e-05' id='373'>++</font></font>)</font> </font><font color='#0011ff' weight='0.0169271' id='404'>{
+         <font color='#0007ff' weight='0.0078125' id='402'><font color='#0003ff' weight='0.00358073' id='400'><font color='#0000ff' weight='2.71267e-05' id='379'>right</font>[i] <font color='#0000ff' weight='5.42535e-05' id='387'>= </font><font color='#0000ff' weight='2.71267e-05' id='389'>arr</font>[<font color='#0000ff' weight='4.52112e-06' id='391'>i </font><font color='#0000ff' weight='4.52112e-06' id='393'>+ </font><font color='#0000ff' weight='4.52112e-06' id='395'>size1</font>];</font>
+      }</font></font>
+      </font><font color='#0005ff' weight='0.00520833' id='410'>return <font color='#0001ff' weight='0.00130208' id='408'><font color='#0000ff' weight='0.000651042' id='407'>right</font>;</font>
+   }</font></font>
+
+   public static void mergeArrays(int[] arr, int[] left, int[] right) {
+      int i1 = 0;
+      int i2 = 0;
+
+      for (int i = 0; i &lt; arr.length; i++) {
+         if (i2 &gt;= right.length || (i1 &lt; left.length &amp;&amp; left[i1] &lt;= right[i2])) {
+            arr[i] = left[i1];
+            i1++;
+         } else {
+            arr[i] = right[i2];
+            i2++;
+         }
+      }
+   }</font>
+</pre>

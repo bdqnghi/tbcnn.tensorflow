@@ -1,0 +1,88 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+package org.burstsort4j;
+
+
+public class Shellsort {
+
+    private Shellsort() {
+    }
+
+    
+    public static &lt;T extends Comparable&lt;? super T&gt;&gt; void sort(T[] input) {
+        if (input == null || input.length &lt; 2) {
+            return;
+        }
+
+        int inc = input.length / 2;
+        while (inc &gt; 0) {
+            for (int ii = inc; ii &lt; input.length; ii++) {
+                T temp = input[ii];
+                int jj = ii;
+                while (jj &gt;= inc &amp;&amp; input[jj - inc].compareTo(temp) &gt; 0) {
+                    input[jj] = input[jj - inc];
+                    jj -= inc;
+                }
+                input[jj] = temp;
+            }
+            
+            inc = inc == 2 ? 1 : inc * 5 / 11;
+        }
+    }
+}
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static int compare(String a, String b){
+        if(a.length() &lt; b.length())
+            return -1;
+        else if(a.length() &gt; b.length())
+            return 1;
+        else
+            return a.compareTo(b);
+    }
+
+    
+    public static long sort(String[] A){
+        
+        long startTime = System.nanoTime();
+        
+        
+        quick_sort(A, 0, A.length - 1);
+
+        
+        long endTime = System.nanoTime();
+        return endTime - startTime;
+    }
+
+    
+    public static int partition(String[] A, int p, int r)<font color='#ff0000' weight='1' id='465'>{
+        String <font color='#0000ff' weight='8.77655e-05' id='258'>x </font>= A[r];
+        <font color='#0003ff' weight='0.00368615' id='279'><font color='#0001ff' weight='0.00131648' id='277'><font color='#0000ff' weight='0.000263296' id='274'><font color='#0000ff' weight='0.000131648' id='273'>String</font> </font><font color='#0000ff' weight='0.000131648' id='276'>tmp</font>;</font>
+        </font>int <font color='#0000ff' weight='8.77655e-05' id='284'>i </font>= p <font color='#0000ff' weight='2.92552e-05' id='288'>- </font><font color='#0000ff' weight='2.92552e-05' id='290'>1</font>;
+        <font color='#003fff' weight='0.0626646' id='415'>for<font color='#0007ff' weight='0.0073723' id='324'>(<font color='#0000ff' weight='0.000724065' id='307'><font color='#0000ff' weight='0.000296209' id='305'><font color='#0000ff' weight='2.19414e-05' id='298'><font color='#0000ff' weight='1.09707e-05' id='297'>int</font> </font><font color='#0000ff' weight='1.09707e-05' id='300'>j </font><font color='#0000ff' weight='3.29121e-05' id='304'>= <font color='#0000ff' weight='2.19414e-05' id='303'>p</font></font>;</font> </font><font color='#0000ff' weight='0.000526593' id='316'><font color='#0000ff' weight='0.000197472' id='314'>j &lt; r;</font> </font><font color='#0000ff' weight='0.000329121' id='322'><font color='#0000ff' weight='0.000263296' id='321'><font color='#0000ff' weight='3.29121e-05' id='318'>j</font>++</font>)</font></font><font color='#0017ff' weight='0.0234334' id='414'>{
+            <font color='#000bff' weight='0.0114534' id='412'>if<font color='#0001ff' weight='0.0016456' id='350'>(<font color='#0000ff' weight='0.000756977' id='348'>compare(<font color='#0000ff' weight='1.46276e-05' id='335'><font color='#0000ff' weight='1.27991e-05' id='334'><font color='#0000ff' weight='9.14224e-07' id='328'>A</font><font color='#0000ff' weight='3.6569e-06' id='333'>[<font color='#0000ff' weight='9.14224e-07' id='331'>j]</font></font></font></font>, <font color='#0000ff' weight='5.48534e-06' id='340'><font color='#0000ff' weight='3.6569e-06' id='339'><font color='#0000ff' weight='1.82845e-06' id='338'>x</font></font>)</font> &lt;= 0)</font></font><font color='#0004ff' weight='0.00394945' id='411'><font color='#0003ff' weight='0.00388362' id='410'>{
+                <font color='#0000ff' weight='7.89889e-05' id='357'><font color='#0000ff' weight='2.63296e-05' id='355'><font color='#0000ff' weight='3.29121e-06' id='352'>i</font><font color='#0000ff' weight='3.29121e-06' id='354'>++</font>;</font>
+                
+                
+                </font><font color='#0000ff' weight='0.000184308' id='372'><font color='#0000ff' weight='7.89889e-05' id='370'><font color='#0000ff' weight='2.19414e-06' id='359'>tmp </font><font color='#0000ff' weight='2.19414e-06' id='361'>= </font><font color='#0000ff' weight='1.5359e-05' id='369'><font color='#0000ff' weight='1.09707e-06' id='363'>A</font><font color='#0000ff' weight='4.38827e-06' id='368'>[<font color='#0000ff' weight='1.09707e-06' id='366'><font color='#0000ff' weight='5.48534e-07' id='365'>j</font>]</font></font></font>;</font>
+                </font>A[j] = A[i];
+                <font color='#0000ff' weight='1.5359e-05' id='401'><font color='#0000ff' weight='1.09707e-06' id='395'>A</font><font color='#0000ff' weight='4.38827e-06' id='400'>[<font color='#0000ff' weight='1.09707e-06' id='398'><font color='#0000ff' weight='5.48534e-07' id='397'>i</font>]</font></font> </font>= tmp;
+            }</font></font>
+        }</font></font>
+        </font><font color='#0003ff' weight='0.00315956' id='422'><font color='#0001ff' weight='0.00105319' id='420'><font color='#0000ff' weight='0.000131648' id='417'>i</font><font color='#0000ff' weight='0.000131648' id='419'>++</font>;</font>
+        </font><font color='#0000ff' weight='4.38827e-05' id='424'>A</font>[<font color='#0000ff' weight='2.19414e-05' id='426'>r</font>] = <font color='#0000ff' weight='0.000614358' id='440'><font color='#0000ff' weight='4.38827e-05' id='434'>A</font><font color='#0000ff' weight='0.000175531' id='439'>[<font color='#0000ff' weight='4.38827e-05' id='437'><font color='#0000ff' weight='2.19414e-05' id='436'>i</font>]</font></font></font>;
+        <font color='#0007ff' weight='0.0073723' id='458'><font color='#0003ff' weight='0.00315956' id='456'><font color='#0000ff' weight='0.000614359' id='451'><font color='#0000ff' weight='4.38828e-05' id='445'>A</font><font color='#0000ff' weight='0.000175531' id='450'>[<font color='#0000ff' weight='4.38828e-05' id='448'><font color='#0000ff' weight='2.19414e-05' id='447'>i</font>]</font></font> </font>= <font color='#0000ff' weight='8.77655e-05' id='455'>x</font>;</font>
+        </font><font color='#0002ff' weight='0.00210637' id='463'>return <font color='#0000ff' weight='0.000526593' id='461'><font color='#0000ff' weight='0.000263296' id='460'>i</font>;</font>
+    }</font></font>
+
+    public static void quick_sort(String[] A, int p, int r){
+        if(p &lt; r){
+            int q = partition(A, p, r);
+            quick_sort(A, p, q-1);
+            quick_sort(A, q+1, r);
+        }
+    }</font>
+</pre>

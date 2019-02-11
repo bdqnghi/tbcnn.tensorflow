@@ -1,0 +1,73 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static void sort(int arr[])
+    {       
+        heapify(arr);        
+        for (int i = N; i &gt; 0; i--)
+        {
+            swap(arr,0, i);
+            N = N-1;
+            maxheap(arr, 0);
+        }
+    }     
+       
+    <font color='#ff0000' weight='1' id='210'><font color='#0001ff' weight='0.00181159' id='119'>public </font><font color='#0001ff' weight='0.00181159' id='121'>static </font><font color='#0003ff' weight='0.00362319' id='124'><font color='#0001ff' weight='0.00181159' id='123'>void</font> </font><font color='#0001ff' weight='0.00181159' id='126'>heapify</font><font color='#0014ff' weight='0.0199275' id='138'>(<font color='#0008ff' weight='0.00815217' id='136'><font color='#0007ff' weight='0.00724638' id='135'><font color='#0000ff' weight='0.000905797' id='129'><font color='#0000ff' weight='0.000452899' id='128'>int</font> </font><font color='#0001ff' weight='0.00181159' id='134'><font color='#0000ff' weight='0.000226449' id='131'>arr</font><font color='#0000ff' weight='0.000226449' id='133'>[]</font></font></font>)</font>
+    </font><font color='#0081ff' weight='0.126812' id='209'>{
+        <font color='#000aff' weight='0.0102657' id='156'><font color='#0004ff' weight='0.00452899' id='154'><font color='#0000ff' weight='6.03865e-05' id='140'>N </font><font color='#0000ff' weight='6.03865e-05' id='142'>= </font><font color='#0000ff' weight='0.000362319' id='149'><font color='#0000ff' weight='2.01288e-05' id='144'>arr</font><font color='#0000ff' weight='2.01288e-05' id='146'>.</font><font color='#0000ff' weight='2.01288e-05' id='148'>length</font></font><font color='#0000ff' weight='6.03865e-05' id='151'>-</font><font color='#0000ff' weight='6.03865e-05' id='153'>1</font>;</font>
+        </font><font color='#001eff' weight='0.0301932' id='207'>for <font color='#0009ff' weight='0.00966184' id='189'>(<font color='#0001ff' weight='0.00113225' id='172'><font color='#0000ff' weight='0.00049064' id='170'><font color='#0000ff' weight='2.5161e-05' id='159'><font color='#0000ff' weight='1.25805e-05' id='158'>int</font> </font><font color='#0000ff' weight='1.25805e-05' id='161'>i </font><font color='#0000ff' weight='8.80636e-05' id='169'>= <font color='#0000ff' weight='7.54831e-05' id='168'><font color='#0000ff' weight='4.19351e-06' id='163'>N</font><font color='#0000ff' weight='4.19351e-06' id='165'>/</font><font color='#0000ff' weight='4.19351e-06' id='167'>2</font></font></font>;</font> </font><font color='#0000ff' weight='0.000603865' id='181'><font color='#0000ff' weight='0.000226449' id='179'><font color='#0000ff' weight='1.25805e-05' id='174'>i </font><font color='#0000ff' weight='1.25805e-05' id='176'>&gt;= </font><font color='#0000ff' weight='1.25805e-05' id='178'>0</font>;</font> </font><font color='#0000ff' weight='0.000377415' id='187'><font color='#0000ff' weight='0.000301932' id='186'><font color='#0000ff' weight='3.77415e-05' id='183'>i</font><font color='#0000ff' weight='3.77415e-05' id='185'>--</font></font>)</font>
+            </font><font color='#0004ff' weight='0.00483092' id='206'><font color='#0004ff' weight='0.00452899' id='205'><font color='#0002ff' weight='0.00196256' id='203'><font color='#0001ff' weight='0.00181159' id='202'><font color='#0000ff' weight='7.54831e-05' id='191'>maxheap</font><font color='#0000ff' weight='0.000679348' id='201'>(<font color='#0000ff' weight='7.54831e-05' id='195'><font color='#0000ff' weight='5.03221e-05' id='194'><font color='#0000ff' weight='2.5161e-05' id='193'>arr</font></font>, </font><font color='#0000ff' weight='7.54831e-05' id='199'><font color='#0000ff' weight='5.03221e-05' id='198'><font color='#0000ff' weight='2.5161e-05' id='197'>i</font></font>)</font></font></font>;</font></font></font>        
+    }</font></font>
+            
+    </font>public static void maxheap(int arr[], int i)
+    { 
+        int left = 2*i ;
+        int right = 2*i + 1;
+        int max = i;
+        if (left &lt;= N &amp;&amp; arr[left] &gt; arr[i])
+            max = left;
+        if (right &lt;= N &amp;&amp; arr[right] &gt; arr[max])        
+            max = right;
+ 
+        if (max != i)
+        {
+            swap(arr, i, max);
+            maxheap(arr, max);
+        }
+    }    
+    
+    public static void swap(int arr[], int i, int j)
+    {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp; 
+    }    </font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+    private static int[] sort(int[] data, int start)<font color='#ff0000' weight='1' id='111'>{
+        <font color='#00ffc8' weight='0.303797' id='104'>if<font color='#0024ff' weight='0.035865' id='49'>(<font color='#0010ff' weight='0.0158228' id='47'>start <font color='#0000ff' weight='0.00021097' id='35'>&lt; </font><font color='#0001ff' weight='0.00126582' id='42'><font color='#0000ff' weight='7.03235e-05' id='37'>data</font><font color='#0000ff' weight='7.03235e-05' id='39'>.</font><font color='#0000ff' weight='7.03235e-05' id='41'>length</font></font><font color='#0000ff' weight='0.00021097' id='44'>-</font><font color='#0000ff' weight='0.00021097' id='46'>1</font>)</font></font><font color='#0072ff' weight='0.111814' id='103'><font color='#006fff' weight='0.109705' id='102'>{
+            <font color='#0015ff' weight='0.021097' id='80'><font color='#000aff' weight='0.00984529' id='78'><font color='#0009ff' weight='0.00949367' id='77'>swap<font color='#0004ff' weight='0.00421941' id='76'>(data, start, <font color='#0000ff' weight='0.00061533' id='74'><font color='#0000ff' weight='0.000571378' id='73'>findMinIndex(data, <font color='#0000ff' weight='7.32536e-06' id='67'>start</font>)</font>)</font></font></font>;</font>
+            </font><font color='#000dff' weight='0.0133615' id='100'><font color='#0006ff' weight='0.0059775' id='98'><font color='#0005ff' weight='0.00562588' id='97'><font color='#0000ff' weight='0.000175809' id='82'>sort</font><font color='#0002ff' weight='0.00228551' id='96'>(<font color='#0000ff' weight='0.000175809' id='86'><font color='#0000ff' weight='0.000117206' id='85'><font color='#0000ff' weight='5.86029e-05' id='84'>data</font></font>,</font><font color='#0000ff' weight='0.00041022' id='94'><font color='#0000ff' weight='0.000351617' id='93'><font color='#0000ff' weight='1.95343e-05' id='88'>start</font><font color='#0000ff' weight='1.95343e-05' id='90'>+</font>1</font>)</font></font></font>;</font>
+        }</font></font></font>
+        </font><font color='#0011ff' weight='0.0168776' id='109'>return <font color='#0004ff' weight='0.00421941' id='107'><font color='#0002ff' weight='0.0021097' id='106'>data</font>;</font>
+    }</font></font>
+    
+    private static int findMinIndex(int[] data, int start){
+        int minpos=start;
+        for(int i=start+1; i&lt;data.length; i++){
+            if(data[i]&lt;data[minpos]){
+                minpos=i;
+            }
+        }
+        return minpos;
+    }
+    
+    private static void swap(int[] data, int idx1, int idx2){
+        int temp1 = data[idx1];
+        int temp2 = data[idx2];
+        data[idx1] = temp2;
+        data[idx2] = temp1;
+        
+    }</font>
+</pre>

@@ -1,0 +1,52 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static void <font color='#ff0000' weight='1' id='9'>selsort</font>(<font color='#ff0000' weight='1' id='19'><font color='#ff0000' weight='1' id='12'><font color='#ff0000' weight='1' id='11'>int</font> </font>a[])</font><font color='#ff0000' weight='1' id='296'>{
+        <font color='#ff0000' weight='1' id='24'>int<font color='#ff0000' weight='1' id='22'></font> </font>n=a.<font color='#ff0000' weight='1' id='32'>length</font>;
+        <font color='#ff0000' weight='1' id='46'><font color='#ff0000' weight='1' id='44'>int <font color='#ff0000' weight='1' id='43'>temp<font color='#ff0000' weight='1' id='42'></font></font>;</font><font color='#ff0000' weight='1' id='45'></font>
+        </font><font color='#ff0000' weight='1' id='58'><font color='#ff0000' weight='1' id='56'><font color='#ff0000' weight='1' id='48'>int<font color='#ff0000' weight='1' id='47'></font></font> <font color='#ff0000' weight='1' id='51'>pos</font><font color='#ff0000' weight='1' id='55'>=0</font>;</font>
+        </font><font color='#ff0000' weight='1' id='210'>for(<font color='#ff0000' weight='1' id='61'>int<font color='#ff0000' weight='1' id='59'></font> </font><font color='#ff0000' weight='1' id='63'>i<font color='#ff0000' weight='1' id='62'></font></font><font color='#ff0000' weight='1' id='67'>=0<font color='#ff0000' weight='1' id='64'></font></font>;<font color='#ff0000' weight='1' id='77'>i<font color='#ff0000' weight='1' id='74'>&lt;<font color='#ff0000' weight='1' id='73'></font></font><font color='#ff0000' weight='1' id='76'>n</font>;</font><font color='#ff0000' weight='1' id='78'></font><font color='#ff0000' weight='1' id='85'>i++)</font><font color='#ff0000' weight='1' id='209'>{
+            for<font color='#ff0000' weight='1' id='120'>(<font color='#ff0000' weight='1' id='90'><font color='#ff0000' weight='1' id='89'>int</font> </font>j=i+1;j&lt;<font color='#ff0000' weight='1' id='109'>n</font>;<font color='#ff0000' weight='1' id='118'><font color='#ff0000' weight='1' id='114'>j</font><font color='#ff0000' weight='1' id='116'>++</font>)</font></font>{
+                if(<font color='#ff0000' weight='1' id='128'>a[i]</font><font color='#ff0000' weight='1' id='130'>&gt;<font color='#ff0000' weight='1' id='129'></font></font><font color='#ff0000' weight='1' id='132'>a<font color='#ff0000' weight='1' id='131'></font></font>[<font color='#ff0000' weight='1' id='134'>j</font>])<font color='#ff0000' weight='1' id='152'>
+                    <font color='#ff0000' weight='1' id='143'>pos</font><font color='#ff0000' weight='1' id='145'>=</font><font color='#ff0000' weight='1' id='147'>j</font>;</font>
+            }
+           temp=a<font color='#ff0000' weight='1' id='161'></font>[<font color='#ff0000' weight='1' id='164'>i<font color='#ff0000' weight='1' id='163'></font></font>];
+           <font color='#ff0000' weight='1' id='192'><font color='#ff0000' weight='1' id='173'>a<font color='#ff0000' weight='1' id='172'></font></font><font color='#ff0000' weight='1' id='178'>[<font color='#ff0000' weight='1' id='176'>i]</font></font>=a<font color='#ff0000' weight='1' id='188'>[<font color='#ff0000' weight='1' id='185'>pos</font>]</font>;
+           </font><font color='#ff0000' weight='1' id='207'>a[<font color='#ff0000' weight='1' id='196'>pos</font>]=<font color='#ff0000' weight='1' id='204'>temp</font>;
+        }</font><font color='#ff0000' weight='1' id='208'></font></font>
+      
+         </font><font color='#ff0000' weight='1' id='231'><font color='#ff0000' weight='1' id='229'><font color='#ff0000' weight='1' id='228'><font color='#ff0000' weight='1' id='221'><font color='#ff0000' weight='1' id='212'>System<font color='#ff0000' weight='1' id='211'></font></font><font color='#ff0000' weight='1' id='214'>.<font color='#ff0000' weight='1' id='213'></font></font><font color='#ff0000' weight='1' id='216'>out<font color='#ff0000' weight='1' id='215'></font></font><font color='#ff0000' weight='1' id='218'>.<font color='#ff0000' weight='1' id='217'></font></font><font color='#ff0000' weight='1' id='220'>println<font color='#ff0000' weight='1' id='219'></font></font></font><font color='#ff0000' weight='1' id='227'>(<font color='#ff0000' weight='1' id='225'><font color='#ff0000' weight='1' id='224'><font color='#ff0000' weight='1' id='223'>"the sorted array is "<font color='#ff0000' weight='1' id='222'></font></font></font>)</font><font color='#ff0000' weight='1' id='226'></font></font></font>;</font><font color='#ff0000' weight='1' id='230'></font>
+         </font><font color='#ff0000' weight='1' id='294'>for<font color='#ff0000' weight='1' id='260'>(<font color='#ff0000' weight='1' id='243'><font color='#ff0000' weight='1' id='241'><font color='#ff0000' weight='1' id='234'>int<font color='#ff0000' weight='1' id='232'></font> </font><font color='#ff0000' weight='1' id='236'>i</font><font color='#ff0000' weight='1' id='240'>=<font color='#ff0000' weight='1' id='239'><font color='#ff0000' weight='1' id='238'>0<font color='#ff0000' weight='1' id='237'></font></font></font></font>;</font><font color='#ff0000' weight='1' id='242'></font></font><font color='#ff0000' weight='1' id='252'><font color='#ff0000' weight='1' id='250'><font color='#ff0000' weight='1' id='245'>i<font color='#ff0000' weight='1' id='244'></font></font><font color='#ff0000' weight='1' id='247'>&lt;</font><font color='#ff0000' weight='1' id='249'>n<font color='#ff0000' weight='1' id='248'></font></font>;</font><font color='#ff0000' weight='1' id='251'></font></font><font color='#ff0000' weight='1' id='258'><font color='#ff0000' weight='1' id='257'><font color='#ff0000' weight='1' id='254'>i<font color='#ff0000' weight='1' id='253'></font></font><font color='#ff0000' weight='1' id='256'>++<font color='#ff0000' weight='1' id='255'></font></font></font>)</font><font color='#ff0000' weight='1' id='259'></font></font><font color='#ff0000' weight='1' id='293'>{
+             <font color='#ff0000' weight='1' id='291'><font color='#ff0000' weight='1' id='289'><font color='#ff0000' weight='1' id='288'><font color='#ff0000' weight='1' id='271'><font color='#ff0000' weight='1' id='262'>System<font color='#ff0000' weight='1' id='261'></font></font><font color='#ff0000' weight='1' id='264'>.<font color='#ff0000' weight='1' id='263'></font></font><font color='#ff0000' weight='1' id='266'>out<font color='#ff0000' weight='1' id='265'></font></font><font color='#ff0000' weight='1' id='268'>.<font color='#ff0000' weight='1' id='267'></font></font><font color='#ff0000' weight='1' id='270'>print<font color='#ff0000' weight='1' id='269'></font></font></font><font color='#ff0000' weight='1' id='287'>(<font color='#ff0000' weight='1' id='285'><font color='#ff0000' weight='1' id='284'><font color='#ff0000' weight='1' id='279'><font color='#ff0000' weight='1' id='273'>a<font color='#ff0000' weight='1' id='272'></font></font><font color='#ff0000' weight='1' id='278'>[<font color='#ff0000' weight='1' id='276'><font color='#ff0000' weight='1' id='275'>i</font>]</font><font color='#ff0000' weight='1' id='277'></font></font></font><font color='#ff0000' weight='1' id='281'>+<font color='#ff0000' weight='1' id='280'></font> </font><font color='#ff0000' weight='1' id='283'>" "</font></font>)</font><font color='#ff0000' weight='1' id='286'></font></font></font>;</font><font color='#ff0000' weight='1' id='290'></font>
+         }</font><font color='#ff0000' weight='1' id='292'></font></font>
+    }</font><font color='#ff0000' weight='1' id='295'></font></font></font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static void quicksort(int[] a, int start, int end) {
+        if (start &gt;= end)
+            return;
+
+        int pavot = a[start];
+        int i = start;
+        int j = end;
+
+        while (i &lt; j) {
+            while (i &lt; j &amp;&amp; a[j] &gt; pavot)
+                j--;
+            while (i &lt; j &amp;&amp; a[i] &lt;= pavot)
+                i++;
+            if (i != j) {
+                int t = a[i];
+                a[i] = a[j];
+                a[j] = t;
+            }
+        }
+        if (i == j) {
+            int t = a[start];
+            a[start<font color='#ff0000' weight='1' id='264'></font>] = a[i];
+            a[j] = t;
+        }
+        quicksort(a, start, i - 1);
+        quicksort(a, i + 1, end);
+    }</font>
+</pre>

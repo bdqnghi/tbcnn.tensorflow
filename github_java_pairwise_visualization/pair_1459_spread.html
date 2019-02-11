@@ -1,0 +1,70 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+package org.hibernate.envers.internal.tools.graph;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+
+public class TopologicalSort&lt;R&gt; {
+	private List&lt;R&gt; sorted;
+	private int time;
+
+	private void process(Vertex&lt;R&gt; v) {
+		if ( v.getStartTime() != 0 ) {
+			
+			return;
+		}
+
+		v.setStartTime( time++ );
+
+		for ( Vertex&lt;R&gt; n : v.getNeighbours() ) {
+			process( n );
+		}
+
+		v.setEndTime( time++ );
+
+		sorted.add( v.getRepresentation() );
+	}
+
+	public List&lt;R&gt; sort(Collection&lt;Vertex&lt;R&gt;&gt; vertices) {
+		sorted = new ArrayList&lt;&gt;( vertices.size() );
+
+		time = 1;
+
+		for ( Vertex&lt;R&gt; v : vertices ) {
+			if ( v.getEndTime() == 0 ) {
+				process( v );
+			}
+		}
+
+		Collections.reverse( sorted );
+
+		return sorted;
+	}
+}
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+   public static void insertionSort(int[] list, int n) {
+        int i, j, key;
+        
+        
+        for (i = 1; i &lt; n; i++) {
+            key = list[i]; 
+            
+            
+            
+            
+            for (j = i - 1; j &gt;= 0 &amp;&amp; list[j] &gt; key; j--) {
+                list[j+1] = list[j];
+            }
+            
+            list[j+1] = key;
+        }
+    }</font>
+</pre>

@@ -1,0 +1,85 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+    public static &lt;T extends Comparable&lt;T&gt;&gt; void sort(List&lt;T&gt; a) {
+        Collections.shuffle(a);
+        sort(a, 0, a.size() - 1);
+    }
+
+    private static &lt;T extends Comparable&lt;T&gt;&gt; void sort(List&lt;T&gt; a, int lo, int hi) {
+        if (hi &lt;= lo + M) {
+            Insertion.sort(a, lo, hi);
+            return;
+        }
+
+        int j = partition(a, lo, hi);
+
+        sort(a, lo, j - 1);
+        sort(a, j + 1, hi);
+    }
+
+    
+    public static &lt;T extends Comparable&lt;T&gt;&gt; void mediansort(List&lt;T&gt; a) {
+        Collections.shuffle(a);
+        mediansort(a, 0, a.size() - 1);
+    }
+
+    private static &lt;T extends Comparable&lt;T&gt;&gt; void mediansort(List&lt;T&gt; a, int lo, int hi) {
+        if (hi &lt;= lo + M) {
+            Insertion.sort(a, lo, hi);
+            return;
+        }
+
+        T pivot = SortUtils.median(a, lo, hi);
+        int i = lo, j = hi - 1; 
+
+        for (; ; ) {
+            while (a.get(++i).compareTo(pivot) &lt; 0) ;
+            while (pivot.compareTo(a.get(--j)) &lt; 0) ;
+            if (i &lt; j)
+                SortUtils.exchange(a, i, j);
+            else break;
+        }
+
+        SortUtils.exchange(a, i, hi - 1); 
+
+        mediansort(a, lo, i - 1);
+        mediansort(a, i + 1, hi);
+    }
+
+    private static &lt;T extends Comparable&lt;T&gt;&gt; int partition(List&lt;T&gt; a, int lo, int hi) {
+        int i = lo;
+        int j = hi + 1;
+
+        T v = a.get(lo);
+
+        while (true) {
+            while (SortUtils.less(a.get(++i), v)) if (i == hi) break;
+            while (SortUtils.less(v, a.get(--j))) if (j == lo) break;
+
+            if (i &gt;= j) break;
+            SortUtils.exchange(a, i, j);
+        }
+
+        SortUtils.exchange(a, lo, j);
+
+        return j;
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public void topSort(Graph g) {
+        initDfs(g);
+        for (int i = 1; i &lt;= g.numV; i++) <font color='#ff0000' weight='1' id='107'>{
+            if (<font color='#ff0000' weight='1' id='64'>!</font><font color='#ff0000' weight='1' id='72'><font color='#ff0000' weight='1' id='66'>mDiscovered</font><font color='#ff0000' weight='1' id='71'>[<font color='#ff0000' weight='1' id='69'><font color='#ff0000' weight='1' id='68'>i<font color='#ff0000' weight='1' id='67'></font></font>]</font><font color='#ff0000' weight='1' id='70'></font></font></font>) <font color='#ff0000' weight='1' id='93'>{
+                <font color='#ff0000' weight='1' id='77'>idfs</font>(<font color='#ff0000' weight='1' id='79'>i</font>, <font color='#ff0000' weight='1' id='83'>g</font>)<font color='#ff0000' weight='1' id='86'></font>;
+            }<font color='#ff0000' weight='1' id='92'></font></font>
+            if (<font color='#ff0000' weight='1' id='97'>mFinished</font>)<font color='#ff0000' weight='1' id='104'> <font color='#ff0000' weight='1' id='102'>return;<font color='#ff0000' weight='1' id='101'></font></font></font>
+        }</font>
+        while (mSorted.size() &gt; 0) {
+            out(mSorted.pop() + " ");
+        }
+        outln("");
+    }
+
+    </font>
+</pre>

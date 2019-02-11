@@ -1,0 +1,37 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+   <font color='#ff0400' weight='0.99537' id='216'>public <font color='#0000ff' weight='0.000661376' id='4'>static </font>&lt;<font color='#0000ff' weight='0.000165344' id='6'>Key </font><font color='#0001ff' weight='0.00132275' id='15'>extends Comparable&lt;Key&gt;</font>&gt; <font color='#0000ff' weight='0.000661376' id='20'>void</font> sort(<font color='#0003ff' weight='0.00297619' id='33'><font color='#0000ff' weight='0.00082672' id='29'><font color='#0000ff' weight='0.000661376' id='28'><font color='#0000ff' weight='8.2672e-05' id='25'>Key</font>[]</font> </font>a)</font> <font color='#0078ff' weight='0.118386' id='215'>{
+        <font color='#0003ff' weight='0.00352734' id='52'><font color='#0000ff' weight='7.34862e-05' id='38'>int </font>n <font color='#0000ff' weight='0.000293945' id='49'>= <font color='#0000ff' weight='0.000257202' id='48'>a.length</font></font>;
+        </font><font color='#0023ff' weight='0.0352734' id='213'>for (<font color='#0000ff' weight='0.000124008' id='62'>int i <font color='#0000ff' weight='1.37787e-05' id='61'>= 0</font>;</font> <font color='#0000ff' weight='0.000220459' id='73'><font color='#0000ff' weight='8.2672e-05' id='71'>i &lt; n;</font> </font><font color='#0000ff' weight='0.000137787' id='79'><font color='#0000ff' weight='0.000110229' id='78'>i<font color='#0000ff' weight='1.37787e-05' id='77'>++</font></font>)</font> {
+            <font color='#0000ff' weight='0.000124008' id='91'><font color='#0000ff' weight='4.59289e-06' id='83'>int</font> exchanges = 0;</font>
+            for (<font color='#0000ff' weight='5.167e-05' id='109'>int j = n <font color='#0000ff' weight='1.9137e-07' id='102'>- </font><font color='#0000ff' weight='1.9137e-07' id='104'>1</font>; </font><font color='#0000ff' weight='2.75573e-05' id='118'><font color='#0000ff' weight='1.0334e-05' id='116'><font color='#0000ff' weight='5.74111e-07' id='111'>j </font><font color='#0000ff' weight='5.74111e-07' id='113'>&gt; </font>i;</font> </font><font color='#0000ff' weight='1.72233e-05' id='124'><font color='#0000ff' weight='1.37787e-05' id='123'>j<font color='#0000ff' weight='1.72233e-06' id='122'>--</font></font>)</font> {
+                if (<font color='#0000ff' weight='4.82253e-05' id='155'>less<font color='#0000ff' weight='2.15292e-05' id='154'>(<font color='#0000ff' weight='2.5835e-06' id='138'><font color='#0000ff' weight='2.29644e-06' id='137'><font color='#0000ff' weight='2.00939e-06' id='136'><font color='#0000ff' weight='1.43528e-07' id='130'>a</font>[j]</font></font>, </font><font color='#0000ff' weight='3.73172e-06' id='152'><font color='#0000ff' weight='3.44467e-06' id='151'><font color='#0000ff' weight='3.15761e-06' id='150'><font color='#0000ff' weight='1.43528e-07' id='140'>a</font>[<font color='#0000ff' weight='4.30583e-07' id='147'>j <font color='#0000ff' weight='2.39213e-08' id='144'>- </font><font color='#0000ff' weight='2.39213e-08' id='146'>1</font>]</font></font></font>)</font></font></font>) {
+                    <font color='#0000ff' weight='2.64091e-05' id='182'><font color='#0000ff' weight='1.20563e-05' id='180'><font color='#0000ff' weight='2.87055e-07' id='160'>exch</font>(<font color='#0000ff' weight='7.17639e-08' id='162'>a</font>, j, j <font color='#0000ff' weight='2.39213e-08' id='172'>- </font>1);</font>
+                    </font><font color='#0000ff' weight='6.88933e-06' id='189'><font color='#0000ff' weight='2.29644e-06' id='187'><font color='#0000ff' weight='2.87055e-07' id='184'>exchanges</font><font color='#0000ff' weight='2.87055e-07' id='186'>++</font>;</font>
+                }</font>
+            }
+            <font color='#0000ff' weight='0.000358245' id='210'>if <font color='#0000ff' weight='0.000110229' id='205'>(<font color='#0000ff' weight='4.1336e-05' id='203'><font color='#0000ff' weight='2.29644e-06' id='198'>exchanges </font><font color='#0000ff' weight='2.29644e-06' id='200'>== </font><font color='#0000ff' weight='2.29644e-06' id='202'>0</font>)</font></font><font color='#0000ff' weight='4.1336e-05' id='209'> <font color='#0000ff' weight='2.75573e-05' id='208'><font color='#0000ff' weight='1.37787e-05' id='207'>break;</font></font></font>
+        }</font>
+    }</font></font></font></font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+    public static int[] swap(int numbers[], int i, int j) {
+        int temp = numbers[i];
+        numbers[i] = numbers[j];
+        numbers[j] = temp;
+        return numbers;
+    }
+
+    public static int[] sort(int numbers[]) {
+        for (int i = 0; i &lt; numbers.length; i++) {
+            for (int j = 0; j &lt; numbers.length - 1; j++) {
+                if (<font color='#0030ff' weight='0.0474138' id='219'><font color='#0000ff' weight='0.000359195' id='198'>numbers</font>[j <font color='#0000ff' weight='5.98659e-05' id='202'>+ </font><font color='#0000ff' weight='5.98659e-05' id='204'>1</font>] <font color='#0000ff' weight='0.000718391' id='210'>&lt; </font><font color='#0000ff' weight='0.000359195' id='212'>numbers</font>[j])</font> {
+                    <font color='#0000ff' weight='0.000359195' id='223'>numbers </font><font color='#0000ff' weight='0.000359195' id='225'>= </font><font color='#0000ff' weight='0.000179598' id='227'>swap</font>(<font color='#0000ff' weight='4.48994e-05' id='229'>numbers</font>, j, j <font color='#0000ff' weight='1.49665e-05' id='239'>+ </font>1);
+                }
+            }
+        }
+        return numbers;
+    }
+</font>
+</pre>

@@ -1,0 +1,64 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public void sort(int a[]) {
+
+        if(a == null || a.length &lt;= 1) {
+            return;
+        }
+
+        insertNumberAtIndexInSortedArray(a, 1);
+    }
+
+    private void insertNumberAtIndexInSortedArray(int a[], int index) {
+
+        if (index == a.length) {
+            return;
+        }
+
+        int number = a[index];
+        int i;
+        for (i=index-1; i &gt;= 0; i--) {
+            if (number &lt; a[i]) {
+                a[i+1] = a[i];
+            } else {
+                break;
+            }
+        }
+
+        a[i+1] = number;
+
+        insertNumberAtIndexInSortedArray(a, index+1);
+    }
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+private List&lt;Stmt&gt; topologicalSort(StmtList stmts) {
+
+        List&lt;Stmt&gt; out = new ArrayList&lt;Stmt&gt;(stmts.getSize());
+        Stack&lt;Stmt&gt; stack = new Stack&lt;Stmt&gt;();
+        stack.push(stmts.getFirst());
+
+        boolean visitedFlag = false;
+
+        while (!stack.empty()) <font color='#ff0000' weight='1' id='335'>{
+            <font color='#ff0000' weight='1' id='146'>Stmt</font> <font color='#ff0000' weight='1' id='149'>stmt </font>= <font color='#ff0000' weight='1' id='159'><font color='#ff0000' weight='1' id='156'>stack<font color='#ff0000' weight='1' id='153'>.<font color='#ff0000' weight='1' id='152'></font></font><font color='#ff0000' weight='1' id='155'>pop</font></font><font color='#ff0000' weight='1' id='158'>()<font color='#ff0000' weight='1' id='157'></font></font></font>;
+            <font color='#ff0000' weight='1' id='184'>if <font color='#ff0000' weight='1' id='178'>(<font color='#ff0000' weight='1' id='176'><font color='#ff0000' weight='1' id='171'><font color='#ff0000' weight='1' id='166'>stmt</font><font color='#ff0000' weight='1' id='168'>.<font color='#ff0000' weight='1' id='167'></font></font><font color='#ff0000' weight='1' id='170'>_cfg_visited</font> </font><font color='#ff0000' weight='1' id='173'>==<font color='#ff0000' weight='1' id='172'></font> </font><font color='#ff0000' weight='1' id='175'>visitedFlag</font>)</font><font color='#ff0000' weight='1' id='177'></font></font><font color='#ff0000' weight='1' id='183'> <font color='#ff0000' weight='1' id='182'>{
+                <font color='#ff0000' weight='1' id='180'>continue;<font color='#ff0000' weight='1' id='179'></font>
+            }</font><font color='#ff0000' weight='1' id='181'></font></font></font>
+            </font><font color='#ff0000' weight='1' id='333'>if <font color='#ff0000' weight='1' id='221'>(<font color='#ff0000' weight='1' id='219'><font color='#ff0000' weight='1' id='198'><font color='#ff0000' weight='1' id='195'><font color='#ff0000' weight='1' id='186'>stmt<font color='#ff0000' weight='1' id='185'></font></font><font color='#ff0000' weight='1' id='188'>.</font><font color='#ff0000' weight='1' id='190'>_cfg_froms</font><font color='#ff0000' weight='1' id='192'>.</font><font color='#ff0000' weight='1' id='194'>size<font color='#ff0000' weight='1' id='193'></font></font></font><font color='#ff0000' weight='1' id='197'>()<font color='#ff0000' weight='1' id='196'></font></font> </font><font color='#ff0000' weight='1' id='200'>==<font color='#ff0000' weight='1' id='199'></font> </font><font color='#ff0000' weight='1' id='202'>0 </font><font color='#ff0000' weight='1' id='204'>||<font color='#ff0000' weight='1' id='203'></font> </font><font color='#ff0000' weight='1' id='214'><font color='#ff0000' weight='1' id='211'><font color='#ff0000' weight='1' id='206'>stack</font><font color='#ff0000' weight='1' id='208'>.<font color='#ff0000' weight='1' id='207'></font></font><font color='#ff0000' weight='1' id='210'>size<font color='#ff0000' weight='1' id='209'></font></font></font><font color='#ff0000' weight='1' id='213'>()<font color='#ff0000' weight='1' id='212'></font></font> </font><font color='#ff0000' weight='1' id='216'>== </font>0)</font></font><font color='#ff0000' weight='1' id='332'> <font color='#ff0000' weight='1' id='331'>{
+                <font color='#ff0000' weight='1' id='235'><font color='#ff0000' weight='1' id='233'><font color='#ff0000' weight='1' id='228'><font color='#ff0000' weight='1' id='223'>stmt</font><font color='#ff0000' weight='1' id='225'>.</font><font color='#ff0000' weight='1' id='227'>_cfg_visited<font color='#ff0000' weight='1' id='226'></font></font> </font><font color='#ff0000' weight='1' id='230'>=<font color='#ff0000' weight='1' id='229'></font> </font><font color='#ff0000' weight='1' id='232'>visitedFlag<font color='#ff0000' weight='1' id='231'></font></font>;</font><font color='#ff0000' weight='1' id='234'></font>
+                </font><font color='#ff0000' weight='1' id='252'><font color='#ff0000' weight='1' id='250'><font color='#ff0000' weight='1' id='249'><font color='#ff0000' weight='1' id='242'><font color='#ff0000' weight='1' id='237'>out</font><font color='#ff0000' weight='1' id='239'>.</font>add</font><font color='#ff0000' weight='1' id='248'>(<font color='#ff0000' weight='1' id='246'><font color='#ff0000' weight='1' id='245'>stmt</font>)</font><font color='#ff0000' weight='1' id='247'></font></font></font>;</font><font color='#ff0000' weight='1' id='251'></font>
+                </font><font color='#ff0000' weight='1' id='329'>for <font color='#ff0000' weight='1' id='270'>(<font color='#ff0000' weight='1' id='268'><font color='#ff0000' weight='1' id='267'><font color='#ff0000' weight='1' id='255'><font color='#ff0000' weight='1' id='254'>Stmt</font> </font><font color='#ff0000' weight='1' id='257'>t<font color='#ff0000' weight='1' id='256'></font> </font><font color='#ff0000' weight='1' id='266'>: <font color='#ff0000' weight='1' id='265'><font color='#ff0000' weight='1' id='264'><font color='#ff0000' weight='1' id='259'>stmt</font><font color='#ff0000' weight='1' id='261'>.</font><font color='#ff0000' weight='1' id='263'>_cfg_tos<font color='#ff0000' weight='1' id='262'></font></font></font></font></font></font>)</font><font color='#ff0000' weight='1' id='269'></font> </font><font color='#ff0000' weight='1' id='328'>{
+                    <font color='#ff0000' weight='1' id='291'><font color='#ff0000' weight='1' id='289'><font color='#ff0000' weight='1' id='288'><font color='#ff0000' weight='1' id='281'><font color='#ff0000' weight='1' id='272'>t<font color='#ff0000' weight='1' id='271'></font></font><font color='#ff0000' weight='1' id='274'>.</font>_cfg_froms<font color='#ff0000' weight='1' id='278'>.<font color='#ff0000' weight='1' id='277'></font></font><font color='#ff0000' weight='1' id='280'>remove<font color='#ff0000' weight='1' id='279'></font></font></font><font color='#ff0000' weight='1' id='287'>(<font color='#ff0000' weight='1' id='285'><font color='#ff0000' weight='1' id='284'>stmt</font>)</font><font color='#ff0000' weight='1' id='286'></font></font></font>;</font>
+                    </font><font color='#ff0000' weight='1' id='326'>if <font color='#ff0000' weight='1' id='305'>(<font color='#ff0000' weight='1' id='303'><font color='#ff0000' weight='1' id='293'>t</font><font color='#ff0000' weight='1' id='295'>.</font><font color='#ff0000' weight='1' id='297'>_cfg_visited<font color='#ff0000' weight='1' id='296'></font></font> <font color='#ff0000' weight='1' id='300'>!= </font><font color='#ff0000' weight='1' id='302'>visitedFlag</font>)</font><font color='#ff0000' weight='1' id='304'></font></font><font color='#ff0000' weight='1' id='325'> <font color='#ff0000' weight='1' id='324'>{
+                        <font color='#ff0000' weight='1' id='312'><font color='#ff0000' weight='1' id='307'>stack</font><font color='#ff0000' weight='1' id='309'>.<font color='#ff0000' weight='1' id='308'></font></font><font color='#ff0000' weight='1' id='311'>push</font></font><font color='#ff0000' weight='1' id='318'>(<font color='#ff0000' weight='1' id='314'>t</font>)</font>;
+                    }</font></font>
+                }</font><font color='#ff0000' weight='1' id='327'></font></font>
+            }</font><font color='#ff0000' weight='1' id='330'></font></font></font>
+        }</font><font color='#ff0000' weight='1' id='334'></font></font>
+        return out;
+    }
+
+    </font>
+</pre>

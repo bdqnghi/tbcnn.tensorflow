@@ -1,0 +1,97 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static void sort(int arr[])
+    {       
+        heapify(arr);        
+        for (int i = N; i &gt; 0; i--)
+        {
+            swap(arr,0, i);
+            N = N-1;
+            maxheap(arr, 0);
+        }
+    }     
+       
+    public static void heapify(int arr[])
+    {
+        N = arr.length-1;
+        for (int i = N/2; i &gt;= 0; i--)
+            maxheap(arr, i);        
+    }
+            
+    public static void maxheap(int arr[], int i)
+    <font color='#ff0000' weight='1' id='419'>{ 
+        <font color='#0018ff' weight='0.0238095' id='240'>int</font> <font color='#0018ff' weight='0.0238095' id='243'>left </font>= <font color='#0018ff' weight='0.0238095' id='250'><font color='#0008ff' weight='0.00793651' id='245'>2</font><font color='#0008ff' weight='0.00793651' id='247'>*<font color='#0008ff' weight='0.00793651' id='246'></font></font><font color='#0008ff' weight='0.00793651' id='249'>i<font color='#0008ff' weight='0.00793651' id='248'></font></font></font> ;
+        <font color='#0091ff' weight='0.142857' id='274'>int <font color='#0018ff' weight='0.0238095' id='259'>right </font>= 2<font color='#0004ff' weight='0.0047619' id='260'></font><font color='#0004ff' weight='0.0047619' id='263'>*</font><font color='#0004ff' weight='0.0047619' id='265'>i<font color='#0004ff' weight='0.0047619' id='264'></font> </font><font color='#0004ff' weight='0.0047619' id='267'>+<font color='#0004ff' weight='0.0047619' id='266'></font> </font>1;<font color='#0048ff' weight='0.0714286' id='273'></font>
+        </font><font color='#0018ff' weight='0.0238095' id='277'><font color='#0018ff' weight='0.0238095' id='276'>int</font> </font><font color='#0018ff' weight='0.0238095' id='279'>max<font color='#0018ff' weight='0.0238095' id='278'></font> </font><font color='#0018ff' weight='0.0238095' id='283'>= <font color='#0018ff' weight='0.0238095' id='281'>i</font></font>;
+        <font color='#0091ff' weight='0.142857' id='327'>if <font color='#0048ff' weight='0.0714286' id='315'>(<font color='#0024ff' weight='0.0357143' id='313'><font color='#0005ff' weight='0.00510204' id='288'>left </font><font color='#0005ff' weight='0.00510204' id='290'>&lt;= </font><font color='#0005ff' weight='0.00510204' id='292'>N </font>&amp;&amp; <font color='#0005ff' weight='0.00510204' id='302'>arr<font color='#0002ff' weight='0.00255102' id='295'></font>[left] </font><font color='#0005ff' weight='0.00510204' id='304'>&gt;<font color='#0005ff' weight='0.00510204' id='303'></font> </font><font color='#0005ff' weight='0.00510204' id='312'><font color='#0002ff' weight='0.00255102' id='306'>arr<font color='#0002ff' weight='0.00255102' id='305'></font></font>[<font color='#0001ff' weight='0.00127551' id='308'>i<font color='#0001ff' weight='0.00127551' id='307'></font></font>]</font>)</font><font color='#0024ff' weight='0.0357143' id='314'></font></font><font color='#0048ff' weight='0.0714286' id='326'>
+            <font color='#0048ff' weight='0.0714286' id='325'><font color='#0048ff' weight='0.0714286' id='324'><font color='#0024ff' weight='0.0357143' id='322'><font color='#000cff' weight='0.0119048' id='317'>max<font color='#000cff' weight='0.0119048' id='316'></font> </font><font color='#000cff' weight='0.0119048' id='319'>=<font color='#000cff' weight='0.0119048' id='318'></font> </font><font color='#000cff' weight='0.0119048' id='321'>left<font color='#000cff' weight='0.0119048' id='320'></font></font>;</font><font color='#0024ff' weight='0.0357143' id='323'></font></font></font></font>
+        </font><font color='#0091ff' weight='0.142857' id='368'>if <font color='#0048ff' weight='0.0714286' id='356'>(<font color='#0024ff' weight='0.0357143' id='354'><font color='#0005ff' weight='0.00510204' id='329'>right </font><font color='#0005ff' weight='0.00510204' id='331'>&lt;= </font><font color='#0005ff' weight='0.00510204' id='333'>N<font color='#0005ff' weight='0.00510204' id='332'></font> </font><font color='#0005ff' weight='0.00510204' id='335'>&amp;&amp;<font color='#0005ff' weight='0.00510204' id='334'></font> </font><font color='#0005ff' weight='0.00510204' id='343'><font color='#0002ff' weight='0.00255102' id='337'>arr</font>[<font color='#0001ff' weight='0.00127551' id='339'>right</font>] </font><font color='#0005ff' weight='0.00510204' id='345'>&gt; </font><font color='#0005ff' weight='0.00510204' id='353'><font color='#0002ff' weight='0.00255102' id='347'>arr</font>[<font color='#0001ff' weight='0.00127551' id='350'><font color='#0001ff' weight='0.00127551' id='349'>max</font>]</font></font>)</font><font color='#0024ff' weight='0.0357143' id='355'></font></font><font color='#0048ff' weight='0.0714286' id='367'>        
+            <font color='#0048ff' weight='0.0714286' id='366'><font color='#0048ff' weight='0.0714286' id='365'><font color='#0024ff' weight='0.0357143' id='363'><font color='#000cff' weight='0.0119048' id='358'>max<font color='#000cff' weight='0.0119048' id='357'></font> </font>= <font color='#000cff' weight='0.0119048' id='362'>right</font>;</font><font color='#0024ff' weight='0.0357143' id='364'></font></font></font></font>
+ 
+        </font><font color='#0091ff' weight='0.142857' id='417'>if <font color='#0048ff' weight='0.0714286' id='377'>(<font color='#0024ff' weight='0.0357143' id='375'><font color='#000cff' weight='0.0119048' id='370'>max<font color='#000cff' weight='0.0119048' id='369'></font> </font><font color='#000cff' weight='0.0119048' id='372'>!=<font color='#000cff' weight='0.0119048' id='371'></font> </font><font color='#000cff' weight='0.0119048' id='374'>i</font>)</font><font color='#0024ff' weight='0.0357143' id='376'></font></font><font color='#0048ff' weight='0.0714286' id='416'>
+        <font color='#0048ff' weight='0.0714286' id='415'>{
+            <font color='#0018ff' weight='0.0238095' id='397'><font color='#000cff' weight='0.0119048' id='395'><font color='#000cff' weight='0.0119048' id='394'><font color='#0006ff' weight='0.00595238' id='379'>swap<font color='#0006ff' weight='0.00595238' id='378'></font></font><font color='#0006ff' weight='0.00595238' id='393'>(<font color='#0001ff' weight='0.0014881' id='383'><font color='#0001ff' weight='0.0014881' id='382'><font color='#0001ff' weight='0.0014881' id='381'>arr</font></font>, </font><font color='#0001ff' weight='0.0014881' id='387'><font color='#0001ff' weight='0.0014881' id='386'><font color='#0001ff' weight='0.0014881' id='385'>i<font color='#0001ff' weight='0.0014881' id='384'></font></font></font>, </font><font color='#0001ff' weight='0.0014881' id='391'><font color='#0001ff' weight='0.0014881' id='390'><font color='#0001ff' weight='0.0014881' id='389'>max</font></font>)</font><font color='#0001ff' weight='0.0014881' id='392'></font></font></font>;</font><font color='#000cff' weight='0.0119048' id='396'></font>
+            </font><font color='#0018ff' weight='0.0238095' id='413'><font color='#000cff' weight='0.0119048' id='411'><font color='#000cff' weight='0.0119048' id='410'><font color='#0006ff' weight='0.00595238' id='399'>maxheap<font color='#0006ff' weight='0.00595238' id='398'></font></font><font color='#0006ff' weight='0.00595238' id='409'>(<font color='#0002ff' weight='0.00198413' id='403'><font color='#0002ff' weight='0.00198413' id='402'><font color='#0002ff' weight='0.00198413' id='401'>arr<font color='#0002ff' weight='0.00198413' id='400'></font></font></font>, </font><font color='#0002ff' weight='0.00198413' id='407'><font color='#0002ff' weight='0.00198413' id='406'><font color='#0002ff' weight='0.00198413' id='405'>max</font></font>)</font><font color='#0002ff' weight='0.00198413' id='408'></font></font></font>;</font><font color='#000cff' weight='0.0119048' id='412'></font>
+        }</font><font color='#0018ff' weight='0.0238095' id='414'></font></font></font>
+    }</font><font color='#0091ff' weight='0.142857' id='418'></font></font>    
+    
+    public static void swap(int arr[], int i, int j)
+    {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp; 
+    }    </font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static int compare(String a, String b){
+        if(a.length() &lt; b.length())
+            return -1;
+        else if(a.length() &gt; b.length())
+            return 1;
+        else
+            return a.compareTo(b);
+    }
+
+    
+    public static long sort(String[] A){
+        
+        long startTime = System.nanoTime();
+        
+        
+        quick_sort(A, 0, A.length - 1);
+
+        
+        long endTime = System.nanoTime();
+        return endTime - startTime;
+    }<font color='#ff0000' weight='1' id='216'></font>
+
+    
+    public static int partition(String[] A, int p, int r){
+        String x = A[r];
+        String tmp;
+        int i = p - 1;
+        for(int j = p; j &lt; r; j++){
+            if(compare(A[j], x) &lt;= 0){
+                i++;
+                
+                
+                tmp = A[j];
+                A[j] = A[i];
+                A[i] = tmp;
+            }
+        }
+        i++;
+        A[r] = A[i];
+        A[i] = x;
+        return i;
+    }
+
+    public static void quick_sort(String[] A, int p, int r){
+        if(p &lt; r){
+            int q = partition(A, p, r);
+            quick_sort(A, p, q-1);
+            quick_sort(A, q+1, r);
+        }
+    }</font>
+</pre>

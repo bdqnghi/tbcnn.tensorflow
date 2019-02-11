@@ -1,0 +1,91 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+<font color='#0001ff' weight='0.00119048' id='2'>private </font><font color='#0001ff' weight='0.00119048' id='4'>void</font> insertionSort(<font color='#0003ff' weight='0.00357143' id='17'><font color='#0003ff' weight='0.0031746' id='16'>int<font color='#0000ff' weight='9.92064e-05' id='11'>[]</font> <font color='#0000ff' weight='0.000198413' id='15'>a</font></font>, </font><font color='#0000ff' weight='0.000396825' id='20'>int </font><font color='#0000ff' weight='0.000198413' id='22'>len</font>) {
+        
+        for <font color='#0008ff' weight='0.00833333' id='55'>(<font color='#0000ff' weight='2.48016e-05' id='29'><font color='#0000ff' weight='1.24008e-05' id='28'>int</font> </font>i = <font color='#0000ff' weight='2.48016e-05' id='34'>1</font>; i <font color='#0000ff' weight='1.24008e-05' id='42'>&lt; </font>len; <font color='#0000ff' weight='0.000372024' id='53'>i<font color='#0000ff' weight='3.72024e-05' id='51'>++</font>)</font> </font>{
+            <font color='#0001ff' weight='0.0010119' id='73'><font color='#0000ff' weight='1.98413e-05' id='58'>int </font>value = <font color='#0000ff' weight='7.93651e-05' id='69'>a[i]</font>;   
+            </font>int position <font color='#0000ff' weight='2.97619e-05' id='82'>= <font color='#0000ff' weight='1.98413e-05' id='81'>i</font></font>;   
+            
+            
+            while (position <font color='#0000ff' weight='2.12585e-06' id='89'>&gt; </font>0 &amp;&amp; a<font color='#0000ff' weight='8.5034e-06' id='104'>[<font color='#0000ff' weight='3.18878e-06' id='102'><font color='#0000ff' weight='1.77154e-07' id='97'>position</font><font color='#0000ff' weight='1.77154e-07' id='99'>-</font><font color='#0000ff' weight='1.77154e-07' id='101'>1</font>]</font></font> <font color='#0000ff' weight='2.12585e-06' id='107'>&gt; </font>value) {
+                a<font color='#0000ff' weight='3.30688e-06' id='119'>[position]</font> = a[position-<font color='#0000ff' weight='1.37787e-07' id='130'>1</font>];    
+                position--;                     
+            }
+            
+            
+            a[position] = value;
+        }
+    }
+    </font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+package heap;
+
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Heap {
+
+    
+
+        
+        
+    private int array[];
+    public static int n; 
+    
+    public static void sort(int arr[])  
+    {
+            buildMaxHeap(arr);
+            
+            for(int i=arr.length-1; i&gt;=0; i--){
+                int temp=arr[0];
+                arr[0] = arr[i];
+                arr[i]= temp;
+
+                n--;
+                
+                maxHeapify(arr,0);
+		}
+    }
+    
+    public static void maxHeapify(int[] arr, int i) 
+    {
+		int leftChild= (2*i)+1;
+		int rightChild=(2*i)+2;
+		
+                int max;
+                
+                if((leftChild &lt; n) &amp;&amp; (arr[leftChild] &gt; arr[i])) 
+			max=leftChild;
+                else max = i;
+                
+		if( (rightChild &lt; n) &amp;&amp; (arr[rightChild] &gt; arr[max])) 
+			max=rightChild;
+		
+                if(max!=i){
+			int temp = arr[max];
+			arr[max] = arr[i];
+			arr[i] = temp;
+                        maxHeapify(arr, max);
+		}
+	}  
+    
+    
+    
+    public static void buildMaxHeap(int [] array){
+    
+        n=array.length;
+        
+        for(int i=array.length/2; i&gt;=0; i--){
+            maxHeapify(array, i);
+        }
+    }
+}
+</font>
+</pre>

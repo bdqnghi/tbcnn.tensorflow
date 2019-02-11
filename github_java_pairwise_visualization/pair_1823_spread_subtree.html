@@ -1,0 +1,62 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public void bubbleSort(){
+        for(int i=0; i&lt;length-1;i++){
+            for(int j=0;<font color='#ff0000' weight='1' id='69'><font color='#000aff' weight='0.0102041' id='56'>j</font>&lt;<font color='#000aff' weight='0.0102041' id='60'>length</font>-<font color='#000aff' weight='0.0102041' id='64'>1</font><font color='#000aff' weight='0.0102041' id='66'>-</font>i;</font>j++){
+                compare(j,j+1);
+            }
+        }
+    }
+    public void compare(int x, int y){
+        int z=0;
+        if(a[x]&gt;a[y]){
+            z=a[x];
+            a[x]=a[y];
+            a[y]=z;
+        }   
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+package algorithms.sort;
+
+public class SortInsertionSort <font color='#ff0000' weight='1' id='340'>{
+	
+	
+<font color='#00ff03' weight='0.496933' id='338'><font color='#0000ff' weight='0.000255624' id='15'>public </font><font color='#0000ff' weight='0.000255624' id='17'>static </font>void main(<font color='#0001ff' weight='0.00115031' id='32'><font color='#0001ff' weight='0.00102249' id='31'><font color='#0000ff' weight='0.000127812' id='25'><font color='#0000ff' weight='6.39059e-05' id='24'>String</font> </font><font color='#0000ff' weight='0.000255624' id='30'><font color='#0000ff' weight='3.1953e-05' id='27'>args</font><font color='#0000ff' weight='3.1953e-05' id='29'>[]</font></font></font>)</font><font color='#004eff' weight='0.0771984' id='337'>{
+		
+		<font color='#0002ff' weight='0.00238582' id='91'><font color='#0001ff' weight='0.00115031' id='89'><font color='#0000ff' weight='1.42013e-05' id='37'><font color='#0000ff' weight='7.10066e-06' id='36'>int</font> </font><font color='#0000ff' weight='2.84026e-05' id='42'><font color='#0000ff' weight='3.55033e-06' id='39'>arr</font><font color='#0000ff' weight='3.55033e-06' id='41'>[]</font> </font><font color='#0000ff' weight='0.00031953' id='88'>= <font color='#0000ff' weight='0.000312429' id='87'><font color='#0000ff' weight='0.000305328' id='86'>{<font color='#0000ff' weight='9.46754e-07' id='45'><font color='#0000ff' weight='4.73377e-07' id='44'>30</font>,</font><font color='#0000ff' weight='9.46754e-07' id='48'><font color='#0000ff' weight='4.73377e-07' id='47'>6</font>,</font><font color='#0000ff' weight='9.46754e-07' id='51'><font color='#0000ff' weight='4.73377e-07' id='50'>2</font>,</font><font color='#0000ff' weight='9.46754e-07' id='54'><font color='#0000ff' weight='4.73377e-07' id='53'>3</font>,</font><font color='#0000ff' weight='9.46754e-07' id='57'><font color='#0000ff' weight='4.73377e-07' id='56'>4</font>,</font><font color='#0000ff' weight='9.46754e-07' id='60'><font color='#0000ff' weight='4.73377e-07' id='59'>6</font>,</font><font color='#0000ff' weight='9.46754e-07' id='63'><font color='#0000ff' weight='4.73377e-07' id='62'>7</font>,</font><font color='#0000ff' weight='9.46754e-07' id='66'><font color='#0000ff' weight='4.73377e-07' id='65'>8</font>,</font><font color='#0000ff' weight='9.46754e-07' id='69'><font color='#0000ff' weight='4.73377e-07' id='68'>10</font>,</font><font color='#0000ff' weight='9.46754e-07' id='72'><font color='#0000ff' weight='4.73377e-07' id='71'>20</font>,</font><font color='#0000ff' weight='9.46754e-07' id='75'><font color='#0000ff' weight='4.73377e-07' id='74'>11</font>,</font><font color='#0000ff' weight='9.46754e-07' id='78'><font color='#0000ff' weight='4.73377e-07' id='77'>5</font>,</font><font color='#0000ff' weight='9.46754e-07' id='81'><font color='#0000ff' weight='4.73377e-07' id='80'>5</font>,</font><font color='#0000ff' weight='9.46754e-07' id='84'><font color='#0000ff' weight='4.73377e-07' id='83'>30</font>}</font></font></font></font>;</font>
+		
+	    </font><font color='#0000ff' weight='0.000681663' id='108'><font color='#0000ff' weight='0.000298228' id='106'><font color='#0000ff' weight='1.42013e-05' id='94'><font color='#0000ff' weight='7.10066e-06' id='93'>int</font> </font><font color='#0000ff' weight='7.10066e-06' id='96'>n </font><font color='#0000ff' weight='5.68053e-05' id='105'>= <font color='#0000ff' weight='4.97046e-05' id='104'><font color='#0000ff' weight='4.2604e-05' id='103'><font color='#0000ff' weight='2.36689e-06' id='98'>arr</font><font color='#0000ff' weight='2.36689e-06' id='100'>.</font><font color='#0000ff' weight='2.36689e-06' id='102'>length</font></font></font></font>;</font>
+	    
+	    
+	    </font><font color='#0006ff' weight='0.00604976' id='251'>for (int i=1; i&lt;n; i++)
+        {
+            <font color='#0000ff' weight='7.24267e-05' id='155'><font color='#0000ff' weight='3.1953e-05' id='153'><font color='#0000ff' weight='1.42013e-06' id='140'><font color='#0000ff' weight='7.10066e-07' id='139'>int</font> </font><font color='#0000ff' weight='7.10066e-07' id='142'>key </font><font color='#0000ff' weight='6.39059e-06' id='152'>= <font color='#0000ff' weight='5.68053e-06' id='151'><font color='#0000ff' weight='4.97046e-06' id='150'><font color='#0000ff' weight='3.55033e-07' id='144'>arr</font><font color='#0000ff' weight='1.42013e-06' id='149'>[<font color='#0000ff' weight='3.55033e-07' id='147'><font color='#0000ff' weight='1.77516e-07' id='146'>i</font>]</font></font></font></font></font>;</font> 
+             
+            </font><font color='#0000ff' weight='6.39059e-05' id='171'><font color='#0000ff' weight='2.76926e-05' id='169'>int j = <font color='#0000ff' weight='2.36689e-07' id='162'>i</font><font color='#0000ff' weight='2.36689e-07' id='164'>-</font>1;</font>
+            
+            
+            </font><font color='#0000ff' weight='0.000242843' id='229'>while <font color='#0000ff' weight='4.68644e-05' id='194'>(j<font color='#0000ff' weight='1.52157e-07' id='175'>&gt;=</font><font color='#0000ff' weight='1.52157e-07' id='177'>0 </font>&amp;&amp; <font color='#0000ff' weight='1.0651e-06' id='187'><font color='#0000ff' weight='7.60785e-08' id='181'>arr</font><font color='#0000ff' weight='3.04314e-07' id='186'>[<font color='#0000ff' weight='7.60785e-08' id='184'><font color='#0000ff' weight='3.80392e-08' id='183'>j</font>]</font></font> </font>&gt; key)  
+            </font><font color='#0000ff' weight='7.02965e-05' id='228'>{
+                <font color='#0000ff' weight='1.70416e-05' id='219'><font color='#0000ff' weight='7.81073e-06' id='217'><font color='#0000ff' weight='1.30179e-06' id='206'><font color='#0000ff' weight='5.91722e-08' id='196'>arr</font><font color='#0000ff' weight='4.73377e-07' id='205'>[<font color='#0000ff' weight='1.77516e-07' id='203'>j+<font color='#0000ff' weight='9.86203e-09' id='202'>1</font>]</font></font> </font><font color='#0000ff' weight='1.18344e-07' id='208'>= </font><font color='#0000ff' weight='8.2841e-07' id='216'><font color='#0000ff' weight='5.91722e-08' id='210'>arr</font><font color='#0000ff' weight='2.36689e-07' id='215'>[<font color='#0000ff' weight='5.91722e-08' id='213'>j]</font></font></font>;</font>
+                
+                </font><font color='#0000ff' weight='4.2604e-06' id='226'><font color='#0000ff' weight='1.42013e-06' id='224'><font color='#0000ff' weight='1.77516e-07' id='221'>j</font><font color='#0000ff' weight='1.77516e-07' id='223'>--</font>;</font>
+            }</font></font>
+            
+            </font><font color='#0000ff' weight='7.66871e-05' id='248'><font color='#0000ff' weight='3.40832e-05' id='246'><font color='#0000ff' weight='7.81073e-06' id='241'><font color='#0000ff' weight='3.55033e-07' id='231'>arr</font><font color='#0000ff' weight='2.84026e-06' id='240'>[<font color='#0000ff' weight='1.0651e-06' id='238'>j+1]</font></font> </font><font color='#0000ff' weight='7.10066e-07' id='243'>= </font><font color='#0000ff' weight='7.10066e-07' id='245'>key</font>;</font>            
+        }</font>
+	    
+	    
+	  </font><font color='#0000ff' weight='0.000852079' id='272'><font color='#0000ff' weight='0.000383436' id='270'><font color='#0000ff' weight='0.000362134' id='269'><font color='#0000ff' weight='0.00010651' id='262'><font color='#0000ff' weight='2.1302e-06' id='253'>System</font><font color='#0000ff' weight='2.1302e-06' id='255'>.</font><font color='#0000ff' weight='2.1302e-06' id='257'>out</font><font color='#0000ff' weight='2.1302e-06' id='259'>.</font><font color='#0000ff' weight='2.1302e-06' id='261'>println</font></font><font color='#0000ff' weight='5.32549e-05' id='268'>(<font color='#0000ff' weight='1.59765e-05' id='266'><font color='#0000ff' weight='1.0651e-05' id='265'><font color='#0000ff' weight='5.32549e-06' id='264'>" Sorted Array: "</font></font> )</font></font></font>;</font>  
+	  
+	  </font><font color='#0002ff' weight='0.00264145' id='335'>for<font color='#0000ff' weight='0.000596455' id='301'>(<font color='#0000ff' weight='5.85804e-05' id='284'><font color='#0000ff' weight='2.39647e-05' id='282'>int <font color='#0000ff' weight='8.87582e-07' id='277'>m</font>=0;</font> </font><font color='#0000ff' weight='4.2604e-05' id='293'><font color='#0000ff' weight='8.87582e-07' id='286'>m </font><font color='#0000ff' weight='8.87582e-07' id='288'>&lt; </font><font color='#0000ff' weight='8.87582e-07' id='290'>n</font>; </font><font color='#0000ff' weight='2.66275e-05' id='299'><font color='#0000ff' weight='2.1302e-05' id='298'><font color='#0000ff' weight='2.66275e-06' id='295'>m</font><font color='#0000ff' weight='2.66275e-06' id='297'>++</font></font>)</font></font><font color='#0000ff' weight='0.000681663' id='334'>{
+		  
+		  <font color='#0000ff' weight='0.00031953' id='332'><font color='#0000ff' weight='0.000149114' id='330'><font color='#0000ff' weight='0.000143788' id='329'><font color='#0000ff' weight='2.66275e-05' id='312'><font color='#0000ff' weight='5.32549e-07' id='303'>System</font><font color='#0000ff' weight='5.32549e-07' id='305'>.</font>out<font color='#0000ff' weight='5.32549e-07' id='309'>.</font><font color='#0000ff' weight='5.32549e-07' id='311'>print</font></font><font color='#0000ff' weight='3.99412e-05' id='328'>(<font color='#0000ff' weight='1.73079e-05' id='326'><font color='#0000ff' weight='1.59765e-05' id='325'><font color='#0000ff' weight='4.43791e-07' id='314'>" "</font><font color='#0000ff' weight='4.43791e-07' id='316'>+ </font>arr[m]</font>)</font></font></font>;</font>
+	  }</font></font>
+	  			
+	}</font></font>
+
+}</font></font>
+</font>
+</pre>

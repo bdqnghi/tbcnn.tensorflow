@@ -1,0 +1,66 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static void sort(long[] valuesArray, int[] gapsArray) throws SortException <font color='#ff0000' weight='1' id='296'>{
+
+        <font color='#ff0000' weight='1' id='67'>if(<font color='#ff0000' weight='1' id='48'><font color='#ff0000' weight='1' id='38'>gapsArray<font color='#ff0000' weight='1' id='37'></font></font>.length == 0)</font><font color='#ff0000' weight='1' id='49'></font> throw <font color='#ff0000' weight='1' id='62'><font color='#ff0000' weight='1' id='52'>new </font><font color='#ff0000' weight='1' id='61'><font color='#ff0000' weight='1' id='54'>EmptyArrayException</font>(<font color='#ff0000' weight='1' id='58'><font color='#ff0000' weight='1' id='56'>"Gaps array can not by empty"<font color='#ff0000' weight='1' id='55'></font></font>)</font></font>;</font>
+
+        </font><font color='#ff0000' weight='1' id='92'><font color='#ff0000' weight='1' id='70'>int<font color='#ff0000' weight='1' id='68'></font> </font><font color='#ff0000' weight='1' id='72'>endGap<font color='#ff0000' weight='1' id='71'></font> </font><font color='#ff0000' weight='1' id='91'>= <font color='#ff0000' weight='1' id='89'>gapsArray<font color='#ff0000' weight='1' id='73'></font>[gapsArray.length<font color='#ff0000' weight='1' id='83'>-</font>1]</font></font>;</font>
+        if<font color='#ff0000' weight='1' id='103'>(<font color='#ff0000' weight='1' id='101'>endGap <font color='#ff0000' weight='1' id='98'>!= </font><font color='#ff0000' weight='1' id='100'>1<font color='#ff0000' weight='1' id='99'></font></font>)</font><font color='#ff0000' weight='1' id='102'></font></font> <font color='#ff0000' weight='1' id='118'><font color='#ff0000' weight='1' id='117'>throw <font color='#ff0000' weight='1' id='105'>new </font>InvalidGapSequenceException<font color='#ff0000' weight='1' id='106'></font>(<font color='#ff0000' weight='1' id='110'><font color='#ff0000' weight='1' id='109'>"Gaps sequence must end with 1"<font color='#ff0000' weight='1' id='108'></font></font></font>);</font></font>
+
+
+        int<font color='#ff0000' weight='1' id='121'></font> valuesArraySize = valuesArray.length;
+
+        <font color='#ff0000' weight='1' id='294'>for (<font color='#ff0000' weight='1' id='148'>int gap : <font color='#ff0000' weight='1' id='144'>gapsArray</font>)</font><font color='#ff0000' weight='1' id='149'></font> <font color='#ff0000' weight='1' id='293'>{
+
+            <font color='#ff0000' weight='1' id='291'>for <font color='#ff0000' weight='1' id='179'>(int i = <font color='#ff0000' weight='1' id='157'>gap</font>; i &lt; valuesArraySize; i++) </font><font color='#ff0000' weight='1' id='290'>{
+
+                <font color='#ff0000' weight='1' id='182'>long </font>value<font color='#ff0000' weight='1' id='183'></font> = valuesArray<font color='#ff0000' weight='1' id='185'></font>[i];
+                <font color='#ff0000' weight='1' id='209'>int j = i;
+
+                </font><font color='#ff0000' weight='1' id='273'>while (j &gt;=<font color='#ff0000' weight='1' id='212'></font> <font color='#ff0000' weight='1' id='215'>gap </font>&amp;&amp;<font color='#ff0000' weight='1' id='216'></font> valuesArray[j <font color='#ff0000' weight='1' id='223'>- </font>gap<font color='#ff0000' weight='1' id='224'></font>] &gt; value) <font color='#ff0000' weight='1' id='272'>{
+                    <font color='#ff0000' weight='1' id='261'><font color='#ff0000' weight='1' id='244'>valuesArray<font color='#ff0000' weight='1' id='237'></font><font color='#ff0000' weight='1' id='243'>[<font color='#ff0000' weight='1' id='241'><font color='#ff0000' weight='1' id='240'>j</font>]</font><font color='#ff0000' weight='1' id='242'></font></font> </font><font color='#ff0000' weight='1' id='246'>=<font color='#ff0000' weight='1' id='245'></font> </font><font color='#ff0000' weight='1' id='258'><font color='#ff0000' weight='1' id='248'>valuesArray<font color='#ff0000' weight='1' id='247'></font></font><font color='#ff0000' weight='1' id='257'>[<font color='#ff0000' weight='1' id='255'><font color='#ff0000' weight='1' id='250'>j<font color='#ff0000' weight='1' id='249'></font> </font><font color='#ff0000' weight='1' id='252'>-<font color='#ff0000' weight='1' id='251'></font> </font><font color='#ff0000' weight='1' id='254'>gap<font color='#ff0000' weight='1' id='253'></font></font>]</font><font color='#ff0000' weight='1' id='256'></font></font></font>;<font color='#ff0000' weight='1' id='260'></font>
+                    </font><font color='#ff0000' weight='1' id='268'>j<font color='#ff0000' weight='1' id='262'></font> -=<font color='#ff0000' weight='1' id='264'></font> <font color='#ff0000' weight='1' id='267'>gap</font>;</font><font color='#ff0000' weight='1' id='269'></font>
+                }<font color='#ff0000' weight='1' id='271'></font></font>
+
+                </font><font color='#ff0000' weight='1' id='288'><font color='#ff0000' weight='1' id='286'><font color='#ff0000' weight='1' id='281'><font color='#ff0000' weight='1' id='275'>valuesArray<font color='#ff0000' weight='1' id='274'></font></font><font color='#ff0000' weight='1' id='280'>[<font color='#ff0000' weight='1' id='278'><font color='#ff0000' weight='1' id='277'>j<font color='#ff0000' weight='1' id='276'></font></font>]</font><font color='#ff0000' weight='1' id='279'></font></font> </font><font color='#ff0000' weight='1' id='283'>=<font color='#ff0000' weight='1' id='282'></font> </font><font color='#ff0000' weight='1' id='285'>value<font color='#ff0000' weight='1' id='284'></font></font>;</font><font color='#ff0000' weight='1' id='287'></font>
+            }</font><font color='#ff0000' weight='1' id='289'></font></font>
+        }</font><font color='#ff0000' weight='1' id='292'></font></font>
+    }</font><font color='#ff0000' weight='1' id='295'></font></font></font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public int[] sort(int num[]) {
+        
+        int h = 1;
+        
+        while (h &lt; num.length / 3)
+            h = h * 3 + 1;
+        for (<font color='#ff0000' weight='1' id='73'>;<font color='#ff0000' weight='1' id='72'></font> </font>h &gt; 0; h /= 3) {
+            
+            for (int k = 0; k &lt; h; k++) {
+                
+                for (int i = h + k; i &lt; num.length; i += h) {
+                    int j = i;
+                    
+                    while (j &gt;= h &amp;&amp; num[j] &lt; num[j - h]) {
+                        swap(num, j, j - h);
+                        j -= h;
+                    }
+
+                }
+            }
+        }
+
+        return num;
+    }
+
+    
+    private void swap(int arg[], int i, int j) {
+        
+        if (i != j) {
+            arg[i] = arg[i] ^ arg[j];
+            arg[j] = arg[j] ^ arg[i];
+            arg[i] = arg[j] ^ arg[i];
+        }
+    }</font>
+</pre>

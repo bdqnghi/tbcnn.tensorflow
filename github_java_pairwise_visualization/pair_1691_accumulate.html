@@ -1,0 +1,47 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public void <font color='#ff0000' weight='1' id='7'>sort</font>(<font color='#ff0000' weight='1' id='17'>Object[] a, </font>Comparator comparator)
+    <font color='#ff0000' weight='1' id='166'>{
+        <font color='#ff0000' weight='1' id='164'>for (<font color='#ff0000' weight='1' id='29'>int </font><font color='#ff0000' weight='1' id='31'>i<font color='#ff0000' weight='1' id='30'></font> </font><font color='#ff0000' weight='1' id='35'>= 1</font>; <font color='#ff0000' weight='1' id='52'>i &lt;<font color='#ff0000' weight='1' id='41'></font> a<font color='#ff0000' weight='1' id='43'></font>.length; </font>i++)
+        {
+            for (<font color='#ff0000' weight='1' id='63'>int </font>j = i; <font color='#ff0000' weight='1' id='81'>j &gt;= 1; </font>j--)
+            {
+                if (less(comparator<font color='#ff0000' weight='1' id='92'></font>, a[j], <font color='#ff0000' weight='1' id='119'>a<font color='#ff0000' weight='1' id='116'>[j - 1<font color='#ff0000' weight='1' id='112'></font>]</font>)</font><font color='#ff0000' weight='1' id='120'></font>)<font color='#ff0000' weight='1' id='152'>
+                <font color='#ff0000' weight='1' id='151'>{
+                    exchange(a, j, j - 1);
+                }</font>
+                </font><font color='#ff0000' weight='1' id='157'>else
+                {
+                    break;
+                }</font>
+            }
+        }<font color='#ff0000' weight='1' id='162'></font>
+    }</font><font color='#ff0000' weight='1' id='165'></font></font>
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static void bubbleSort(int[] arr) {
+        int length = arr.length;
+        int k;
+
+        for (int i = length; i &gt;= 0; i--) {
+            for (int j = 0; j &lt; length-1; j++) {
+                k = j + 1;
+
+                if (arr[j] &gt; arr[k])
+                    swap(j, k, arr);
+            }
+            printArray(arr);
+        }
+    }
+
+  
+
+    private static void swap(int j, int k, int[] arr) {
+        int temp = arr[j];
+        arr[j] = arr[k];
+        arr[k] = temp;
+
+    }</font>
+</pre>

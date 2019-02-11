@@ -1,0 +1,84 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void shellSort(DataWrapShellSort[] data) {
+        System.out.println("å¼å§æåºï¼");
+        int arrayLength = data.length;
+        
+        int h = 1;
+        
+        while (h &lt;= arrayLength / 3) {
+            h = h * 3 + 1;
+        }
+        while (h &gt; 0) {
+            System.out.println("===hçå¼:" + h + "===");
+            for (int i = h; i &lt; arrayLength; i++) {
+                
+                <font color='#0014ff' weight='0.0203349' id='189'><font color='#0009ff' weight='0.00897129' id='187'>DataWrapShellSort tmp = <font color='#0001ff' weight='0.0015949' id='185'>data[i]</font>;</font>
+                
+                
+                </font><font color='#00b4ff' weight='0.177033' id='338'>if <font color='#0015ff' weight='0.020933' id='225'>(<font color='#000aff' weight='0.00986842' id='223'><font color='#0000ff' weight='0.00041866' id='197'>data<font color='#0000ff' weight='0.000119617' id='196'>[<font color='#0000ff' weight='2.99043e-05' id='194'><font color='#0000ff' weight='1.49522e-05' id='193'>i</font>]</font></font></font>.<font color='#0000ff' weight='2.99043e-05' id='201'>compareTo</font>(<font color='#0000ff' weight='0.000194378' id='215'><font color='#0000ff' weight='7.47608e-06' id='203'>data</font><font color='#0000ff' weight='5.98086e-05' id='212'>[<font color='#0000ff' weight='1.24601e-06' id='205'>i </font>- h]</font>)</font> &lt; 0)</font></font> {
+                    <font color='#0000ff' weight='4.98405e-05' id='228'><font color='#0000ff' weight='2.49203e-05' id='227'>int</font> </font>j = <font color='#0000ff' weight='8.30675e-06' id='232'>i </font>- h;
+                    
+                    for <font color='#0003ff' weight='0.00336423' id='287'>(<font color='#0000ff' weight='1.86902e-05' id='243'>; </font><font color='#0000ff' weight='0.000289698' id='275'><font color='#0000ff' weight='1.03834e-06' id='245'>j </font><font color='#0000ff' weight='1.03834e-06' id='247'>&gt;= </font>0 <font color='#0000ff' weight='1.03834e-06' id='251'>&amp;&amp; </font><font color='#0000ff' weight='7.26841e-06' id='259'>data[<font color='#0000ff' weight='5.19172e-07' id='256'>j]</font></font>.<font color='#0000ff' weight='8.30675e-06' id='270'><font color='#0000ff' weight='5.19172e-07' id='263'>compareTo</font><font color='#0000ff' weight='2.59586e-06' id='269'>(<font color='#0000ff' weight='7.78758e-07' id='267'><font color='#0000ff' weight='5.19172e-07' id='266'>tmp</font>)</font></font> </font><font color='#0000ff' weight='1.03834e-06' id='272'>&gt; </font><font color='#0000ff' weight='1.03834e-06' id='274'>0</font>;</font> <font color='#0000ff' weight='6.23006e-06' id='279'>j </font><font color='#0000ff' weight='6.23006e-06' id='281'>-= </font><font color='#0000ff' weight='6.23006e-06' id='283'>h</font>) </font><font color='#0001ff' weight='0.00194378' id='314'>{
+                        <font color='#0000ff' weight='0.000897129' id='312'><font color='#0000ff' weight='0.000411184' id='310'><font color='#0000ff' weight='3.11503e-06' id='289'>data</font>[<font color='#0000ff' weight='9.3451e-06' id='296'>j <font color='#0000ff' weight='5.19172e-07' id='293'>+ </font><font color='#0000ff' weight='5.19172e-07' id='295'>h</font>]</font> = <font color='#0000ff' weight='3.11503e-06' id='303'>data</font>[<font color='#0000ff' weight='3.11503e-06' id='306'><font color='#0000ff' weight='1.55752e-06' id='305'>j</font>]</font>;</font>
+                    }</font></font>
+                    
+                    <font color='#0002ff' weight='0.00269139' id='334'><font color='#0000ff' weight='1.24601e-05' id='317'>data</font>[<font color='#0000ff' weight='2.07669e-06' id='319'>j </font><font color='#0000ff' weight='2.07669e-06' id='321'>+ </font>h] = tmp;
+                }</font>
+                </font><font color='#0003ff' weight='0.00299043' id='349'><font color='#0000ff' weight='5.98086e-05' id='340'>System</font>.out.<font color='#0000ff' weight='5.98086e-05' id='348'>println</font></font>(<font color='#0003ff' weight='0.00313995' id='371'><font color='#0000ff' weight='1.06801e-05' id='351'>java</font>.util.Arrays.toString(<font color='#0000ff' weight='3.73804e-05' id='366'>data</font>)</font>);
+            }
+            h = (h - 1) / 3;
+        }
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static void sort(Comparable[] data){
+        long start = System.nanoTime();
+        int len = data.length-1;
+        mergeSort(data,0,len);
+        long end = System.nanoTime();
+        System.out.println("\nMergeSort Execute time:"+(end-start));
+    }
+
+    private static void mergeSort(Comparable[] data, int begin, int end) {
+        if(begin&lt;end){
+            int mid = (begin+end)/2;
+            mergeSort(data, begin, mid);
+            mergeSort(data, mid+1, end);
+            merge(data,begin,mid,end);
+        }
+    }
+
+    private static void merge(Comparable[] data, int begin, int mid, int end) {
+        int leftIndex = begin;
+        int rightIndex = mid+1;
+        Comparable[] tmp = new Comparable[end-begin+1];
+        int tmpIndex = 0;
+        while (leftIndex&lt;=mid &amp;&amp; rightIndex&lt;=end) {
+            if(data[leftIndex].compareTo(data[rightIndex])&gt;0)
+            {
+                tmp[tmpIndex] = data[rightIndex];
+                rightIndex++;
+            }else{
+                tmp[tmpIndex] = data[leftIndex];
+                leftIndex++;
+            }
+            tmpIndex++;         
+        }
+        while(leftIndex&lt;=mid){
+            tmp[tmpIndex]=data[leftIndex];
+            tmpIndex++;
+            leftIndex++;
+        }
+        while(rightIndex&lt;=end){
+            tmp[tmpIndex]=data[rightIndex];
+            tmpIndex++;
+            rightIndex++;
+        }
+        for(int i=0;i&lt;tmpIndex;i++)
+        {
+            data[begin+i] = tmp[i];
+        }
+    }</font>
+</pre>

@@ -1,0 +1,78 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void sort(int[] arr) {
+        int max = Integer.MAX_VALUE;
+        int min = Integer.MIN_VALUE;
+
+        for (int i = 0; i &lt; arr.length; i++) {
+            max = Math.max(max, arr[i]);
+            min = Math.min(min, arr[i]);
+        }
+        
+        
+        int bucketNum = (max - min) / arr.length + 1;
+        ArrayList&lt;ArrayList&lt;Integer&gt;&gt; bucketArr = new ArrayList&lt;&gt;(bucketNum);
+        for (int i = 0; i &lt; bucketNum; i++) {
+            bucketArr.add(new ArrayList&lt;&gt;());
+        }
+
+        
+        for (int i = 0; i &lt; arr.length; i++) {
+            int num = (arr[i] - min) / (arr.length);
+            bucketArr.get(num).add(arr[i]);
+        }
+
+        
+        for (int i = 0; i &lt; bucketArr.size(); i++) {
+            Collections.sort(bucketArr.get(i));
+        }
+
+        System.out.println(bucketArr.toString());
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+    public static void buildheap(int []a){
+        n=a.length-1;
+        for(int i=n/2;i&gt;=0;i--){
+            maxheap(a,i);
+        }
+    }
+    
+    public static void maxheap(int[] a, int i){ 
+        left=2*i;
+        right=2*i+1;
+        if(left &lt;= n &amp;&amp; a[left] &gt; a[i]){
+            largest=left;
+        }
+        else{
+            largest=i;
+        }
+        
+        if<font color='#ff0000' weight='1' id='235'>(<font color='#ff0000' weight='1' id='208'>right </font><font color='#ff0000' weight='1' id='210'>&lt;= </font><font color='#ff0000' weight='1' id='212'>n </font><font color='#ff0000' weight='1' id='214'>&amp;&amp;<font color='#ff0000' weight='1' id='213'></font> </font><font color='#ff0000' weight='1' id='222'><font color='#ff0000' weight='1' id='216'>a<font color='#ff0000' weight='1' id='215'></font></font><font color='#ff0000' weight='1' id='221'>[<font color='#ff0000' weight='1' id='219'><font color='#ff0000' weight='1' id='218'>right<font color='#ff0000' weight='1' id='217'></font></font>]</font><font color='#ff0000' weight='1' id='220'></font></font> </font><font color='#ff0000' weight='1' id='224'>&gt;<font color='#ff0000' weight='1' id='223'></font> </font><font color='#ff0000' weight='1' id='232'><font color='#ff0000' weight='1' id='226'>a<font color='#ff0000' weight='1' id='225'></font></font><font color='#ff0000' weight='1' id='231'>[<font color='#ff0000' weight='1' id='229'><font color='#ff0000' weight='1' id='228'>largest<font color='#ff0000' weight='1' id='227'></font></font>]</font><font color='#ff0000' weight='1' id='230'></font></font></font>)</font>{
+            largest=right;
+        }
+        if(largest!=i){
+            exchange(i,largest);
+            maxheap(a, largest);
+        }
+    }
+    
+    public static void exchange(int i, int j){
+        int t=a[i];
+        a[i]=a[j];
+        a[j]=t; 
+        }
+    
+    public static void sort(int []a0){
+        a=a0;
+        buildheap(a);
+        
+        for(int i=n;i&gt;0;i--){
+            exchange(0, i);
+            n=n-1;
+            maxheap(a, 0);
+        }
+    }</font>
+</pre>

@@ -1,0 +1,46 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void sort(Comparable[] a) {
+    int n = a.length;
+
+    
+    int h = 1;
+    while (h &lt; n/3) h = 3*h + 1;
+
+    while (h &gt;= 1) {
+      
+      for (int i = h; i &lt; n; i++) {
+        for (int j = i; j &gt;= h &amp;&amp; less(a[j], a[j-h]); j -= h) {
+          exch(a, j, j-h);
+        }<font color='#ff0000' weight='1' id='207'></font>
+      }
+      h /= 3;
+    }
+  }
+
+  private static boolean less(Comparable v, Comparable w) {
+    return v.compareTo(w) &lt; 0;
+  }
+
+  private static void exch(Object[] a, int i, int j) {
+    Object swap = a[i];
+    a[i] = a[j];
+    a[j] = swap;
+  }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+<font color='#ff0400' weight='0.995305' id='213'><font color='#0000ff' weight='0.000782473' id='2'>private </font>static void <font color='#0000ff' weight='0.000782473' id='9'>selectionsort</font>(<font color='#0000ff' weight='0.000260824' id='12'><font color='#0000ff' weight='0.000130412' id='11'>double</font> </font><font color='#0000ff' weight='0.000521648' id='17'>tablica[]</font>, <font color='#0001ff' weight='0.00156495' id='26'><font color='#0001ff' weight='0.00130412' id='25'><font color='#0000ff' weight='0.000260824' id='22'><font color='#0000ff' weight='0.000130412' id='21'>int</font> </font><font color='#0000ff' weight='0.000130412' id='24'>ile_liczb</font></font>)</font> <font color='#0092ff' weight='0.143192' id='212'>{
+    <font color='#0000ff' weight='0.000244523' id='34'>int <font color='#0000ff' weight='2.44523e-05' id='33'>min</font>,</font><font color='#0000ff' weight='0.000146714' id='38'><font color='#0000ff' weight='2.44523e-05' id='37'>i</font>,</font><font color='#0000ff' weight='0.000146714' id='42'><font color='#0000ff' weight='2.44523e-05' id='41'>j</font>;</font>
+    <font color='#0001ff' weight='0.00136933' id='52'><font color='#0000ff' weight='0.000489045' id='50'><font color='#0000ff' weight='4.89045e-05' id='46'>double</font> <font color='#0000ff' weight='4.89045e-05' id='49'>temp</font>;</font>
+    </font><font color='#001fff' weight='0.030712' id='210'>for <font color='#0002ff' weight='0.00283646' id='82'>(<font color='#0000ff' weight='0.000195618' id='61'><font color='#0000ff' weight='4.07538e-06' id='54'>i</font><font color='#0000ff' weight='4.07538e-06' id='56'>=</font><font color='#0000ff' weight='4.07538e-06' id='58'>0</font>;</font><font color='#0000ff' weight='0.000293427' id='74'><font color='#0000ff' weight='2.44523e-06' id='63'>i</font>&lt;<font color='#0000ff' weight='2.44523e-06' id='67'>ile_liczb</font><font color='#0000ff' weight='2.44523e-06' id='69'>-</font><font color='#0000ff' weight='2.44523e-06' id='71'>1</font>;</font><font color='#0000ff' weight='0.000122261' id='80'><font color='#0000ff' weight='9.78091e-05' id='79'><font color='#0000ff' weight='1.22261e-05' id='76'>i</font><font color='#0000ff' weight='1.22261e-05' id='78'>++</font></font>)</font>  </font><font color='#000cff' weight='0.0123239' id='209'>{
+    <font color='#0000ff' weight='0.000130412' id='91'><font color='#0000ff' weight='4.89045e-05' id='89'><font color='#0000ff' weight='2.71692e-06' id='84'>min</font><font color='#0000ff' weight='2.71692e-06' id='86'>=</font><font color='#0000ff' weight='2.71692e-06' id='88'>i</font>;</font>
+    </font>for (<font color='#0000ff' weight='1.01884e-05' id='102'><font color='#0000ff' weight='2.03769e-07' id='93'>j</font><font color='#0000ff' weight='2.03769e-07' id='95'>=</font><font color='#0000ff' weight='2.03769e-07' id='97'>i</font><font color='#0000ff' weight='2.03769e-07' id='99'>+</font><font color='#0000ff' weight='2.03769e-07' id='101'>1</font>;</font><font color='#0000ff' weight='3.39615e-07' id='106'>j</font>&lt;<font color='#0000ff' weight='3.39615e-07' id='110'>ile_liczb</font>;<font color='#0000ff' weight='1.01884e-06' id='115'>j</font>++)
+    <font color='#0000ff' weight='0.000268975' id='155'><font color='#0000ff' weight='0.000260824' id='154'>if <font color='#0000ff' weight='8.15076e-05' id='142'>(<font color='#0000ff' weight='3.66784e-05' id='140'><font color='#0000ff' weight='3.39615e-07' id='123'>tablica</font>[j]<font color='#0000ff' weight='6.7923e-07' id='131'>&lt;</font><font color='#0000ff' weight='3.39615e-07' id='133'>tablica</font>[<font color='#0000ff' weight='1.69807e-07' id='135'>min</font>])</font></font><font color='#0000ff' weight='4.07538e-05' id='153'>
+    <font color='#0000ff' weight='3.66784e-05' id='152'><font color='#0000ff' weight='1.22261e-05' id='149'><font color='#0000ff' weight='6.7923e-07' id='144'>min</font><font color='#0000ff' weight='6.7923e-07' id='146'>=</font><font color='#0000ff' weight='6.7923e-07' id='148'>j</font>;</font></font></font></font></font>
+    <font color='#0000ff' weight='0.000228221' id='171'><font color='#0000ff' weight='9.78091e-05' id='169'><font color='#0000ff' weight='2.71692e-06' id='158'>temp</font><font color='#0000ff' weight='2.71692e-06' id='160'>=</font><font color='#0000ff' weight='1.35846e-06' id='162'>tablica</font>[<font color='#0000ff' weight='6.7923e-07' id='164'>min</font>];</font>
+    </font><font color='#0000ff' weight='1.35846e-06' id='173'>tablica</font>[<font color='#0000ff' weight='6.7923e-07' id='175'>min</font>]=<font color='#0000ff' weight='1.35846e-06' id='183'>tablica</font>[<font color='#0000ff' weight='6.7923e-07' id='185'>i</font>];
+    <font color='#0000ff' weight='1.35846e-06' id='194'>tablica</font>[<font color='#0000ff' weight='6.7923e-07' id='196'>i</font>]=<font color='#0000ff' weight='2.71692e-06' id='204'>temp</font>;
+    }</font>
+}</font></font></font></font>
+</pre>

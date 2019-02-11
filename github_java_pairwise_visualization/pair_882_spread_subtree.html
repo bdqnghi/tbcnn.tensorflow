@@ -1,0 +1,125 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+
+import java.util.*;
+import java.nio.file.*;
+import java.io.*;
+
+public class Radix{
+
+    
+    
+    
+    public static int[] B;
+    public static long t;
+    public static void main(String[] args) throws IOException{
+        
+        Scanner in = new Scanner(Paths.get("../input/input_integers.txt"), "UTF-8");
+        PrintWriter outTime = new PrintWriter("../output/radix_sort/time.txt", "UTF-8");
+        
+        int[] origin=new int[1&lt;&lt;<font color='#ff0000' weight='1' id='177'></font>17];
+        for(int i = 0; i &lt; 1&lt;&lt;23; i++){
+            origin[i] = in.nextInt();
+        }
+
+        int[] exp={2, 5, 8, 11, 14, 17};
+        
+        
+        for(int index : exp){
+            int[] partArray = Arrays.copyOf(origin, 1&lt;&lt;index);
+            
+            
+            long enduration = sort(partArray)/1000;
+            partArray = B;
+            
+            outTime.println("index: " + index + "\ntime: " + enduration + "\tmicroseconds.");
+            outTime.flush();
+
+            
+            System.out.println("index: " + index + "\ntime: " + enduration + "\tmicroseconds.\n");
+            
+            PrintWriter outSort = new PrintWriter("../output/radix_sort/result_"+index+".txt", "UTF-8");
+            for(int j = 0; j &lt; 1&lt;&lt;index; j++){
+                
+                outSort.println(partArray[j]);
+                outSort.flush();
+            }
+        }
+    }
+    
+    
+    public static long sort(int[] A){
+        
+        long startTime = System.nanoTime();
+        
+        
+        radix_sort(A, 4);
+
+        
+        long endTime = System.nanoTime();
+        return endTime - startTime;
+    }
+
+    public static void radix_sort(int[] A, int d){
+        for(int i = 1; i &lt;= d; i++){
+            counting_sort(A, i);
+            A = B;
+        }
+    }
+
+    
+    
+    public static int digit(int num, int d){
+        
+        
+        return (num &gt;&gt; (4*(d-1))) &amp; 0x0f;
+    }
+
+    public static void counting_sort(int[] A, int d){
+        int tmp;
+        int l = A.length;
+        B = new int[l];
+        int[] C = new int[16];
+
+        for(int i = 0; i &lt; l; i++){
+            C[digit(A[i], d)]++;
+        }
+        
+
+        for(int i = 1; i &lt; 16; i++){
+            C[i] += C[i-1];
+        }
+        
+
+        for(int i = l-1; i &gt;= 0; i--){
+            B[C[digit(A[i], d)]-1] = A[i];
+            C[digit(A[i], d)] --;
+        }
+    }
+}
+
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+<font color='#ff0400' weight='0.995516' id='223'><font color='#0000ff' weight='0.000747384' id='2'>public </font><font color='#0000ff' weight='0.000747384' id='4'>static </font>void <font color='#0000ff' weight='0.000747384' id='9'>InsertionSort</font>(<font color='#0000ff' weight='9.3423e-05' id='11'>int</font>[] <font color='#0000ff' weight='0.000186846' id='17'>A</font>)
+    <font color='#0098ff' weight='0.149477' id='222'>{
+        <font color='#0002ff' weight='0.00205531' id='33'><font color='#0000ff' weight='3.1141e-05' id='23'>int</font> <font color='#0000ff' weight='3.1141e-05' id='26'>temp</font>,<font color='#0000ff' weight='3.1141e-05' id='30'>j</font>;
+        </font><font color='#001dff' weight='0.0285874' id='187'>for (int i = 0; i &lt; <font color='#0000ff' weight='2.33558e-05' id='56'><font color='#0000ff' weight='1.29754e-06' id='51'>A</font><font color='#0000ff' weight='1.29754e-06' id='53'>.</font><font color='#0000ff' weight='1.29754e-06' id='55'>length</font></font>; i++)
+        <font color='#000bff' weight='0.0110239' id='186'>{
+            <font color='#0000ff' weight='5.19017e-06' id='69'>j </font>= <font color='#0000ff' weight='5.19017e-06' id='73'>i</font>;
+            <font color='#0003ff' weight='0.00333209' id='184'>while <font color='#0000ff' weight='0.000498256' id='109'>(<font color='#0000ff' weight='0.000233558' id='107'><font color='#0000ff' weight='1.11218e-06' id='78'>j </font><font color='#0000ff' weight='1.11218e-06' id='80'>&gt; </font><font color='#0000ff' weight='1.11218e-06' id='82'>0 </font><font color='#0000ff' weight='1.11218e-06' id='84'>&amp;&amp; </font><font color='#0000ff' weight='1.2234e-05' id='96'><font color='#0000ff' weight='5.56089e-07' id='86'>A</font><font color='#0000ff' weight='4.44872e-06' id='95'>[<font color='#0000ff' weight='1.66827e-06' id='93'><font color='#0000ff' weight='9.26816e-08' id='88'>j</font>-1]</font></font> </font><font color='#0000ff' weight='1.11218e-06' id='98'>&gt; </font><font color='#0000ff' weight='5.56089e-07' id='100'>A</font>[<font color='#0000ff' weight='2.78045e-07' id='102'>j</font>])</font>
+            </font><font color='#0001ff' weight='0.00113665' id='183'>{
+                <font color='#0000ff' weight='1.86846e-05' id='122'><font color='#0000ff' weight='5.19017e-07' id='111'>temp </font><font color='#0000ff' weight='5.19017e-07' id='113'>= </font>A[<font color='#0000ff' weight='1.29754e-07' id='117'>j</font>];</font>
+                <font color='#0000ff' weight='2.59508e-07' id='126'>A</font>[<font color='#0000ff' weight='1.29754e-07' id='128'>j</font>] <font color='#0000ff' weight='5.19017e-07' id='134'>= </font><font color='#0000ff' weight='2.59508e-07' id='136'>A</font>[<font color='#0000ff' weight='4.32514e-08' id='138'>j</font>-1];
+                <font color='#0000ff' weight='5.60538e-05' id='168'><font color='#0000ff' weight='2.49128e-05' id='166'><font color='#0000ff' weight='5.70918e-06' id='161'><font color='#0000ff' weight='2.59508e-07' id='151'>A</font><font color='#0000ff' weight='2.07607e-06' id='160'>[<font color='#0000ff' weight='7.78525e-07' id='158'><font color='#0000ff' weight='4.32514e-08' id='153'>j</font>-1]</font></font> </font><font color='#0000ff' weight='5.19017e-07' id='163'>= </font><font color='#0000ff' weight='5.19017e-07' id='165'>temp</font>;</font>
+                </font><font color='#0000ff' weight='3.73692e-05' id='181'><font color='#0000ff' weight='1.55705e-05' id='179'><font color='#0000ff' weight='3.1141e-07' id='170'>j </font><font color='#0000ff' weight='3.1141e-07' id='172'>= </font><font color='#0000ff' weight='3.1141e-07' id='174'>j</font>-1;</font>
+            }</font></font>           
+        }</font></font>
+        </font><font color='#0006ff' weight='0.00597907' id='220'><font color='#0002ff' weight='0.00280269' id='218'><font color='#0002ff' weight='0.00270927' id='217'><font color='#0000ff' weight='0.000467115' id='198'><font color='#0000ff' weight='9.3423e-06' id='189'>System</font><font color='#0000ff' weight='9.3423e-06' id='191'>.</font><font color='#0000ff' weight='9.3423e-06' id='193'>out</font><font color='#0000ff' weight='9.3423e-06' id='195'>.</font><font color='#0000ff' weight='9.3423e-06' id='197'>println</font></font>(<font color='#0000ff' weight='0.000350336' id='214'><font color='#0000ff' weight='0.000326981' id='213'><font color='#0000ff' weight='0.000303625' id='212'><font color='#0000ff' weight='7.00672e-05' id='205'><font color='#0000ff' weight='3.89263e-06' id='200'>Arrays</font><font color='#0000ff' weight='3.89263e-06' id='202'>.</font><font color='#0000ff' weight='3.89263e-06' id='204'>toString</font></font><font color='#0000ff' weight='5.83894e-05' id='211'>(<font color='#0000ff' weight='5.83894e-06' id='207'>A</font>)</font></font></font>)</font></font>;</font>
+    }</font></font>
+
+      
+    </font></font>
+</pre>

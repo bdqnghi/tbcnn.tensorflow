@@ -1,0 +1,115 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+package search.search;
+
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Stack;
+
+public class Topological {
+	
+	private int vertices;
+    private LinkedList&lt;Integer&gt; adj[];
+	
+	Topological(Graph g) {
+		vertices = g.getVertices();
+		adj = g.getAdjacencyList();
+	}
+
+    
+    void topologicalSortUtil(int v, boolean visited[],
+                             Stack&lt;Integer&gt; stack)
+    {
+        
+        visited[v] = true;
+        Integer i;
+ 
+        
+        
+        Iterator&lt;Integer&gt; it = adj[v].iterator();
+        while (it.hasNext())
+        {
+            i = it.next();
+            if (!visited[i])
+                topologicalSortUtil(i, visited, stack);
+        }
+ 
+        
+        stack.push(new Integer(v));
+    }
+ 
+    
+    
+    public void topologicalSort()
+    <font color='#ff0000' weight='1' id='548'>{
+        <font color='#ff0000' weight='1' id='356'><font color='#ff0000' weight='1' id='354'><font color='#ff0000' weight='1' id='336'><font color='#ff0000' weight='1' id='335'><font color='#ff0000' weight='1' id='329'>Stack</font>&lt;<font color='#ff0000' weight='1' id='331'>Integer</font>&gt;</font> </font><font color='#ff0000' weight='1' id='338'>stack<font color='#ff0000' weight='1' id='337'></font> </font><font color='#ff0000' weight='1' id='353'>= <font color='#ff0000' weight='1' id='352'><font color='#ff0000' weight='1' id='340'>new<font color='#ff0000' weight='1' id='339'></font> </font><font color='#ff0000' weight='1' id='351'><font color='#ff0000' weight='1' id='348'><font color='#ff0000' weight='1' id='342'>Stack</font><font color='#ff0000' weight='1' id='347'>&lt;<font color='#ff0000' weight='1' id='345'><font color='#ff0000' weight='1' id='344'>Integer</font>&gt;</font></font></font><font color='#ff0000' weight='1' id='350'>()<font color='#ff0000' weight='1' id='349'></font></font></font></font></font>;</font><font color='#ff0000' weight='1' id='355'></font>
+ 
+        
+        </font><font color='#ff0000' weight='1' id='379'><font color='#ff0000' weight='1' id='377'><font color='#ff0000' weight='1' id='359'><font color='#ff0000' weight='1' id='358'>boolean<font color='#ff0000' weight='1' id='357'></font></font> </font><font color='#ff0000' weight='1' id='364'><font color='#ff0000' weight='1' id='361'>visited<font color='#ff0000' weight='1' id='360'></font></font><font color='#ff0000' weight='1' id='363'>[]<font color='#ff0000' weight='1' id='362'></font></font> </font><font color='#ff0000' weight='1' id='376'>= <font color='#ff0000' weight='1' id='375'><font color='#ff0000' weight='1' id='366'>new </font><font color='#ff0000' weight='1' id='374'><font color='#ff0000' weight='1' id='368'>boolean<font color='#ff0000' weight='1' id='367'></font></font><font color='#ff0000' weight='1' id='373'>[<font color='#ff0000' weight='1' id='371'><font color='#ff0000' weight='1' id='370'>vertices<font color='#ff0000' weight='1' id='369'></font></font>]</font><font color='#ff0000' weight='1' id='372'></font></font></font></font></font>;</font><font color='#ff0000' weight='1' id='378'></font>
+        </font><font color='#ff0000' weight='1' id='425'>for <font color='#ff0000' weight='1' id='408'>(<font color='#ff0000' weight='1' id='391'><font color='#ff0000' weight='1' id='389'><font color='#ff0000' weight='1' id='382'><font color='#ff0000' weight='1' id='381'>int<font color='#ff0000' weight='1' id='380'></font></font> </font><font color='#ff0000' weight='1' id='384'>i<font color='#ff0000' weight='1' id='383'></font> </font><font color='#ff0000' weight='1' id='388'>= <font color='#ff0000' weight='1' id='387'><font color='#ff0000' weight='1' id='386'>0<font color='#ff0000' weight='1' id='385'></font></font></font></font>;</font><font color='#ff0000' weight='1' id='390'></font> </font><font color='#ff0000' weight='1' id='400'><font color='#ff0000' weight='1' id='398'><font color='#ff0000' weight='1' id='393'>i<font color='#ff0000' weight='1' id='392'></font> </font><font color='#ff0000' weight='1' id='395'>&lt;<font color='#ff0000' weight='1' id='394'></font> </font><font color='#ff0000' weight='1' id='397'>vertices<font color='#ff0000' weight='1' id='396'></font></font>;</font><font color='#ff0000' weight='1' id='399'></font> </font><font color='#ff0000' weight='1' id='406'><font color='#ff0000' weight='1' id='405'><font color='#ff0000' weight='1' id='402'>i<font color='#ff0000' weight='1' id='401'></font></font><font color='#ff0000' weight='1' id='404'>++<font color='#ff0000' weight='1' id='403'></font></font></font>)</font><font color='#ff0000' weight='1' id='407'></font>
+            </font><font color='#ff0000' weight='1' id='424'><font color='#ff0000' weight='1' id='423'><font color='#ff0000' weight='1' id='421'><font color='#ff0000' weight='1' id='416'><font color='#ff0000' weight='1' id='410'>visited<font color='#ff0000' weight='1' id='409'></font></font><font color='#ff0000' weight='1' id='415'>[<font color='#ff0000' weight='1' id='413'><font color='#ff0000' weight='1' id='412'>i<font color='#ff0000' weight='1' id='411'></font></font>]</font><font color='#ff0000' weight='1' id='414'></font></font> </font>= <font color='#ff0000' weight='1' id='420'>false</font>;</font></font></font>
+ 
+        
+        
+        
+        </font><font color='#ff0000' weight='1' id='494'>for <font color='#ff0000' weight='1' id='454'>(<font color='#ff0000' weight='1' id='437'><font color='#ff0000' weight='1' id='435'><font color='#ff0000' weight='1' id='428'><font color='#ff0000' weight='1' id='427'>int<font color='#ff0000' weight='1' id='426'></font></font> </font><font color='#ff0000' weight='1' id='430'>i<font color='#ff0000' weight='1' id='429'></font> </font><font color='#ff0000' weight='1' id='434'>= <font color='#ff0000' weight='1' id='433'><font color='#ff0000' weight='1' id='432'>0<font color='#ff0000' weight='1' id='431'></font></font></font></font>;</font><font color='#ff0000' weight='1' id='436'></font> </font><font color='#ff0000' weight='1' id='446'><font color='#ff0000' weight='1' id='444'><font color='#ff0000' weight='1' id='439'>i<font color='#ff0000' weight='1' id='438'></font> </font><font color='#ff0000' weight='1' id='441'>&lt;<font color='#ff0000' weight='1' id='440'></font> </font><font color='#ff0000' weight='1' id='443'>vertices<font color='#ff0000' weight='1' id='442'></font></font>;</font><font color='#ff0000' weight='1' id='445'></font> </font><font color='#ff0000' weight='1' id='452'><font color='#ff0000' weight='1' id='451'><font color='#ff0000' weight='1' id='448'>i</font><font color='#ff0000' weight='1' id='450'>++<font color='#ff0000' weight='1' id='449'></font></font></font>)</font>
+            </font><font color='#ff0000' weight='1' id='493'>if <font color='#ff0000' weight='1' id='469'>(<font color='#ff0000' weight='1' id='462'><font color='#ff0000' weight='1' id='456'>visited</font><font color='#ff0000' weight='1' id='461'>[<font color='#ff0000' weight='1' id='459'><font color='#ff0000' weight='1' id='458'>i<font color='#ff0000' weight='1' id='457'></font></font>]</font><font color='#ff0000' weight='1' id='460'></font></font> </font>== <font color='#ff0000' weight='1' id='466'>false</font>)</font><font color='#ff0000' weight='1' id='491'>
+                <font color='#ff0000' weight='1' id='490'><font color='#ff0000' weight='1' id='471'>topologicalSortUtil</font><font color='#ff0000' weight='1' id='485'>(<font color='#ff0000' weight='1' id='475'><font color='#ff0000' weight='1' id='474'><font color='#ff0000' weight='1' id='473'>i<font color='#ff0000' weight='1' id='472'></font></font></font>, </font><font color='#ff0000' weight='1' id='477'>visited</font>, <font color='#ff0000' weight='1' id='483'><font color='#ff0000' weight='1' id='482'><font color='#ff0000' weight='1' id='481'>stack<font color='#ff0000' weight='1' id='480'></font></font></font>)</font><font color='#ff0000' weight='1' id='484'></font></font>;</font></font></font>
+ 
+        
+        </font><font color='#ff0000' weight='1' id='546'>while <font color='#ff0000' weight='1' id='511'>(<font color='#ff0000' weight='1' id='509'><font color='#ff0000' weight='1' id='504'><font color='#ff0000' weight='1' id='501'><font color='#ff0000' weight='1' id='496'>stack<font color='#ff0000' weight='1' id='495'></font></font><font color='#ff0000' weight='1' id='498'>.<font color='#ff0000' weight='1' id='497'></font></font><font color='#ff0000' weight='1' id='500'>empty<font color='#ff0000' weight='1' id='499'></font></font></font><font color='#ff0000' weight='1' id='503'>()<font color='#ff0000' weight='1' id='502'></font></font></font><font color='#ff0000' weight='1' id='506'>==<font color='#ff0000' weight='1' id='505'></font></font><font color='#ff0000' weight='1' id='508'>false<font color='#ff0000' weight='1' id='507'></font></font>)</font><font color='#ff0000' weight='1' id='510'></font>
+            </font><font color='#ff0000' weight='1' id='545'><font color='#ff0000' weight='1' id='544'><font color='#ff0000' weight='1' id='513'>System</font>.<font color='#ff0000' weight='1' id='517'>out</font><font color='#ff0000' weight='1' id='519'>.<font color='#ff0000' weight='1' id='518'></font></font><font color='#ff0000' weight='1' id='521'>print<font color='#ff0000' weight='1' id='520'></font></font><font color='#ff0000' weight='1' id='540'>(<font color='#ff0000' weight='1' id='532'><font color='#ff0000' weight='1' id='529'><font color='#ff0000' weight='1' id='524'>stack<font color='#ff0000' weight='1' id='523'></font></font><font color='#ff0000' weight='1' id='526'>.<font color='#ff0000' weight='1' id='525'></font></font><font color='#ff0000' weight='1' id='528'>pop<font color='#ff0000' weight='1' id='527'></font></font></font><font color='#ff0000' weight='1' id='531'>()<font color='#ff0000' weight='1' id='530'></font></font> </font><font color='#ff0000' weight='1' id='534'>+<font color='#ff0000' weight='1' id='533'></font> </font><font color='#ff0000' weight='1' id='536'>" "<font color='#ff0000' weight='1' id='535'></font></font>)</font>;</font></font>
+    }</font><font color='#ff0000' weight='1' id='547'></font></font>
+}
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+package org.hibernate.envers.internal.tools.graph;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+
+public class TopologicalSort&lt;R&gt; <font color='#ff0000' weight='1' id='420'>{
+	private List&lt;R&gt; <font color='#ff0000' weight='1' id='100'>sorted</font>;
+	<font color='#ff0000' weight='1' id='113'><font color='#ff0000' weight='1' id='111'><font color='#ff0000' weight='1' id='105'>private<font color='#ff0000' weight='1' id='104'></font> </font><font color='#ff0000' weight='1' id='107'>int</font> <font color='#ff0000' weight='1' id='110'>time</font>;</font><font color='#ff0000' weight='1' id='112'></font>
+
+	</font><font color='#ff0000' weight='1' id='266'><font color='#ff0000' weight='1' id='115'>private<font color='#ff0000' weight='1' id='114'></font> </font>void <font color='#ff0000' weight='1' id='120'>process</font>(<font color='#ff0000' weight='1' id='122'>Vertex</font>&lt;<font color='#ff0000' weight='1' id='124'>R</font>&gt; <font color='#ff0000' weight='1' id='131'>v</font>) <font color='#ff0000' weight='1' id='265'>{
+		<font color='#ff0000' weight='1' id='158'>if <font color='#ff0000' weight='1' id='152'>( <font color='#ff0000' weight='1' id='150'><font color='#ff0000' weight='1' id='145'><font color='#ff0000' weight='1' id='142'><font color='#ff0000' weight='1' id='137'>v</font><font color='#ff0000' weight='1' id='139'>.<font color='#ff0000' weight='1' id='138'></font></font><font color='#ff0000' weight='1' id='141'>getStartTime</font></font><font color='#ff0000' weight='1' id='144'>()<font color='#ff0000' weight='1' id='143'></font></font> </font><font color='#ff0000' weight='1' id='147'>!= </font><font color='#ff0000' weight='1' id='149'>0</font> )</font><font color='#ff0000' weight='1' id='151'></font></font><font color='#ff0000' weight='1' id='157'> <font color='#ff0000' weight='1' id='156'>{
+			
+			<font color='#ff0000' weight='1' id='154'>return;<font color='#ff0000' weight='1' id='153'></font>
+		}</font><font color='#ff0000' weight='1' id='155'></font></font></font>
+
+		</font><font color='#ff0000' weight='1' id='177'><font color='#ff0000' weight='1' id='175'><font color='#ff0000' weight='1' id='174'><font color='#ff0000' weight='1' id='165'><font color='#ff0000' weight='1' id='160'>v</font><font color='#ff0000' weight='1' id='162'>.<font color='#ff0000' weight='1' id='161'></font></font><font color='#ff0000' weight='1' id='164'>setStartTime</font></font><font color='#ff0000' weight='1' id='173'>( <font color='#ff0000' weight='1' id='170'><font color='#ff0000' weight='1' id='167'>time</font><font color='#ff0000' weight='1' id='169'>++<font color='#ff0000' weight='1' id='168'></font></font></font> )</font></font>;</font><font color='#ff0000' weight='1' id='176'></font>
+
+		</font><font color='#ff0000' weight='1' id='219'>for <font color='#ff0000' weight='1' id='204'>( <font color='#ff0000' weight='1' id='202'><font color='#ff0000' weight='1' id='201'><font color='#ff0000' weight='1' id='186'><font color='#ff0000' weight='1' id='185'><font color='#ff0000' weight='1' id='179'>Vertex</font><font color='#ff0000' weight='1' id='184'>&lt;<font color='#ff0000' weight='1' id='182'><font color='#ff0000' weight='1' id='181'>R</font>&gt;</font><font color='#ff0000' weight='1' id='183'></font></font></font> </font><font color='#ff0000' weight='1' id='188'>n </font><font color='#ff0000' weight='1' id='200'>: <font color='#ff0000' weight='1' id='199'><font color='#ff0000' weight='1' id='190'>v</font>.<font color='#ff0000' weight='1' id='194'>getNeighbours</font>()</font></font></font> )</font><font color='#ff0000' weight='1' id='203'></font> </font><font color='#ff0000' weight='1' id='218'>{
+			<font color='#ff0000' weight='1' id='206'>process</font><font color='#ff0000' weight='1' id='212'>( <font color='#ff0000' weight='1' id='210'><font color='#ff0000' weight='1' id='209'><font color='#ff0000' weight='1' id='208'>n</font></font> )</font></font>;
+		}<font color='#ff0000' weight='1' id='217'></font></font>
+
+		</font><font color='#ff0000' weight='1' id='226'><font color='#ff0000' weight='1' id='221'>v</font><font color='#ff0000' weight='1' id='223'>.<font color='#ff0000' weight='1' id='222'></font></font><font color='#ff0000' weight='1' id='225'>setEndTime</font></font><font color='#ff0000' weight='1' id='234'>( <font color='#ff0000' weight='1' id='228'>time</font><font color='#ff0000' weight='1' id='230'>++<font color='#ff0000' weight='1' id='229'></font></font> )</font>;
+
+		<font color='#ff0000' weight='1' id='240'>sorted</font>.<font color='#ff0000' weight='1' id='244'>add</font><font color='#ff0000' weight='1' id='259'>( <font color='#ff0000' weight='1' id='255'><font color='#ff0000' weight='1' id='252'><font color='#ff0000' weight='1' id='247'>v<font color='#ff0000' weight='1' id='246'></font></font><font color='#ff0000' weight='1' id='249'>.</font><font color='#ff0000' weight='1' id='251'>getRepresentation</font></font><font color='#ff0000' weight='1' id='254'>()<font color='#ff0000' weight='1' id='253'></font></font></font> )</font>;
+	}</font>
+
+	</font>public <font color='#ff0000' weight='1' id='277'><font color='#ff0000' weight='1' id='270'>List</font>&lt;<font color='#ff0000' weight='1' id='272'>R</font>&gt; </font><font color='#ff0000' weight='1' id='279'>sort</font><font color='#ff0000' weight='1' id='300'>(<font color='#ff0000' weight='1' id='298'><font color='#ff0000' weight='1' id='297'><font color='#ff0000' weight='1' id='294'><font color='#ff0000' weight='1' id='293'><font color='#ff0000' weight='1' id='281'>Collection<font color='#ff0000' weight='1' id='280'></font></font><font color='#ff0000' weight='1' id='292'>&lt;<font color='#ff0000' weight='1' id='290'><font color='#ff0000' weight='1' id='289'><font color='#ff0000' weight='1' id='283'>Vertex</font>&lt;<font color='#ff0000' weight='1' id='285'>R</font>&gt;</font>&gt;</font></font></font> </font><font color='#ff0000' weight='1' id='296'>vertices<font color='#ff0000' weight='1' id='295'></font></font></font>)</font><font color='#ff0000' weight='1' id='299'></font> </font><font color='#ff0000' weight='1' id='417'>{
+		<font color='#ff0000' weight='1' id='329'><font color='#ff0000' weight='1' id='327'><font color='#ff0000' weight='1' id='302'>sorted </font><font color='#ff0000' weight='1' id='304'>=<font color='#ff0000' weight='1' id='303'></font> </font>new <font color='#ff0000' weight='1' id='326'><font color='#ff0000' weight='1' id='311'><font color='#ff0000' weight='1' id='308'>ArrayList</font><font color='#ff0000' weight='1' id='310'>&lt;&gt;<font color='#ff0000' weight='1' id='309'></font></font></font><font color='#ff0000' weight='1' id='325'>( <font color='#ff0000' weight='1' id='323'><font color='#ff0000' weight='1' id='322'><font color='#ff0000' weight='1' id='321'><font color='#ff0000' weight='1' id='318'><font color='#ff0000' weight='1' id='313'>vertices</font><font color='#ff0000' weight='1' id='315'>.</font><font color='#ff0000' weight='1' id='317'>size</font></font><font color='#ff0000' weight='1' id='320'>()<font color='#ff0000' weight='1' id='319'></font></font></font></font> )</font><font color='#ff0000' weight='1' id='324'></font></font></font>;</font><font color='#ff0000' weight='1' id='328'></font>
+
+		</font><font color='#ff0000' weight='1' id='331'>time </font>= <font color='#ff0000' weight='1' id='335'>1</font>;
+
+		for <font color='#ff0000' weight='1' id='357'>( <font color='#ff0000' weight='1' id='355'><font color='#ff0000' weight='1' id='354'><font color='#ff0000' weight='1' id='347'><font color='#ff0000' weight='1' id='346'><font color='#ff0000' weight='1' id='340'>Vertex</font><font color='#ff0000' weight='1' id='345'>&lt;<font color='#ff0000' weight='1' id='343'><font color='#ff0000' weight='1' id='342'>R</font>&gt;</font><font color='#ff0000' weight='1' id='344'></font></font></font> </font><font color='#ff0000' weight='1' id='349'>v </font><font color='#ff0000' weight='1' id='353'>: <font color='#ff0000' weight='1' id='352'><font color='#ff0000' weight='1' id='351'>vertices</font></font></font></font> )</font> </font><font color='#ff0000' weight='1' id='392'>{
+			if <font color='#ff0000' weight='1' id='374'>( <font color='#ff0000' weight='1' id='367'><font color='#ff0000' weight='1' id='364'><font color='#ff0000' weight='1' id='359'>v</font><font color='#ff0000' weight='1' id='361'>.<font color='#ff0000' weight='1' id='360'></font></font><font color='#ff0000' weight='1' id='363'>getEndTime</font></font><font color='#ff0000' weight='1' id='366'>()<font color='#ff0000' weight='1' id='365'></font></font> </font>== <font color='#ff0000' weight='1' id='371'>0</font> )</font><font color='#ff0000' weight='1' id='389'> <font color='#ff0000' weight='1' id='388'>{
+				<font color='#ff0000' weight='1' id='376'>process</font><font color='#ff0000' weight='1' id='382'>( <font color='#ff0000' weight='1' id='378'>v</font> )<font color='#ff0000' weight='1' id='381'></font></font>;
+			}<font color='#ff0000' weight='1' id='387'></font></font></font>
+		}<font color='#ff0000' weight='1' id='391'></font></font>
+
+		<font color='#ff0000' weight='1' id='395'>Collections</font>.<font color='#ff0000' weight='1' id='399'>reverse</font><font color='#ff0000' weight='1' id='406'>( <font color='#ff0000' weight='1' id='402'>sorted</font> )</font>;
+
+		<font color='#ff0000' weight='1' id='415'>return <font color='#ff0000' weight='1' id='413'><font color='#ff0000' weight='1' id='412'>sorted<font color='#ff0000' weight='1' id='411'></font></font>;</font><font color='#ff0000' weight='1' id='414'></font>
+	}</font><font color='#ff0000' weight='1' id='416'></font></font>
+}</font>
+</font>
+</pre>

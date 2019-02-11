@@ -1,0 +1,49 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+private static void selectionsort(double tablica[], int ile_liczb) {
+    int min,i,j;
+    double temp;
+    for (i=0;i&lt;ile_liczb-1;i++)  {
+    min=i;
+    for (j=i+1;j&lt;ile_liczb;j++)
+    if (tablica[j]&lt;tablica[min])
+    min=j;
+    temp=tablica[min];
+    tablica[min]=<font color='#ff0000' weight='1' id='189'><font color='#0048ff' weight='0.0714286' id='183'>tablica</font><font color='#00ffda' weight='0.285714' id='188'>[<font color='#0048ff' weight='0.0714286' id='186'><font color='#0024ff' weight='0.0357143' id='185'>i</font>]</font></font></font>;
+    tablica[i]=temp;
+    }
+}</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public void sort(int a[]) {
+
+        if(a == null || a.length &lt;= 1) {
+            return;
+        }
+
+        insertNumberAtIndexInSortedArray(a, 1);
+    }
+
+    private void insertNumberAtIndexInSortedArray(int a[], int index) {
+
+        if (index == a.length) <font color='#ff0000' weight='1' id='110'>{
+            <font color='#00aaff' weight='0.166667' id='108'>return;
+        }</font></font>
+
+        int number = a[index];
+        int i;
+        for (i=index-1; i &gt;= 0; i--) {
+            if (number &lt; a[i]) {
+                a[i+1] = a[i];
+            } else {
+                break;
+            }
+        }
+
+        a[i+1] = number;
+
+        insertNumberAtIndexInSortedArray(a, index+1);
+    }
+</font>
+</pre>

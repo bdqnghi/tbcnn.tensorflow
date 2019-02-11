@@ -1,0 +1,64 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+<font color='#ff0000' weight='1' id='258'><font color='#ff0300' weight='0.996109' id='257'>public <font color='#0000ff' weight='0.00077821' id='4'>void</font> <font color='#0000ff' weight='0.00077821' id='7'>bubbleSortFor</font><font color='#0008ff' weight='0.00856031' id='19'>(<font color='#0003ff' weight='0.00350195' id='17'>int[] <font color='#0000ff' weight='0.000194553' id='15'>array</font>)</font> </font><font color='#00bbff' weight='0.183658' id='256'>{
+
+        <font color='#0002ff' weight='0.00282101' id='49'>System.out<font color='#0000ff' weight='9.72763e-06' id='27'>.</font>println(<font color='#0000ff' weight='0.000340467' id='45'>Arrays.<font color='#0000ff' weight='4.05318e-06' id='36'>toString</font>(array)</font>)</font>;
+        <font color='#0001ff' weight='0.00136187' id='60'>int aux;
+
+        </font><font color='#0026ff' weight='0.0375486' id='254'>for <font color='#0003ff' weight='0.00321012' id='94'>(<font color='#0000ff' weight='4.05318e-06' id='62'>int</font> i = array.length; <font color='#0000ff' weight='7.29572e-05' id='84'><font color='#0000ff' weight='4.05318e-06' id='79'>i </font>&gt; 0;</font> <font color='#0000ff' weight='0.000121595' id='92'>i--)</font> </font>{
+            for (int j = 0; j &lt; <font color='#0000ff' weight='6.07977e-07' id='112'>i </font><font color='#0000ff' weight='6.07977e-07' id='114'>- </font>1; <font color='#0000ff' weight='3.03988e-05' id='125'><font color='#0000ff' weight='2.43191e-05' id='124'><font color='#0000ff' weight='3.03988e-06' id='121'>j</font><font color='#0000ff' weight='3.03988e-06' id='123'>++</font></font>)</font> {
+                if <font color='#0000ff' weight='9.72763e-05' id='152'>(<font color='#0000ff' weight='4.4585e-05' id='150'><font color='#0000ff' weight='4.72871e-06' id='135'>array<font color='#0000ff' weight='1.35106e-06' id='134'>[j]</font> </font><font color='#0000ff' weight='6.7553e-07' id='137'>&gt; </font><font color='#0000ff' weight='7.43083e-06' id='149'><font color='#0000ff' weight='3.37765e-07' id='139'>array</font>[<font color='#0000ff' weight='1.01329e-06' id='146'><font color='#0000ff' weight='5.62941e-08' id='141'>j </font><font color='#0000ff' weight='5.62941e-08' id='143'>+ </font>1]</font></font>)</font></font><font color='#0000ff' weight='0.000247244' id='214'> <font color='#0000ff' weight='0.000243191' id='213'>{
+                    <font color='#0000ff' weight='1.68882e-07' id='154'>aux </font><font color='#0000ff' weight='1.68882e-07' id='156'>= </font>array[j];
+                    array[j] = array[j + 1];
+                    <font color='#0000ff' weight='8.10636e-06' id='209'>array<font color='#0000ff' weight='6.7553e-07' id='203'>[j + 1]</font> <font color='#0000ff' weight='1.68882e-07' id='206'>= </font><font color='#0000ff' weight='1.68882e-07' id='208'>aux</font>;</font>
+                }</font></font>
+                <font color='#0000ff' weight='2.02659e-05' id='226'><font color='#0000ff' weight='4.05318e-07' id='217'>System</font>.out<font color='#0000ff' weight='4.05318e-07' id='223'>.</font><font color='#0000ff' weight='4.05318e-07' id='225'>println</font></font>(<font color='#0000ff' weight='3.03988e-06' id='233'><font color='#0000ff' weight='1.68882e-07' id='228'>Arrays</font><font color='#0000ff' weight='1.68882e-07' id='230'>.</font><font color='#0000ff' weight='1.68882e-07' id='232'>toString</font></font>(<font color='#0000ff' weight='7.59971e-07' id='237'><font color='#0000ff' weight='5.06647e-07' id='236'>array</font>)</font>);
+            }
+        }
+    }</font></font>
+</font></font></font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static void sort(int arr[])
+    {       
+        heapify(arr);        
+        for (int i = N; i &gt; 0; i--)
+        {
+            swap(arr,0, i);
+            N = N-1;
+            maxheap(arr, 0);
+        }
+    }     
+       
+    public static void heapify(int arr[])
+    {
+        N = arr.length-1;
+        for (int i = N/2; i &gt;= 0; i--)
+            maxheap(arr, i);        
+    }
+            
+    public static void maxheap(int arr[], int i)
+    { 
+        int left = 2*i ;
+        int right = 2*i + 1;
+        int max = i;
+        if (left &lt;= N &amp;&amp; arr[left] &gt; arr[i])
+            max = left;
+        if (right &lt;= N &amp;&amp; arr[right] &gt; arr[max])        
+            max = right;
+ 
+        if (max != i)
+        {
+            swap(arr, i, max);
+            maxheap(arr, max);
+        }
+    }    
+    
+    public static void swap(int arr[], int i, int j)
+    {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp; 
+    }    </font>
+</pre>

@@ -1,0 +1,67 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public void bubbleSortWhile(int[] array) {
+
+        System.out.println(Arrays.toString(array));
+        int aux;
+        int i = array.length;
+
+        while (i &gt; 0) {
+            int j = 0;
+            while (j &lt; i - 1) {
+                if <font color='#0017ff' weight='0.0232558' id='136'>(<font color='#0000ff' weight='8.07494e-05' id='113'>array</font><font color='#0000ff' weight='0.000322997' id='118'>[<font color='#0000ff' weight='4.03747e-05' id='115'>j</font>]</font> <font color='#0000ff' weight='0.000161499' id='121'>&gt; </font><font color='#0000ff' weight='8.07494e-05' id='123'>array</font><font color='#0000ff' weight='0.000645995' id='132'>[<font color='#0000ff' weight='1.34582e-05' id='125'>j </font>+ 1]</font>)</font> {
+                    <font color='#0001ff' weight='0.00145349' id='149'><font color='#0000ff' weight='4.03747e-05' id='138'>aux </font><font color='#0000ff' weight='4.03747e-05' id='140'>= </font><font color='#0000ff' weight='0.000282623' id='148'>array<font color='#0000ff' weight='8.07494e-05' id='147'>[<font color='#0000ff' weight='2.01873e-05' id='145'><font color='#0000ff' weight='1.00937e-05' id='144'>j</font>]</font></font></font>;</font>
+                    <font color='#0000ff' weight='2.01873e-05' id='153'>array</font>[<font color='#0000ff' weight='2.01873e-05' id='156'><font color='#0000ff' weight='1.00937e-05' id='155'>j</font>]</font> = array[<font color='#0000ff' weight='6.0562e-05' id='170'>j + 1]</font>;
+                    <font color='#0000ff' weight='0.000444122' id='188'>array<font color='#0000ff' weight='0.000161499' id='187'>[<font color='#0000ff' weight='6.0562e-05' id='185'>j + 1]</font></font> </font>= aux;
+                }
+                <font color='#000bff' weight='0.0116279' id='206'><font color='#0003ff' weight='0.00387597' id='204'>j<font color='#0000ff' weight='0.000484496' id='203'>++</font>;</font>
+                </font><font color='#001dff' weight='0.0290698' id='237'><font color='#001cff' weight='0.0281008' id='236'><font color='#0004ff' weight='0.00484496' id='217'><font color='#0000ff' weight='9.68992e-05' id='208'>System</font><font color='#0000ff' weight='9.68992e-05' id='210'>.</font>out<font color='#0000ff' weight='9.68992e-05' id='214'>.</font>println</font><font color='#0008ff' weight='0.00823643' id='235'>(<font color='#0003ff' weight='0.00363372' id='233'><font color='#0003ff' weight='0.00314922' id='231'><font color='#0000ff' weight='0.000726744' id='224'>Arrays<font color='#0000ff' weight='4.03747e-05' id='221'>.</font><font color='#0000ff' weight='4.03747e-05' id='223'>toString</font></font><font color='#0000ff' weight='0.00060562' id='230'>(<font color='#0000ff' weight='0.000121124' id='227'><font color='#0000ff' weight='6.0562e-05' id='226'>array</font></font>)</font></font>)</font></font></font>;</font>
+            }
+            i--;
+        }
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static void sort(int arr[])
+    {       
+        heapify(arr);        
+        for (int i = N; i &gt; 0; i--)
+        {
+            swap(arr,0, i);
+            N = N-1;
+            maxheap(arr, 0);
+        }
+    }     
+       
+    public static void heapify(int arr[])
+    {
+        N = arr.length-1;
+        for (int i = N/2; i &gt;= 0; i--)
+            maxheap(arr, i);        
+    }
+            
+    public static void maxheap(int arr[], int i)
+    <font color='#ff0000' weight='1' id='419'>{ 
+        int left = 2<font color='#0000ff' weight='4.40917e-05' id='247'>*</font><font color='#0000ff' weight='4.40917e-05' id='249'>i</font> ;
+        <font color='#000fff' weight='0.0150794' id='274'><font color='#0006ff' weight='0.00674603' id='272'><font color='#0000ff' weight='0.00026455' id='257'><font color='#0000ff' weight='0.000132275' id='256'>int</font> </font><font color='#0000ff' weight='0.000132275' id='259'>right </font><font color='#0001ff' weight='0.00145503' id='271'>= <font color='#0001ff' weight='0.00132275' id='270'><font color='#0000ff' weight='2.6455e-05' id='261'>2</font>*i + 1</font></font>;</font>
+        </font><font color='#0008ff' weight='0.00873016' id='286'><font color='#0003ff' weight='0.00357143' id='284'><font color='#0000ff' weight='0.00026455' id='277'><font color='#0000ff' weight='0.000132275' id='276'>int</font> </font><font color='#0000ff' weight='0.000132275' id='279'>max </font><font color='#0000ff' weight='0.000396825' id='283'>= <font color='#0000ff' weight='0.00026455' id='282'><font color='#0000ff' weight='0.000132275' id='281'>i</font></font></font>;</font>
+        </font><font color='#0020ff' weight='0.031746' id='327'>if (<font color='#0000ff' weight='2.83447e-05' id='288'>left </font><font color='#0000ff' weight='2.83447e-05' id='290'>&lt;= </font><font color='#0000ff' weight='2.83447e-05' id='292'>N </font><font color='#0000ff' weight='2.83447e-05' id='294'>&amp;&amp; </font>arr[left] &gt; arr[i])<font color='#0004ff' weight='0.00396825' id='326'>
+            <font color='#0003ff' weight='0.00357143' id='325'><font color='#0003ff' weight='0.0031746' id='324'><font color='#0001ff' weight='0.00119048' id='322'>max = <font color='#0000ff' weight='6.61376e-05' id='321'>left</font>;</font></font></font></font>
+        </font><font color='#0020ff' weight='0.031746' id='368'>if <font color='#000bff' weight='0.0111111' id='356'>(<font color='#0005ff' weight='0.00515873' id='354'><font color='#0000ff' weight='2.83447e-05' id='329'>right </font><font color='#0000ff' weight='2.83447e-05' id='331'>&lt;= </font><font color='#0000ff' weight='2.83447e-05' id='333'>N </font><font color='#0000ff' weight='2.83447e-05' id='335'>&amp;&amp; </font>arr[right] <font color='#0000ff' weight='2.83447e-05' id='345'>&gt; </font>arr[max])</font></font><font color='#0004ff' weight='0.00396825' id='367'>        
+            <font color='#0003ff' weight='0.00357143' id='366'><font color='#0003ff' weight='0.0031746' id='365'><font color='#0001ff' weight='0.00119048' id='363'><font color='#0000ff' weight='6.61376e-05' id='358'>max </font>= <font color='#0000ff' weight='6.61376e-05' id='362'>right</font>;</font></font></font></font>
+ 
+        </font><font color='#0026ff' weight='0.0380952' id='417'>if <font color='#0003ff' weight='0.0031746' id='377'>(<font color='#0001ff' weight='0.00119048' id='375'>max != <font color='#0000ff' weight='6.61376e-05' id='374'>i</font>)</font></font><font color='#000fff' weight='0.0150794' id='416'>
+        <font color='#000eff' weight='0.0146825' id='415'>{
+            <font color='#0002ff' weight='0.00251323' id='397'><font color='#0001ff' weight='0.00112434' id='395'><font color='#0001ff' weight='0.0010582' id='394'><font color='#0000ff' weight='3.30688e-05' id='379'>swap</font><font color='#0000ff' weight='0.000429894' id='393'>(<font color='#0000ff' weight='2.48016e-05' id='383'><font color='#0000ff' weight='1.65344e-05' id='382'><font color='#0000ff' weight='8.2672e-06' id='381'>arr</font></font>, </font><font color='#0000ff' weight='2.48016e-05' id='387'><font color='#0000ff' weight='1.65344e-05' id='386'>i</font>, </font><font color='#0000ff' weight='2.48016e-05' id='391'><font color='#0000ff' weight='1.65344e-05' id='390'><font color='#0000ff' weight='8.2672e-06' id='389'>max</font></font>)</font></font></font>;</font>
+            </font><font color='#0002ff' weight='0.00198413' id='413'><font color='#0000ff' weight='0.000859788' id='411'><font color='#0000ff' weight='0.000793651' id='410'><font color='#0000ff' weight='3.30688e-05' id='399'>maxheap</font><font color='#0000ff' weight='0.000297619' id='409'>(<font color='#0000ff' weight='3.30688e-05' id='403'><font color='#0000ff' weight='2.20459e-05' id='402'>arr</font>, </font><font color='#0000ff' weight='3.30688e-05' id='407'><font color='#0000ff' weight='2.20459e-05' id='406'><font color='#0000ff' weight='1.10229e-05' id='405'>max</font></font>)</font></font></font>;</font>
+        }</font></font></font>
+    }</font></font>    
+    
+    public static void swap(int arr[], int i, int j)
+    {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp; 
+    }    </font>
+</pre>

@@ -1,0 +1,53 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void sort(Comparable[] a) {
+    int n = a.length;
+
+    
+    int h = 1;
+    while (h &lt; n/3) h = 3*h + 1;
+
+    while (h &gt;= 1) {
+      
+      for (int i = h; i &lt; n; i++) {
+        for (int j = i; j &gt;= h &amp;&amp; less(a[j], a[j-h]); j -= h) {
+          exch(a, j, j-h);
+        }
+      }
+      h /= 3;
+    }
+  }
+
+  private static boolean less(Comparable v, Comparable w) <font color='#ff0000' weight='1' id='275'>{
+    <font color='#00ff2e' weight='0.454545' id='273'>return <font color='#00d0ff' weight='0.204545' id='271'><font color='#0032ff' weight='0.0492424' id='266'><font color='#000bff' weight='0.0113636' id='259'><font color='#0000ff' weight='0.000631313' id='254'>v</font><font color='#0000ff' weight='0.000631313' id='256'>.</font><font color='#0000ff' weight='0.000631313' id='258'>compareTo</font></font><font color='#0009ff' weight='0.0094697' id='265'>(<font color='#0002ff' weight='0.00284091' id='263'><font color='#0001ff' weight='0.00189394' id='262'><font color='#0000ff' weight='0.00094697' id='261'>w</font></font>)</font></font> </font><font color='#0003ff' weight='0.00378788' id='268'>&lt; </font><font color='#0003ff' weight='0.00378788' id='270'>0</font>;</font>
+  }</font></font>
+
+  private static void exch(Object[] a, int i, int j) {
+    Object swap = a[i];
+    a[i] = a[j];
+    a[j] = swap;
+  }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+<font color='#ff0400' weight='0.995745' id='235'><font color='#0000ff' weight='0.000851064' id='2'>protected </font>void sort<font color='#0015ff' weight='0.0212766' id='33'>(T[] <font color='#0000ff' weight='0.000106383' id='15'>array</font>, <font color='#0001ff' weight='0.0012766' id='24'><font color='#0001ff' weight='0.00106383' id='23'>int <font color='#0000ff' weight='0.000106383' id='22'>leftIndex</font></font>, </font><font color='#0001ff' weight='0.0012766' id='31'><font color='#0001ff' weight='0.00106383' id='30'>int <font color='#0000ff' weight='0.000106383' id='29'>rightIndex</font></font>)</font> </font><font color='#00adff' weight='0.170213' id='234'>{
+        
+        <font color='#0055ff' weight='0.0842553' id='232'>if <font color='#0002ff' weight='0.00276596' id='47'>(<font color='#0000ff' weight='0.000212766' id='40'><font color='#0000ff' weight='1.18203e-05' id='35'>array</font><font color='#0000ff' weight='1.18203e-05' id='37'>.</font><font color='#0000ff' weight='1.18203e-05' id='39'>length</font> </font><font color='#0000ff' weight='3.5461e-05' id='42'>&gt; </font><font color='#0000ff' weight='3.5461e-05' id='44'>1</font>)</font><font color='#0027ff' weight='0.0389362' id='231'> <font color='#0027ff' weight='0.0387234' id='230'>{
+            
+            <font color='#0001ff' weight='0.00120567' id='65'><font color='#0000ff' weight='0.000531915' id='63'><font color='#0000ff' weight='2.36407e-05' id='50'><font color='#0000ff' weight='1.18203e-05' id='49'>T</font> </font><font color='#0000ff' weight='1.18203e-05' id='52'>aux </font><font color='#0000ff' weight='0.000106383' id='62'>= <font color='#0000ff' weight='9.45627e-05' id='61'><font color='#0000ff' weight='8.27423e-05' id='60'><font color='#0000ff' weight='5.91017e-06' id='54'>array</font><font color='#0000ff' weight='2.36407e-05' id='59'>[<font color='#0000ff' weight='5.91017e-06' id='57'><font color='#0000ff' weight='2.95508e-06' id='56'>leftIndex</font>]</font></font></font></font></font>;</font>
+            
+            </font><font color='#000bff' weight='0.0114894' id='228'>for (int i = <font color='#0000ff' weight='1.47754e-06' id='72'>leftIndex</font>; i &lt; <font color='#0000ff' weight='1.47754e-06' id='83'>rightIndex</font>; i++) <font color='#0004ff' weight='0.00468085' id='227'>{
+                <font color='#0002ff' weight='0.00230496' id='225'>for (int j = <font color='#0000ff' weight='3.69385e-07' id='101'>leftIndex</font>; j <font color='#0000ff' weight='3.69385e-07' id='110'>&lt; </font><font color='#0000ff' weight='3.69385e-07' id='112'>rightIndex</font>; j<font color='#0000ff' weight='1.10816e-06' id='119'>++</font>) <font color='#0000ff' weight='0.000886525' id='224'>{
+                    
+                    <font color='#0000ff' weight='0.000434397' id='222'>if <font color='#0000ff' weight='7.75709e-05' id='159'>(<font color='#0000ff' weight='3.65691e-05' id='157'><font color='#0000ff' weight='1.55142e-06' id='131'><font color='#0000ff' weight='1.10816e-07' id='125'>array</font><font color='#0000ff' weight='4.43262e-07' id='130'>[<font color='#0000ff' weight='1.10816e-07' id='128'>j]</font></font></font><font color='#0000ff' weight='2.21631e-07' id='133'>.</font><font color='#0000ff' weight='3.98936e-06' id='152'><font color='#0000ff' weight='1.10816e-07' id='135'>compareTo</font><font color='#0000ff' weight='1.66223e-06' id='151'>(<font color='#0000ff' weight='7.20301e-07' id='149'><font color='#0000ff' weight='6.64894e-07' id='148'><font color='#0000ff' weight='6.09486e-07' id='147'><font color='#0000ff' weight='2.77039e-08' id='137'>array</font><font color='#0000ff' weight='2.21631e-07' id='146'>[<font color='#0000ff' weight='8.31117e-08' id='144'><font color='#0000ff' weight='4.61732e-09' id='139'>j</font><font color='#0000ff' weight='4.61732e-09' id='141'>+</font><font color='#0000ff' weight='4.61732e-09' id='143'>1</font>]</font></font></font></font>)</font></font> </font><font color='#0000ff' weight='2.21631e-07' id='154'>&gt; </font>0)</font></font><font color='#0000ff' weight='0.000135195' id='221'> <font color='#0000ff' weight='0.000132979' id='220'>{
+                        <font color='#0000ff' weight='7.75709e-06' id='174'><font color='#0000ff' weight='3.32447e-06' id='172'><font color='#0000ff' weight='9.23463e-08' id='161'>aux </font><font color='#0000ff' weight='9.23463e-08' id='163'>= </font><font color='#0000ff' weight='4.61732e-08' id='165'>array</font>[<font color='#0000ff' weight='2.30866e-08' id='167'>j</font>];</font>
+                        </font><font color='#0000ff' weight='4.61732e-08' id='176'>array</font>[<font color='#0000ff' weight='2.30866e-08' id='178'>j</font>] = <font color='#0000ff' weight='4.61732e-08' id='186'>array</font>[j<font color='#0000ff' weight='7.69553e-09' id='190'>+</font><font color='#0000ff' weight='7.69553e-09' id='192'>1</font>];
+                        <font color='#0000ff' weight='4.61732e-08' id='201'>array</font>[j<font color='#0000ff' weight='7.69553e-09' id='205'>+</font><font color='#0000ff' weight='7.69553e-09' id='207'>1</font>] = <font color='#0000ff' weight='9.23463e-08' id='215'>aux</font>;
+                    }</font></font>
+                    
+                }</font></font>
+            }</font></font>
+        }</font></font></font>
+        
+    }</font></font></font></font>
+</pre>

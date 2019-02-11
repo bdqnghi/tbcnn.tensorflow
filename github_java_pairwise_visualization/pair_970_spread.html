@@ -1,0 +1,82 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void sort(int[] arr) {
+        int max = Integer.MAX_VALUE;
+        int min = Integer.MIN_VALUE;
+
+        for (int i = 0; i &lt; arr.length; i++) {
+            max = Math.max(max, arr[i]);
+            min = Math.min(min, arr[i]);
+        }
+        
+        
+        int bucketNum = (max - min) / arr.length + 1;
+        ArrayList&lt;ArrayList&lt;Integer&gt;&gt; bucketArr = new ArrayList&lt;&gt;(bucketNum);
+        for (int i = 0; i &lt; bucketNum; i++) {
+            bucketArr.add(new ArrayList&lt;&gt;());
+        }
+
+        
+        for (int i = 0; i &lt; arr.length; i++) {
+            int num = (arr[i] - min) / (arr.length);
+            bucketArr.get(num).add(arr[i]);
+        }
+
+        
+        for (int i = 0; i &lt; bucketArr.size(); i++) {
+            Collections.sort(bucketArr.get(i));
+        }
+
+        System.out.println(bucketArr.toString());
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+package org.hibernate.envers.internal.tools.graph;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+
+public class TopologicalSort&lt;R&gt; {
+	private List&lt;R&gt; sorted;
+	private int time;
+
+	private void process(Vertex&lt;R&gt; v) {
+		if ( v.getStartTime() != 0 ) {
+			
+			return;
+		}
+
+		v.setStartTime( time++ );
+
+		for ( Vertex&lt;R&gt; n : v.getNeighbours() ) {
+			process( n );
+		}
+
+		v.setEndTime( time++ );
+
+		sorted.add( v.getRepresentation() );
+	}
+
+	public List&lt;R&gt; sort(Collection&lt;Vertex&lt;R&gt;&gt; vertices) {
+		sorted = new ArrayList&lt;&gt;( vertices.size() );
+
+		time = 1;
+
+		for ( Vertex&lt;R<font color='#ff0000' weight='1' id='341'></font>&gt; v : vertices ) {
+			if ( v.getEndTime() == 0 ) {
+				process( v );
+			}
+		}
+
+		Collections.reverse( sorted );
+
+		return sorted;
+	}
+}
+</font>
+</pre>

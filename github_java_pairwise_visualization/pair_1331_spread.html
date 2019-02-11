@@ -1,0 +1,51 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+private List&lt;Stmt&gt; topologicalSort(StmtList stmts) {
+
+        List&lt;Stmt&gt; out = new ArrayList&lt;Stmt&gt;(stmts.getSize());
+        Stack&lt;Stmt&gt; stack = new Stack&lt;Stmt&gt;();
+        stack.push(stmts.getFirst());
+
+        boolean visitedFlag = false;
+
+        while (!stack.empty()) {
+            Stmt stmt = stack.pop();
+            if (<font color='#ff0000' weight='1' id='176'><font color='#00ffa9' weight='0.333333' id='171'><font color='#0071ff' weight='0.111111' id='166'>stmt<font color='#0071ff' weight='0.111111' id='165'></font></font><font color='#0071ff' weight='0.111111' id='168'>.<font color='#0071ff' weight='0.111111' id='167'></font></font><font color='#0071ff' weight='0.111111' id='170'>_cfg_visited<font color='#0071ff' weight='0.111111' id='169'></font></font> </font><font color='#00ffa9' weight='0.333333' id='173'>==<font color='#00ffa9' weight='0.333333' id='172'></font> </font><font color='#00ffa9' weight='0.333333' id='175'>visitedFlag<font color='#00ffa9' weight='0.333333' id='174'></font></font>)</font> {
+                continue;
+            }
+            if (stmt._cfg_froms.size() == 0 || stack.size() == 0) {
+                stmt._cfg_visited = visitedFlag;
+                out.add(stmt);
+                for (Stmt t : stmt._cfg_tos) {
+                    t._cfg_froms.remove(stmt);
+                    if (t._cfg_visited != visitedFlag) {
+                        stack.push(t);
+                    }
+                }
+            }
+        }
+        return out;
+    }
+
+    </font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+    public static int[] swap(int numbers[], int i, int j) {
+        int temp = numbers[i];
+        numbers[i] = numbers[j];
+        numbers[j] = temp;
+        return numbers;
+    }
+
+    public static int[] sort(int array[]) {
+        for (int index = 1; index &lt; array.length; index++) {
+            for (int indexj = 0; indexj &lt; index-1; indexj++)
+                <font color='#ff0000' weight='1' id='241'>if (<font color='#002aff' weight='0.0416667' id='193'>array</font><font color='#002aff' weight='0.0416667' id='198'>[<font color='#0015ff' weight='0.0208333' id='196'><font color='#0015ff' weight='0.0208333' id='195'>indexj<font color='#0015ff' weight='0.0208333' id='194'></font></font>]</font><font color='#0015ff' weight='0.0208333' id='197'></font></font> <font color='#0054ff' weight='0.0833333' id='201'>&gt; </font><font color='#0054ff' weight='0.0833333' id='209'><font color='#002aff' weight='0.0416667' id='203'>array</font><font color='#002aff' weight='0.0416667' id='208'>[<font color='#0015ff' weight='0.0208333' id='206'><font color='#0015ff' weight='0.0208333' id='205'>index<font color='#0015ff' weight='0.0208333' id='204'></font></font>]</font><font color='#0015ff' weight='0.0208333' id='207'></font></font></font>) <font color='#00ff00' weight='0.5' id='238'>{
+                    <font color='#002aff' weight='0.0416667' id='214'>array </font><font color='#002aff' weight='0.0416667' id='216'>= </font><font color='#002aff' weight='0.0416667' id='233'><font color='#0015ff' weight='0.0208333' id='218'>swap</font>(<font color='#0005ff' weight='0.00520833' id='220'>array</font>, <font color='#0005ff' weight='0.00520833' id='226'><font color='#0005ff' weight='0.00520833' id='225'><font color='#0005ff' weight='0.00520833' id='224'>indexj<font color='#0005ff' weight='0.00520833' id='223'></font></font></font>, </font><font color='#0005ff' weight='0.00520833' id='230'><font color='#0005ff' weight='0.00520833' id='229'><font color='#0005ff' weight='0.00520833' id='228'>index<font color='#0005ff' weight='0.00520833' id='227'></font></font></font>)</font><font color='#0005ff' weight='0.00520833' id='231'></font></font>;
+                }</font></font>
+        }
+        return array;
+    }
+</font>
+</pre>

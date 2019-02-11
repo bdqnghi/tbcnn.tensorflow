@@ -1,0 +1,46 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void bubbleSort(int arr[]) {
+      int len = arr.length;
+      for (int i = len; i &gt;= 0; i--) {
+         for (int j = 0; j &lt; len - 1; j++) <font color='#ff0000' weight='1' id='163'>{
+            <font color='#ff0000' weight='1' id='116'><font color='#ff0000' weight='1' id='114'><font color='#ff0000' weight='1' id='103'><font color='#ff0000' weight='1' id='102'>int<font color='#ff0000' weight='1' id='101'></font></font> </font><font color='#ff0000' weight='1' id='105'>k<font color='#ff0000' weight='1' id='104'></font> </font><font color='#ff0000' weight='1' id='113'>= <font color='#ff0000' weight='1' id='112'><font color='#ff0000' weight='1' id='107'>j </font><font color='#ff0000' weight='1' id='109'>+ </font>1<font color='#ff0000' weight='1' id='110'></font></font></font>;</font>
+            </font>if (arr<font color='#ff0000' weight='1' id='117'></font><font color='#ff0000' weight='1' id='123'>[<font color='#ff0000' weight='1' id='120'>j</font>]<font color='#ff0000' weight='1' id='122'></font></font> &gt; arr[k])<font color='#ff0000' weight='1' id='160'> {
+               <font color='#ff0000' weight='1' id='157'>swapNumbers(<font color='#ff0000' weight='1' id='143'>j, </font><font color='#ff0000' weight='1' id='146'><font color='#ff0000' weight='1' id='145'>k</font></font>, arr);
+            }</font><font color='#ff0000' weight='1' id='158'></font></font>
+         }<font color='#ff0000' weight='1' id='162'></font></font>
+      }
+   }
+
+   private static void swapNumbers(int i, int j, int[] arr) {
+      int temp;
+      temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
+   }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public int[] sort(int[] arrayToSort) {
+        int max = getMaxFromArray(arrayToSort);
+        Map&lt;Integer, Integer&gt; bucketMap = new HashMap&lt;&gt;();
+        for (int i = 0; i &lt;= max; i++) {
+            bucketMap.put(i, 0);
+        }
+        for (int i = 0; i &lt; arrayToSort.length; i++) {
+            bucketMap.put(arrayToSort[i], bucketMap.get(arrayToSort[i])+1);
+        }
+        <font color='#ff0000' weight='1' id='211'>int<font color='#ff0000' weight='1' id='210'></font></font> sortedArrayIndex = 0;
+        for (Map.Entry&lt;Integer, Integer&gt; entry: bucketMap.entrySet()) {
+            for (int i = 0; i &lt; entry.getValue(); i++) {
+                arrayToSort[sortedArrayIndex++] = entry.getKey();
+            }
+        }
+        return arrayToSort;
+    }
+
+    protected int getMaxFromArray(int[] arrayToSort) {
+        List&lt;Integer&gt; numbers = Arrays.stream(arrayToSort).boxed().collect(Collectors.toList());
+        return numbers.stream().mapToInt(Integer::intValue).max().getAsInt();
+    }</font>
+</pre>

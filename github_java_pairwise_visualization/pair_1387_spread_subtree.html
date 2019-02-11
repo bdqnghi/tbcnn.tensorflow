@@ -1,0 +1,61 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static int[] bucketSort(int[] input, int bucketCount) {
+        if (input == null || input.length &lt;= 1) {
+            return input;
+        }
+        int[] output = new int[input.length];
+        int lowerBound = Integer.MAX_VALUE;
+        int upperBound = Integer.MIN_VALUE;
+        for (int i = 0; i &lt; input.length; i++) {
+            upperBound = Math.max(upperBound, input[i]);
+            lowerBound = Math.min(lowerBound, input[i]);
+        }
+        
+        double interval = (double)(upperBound - lowerBound + 1)/bucketCount;
+
+        ArrayList&lt;ArrayList&lt;Integer&gt;&gt; buckets = new ArrayList&lt;ArrayList&lt;Integer&gt;&gt;();
+        
+        
+        for (int i = <font color='#ff0000' weight='1' id='302'>0</font>; i &lt; bucketCount; i++) {
+            ArrayList&lt;Integer&gt; line = new ArrayList&lt;Integer&gt;();
+            buckets.add(line);
+        }
+        for (int i = 0; i &lt; input.length; i++) {    
+            int pos = (int) ((input[i] - lowerBound)/interval);
+            buckets.get(pos).add(input[i]);
+        }
+        
+        
+        for (int i = 0; i &lt; bucketCount; i++) {
+            Collections.sort(buckets.get(i));
+        }
+        int pointer = 0;
+        for (int i = 0; i &lt; bucketCount; i++) {
+            for (int j = 0; j &lt; buckets.get(i).size(); j++) {
+                output[pointer] = buckets.get(i).get(j);
+                pointer ++;
+            }
+        }
+        return output;
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ <font color='#0001ff' weight='0.00120773' id='2'>void</font> <font color='#0001ff' weight='0.00120773' id='5'>sort</font>(<font color='#0000ff' weight='0.000603865' id='8'><font color='#0000ff' weight='0.000301932' id='7'>double</font> </font><font color='#0001ff' weight='0.00120773' id='13'><font color='#0000ff' weight='0.000150966' id='10'>arr</font>[]</font>)
+    {
+        <font color='#0000ff' weight='6.70961e-05' id='19'>int</font> <font color='#0000ff' weight='6.70961e-05' id='22'>n </font>= <font color='#0000ff' weight='0.000469673' id='30'><font color='#0000ff' weight='2.23654e-05' id='24'>arr</font>.length</font>;
+         <font color='#0045ff' weight='0.0680354' id='204'>for (int i = 0; i &lt; <font color='#0000ff' weight='5.03221e-06' id='52'>n</font><font color='#0000ff' weight='5.03221e-06' id='54'>-</font><font color='#0000ff' weight='5.03221e-06' id='56'>1</font>; i++)
+        <font color='#001bff' weight='0.0271739' id='203'>{
+            <font color='#0000ff' weight='5.59134e-06' id='69'>int</font> <font color='#0000ff' weight='5.59134e-06' id='72'>min_idx </font>= <font color='#0000ff' weight='5.59134e-06' id='74'>i</font>;
+            for (int <font color='#0000ff' weight='6.98918e-07' id='84'>j </font>= <font color='#0000ff' weight='2.32973e-07' id='86'>i</font><font color='#0000ff' weight='2.32973e-07' id='88'>+</font><font color='#0000ff' weight='2.32973e-07' id='90'>1</font>; <font color='#0000ff' weight='6.98918e-07' id='97'>j </font>&lt; <font color='#0000ff' weight='6.98918e-07' id='101'>n</font>; <font color='#0000ff' weight='2.09675e-06' id='106'>j</font>++)
+                <font color='#0000ff' weight='0.000553543' id='146'><font color='#0000ff' weight='0.000536769' id='145'>if <font color='#0000ff' weight='0.00016774' id='133'>(<font color='#0000ff' weight='7.54831e-05' id='131'><font color='#0000ff' weight='9.78485e-06' id='120'><font color='#0000ff' weight='6.98918e-07' id='114'>arr</font><font color='#0000ff' weight='2.79567e-06' id='119'>[<font color='#0000ff' weight='6.98918e-07' id='117'><font color='#0000ff' weight='3.49459e-07' id='116'>j</font>]</font></font> </font><font color='#0000ff' weight='1.39784e-06' id='122'>&lt; </font><font color='#0000ff' weight='9.78485e-06' id='130'><font color='#0000ff' weight='6.98918e-07' id='124'>arr</font><font color='#0000ff' weight='2.79567e-06' id='129'>[<font color='#0000ff' weight='6.98918e-07' id='127'><font color='#0000ff' weight='3.49459e-07' id='126'>min_idx</font>]</font></font></font>)</font></font><font color='#0000ff' weight='8.38701e-05' id='144'>
+                    <font color='#0000ff' weight='7.54831e-05' id='143'><font color='#0000ff' weight='1.39784e-06' id='135'>min_idx </font><font color='#0000ff' weight='1.39784e-06' id='137'>= </font><font color='#0000ff' weight='1.39784e-06' id='139'>j</font>;</font></font></font></font>
+ 
+
+            <font color='#0000ff' weight='5.59134e-06' id='149'>double</font> <font color='#0000ff' weight='5.59134e-06' id='152'>temp </font>= <font color='#0000ff' weight='4.47307e-05' id='161'><font color='#0000ff' weight='2.79567e-06' id='154'>arr</font>[<font color='#0000ff' weight='1.39784e-06' id='156'>min_idx</font>]</font>;
+            <font color='#0000ff' weight='0.000301932' id='184'><font color='#0000ff' weight='3.91394e-05' id='173'><font color='#0000ff' weight='2.79567e-06' id='167'>arr</font><font color='#0000ff' weight='1.11827e-05' id='172'>[<font color='#0000ff' weight='2.79567e-06' id='170'><font color='#0000ff' weight='1.39784e-06' id='169'>min_idx</font>]</font></font> </font><font color='#0000ff' weight='5.59134e-06' id='175'>= </font><font color='#0000ff' weight='2.79567e-06' id='177'>arr</font>[i];</font>
+            <font color='#0000ff' weight='2.79567e-06' id='188'>arr</font>[<font color='#0000ff' weight='1.39784e-06' id='190'>i</font>] = <font color='#0000ff' weight='5.59134e-06' id='198'>temp</font>;
+        }</font>
+    }</font></font>
+</pre>

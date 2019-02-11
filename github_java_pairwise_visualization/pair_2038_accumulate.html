@@ -1,0 +1,92 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+    public static void sort(int[] a) {
+        
+        shuffleArray(a);
+        sort(a, 0, a.length - 1);
+    }
+
+    private static void sort(int[] a, int lo, int hi) {
+        
+        if(hi &lt;= lo)    return;
+        int j = partition(a, lo, hi);
+        sort(a, lo, j - 1);
+        sort(a, j + 1, hi);
+    }
+
+    private static int partition(int[] a, int lo, int hi) {
+        int i = lo, j = hi + 1;
+        while(true)<font color='#ff0000' weight='1' id='372'>{
+            
+            while<font color='#ff0000' weight='1' id='279'>(<font color='#ff0000' weight='1' id='264'><font color='#ff0000' weight='1' id='258'>a</font>[<font color='#ff0000' weight='1' id='260'>lo<font color='#ff0000' weight='1' id='259'></font></font>]<font color='#ff0000' weight='1' id='262'></font> </font><font color='#ff0000' weight='1' id='266'>&gt; </font><font color='#ff0000' weight='1' id='276'><font color='#ff0000' weight='1' id='268'>a</font>[<font color='#ff0000' weight='1' id='270'>++</font>i]<font color='#ff0000' weight='1' id='274'></font></font>) </font><font color='#ff0000' weight='1' id='295'>{
+                if<font color='#ff0000' weight='1' id='288'>(<font color='#ff0000' weight='1' id='286'><font color='#ff0000' weight='1' id='281'>i<font color='#ff0000' weight='1' id='280'></font> </font>==<font color='#ff0000' weight='1' id='282'></font> <font color='#ff0000' weight='1' id='285'>hi<font color='#ff0000' weight='1' id='284'></font></font>)</font></font> <font color='#ff0000' weight='1' id='290'>break;<font color='#ff0000' weight='1' id='289'></font></font>
+            }<font color='#ff0000' weight='1' id='294'></font></font>
+            
+            while<font color='#ff0000' weight='1' id='319'>(<font color='#ff0000' weight='1' id='317'><font color='#ff0000' weight='1' id='304'><font color='#ff0000' weight='1' id='298'>a</font><font color='#ff0000' weight='1' id='303'>[<font color='#ff0000' weight='1' id='301'><font color='#ff0000' weight='1' id='300'>lo<font color='#ff0000' weight='1' id='299'></font></font>]</font></font> </font>&lt; <font color='#ff0000' weight='1' id='316'>a<font color='#ff0000' weight='1' id='307'></font><font color='#ff0000' weight='1' id='315'>[<font color='#ff0000' weight='1' id='313'>--<font color='#ff0000' weight='1' id='309'></font>j<font color='#ff0000' weight='1' id='311'></font>]</font></font></font>)</font> </font>{
+                <font color='#ff0000' weight='1' id='333'>if(<font color='#ff0000' weight='1' id='321'>j<font color='#ff0000' weight='1' id='320'></font> </font>==<font color='#ff0000' weight='1' id='322'></font> <font color='#ff0000' weight='1' id='325'>lo<font color='#ff0000' weight='1' id='324'></font></font>) <font color='#ff0000' weight='1' id='331'><font color='#ff0000' weight='1' id='330'>break;</font></font>
+            }</font>
+            
+            if<font color='#ff0000' weight='1' id='345'>(<font color='#ff0000' weight='1' id='338'>j<font color='#ff0000' weight='1' id='337'></font> </font><font color='#ff0000' weight='1' id='340'>&lt;=<font color='#ff0000' weight='1' id='339'></font> </font>i<font color='#ff0000' weight='1' id='341'></font>)<font color='#ff0000' weight='1' id='344'></font></font> <font color='#ff0000' weight='1' id='348'><font color='#ff0000' weight='1' id='347'>break;<font color='#ff0000' weight='1' id='346'></font></font></font>
+            
+            <font color='#ff0000' weight='1' id='370'><font color='#ff0000' weight='1' id='368'><font color='#ff0000' weight='1' id='367'>exch<font color='#ff0000' weight='1' id='351'></font><font color='#ff0000' weight='1' id='366'>(<font color='#ff0000' weight='1' id='356'><font color='#ff0000' weight='1' id='355'>a<font color='#ff0000' weight='1' id='353'></font></font>, </font><font color='#ff0000' weight='1' id='360'><font color='#ff0000' weight='1' id='359'><font color='#ff0000' weight='1' id='358'>i<font color='#ff0000' weight='1' id='357'></font></font></font>, </font><font color='#ff0000' weight='1' id='364'><font color='#ff0000' weight='1' id='363'><font color='#ff0000' weight='1' id='362'>j</font></font>)</font><font color='#ff0000' weight='1' id='365'></font></font></font>;</font><font color='#ff0000' weight='1' id='369'></font>
+        }</font><font color='#ff0000' weight='1' id='371'></font></font>
+        
+        exch(a, lo, j);
+        return j;
+    }
+
+    private static void exch(int[] a, int i, int j) {
+        int temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+   public static void mergeSort(int[] arr) {
+      if (arr.length &gt; 1) {
+         int[] left = leftHalf(arr);
+         int[] right = rightHalf(arr);
+
+         mergeSort(left);
+         mergeSort(right);
+
+         mergeArrays(arr, left, right);
+      }
+   }
+
+   public static int[] leftHalf(int[] arr) {
+      int size = arr.length / 2;
+      int[] left = new int[size];
+      for (int i = 0; i &lt; size; i++) {
+         left[i] = arr[i];
+      }
+      return left;
+   }
+
+   public static int[] rightHalf(int[] arr) {
+      int size1 = arr.length / 2;
+      int size2 = arr.length - size1;
+      int[] right = new int[size2];
+      for (int i = 0; i &lt; size2; i++) {
+         right[i] = arr[i + size1];
+      }
+      return right;
+   }
+
+   public static void mergeArrays(int[] arr, int[] left, int[] right) {
+      int i1 = 0;
+      int i2 = 0;
+
+      for (int i = 0; i &lt; arr.length; i++) {
+         if (i2 &gt;= right.length || (i1 &lt; left.length &amp;&amp; left[i1] &lt;= right[i2])) {
+            arr[i] = left[i1];
+            i1++;
+         } else {
+            arr[i] = right[i2];
+            i2++;
+         }
+      }
+   }</font>
+</pre>

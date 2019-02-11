@@ -1,0 +1,53 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public void sort(int a[]) {
+
+        if(a == null || a.length &lt;= 1) {
+            return;
+        }
+
+        insertNumberAtIndexInSortedArray(a, 1);
+    }
+
+    private void insertNumberAtIndexInSortedArray(int a[], int index) {
+
+        if (index == a.length) <font color='#ff0000' weight='1' id='110'>{
+            <font color='#00ff00' weight='0.5' id='108'>return;<font color='#00ff00' weight='0.5' id='107'></font>
+        }</font><font color='#00ff00' weight='0.5' id='109'></font></font>
+
+        int number = a[index];
+        int i;
+        for (i=index-1; i &gt;= 0; i--) {
+            if (number &lt; a[i]) {
+                a[i+1] = a[i];
+            } else {
+                break;
+            }
+        }
+
+        a[i+1] = number;
+
+        insertNumberAtIndexInSortedArray(a, index+1);
+    }
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+<font color='#ff0000' weight='1' id='168'><font color='#00cbff' weight='0.2' id='2'>private </font>void <font color='#00cbff' weight='0.2' id='7'>insertionSort</font><font color='#00cbff' weight='0.2' id='26'>(<font color='#0043ff' weight='0.0666667' id='17'><font color='#0043ff' weight='0.0666667' id='16'><font color='#0022ff' weight='0.0333333' id='13'><font color='#0022ff' weight='0.0333333' id='12'>int[]</font> </font><font color='#0022ff' weight='0.0333333' id='15'>a</font></font>, </font>int <font color='#0022ff' weight='0.0333333' id='22'>len</font>)<font color='#0043ff' weight='0.0666667' id='25'></font> </font><font color='#00cbff' weight='0.2' id='167'>{
+        
+        <font color='#0066ff' weight='0.1' id='165'>for <font color='#0033ff' weight='0.05' id='55'>(<font color='#000cff' weight='0.0125' id='38'><font color='#0006ff' weight='0.00625' id='36'>int <font color='#0002ff' weight='0.00208333' id='31'>i </font><font color='#0002ff' weight='0.00208333' id='35'>= <font color='#0002ff' weight='0.00208333' id='34'><font color='#0002ff' weight='0.00208333' id='33'>1<font color='#0002ff' weight='0.00208333' id='32'></font></font></font></font>;</font><font color='#0006ff' weight='0.00625' id='37'></font> </font><font color='#000cff' weight='0.0125' id='47'><font color='#0002ff' weight='0.00208333' id='40'>i </font><font color='#0002ff' weight='0.00208333' id='42'>&lt; </font><font color='#0002ff' weight='0.00208333' id='44'>len</font>; </font><font color='#000cff' weight='0.0125' id='53'><font color='#000cff' weight='0.0125' id='52'><font color='#0006ff' weight='0.00625' id='49'>i<font color='#0006ff' weight='0.00625' id='48'></font></font><font color='#0006ff' weight='0.00625' id='51'>++<font color='#0006ff' weight='0.00625' id='50'></font></font></font>)</font><font color='#000cff' weight='0.0125' id='54'></font> </font><font color='#0033ff' weight='0.05' id='164'>{
+            int <font color='#0001ff' weight='0.00166667' id='60'>value </font>= a[<font color='#0000ff' weight='0.000416667' id='64'>i</font>];   
+            int <font color='#0001ff' weight='0.00166667' id='78'>position<font color='#0001ff' weight='0.00166667' id='77'></font> </font><font color='#0001ff' weight='0.00166667' id='82'>= <font color='#0001ff' weight='0.00166667' id='81'><font color='#0001ff' weight='0.00166667' id='80'>i</font></font></font>;   
+            
+            
+            <font color='#000aff' weight='0.01' id='147'>while <font color='#0005ff' weight='0.005' id='112'>(<font color='#0002ff' weight='0.0025' id='110'><font color='#0000ff' weight='0.000357143' id='87'>position </font><font color='#0000ff' weight='0.000357143' id='89'>&gt; </font><font color='#0000ff' weight='0.000357143' id='91'>0<font color='#0000ff' weight='0.000357143' id='90'></font> </font><font color='#0000ff' weight='0.000357143' id='93'>&amp;&amp; </font><font color='#0000ff' weight='0.000357143' id='105'><font color='#0000ff' weight='0.000178571' id='95'>a<font color='#0000ff' weight='0.000178571' id='94'></font></font><font color='#0000ff' weight='0.000178571' id='104'>[<font color='#0000ff' weight='8.92857e-05' id='102'><font color='#0000ff' weight='2.97619e-05' id='97'>position</font><font color='#0000ff' weight='2.97619e-05' id='99'>-</font><font color='#0000ff' weight='2.97619e-05' id='101'>1</font>]</font><font color='#0000ff' weight='8.92857e-05' id='103'></font></font> </font><font color='#0000ff' weight='0.000357143' id='107'>&gt; </font><font color='#0000ff' weight='0.000357143' id='109'>value</font>)</font><font color='#0002ff' weight='0.0025' id='111'></font> </font><font color='#0005ff' weight='0.005' id='146'>{
+                <font color='#0001ff' weight='0.00166667' id='137'><font color='#0000ff' weight='0.000833333' id='135'>a[<font color='#0000ff' weight='6.94444e-05' id='116'>position</font>] <font color='#0000ff' weight='0.000277778' id='122'>=<font color='#0000ff' weight='0.000277778' id='121'></font> </font>a[<font color='#0000ff' weight='2.31481e-05' id='126'>position</font><font color='#0000ff' weight='2.31481e-05' id='128'>-</font>1];</font><font color='#0000ff' weight='0.000833333' id='136'></font>    
+                </font><font color='#0001ff' weight='0.00166667' id='144'><font color='#0000ff' weight='0.000833333' id='142'><font color='#0000ff' weight='0.000416667' id='139'>position</font><font color='#0000ff' weight='0.000416667' id='141'>--<font color='#0000ff' weight='0.000416667' id='140'></font></font>;</font><font color='#0000ff' weight='0.000833333' id='143'></font>                     
+            }</font><font color='#0001ff' weight='0.00166667' id='145'></font></font>
+            
+            
+            </font>a[<font color='#0000ff' weight='0.000416667' id='151'>position</font>] = <font color='#0001ff' weight='0.00166667' id='159'>value</font>;
+        }<font color='#000aff' weight='0.01' id='163'></font></font>
+    }</font><font color='#0066ff' weight='0.1' id='166'></font></font>
+    </font></font>
+</pre>

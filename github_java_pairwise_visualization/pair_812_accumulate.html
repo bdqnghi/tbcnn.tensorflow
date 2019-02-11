@@ -1,0 +1,45 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public void shellSort(int[] array) {
+        for(int gap = array.length / 2; gap &gt; 0; gap /= 2) {
+            for(int i = 0; i &lt; gap; i++) {
+                for(int j = i; j &lt; array.length; j += gap) {
+                    int min = j;
+                    for(int k = j + gap; k &lt; array.length; k += gap) <font color='#ff0000' weight='1' id='212'>{
+                        <font color='#ff0000' weight='1' id='210'>if<font color='#ff0000' weight='1' id='197'>(<font color='#ff0000' weight='1' id='195'><font color='#ff0000' weight='1' id='184'><font color='#ff0000' weight='1' id='178'>array</font><font color='#ff0000' weight='1' id='183'>[<font color='#ff0000' weight='1' id='180'>k</font>]</font> </font><font color='#ff0000' weight='1' id='186'>&lt; </font><font color='#ff0000' weight='1' id='194'><font color='#ff0000' weight='1' id='188'>array</font><font color='#ff0000' weight='1' id='193'>[<font color='#ff0000' weight='1' id='191'><font color='#ff0000' weight='1' id='190'>min<font color='#ff0000' weight='1' id='189'></font></font>]</font><font color='#ff0000' weight='1' id='192'></font></font></font>)</font><font color='#ff0000' weight='1' id='196'></font></font><font color='#ff0000' weight='1' id='209'> <font color='#ff0000' weight='1' id='208'>{
+                            <font color='#ff0000' weight='1' id='206'><font color='#ff0000' weight='1' id='204'><font color='#ff0000' weight='1' id='199'>min </font><font color='#ff0000' weight='1' id='201'>= </font><font color='#ff0000' weight='1' id='203'>k<font color='#ff0000' weight='1' id='202'></font></font>;</font><font color='#ff0000' weight='1' id='205'></font>
+                        }</font><font color='#ff0000' weight='1' id='207'></font></font></font>
+                    }</font><font color='#ff0000' weight='1' id='211'></font></font>
+                    swap(array, j, min);
+                }
+            }
+        }
+    }
+
+    public void swap(int[] array, int a, int b) {
+        int temp = array[a];
+        array[a] = array[b];
+        array[b] = temp;
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+    public static void insertionSort() {
+        int ii = 0, jj = 0;
+        for (ii = 1; ii &lt; InsertionSort.ITEMS.length; ii++) {
+            jj = ii;
+            while ((jj &gt; 0)
+                    &amp;&amp; (InsertionSort.ITEMS[jj] &lt; InsertionSort.ITEMS[jj - 1])) {
+                swap(jj, jj - 1);
+                jj -= 1;
+            }
+        }
+    }
+
+    public static void swap(final int ii, final int jj) {
+        final int temp = InsertionSort.ITEMS[ii];
+        InsertionSort.ITEMS[ii] = InsertionSort.ITEMS[jj];
+        InsertionSort.ITEMS[jj] = temp;
+    }</font>
+</pre>

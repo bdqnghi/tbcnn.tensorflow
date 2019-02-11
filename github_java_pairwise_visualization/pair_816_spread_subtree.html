@@ -1,0 +1,99 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public ListNode insertionSortList(ListNode head) {      
+    
+        if (head == null)
+            return null;
+        if (head.next == null) {
+            return head;
+        }
+        ListNode first = head;
+        ListNode testNode = head;
+
+        while (testNode.next != null) {
+            ListNode insertNode = testNode.next;
+            
+            if (testNode.val &lt;= insertNode.val) {
+                testNode = testNode.next;
+                continue;
+            }
+            
+            if (insertNode.val &lt;= first.val) {
+                testNode.next = insertNode.next;
+                insertNode.next = first;
+                first = insertNode;
+                continue;
+            }
+
+            for (ListNode pointer = first; pointer != testNode; pointer = pointer.next) {
+                if (pointer.val &lt;= insertNode.val
+                        &amp;&amp; insertNode.val &lt;= pointer.next.val) {
+                    testNode.next = insertNode.next;
+                    insertNode.next = pointer.next;
+                    pointer.next = insertNode;
+                    break;
+                }
+            }
+        }
+
+        return first;
+    }
+
+    </font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ static int[] mergeSort(int[] a){
+        int n = a.length;
+        int[] left;
+        int[] right;
+
+        if(n % 2 == 0){
+            left  = new int[n / 2];
+            right = new int[n / 2];
+        } else {
+            left  = new int[n / 2];
+            right = new int[n / 2 + 1];
+        }
+
+        for(int i = 0; i &lt; n; i++){
+            if<font color='#ff0000' weight='1' id='211'>(<font color='#00ff55' weight='0.416667' id='209'><font color='#0008ff' weight='0.00833333' id='200'>i </font>&lt; <font color='#0008ff' weight='0.00833333' id='204'>n</font><font color='#0008ff' weight='0.00833333' id='206'>/</font><font color='#0008ff' weight='0.00833333' id='208'>2</font>)</font></font>{
+                left[i] = a[i];
+            } else {
+                right[i - n/2] = a[i];
+            }
+        }
+
+        left = mergeSort(left);
+        right = mergeSort(right);
+
+        return merge(left, right);
+
+    }
+
+    static int[] merge(int[] left, int[] right){
+        int[] result = new int[left.length + right.length];
+        
+        int i = 0;
+        int j = 0;
+        int index = 0;
+
+        while(i &lt; left.length &amp;&amp; j &lt; right.length){
+            if(left[i] &lt; right[i]){
+                result[index++] = left[i++];
+            } else {
+                result[index++] = right[j++];
+            }
+        }
+
+        while(i &lt; left.length){
+            result[index++] = left[i++];
+        }
+
+        while (j &lt; right.length) {
+            result[index++] = right[j++];
+        }
+        
+        return result;
+    }</font>
+</pre>

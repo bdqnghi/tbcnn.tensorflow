@@ -1,0 +1,66 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static void sort(int[] a, int maxVal) <font color='#ff0000' weight='1' id='269'>{
+          int [] <font color='#0000ff' weight='0.000115741' id='36'>bucket</font><font color='#0001ff' weight='0.00173611' id='52'>=new int[maxVal+1]</font>;
+     
+          for (int i=0; i&lt;bucket.length; i++) <font color='#0005ff' weight='0.00555556' id='106'>{
+             bucket[<font color='#0000ff' weight='1.44676e-05' id='94'>i]</font>=0;
+          }</font>
+     
+          for (<font color='#0000ff' weight='0.000390625' id='117'>int i=<font color='#0000ff' weight='2.89352e-05' id='115'>0</font>;</font> i&lt;a.length; i++) <font color='#0007ff' weight='0.00694444' id='162'>{
+             bucket[a[i]]++;
+          }</font>
+     
+          <font color='#0000ff' weight='0.000231481' id='166'>int </font><font color='#0000ff' weight='0.000115741' id='168'>outPos</font><font color='#0000ff' weight='0.000347222' id='172'>=0</font>;
+          for (int i<font color='#0000ff' weight='4.34028e-05' id='184'>=0</font>; i<font color='#0000ff' weight='1.44676e-05' id='191'>&lt;</font>bucket.length; i++) <font color='#0013ff' weight='0.0194444' id='266'>{
+             for (<font color='#0000ff' weight='0.000238715' id='221'>int j=0; </font>j&lt;bucket[i]; j++) {
+                <font color='#0000ff' weight='6.51042e-05' id='254'>a[<font color='#0000ff' weight='7.2338e-06' id='251'>outPos++]</font></font>=i;
+             }
+          }</font>
+       }</font>
+     
+     
+       </font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static int[] bucketSort(int[] input, int bucketCount) {
+        if (input == null || input.length &lt;= 1) {
+            return input;
+        }
+        int[] output = new int[input.length];
+        int lowerBound = Integer.MAX_VALUE;
+        int upperBound = Integer.MIN_VALUE;
+        for (int i = 0; i &lt; input.length; i++) {
+            upperBound = Math.max(upperBound, input[i]);
+            lowerBound = Math.min(lowerBound, input[i]);
+        }
+        
+        double interval = (double)(upperBound - lowerBound + 1)/bucketCount;
+
+        ArrayList&lt;ArrayList&lt;Integer&gt;&gt; buckets = new ArrayList&lt;ArrayList&lt;Integer&gt;&gt;();
+        
+        
+        for (int i = <font color='#ff0000' weight='1' id='302'>0</font>; i &lt; bucketCount; i++) {
+            ArrayList&lt;Integer&gt; line = new ArrayList&lt;Integer&gt;();
+            buckets.add(line);
+        }
+        for (int i = 0; i &lt; input.length; i++) {    
+            int pos = (int) ((input[i] - lowerBound)/interval);
+            buckets.get(pos).add(input[i]);
+        }
+        
+        
+        for (int i = 0; i &lt; bucketCount; i++) {
+            Collections.sort(buckets.get(i));
+        }
+        int pointer = 0;
+        for (int i = 0; i &lt; bucketCount; i++) {
+            for (int j = 0; j &lt; buckets.get(i).size(); j++) {
+                output[pointer] = buckets.get(i).get(j);
+                pointer ++;
+            }
+        }
+        return output;
+    }</font>
+</pre>

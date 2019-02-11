@@ -1,0 +1,46 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public int[] sort(int[] arrayToSort) {
+        int max = getMaxFromArray(arrayToSort);
+        Map&lt;Integer, Integer&gt; bucketMap = new HashMap&lt;&gt;();
+        for (int i = 0; i &lt;= max; i++) {
+            bucketMap.put(i, 0);
+        }
+        for (int i = 0; i &lt; arrayToSort.length; i++) {
+            bucketMap.put(arrayToSort[i], bucketMap.get(arrayToSort[i])+1);
+        }
+        int sortedArrayIndex = 0;
+        for (Map.Entry&lt;Integer, Integer&gt; entry: bucketMap.entrySet()) {
+            for (int i = 0; i &lt; entry.getValue(); i++) {
+                arrayToSort[sortedArrayIndex++] = entry.getKey();
+            }
+        }
+        return arrayToSort;
+    }
+
+    protected int getMaxFromArray(int[] arrayToSort) {
+        List&lt;Integer&gt; numbers = Arrays.stream(arrayToSort).boxed().collect(Collectors.toList());
+        return numbers.stream().mapToInt(Integer::intValue).max().getAsInt();
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+    public static void insertionSort() {
+        int ii = 0, jj = 0;
+        for (ii = 1; ii &lt; InsertionSort.ITEMS.length; ii++) {
+            jj = ii;
+            while ((jj &gt; 0)
+                    &amp;&amp; (InsertionSort.ITEMS[jj] &lt; InsertionSort.ITEMS[jj - 1])) {
+                swap(jj, jj - 1);
+                jj -= 1;
+            }
+        }
+    }
+
+    public static void swap(final int ii, final int jj) {
+        final int temp = InsertionSort.ITEMS[ii];
+        InsertionSort.ITEMS[ii] = InsertionSort.ITEMS[jj];
+        InsertionSort.ITEMS[jj] = temp;
+    }</font>
+</pre>

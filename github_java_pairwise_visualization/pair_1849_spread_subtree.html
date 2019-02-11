@@ -1,0 +1,46 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+   public static &lt;Key extends Comparable&lt;Key&gt;&gt; void sort(Key[] a) {
+        int n = a.length;
+        for (int i = 0; i &lt; n; i++) {
+            int exchanges = 0;
+            for (int j = n - 1; j &gt; i; j--) {
+                if (less(a[j], a[j - 1])) {
+                    exch(a, j, j - 1);
+                    exchanges++;
+                }
+            }
+            if (exchanges == 0) break;
+        }
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void sort(Comparable[] a) {
+    int n = a.length;
+
+    
+    int h = 1;
+    while (h &lt; n/3) h = 3*h + 1;
+
+    while (h &gt;= 1) {
+      
+      for (int i = h; i &lt; n; i++) {
+        for (int j = i; j &gt;= h &amp;&amp; less(a[j], a[j-h]); j -= h) {
+          exch(a, j, j-h);
+        }
+      }
+      h /= 3;
+    }
+  }
+
+  private static boolean less(Comparable v, Comparable w) <font color='#ff0000' weight='1' id='275'>{
+    <font color='#00ff2e' weight='0.454545' id='273'>return <font color='#00d0ff' weight='0.204545' id='271'><font color='#0032ff' weight='0.0492424' id='266'><font color='#000bff' weight='0.0113636' id='259'><font color='#0000ff' weight='0.000631313' id='254'>v</font><font color='#0000ff' weight='0.000631313' id='256'>.</font><font color='#0000ff' weight='0.000631313' id='258'>compareTo</font></font><font color='#0009ff' weight='0.0094697' id='265'>(<font color='#0002ff' weight='0.00284091' id='263'><font color='#0001ff' weight='0.00189394' id='262'><font color='#0000ff' weight='0.00094697' id='261'>w</font></font>)</font></font> </font><font color='#0003ff' weight='0.00378788' id='268'>&lt; </font>0;</font>
+  }</font></font>
+
+  private static void exch(Object[] a, int i, int j) {
+    Object swap = a[i];
+    a[i] = a[j];
+    a[j] = swap;
+  }</font>
+</pre>

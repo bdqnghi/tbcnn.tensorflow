@@ -1,0 +1,38 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+    public static int[] swap(int numbers[], int i, int j) {
+        int temp = numbers[i];
+        numbers[i] = numbers[j];
+        numbers[j] = temp;
+        return numbers;
+    }
+
+    public static int[] sort(int array[]) {
+        for (int index = 1; index &lt; array.length; index++) {
+            for (int indexj = 0; indexj &lt; index-1; indexj++)
+                <font color='#ff0000' weight='1' id='241'><font color='#ff0000' weight='1' id='240'>if <font color='#ff0000' weight='1' id='212'>(<font color='#ff0000' weight='1' id='210'><font color='#ff0000' weight='1' id='199'><font color='#ff0000' weight='1' id='193'>array</font><font color='#ff0000' weight='1' id='198'>[<font color='#ff0000' weight='1' id='196'><font color='#ff0000' weight='1' id='195'>indexj<font color='#ff0000' weight='1' id='194'></font></font>]</font><font color='#ff0000' weight='1' id='197'></font></font> </font>&gt; <font color='#ff0000' weight='1' id='209'><font color='#ff0000' weight='1' id='203'>array<font color='#ff0000' weight='1' id='202'></font></font><font color='#ff0000' weight='1' id='208'>[<font color='#ff0000' weight='1' id='206'><font color='#ff0000' weight='1' id='205'>index<font color='#ff0000' weight='1' id='204'></font></font>]</font><font color='#ff0000' weight='1' id='207'></font></font></font>)</font><font color='#ff0000' weight='1' id='211'></font></font><font color='#ff0000' weight='1' id='239'> <font color='#ff0000' weight='1' id='238'>{
+                    <font color='#ff0000' weight='1' id='236'><font color='#ff0000' weight='1' id='214'>array<font color='#ff0000' weight='1' id='213'></font> </font><font color='#ff0000' weight='1' id='216'>=<font color='#ff0000' weight='1' id='215'></font> </font><font color='#ff0000' weight='1' id='218'>swap</font>(<font color='#ff0000' weight='1' id='222'><font color='#ff0000' weight='1' id='221'><font color='#ff0000' weight='1' id='220'>array<font color='#ff0000' weight='1' id='219'></font></font></font>, </font><font color='#ff0000' weight='1' id='226'><font color='#ff0000' weight='1' id='225'><font color='#ff0000' weight='1' id='224'>indexj<font color='#ff0000' weight='1' id='223'></font></font></font>, </font><font color='#ff0000' weight='1' id='230'><font color='#ff0000' weight='1' id='229'><font color='#ff0000' weight='1' id='228'>index<font color='#ff0000' weight='1' id='227'></font></font></font>)</font><font color='#ff0000' weight='1' id='231'></font>;
+                }</font><font color='#ff0000' weight='1' id='237'></font></font></font></font></font>
+        }
+        return array;
+    }
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public void topSort(Graph g) {
+        initDfs(g);
+        for (int i = 1; i &lt;= g.numV; i++) {
+            if (!mDiscovered[i]) {
+                idfs(i, g);
+            }
+            if (mFinished) return;
+        }
+        while (mSorted.size() &gt; 0) {
+            out(mSorted.pop() + " ");
+        }
+        outln("");
+    }
+
+    </font>
+</pre>

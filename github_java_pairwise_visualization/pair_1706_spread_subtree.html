@@ -1,0 +1,45 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+private static void selectionsort(double tablica[], int ile_liczb) {
+    int min,i,j;
+    double temp;
+    for (i=0;i&lt;ile_liczb-1;i++)  {
+    min=i;
+    for (j=i+1;j&lt;ile_liczb;j++)
+    if (tablica[j]&lt;tablica[min])
+    min=j;
+    temp=tablica[min];
+    tablica[min]=<font color='#ff0000' weight='1' id='189'><font color='#0048ff' weight='0.0714286' id='183'>tablica</font>[<font color='#0024ff' weight='0.0357143' id='185'>i</font>]</font>;
+    tablica[i]=temp;
+    }
+}</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ private void setSort(int[] input ){
+        for (int sq = 1; sq &lt; input.length; sq += sq){
+            for (int j =0;j&lt;input.length-sq;j += sq*2){
+                setMergeSort(input,j,j+sq-1,Math.min(j+sq+sq,input.length-1));
+            }
+        }
+    }
+    private void setMergeSort(int[] input,int start,int mid , int end){
+        int[] tem = new int[input.length];
+
+       for ( int i = start; i &lt;= end ; i ++){
+           tem[i] = input[i];
+       }
+        int i= start,j=mid +1;
+       for (int h = start;h&lt;= end;h++){
+           <font color='#ff0000' weight='1' id='518'>if <font color='#0009ff' weight='0.00941177' id='356'>(<font color='#0003ff' weight='0.00352941' id='354'><font color='#0000ff' weight='0.000196078' id='349'>i </font><font color='#0000ff' weight='0.000196078' id='351'>&gt; </font><font color='#0000ff' weight='0.000196078' id='353'>mid</font>)</font></font><font color='#001eff' weight='0.0294118' id='382'><font color='#001cff' weight='0.0282353' id='381'>{
+               <font color='#000dff' weight='0.0129412' id='379'><font color='#0006ff' weight='0.00588235' id='377'>input[h] = tem[j<font color='#0000ff' weight='1.22549e-05' id='372'>++</font>];</font>
+           }</font></font></font><font color='#002bff' weight='0.0423529' id='419'>else <font color='#002aff' weight='0.0411765' id='418'>if<font color='#0004ff' weight='0.00470588' id='391'>(<font color='#0001ff' weight='0.00176471' id='389'><font color='#0000ff' weight='9.80392e-05' id='384'>j </font><font color='#0000ff' weight='9.80392e-05' id='386'>&gt; </font><font color='#0000ff' weight='9.80392e-05' id='388'>end</font>)</font></font>{
+               <font color='#0000ff' weight='0.000343137' id='399'><font color='#0000ff' weight='2.45098e-05' id='393'>input</font><font color='#0000ff' weight='9.80392e-05' id='398'>[<font color='#0000ff' weight='2.45098e-05' id='396'><font color='#0000ff' weight='1.22549e-05' id='395'>h</font>]</font></font> </font>= <font color='#0000ff' weight='0.000441177' id='411'><font color='#0000ff' weight='2.45098e-05' id='403'>tem</font><font color='#0000ff' weight='0.000147059' id='410'>[<font color='#0000ff' weight='4.90196e-05' id='408'><font color='#0000ff' weight='6.12745e-06' id='405'>i</font><font color='#0000ff' weight='6.12745e-06' id='407'>++</font>]</font></font></font>;
+           }</font> </font><font color='#0039ff' weight='0.0564706' id='468'>else <font color='#0038ff' weight='0.0552941' id='467'>if <font color='#000bff' weight='0.0117647' id='440'>(<font color='#0005ff' weight='0.00529412' id='438'><font color='#0000ff' weight='0.000686275' id='427'><font color='#0000ff' weight='4.90196e-05' id='421'>tem</font><font color='#0000ff' weight='0.000196078' id='426'>[<font color='#0000ff' weight='4.90196e-05' id='424'><font color='#0000ff' weight='2.45098e-05' id='423'>i</font>]</font></font> </font>&lt; tem[j])</font></font><font color='#000fff' weight='0.0147059' id='466'><font color='#000eff' weight='0.0141176' id='465'>{
+               input[h] = tem[i<font color='#0000ff' weight='6.12745e-06' id='456'>++</font>];
+           }</font></font></font></font><font color='#0039ff' weight='0.0564706' id='517'>else <font color='#0038ff' weight='0.0552941' id='516'>if <font color='#000bff' weight='0.0117647' id='489'>(<font color='#0005ff' weight='0.00529412' id='487'><font color='#0000ff' weight='0.000686275' id='476'><font color='#0000ff' weight='4.90196e-05' id='470'>tem</font><font color='#0000ff' weight='0.000196078' id='475'>[<font color='#0000ff' weight='4.90196e-05' id='473'><font color='#0000ff' weight='2.45098e-05' id='472'>i</font>]</font></font> </font><font color='#0000ff' weight='9.80392e-05' id='478'>&gt; </font><font color='#0000ff' weight='0.000686275' id='486'><font color='#0000ff' weight='4.90196e-05' id='480'>tem</font><font color='#0000ff' weight='0.000196078' id='485'>[<font color='#0000ff' weight='4.90196e-05' id='483'><font color='#0000ff' weight='2.45098e-05' id='482'>j</font>]</font></font></font>)</font></font><font color='#000fff' weight='0.0147059' id='515'><font color='#000eff' weight='0.0141176' id='514'>{
+               input[h] = <font color='#0000ff' weight='0.000441177' id='509'><font color='#0000ff' weight='2.45098e-05' id='501'>tem</font><font color='#0000ff' weight='0.000147059' id='508'>[<font color='#0000ff' weight='4.90196e-05' id='506'><font color='#0000ff' weight='6.12745e-06' id='503'>j</font><font color='#0000ff' weight='6.12745e-06' id='505'>++</font>]</font></font></font>;
+           }</font></font></font></font>
+       }</font>
+    }</font>
+</pre>

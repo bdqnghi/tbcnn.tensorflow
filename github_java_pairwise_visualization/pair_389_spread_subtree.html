@@ -1,0 +1,40 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+import java.util.*;
+
+class BSorting<font color='#ff0000' weight='1' id='214'>{
+    <font color='#00ff05' weight='0.494949' id='212'><font color='#0000ff' weight='0.000420875' id='17'>public </font><font color='#0000ff' weight='0.000420875' id='19'>static </font><font color='#0000ff' weight='0.000841751' id='22'><font color='#0000ff' weight='0.000420875' id='21'>void</font> </font><font color='#0000ff' weight='0.000420875' id='24'>main</font>(<font color='#0001ff' weight='0.00189394' id='34'><font color='#0001ff' weight='0.0016835' id='33'><font color='#0000ff' weight='0.000526094' id='30'><font color='#0000ff' weight='0.000420875' id='29'><font color='#0000ff' weight='5.26094e-05' id='26'>String</font><font color='#0000ff' weight='5.26094e-05' id='28'>[]</font></font></font><font color='#0000ff' weight='0.000105219' id='32'>args</font></font>)</font><font color='#004aff' weight='0.0732323' id='211'>{
+     
+
+        <font color='#0024ff' weight='0.0361953' id='209'>for(<font color='#0000ff' weight='0.000118371' id='46'><font color='#0000ff' weight='8.76824e-06' id='39'><font color='#0000ff' weight='4.38412e-06' id='38'>int</font> </font><font color='#0000ff' weight='4.38412e-06' id='41'>i </font>= <font color='#0000ff' weight='8.76824e-06' id='44'><font color='#0000ff' weight='4.38412e-06' id='43'>0</font></font>;</font> <font color='#0000ff' weight='2.63047e-06' id='50'>i </font><font color='#0000ff' weight='2.63047e-06' id='52'>&lt;= </font><font color='#0000ff' weight='1.57828e-05' id='59'><font color='#0000ff' weight='8.76824e-07' id='54'>numbers</font><font color='#0000ff' weight='8.76824e-07' id='56'>.</font>length </font>- 1; i++)<font color='#000eff' weight='0.0139941' id='208'>{
+            <font color='#0007ff' weight='0.00689183' id='206'>for<font color='#0000ff' weight='0.000973274' id='112'>(<font color='#0000ff' weight='7.2338e-05' id='86'><font color='#0000ff' weight='2.95928e-05' id='84'>int j = <font color='#0000ff' weight='1.09603e-06' id='81'>0</font>;</font> </font>j &lt; <font color='#0000ff' weight='3.94571e-06' id='97'><font color='#0000ff' weight='2.19206e-07' id='92'>numbers</font><font color='#0000ff' weight='2.19206e-07' id='94'>.</font><font color='#0000ff' weight='2.19206e-07' id='96'>length</font> </font><font color='#0000ff' weight='6.57618e-07' id='99'>- </font><font color='#0000ff' weight='6.57618e-07' id='101'>1</font>; <font color='#0000ff' weight='3.28809e-05' id='110'>j++)</font></font><font color='#0002ff' weight='0.00242003' id='205'>{
+                <font color='#0001ff' weight='0.00118371' id='203'>if<font color='#0000ff' weight='0.000157828' id='137'>(<font color='#0000ff' weight='5.48015e-07' id='114'>numbers</font>[j] <font color='#0000ff' weight='1.09603e-06' id='122'>&gt; </font><font color='#0000ff' weight='5.48015e-07' id='124'>numbers</font>[<font color='#0000ff' weight='9.13358e-08' id='126'>j </font><font color='#0000ff' weight='9.13358e-08' id='128'>+ </font><font color='#0000ff' weight='9.13358e-08' id='130'>1</font>])</font><font color='#0000ff' weight='0.000420875' id='202'><font color='#0000ff' weight='0.000414299' id='201'>{
+                    <font color='#0000ff' weight='2.79488e-05' id='155'><font color='#0000ff' weight='1.23303e-05' id='153'><font color='#0000ff' weight='5.48015e-07' id='140'><font color='#0000ff' weight='2.74007e-07' id='139'>int</font> </font><font color='#0000ff' weight='2.74007e-07' id='142'>temp </font><font color='#0000ff' weight='2.46607e-06' id='152'>= <font color='#0000ff' weight='2.19206e-06' id='151'><font color='#0000ff' weight='1.91805e-06' id='150'><font color='#0000ff' weight='1.37004e-07' id='144'>numbers</font>[<font color='#0000ff' weight='6.85018e-08' id='146'>j</font>]</font></font></font>;</font>
+                    </font><font color='#0000ff' weight='3.94571e-05' id='180'><font color='#0000ff' weight='1.37004e-07' id='157'>numbers</font>[<font color='#0000ff' weight='6.85018e-08' id='159'>j</font>] = <font color='#0000ff' weight='1.37004e-07' id='167'>numbers</font>[<font color='#0000ff' weight='2.28339e-08' id='169'>j </font><font color='#0000ff' weight='2.28339e-08' id='171'>+ </font><font color='#0000ff' weight='2.28339e-08' id='173'>1</font>];
+                    </font><font color='#0000ff' weight='2.95928e-05' id='199'><font color='#0000ff' weight='1.37004e-07' id='182'>numbers</font>[<font color='#0000ff' weight='2.28339e-08' id='184'>j </font><font color='#0000ff' weight='2.28339e-08' id='186'>+ </font><font color='#0000ff' weight='2.28339e-08' id='188'>1</font>] = temp;
+                }</font></font></font>
+            }</font></font>
+        
+        }</font></font>
+
+   
+    }</font></font>
+}</font></font>
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+private static void selectionsort(double tablica[], int ile_liczb) {
+    int min,i,j;
+    double temp;
+    for (i=0;i&lt;ile_liczb-1;i++)  {
+    min=i;
+    for (j=i+1;j&lt;ile_liczb;j++)
+    if (tablica[j]&lt;tablica[min])
+    min=j;
+    temp=tablica[min];
+    tablica[min]=<font color='#0048ff' weight='0.0714286' id='183'>tablica</font>[<font color='#0024ff' weight='0.0357143' id='185'>i</font>];
+    tablica[i]=temp;
+    }
+}</font>
+</pre>

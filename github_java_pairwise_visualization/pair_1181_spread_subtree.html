@@ -1,0 +1,138 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+
+import java.util.*;
+import java.nio.file.*;
+import java.io.*;
+
+public class Radix{
+
+    
+    
+    
+    public static int[] B;
+    public static long t;
+    public static void main(String[] args) throws IOException{
+        
+        Scanner in = new Scanner(Paths.get("../input/input_integers.txt"), "UTF-8");
+        PrintWriter outTime = new PrintWriter("../output/radix_sort/time.txt", "UTF-8");
+        
+        int[] origin=new int[1&lt;&lt;<font color='#ff0000' weight='1' id='177'></font>17];
+        for(int i = 0; i &lt; 1&lt;&lt;23; i++){
+            origin[i] = in.nextInt();
+        }
+
+        int[] exp={2, 5, 8, 11, 14, 17};
+        
+        
+        for(int index : exp){
+            int[] partArray = Arrays.copyOf(origin, 1&lt;&lt;index);
+            
+            
+            long enduration = sort(partArray)/1000;
+            partArray = B;
+            
+            outTime.println("index: " + index + "\ntime: " + enduration + "\tmicroseconds.");
+            outTime.flush();
+
+            
+            System.out.println("index: " + index + "\ntime: " + enduration + "\tmicroseconds.\n");
+            
+            PrintWriter outSort = new PrintWriter("../output/radix_sort/result_"+index+".txt", "UTF-8");
+            for(int j = 0; j &lt; 1&lt;&lt;index; j++){
+                
+                outSort.println(partArray[j]);
+                outSort.flush();
+            }
+        }
+    }
+    
+    
+    public static long sort(int[] A){
+        
+        long startTime = System.nanoTime();
+        
+        
+        radix_sort(A, 4);
+
+        
+        long endTime = System.nanoTime();
+        return endTime - startTime;
+    }
+
+    public static void radix_sort(int[] A, int d){
+        for(int i = 1; i &lt;= d; i++){
+            counting_sort(A, i);
+            A = B;
+        }
+    }
+
+    
+    
+    public static int digit(int num, int d){
+        
+        
+        return (num &gt;&gt; (4*(d-1))) &amp; 0x0f;
+    }
+
+    public static void counting_sort(int[] A, int d){
+        int tmp;
+        int l = A.length;
+        B = new int[l];
+        int[] C = new int[16];
+
+        for(int i = 0; i &lt; l; i++){
+            C[digit(A[i], d)]++;
+        }
+        
+
+        for(int i = 1; i &lt; 16; i++){
+            C[i] += C[i-1];
+        }
+        
+
+        for(int i = l-1; i &gt;= 0; i--){
+            B[C[digit(A[i], d)]-1] = A[i];
+            C[digit(A[i], d)] --;
+        }
+    }
+}
+
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+import java.util.*;
+
+class TopologicalSort<font color='#ff0000' weight='1' id='392'>{
+ static <font color='#0000ff' weight='3.16616e-05' id='19'>LinkedList</font><font color='#0000ff' weight='0.000126646' id='24'>&lt;<font color='#0000ff' weight='3.16616e-05' id='22'><font color='#0000ff' weight='1.58308e-05' id='21'>Integer</font>&gt;</font></font> <font color='#0000ff' weight='0.000253293' id='31'><font color='#0000ff' weight='3.16616e-05' id='28'>arr</font><font color='#0000ff' weight='3.16616e-05' id='30'>[]</font></font>;
+ static <font color='#0000ff' weight='6.33232e-05' id='38'>boolean</font> <font color='#0000ff' weight='0.000253293' id='44'><font color='#0000ff' weight='3.16616e-05' id='41'>visited</font><font color='#0000ff' weight='3.16616e-05' id='43'>[]</font></font>;
+ <font color='#0005ff' weight='0.00569909' id='63'><font color='#0002ff' weight='0.00246961' id='61'><font color='#0000ff' weight='6.33232e-05' id='49'>static </font><font color='#0000ff' weight='0.000506586' id='58'><font color='#0000ff' weight='0.000443262' id='57'><font color='#0000ff' weight='3.16616e-05' id='51'>Stack</font><font color='#0000ff' weight='0.000126646' id='56'>&lt;<font color='#0000ff' weight='3.16616e-05' id='54'><font color='#0000ff' weight='1.58308e-05' id='53'>Integer</font>&gt;</font></font></font> </font><font color='#0000ff' weight='6.33232e-05' id='60'>stack</font>;</font>
+ </font><font color='#0032ff' weight='0.049772' id='195'><font color='#0000ff' weight='0.000126646' id='65'>TopologicalSort</font><font color='#0001ff' weight='0.00101317' id='74'>(<font color='#0000ff' weight='0.000379939' id='72'><font color='#0000ff' weight='0.000316616' id='71'><font color='#0000ff' weight='3.16616e-05' id='67'>int</font> <font color='#0000ff' weight='3.16616e-05' id='70'>v</font></font>)</font></font><font color='#000fff' weight='0.0150709' id='194'>{
+  <font color='#0000ff' weight='0.000405269' id='91'><font color='#0000ff' weight='0.000177305' id='89'><font color='#0000ff' weight='3.16616e-06' id='76'>arr </font><font color='#0000ff' weight='3.16616e-06' id='78'>= </font>new <font color='#0000ff' weight='1.58308e-06' id='82'>LinkedList</font>[<font color='#0000ff' weight='7.9154e-07' id='84'>v</font>];</font>
+  </font><font color='#0000ff' weight='0.000405269' id='108'><font color='#0000ff' weight='0.000177305' id='106'><font color='#0000ff' weight='3.16616e-06' id='93'>visited </font><font color='#0000ff' weight='3.16616e-06' id='95'>= </font><font color='#0000ff' weight='3.16616e-06' id='97'>new </font><font color='#0000ff' weight='1.58308e-06' id='99'>boolean</font>[<font color='#0000ff' weight='7.9154e-07' id='101'>v</font>];</font>
+  </font><font color='#0000ff' weight='0.000405269' id='125'><font color='#0000ff' weight='0.000177305' id='123'><font color='#0000ff' weight='3.16616e-06' id='110'>stack </font>= <font color='#0000ff' weight='3.16616e-06' id='114'>new </font><font color='#0000ff' weight='7.9154e-07' id='116'>Stack</font><font color='#0000ff' weight='7.9154e-07' id='118'>&lt;&gt;</font>();</font>
+  </font><font color='#0001ff' weight='0.00167173' id='192'>for(int <font color='#0000ff' weight='5.27693e-07' id='130'>i</font><font color='#0000ff' weight='1.58308e-06' id='134'>=0</font>;<font color='#0000ff' weight='5.27693e-07' id='139'>i</font>&lt;<font color='#0000ff' weight='5.27693e-07' id='143'>v</font>;<font color='#0000ff' weight='1.58308e-06' id='148'>i</font>++)<font color='#0000ff' weight='0.000455927' id='191'>{
+   <font color='#0000ff' weight='8.02094e-05' id='174'><font color='#0000ff' weight='3.58831e-05' id='172'><font color='#0000ff' weight='2.63847e-07' id='156'>arr</font>[<font color='#0000ff' weight='1.31923e-07' id='158'>i</font>] <font color='#0000ff' weight='5.27693e-07' id='164'>= </font><font color='#0000ff' weight='5.27693e-07' id='166'>new </font><font color='#0000ff' weight='2.11077e-06' id='171'><font color='#0000ff' weight='2.63847e-07' id='168'>LinkedList</font>()</font>;</font>
+   </font><font color='#0000ff' weight='2.53293e-05' id='187'><font color='#0000ff' weight='4.92514e-06' id='182'><font color='#0000ff' weight='3.51796e-07' id='176'>visited</font><font color='#0000ff' weight='1.40718e-06' id='181'>[<font color='#0000ff' weight='3.51796e-07' id='179'><font color='#0000ff' weight='1.75898e-07' id='178'>i</font>]</font></font> </font><font color='#0000ff' weight='7.03591e-07' id='184'>= </font><font color='#0000ff' weight='7.03591e-07' id='186'>false</font>;</font>
+  }</font>
+ }</font></font>
+ </font>public void <font color='#0000ff' weight='7.59878e-05' id='202'>addEdge</font>(<font color='#0000ff' weight='1.26646e-05' id='204'>int</font> <font color='#0000ff' weight='1.26646e-05' id='207'>src</font>, int <font color='#0000ff' weight='1.26646e-05' id='214'>dest</font>)<font color='#0001ff' weight='0.00174772' id='242'>{
+  <font color='#0000ff' weight='0.000797872' id='240'><font color='#0000ff' weight='0.000360942' id='238'><font color='#0000ff' weight='4.43262e-05' id='226'><font color='#0000ff' weight='3.16616e-06' id='220'>arr</font><font color='#0000ff' weight='1.26646e-05' id='225'>[<font color='#0000ff' weight='3.16616e-06' id='223'><font color='#0000ff' weight='1.58308e-06' id='222'>src</font>]</font></font></font><font color='#0000ff' weight='6.33232e-06' id='228'>.</font><font color='#0000ff' weight='3.16616e-06' id='230'>add</font>(<font color='#0000ff' weight='1.58308e-06' id='232'>dest</font>);</font>
+ }</font></font>
+ public void <font color='#0000ff' weight='7.59878e-05' id='250'>sort</font>(<font color='#0000ff' weight='1.8997e-05' id='252'>int</font> <font color='#0000ff' weight='1.8997e-05' id='255'>i</font>)<font color='#0009ff' weight='0.00980243' id='389'>{
+  <font color='#0000ff' weight='0.000212766' id='274'><font color='#0000ff' weight='9.11854e-05' id='272'><font color='#0000ff' weight='1.26646e-06' id='261'>visited</font>[<font color='#0000ff' weight='6.33232e-07' id='263'>i</font>] <font color='#0000ff' weight='2.53293e-06' id='269'>= </font><font color='#0000ff' weight='2.53293e-06' id='271'>true</font>;</font>
+  </font><font color='#0000ff' weight='0.000455927' id='305'><font color='#0000ff' weight='0.000212766' id='303'><font color='#0000ff' weight='2.02634e-05' id='283'><font color='#0000ff' weight='1.77305e-05' id='282'><font color='#0000ff' weight='1.26646e-06' id='276'>Iterator</font><font color='#0000ff' weight='5.06586e-06' id='281'>&lt;<font color='#0000ff' weight='1.26646e-06' id='279'><font color='#0000ff' weight='6.33232e-07' id='278'>Integer</font>&gt;</font></font></font> </font><font color='#0000ff' weight='2.53293e-06' id='285'>ite </font><font color='#0000ff' weight='4.05269e-05' id='302'>= <font color='#0000ff' weight='3.79939e-05' id='301'><font color='#0000ff' weight='4.22155e-07' id='287'>arr</font>[i]<font color='#0000ff' weight='8.44309e-07' id='295'>.</font><font color='#0000ff' weight='3.37724e-06' id='300'><font color='#0000ff' weight='4.22155e-07' id='297'>listIterator</font><font color='#0000ff' weight='4.22155e-07' id='299'>()</font></font></font></font>;</font>
+  </font><font color='#0000ff' weight='0.000972644' id='370'>while<font color='#0000ff' weight='9.11854e-05' id='318'>(<font color='#0000ff' weight='3.79939e-05' id='316'><font color='#0000ff' weight='3.41945e-05' id='315'><font color='#0000ff' weight='1.13982e-05' id='312'><font color='#0000ff' weight='6.33232e-07' id='307'>ite</font><font color='#0000ff' weight='6.33232e-07' id='309'>.</font><font color='#0000ff' weight='6.33232e-07' id='311'>hasNext</font></font><font color='#0000ff' weight='1.8997e-06' id='314'>()</font></font>)</font></font><font color='#0000ff' weight='0.000379939' id='369'>{
+   <font color='#0000ff' weight='4.81256e-05' id='338'><font color='#0000ff' weight='2.15299e-05' id='336'>int <font color='#0000ff' weight='4.22155e-07' id='323'>item </font>= <font color='#0000ff' weight='3.79939e-06' id='333'><font color='#0000ff' weight='1.26646e-06' id='330'><font color='#0000ff' weight='7.03591e-08' id='325'>ite</font><font color='#0000ff' weight='7.03591e-08' id='327'>.</font><font color='#0000ff' weight='7.03591e-08' id='329'>next</font></font><font color='#0000ff' weight='2.11077e-07' id='332'>()</font></font>;</font>
+   </font><font color='#0000ff' weight='7.0922e-05' id='367'>if<font color='#0000ff' weight='1.51976e-05' id='351'>(<font color='#0000ff' weight='6.33232e-06' id='349'><font color='#0000ff' weight='3.16616e-07' id='340'>!</font><font color='#0000ff' weight='2.21631e-06' id='348'><font color='#0000ff' weight='1.58308e-07' id='342'>visited</font><font color='#0000ff' weight='6.33232e-07' id='347'>[<font color='#0000ff' weight='1.58308e-07' id='345'><font color='#0000ff' weight='7.9154e-08' id='344'>item</font>]</font></font></font>)</font></font><font color='#0000ff' weight='1.77305e-05' id='366'><font color='#0000ff' weight='1.6464e-05' id='365'>{
+     <font color='#0000ff' weight='6.96555e-06' id='363'><font color='#0000ff' weight='2.84954e-06' id='361'><font color='#0000ff' weight='1.58308e-07' id='353'>sort</font>(<font color='#0000ff' weight='1.58308e-07' id='356'><font color='#0000ff' weight='7.9154e-08' id='355'>item</font></font>);</font>
+   }</font></font></font>
+  }</font></font>
+  </font><font color='#0000ff' weight='9.87842e-05' id='384'><font color='#0000ff' weight='2.27964e-05' id='377'><font color='#0000ff' weight='1.26646e-06' id='372'>stack</font><font color='#0000ff' weight='1.26646e-06' id='374'>.</font><font color='#0000ff' weight='1.26646e-06' id='376'>push</font></font>(<font color='#0000ff' weight='3.79939e-06' id='380'>i</font>)</font>;
+ }</font>
+
+}</font>
+</font>
+</pre>

@@ -1,0 +1,88 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void bubbleSort(int arr[]) {
+      int len = arr.length;
+      for (int i = len; i &gt;= 0; i--) {
+         for (int j = 0; j &lt; len - 1; j++) {
+            <font color='#ff0000' weight='1' id='116'>int <font color='#ff0000' weight='1' id='105'>k </font><font color='#ff0000' weight='1' id='113'>= <font color='#ff0000' weight='1' id='107'>j<font color='#ff0000' weight='1' id='106'></font> </font>+ <font color='#ff0000' weight='1' id='111'>1<font color='#ff0000' weight='1' id='110'></font></font></font>;
+            </font>if <font color='#ff0000' weight='1' id='137'>(<font color='#ff0000' weight='1' id='135'>arr[<font color='#ff0000' weight='1' id='121'>j]</font> &gt;<font color='#ff0000' weight='1' id='125'></font> arr<font color='#ff0000' weight='1' id='133'>[k]</font>)</font></font> {
+               <font color='#ff0000' weight='1' id='155'><font color='#ff0000' weight='1' id='139'>swapNumbers</font>(<font color='#ff0000' weight='1' id='141'>j</font>, <font color='#ff0000' weight='1' id='146'>k<font color='#ff0000' weight='1' id='144'></font></font>, <font color='#ff0000' weight='1' id='150'>arr<font color='#ff0000' weight='1' id='148'></font></font>)<font color='#ff0000' weight='1' id='152'></font>;</font>
+            }
+         }
+      }
+   }
+
+   private static void swapNumbers(int i, int j, int[] arr) {
+      int temp;
+      temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
+   }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+    public static &lt;T extends Comparable&lt;T&gt;&gt; void sort(List&lt;T&gt; a) {
+        Collections.shuffle(a);
+        sort(a, 0, a.size() - 1);
+    }
+
+    private static &lt;T extends Comparable&lt;T&gt;&gt; void sort(List&lt;T&gt; a, int lo, int hi) {
+        if (hi &lt;= lo + M) {
+            Insertion.sort(a, lo, hi);
+            return;
+        }
+
+        int j = partition(a, lo, hi);
+
+        sort(a, lo, j - 1);
+        sort(a, j + 1, hi);
+    }
+
+    
+    public static &lt;T extends Comparable&lt;T&gt;&gt; void mediansort(List&lt;T&gt; a) {
+        Collections.shuffle(a);
+        mediansort(a, 0, a.size() - 1);
+    }
+
+    private static &lt;T extends Comparable&lt;T&gt;&gt; void mediansort(List&lt;T&gt; a, int lo, int hi) {
+        if (hi &lt;= lo + M) {
+            Insertion.sort(a, lo, hi);
+            return;
+        }
+
+        T pivot = SortUtils.median(a, lo, hi);
+        int i = lo, j = hi - 1; 
+
+        for (; ; ) {
+            while (a.get(++i).compareTo(pivot) &lt; 0) ;
+            while (pivot.compareTo(a.get(--j)) &lt; 0) ;
+            if (i &lt; j)
+                SortUtils.exchange(a, i, j);
+            else break;
+        }
+
+        SortUtils.exchange(a, i, hi - 1); 
+
+        mediansort(a, lo, i - 1);
+        mediansort(a, i + 1, hi);
+    }
+
+    private static &lt;T extends Comparable&lt;T&gt;&gt; int partition(List&lt;T&gt; a, int lo, int hi) {
+        int i = lo;
+        int j = hi + 1;
+
+        T v = a.get(lo);
+
+        while (true) {
+            while (SortUtils.less(a.get(++i), v)) if (i == hi) break;
+            while (SortUtils.less(v, a.get(--j))) if (j == lo) break;
+
+            if (i &gt;= j) break;
+            SortUtils.exchange(a, i, j);
+        }
+
+        SortUtils.exchange(a, lo, j);
+
+        return j;
+    }</font>
+</pre>

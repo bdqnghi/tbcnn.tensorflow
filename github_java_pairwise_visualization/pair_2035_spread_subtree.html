@@ -1,0 +1,96 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+   <font color='#0000ff' weight='0.000661376' id='2'>public </font><font color='#0000ff' weight='0.000661376' id='4'>static </font><font color='#0008ff' weight='0.00859788' id='18'>&lt;<font color='#0003ff' weight='0.00363757' id='16'><font color='#0000ff' weight='0.000165344' id='6'>Key </font><font color='#0001ff' weight='0.00132275' id='15'>extends <font color='#0001ff' weight='0.00115741' id='14'>Comparable&lt;<font color='#0000ff' weight='8.2672e-05' id='11'><font color='#0000ff' weight='4.1336e-05' id='10'>Key</font>&gt;</font></font></font>&gt;</font> </font>void <font color='#0000ff' weight='0.000661376' id='23'>sort</font>(<font color='#0002ff' weight='0.0026455' id='32'><font color='#0000ff' weight='0.00082672' id='29'><font color='#0000ff' weight='0.000661376' id='28'><font color='#0000ff' weight='8.2672e-05' id='25'>Key</font><font color='#0000ff' weight='8.2672e-05' id='27'>[]</font></font> </font>a</font>) {
+        <font color='#0001ff' weight='0.00154321' id='50'>int n = <font color='#0000ff' weight='0.000220459' id='47'>a.<font color='#0000ff' weight='1.22477e-05' id='46'>length</font></font>;</font>
+        for (<font color='#0000ff' weight='4.59289e-06' id='54'>int</font> i = 0; <font color='#0000ff' weight='0.000220459' id='73'>i &lt; n; </font><font color='#0000ff' weight='0.000137787' id='79'><font color='#0000ff' weight='1.37787e-05' id='75'>i</font>++)</font> {
+            <font color='#0000ff' weight='0.000303131' id='93'>int exchanges = 0;
+            </font>for (int j = n - 1; <font color='#0000ff' weight='5.74111e-07' id='111'>j </font>&gt; i; j--) {
+                if (less(a[j], a[j - 1])) {
+                    <font color='#0000ff' weight='2.64091e-05' id='182'><font color='#0000ff' weight='1.20563e-05' id='180'>exch(a, j, <font color='#0000ff' weight='2.39213e-08' id='170'>j </font>- 1);</font>
+                    </font><font color='#0000ff' weight='2.87055e-07' id='184'>exchanges</font><font color='#0000ff' weight='2.87055e-07' id='186'>++</font>;
+                }
+            }
+            <font color='#0000ff' weight='0.000358245' id='210'>if (exchanges == 0) break;
+        }</font>
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+
+public class AcyclicSP {
+
+    private double[] distTo;    
+    private DirectedEdge[] edgeTo;  
+
+    
+    
+    public AcyclicSP(EdgeWeightedDigraph G, int s) {
+        distTo = new double[G.V()];
+        edgeTo = new DirectedEdge[G.V()];
+
+        validateVertex(s);
+
+        for (int v = 0; v &lt; G.V(); v++) {
+            distTo[v] = Double.POSITIVE_INFINITY;
+        }
+        distTo[s] = 0.0;
+
+        
+        Topological topological = new Topological<font color='#ff0000' weight='1' id='202'>(<font color='#00ffcb' weight='0.3' id='200'><font color='#00cbff' weight='0.2' id='199'><font color='#0066ff' weight='0.1' id='198'>G</font></font>)</font></font>;
+        if (!topological.hasOrder()) {
+            throw new IllegalArgumentException("Digraph is not acyclic.");
+        }
+        for (int v : topological.order()) {
+            for (DirectedEdge e : G.adj(v)) {
+                relax(e);
+            }
+        }
+    }
+
+    
+    private void relax(DirectedEdge e) {
+        int v = e.from(), w = e.to();
+        if (distTo[w] &gt; distTo[v] + e.weight()) {
+            distTo[w] = distTo[v] + e.weight();
+            edgeTo[w] = e;
+        }
+    }
+
+    
+    public double distTo(int v) {
+        validateVertex(v);
+        return distTo[v];
+    }
+
+    
+    public boolean hasPathTo(int v) {
+        validateVertex(v);
+        return distTo[v] &lt; Double.POSITIVE_INFINITY;
+    }
+
+    
+    public Iterable&lt;DirectedEdge&gt; pathTo(int v) {
+        validateVertex(v);
+        if (!hasPathTo(v)) {
+            return null;
+        }
+        Stack&lt;DirectedEdge&gt; path = new Stack&lt;DirectedEdge&gt;();
+        for (DirectedEdge e = edgeTo[v]; e != null; e = edgeTo[e.from()]) {
+            path.push(e);
+        }
+        return path;
+    }
+
+    
+    private void validateVertex(int v) {
+        int V = distTo.length;
+        if (v &lt; 0 || v &gt;= V) {
+            throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V - 1));
+        }
+    }
+
+
+}
+</font>
+</pre>

@@ -1,0 +1,59 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+    private static int[] sort(int[] data, int start)<font color='#ff0000' weight='1' id='111'>{
+        if<font color='#ff0000' weight='1' id='49'>(start &lt;<font color='#ff0000' weight='1' id='34'></font> data.<font color='#ff0000' weight='1' id='41'>length</font>-<font color='#ff0000' weight='1' id='46'>1<font color='#ff0000' weight='1' id='45'></font></font>)</font><font color='#ff0000' weight='1' id='102'>{
+            <font color='#ff0000' weight='1' id='80'><font color='#ff0000' weight='1' id='51'>swap</font><font color='#ff0000' weight='1' id='76'>(data<font color='#ff0000' weight='1' id='52'></font>, <font color='#ff0000' weight='1' id='59'>start<font color='#ff0000' weight='1' id='56'></font>, </font>findMinIndex<font color='#ff0000' weight='1' id='60'></font>(<font color='#ff0000' weight='1' id='63'>data<font color='#ff0000' weight='1' id='62'></font></font>, <font color='#ff0000' weight='1' id='67'>start</font>))<font color='#ff0000' weight='1' id='75'></font></font>;<font color='#ff0000' weight='1' id='79'></font>
+            </font><font color='#ff0000' weight='1' id='98'><font color='#ff0000' weight='1' id='97'><font color='#ff0000' weight='1' id='82'>sort<font color='#ff0000' weight='1' id='81'></font></font><font color='#ff0000' weight='1' id='96'>(<font color='#ff0000' weight='1' id='84'>data<font color='#ff0000' weight='1' id='83'></font></font>,<font color='#ff0000' weight='1' id='94'><font color='#ff0000' weight='1' id='93'><font color='#ff0000' weight='1' id='88'>start<font color='#ff0000' weight='1' id='87'></font></font><font color='#ff0000' weight='1' id='90'>+</font>1<font color='#ff0000' weight='1' id='91'></font></font>)</font><font color='#ff0000' weight='1' id='95'></font></font></font>;</font><font color='#ff0000' weight='1' id='99'></font>
+        }</font>
+        return <font color='#ff0000' weight='1' id='106'>data</font>;
+    }</font>
+    
+    private static int findMinIndex(int[] data, int start){
+        int minpos=start;
+        for(int i=start+1; i&lt;data.length; i++){
+            if(data[i]&lt;data[minpos]){
+                minpos=i;
+            }
+        }
+        return minpos;
+    }
+    
+    private static void swap(int[] data, int idx1, int idx2){
+        int temp1 = data[idx1];
+        int temp2 = data[idx2];
+        data[idx1] = temp2;
+        data[idx2] = temp1;
+        
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static void quicksort(int[] a, int start, int end) {
+        if (start &gt;= end)
+            return;
+
+        int pavot = a[start];
+        int i = start;
+        int j = end;
+
+        while (i &lt; j) {
+            while (i &lt; j &amp;&amp; a[j] &gt; pavot)
+                j--;
+            while (i &lt; j &amp;&amp; a[i] &lt;= pavot)
+                i++;
+            if (i != j) {
+                int t = a[i];
+                a[i] = a[j];
+                a[j] = t;
+            }
+        }
+        if (i == j) {
+            int t = a[start];
+            a[start] = a[i];
+            a[j] = t;
+        }
+        quicksort(a, start, i - 1);
+        quicksort(a, i + 1, end);
+    }</font>
+</pre>

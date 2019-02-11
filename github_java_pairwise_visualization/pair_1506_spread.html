@@ -1,0 +1,46 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ void <font color='#00feff' weight='0.249973' id='5'>bubbleSort</font>(int <font color='#003fff' weight='0.0624661' id='13'>arr<font color='#001fff' weight='0.031215' id='12'>[]<font color='#001fff' weight='0.031215' id='11'></font></font></font>) 
+    <font color='#00feff' weight='0.249973' id='201'>{ 
+        <font color='#0054ff' weight='0.0833002' id='34'><font color='#000eff' weight='0.0138532' id='20'>int </font>n = <font color='#000eff' weight='0.0138532' id='30'>arr<font color='#0004ff' weight='0.00459363' id='23'></font>.<font color='#0004ff' weight='0.00459363' id='25'></font><font color='#0004ff' weight='0.00459363' id='28'>length<font color='#0004ff' weight='0.00459363' id='27'></font></font></font>;<font color='#002aff' weight='0.041632' id='33'></font> 
+        </font>for (<font color='#0001ff' weight='0.0017' id='37'><font color='#0001ff' weight='0.0017' id='36'>int</font> </font><font color='#0001ff' weight='0.0017' id='39'>i </font><font color='#0001ff' weight='0.0017' id='43'>= 0<font color='#0001ff' weight='0.0017' id='40'></font></font>; <font color='#0005ff' weight='0.00517235' id='57'>i &lt; n-1;</font><font color='#0005ff' weight='0.00517235' id='58'></font> i++) 
+            for (<font color='#0005ff' weight='0.00517235' id='79'>int j = 0<font color='#0000ff' weight='0.000831917' id='73'></font>; </font><font color='#0002ff' weight='0.00256809' id='94'><font color='#0000ff' weight='0.000335867' id='81'>j </font><font color='#0000ff' weight='0.000335867' id='83'>&lt; </font>n<font color='#0000ff' weight='0.000335867' id='84'></font><font color='#0000ff' weight='0.000335867' id='87'>-<font color='#0000ff' weight='0.000335867' id='86'></font></font><font color='#0000ff' weight='0.000335867' id='89'>i<font color='#0000ff' weight='0.000335867' id='88'></font></font><font color='#0000ff' weight='0.000335867' id='91'>-</font>1;</font><font color='#0002ff' weight='0.00256809' id='95'></font> j<font color='#0002ff' weight='0.00256809' id='100'>++</font>) 
+                if (<font color='#0005ff' weight='0.00517235' id='127'>arr[j] &gt;<font color='#0001ff' weight='0.0017' id='113'></font> <font color='#0001ff' weight='0.0017' id='126'><font color='#0000ff' weight='0.000831917' id='116'>arr</font>[<font color='#0000ff' weight='0.000397873' id='123'>j+<font color='#0000ff' weight='0.000108511' id='122'>1</font>]</font></font>)</font><font color='#0005ff' weight='0.00517235' id='128'></font><font color='#000aff' weight='0.0103809' id='194'> 
+                <font color='#000aff' weight='0.0103809' id='193'>{ 
+                    
+                    <font color='#0002ff' weight='0.00256809' id='147'><font color='#0001ff' weight='0.00126596' id='145'><font color='#0000ff' weight='0.000397873' id='131'>int</font> <font color='#0000ff' weight='0.000397873' id='134'>temp </font>= arr<font color='#0000ff' weight='0.000180851' id='141'>[j]</font>;</font><font color='#0001ff' weight='0.00126596' id='146'></font> 
+                    </font><font color='#0002ff' weight='0.00256809' id='172'><font color='#0001ff' weight='0.00126596' id='170'><font color='#0000ff' weight='0.000397873' id='155'><font color='#0000ff' weight='0.000180851' id='149'>arr<font color='#0000ff' weight='0.000180851' id='148'></font></font>[j] </font>= <font color='#0000ff' weight='0.000180851' id='159'>arr</font><font color='#0000ff' weight='0.000180851' id='168'>[j+1]</font>;</font> 
+                    </font><font color='#0002ff' weight='0.00256809' id='191'><font color='#0000ff' weight='0.000180851' id='174'>arr<font color='#0000ff' weight='0.000180851' id='173'></font></font>[j+1] <font color='#0000ff' weight='0.000397873' id='186'>= </font><font color='#0000ff' weight='0.000397873' id='188'>temp</font>; 
+                }</font></font></font> 
+    }</font> </font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static void quicksort(int[] a, int start, int end) {
+        if (start &gt;= end)
+            return;
+
+        int pavot = a[start];
+        int i = start;
+        int j = end;
+
+        while (i &lt; j) {
+            while (i &lt; j &amp;&amp; a[j] &gt; pavot)
+                j--;
+            while (i &lt; j &amp;&amp; a[i] &lt;= pavot)
+                i++;
+            if (i != j) {
+                int t = a[i];
+                a[i] = a[j];
+                a[j] = t;
+            }
+        }
+        if (i == j) {
+            int t = a[start];
+            a[start] = a[i];
+            a[j] = t;
+        }
+        quicksort(<font color='#ff0000' weight='1' id='307'><font color='#ff0000' weight='1' id='306'><font color='#ff0000' weight='1' id='305'>a<font color='#ff0000' weight='1' id='304'></font></font></font>, </font>start, i - 1);
+        quicksort(a, i + 1, end);
+    }</font>
+</pre>

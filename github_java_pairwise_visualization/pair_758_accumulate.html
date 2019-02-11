@@ -1,0 +1,90 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ void <font color='#ff0000' weight='1' id='5'>sort</font>(<font color='#ff0000' weight='1' id='7'>double</font> <font color='#ff0000' weight='1' id='13'>arr<font color='#ff0000' weight='1' id='9'></font>[]<font color='#ff0000' weight='1' id='11'></font></font>)
+    {
+        <font color='#ff0000' weight='1' id='32'><font color='#ff0000' weight='1' id='20'>int<font color='#ff0000' weight='1' id='18'></font> </font><font color='#ff0000' weight='1' id='22'>n </font><font color='#ff0000' weight='1' id='31'>= <font color='#ff0000' weight='1' id='30'><font color='#ff0000' weight='1' id='24'>arr<font color='#ff0000' weight='1' id='23'></font></font><font color='#ff0000' weight='1' id='26'>.<font color='#ff0000' weight='1' id='25'></font></font>length<font color='#ff0000' weight='1' id='27'></font></font></font>;</font>
+         for (<font color='#ff0000' weight='1' id='44'>int i<font color='#ff0000' weight='1' id='38'></font> = 0;</font><font color='#ff0000' weight='1' id='45'></font> i &lt;<font color='#ff0000' weight='1' id='49'></font> n<font color='#ff0000' weight='1' id='51'></font>-<font color='#ff0000' weight='1' id='53'></font><font color='#ff0000' weight='1' id='56'>1<font color='#ff0000' weight='1' id='55'></font></font>;<font color='#ff0000' weight='1' id='58'></font> <font color='#ff0000' weight='1' id='61'>i<font color='#ff0000' weight='1' id='60'></font></font>++<font color='#ff0000' weight='1' id='62'></font>)<font color='#ff0000' weight='1' id='66'></font>
+        {
+            <font color='#ff0000' weight='1' id='79'><font color='#ff0000' weight='1' id='77'>int <font color='#ff0000' weight='1' id='72'>min_idx<font color='#ff0000' weight='1' id='71'></font> </font>= i;</font><font color='#ff0000' weight='1' id='78'></font>
+            </font>for (<font color='#ff0000' weight='1' id='93'>int <font color='#ff0000' weight='1' id='84'>j<font color='#ff0000' weight='1' id='83'></font> </font>= i<font color='#ff0000' weight='1' id='88'>+</font>1<font color='#ff0000' weight='1' id='89'></font>;</font> j<font color='#ff0000' weight='1' id='96'></font> <font color='#ff0000' weight='1' id='99'>&lt;<font color='#ff0000' weight='1' id='98'></font> </font><font color='#ff0000' weight='1' id='101'>n</font>; j++)
+                <font color='#ff0000' weight='1' id='145'>if (<font color='#ff0000' weight='1' id='131'>arr[j] &lt;<font color='#ff0000' weight='1' id='121'></font> arr[<font color='#ff0000' weight='1' id='127'>min_idx]</font>)</font>
+                    min_idx = j;</font>
+ 
+
+            <font color='#ff0000' weight='1' id='150'>double </font><font color='#ff0000' weight='1' id='152'>temp<font color='#ff0000' weight='1' id='151'></font> </font>= <font color='#ff0000' weight='1' id='160'>arr<font color='#ff0000' weight='1' id='159'>[min_idx]</font></font>;
+            arr<font color='#ff0000' weight='1' id='166'></font>[<font color='#ff0000' weight='1' id='169'>min_idx</font>] = arr[i];
+            arr[i] = temp;
+        }
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+package heap;
+
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Heap {
+
+    
+
+        
+        
+    private int array[];
+    public static int n; 
+    
+    public static void sort(int arr[])  
+    {
+            buildMaxHeap(arr);
+            
+            for(int i=arr.length-1; i&gt;=0; i--){
+                int temp=arr[0];
+                arr[0] = arr[i];
+                arr[i]= temp;
+
+                n--;
+                
+                maxHeapify(arr,0);
+		}
+    }
+    
+    public static void maxHeapify(int[] arr, int i) 
+    {
+		int leftChild= (2*i)+1;
+		int rightChild=(2*i)+2;
+		
+                int max;
+                
+                if((leftChild &lt; n) &amp;&amp; (arr[leftChild] &gt; arr[i])) 
+			max=leftChild;
+                else max = i;
+                
+		if( (rightChild &lt; n) &amp;&amp; (arr[rightChild] &gt; arr[max])) 
+			max=rightChild;
+		
+                if(max!=i){
+			int temp = arr[max];
+			arr[max] = arr[i];
+			arr[i] = temp;
+                        maxHeapify(arr, max);
+		}
+	}  
+    
+    
+    
+    public static void buildMaxHeap(int [] array){
+    
+        n=array.length;
+        
+        for(int i=array.length/2; i&gt;=0; i--){
+            maxHeapify(array, i);
+        }
+    }
+}
+</font>
+</pre>

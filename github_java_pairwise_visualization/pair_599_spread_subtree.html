@@ -1,0 +1,43 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public int[] sort(int[] arrayToSort) {
+        int max = getMaxFromArray(arrayToSort);
+        Map&lt;Integer, Integer&gt; bucketMap = new HashMap&lt;&gt;();
+        for (int i = 0; i &lt;= max; i++) {
+            bucketMap.put(i, 0);
+        }
+        for (int i = 0; i &lt; arrayToSort.length; i++) {
+            bucketMap.put(arrayToSort[i], bucketMap.get(arrayToSort[i])+1);
+        }
+        <font color='#ff0000' weight='1' id='211'>int</font> sortedArrayIndex = 0;
+        for (Map.Entry&lt;Integer, Integer&gt; entry: bucketMap.entrySet()) {
+            for (int i = 0; i &lt; entry.getValue(); i++) {
+                arrayToSort[sortedArrayIndex++] = entry.getKey();
+            }
+        }
+        return arrayToSort;
+    }
+
+    protected int getMaxFromArray(int[] arrayToSort) {
+        List&lt;Integer&gt; numbers = Arrays.stream(arrayToSort).boxed().collect(Collectors.toList());
+        return numbers.stream().mapToInt(Integer::intValue).max().getAsInt();
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public void bubbleSort(){
+        for(int i=0; i&lt;length-1;i++){
+            for(int j=0;<font color='#000aff' weight='0.0102041' id='56'>j</font>&lt;<font color='#000aff' weight='0.0102041' id='60'>length</font><font color='#000aff' weight='0.0102041' id='62'>-</font><font color='#000aff' weight='0.0102041' id='64'>1</font><font color='#000aff' weight='0.0102041' id='66'>-</font><font color='#000aff' weight='0.0102041' id='68'>i</font>;j++){
+                compare(j,j+1);
+            }
+        }
+    }
+    public void compare(int x, int y){
+        int z=0;
+        if(a[x]&gt;a[y]){
+            z=a[x];
+            a[x]=a[y];
+            a[y]=z;
+        }   
+    }</font>
+</pre>

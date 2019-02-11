@@ -1,0 +1,107 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static int[] shellSort(int[] arr) {
+        if (arr == null || arr.length == 0) <font color='#ff0000' weight='1' id='53'>{
+            <font color='#00ff00' weight='0.5' id='51'>return <font color='#00ffff' weight='0.25' id='49'>arr;</font><font color='#00ffff' weight='0.25' id='50'></font>
+        }</font><font color='#00ff00' weight='0.5' id='52'></font></font>
+        shell(arr);
+        return arr;
+    }
+
+    public static void shell(int[] arr) {
+        int cur = 0;
+        for (int i = arr.length / 2; i &gt; 0; i--) {    
+            for (int j = i; j &lt; arr.length; j++) {
+                cur = j;
+                for (int k = j - i; k &gt;= 0; k -= i) {
+                    if (arr[cur] &gt;= arr[k]) {
+                        break;
+                    } else {
+                        swap(arr, cur, k);
+                        cur = k;
+                    }
+                }
+            }
+        }
+    }
+
+    public static void swap(int[] arr, int index1, int index2) {
+        int temp = arr[index1];
+        arr[index1] = arr[index2];
+        arr[index2] = temp;
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ 
+  public static void sort(double[] a)
+  {
+    int n = a.length;
+    temp = new double[n];
+    recursiveSort(a, 0, n-1);
+  }
+
+  
+  private static void recursiveSort(double[] a, int from, int to)
+  {
+    if (to - from &lt; 2)       
+    {
+      if (to &gt; from &amp;&amp; a[to] &lt; a[from])
+      {
+        double aTemp = a[to];  
+        a[to] = a[from];
+        a[from] = aTemp;
+      }
+    }
+    else                     
+    {
+      int middle = (from + to) / 2;
+      recursiveSort(a, from, middle);
+      recursiveSort(a, middle + 1, to);
+      merge(a, from, middle, to);
+    }
+  }
+
+  
+  
+  private static void merge(double[] a, int from, int <font color='#00ff00' weight='0.5' id='350'>middle</font>, int to)
+  {
+    int i = from, j = middle + 1, k = from;
+
+    
+    while (i &lt;= middle &amp;&amp; j &lt;= to)
+    {
+      if (a[i] &lt; a[j])
+      {
+        temp[k] = a[i];   
+        i++;
+      }
+      else
+      {
+        temp[k] = a[j];
+        j++;
+      }
+      k++;
+    }
+
+    
+    while (i &lt;= middle)
+    {
+      temp[k] = a[i];     
+      i++;
+      k++;
+    }
+
+    
+    while (j &lt;= to)
+    {
+      temp[k] = a[j];     
+      j++;
+      k++;
+    }
+
+    
+    for (k = from; k &lt;= to; k++)
+      a[k] = temp[k];
+  }</font>
+</pre>

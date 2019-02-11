@@ -1,0 +1,49 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void bubbleSort(int arr[]) {
+      int len = arr.length;
+      for (int i = len; i &gt;= 0; i--) {
+         for (int j = 0; j &lt; len - 1; j++) <font color='#ff0000' weight='1' id='163'>{
+            int k = <font color='#0005ff' weight='0.00537634' id='112'><font color='#0000ff' weight='0.000298686' id='107'>j </font><font color='#0000ff' weight='0.000298686' id='109'>+ </font><font color='#0000ff' weight='0.000298686' id='111'>1</font></font>;
+            <font color='#00f1ff' weight='0.236559' id='161'>if <font color='#0036ff' weight='0.0537634' id='137'>(<font color='#0018ff' weight='0.0241935' id='135'>arr[j] &gt; <font color='#0000ff' weight='0.000224014' id='128'>arr</font><font color='#0000ff' weight='0.000896057' id='133'>[<font color='#0000ff' weight='0.000224014' id='131'><font color='#0000ff' weight='0.000112007' id='130'>k</font>]</font></font>)</font></font><font color='#003cff' weight='0.0591398' id='160'> <font color='#0039ff' weight='0.0564516' id='159'>{
+               <font color='#001aff' weight='0.0255376' id='157'><font color='#000bff' weight='0.0114247' id='155'><font color='#000aff' weight='0.0107527' id='154'><font color='#0000ff' weight='0.000336022' id='139'>swapNumbers</font><font color='#0004ff' weight='0.00436828' id='153'>(<font color='#0000ff' weight='0.000252016' id='143'><font color='#0000ff' weight='0.000168011' id='142'>j</font>, </font><font color='#0000ff' weight='0.000252016' id='147'><font color='#0000ff' weight='0.000168011' id='146'><font color='#0000ff' weight='8.40054e-05' id='145'>k</font></font>, </font><font color='#0000ff' weight='0.000252016' id='151'><font color='#0000ff' weight='0.000168011' id='150'><font color='#0000ff' weight='8.40054e-05' id='149'>arr</font></font>)</font></font></font>;</font>
+            }</font></font></font>
+         }</font></font>
+      }
+   }
+
+   private static void swapNumbers(int i, int j, int[] arr) {
+      int temp;
+      temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
+   }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public List&lt;Integer&gt; sort(List&lt;Integer&gt; list){
+
+        
+        
+        
+        int n = list.size();
+        
+        while(n != 0){
+            
+            int swappy = 0;
+            for (int i = 1;i&lt;n;i++){
+                
+                if(<font color='#ff0000' weight='1' id='133'><font color='#00aaff' weight='0.166667' id='116'><font color='#001eff' weight='0.0294118' id='105'><font color='#0001ff' weight='0.00163399' id='100'>list</font><font color='#0001ff' weight='0.00163399' id='102'>.</font><font color='#0001ff' weight='0.00163399' id='104'>get</font></font><font color='#002cff' weight='0.0441176' id='115'>(<font color='#0011ff' weight='0.0171569' id='113'><font color='#000fff' weight='0.0147059' id='112'><font color='#0000ff' weight='0.000816993' id='107'>i</font><font color='#0000ff' weight='0.000816993' id='109'>-</font>1</font>)</font></font> </font><font color='#000aff' weight='0.00980392' id='118'>&gt; </font><font color='#0082ff' weight='0.127451' id='132'><font color='#001eff' weight='0.0294118' id='125'><font color='#0001ff' weight='0.00163399' id='120'>list</font><font color='#0001ff' weight='0.00163399' id='122'>.</font><font color='#0001ff' weight='0.00163399' id='124'>get</font></font><font color='#0018ff' weight='0.0245098' id='131'>(<font color='#0007ff' weight='0.00735294' id='129'><font color='#0004ff' weight='0.00490196' id='128'><font color='#0002ff' weight='0.00245098' id='127'>i</font></font>)</font></font></font>)</font>{
+                    int temp = list.get(i-1);
+                    list.set(i-1,list.get(i));
+                    list.set(i,temp);
+                    
+                    swappy = i;
+                }
+            }
+            
+            n = swappy;
+        }
+        return list;
+    }</font>
+</pre>

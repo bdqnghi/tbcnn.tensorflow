@@ -1,0 +1,45 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+private <font color='#00cbff' weight='0.199981' id='5'>void </font><font color='#00cbff' weight='0.199981' id='7'>insertionSort</font>(<font color='#0043ff' weight='0.0666451' id='17'>int[] a, </font>int <font color='#0021ff' weight='0.033311' id='22'>len</font>) {
+        
+        for <font color='#0032ff' weight='0.049978' id='55'>(<font color='#0006ff' weight='0.006227' id='36'><font color='#0002ff' weight='0.00206023' id='29'>int </font>i = 1;</font> i <font color='#0002ff' weight='0.00206023' id='42'>&lt; </font>len<font color='#0002ff' weight='0.00206023' id='43'></font>; <font color='#0006ff' weight='0.006227' id='49'>i</font><font color='#0006ff' weight='0.006227' id='51'>++<font color='#0006ff' weight='0.006227' id='50'></font></font>) </font><font color='#0032ff' weight='0.049978' id='164'>{
+            <font color='#0001ff' weight='0.00164356' id='57'>int<font color='#0001ff' weight='0.00164356' id='56'></font></font> value = <font color='#0000ff' weight='0.000810204' id='62'>a</font>[<font color='#0000ff' weight='0.000393528' id='65'><font color='#0000ff' weight='0.000393528' id='64'>i</font>]</font>;   
+            <font color='#000aff' weight='0.00997708' id='85'>int <font color='#0001ff' weight='0.00164356' id='78'>position </font>= i;   
+            
+            
+            </font>while (position &gt; 0 &amp;&amp; a[position-1] &gt; value) <font color='#0005ff' weight='0.00497697' id='146'>{
+                <font color='#0001ff' weight='0.00164356' id='137'>a<font color='#0000ff' weight='0.000115743' id='119'>[<font color='#0000ff' weight='4.62974e-05' id='117'>position]</font><font color='#0000ff' weight='4.62974e-05' id='118'></font></font> <font color='#0000ff' weight='0.000254635' id='122'>= </font>a[position-1];<font color='#0000ff' weight='0.000810204' id='136'></font>    
+                </font>position<font color='#0000ff' weight='0.000393528' id='138'></font><font color='#0000ff' weight='0.000393528' id='141'>--</font>;<font color='#0000ff' weight='0.000810204' id='143'></font>                     
+            }<font color='#0001ff' weight='0.00164356' id='145'></font></font>
+            
+            
+            a<font color='#0000ff' weight='0.000810204' id='148'></font>[<font color='#0000ff' weight='0.000393528' id='152'><font color='#0000ff' weight='0.000393528' id='151'>position<font color='#0000ff' weight='0.000393528' id='150'></font></font>]</font><font color='#0000ff' weight='0.000393528' id='153'></font> <font color='#0001ff' weight='0.00164356' id='157'>= </font>value<font color='#0001ff' weight='0.00164356' id='158'></font>;
+        }</font>
+    }
+    </font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public int[] sort(int[] arrayToSort) {
+        int max = getMaxFromArray(arrayToSort);
+        Map&lt;Integer, Integer&gt; bucketMap = new HashMap&lt;&gt;();
+        for (int i = 0; i &lt;= max; i++) {
+            bucketMap.put(i, 0);
+        }
+        for (int i = 0; i &lt; arrayToSort.length; i++) {
+            bucketMap.put(arrayToSort[i], bucketMap.get(arrayToSort[i])+1);
+        }
+        int sortedArrayIndex = 0;
+        for (Map.Entry&lt;Integer, Integer&gt; entry: bucketMap.entrySet()) {
+            for (int i = 0; i &lt; entry.getValue(); i++) {
+                arrayToSort[sortedArrayIndex++] = entry.getKey();
+            }
+        }
+        return arrayToSort;
+    }
+
+    protected int getMaxFromArray(int[] arrayToSort) {
+        List&lt;Integer&gt; numbers = Arrays.stream(arrayToSort).boxed().collect(Collectors.toList());
+        return numbers.stream().mapToInt(Integer::intValue).max().getAsInt();
+    }</font>
+</pre>

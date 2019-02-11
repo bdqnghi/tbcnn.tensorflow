@@ -1,0 +1,89 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+package Graph;
+
+import java.util.Iterator;
+import java.util.LinkedList;
+
+import java.util.ArrayList;
+import java.util.Stack;
+
+
+public class TopologicalSort {
+    private int vertex;
+    private LinkedList&lt;Integer&gt; adj[];
+
+    public TopologicalSort(int v) {
+        vertex = v;
+        adj = new LinkedList[v];
+        for (int i = 0; i &lt; v; i++) {
+            adj[i] = new LinkedList&lt;&gt;();
+        }
+    }
+    void addEdge(int v, int e) {
+        adj[v].add(e);
+    }
+
+   
+
+    public  void topologicalSort() {
+        Stack stack=new Stack();
+        boolean visited[]=new boolean[vertex];
+        for(int i=0;i&lt;vertex;i++) {
+            visited[i]=false;
+        }
+        for(int j=0;j&lt;vertex;j++) {
+            if(visited[j]==false) {
+                topologicalSortUtil(visited,stack,j);
+            }
+        }
+        while(stack.empty()==false) {
+            System.out.println(stack.pop() + " ");
+        }
+    }
+
+    public void topologicalSortUtil(boolean[] visited, Stack stack,int vertexData) {
+        
+            visited[vertexData] = true;
+            
+           
+            Iterator&lt;Integer&gt; iterator = adj[vertexData].iterator();
+            while (iterator.hasNext()) {
+                
+                int nextData = iterator.next();
+                
+                if (!visited[nextData]) {
+                    topologicalSortUtil(visited, stack, nextData);
+                }
+                
+
+            }
+            stack.push(vertexData);
+        
+    }
+
+}
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+<font color='#ff0000' weight='1' id='223'><font color='#ff0000' weight='1' id='2'>public </font><font color='#ff0000' weight='1' id='4'>static </font><font color='#ff0000' weight='1' id='7'><font color='#ff0000' weight='1' id='6'>void</font> </font><font color='#ff0000' weight='1' id='9'>InsertionSort</font><font color='#ff0000' weight='1' id='21'>(<font color='#ff0000' weight='1' id='19'><font color='#ff0000' weight='1' id='18'><font color='#ff0000' weight='1' id='11'>int</font><font color='#ff0000' weight='1' id='13'>[]<font color='#ff0000' weight='1' id='12'></font></font> <font color='#ff0000' weight='1' id='17'>A</font></font>)</font><font color='#ff0000' weight='1' id='20'></font>
+    </font><font color='#ff0000' weight='1' id='222'>{
+        <font color='#ff0000' weight='1' id='33'><font color='#ff0000' weight='1' id='27'>int <font color='#ff0000' weight='1' id='26'>temp</font>,</font><font color='#ff0000' weight='1' id='31'><font color='#ff0000' weight='1' id='28'></font><font color='#ff0000' weight='1' id='30'>j</font>;</font><font color='#ff0000' weight='1' id='32'></font>
+        </font><font color='#ff0000' weight='1' id='187'>for (int i = 0; i &lt; <font color='#ff0000' weight='1' id='56'><font color='#ff0000' weight='1' id='51'>A</font><font color='#ff0000' weight='1' id='53'>.<font color='#ff0000' weight='1' id='52'></font></font><font color='#ff0000' weight='1' id='55'>length<font color='#ff0000' weight='1' id='54'></font></font></font>; i++)
+        <font color='#ff0000' weight='1' id='186'>{
+            <font color='#ff0000' weight='1' id='69'>j </font>= <font color='#ff0000' weight='1' id='73'>i</font>;
+            <font color='#ff0000' weight='1' id='184'>while <font color='#ff0000' weight='1' id='109'>(<font color='#ff0000' weight='1' id='107'><font color='#ff0000' weight='1' id='78'>j </font><font color='#ff0000' weight='1' id='80'>&gt;<font color='#ff0000' weight='1' id='79'></font> </font><font color='#ff0000' weight='1' id='82'>0<font color='#ff0000' weight='1' id='81'></font> </font><font color='#ff0000' weight='1' id='84'>&amp;&amp;<font color='#ff0000' weight='1' id='83'></font> </font><font color='#ff0000' weight='1' id='86'>A</font>[<font color='#ff0000' weight='1' id='88'>j</font><font color='#ff0000' weight='1' id='90'>-<font color='#ff0000' weight='1' id='89'></font></font><font color='#ff0000' weight='1' id='92'>1<font color='#ff0000' weight='1' id='91'></font></font>] <font color='#ff0000' weight='1' id='98'>&gt; </font><font color='#ff0000' weight='1' id='106'><font color='#ff0000' weight='1' id='100'>A</font><font color='#ff0000' weight='1' id='105'>[<font color='#ff0000' weight='1' id='103'><font color='#ff0000' weight='1' id='102'>j</font>]</font><font color='#ff0000' weight='1' id='104'></font></font></font>)</font><font color='#ff0000' weight='1' id='108'></font>
+            </font><font color='#ff0000' weight='1' id='183'>{
+                <font color='#ff0000' weight='1' id='124'><font color='#ff0000' weight='1' id='122'><font color='#ff0000' weight='1' id='111'>temp </font><font color='#ff0000' weight='1' id='113'>= </font><font color='#ff0000' weight='1' id='115'>A</font>[<font color='#ff0000' weight='1' id='117'>j</font>];</font><font color='#ff0000' weight='1' id='123'></font>
+                </font><font color='#ff0000' weight='1' id='149'><font color='#ff0000' weight='1' id='147'><font color='#ff0000' weight='1' id='126'>A</font>[<font color='#ff0000' weight='1' id='128'>j</font>] = <font color='#ff0000' weight='1' id='146'><font color='#ff0000' weight='1' id='136'>A</font><font color='#ff0000' weight='1' id='145'>[<font color='#ff0000' weight='1' id='143'>j<font color='#ff0000' weight='1' id='140'>-</font><font color='#ff0000' weight='1' id='142'>1<font color='#ff0000' weight='1' id='141'></font></font>]</font><font color='#ff0000' weight='1' id='144'></font></font></font>;</font><font color='#ff0000' weight='1' id='148'></font>
+                </font><font color='#ff0000' weight='1' id='168'><font color='#ff0000' weight='1' id='166'><font color='#ff0000' weight='1' id='151'>A</font>[j<font color='#ff0000' weight='1' id='155'>-<font color='#ff0000' weight='1' id='154'></font></font><font color='#ff0000' weight='1' id='157'>1<font color='#ff0000' weight='1' id='156'></font></font>] <font color='#ff0000' weight='1' id='163'>= </font><font color='#ff0000' weight='1' id='165'>temp</font>;</font><font color='#ff0000' weight='1' id='167'></font>
+                </font><font color='#ff0000' weight='1' id='181'><font color='#ff0000' weight='1' id='179'>j <font color='#ff0000' weight='1' id='172'>=<font color='#ff0000' weight='1' id='171'></font> </font><font color='#ff0000' weight='1' id='174'>j</font><font color='#ff0000' weight='1' id='176'>-</font><font color='#ff0000' weight='1' id='178'>1<font color='#ff0000' weight='1' id='177'></font></font>;</font><font color='#ff0000' weight='1' id='180'></font>
+            }</font><font color='#ff0000' weight='1' id='182'></font></font>           
+        }</font><font color='#ff0000' weight='1' id='185'></font></font>
+        </font>System.out.println(<font color='#ff0000' weight='1' id='200'>Arrays</font>.<font color='#ff0000' weight='1' id='204'>toString</font><font color='#ff0000' weight='1' id='211'>(<font color='#ff0000' weight='1' id='209'><font color='#ff0000' weight='1' id='208'><font color='#ff0000' weight='1' id='207'>A<font color='#ff0000' weight='1' id='206'></font></font></font>)</font><font color='#ff0000' weight='1' id='210'></font></font>);
+    }</font>
+
+      
+    </font></font>
+</pre>

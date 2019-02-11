@@ -1,0 +1,72 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static void sort(long[] valuesArray, int[] gapsArray) throws SortException {
+
+        if(<font color='#0000ff' weight='1.7875e-05' id='38'>gapsArray</font>.<font color='#0000ff' weight='1.7875e-05' id='42'>length</font> == 0) throw <font color='#0001ff' weight='0.00176963' id='62'>new <font color='#0000ff' weight='0.000643501' id='61'><font color='#0000ff' weight='4.02188e-05' id='54'>EmptyArrayException</font>("Gaps array can not by empty")</font>;</font>
+
+        <font color='#0000ff' weight='0.0002145' id='70'><font color='#0000ff' weight='0.00010725' id='69'>int</font> </font><font color='#0000ff' weight='0.00010725' id='72'>endGap </font><font color='#0001ff' weight='0.0019305' id='91'>= <font color='#0001ff' weight='0.00182325' id='90'><font color='#0001ff' weight='0.001716' id='89'>gapsArray[gapsArray.length-1]</font></font></font>;
+        if(endGap != 1) <font color='#0004ff' weight='0.00418275' id='117'>throw <font color='#0000ff' weight='8.04376e-05' id='105'>new </font><font color='#0000ff' weight='0.000643501' id='114'><font color='#0000ff' weight='4.02188e-05' id='107'>InvalidGapSequenceException</font>(<font color='#0000ff' weight='4.02188e-05' id='110'>"Gaps sequence must end with 1"</font>)</font>;</font>
+
+
+        <font color='#0004ff' weight='0.0045045' id='135'><font color='#0000ff' weight='0.0002145' id='123'>int </font><font color='#0000ff' weight='0.00010725' id='125'>valuesArraySize </font>= <font color='#0000ff' weight='0.000750751' id='133'><font color='#0000ff' weight='0.000643501' id='132'><font color='#0000ff' weight='3.575e-05' id='127'>valuesArray</font>.length</font></font>;</font>
+
+        for (<font color='#0001ff' weight='0.00160875' id='148'><font color='#0001ff' weight='0.00144788' id='147'><font color='#0000ff' weight='0.00010725' id='140'>int </font><font color='#0000ff' weight='5.36251e-05' id='142'>gap </font><font color='#0000ff' weight='0.000160875' id='146'>: <font color='#0000ff' weight='0.00010725' id='145'>gapsArray</font></font></font>)</font> {
+
+            for <font color='#0002ff' weight='0.00225225' id='179'>(int i = gap; <font color='#0000ff' weight='0.000160875' id='171'><font color='#0000ff' weight='6.03282e-05' id='169'>i <font color='#0000ff' weight='3.35157e-06' id='166'>&lt; </font><font color='#0000ff' weight='3.35157e-06' id='168'>valuesArraySize</font>;</font> </font>i++) </font>{
+
+                long value = valuesArray[i];
+                <font color='#0000ff' weight='0.000176963' id='209'>int j = i;
+
+                </font>while <font color='#0000ff' weight='0.000209138' id='236'>(<font color='#0000ff' weight='5.74554e-07' id='211'>j </font>&gt;= gap &amp;&amp; valuesArray[j - gap] &gt; value) </font><font color='#0000ff' weight='0.000281532' id='272'>{
+                    valuesArray[j] = valuesArray[j - gap];
+                    <font color='#0000ff' weight='2.145e-05' id='270'>j -= gap;
+                }</font></font>
+
+                <font color='#0000ff' weight='1.87688e-05' id='281'>valuesArray[j] </font>= value;
+            }
+        }
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+  private static void merge(Comparable[] a, Comparable[] aux, int lo, int mid, int hi) {
+
+        
+        assert isSorted(a, lo, mid);
+        assert isSorted(a, mid+1, hi);
+
+        
+        for (int k = lo; k &lt;= hi; k++) {
+            aux[k] = a[k]; 
+        }
+
+        
+        int i = lo, j = mid+1;
+        for (int k = lo; k &lt;= hi; k++) {
+            if      (i &gt; mid)              a[k] = aux[j++];   
+            else if (j &gt; hi)               a[k] = aux[i++];
+            else if (<font color='#ff0000' weight='1' id='298'><font color='#ff2800' weight='0.96' id='297'><font color='#0014ff' weight='0.02' id='274'>less</font><font color='#00ff51' weight='0.42' id='296'>(<font color='#003dff' weight='0.06' id='284'><font color='#0036ff' weight='0.0533333' id='283'><font color='#002fff' weight='0.0466667' id='282'><font color='#0003ff' weight='0.00333333' id='276'>aux</font><font color='#000dff' weight='0.0133333' id='281'>[<font color='#0003ff' weight='0.00333333' id='279'><font color='#0001ff' weight='0.00166667' id='278'>j</font>]</font></font></font></font>, </font><font color='#003dff' weight='0.06' id='294'><font color='#0036ff' weight='0.0533333' id='293'><font color='#002fff' weight='0.0466667' id='292'><font color='#0003ff' weight='0.00333333' id='286'>aux</font><font color='#000dff' weight='0.0133333' id='291'>[<font color='#0003ff' weight='0.00333333' id='289'><font color='#0001ff' weight='0.00166667' id='288'>i</font>]</font></font></font></font>)</font></font></font>)</font> a[k] = aux[j++];
+            else                           a[k] = aux[i++];
+        }
+
+        
+        assert isSorted(a, lo, hi);
+    }
+
+    
+    private static void sort(Comparable[] a, Comparable[] aux, int lo, int hi) {
+        if (hi &lt;= lo) return;
+        int mid = lo + (hi - lo) / 2;
+        sort(a, aux, lo, mid);
+        sort(a, aux, mid + 1, hi);
+        merge(a, aux, lo, mid, hi);
+    }
+
+    
+    public static void sort(Comparable[] a) {
+        Comparable[] aux = new Comparable[a.length];
+        sort(a, aux, 0, a.length-1);
+        assert isSorted(a);
+    }
+</font>
+</pre>

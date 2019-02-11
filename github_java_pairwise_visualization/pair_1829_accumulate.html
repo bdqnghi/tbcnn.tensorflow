@@ -1,0 +1,76 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ static int[] mergeSort(int[] a){
+        int n = a.length;
+        int[] left;
+        int[] right;
+
+        if(n % 2 == 0){
+            left  = new int[n / 2];
+            right = new int[n / 2];
+        } else {
+            left  = new int[n / 2];
+            right = new int[n / 2 + 1];
+        }
+
+        for(int i = 0; i &lt; n; i++){
+            if<font color='#ff0000' weight='1' id='211'>(<font color='#ff0000' weight='1' id='209'><font color='#ff0000' weight='1' id='200'>i<font color='#ff0000' weight='1' id='199'></font> </font><font color='#ff0000' weight='1' id='202'>&lt;<font color='#ff0000' weight='1' id='201'></font> </font><font color='#ff0000' weight='1' id='204'>n<font color='#ff0000' weight='1' id='203'></font></font><font color='#ff0000' weight='1' id='206'>/<font color='#ff0000' weight='1' id='205'></font></font><font color='#ff0000' weight='1' id='208'>2<font color='#ff0000' weight='1' id='207'></font></font>)</font><font color='#ff0000' weight='1' id='210'></font></font>{
+                left[i] = a[i];
+            } else {
+                right[i - n/2] = a[i];
+            }
+        }
+
+        left = mergeSort(left);
+        right = mergeSort(right);
+
+        return merge(left, right);
+
+    }
+
+    static int[] merge(int[] left, int[] right){
+        int[] result = new int[left.length + right.length];
+        
+        int i = 0;
+        int j = 0;
+        int index = 0;
+
+        while(i &lt; left.length &amp;&amp; j &lt; right.length){
+            if(left[i] &lt; right[i]){
+                result[index++] = left[i++];
+            } else {
+                result[index++] = right[j++];
+            }
+        }
+
+        while(i &lt; left.length){
+            result[index++] = left[i++];
+        }
+
+        while (j &lt; right.length) {
+            result[index++] = right[j++];
+        }
+        
+        return result;
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+<font color='#ff0000' weight='1' id='168'><font color='#ff0000' weight='1' id='2'>private </font><font color='#ff0000' weight='1' id='4'>void</font> <font color='#ff0000' weight='1' id='7'>insertionSort</font><font color='#ff0000' weight='1' id='26'>(int[] a, <font color='#ff0000' weight='1' id='24'><font color='#ff0000' weight='1' id='23'>int <font color='#ff0000' weight='1' id='22'>len</font></font>)</font><font color='#ff0000' weight='1' id='25'></font> </font><font color='#ff0000' weight='1' id='167'>{
+        
+        <font color='#ff0000' weight='1' id='165'>for (int i = <font color='#ff0000' weight='1' id='33'>1</font>; i &lt; <font color='#ff0000' weight='1' id='44'>len</font>; i++) <font color='#ff0000' weight='1' id='164'>{
+            <font color='#ff0000' weight='1' id='57'>int</font> <font color='#ff0000' weight='1' id='60'>value </font>= <font color='#ff0000' weight='1' id='62'>a</font>[<font color='#ff0000' weight='1' id='64'>i</font>];   
+            int <font color='#ff0000' weight='1' id='78'>position </font>= <font color='#ff0000' weight='1' id='80'>i<font color='#ff0000' weight='1' id='79'></font></font>;   
+            
+            
+            <font color='#ff0000' weight='1' id='147'>while (<font color='#ff0000' weight='1' id='87'>position </font><font color='#ff0000' weight='1' id='89'>&gt; </font><font color='#ff0000' weight='1' id='91'>0<font color='#ff0000' weight='1' id='90'></font> </font><font color='#ff0000' weight='1' id='93'>&amp;&amp; </font><font color='#ff0000' weight='1' id='105'><font color='#ff0000' weight='1' id='95'>a</font><font color='#ff0000' weight='1' id='104'>[<font color='#ff0000' weight='1' id='102'><font color='#ff0000' weight='1' id='97'>position</font><font color='#ff0000' weight='1' id='99'>-</font><font color='#ff0000' weight='1' id='101'>1<font color='#ff0000' weight='1' id='100'></font></font>]</font><font color='#ff0000' weight='1' id='103'></font></font> </font><font color='#ff0000' weight='1' id='107'>&gt; </font><font color='#ff0000' weight='1' id='109'>value</font>) <font color='#ff0000' weight='1' id='146'>{
+                <font color='#ff0000' weight='1' id='114'>a</font>[<font color='#ff0000' weight='1' id='116'>position</font>] = <font color='#ff0000' weight='1' id='124'>a</font>[<font color='#ff0000' weight='1' id='126'>position</font><font color='#ff0000' weight='1' id='128'>-</font><font color='#ff0000' weight='1' id='130'>1<font color='#ff0000' weight='1' id='129'></font></font>];    
+                <font color='#ff0000' weight='1' id='142'><font color='#ff0000' weight='1' id='139'>position</font><font color='#ff0000' weight='1' id='141'>--</font>;</font><font color='#ff0000' weight='1' id='143'></font>                     
+            }</font>
+            
+            
+            </font><font color='#ff0000' weight='1' id='149'>a</font>[<font color='#ff0000' weight='1' id='151'>position</font>] = <font color='#ff0000' weight='1' id='159'>value</font>;
+        }</font>
+    }</font><font color='#ff0000' weight='1' id='166'></font></font>
+    </font></font>
+</pre>

@@ -1,0 +1,97 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+package heap;
+
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Heap {
+
+    
+
+        
+        
+    private int array[];
+    public static int n; 
+    
+    public static void sort(int arr[])  
+    {
+            buildMaxHeap(arr);
+            
+            for(int i=arr.length-1; i&gt;=0; i--){
+                int temp=arr[0];
+                arr[0] = arr[i];
+                arr[i]= temp;
+
+                n--;
+                
+                maxHeapify(arr,0);
+		}
+    }
+    
+    public static void maxHeapify(int[] arr, int i) 
+    {
+		int leftChild= (2*i)+1;
+		int rightChild=(2*i)+2;
+		
+                int max;
+                
+                if((leftChild &lt; n) &amp;&amp; (arr[leftChild] &gt; arr[i])) 
+			max=leftChild;
+                else max = i;
+                
+		if( (rightChild &lt; n) &amp;&amp; (<font color='#ff0000' weight='1' id='418'><font color='#0048ff' weight='0.0714286' id='412'>arr</font><font color='#00ffda' weight='0.285714' id='417'>[<font color='#0048ff' weight='0.0714286' id='415'><font color='#0024ff' weight='0.0357143' id='414'>rightChild</font>]</font></font> </font>&gt; arr[max])) 
+			max=rightChild;
+		
+                if(max!=i){
+			int temp = arr[max];
+			arr[max] = arr[i];
+			arr[i] = temp;
+                        maxHeapify(arr, max);
+		}
+	}  
+    
+    
+    
+    public static void buildMaxHeap(int [] array){
+    
+        n=array.length;
+        
+        for(int i=array.length/2; i&gt;=0; i--){
+            maxHeapify(array, i);
+        }
+    }
+}
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static void selection_sort(int[]arr,int bi,int ei)<font color='#ff0000' weight='1' id='212'>{
+        <font color='#001aff' weight='0.0261364' id='59'>if <font color='#0009ff' weight='0.00965909' id='53'>(<font color='#0004ff' weight='0.00426136' id='51'><font color='#0000ff' weight='5.68182e-05' id='37'>bi</font><font color='#0000ff' weight='5.68182e-05' id='39'>==</font>arr.length-1)</font></font><font color='#0002ff' weight='0.00227273' id='58'><font color='#0001ff' weight='0.00170455' id='57'>{
+            <font color='#0000ff' weight='0.000284091' id='55'>return;
+        }</font></font></font>
+        </font><font color='#0036ff' weight='0.0534091' id='107'>if <font color='#0007ff' weight='0.00738636' id='73'>(<font color='#0003ff' weight='0.003125' id='71'><font color='#0000ff' weight='9.4697e-05' id='61'>ei</font><font color='#0000ff' weight='9.4697e-05' id='63'>==</font><font color='#0000ff' weight='0.000568182' id='70'>arr<font color='#0000ff' weight='3.15657e-05' id='67'>.</font><font color='#0000ff' weight='3.15657e-05' id='69'>length</font></font>)</font></font><font color='#0012ff' weight='0.0181818' id='106'><font color='#0011ff' weight='0.0176136' id='105'>{
+            <font color='#0005ff' weight='0.00511364' id='101'><font color='#0002ff' weight='0.00236742' id='99'><font color='#0002ff' weight='0.00227273' id='98'><font color='#0000ff' weight='4.73485e-05' id='75'>selection_sort</font><font color='#0001ff' weight='0.000994318' id='97'>(arr,<font color='#0000ff' weight='8.28599e-05' id='87'><font color='#0000ff' weight='7.10227e-05' id='86'><font color='#0000ff' weight='3.94571e-06' id='81'>bi</font>+1</font>,</font><font color='#0000ff' weight='8.28599e-05' id='95'><font color='#0000ff' weight='7.10227e-05' id='94'><font color='#0000ff' weight='3.94571e-06' id='89'>bi</font>+2</font>)</font></font></font>;</font>
+            </font><font color='#0000ff' weight='0.000189394' id='103'>return;
+        }</font></font></font>
+        </font><font color='#005aff' weight='0.0886364' id='186'>if (arr[<font color='#0000ff' weight='2.36742e-05' id='111'>bi</font>]&gt;arr[<font color='#0000ff' weight='2.36742e-05' id='121'>ei</font>])<font color='#0020ff' weight='0.0318182' id='185'><font color='#001fff' weight='0.03125' id='184'>{
+            int temp = arr[<font color='#0000ff' weight='5.91856e-06' id='137'>bi</font>];
+            arr[<font color='#0000ff' weight='5.91856e-06' id='150'>bi</font>] = arr[<font color='#0000ff' weight='5.91856e-06' id='160'>ei</font>];
+            arr[<font color='#0000ff' weight='5.91856e-06' id='171'>ei</font>] = temp;
+        
+        }</font></font>
+        </font><font color='#0000ff' weight='0.000284091' id='188'>selection_sort</font>(arr,<font color='#0000ff' weight='7.10227e-05' id='194'>bi</font>,<font color='#0000ff' weight='0.000497159' id='204'><font color='#0000ff' weight='0.000426136' id='203'><font color='#0000ff' weight='2.36742e-05' id='198'>ei</font><font color='#0000ff' weight='2.36742e-05' id='200'>+</font><font color='#0000ff' weight='2.36742e-05' id='202'>1</font></font>)</font>;
+    }</font>
+    public static void display(int[] arr) {
+        for (int val : arr) {
+            
+            System.out.print(val + ",");
+        }
+        System.out.println("end");
+    }</font>
+</pre>

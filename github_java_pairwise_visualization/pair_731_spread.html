@@ -1,0 +1,77 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+   public static void mergeSort(int[] arr) {
+      if (arr.length &gt; 1) {
+         int[] left = leftHalf(arr);
+         int[] right = rightHalf(arr);
+
+         mergeSort(left);
+         mergeSort(right);
+
+         mergeArrays(arr, left, right);
+      }
+   }
+
+   public static int[] leftHalf(int[] arr) {
+      int size = arr.length / 2;
+      int[] left = new int[size];
+      for (int i = 0; i &lt; size; i++) {
+         left<font color='#ff0000' weight='1' id='228'></font>[i] = arr[i];
+      }
+      return left;
+   }
+
+   public static int[] rightHalf(int[] arr) {
+      int size1 = arr.length / 2;
+      int size2 = arr.length - size1;
+      int[] right = new int[size2];
+      for (int i = 0; i &lt; size2; i++) {
+         right[i] = arr[i + size1];
+      }
+      return right;
+   }
+
+   public static void mergeArrays(int[] arr, int[] left, int[] right) {
+      int i1 = 0;
+      int i2 = 0;
+
+      for (int i = 0; i &lt; arr.length; i++) {
+         if (i2 &gt;= right.length || (i1 &lt; left.length &amp;&amp; left[i1] &lt;= right[i2])) {
+            arr[i] = left[i1];
+            i1++;
+         } else {
+            arr[i] = right[i2];
+            i2++;
+         }
+      }
+   }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static void sort(long[] valuesArray, int[] gapsArray) throws SortException <font color='#ff0000' weight='1' id='296'>{
+
+        <font color='#00aaff' weight='0.166667' id='67'>if(gapsArray.length <font color='#000eff' weight='0.0138889' id='45'>== </font><font color='#000eff' weight='0.0138889' id='47'>0</font>) <font color='#0054ff' weight='0.0833333' id='65'><font color='#0054ff' weight='0.0833333' id='64'>throw <font color='#002aff' weight='0.0416667' id='62'><font color='#0015ff' weight='0.0208333' id='52'>new<font color='#0015ff' weight='0.0208333' id='51'></font> </font><font color='#000aff' weight='0.0104167' id='54'>EmptyArrayException</font>(<font color='#0005ff' weight='0.00520833' id='56'>"Gaps array can not by empty"<font color='#0005ff' weight='0.00520833' id='55'></font></font>)<font color='#0005ff' weight='0.00520833' id='59'></font>;</font><font color='#002aff' weight='0.0416667' id='63'></font></font></font>
+
+        </font>int <font color='#001cff' weight='0.0277778' id='72'>endGap </font>= <font color='#001cff' weight='0.0277778' id='90'><font color='#001cff' weight='0.0277778' id='89'><font color='#000eff' weight='0.0138889' id='74'>gapsArray<font color='#000eff' weight='0.0138889' id='73'></font></font><font color='#000eff' weight='0.0138889' id='88'>[<font color='#0007ff' weight='0.00694444' id='86'><font color='#0000ff' weight='0.000771605' id='76'>gapsArray</font>.length<font color='#0002ff' weight='0.00231481' id='83'>-</font><font color='#0002ff' weight='0.00231481' id='85'>1</font>]</font><font color='#0007ff' weight='0.00694444' id='87'></font></font></font></font>;
+        <font color='#00aaff' weight='0.166667' id='120'>if<font color='#0054ff' weight='0.0833333' id='103'>(<font color='#000eff' weight='0.0138889' id='96'>endGap </font><font color='#000eff' weight='0.0138889' id='98'>!= </font><font color='#000eff' weight='0.0138889' id='100'>1<font color='#000eff' weight='0.0138889' id='99'></font></font>)</font><font color='#0054ff' weight='0.0833333' id='119'> <font color='#0054ff' weight='0.0833333' id='118'><font color='#0054ff' weight='0.0833333' id='117'>throw <font color='#002aff' weight='0.0416667' id='115'><font color='#0015ff' weight='0.0208333' id='105'>new </font><font color='#0015ff' weight='0.0208333' id='114'><font color='#000aff' weight='0.0104167' id='107'>InvalidGapSequenceException</font><font color='#000aff' weight='0.0104167' id='113'>(<font color='#0005ff' weight='0.00520833' id='111'><font color='#0005ff' weight='0.00520833' id='110'><font color='#0005ff' weight='0.00520833' id='109'>"Gaps sequence must end with 1"<font color='#0005ff' weight='0.00520833' id='108'></font></font></font>)</font><font color='#0005ff' weight='0.00520833' id='112'></font></font></font>;</font><font color='#002aff' weight='0.0416667' id='116'></font></font></font></font>
+
+
+        </font>int <font color='#001cff' weight='0.0277778' id='125'>valuesArraySize </font>= <font color='#0009ff' weight='0.00925926' id='127'>valuesArray</font>.length;
+
+        <font color='#00aaff' weight='0.166667' id='294'>for <font color='#0054ff' weight='0.0833333' id='150'>(<font color='#002aff' weight='0.0416667' id='148'><font color='#002aff' weight='0.0416667' id='147'>int <font color='#000eff' weight='0.0138889' id='142'>gap </font><font color='#000eff' weight='0.0138889' id='146'>: <font color='#000eff' weight='0.0138889' id='145'><font color='#000eff' weight='0.0138889' id='144'>gapsArray</font></font></font></font>)</font><font color='#002aff' weight='0.0416667' id='149'></font> </font><font color='#0054ff' weight='0.0833333' id='293'>{
+
+            <font color='#002aff' weight='0.0416667' id='291'>for (int i = <font color='#0000ff' weight='0.000868056' id='157'>gap<font color='#0000ff' weight='0.000868056' id='156'></font></font>; i &lt; <font color='#0000ff' weight='0.000868056' id='168'>valuesArraySize</font>; i++) <font color='#0015ff' weight='0.0208333' id='290'>{
+
+                <font color='#0004ff' weight='0.00416667' id='197'><font color='#0002ff' weight='0.00208333' id='195'><font color='#0000ff' weight='0.000694444' id='182'><font color='#0000ff' weight='0.000694444' id='181'>long</font> </font><font color='#0000ff' weight='0.000694444' id='184'>value </font><font color='#0000ff' weight='0.000694444' id='194'>= <font color='#0000ff' weight='0.000694444' id='193'><font color='#0000ff' weight='0.000347222' id='186'>valuesArray</font>[i]</font></font>;</font><font color='#0002ff' weight='0.00208333' id='196'></font>
+                </font>int <font color='#0000ff' weight='0.000694444' id='202'>j </font>= <font color='#0000ff' weight='0.000694444' id='204'>i<font color='#0000ff' weight='0.000694444' id='203'></font></font>;
+
+                <font color='#0004ff' weight='0.00416667' id='273'>while <font color='#0002ff' weight='0.00208333' id='236'>(<font color='#0000ff' weight='0.00014881' id='211'>j </font>&gt;= <font color='#0000ff' weight='0.00014881' id='215'>gap </font>&amp;&amp; <font color='#0000ff' weight='7.44048e-05' id='219'>valuesArray</font>[<font color='#0000ff' weight='1.24008e-05' id='221'>j </font><font color='#0000ff' weight='1.24008e-05' id='223'>-<font color='#0000ff' weight='1.24008e-05' id='222'></font> </font><font color='#0000ff' weight='1.24008e-05' id='225'>gap<font color='#0000ff' weight='1.24008e-05' id='224'></font></font>] <font color='#0000ff' weight='0.00014881' id='231'>&gt; </font><font color='#0000ff' weight='0.00014881' id='233'>value</font>) </font><font color='#0002ff' weight='0.00208333' id='272'>{
+                    <font color='#0000ff' weight='5.78704e-05' id='238'>valuesArray</font>[<font color='#0000ff' weight='2.89352e-05' id='240'>j</font>] = <font color='#0000ff' weight='5.78704e-05' id='248'>valuesArray</font>[<font color='#0000ff' weight='9.64506e-06' id='250'>j </font><font color='#0000ff' weight='9.64506e-06' id='252'>-<font color='#0000ff' weight='9.64506e-06' id='251'></font> </font><font color='#0000ff' weight='9.64506e-06' id='254'>gap<font color='#0000ff' weight='9.64506e-06' id='253'></font></font>];
+                    <font color='#0000ff' weight='0.000115741' id='263'>j </font><font color='#0000ff' weight='0.000115741' id='265'>-= </font><font color='#0000ff' weight='0.000115741' id='267'>gap<font color='#0000ff' weight='0.000115741' id='266'></font></font>;
+                }</font>
+
+                </font><font color='#0000ff' weight='0.000347222' id='275'>valuesArray</font>[<font color='#0000ff' weight='0.000173611' id='277'>j</font>] = <font color='#0000ff' weight='0.000694444' id='285'>value</font>;
+            }<font color='#0004ff' weight='0.00416667' id='289'></font></font>
+        }</font><font color='#002aff' weight='0.0416667' id='292'></font></font>
+    }</font><font color='#00aaff' weight='0.166667' id='295'></font></font></font>
+</pre>

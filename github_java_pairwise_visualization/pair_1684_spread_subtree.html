@@ -1,0 +1,51 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+   public <font color='#0000ff' weight='0.000915751' id='4'>static </font><font color='#0001ff' weight='0.0018315' id='7'>void </font><font color='#0000ff' weight='0.000915751' id='9'>insertionSort</font>(<font color='#0002ff' weight='0.00274725' id='19'>int[] list, </font>int n) {
+        <font color='#0000ff' weight='0.000381563' id='34'>int i, </font><font color='#0000ff' weight='3.81563e-05' id='37'>j</font>, key;
+        
+        
+        for (<font color='#0000ff' weight='6.35938e-06' id='46'>i </font>= 1; <font color='#0000ff' weight='0.00030525' id='62'>i <font color='#0000ff' weight='6.35938e-06' id='57'>&lt; </font><font color='#0000ff' weight='6.35938e-06' id='59'>n</font>; </font>i++) {
+            <font color='#0000ff' weight='0.000534188' id='85'><font color='#0000ff' weight='0.000228938' id='83'>key = list<font color='#0000ff' weight='1.27188e-05' id='81'>[<font color='#0000ff' weight='1.58985e-06' id='78'>i</font>]</font>;</font> 
+            
+            
+            
+            
+            </font>for (<font color='#0000ff' weight='4.76954e-07' id='87'>j </font>= i <font color='#0000ff' weight='4.76954e-07' id='93'>- </font><font color='#0000ff' weight='4.76954e-07' id='95'>1</font>; j &gt;= 0 &amp;&amp; list[j] <font color='#0000ff' weight='3.40681e-07' id='116'>&gt; </font>key; j--) {
+                <font color='#0000ff' weight='0.000228938' id='154'><font color='#0000ff' weight='7.94923e-07' id='131'>list</font>[j+1] = <font color='#0000ff' weight='7.94923e-07' id='145'>list</font>[j];
+            }</font>
+            
+            <font color='#0000ff' weight='0.000686813' id='176'><font color='#0000ff' weight='3.17969e-06' id='159'>list</font>[j+1] = <font color='#0000ff' weight='6.35938e-06' id='173'>key</font>;
+        }</font>
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void sort(Comparable[] a){
+        int N = a.length;               
+        int h = 1;                      
+        while(h &lt; N / 3) h = 3*h + 1;   
+        while(h &gt;= 1){                  
+            for(int i = h; i &lt; N; i++){
+                
+                for(int j = i; j &gt;= h &amp;&amp; less(a[j], a[j - h]); j-= h)
+                    exch(a, j, j - h);
+            } 
+            h = h / 3;                  
+        }                              
+    }
+    
+    
+    
+    
+    
+    
+    public static boolean less(Comparable v, Comparable w)
+    <font color='#ff0000' weight='1' id='278'>{    <font color='#00ff2e' weight='0.454545' id='276'>return <font color='#00d0ff' weight='0.204545' id='274'><font color='#0032ff' weight='0.0492424' id='269'><font color='#000bff' weight='0.0113636' id='262'><font color='#0000ff' weight='0.000631313' id='257'>v</font><font color='#0000ff' weight='0.000631313' id='259'>.</font>compareTo</font><font color='#0009ff' weight='0.0094697' id='268'>(<font color='#0002ff' weight='0.00284091' id='266'><font color='#0001ff' weight='0.00189394' id='265'>w</font>)</font></font> </font><font color='#0003ff' weight='0.00378788' id='271'>&lt; </font><font color='#0003ff' weight='0.00378788' id='273'>0</font>;</font> }</font></font>
+    
+    
+    private static void exch(Comparable[] a, int i, int j){
+        Comparable swap = a[i];
+        a[i] = a[j];
+        a[j] = swap;
+    }</font>
+</pre>

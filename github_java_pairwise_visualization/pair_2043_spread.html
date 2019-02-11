@@ -1,0 +1,96 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static &lt;T extends Comparable&lt;T&gt;&gt; void sort(List&lt;T&gt; itemsToSort) {
+        for (int i = 0; i &lt; itemsToSort.size(); i++) {
+            for (int j = itemsToSort.size() - 1; j &gt; 0; j--) {
+                T secondItem = itemsToSort.get(j);
+                <font color='#00ffff' weight='0.25' id='168'>T firstItem = itemsToSort.get(j - 1);
+
+                </font>if (secondItem<font color='#0003ff' weight='0.00347222' id='169'></font>.compareTo(firstItem)<font color='#0005ff' weight='0.00520833' id='180'></font> <font color='#0015ff' weight='0.0208333' id='184'>&lt; </font>0<font color='#0015ff' weight='0.0208333' id='185'></font>) {
+                    itemsToSort.set<font color='#000aff' weight='0.0104167' id='206'>(j, firstItem)<font color='#0003ff' weight='0.00347222' id='205'></font></font>;
+                    itemsToSort.set(j <font color='#0001ff' weight='0.00115741' id='221'>- </font>1<font color='#0001ff' weight='0.00115741' id='222'></font>, secondItem);
+                }
+            }<font color='#00ffff' weight='0.25' id='240'></font>
+        }
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+
+public class AcyclicSP {
+
+    private double[] distTo;    
+    private DirectedEdge[] edgeTo;  
+
+    
+    
+    public AcyclicSP(EdgeWeightedDigraph G, int s) {
+        distTo = new double[G.V()];
+        edgeTo = new DirectedEdge[G.V()];
+
+        validateVertex(s);
+
+        for (int v = 0; v &lt; G.V(); v++) {
+            distTo[v] = Double.POSITIVE_INFINITY;
+        }
+        distTo[s] = 0.0;
+
+        
+        Topological topological = new Topological<font color='#ff0000' weight='1' id='202'>(<font color='#00ff00' weight='0.5' id='200'><font color='#00ff00' weight='0.5' id='199'><font color='#00ff00' weight='0.5' id='198'>G<font color='#00ff00' weight='0.5' id='197'></font></font></font>)</font><font color='#00ff00' weight='0.5' id='201'></font></font>;
+        if (!topological.hasOrder()) {
+            throw new IllegalArgumentException("Digraph is not acyclic.");
+        }
+        for (int v : topological.order()) {
+            for (DirectedEdge e : G.adj(v)) {
+                relax(e);
+            }
+        }
+    }
+
+    
+    private void relax(DirectedEdge e) {
+        int v = e.from(), w = e.to();
+        if (distTo[w] &gt; distTo[v] + e.weight()) {
+            distTo[w] = distTo[v] + e.weight();
+            edgeTo[w] = e;
+        }
+    }
+
+    
+    public double distTo(int v) {
+        validateVertex(v);
+        return distTo[v];
+    }
+
+    
+    public boolean hasPathTo(int v) {
+        validateVertex(v);
+        return distTo[v] &lt; Double.POSITIVE_INFINITY;
+    }
+
+    
+    public Iterable&lt;DirectedEdge&gt; pathTo(int v) {
+        validateVertex(v);
+        if (!hasPathTo(v)) {
+            return null;
+        }
+        Stack&lt;DirectedEdge&gt; path = new Stack&lt;DirectedEdge&gt;();
+        for (DirectedEdge e = edgeTo[v]; e != null; e = edgeTo[e.from()]) {
+            path.push(e);
+        }
+        return path;
+    }
+
+    
+    private void validateVertex(int v) {
+        int V = distTo.length;
+        if (v &lt; 0 || v &gt;= V) {
+            throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V - 1));
+        }
+    }
+
+
+}
+</font>
+</pre>

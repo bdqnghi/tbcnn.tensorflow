@@ -1,0 +1,98 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+private List&lt;Stmt&gt; topologicalSort(StmtList stmts) {
+
+        List&lt;Stmt&gt; out = new ArrayList&lt;Stmt&gt;(stmts.getSize());
+        Stack&lt;Stmt&gt; stack = new Stack&lt;Stmt&gt;();
+        stack.push(stmts.getFirst());
+
+        boolean visitedFlag = false;
+
+        while (!stack.empty()) {
+            Stmt stmt = stack.pop();
+            if (stmt._cfg_visited == visitedFlag) {
+                continue;
+            }
+            if (stmt._cfg_froms.size() == 0 || stack.size() == 0) {
+                stmt._cfg_visited = visitedFlag;
+                out.add(stmt);
+                for (Stmt t : stmt._cfg_tos) {
+                    t._cfg_froms.remove(stmt);
+                    if (t._cfg_visited != visitedFlag) {
+                        stack.push(t);
+                    }
+                }
+            }
+        }
+        return out;
+    }
+
+    </font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+    public static &lt;T extends Comparable&lt;T&gt;&gt; void sort(List&lt;T&gt; a) {
+        Collections.shuffle(a);
+        sort(a, 0, a.size() - 1);
+    }
+
+    private static &lt;T extends Comparable&lt;T&gt;&gt; void sort(List&lt;T&gt; a, int lo, int hi) {
+        if (hi &lt;= lo + M) {
+            Insertion.sort(a, lo, hi);
+            return;
+        }
+
+        int j = partition(a, lo, hi);
+
+        sort(a, lo, j - 1);
+        sort(a, j + 1, hi);
+    }
+
+    
+    public static &lt;T extends Comparable&lt;T&gt;&gt; void mediansort(List&lt;T&gt; a) {
+        Collections.shuffle(a);
+        mediansort(a, 0, a.size() - 1);
+    }
+
+    private static &lt;T extends Comparable&lt;T&gt;&gt; void mediansort(List&lt;T&gt; a, int lo, int hi) {
+        if (hi &lt;= lo + M) {
+            Insertion.sort(a, lo, hi);
+            return;
+        }
+
+        T pivot = SortUtils.median(a, lo, hi);
+        int i = lo, j = hi - 1; 
+
+        for (; ; ) {
+            while (a.get(++i).compareTo(pivot) &lt; 0) ;
+            while (pivot.compareTo(a.get(--j)) &lt; 0) ;
+            if (i &lt; j)
+                SortUtils.exchange(a, i, j);
+            else break;
+        }
+
+        SortUtils.exchange(a, i, hi - 1); 
+
+        mediansort(a, lo, i - 1);
+        mediansort(a, i + 1, hi);
+    }
+
+    private static &lt;T extends Comparable&lt;T&gt;&gt; int partition(List&lt;T&gt; a, int lo, int hi) {
+        int i = lo;
+        int j = hi + 1;
+
+        T v = a.get(lo);
+
+        while (true) {
+            while (SortUtils.less(a.get(++i), v)) if (i == hi) break;
+            while (SortUtils.less(v, a.get(--j))) if (j == lo) break;
+
+            if (i &gt;= j) break;
+            SortUtils.exchange(a, i, j);
+        }
+
+        SortUtils.exchange(a, lo, j);
+
+        return j;
+    }</font>
+</pre>

@@ -1,0 +1,96 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+
+public class AcyclicSP {
+
+    private double[] distTo;    
+    private DirectedEdge[] edgeTo;  
+
+    
+    
+    public AcyclicSP(EdgeWeightedDigraph G, int s) {
+        distTo = new double[G.V()];
+        edgeTo = new DirectedEdge[G.V()];
+
+        validateVertex(s);
+
+        for (int v = 0; v &lt; G.V(); v++) {
+            distTo[v] = Double.POSITIVE_INFINITY;
+        }
+        distTo[s] = 0.0;
+
+        
+        Topological topological = new Topological<font color='#ff0000' weight='1' id='202'>(<font color='#00ffcb' weight='0.3' id='200'><font color='#00cbff' weight='0.2' id='199'><font color='#0066ff' weight='0.1' id='198'>G</font></font>)</font></font>;
+        if (!topological.hasOrder()) {
+            throw new IllegalArgumentException("Digraph is not acyclic.");
+        }
+        for (int v : topological.order()) {
+            for (DirectedEdge e : G.adj(v)) {
+                relax(e);
+            }
+        }
+    }
+
+    
+    private void relax(DirectedEdge e) {
+        int v = e.from(), w = e.to();
+        if (distTo[w] &gt; distTo[v] + e.weight()) {
+            distTo[w] = distTo[v] + e.weight();
+            edgeTo[w] = e;
+        }
+    }
+
+    
+    public double distTo(int v) {
+        validateVertex(v);
+        return distTo[v];
+    }
+
+    
+    public boolean hasPathTo(int v) {
+        validateVertex(v);
+        return distTo[v] &lt; Double.POSITIVE_INFINITY;
+    }
+
+    
+    public Iterable&lt;DirectedEdge&gt; pathTo(int v) {
+        validateVertex(v);
+        if (!hasPathTo(v)) {
+            return null;
+        }
+        Stack&lt;DirectedEdge&gt; path = new Stack&lt;DirectedEdge&gt;();
+        for (DirectedEdge e = edgeTo[v]; e != null; e = edgeTo[e.from()]) {
+            path.push(e);
+        }
+        return path;
+    }
+
+    
+    private void validateVertex(int v) {
+        int V = distTo.length;
+        if (v &lt; 0 || v &gt;= V) {
+            throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V - 1));
+        }
+    }
+
+
+}
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+   <font color='#ff0400' weight='0.99537' id='216'><font color='#0000ff' weight='0.000661376' id='2'>public </font><font color='#0000ff' weight='0.000661376' id='4'>static </font><font color='#0008ff' weight='0.00859788' id='18'>&lt;<font color='#0003ff' weight='0.00363757' id='16'><font color='#0000ff' weight='0.000165344' id='6'>Key </font><font color='#0001ff' weight='0.00132275' id='15'>extends <font color='#0001ff' weight='0.00115741' id='14'><font color='#0000ff' weight='8.2672e-05' id='8'>Comparable</font><font color='#0000ff' weight='0.000330688' id='13'>&lt;<font color='#0000ff' weight='8.2672e-05' id='11'><font color='#0000ff' weight='4.1336e-05' id='10'>Key</font>&gt;</font></font></font></font>&gt;</font> </font><font color='#0001ff' weight='0.00132275' id='21'><font color='#0000ff' weight='0.000661376' id='20'>void</font> </font><font color='#0000ff' weight='0.000661376' id='23'>sort</font><font color='#0007ff' weight='0.00727513' id='35'>(<font color='#0000ff' weight='0.000661376' id='28'><font color='#0000ff' weight='8.2672e-05' id='25'>Key</font><font color='#0000ff' weight='8.2672e-05' id='27'>[]</font></font> <font color='#0000ff' weight='0.000165344' id='31'>a</font>) </font><font color='#0078ff' weight='0.118386' id='215'>{
+        <font color='#0003ff' weight='0.00352734' id='52'><font color='#0001ff' weight='0.00154321' id='50'><font color='#0000ff' weight='7.34862e-05' id='38'><font color='#0000ff' weight='3.67431e-05' id='37'>int</font> </font><font color='#0000ff' weight='3.67431e-05' id='40'>n </font><font color='#0000ff' weight='0.000293945' id='49'>= <font color='#0000ff' weight='0.000257202' id='48'><font color='#0000ff' weight='0.000220459' id='47'><font color='#0000ff' weight='1.22477e-05' id='42'>a</font>.<font color='#0000ff' weight='1.22477e-05' id='46'>length</font></font></font></font>;</font>
+        </font><font color='#0023ff' weight='0.0352734' id='213'>for (int <font color='#0000ff' weight='4.59289e-06' id='57'>i </font>= 0; <font color='#0000ff' weight='4.59289e-06' id='66'>i </font>&lt; <font color='#0000ff' weight='4.59289e-06' id='70'>n</font>; <font color='#0000ff' weight='1.37787e-05' id='75'>i</font>++) <font color='#000eff' weight='0.0143298' id='212'>{
+            <font color='#0000ff' weight='4.59289e-06' id='83'>int</font> <font color='#0000ff' weight='4.59289e-06' id='86'>exchanges </font>= <font color='#0000ff' weight='9.18577e-06' id='89'><font color='#0000ff' weight='4.59289e-06' id='88'>0</font></font>;
+            <font color='#0002ff' weight='0.00281085' id='196'>for <font color='#0000ff' weight='0.000440917' id='126'>(<font color='#0000ff' weight='5.167e-05' id='109'><font color='#0000ff' weight='2.23903e-05' id='107'>int <font color='#0000ff' weight='5.74111e-07' id='98'>j </font>= <font color='#0000ff' weight='1.9137e-07' id='100'>n </font><font color='#0000ff' weight='1.9137e-07' id='102'>- </font><font color='#0000ff' weight='1.9137e-07' id='104'>1</font>;</font> </font><font color='#0000ff' weight='2.75573e-05' id='118'><font color='#0000ff' weight='5.74111e-07' id='111'>j </font>&gt; <font color='#0000ff' weight='5.74111e-07' id='115'>i</font>; </font><font color='#0000ff' weight='1.72233e-05' id='124'><font color='#0000ff' weight='1.37787e-05' id='123'><font color='#0000ff' weight='1.72233e-06' id='120'>j</font><font color='#0000ff' weight='1.72233e-06' id='122'>--</font></font>)</font> </font><font color='#0000ff' weight='0.000936949' id='195'>{
+                <font color='#0000ff' weight='0.000454696' id='193'>if <font color='#0000ff' weight='0.000106785' id='158'>(<font color='#0000ff' weight='4.99476e-05' id='156'><font color='#0000ff' weight='4.82253e-05' id='155'><font color='#0000ff' weight='8.61166e-07' id='128'>less</font><font color='#0000ff' weight='2.15292e-05' id='154'>(<font color='#0000ff' weight='2.5835e-06' id='138'><font color='#0000ff' weight='2.29644e-06' id='137'><font color='#0000ff' weight='1.43528e-07' id='130'>a</font>[<font color='#0000ff' weight='7.17639e-08' id='132'>j</font>]</font>, </font><font color='#0000ff' weight='3.73172e-06' id='152'><font color='#0000ff' weight='3.44467e-06' id='151'><font color='#0000ff' weight='1.43528e-07' id='140'>a</font>[<font color='#0000ff' weight='2.39213e-08' id='142'>j </font><font color='#0000ff' weight='2.39213e-08' id='144'>- </font><font color='#0000ff' weight='2.39213e-08' id='146'>1</font>]</font>)</font></font></font>)</font></font><font color='#0000ff' weight='0.000113674' id='192'> <font color='#0000ff' weight='0.000110229' id='191'>{
+                    <font color='#0000ff' weight='2.64091e-05' id='182'><font color='#0000ff' weight='1.20563e-05' id='180'><font color='#0000ff' weight='1.14822e-05' id='179'><font color='#0000ff' weight='2.87055e-07' id='160'>exch</font><font color='#0000ff' weight='4.87994e-06' id='178'>(<font color='#0000ff' weight='7.17639e-08' id='162'>a</font>, <font color='#0000ff' weight='7.17639e-08' id='166'>j</font>, <font color='#0000ff' weight='5.02347e-07' id='176'><font color='#0000ff' weight='4.30583e-07' id='175'><font color='#0000ff' weight='2.39213e-08' id='170'>j </font><font color='#0000ff' weight='2.39213e-08' id='172'>- </font><font color='#0000ff' weight='2.39213e-08' id='174'>1</font></font>)</font></font></font>;</font>
+                    </font><font color='#0000ff' weight='2.87055e-07' id='184'>exchanges</font><font color='#0000ff' weight='2.87055e-07' id='186'>++</font>;
+                }</font></font>
+            }</font></font>
+            </font>if (<font color='#0000ff' weight='2.29644e-06' id='198'>exchanges </font><font color='#0000ff' weight='2.29644e-06' id='200'>== </font>0) <font color='#0000ff' weight='2.75573e-05' id='208'><font color='#0000ff' weight='1.37787e-05' id='207'>break;</font></font>
+        }</font>
+    }</font></font></font></font>
+</pre>

@@ -1,0 +1,52 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public <font color='#00a9ff' weight='0.166659' id='4'>static </font><font color='#00a9ff' weight='0.166659' id='7'>void </font><font color='#00a9ff' weight='0.166659' id='9'>InsertionSort</font><font color='#00a9ff' weight='0.166659' id='21'>(int[] A)
+    </font><font color='#00a9ff' weight='0.166659' id='222'>{
+        <font color='#000eff' weight='0.0138794' id='27'>int temp,</font><font color='#000eff' weight='0.0138794' id='31'><font color='#0007ff' weight='0.00693487' id='28'></font><font color='#0007ff' weight='0.00693487' id='30'>j<font color='#0007ff' weight='0.00693487' id='29'></font></font>;</font><font color='#000eff' weight='0.0138794' id='32'></font>
+        for <font color='#0015ff' weight='0.0208239' id='67'>(<font color='#0005ff' weight='0.00519874' id='45'>int<font color='#0000ff' weight='0.000858419' id='34'></font> <font color='#0000ff' weight='0.000858419' id='38'>i </font>= <font color='#0000ff' weight='0.000858419' id='40'>0<font color='#0000ff' weight='0.000858419' id='39'></font></font>;<font color='#0002ff' weight='0.00259455' id='44'></font> </font><font color='#0005ff' weight='0.00519874' id='59'><font color='#0002ff' weight='0.00259455' id='57'>i<font color='#0000ff' weight='0.000858419' id='46'></font> &lt; <font color='#0000ff' weight='0.000279709' id='51'>A</font><font color='#0000ff' weight='0.000279709' id='53'>.</font><font color='#0000ff' weight='0.000279709' id='55'>length</font>;</font><font color='#0002ff' weight='0.00259455' id='58'></font> </font><font color='#0005ff' weight='0.00519874' id='65'><font color='#0005ff' weight='0.00519874' id='64'>i<font color='#0002ff' weight='0.00259455' id='60'></font>++</font>)</font><font color='#0005ff' weight='0.00519874' id='66'></font>
+        </font>{
+            <font color='#0003ff' weight='0.00346261' id='74'>j<font color='#0001ff' weight='0.00114777' id='68'></font> <font color='#0001ff' weight='0.00114777' id='71'>=<font color='#0001ff' weight='0.00114777' id='70'></font> </font>i<font color='#0001ff' weight='0.00114777' id='72'></font>;</font><font color='#0003ff' weight='0.00346261' id='75'></font>
+            <font color='#0007ff' weight='0.00693487' id='184'>while (<font color='#0000ff' weight='0.000238373' id='78'>j<font color='#0000ff' weight='0.000238373' id='77'></font> </font>&gt; 0 <font color='#0000ff' weight='0.000238373' id='84'>&amp;&amp;<font color='#0000ff' weight='0.000238373' id='83'></font> </font>A<font color='#0000ff' weight='0.000114364' id='85'></font>[j<font color='#0000ff' weight='1.1023e-05' id='87'></font>-1] <font color='#0000ff' weight='0.000238373' id='98'>&gt;<font color='#0000ff' weight='0.000238373' id='97'></font> </font>A[j])
+            {
+                <font color='#0000ff' weight='0.00033758' id='122'>temp = <font color='#0000ff' weight='0.000106097' id='121'>A[j]</font>;</font>
+                <font color='#0000ff' weight='0.000106097' id='132'>A[<font color='#0000ff' weight='1.92903e-05' id='129'><font color='#0000ff' weight='1.92903e-05' id='128'>j</font>]</font> </font>= A[j-1];
+                <font color='#0000ff' weight='0.000684806' id='168'>A[j-1] = temp<font color='#0000ff' weight='0.000106097' id='164'></font>;
+                </font><font color='#0000ff' weight='0.00033758' id='179'>j<font color='#0000ff' weight='5.98e-05' id='169'></font> <font color='#0000ff' weight='5.98e-05' id='172'>= </font>j<font color='#0000ff' weight='5.98e-05' id='176'>-</font><font color='#0000ff' weight='5.98e-05' id='178'>1</font>;</font><font color='#0000ff' weight='0.00033758' id='180'></font>
+            }<font color='#0000ff' weight='0.000684806' id='182'></font>           
+        }</font>
+        System<font color='#0002ff' weight='0.00207371' id='188'></font>.out<font color='#0002ff' weight='0.00207371' id='192'></font>.println<font color='#0002ff' weight='0.00207371' id='196'></font>(<font color='#0005ff' weight='0.00519874' id='212'><font color='#0000ff' weight='0.000858419' id='200'>Arrays</font><font color='#0000ff' weight='0.000858419' id='202'>.<font color='#0000ff' weight='0.000858419' id='201'></font></font><font color='#0000ff' weight='0.000858419' id='204'>toString<font color='#0000ff' weight='0.000858419' id='203'></font></font>(<font color='#0001ff' weight='0.00129245' id='209'><font color='#0001ff' weight='0.00129245' id='207'>A</font>)</font><font color='#0001ff' weight='0.00129245' id='210'></font></font>);
+    }<font color='#002aff' weight='0.0416574' id='221'></font></font>
+
+      
+    </font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void sort(Comparable[] a) {
+    int n = a.length;
+
+    
+    int h = 1;
+    while (h &lt; n/3) h = 3*h + 1;
+
+    while (h &gt;= 1) {
+      
+      for (int i = h; i &lt; n; i++) {
+        for (int j = i; j &gt;= h &amp;&amp; less(a[j], a[j-h]); j -= h) {
+          exch(a, j, j-h);
+        }
+      }
+      h /= 3;
+    }
+  }
+
+  private static boolean less(Comparable v, Comparable w) <font color='#ff0000' weight='1' id='275'>{
+    <font color='#00ff00' weight='0.5' id='273'>return <font color='#00ffff' weight='0.25' id='271'><font color='#0054ff' weight='0.0833333' id='266'><font color='#002aff' weight='0.0416667' id='259'><font color='#000eff' weight='0.0138889' id='254'>v</font><font color='#000eff' weight='0.0138889' id='256'>.</font><font color='#000eff' weight='0.0138889' id='258'>compareTo</font></font><font color='#002aff' weight='0.0416667' id='265'>(<font color='#0015ff' weight='0.0208333' id='263'><font color='#0015ff' weight='0.0208333' id='262'><font color='#0015ff' weight='0.0208333' id='261'>w<font color='#0015ff' weight='0.0208333' id='260'></font></font></font>)</font><font color='#0015ff' weight='0.0208333' id='264'></font></font> </font><font color='#0054ff' weight='0.0833333' id='268'>&lt; </font><font color='#0054ff' weight='0.0833333' id='270'>0</font>;</font><font color='#00ffff' weight='0.25' id='272'></font>
+  }</font></font>
+
+  private static void exch(Object[] a, int i, int j) {
+    Object swap = a[i];
+    a[i] = a[j];
+    a[j] = swap;
+  }</font>
+</pre>

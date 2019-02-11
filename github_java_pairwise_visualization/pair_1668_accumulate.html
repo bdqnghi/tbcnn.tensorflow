@@ -1,0 +1,64 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public void topSort(Graph g) {
+        initDfs(g);
+        for (int i = 1; i &lt;= g.numV; i++) {
+            if (!mDiscovered[i]) {
+                idfs(i, g);
+            }
+            if (mFinished) return;
+        }
+        while (mSorted.size() &gt; 0) {
+            out(mSorted.pop() + " ");
+        }
+        outln("");
+    }
+
+    </font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+    public static void buildheap(int []a){
+        n=a.length-1;
+        for(int i=n/2;i&gt;=0;i--){
+            maxheap(a,i);
+        }
+    }
+    
+    public static void maxheap(int[] a, int i)<font color='#ff0000' weight='1' id='295'>{ 
+        <font color='#ff0000' weight='1' id='135'><font color='#ff0000' weight='1' id='133'><font color='#ff0000' weight='1' id='124'>left<font color='#ff0000' weight='1' id='123'></font></font><font color='#ff0000' weight='1' id='126'>=<font color='#ff0000' weight='1' id='125'></font></font><font color='#ff0000' weight='1' id='128'>2<font color='#ff0000' weight='1' id='127'></font></font><font color='#ff0000' weight='1' id='130'>*<font color='#ff0000' weight='1' id='129'></font></font><font color='#ff0000' weight='1' id='132'>i<font color='#ff0000' weight='1' id='131'></font></font>;</font><font color='#ff0000' weight='1' id='134'></font>
+        </font><font color='#ff0000' weight='1' id='152'><font color='#ff0000' weight='1' id='150'><font color='#ff0000' weight='1' id='137'>right<font color='#ff0000' weight='1' id='136'></font></font><font color='#ff0000' weight='1' id='139'>=<font color='#ff0000' weight='1' id='138'></font></font><font color='#ff0000' weight='1' id='141'>2<font color='#ff0000' weight='1' id='140'></font></font><font color='#ff0000' weight='1' id='143'>*<font color='#ff0000' weight='1' id='142'></font></font><font color='#ff0000' weight='1' id='145'>i<font color='#ff0000' weight='1' id='144'></font></font><font color='#ff0000' weight='1' id='147'>+<font color='#ff0000' weight='1' id='146'></font></font>1;</font><font color='#ff0000' weight='1' id='151'></font>
+        </font><font color='#ff0000' weight='1' id='206'>if<font color='#ff0000' weight='1' id='181'>(left &lt;= <font color='#ff0000' weight='1' id='158'>n </font><font color='#ff0000' weight='1' id='160'>&amp;&amp; </font><font color='#ff0000' weight='1' id='168'>a<font color='#ff0000' weight='1' id='167'>[<font color='#ff0000' weight='1' id='165'><font color='#ff0000' weight='1' id='164'>left<font color='#ff0000' weight='1' id='163'></font></font>]</font><font color='#ff0000' weight='1' id='166'></font></font> </font><font color='#ff0000' weight='1' id='170'>&gt;<font color='#ff0000' weight='1' id='169'></font> </font><font color='#ff0000' weight='1' id='178'><font color='#ff0000' weight='1' id='172'>a<font color='#ff0000' weight='1' id='171'></font></font><font color='#ff0000' weight='1' id='177'>[<font color='#ff0000' weight='1' id='175'><font color='#ff0000' weight='1' id='174'>i<font color='#ff0000' weight='1' id='173'></font></font>]</font><font color='#ff0000' weight='1' id='176'></font></font></font>)</font><font color='#ff0000' weight='1' id='193'><font color='#ff0000' weight='1' id='192'>{
+            <font color='#ff0000' weight='1' id='190'><font color='#ff0000' weight='1' id='188'>largest=<font color='#ff0000' weight='1' id='187'>left<font color='#ff0000' weight='1' id='186'></font></font>;</font><font color='#ff0000' weight='1' id='189'></font>
+        }</font><font color='#ff0000' weight='1' id='191'></font></font>
+        </font><font color='#ff0000' weight='1' id='205'>else<font color='#ff0000' weight='1' id='204'>{
+            <font color='#ff0000' weight='1' id='202'><font color='#ff0000' weight='1' id='200'><font color='#ff0000' weight='1' id='195'>largest<font color='#ff0000' weight='1' id='194'></font></font><font color='#ff0000' weight='1' id='197'>=<font color='#ff0000' weight='1' id='196'></font></font><font color='#ff0000' weight='1' id='199'>i<font color='#ff0000' weight='1' id='198'></font></font>;</font><font color='#ff0000' weight='1' id='201'></font>
+        }</font><font color='#ff0000' weight='1' id='203'></font></font></font>
+        
+        </font><font color='#ff0000' weight='1' id='248'>if(<font color='#ff0000' weight='1' id='208'>right<font color='#ff0000' weight='1' id='207'></font> </font>&lt;= <font color='#ff0000' weight='1' id='212'>n<font color='#ff0000' weight='1' id='211'></font> </font><font color='#ff0000' weight='1' id='214'>&amp;&amp;<font color='#ff0000' weight='1' id='213'></font> </font>a[right] <font color='#ff0000' weight='1' id='224'>&gt;<font color='#ff0000' weight='1' id='223'></font> </font><font color='#ff0000' weight='1' id='232'><font color='#ff0000' weight='1' id='226'>a<font color='#ff0000' weight='1' id='225'></font></font><font color='#ff0000' weight='1' id='231'>[<font color='#ff0000' weight='1' id='229'><font color='#ff0000' weight='1' id='228'>largest<font color='#ff0000' weight='1' id='227'></font></font>]</font><font color='#ff0000' weight='1' id='230'></font></font></font>)<font color='#ff0000' weight='1' id='247'><font color='#ff0000' weight='1' id='246'>{
+            <font color='#ff0000' weight='1' id='244'><font color='#ff0000' weight='1' id='242'><font color='#ff0000' weight='1' id='237'>largest<font color='#ff0000' weight='1' id='236'></font></font><font color='#ff0000' weight='1' id='239'>=<font color='#ff0000' weight='1' id='238'></font></font><font color='#ff0000' weight='1' id='241'>right<font color='#ff0000' weight='1' id='240'></font></font>;</font><font color='#ff0000' weight='1' id='243'></font>
+        }</font><font color='#ff0000' weight='1' id='245'></font></font></font>
+        </font><font color='#ff0000' weight='1' id='293'>if<font color='#ff0000' weight='1' id='257'>(<font color='#ff0000' weight='1' id='255'><font color='#ff0000' weight='1' id='250'>largest<font color='#ff0000' weight='1' id='249'></font></font><font color='#ff0000' weight='1' id='252'>!=<font color='#ff0000' weight='1' id='251'></font></font><font color='#ff0000' weight='1' id='254'>i<font color='#ff0000' weight='1' id='253'></font></font>)</font><font color='#ff0000' weight='1' id='256'></font></font><font color='#ff0000' weight='1' id='292'>{
+            exchange(i,largest);
+            <font color='#ff0000' weight='1' id='289'><font color='#ff0000' weight='1' id='287'><font color='#ff0000' weight='1' id='286'><font color='#ff0000' weight='1' id='275'>maxheap<font color='#ff0000' weight='1' id='274'></font></font><font color='#ff0000' weight='1' id='285'>(<font color='#ff0000' weight='1' id='279'><font color='#ff0000' weight='1' id='278'><font color='#ff0000' weight='1' id='277'>a<font color='#ff0000' weight='1' id='276'></font></font></font>, </font><font color='#ff0000' weight='1' id='283'><font color='#ff0000' weight='1' id='282'><font color='#ff0000' weight='1' id='281'>largest<font color='#ff0000' weight='1' id='280'></font></font></font>)</font><font color='#ff0000' weight='1' id='284'></font></font></font>;</font><font color='#ff0000' weight='1' id='288'></font>
+        }</font><font color='#ff0000' weight='1' id='290'></font></font>
+    }</font><font color='#ff0000' weight='1' id='294'></font></font>
+    
+    public static void exchange(int i, int j){
+        int t=a[i];
+        a[i]=a[j];
+        a[j]=t; 
+        }
+    
+    public static void sort(int []a0){
+        a=a0;
+        buildheap(a);
+        
+        for(int i=n;i&gt;0;i--){
+            exchange(0, i);
+            n=n-1;
+            maxheap(a, 0);
+        }
+    }</font>
+</pre>

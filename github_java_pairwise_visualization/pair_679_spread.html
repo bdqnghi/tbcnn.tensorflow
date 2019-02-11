@@ -1,0 +1,62 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public int[] mergesort(int[] arr) {
+    int len = arr.length; 
+    if (len &lt;= 1)
+      return arr; 
+    int alen = len / 2; 
+    int blen = len - alen; 
+    int[] a = new int[alen];
+    int[] b = new int[blen]; 
+    for (int i = 0; i &lt; alen; i++) 
+      a[i] = arr[i];
+    for (int i = 0; i &lt; blen; i++)
+      b[i] = arr[alen + i];
+    return merge(mergesort(a), mergesort(b));
+  }
+  
+  public int[] merge(int[] a, int[] b) {
+    int alen = a.length; 
+    int blen = b.length; 
+    int len = alen + blen; 
+    int[] arr = new int[len];
+    int i = 0, j = 0, k = 0; 
+    while (k &lt; len) { 
+      while (i &lt; alen &amp;&amp; j &lt; blen) 
+        if (a[i] &lt; b[j])  
+          arr[k++] = a[i++];
+        else if (a[i] &gt; b[j])<font color='#ff0000' weight='1' id='502'></font> 
+          arr[k++] = b[j++];
+        else { 
+          arr[k++] = a[i++]; 
+          arr[k++] = b[j++];
+        }
+        while (i &lt; alen)  
+          arr[k++] = a[i++];
+        while (j &lt; blen)
+          arr[k++] = b[j++];
+    }
+    return arr; 
+  }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+    public static void insertionSort() {
+        int ii = 0, jj = 0;
+        for (ii = 1; ii &lt; InsertionSort.ITEMS.length; ii++) {
+            jj = ii;
+            while ((jj &gt; 0)
+                    &amp;&amp; (InsertionSort.ITEMS[jj] &lt; <font color='#00ffff' weight='0.25' id='105'>InsertionSort</font><font color='#00ffff' weight='0.25' id='107'>.<font color='#00ffff' weight='0.25' id='106'></font></font><font color='#00ffff' weight='0.25' id='109'>ITEMS<font color='#00ffff' weight='0.25' id='108'></font></font>[<font color='#002aff' weight='0.0416667' id='111'>jj </font><font color='#002aff' weight='0.0416667' id='113'>- </font><font color='#002aff' weight='0.0416667' id='115'>1<font color='#002aff' weight='0.0416667' id='114'></font></font>])) {
+                swap(jj, jj - 1);
+                jj -= 1;
+            }
+        }
+    }
+
+    public static void swap(final int ii, final int jj) {
+        final int temp = InsertionSort.ITEMS[ii];
+        InsertionSort.ITEMS[ii] = InsertionSort.ITEMS[jj];
+        InsertionSort.ITEMS[jj] = temp;
+    }</font>
+</pre>

@@ -1,0 +1,77 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static void quicksort(int[] a, int start, int end) {
+        if (start &gt;= end)
+            return;
+
+        int pavot = a[start];
+        int i = start;
+        int j = end;
+
+        while (i &lt; j) {
+            while (i &lt; j &amp;&amp; a[j] &gt; pavot)
+                j--;
+            while (i &lt; j &amp;&amp; a[i] &lt;= pavot)
+                i++;
+            if (i != j) {
+                int t = a[i];
+                a[i] = a[j];
+                a[j] = t;
+            }
+        }
+        if (i == j) {
+            int t = a[start];
+            a[start] = a[i];
+            a[j] = t;
+        }
+        quicksort(a, start, i - 1);
+        quicksort(a, i + 1, end);
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+    void ordenaArray(int iz, int de) {
+
+        int i, j, x, w;
+
+        i = iz;
+        j = de;
+
+        x = vector[(iz + de) / 2];
+
+        do {
+
+            while (vector[i] &lt; x) {
+                i++; 
+            }
+
+            while (x &lt; vector[j]) {
+                j--; 
+            }
+
+            if (i &lt;= j) {
+
+                w = vector[i];
+
+                vector[i] = vector[j];
+
+                vector[j] = w;
+                i++;  
+                j--; 
+            }
+        } while (i &lt;= j);
+
+
+        w = vector[i];
+        vector[i] = vector[de];
+        vector[de] = w;
+
+        if (iz &lt; j) {
+            ordenaArray(iz, j);
+        }
+        if (i &lt; de) {
+            ordenaArray(i, de);
+        }
+    }</font>
+</pre>

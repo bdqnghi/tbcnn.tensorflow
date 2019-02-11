@@ -1,0 +1,75 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ <font color='#00feff' weight='0.249964' id='2'>void<font color='#00feff' weight='0.249964' id='1'></font></font> <font color='#00feff' weight='0.249964' id='5'>sort</font><font color='#00feff' weight='0.249964' id='17'>(<font color='#007fff' weight='0.124958' id='15'>double arr[])</font>
+    </font>{
+        <font color='#0054ff' weight='0.0832891' id='34'>int n = arr.length;
+         </font>for (<font color='#0005ff' weight='0.00516036' id='44'>int i = <font color='#0001ff' weight='0.00168797' id='41'>0</font>;</font><font color='#0005ff' weight='0.00516036' id='45'></font> i<font color='#0001ff' weight='0.000993489' id='47'></font> <font color='#0001ff' weight='0.000993489' id='50'>&lt; </font>n-<font color='#0001ff' weight='0.000993489' id='56'>1</font>; <font color='#0005ff' weight='0.00516036' id='61'>i</font>++)
+        {
+            <font color='#0007ff' weight='0.00689655' id='79'><font color='#0001ff' weight='0.00110924' id='70'>int </font>min_idx<font color='#0001ff' weight='0.00110924' id='71'></font> = i;
+            </font>for (int j = i+1; j &lt; n; j++)
+                if (arr[<font color='#0000ff' weight='2.41138e-05' id='116'>j</font>] &lt; arr[min_idx])
+                    min_idx = j;
+ 
+
+            double temp = arr[min_idx];
+            <font color='#0007ff' weight='0.00689655' id='186'>arr[min_idx] = arr[i];
+            </font><font color='#0007ff' weight='0.00689655' id='201'><font color='#0001ff' weight='0.00110924' id='194'>arr<font color='#0000ff' weight='0.000530504' id='187'></font>[i] </font>=<font color='#0001ff' weight='0.00110924' id='195'></font> temp<font color='#0001ff' weight='0.00110924' id='197'></font>;
+        }</font><font color='#0007ff' weight='0.00689655' id='202'></font>
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ static int[] mergeSort(int[] a){
+        int n = a.length;
+        int[] left;
+        int[] right;
+
+        if(n % 2 == 0){
+            left  = new int[n / 2];
+            right = new int[n / 2];
+        } else {
+            left  = new int[n / 2];
+            right = new int[n / 2 + 1];
+        }
+
+        for(int i = 0; i &lt; n; i++){
+            if<font color='#ff0000' weight='1' id='211'>(i &lt; n/2)</font>{
+                left[i] = a[i];
+            } else {
+                right[i - n/2] = a[i];
+            }
+        }
+
+        left = mergeSort(left);
+        right = mergeSort(right);
+
+        return merge(left, right);
+
+    }
+
+    static int[] merge(int[] left, int[] right){
+        int[] result = new int[left.length + right.length];
+        
+        int i = 0;
+        int j = 0;
+        int index = 0;
+
+        while(i &lt; left.length &amp;&amp; j &lt; right.length){
+            if(left[i] &lt; right[i]){
+                result[index++] = left[i++];
+            } else {
+                result[index++] = right[j++];
+            }
+        }
+
+        while(i &lt; left.length){
+            result[index++] = left[i++];
+        }
+
+        while (j &lt; right.length) {
+            result[index++] = right[j++];
+        }
+        
+        return result;
+    }</font>
+</pre>

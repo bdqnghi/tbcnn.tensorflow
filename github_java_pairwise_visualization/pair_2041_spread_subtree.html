@@ -1,0 +1,51 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+<font color='#ff0600' weight='0.994048' id='168'>private <font color='#0001ff' weight='0.00119048' id='4'>void</font> <font color='#0001ff' weight='0.00119048' id='7'>insertionSort</font><font color='#0015ff' weight='0.0214286' id='26'>(<font color='#0003ff' weight='0.00357143' id='17'>int[] <font color='#0000ff' weight='0.000198413' id='15'>a</font>, </font><font color='#0002ff' weight='0.00238095' id='24'>int len)</font> </font><font color='#00aaff' weight='0.166667' id='167'>{
+        
+        for <font color='#0008ff' weight='0.00833333' id='55'>(<font color='#0000ff' weight='2.48016e-05' id='29'><font color='#0000ff' weight='1.24008e-05' id='28'>int</font> </font><font color='#0000ff' weight='1.24008e-05' id='31'>i </font><font color='#0000ff' weight='3.72024e-05' id='35'>= <font color='#0000ff' weight='2.48016e-05' id='34'>1</font></font>; <font color='#0000ff' weight='1.24008e-05' id='40'>i </font><font color='#0000ff' weight='1.24008e-05' id='42'>&lt; </font>len; i++) </font>{
+            <font color='#0001ff' weight='0.0010119' id='73'><font color='#0000ff' weight='0.000446429' id='71'><font color='#0000ff' weight='1.98413e-05' id='58'><font color='#0000ff' weight='9.92063e-06' id='57'>int</font> </font><font color='#0000ff' weight='9.92063e-06' id='60'>value </font><font color='#0000ff' weight='8.92857e-05' id='70'>= <font color='#0000ff' weight='7.93651e-05' id='69'><font color='#0000ff' weight='6.94444e-05' id='68'><font color='#0000ff' weight='4.96032e-06' id='62'>a</font><font color='#0000ff' weight='1.98413e-05' id='67'>[<font color='#0000ff' weight='2.48016e-06' id='64'>i</font>]</font></font></font></font>;</font>   
+            </font><font color='#0000ff' weight='0.000654762' id='85'><font color='#0000ff' weight='0.000267857' id='83'><font color='#0000ff' weight='1.98413e-05' id='76'><font color='#0000ff' weight='9.92063e-06' id='75'>int</font> </font><font color='#0000ff' weight='9.92063e-06' id='78'>position </font><font color='#0000ff' weight='2.97619e-05' id='82'>= i</font>;</font>   
+            
+            
+            </font>while (<font color='#0000ff' weight='0.000357143' id='110'><font color='#0000ff' weight='2.12585e-06' id='87'>position </font>&gt; 0 <font color='#0000ff' weight='2.12585e-06' id='93'>&amp;&amp; </font><font color='#0000ff' weight='1.06293e-06' id='95'>a</font>[<font color='#0000ff' weight='1.77154e-07' id='97'>position</font><font color='#0000ff' weight='1.77154e-07' id='99'>-</font>1] &gt; value)</font> {
+                <font color='#0000ff' weight='0.000238095' id='137'><font color='#0000ff' weight='0.000109127' id='135'>a<font color='#0000ff' weight='3.30688e-06' id='119'>[<font color='#0000ff' weight='4.1336e-07' id='116'>position</font>]</font> = a<font color='#0000ff' weight='6.61376e-06' id='133'>[<font color='#0000ff' weight='2.48016e-06' id='131'><font color='#0000ff' weight='1.37787e-07' id='126'>position</font>-1]</font></font>;</font>    
+                </font><font color='#0000ff' weight='5.95238e-05' id='144'><font color='#0000ff' weight='1.98413e-05' id='142'>position<font color='#0000ff' weight='2.48016e-06' id='141'>--</font>;</font>                     
+            }</font>
+            
+            
+            a[position] = <font color='#0000ff' weight='9.92063e-06' id='159'>value</font>;
+        }
+    }</font>
+    </font></font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+private List&lt;Stmt&gt; topologicalSort(StmtList stmts) {
+
+        List&lt;Stmt&gt; out = new ArrayList&lt;Stmt&gt;(stmts.getSize());
+        Stack&lt;Stmt&gt; stack = new Stack&lt;Stmt&gt;();
+        stack.push(stmts.getFirst());
+
+        boolean visitedFlag = false;
+
+        while (!stack.empty()) <font color='#ff0000' weight='1' id='335'>{
+            Stmt stmt = <font color='#0002ff' weight='0.00197368' id='159'><font color='#0000ff' weight='0.000657895' id='156'>stack<font color='#0000ff' weight='3.65497e-05' id='153'>.</font><font color='#0000ff' weight='3.65497e-05' id='155'>pop</font></font><font color='#0000ff' weight='0.000109649' id='158'>()</font></font>;
+            <font color='#0019ff' weight='0.025' id='184'>if <font color='#0008ff' weight='0.00855263' id='178'>(<font color='#0003ff' weight='0.00361842' id='176'><font color='#0000ff' weight='0.000657895' id='171'><font color='#0000ff' weight='3.65497e-05' id='166'>stmt</font><font color='#0000ff' weight='3.65497e-05' id='168'>.</font><font color='#0000ff' weight='3.65497e-05' id='170'>_cfg_visited</font> </font><font color='#0000ff' weight='0.000109649' id='173'>== </font>visitedFlag)</font></font><font color='#0002ff' weight='0.00263158' id='183'> <font color='#0002ff' weight='0.00197368' id='182'>{
+                <font color='#0000ff' weight='0.000328947' id='180'>continue;
+            }</font></font></font>
+            </font><font color='#00c6ff' weight='0.194737' id='333'>if <font color='#0018ff' weight='0.0236842' id='221'>(<font color='#0000ff' weight='0.000610902' id='198'><font color='#0000ff' weight='0.000234962' id='195'><font color='#0000ff' weight='4.69925e-06' id='186'>stmt</font><font color='#0000ff' weight='4.69925e-06' id='188'>.</font><font color='#0000ff' weight='4.69925e-06' id='190'>_cfg_froms</font><font color='#0000ff' weight='4.69925e-06' id='192'>.</font>size</font><font color='#0000ff' weight='2.34962e-05' id='197'>()</font> </font>== 0 <font color='#0000ff' weight='4.69925e-05' id='204'>|| </font><font color='#0000ff' weight='0.000422932' id='214'><font color='#0000ff' weight='0.000140977' id='211'><font color='#0000ff' weight='7.83208e-06' id='206'>stack</font><font color='#0000ff' weight='7.83208e-06' id='208'>.</font><font color='#0000ff' weight='7.83208e-06' id='210'>size</font></font><font color='#0000ff' weight='2.34962e-05' id='213'>()</font> </font><font color='#0000ff' weight='4.69925e-05' id='216'>== </font><font color='#0000ff' weight='4.69925e-05' id='218'>0</font>)</font><font color='#0049ff' weight='0.0723684' id='332'> <font color='#0049ff' weight='0.0717105' id='331'>{
+                <font color='#0002ff' weight='0.00213816' id='235'><font color='#0000ff' weight='0.000904605' id='233'>stmt<font color='#0000ff' weight='9.13743e-06' id='225'>.</font><font color='#0000ff' weight='9.13743e-06' id='227'>_cfg_visited</font> = <font color='#0000ff' weight='2.74123e-05' id='232'>visitedFlag</font>;</font>
+                </font><font color='#0002ff' weight='0.00263158' id='252'><font color='#0001ff' weight='0.00115132' id='250'><font color='#0001ff' weight='0.00106908' id='249'><font color='#0000ff' weight='0.000246711' id='242'><font color='#0000ff' weight='1.37061e-05' id='237'>out</font><font color='#0000ff' weight='1.37061e-05' id='239'>.</font><font color='#0000ff' weight='1.37061e-05' id='241'>add</font></font><font color='#0000ff' weight='0.000205592' id='248'>(<font color='#0000ff' weight='6.16776e-05' id='246'><font color='#0000ff' weight='4.11184e-05' id='245'><font color='#0000ff' weight='2.05592e-05' id='244'>stmt</font></font>)</font></font></font>;</font>
+                </font><font color='#000cff' weight='0.0125' id='329'>for <font color='#0001ff' weight='0.00139803' id='270'>(<font color='#0000ff' weight='0.000616776' id='268'><font color='#0000ff' weight='0.000575658' id='267'><font color='#0000ff' weight='2.74123e-05' id='255'><font color='#0000ff' weight='1.37061e-05' id='254'>Stmt</font> </font><font color='#0000ff' weight='1.37061e-05' id='257'>t </font><font color='#0000ff' weight='0.000109649' id='266'>: <font color='#0000ff' weight='9.5943e-05' id='265'><font color='#0000ff' weight='8.22368e-05' id='264'><font color='#0000ff' weight='4.56871e-06' id='259'>stmt</font><font color='#0000ff' weight='4.56871e-06' id='261'>.</font><font color='#0000ff' weight='4.56871e-06' id='263'>_cfg_tos</font></font></font></font></font>)</font> </font><font color='#0004ff' weight='0.0046875' id='328'>{
+                    <font color='#0000ff' weight='0.000233004' id='288'><font color='#0000ff' weight='6.85307e-05' id='281'><font color='#0000ff' weight='1.37061e-06' id='272'>t</font><font color='#0000ff' weight='1.37061e-06' id='274'>.</font><font color='#0000ff' weight='1.37061e-06' id='276'>_cfg_froms</font><font color='#0000ff' weight='1.37061e-06' id='278'>.</font><font color='#0000ff' weight='1.37061e-06' id='280'>remove</font></font><font color='#0000ff' weight='3.42653e-05' id='287'>(<font color='#0000ff' weight='1.02796e-05' id='285'><font color='#0000ff' weight='6.85307e-06' id='284'><font color='#0000ff' weight='3.42653e-06' id='283'>stmt</font></font>)</font></font></font>;
+                    <font color='#0000ff' weight='0.000932018' id='326'>if <font color='#0000ff' weight='0.00017818' id='305'>(<font color='#0000ff' weight='7.53838e-05' id='303'>t<font color='#0000ff' weight='7.61452e-07' id='295'>.</font><font color='#0000ff' weight='7.61452e-07' id='297'>_cfg_visited</font> != visitedFlag)</font></font><font color='#0000ff' weight='0.000260417' id='325'> <font color='#0000ff' weight='0.000246711' id='324'>{
+                        <font color='#0000ff' weight='0.000109649' id='322'><font color='#0000ff' weight='4.79715e-05' id='320'><font color='#0000ff' weight='4.4545e-05' id='319'><font color='#0000ff' weight='1.02796e-05' id='312'><font color='#0000ff' weight='5.71089e-07' id='307'>stack</font><font color='#0000ff' weight='5.71089e-07' id='309'>.</font><font color='#0000ff' weight='5.71089e-07' id='311'>push</font></font><font color='#0000ff' weight='8.56634e-06' id='318'>(<font color='#0000ff' weight='2.5699e-06' id='316'><font color='#0000ff' weight='1.71327e-06' id='315'><font color='#0000ff' weight='8.56634e-07' id='314'>t</font></font>)</font></font></font>;</font>
+                    }</font></font></font>
+                }</font></font>
+            }</font></font></font>
+        }</font></font>
+        return out;
+    }
+
+    </font>
+</pre>

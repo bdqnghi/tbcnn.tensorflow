@@ -1,0 +1,47 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static void bubbleSort(int[] arr) {
+        int length = arr.length;
+        int k;
+
+        for (int i = length; i &gt;= 0; i--) {
+            for (int j = 0; j &lt; length-1; j++) {
+                k = j + 1;
+
+                if (arr[j] &gt; arr[k])
+                    swap(j, k, arr);
+            }
+            printArray(arr);
+        }
+    }
+
+  
+
+    private static void swap(int j, int k, int[] arr) {
+        int temp = arr[j];
+        arr[j] = arr[k];
+        arr[k] = temp;
+
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public void <font color='#0001ff' weight='0.0011976' id='7'>sort</font><font color='#0015ff' weight='0.0215569' id='26'>(<font color='#0000ff' weight='9.98004e-05' id='9'>Object</font>[] <font color='#0000ff' weight='0.000199601' id='15'>a</font>, <font color='#0002ff' weight='0.00239521' id='24'><font color='#0002ff' weight='0.00199601' id='23'><font color='#0000ff' weight='0.000199601' id='19'>Comparator</font> <font color='#0000ff' weight='0.000199601' id='22'>comparator</font></font>)</font>
+    </font><font color='#00a9ff' weight='0.166467' id='166'>{
+        for (int i = <font color='#0000ff' weight='1.24751e-05' id='33'>1</font>; i <font color='#0000ff' weight='1.24751e-05' id='42'>&lt; </font><font color='#0000ff' weight='7.48503e-05' id='49'><font color='#0000ff' weight='4.15835e-06' id='44'>a</font><font color='#0000ff' weight='4.15835e-06' id='46'>.</font><font color='#0000ff' weight='4.15835e-06' id='48'>length</font></font>; i<font color='#0000ff' weight='3.74252e-05' id='56'>++</font>)
+        {
+            for (int j = <font color='#0000ff' weight='3.11876e-06' id='67'>i</font>; j <font color='#0000ff' weight='3.11876e-06' id='76'>&gt;= </font>1; j<font color='#0000ff' weight='9.35629e-06' id='85'>--</font>)
+            {
+                if (<font color='#0000ff' weight='0.000199601' id='122'><font color='#0000ff' weight='3.11876e-06' id='91'>less</font><font color='#0000ff' weight='9.04441e-05' id='121'>(<font color='#0000ff' weight='2.33907e-06' id='95'><font color='#0000ff' weight='1.55938e-06' id='94'><font color='#0000ff' weight='7.79691e-07' id='93'>comparator</font></font>, </font><font color='#0000ff' weight='7.01722e-06' id='105'><font color='#0000ff' weight='6.23752e-06' id='104'><font color='#0000ff' weight='3.89845e-07' id='97'>a</font>[j]</font>, </font><font color='#0000ff' weight='1.0136e-05' id='119'><font color='#0000ff' weight='9.35629e-06' id='118'><font color='#0000ff' weight='3.89845e-07' id='107'>a</font>[<font color='#0000ff' weight='6.49742e-08' id='109'>j </font><font color='#0000ff' weight='6.49742e-08' id='111'>- </font><font color='#0000ff' weight='6.49742e-08' id='113'>1</font>]</font>)</font></font></font>)<font color='#0000ff' weight='0.000324351' id='152'>
+                <font color='#0000ff' weight='0.000311876' id='151'>{
+                    <font color='#0000ff' weight='1.55938e-06' id='127'>exchange</font>(<font color='#0000ff' weight='3.89845e-07' id='129'>a</font>, <font color='#0000ff' weight='3.89845e-07' id='133'>j</font>, <font color='#0000ff' weight='1.29948e-07' id='137'>j </font><font color='#0000ff' weight='1.29948e-07' id='139'>- </font><font color='#0000ff' weight='1.29948e-07' id='141'>1</font>);
+                }</font>
+                </font><font color='#0000ff' weight='4.99002e-05' id='157'>else
+                <font color='#0000ff' weight='3.74251e-05' id='156'>{
+                    <font color='#0000ff' weight='6.23752e-06' id='154'>break;
+                }</font></font></font>
+            }
+        }
+    }</font>
+</font>
+</pre>

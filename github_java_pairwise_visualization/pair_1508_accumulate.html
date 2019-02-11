@@ -1,0 +1,48 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public <font color='#ff0000' weight='1' id='4'>static </font><font color='#ff0000' weight='1' id='7'>void </font><font color='#ff0000' weight='1' id='9'>sort</font><font color='#ff0000' weight='1' id='21'>(int[] data) </font>{
+        for (<font color='#ff0000' weight='1' id='42'><font color='#ff0000' weight='1' id='40'>int k <font color='#ff0000' weight='1' id='39'>= <font color='#ff0000' weight='1' id='38'>data.length - <font color='#ff0000' weight='1' id='37'>1<font color='#ff0000' weight='1' id='36'></font></font></font></font>;</font><font color='#ff0000' weight='1' id='41'></font> </font><font color='#ff0000' weight='1' id='49'><font color='#ff0000' weight='1' id='44'>k<font color='#ff0000' weight='1' id='43'></font> </font>&gt; <font color='#ff0000' weight='1' id='48'>0<font color='#ff0000' weight='1' id='47'></font></font>;</font> k<font color='#ff0000' weight='1' id='55'>--</font>) {
+            int largestIdx <font color='#ff0000' weight='1' id='68'>= 0</font>;<font color='#ff0000' weight='1' id='70'></font>
+            <font color='#ff0000' weight='1' id='137'>for (<font color='#ff0000' weight='1' id='81'><font color='#ff0000' weight='1' id='74'><font color='#ff0000' weight='1' id='73'>int<font color='#ff0000' weight='1' id='72'></font></font> </font><font color='#ff0000' weight='1' id='76'>i<font color='#ff0000' weight='1' id='75'></font> </font><font color='#ff0000' weight='1' id='80'>= 0<font color='#ff0000' weight='1' id='77'></font></font>;</font> <font color='#ff0000' weight='1' id='90'>i &lt;= <font color='#ff0000' weight='1' id='89'>k</font>;</font> i++) <font color='#ff0000' weight='1' id='136'>{
+                if (data[i] &gt; data[largestIdx]) {
+                    largestIdx = i<font color='#ff0000' weight='1' id='126'></font>;
+                }
+            }</font>
+            </font><font color='#ff0000' weight='1' id='155'><font color='#ff0000' weight='1' id='139'>int</font> <font color='#ff0000' weight='1' id='142'>tmp </font>= <font color='#ff0000' weight='1' id='151'><font color='#ff0000' weight='1' id='144'>data</font>[k]</font>;
+            </font><font color='#ff0000' weight='1' id='176'><font color='#ff0000' weight='1' id='157'>data</font>[<font color='#ff0000' weight='1' id='159'>k</font>] <font color='#ff0000' weight='1' id='165'>= </font><font color='#ff0000' weight='1' id='167'>data</font>[<font color='#ff0000' weight='1' id='169'>largestIdx</font>];
+            </font><font color='#ff0000' weight='1' id='191'><font color='#ff0000' weight='1' id='178'>data</font>[<font color='#ff0000' weight='1' id='180'>largestIdx</font>]<font color='#ff0000' weight='1' id='182'></font> = <font color='#ff0000' weight='1' id='188'>tmp<font color='#ff0000' weight='1' id='187'></font></font>;
+        }</font><font color='#ff0000' weight='1' id='192'></font>
+    }
+
+}</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void sort(Comparable[] a) {
+    int n = a.length;
+
+    
+    int h = 1;
+    while (h &lt; n/3) h = 3*h + 1;
+
+    while (h &gt;= 1) {
+      
+      for (int i = h; i &lt; n; i++) {
+        for (int j = i; j &gt;= h &amp;&amp; less(a[j], a[j-h]); j -= h) {
+          exch(a, j, j-h);
+        }
+      }
+      h /= 3;
+    }
+  }
+
+  private static boolean less(Comparable v, Comparable w) {
+    return v.compareTo(w) &lt; 0;
+  }
+
+  private static void exch(Object[] a, int i, int j) {
+    Object swap = a[i];
+    a[i] = a[j];
+    a[j] = swap;
+  }</font>
+</pre>

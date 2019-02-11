@@ -1,0 +1,77 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+package org.hibernate.envers.internal.tools.graph;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+
+public class TopologicalSort&lt;R&gt; {
+	private List&lt;R&gt; sorted;
+	private int time;
+
+	private void process(Vertex&lt;R&gt; v) {
+		if ( v.getStartTime() != 0 ) {
+			
+			return;
+		}
+
+		v.setStartTime( time++ );
+
+		for ( Vertex&lt;R&gt; n : v.getNeighbours() ) {
+			process( n );
+		}
+
+		v.setEndTime( time++ );
+
+		sorted.add( v.getRepresentation() );
+	}
+
+	public List&lt;R&gt; sort(Collection&lt;Vertex&lt;R&gt;&gt; vertices) {
+		sorted = new ArrayList&lt;&gt;( vertices.size() );
+
+		time = 1;
+
+		for ( Vertex&lt;R<font color='#ff0000' weight='1' id='341'></font>&gt; v : vertices ) {
+			if ( v.getEndTime() == 0 ) {
+				process( v );
+			}
+		}
+
+		Collections.reverse( sorted );
+
+		return sorted;
+	}
+}
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+   <font color='#ff0000' weight='1' id='306'><font color='#ff0000' weight='1' id='2'>public<font color='#ff0000' weight='1' id='1'></font> </font><font color='#ff0000' weight='1' id='4'>static<font color='#ff0000' weight='1' id='3'></font> </font><font color='#ff0000' weight='1' id='7'><font color='#ff0000' weight='1' id='6'>void</font> </font><font color='#ff0000' weight='1' id='9'>shellSort0</font><font color='#ff0000' weight='1' id='21'>(<font color='#ff0000' weight='1' id='19'><font color='#ff0000' weight='1' id='18'><font color='#ff0000' weight='1' id='15'><font color='#ff0000' weight='1' id='14'>int<font color='#ff0000' weight='1' id='13'>[]<font color='#ff0000' weight='1' id='12'></font></font></font> </font><font color='#ff0000' weight='1' id='17'>array</font></font>)</font><font color='#ff0000' weight='1' id='20'></font> </font><font color='#ff0000' weight='1' id='305'>{
+     
+        <font color='#ff0000' weight='1' id='29'><font color='#ff0000' weight='1' id='27'><font color='#ff0000' weight='1' id='24'><font color='#ff0000' weight='1' id='23'>int</font> </font><font color='#ff0000' weight='1' id='26'>step</font>;</font><font color='#ff0000' weight='1' id='28'></font>
+        
+        </font><font color='#ff0000' weight='1' id='303'>for <font color='#ff0000' weight='1' id='66'>(<font color='#ff0000' weight='1' id='47'><font color='#ff0000' weight='1' id='45'><font color='#ff0000' weight='1' id='31'>step </font><font color='#ff0000' weight='1' id='33'>= </font><font color='#ff0000' weight='1' id='40'>array.length </font><font color='#ff0000' weight='1' id='42'>/ </font><font color='#ff0000' weight='1' id='44'>2<font color='#ff0000' weight='1' id='43'></font></font>;</font><font color='#ff0000' weight='1' id='46'></font> </font><font color='#ff0000' weight='1' id='56'><font color='#ff0000' weight='1' id='54'><font color='#ff0000' weight='1' id='49'>step </font><font color='#ff0000' weight='1' id='51'>&gt; </font><font color='#ff0000' weight='1' id='53'>0<font color='#ff0000' weight='1' id='52'></font></font>;</font><font color='#ff0000' weight='1' id='55'></font> </font><font color='#ff0000' weight='1' id='64'><font color='#ff0000' weight='1' id='63'><font color='#ff0000' weight='1' id='58'>step </font><font color='#ff0000' weight='1' id='60'>/= </font><font color='#ff0000' weight='1' id='62'>2<font color='#ff0000' weight='1' id='61'></font></font></font>)</font><font color='#ff0000' weight='1' id='65'></font> </font><font color='#ff0000' weight='1' id='302'>{
+            
+            <font color='#ff0000' weight='1' id='279'>for <font color='#ff0000' weight='1' id='95'>(<font color='#ff0000' weight='1' id='78'><font color='#ff0000' weight='1' id='76'><font color='#ff0000' weight='1' id='69'><font color='#ff0000' weight='1' id='68'>int</font> </font><font color='#ff0000' weight='1' id='71'>i </font><font color='#ff0000' weight='1' id='75'>= <font color='#ff0000' weight='1' id='74'><font color='#ff0000' weight='1' id='73'>0<font color='#ff0000' weight='1' id='72'></font></font></font></font>;</font><font color='#ff0000' weight='1' id='77'></font> </font><font color='#ff0000' weight='1' id='87'><font color='#ff0000' weight='1' id='85'><font color='#ff0000' weight='1' id='80'>i </font><font color='#ff0000' weight='1' id='82'>&lt;<font color='#ff0000' weight='1' id='81'></font> </font><font color='#ff0000' weight='1' id='84'>step</font>;</font><font color='#ff0000' weight='1' id='86'></font> </font><font color='#ff0000' weight='1' id='93'><font color='#ff0000' weight='1' id='92'><font color='#ff0000' weight='1' id='89'>i</font><font color='#ff0000' weight='1' id='91'>++<font color='#ff0000' weight='1' id='90'></font></font></font>)</font><font color='#ff0000' weight='1' id='94'></font> </font><font color='#ff0000' weight='1' id='278'>{
+                
+                <font color='#ff0000' weight='1' id='276'>for <font color='#ff0000' weight='1' id='135'>(<font color='#ff0000' weight='1' id='107'><font color='#ff0000' weight='1' id='105'><font color='#ff0000' weight='1' id='98'><font color='#ff0000' weight='1' id='97'>int</font> </font><font color='#ff0000' weight='1' id='100'>j </font><font color='#ff0000' weight='1' id='104'>= <font color='#ff0000' weight='1' id='103'><font color='#ff0000' weight='1' id='102'>i</font></font></font>;</font><font color='#ff0000' weight='1' id='106'></font> </font><font color='#ff0000' weight='1' id='125'><font color='#ff0000' weight='1' id='123'><font color='#ff0000' weight='1' id='109'>j </font><font color='#ff0000' weight='1' id='111'>&lt;<font color='#ff0000' weight='1' id='110'></font> </font><font color='#ff0000' weight='1' id='118'><font color='#ff0000' weight='1' id='113'>array</font>.<font color='#ff0000' weight='1' id='117'>length</font> </font><font color='#ff0000' weight='1' id='120'>- </font><font color='#ff0000' weight='1' id='122'>step<font color='#ff0000' weight='1' id='121'></font></font>;</font> </font><font color='#ff0000' weight='1' id='133'><font color='#ff0000' weight='1' id='132'><font color='#ff0000' weight='1' id='127'>j </font><font color='#ff0000' weight='1' id='129'>+= </font><font color='#ff0000' weight='1' id='131'>step</font></font>)</font><font color='#ff0000' weight='1' id='134'></font> </font><font color='#ff0000' weight='1' id='275'>{
+                    <font color='#ff0000' weight='1' id='273'>for <font color='#ff0000' weight='1' id='174'>(<font color='#ff0000' weight='1' id='137'>int</font> <font color='#ff0000' weight='1' id='140'>k </font><font color='#ff0000' weight='1' id='148'>= <font color='#ff0000' weight='1' id='147'><font color='#ff0000' weight='1' id='142'>j </font><font color='#ff0000' weight='1' id='144'>+ </font><font color='#ff0000' weight='1' id='146'>step</font></font></font>;<font color='#ff0000' weight='1' id='150'></font> <font color='#ff0000' weight='1' id='164'><font color='#ff0000' weight='1' id='162'><font color='#ff0000' weight='1' id='153'>k </font><font color='#ff0000' weight='1' id='155'>-<font color='#ff0000' weight='1' id='154'></font> </font><font color='#ff0000' weight='1' id='157'>step </font><font color='#ff0000' weight='1' id='159'>&gt;= </font><font color='#ff0000' weight='1' id='161'>0<font color='#ff0000' weight='1' id='160'></font></font>;</font><font color='#ff0000' weight='1' id='163'></font> </font><font color='#ff0000' weight='1' id='172'><font color='#ff0000' weight='1' id='171'><font color='#ff0000' weight='1' id='166'>k </font><font color='#ff0000' weight='1' id='168'>-= </font><font color='#ff0000' weight='1' id='170'>step</font></font>)</font><font color='#ff0000' weight='1' id='173'></font> </font><font color='#ff0000' weight='1' id='272'>{
+                        <font color='#ff0000' weight='1' id='270'>if <font color='#ff0000' weight='1' id='199'>(<font color='#ff0000' weight='1' id='197'><font color='#ff0000' weight='1' id='186'><font color='#ff0000' weight='1' id='176'>array</font><font color='#ff0000' weight='1' id='185'>[<font color='#ff0000' weight='1' id='183'><font color='#ff0000' weight='1' id='178'>k </font><font color='#ff0000' weight='1' id='180'>- </font><font color='#ff0000' weight='1' id='182'>step</font>]</font><font color='#ff0000' weight='1' id='184'></font></font> </font><font color='#ff0000' weight='1' id='188'>&gt;<font color='#ff0000' weight='1' id='187'></font> </font><font color='#ff0000' weight='1' id='196'><font color='#ff0000' weight='1' id='190'>array</font><font color='#ff0000' weight='1' id='195'>[<font color='#ff0000' weight='1' id='193'><font color='#ff0000' weight='1' id='192'>k</font>]</font><font color='#ff0000' weight='1' id='194'></font></font></font>)</font><font color='#ff0000' weight='1' id='198'></font></font><font color='#ff0000' weight='1' id='264'> <font color='#ff0000' weight='1' id='263'>{
+                            <font color='#ff0000' weight='1' id='221'><font color='#ff0000' weight='1' id='219'><font color='#ff0000' weight='1' id='202'><font color='#ff0000' weight='1' id='201'>int</font> </font><font color='#ff0000' weight='1' id='204'>temp </font><font color='#ff0000' weight='1' id='218'>= <font color='#ff0000' weight='1' id='217'><font color='#ff0000' weight='1' id='216'><font color='#ff0000' weight='1' id='206'>array</font><font color='#ff0000' weight='1' id='215'>[<font color='#ff0000' weight='1' id='213'><font color='#ff0000' weight='1' id='208'>k </font><font color='#ff0000' weight='1' id='210'>-<font color='#ff0000' weight='1' id='209'></font> </font><font color='#ff0000' weight='1' id='212'>step</font>]</font><font color='#ff0000' weight='1' id='214'></font></font></font></font></font>;</font><font color='#ff0000' weight='1' id='220'></font>
+                            </font><font color='#ff0000' weight='1' id='246'><font color='#ff0000' weight='1' id='244'><font color='#ff0000' weight='1' id='233'><font color='#ff0000' weight='1' id='223'>array</font><font color='#ff0000' weight='1' id='232'>[<font color='#ff0000' weight='1' id='230'><font color='#ff0000' weight='1' id='225'>k </font><font color='#ff0000' weight='1' id='227'>- </font><font color='#ff0000' weight='1' id='229'>step</font>]</font><font color='#ff0000' weight='1' id='231'></font></font> </font>= <font color='#ff0000' weight='1' id='243'><font color='#ff0000' weight='1' id='237'>array</font><font color='#ff0000' weight='1' id='242'>[<font color='#ff0000' weight='1' id='240'><font color='#ff0000' weight='1' id='239'>k</font>]</font><font color='#ff0000' weight='1' id='241'></font></font></font>;</font><font color='#ff0000' weight='1' id='245'></font>
+                            </font><font color='#ff0000' weight='1' id='261'><font color='#ff0000' weight='1' id='259'><font color='#ff0000' weight='1' id='254'><font color='#ff0000' weight='1' id='248'>array</font><font color='#ff0000' weight='1' id='253'>[<font color='#ff0000' weight='1' id='251'><font color='#ff0000' weight='1' id='250'>k<font color='#ff0000' weight='1' id='249'></font></font>]</font><font color='#ff0000' weight='1' id='252'></font></font> </font><font color='#ff0000' weight='1' id='256'>= </font><font color='#ff0000' weight='1' id='258'>temp<font color='#ff0000' weight='1' id='257'></font></font>;</font><font color='#ff0000' weight='1' id='260'></font>
+                        }</font><font color='#ff0000' weight='1' id='262'></font></font> </font><font color='#ff0000' weight='1' id='269'>else <font color='#ff0000' weight='1' id='268'>{
+                            <font color='#ff0000' weight='1' id='266'>break;<font color='#ff0000' weight='1' id='265'></font>
+                        }</font><font color='#ff0000' weight='1' id='267'></font></font></font>
+                    }</font><font color='#ff0000' weight='1' id='271'></font></font>
+                }</font></font>
+            }</font></font>
+            </font><font color='#ff0000' weight='1' id='281'>SortUtil</font>.<font color='#ff0000' weight='1' id='285'>logArray</font><font color='#ff0000' weight='1' id='296'>(<font color='#ff0000' weight='1' id='288'>step</font>, <font color='#ff0000' weight='1' id='294'><font color='#ff0000' weight='1' id='293'><font color='#ff0000' weight='1' id='292'>array<font color='#ff0000' weight='1' id='291'></font></font></font>)</font><font color='#ff0000' weight='1' id='295'></font></font>;
+        }<font color='#ff0000' weight='1' id='301'></font></font>
+
+    }</font><font color='#ff0000' weight='1' id='304'></font></font></font></font>
+</pre>

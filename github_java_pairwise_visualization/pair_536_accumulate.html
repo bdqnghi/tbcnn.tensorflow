@@ -1,0 +1,63 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static int[] bucketSort(int[] input, int bucketCount) {
+        if (input == null || input.length &lt;= 1) {
+            return input;
+        }
+        int[] output = new int[input.length];
+        int lowerBound = Integer.MAX_VALUE;
+        int upperBound = Integer.MIN_VALUE;
+        for (int i = 0; i &lt; input.length; i++) {
+            upperBound = Math.max(upperBound, input[i]);
+            lowerBound = Math.min(lowerBound, input[i]);
+        }
+        
+        double interval = (double)(upperBound - lowerBound + 1)/bucketCount;
+
+        ArrayList&lt;ArrayList&lt;Integer&gt;&gt; buckets = new ArrayList&lt;ArrayList&lt;Integer&gt;&gt;();
+        
+        
+        for (int i = 0; i &lt; bucketCount; i++) {
+            ArrayList&lt;Integer&gt; line = new ArrayList&lt;Integer&gt;();
+            buckets.add(line);
+        }
+        for (int i = 0; i &lt; input.length; i++) {    
+            int pos = (int) ((input[i] - lowerBound)/interval);
+            buckets.get(pos).add(input[i]);
+        }
+        
+        
+        for (int i = 0; i &lt; bucketCount; i++) {
+            Collections.sort(buckets.get(i));
+        }
+        int pointer = 0;
+        for (int i = 0; i &lt; bucketCount; i++) {
+            for (int j = 0; j &lt; buckets.get(i).size(); j++) {
+                output[pointer] = buckets.get(i).get(j);
+                pointer ++;
+            }
+        }
+        return output;
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+    public static <font color='#ff0000' weight='1' id='6'>void</font> <font color='#ff0000' weight='1' id='9'>selectionSortLargest</font>(<font color='#ff0000' weight='1' id='11'>double</font>[] <font color='#ff0000' weight='1' id='17'>array</font>)<font color='#ff0000' weight='1' id='20'></font>
+    {
+        <font color='#ff0000' weight='1' id='193'>for <font color='#ff0000' weight='1' id='59'>(<font color='#ff0000' weight='1' id='42'><font color='#ff0000' weight='1' id='40'><font color='#ff0000' weight='1' id='23'>int</font> <font color='#ff0000' weight='1' id='26'>r </font>= <font color='#ff0000' weight='1' id='38'><font color='#ff0000' weight='1' id='28'>array</font>.length <font color='#ff0000' weight='1' id='35'>-<font color='#ff0000' weight='1' id='34'></font> </font><font color='#ff0000' weight='1' id='37'>1<font color='#ff0000' weight='1' id='36'></font></font></font>;</font><font color='#ff0000' weight='1' id='41'></font> </font><font color='#ff0000' weight='1' id='44'>r </font><font color='#ff0000' weight='1' id='46'>&gt; </font><font color='#ff0000' weight='1' id='48'>0<font color='#ff0000' weight='1' id='47'></font></font>; <font color='#ff0000' weight='1' id='57'><font color='#ff0000' weight='1' id='56'><font color='#ff0000' weight='1' id='53'>--</font><font color='#ff0000' weight='1' id='55'>r</font></font>)</font><font color='#ff0000' weight='1' id='58'></font>
+        </font><font color='#ff0000' weight='1' id='192'>{
+            <font color='#ff0000' weight='1' id='61'>int</font> <font color='#ff0000' weight='1' id='64'>largestElementIndex </font>= <font color='#ff0000' weight='1' id='66'>r</font>;
+            
+            for (int <font color='#ff0000' weight='1' id='76'>l </font>= 0; <font color='#ff0000' weight='1' id='85'>l </font>&lt; <font color='#ff0000' weight='1' id='89'>r</font>; ++<font color='#ff0000' weight='1' id='96'>l<font color='#ff0000' weight='1' id='95'></font></font>)
+            <font color='#ff0000' weight='1' id='135'>{
+                <font color='#ff0000' weight='1' id='133'>if <font color='#ff0000' weight='1' id='121'>(<font color='#ff0000' weight='1' id='119'><font color='#ff0000' weight='1' id='108'><font color='#ff0000' weight='1' id='102'>array</font><font color='#ff0000' weight='1' id='107'>[<font color='#ff0000' weight='1' id='105'><font color='#ff0000' weight='1' id='104'>l</font>]</font><font color='#ff0000' weight='1' id='106'></font></font> </font><font color='#ff0000' weight='1' id='110'>&gt; </font><font color='#ff0000' weight='1' id='118'><font color='#ff0000' weight='1' id='112'>array</font><font color='#ff0000' weight='1' id='117'>[<font color='#ff0000' weight='1' id='115'><font color='#ff0000' weight='1' id='114'>largestElementIndex</font>]</font><font color='#ff0000' weight='1' id='116'></font></font></font>)</font><font color='#ff0000' weight='1' id='120'></font></font><font color='#ff0000' weight='1' id='132'>
+                    <font color='#ff0000' weight='1' id='131'><font color='#ff0000' weight='1' id='128'><font color='#ff0000' weight='1' id='123'>largestElementIndex </font><font color='#ff0000' weight='1' id='125'>= </font><font color='#ff0000' weight='1' id='127'>l</font>;</font></font></font>
+            }</font></font>
+            
+            
+            <font color='#ff0000' weight='1' id='138'>double</font> <font color='#ff0000' weight='1' id='141'>temp </font>= <font color='#ff0000' weight='1' id='150'><font color='#ff0000' weight='1' id='143'>array</font>[<font color='#ff0000' weight='1' id='145'>r</font>]</font>;
+            <font color='#ff0000' weight='1' id='173'><font color='#ff0000' weight='1' id='162'><font color='#ff0000' weight='1' id='156'>array</font><font color='#ff0000' weight='1' id='161'>[<font color='#ff0000' weight='1' id='159'><font color='#ff0000' weight='1' id='158'>r</font>]</font><font color='#ff0000' weight='1' id='160'></font></font> </font><font color='#ff0000' weight='1' id='164'>= </font><font color='#ff0000' weight='1' id='166'>array</font>[<font color='#ff0000' weight='1' id='168'>largestElementIndex</font>];</font>
+            <font color='#ff0000' weight='1' id='177'>array</font>[<font color='#ff0000' weight='1' id='179'>largestElementIndex</font>] = <font color='#ff0000' weight='1' id='187'>temp</font>;
+        }<font color='#ff0000' weight='1' id='191'></font></font>
+    }</font><font color='#ff0000' weight='1' id='194'></font></font>
+</pre>

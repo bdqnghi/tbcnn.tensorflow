@@ -1,0 +1,96 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ <font color='#ff0000' weight='1' id='3'><font color='#ff0000' weight='1' id='2'>void<font color='#ff0000' weight='1' id='1'></font></font> </font>bubbleSort<font color='#ff0000' weight='1' id='4'></font><font color='#ff0000' weight='1' id='17'>(<font color='#ff0000' weight='1' id='15'><font color='#ff0000' weight='1' id='14'>int <font color='#ff0000' weight='1' id='10'>arr</font>[]</font>)</font><font color='#ff0000' weight='1' id='16'></font> 
+    </font>{ 
+        <font color='#ff0000' weight='1' id='32'><font color='#ff0000' weight='1' id='19'>int<font color='#ff0000' weight='1' id='18'></font></font> n <font color='#ff0000' weight='1' id='31'>= <font color='#ff0000' weight='1' id='30'>arr<font color='#ff0000' weight='1' id='26'>.<font color='#ff0000' weight='1' id='25'></font></font>length<font color='#ff0000' weight='1' id='27'></font></font></font>;</font><font color='#ff0000' weight='1' id='33'></font> 
+        for (<font color='#ff0000' weight='1' id='37'>int </font><font color='#ff0000' weight='1' id='39'>i </font>= 0; i<font color='#ff0000' weight='1' id='47'></font> <font color='#ff0000' weight='1' id='50'>&lt; </font><font color='#ff0000' weight='1' id='52'>n</font><font color='#ff0000' weight='1' id='54'>-</font><font color='#ff0000' weight='1' id='56'>1</font>; i++) 
+            for (<font color='#ff0000' weight='1' id='77'>int j = <font color='#ff0000' weight='1' id='74'>0<font color='#ff0000' weight='1' id='73'></font></font>;</font> <font color='#ff0000' weight='1' id='81'>j </font>&lt; n-i-1; j<font color='#ff0000' weight='1' id='100'>++<font color='#ff0000' weight='1' id='99'></font></font>) 
+                if (arr<font color='#ff0000' weight='1' id='111'>[<font color='#ff0000' weight='1' id='109'>j]</font></font> &gt; arr[j+1]) 
+                { 
+                    
+                    <font color='#ff0000' weight='1' id='147'>int temp = arr[j]; 
+                    </font><font color='#ff0000' weight='1' id='170'>arr[j] = <font color='#ff0000' weight='1' id='169'>arr[j+1]</font>;</font><font color='#ff0000' weight='1' id='171'></font> 
+                    arr[j+<font color='#ff0000' weight='1' id='180'>1</font>]<font color='#ff0000' weight='1' id='182'></font> <font color='#ff0000' weight='1' id='186'>=<font color='#ff0000' weight='1' id='185'></font> </font>temp;<font color='#ff0000' weight='1' id='190'></font> 
+                } 
+    }<font color='#ff0000' weight='1' id='200'></font> </font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+
+public class AcyclicSP {
+
+    private double[] distTo;    
+    private DirectedEdge[] edgeTo;  
+
+    
+    
+    public AcyclicSP(EdgeWeightedDigraph G, int s) {
+        distTo = new double[G.V()];
+        edgeTo = new DirectedEdge[G.V()];
+
+        validateVertex(s);
+
+        for (int v = 0; v &lt; G.V(); v++) {
+            distTo[v] = Double.POSITIVE_INFINITY;
+        }
+        distTo[s] = 0.0;
+
+        
+        Topological topological = new Topological<font color='#ff0000' weight='1' id='202'>(<font color='#ff0000' weight='1' id='200'><font color='#ff0000' weight='1' id='199'><font color='#ff0000' weight='1' id='198'>G<font color='#ff0000' weight='1' id='197'></font></font></font>)</font><font color='#ff0000' weight='1' id='201'></font></font>;
+        if (!topological.hasOrder()) {
+            throw new IllegalArgumentException("Digraph is not acyclic.");
+        }
+        for (int v : topological.order()) {
+            for (DirectedEdge e : G.adj(v)) {
+                relax(e);
+            }
+        }
+    }
+
+    
+    private void relax(DirectedEdge e) {
+        int v = e.from(), w = e.to();
+        if (distTo[w] &gt; distTo[v] + e.weight()) {
+            distTo[w] = distTo[v] + e.weight();
+            edgeTo[w] = e;
+        }
+    }
+
+    
+    public double distTo(int v) {
+        validateVertex(v);
+        return distTo[v];
+    }
+
+    
+    public boolean hasPathTo(int v) {
+        validateVertex(v);
+        return distTo[v] &lt; Double.POSITIVE_INFINITY;
+    }
+
+    
+    public Iterable&lt;DirectedEdge&gt; pathTo(int v) {
+        validateVertex(v);
+        if (!hasPathTo(v)) {
+            return null;
+        }
+        Stack&lt;DirectedEdge&gt; path = new Stack&lt;DirectedEdge&gt;();
+        for (DirectedEdge e = edgeTo[v]; e != null; e = edgeTo[e.from()]) {
+            path.push(e);
+        }
+        return path;
+    }
+
+    
+    private void validateVertex(int v) {
+        int V = distTo.length;
+        if (v &lt; 0 || v &gt;= V) {
+            throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V - 1));
+        }
+    }
+
+
+}
+</font>
+</pre>

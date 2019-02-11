@@ -1,0 +1,50 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static void quicksort(int[] a, int start, int end) {
+        if (start &gt;= end)
+            return;
+
+        int pavot = a[start];
+        int i = start;
+        int j = end;
+
+        while (i &lt; j) {
+            while (i &lt; j &amp;&amp; a[j] &gt; pavot)
+                j--;
+            while (i &lt; j &amp;&amp; a[i] &lt;= pavot)
+                i++;
+            if (i != j) {
+                int t = a[i];
+                a[i] = a[j];
+                a[j] = t;
+            }
+        }
+        if (i == j) {
+            int t = a[start];
+            a[start] = a[i];
+            a[j] = t;
+        }
+        quicksort(<font color='#ff0000' weight='1' id='305'>a</font>, start, i - 1);
+        quicksort(a, i + 1, end);
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+    public static int[] swap(int numbers[], int i, int j) {
+        int temp = numbers[i];
+        numbers[i] = numbers[j];
+        numbers[j] = temp;
+        return numbers;
+    }
+
+    public static int[] sort(int array[]) {
+        for (int index = 1; index &lt; array.length; index++) {
+            for (int indexj = 0; indexj &lt; index-1; indexj++)
+                <font color='#ff0000' weight='1' id='241'><font color='#ff0000' weight='1' id='240'>if <font color='#ff0000' weight='1' id='212'>(<font color='#ff0000' weight='1' id='210'><font color='#ff0000' weight='1' id='193'>array</font>[<font color='#ff0000' weight='1' id='195'>indexj</font>] <font color='#ff0000' weight='1' id='201'>&gt; </font><font color='#ff0000' weight='1' id='203'>array</font>[<font color='#ff0000' weight='1' id='205'>index</font>])</font><font color='#ff0000' weight='1' id='211'></font></font><font color='#ff0000' weight='1' id='239'> <font color='#ff0000' weight='1' id='238'>{
+                    <font color='#ff0000' weight='1' id='236'><font color='#ff0000' weight='1' id='234'><font color='#ff0000' weight='1' id='214'>array </font>= <font color='#ff0000' weight='1' id='218'>swap</font>(<font color='#ff0000' weight='1' id='220'>array</font>, <font color='#ff0000' weight='1' id='224'>indexj</font>, <font color='#ff0000' weight='1' id='228'>index</font>);</font>
+                }</font><font color='#ff0000' weight='1' id='237'></font></font></font></font></font>
+        }
+        return array;
+    }
+</font>
+</pre>

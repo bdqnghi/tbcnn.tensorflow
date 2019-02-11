@@ -1,0 +1,69 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public <font color='#0000ff' weight='0.000846024' id='4'>static </font><font color='#0001ff' weight='0.00169205' id='7'>void </font><font color='#0000ff' weight='0.000846024' id='9'>sort</font><font color='#0009ff' weight='0.00930626' id='21'>(int[] data) </font>{
+        for (<font color='#0000ff' weight='0.000475888' id='40'><font color='#0000ff' weight='1.76255e-05' id='24'><font color='#0000ff' weight='8.81275e-06' id='23'>int</font> </font>k <font color='#0000ff' weight='0.000105753' id='39'>= <font color='#0000ff' weight='9.69402e-05' id='38'>data.length - <font color='#0000ff' weight='2.93758e-06' id='37'>1</font></font></font>;</font> k &gt; 0; k--) {
+            <font color='#0000ff' weight='0.000387761' id='71'><font color='#0000ff' weight='5.87516e-06' id='61'>int</font> <font color='#0000ff' weight='5.87516e-06' id='64'>largestIdx </font>= 0;
+            </font>for <font color='#0000ff' weight='0.000493514' id='100'>(<font color='#0000ff' weight='1.98287e-05' id='81'>int i = <font color='#0000ff' weight='7.34396e-07' id='78'>0</font>;</font> <font color='#0000ff' weight='7.34396e-07' id='85'>i </font><font color='#0000ff' weight='7.34396e-07' id='87'>&lt;= </font>k; <font color='#0000ff' weight='2.20319e-05' id='98'>i++)</font> </font>{
+                <font color='#0000ff' weight='0.000290821' id='134'>if (data[i] &gt; data[largestIdx])<font color='#0000ff' weight='4.84701e-05' id='133'> <font color='#0000ff' weight='4.40637e-05' id='132'>{
+                    largestIdx = i;
+                }</font></font>
+            }</font>
+            <font color='#0000ff' weight='0.000599267' id='155'>int tmp = data[<font color='#0000ff' weight='1.46879e-06' id='146'>k</font>];
+            </font><font color='#0000ff' weight='0.00070502' id='176'>data<font color='#0000ff' weight='1.17503e-05' id='162'>[k]</font> = <font color='#0000ff' weight='2.93758e-06' id='167'>data</font>[<font color='#0000ff' weight='1.46879e-06' id='169'>largestIdx</font>];
+            </font><font color='#0000ff' weight='0.000493514' id='191'>data[<font color='#0000ff' weight='2.93758e-06' id='181'><font color='#0000ff' weight='1.46879e-06' id='180'>largestIdx</font>]</font> = tmp;
+        }</font>
+    }
+
+}</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static void sort(Comparable[] data){
+        long start = System.nanoTime();
+        int len = data.length-1;
+        mergeSort(data,0,len);
+        long end = System.nanoTime();
+        System.out.println("\nMergeSort Execute time:"+(end-start));
+    }
+
+    private static void mergeSort(Comparable[] data, int begin, int end) {
+        if(begin&lt;end){
+            int mid = (begin+end)/2;
+            mergeSort(data, begin, mid);
+            mergeSort(data, mid+1, end);
+            merge(data,begin,mid,end);
+        }
+    }
+
+    private static void merge(Comparable[] data, int begin, int mid, int end) {
+        int leftIndex = begin;
+        int rightIndex = mid+1;
+        Comparable[] tmp = new Comparable[end-begin+1];
+        int tmpIndex = 0;
+        while (leftIndex&lt;=mid &amp;&amp; rightIndex&lt;=end) {
+            if(data[leftIndex].compareTo(data[rightIndex])&gt;0)
+            {
+                tmp[tmpIndex] = data[rightIndex];
+                rightIndex++;
+            }else{
+                tmp[tmpIndex] = data[leftIndex];
+                leftIndex++;
+            }
+            tmpIndex++;         
+        }
+        while(leftIndex&lt;=mid){
+            tmp[tmpIndex]=data[leftIndex];
+            tmpIndex++;
+            leftIndex++;
+        }
+        while(rightIndex&lt;=end){
+            tmp[tmpIndex]=data[rightIndex];
+            tmpIndex++;
+            rightIndex++;
+        }
+        for(int i=0;i&lt;tmpIndex;i++)
+        {
+            data[begin+i] = tmp[i];
+        }
+    }</font>
+</pre>

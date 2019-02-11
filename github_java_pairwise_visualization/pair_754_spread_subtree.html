@@ -1,0 +1,49 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+   public static &lt;Key extends Comparable&lt;Key&gt;&gt; void sort(Key[] a) {
+        int n = a.length;
+        for (int i = 0; i &lt; n; i++) {
+            int exchanges = 0;
+            for (int j = n - 1; j &gt; i; j--) {
+                if (less(a[j], a[j - 1])) {
+                    exch(a, j, j - 1);
+                    exchanges++;
+                }
+            }
+            if (exchanges == 0) break;
+        }
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static int[] shellSort(int[] arr) {
+        if (arr == null || arr.length == 0) <font color='#ff0000' weight='1' id='53'>{
+            <font color='#00ffa9' weight='0.333333' id='51'>return <font color='#0054ff' weight='0.0833333' id='49'><font color='#002aff' weight='0.0416667' id='48'>arr</font>;</font>
+        }</font></font>
+        shell(arr);
+        return arr;
+    }
+
+    public static void shell(int[] arr) {
+        int cur = 0;
+        for (int i = arr.length / 2; i &gt; 0; i--) {    
+            for (int j = i; j &lt; arr.length; j++) {
+                cur = j;
+                for (int k = j - i; k &gt;= 0; k -= i) {
+                    if (arr[cur] &gt;= arr[k]) {
+                        break;
+                    } else {
+                        swap(arr, cur, k);
+                        cur = k;
+                    }
+                }
+            }
+        }
+    }
+
+    public static void swap(int[] arr, int index1, int index2) {
+        int temp = arr[index1];
+        arr[index1] = arr[index2];
+        arr[index2] = temp;
+    }</font>
+</pre>

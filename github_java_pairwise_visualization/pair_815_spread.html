@@ -1,0 +1,77 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+   public static void mergeSort(int[] arr) {
+      if (arr.length &gt; 1) {
+         int[] left = leftHalf(arr);
+         int[] right = rightHalf(arr);
+
+         mergeSort(left);
+         mergeSort(right);
+
+         mergeArrays(arr, left, right);
+      }
+   }
+
+   public static int[] leftHalf(int[] arr) {
+      int size = arr.length / 2;
+      int[] left = new int[size];
+      for (int i = 0; i &lt; size; i++) {
+         left[i] = arr[i];
+      }
+      return left;
+   }
+
+   public static int[] rightHalf(int[] arr) <font color='#ff0000' weight='1' id='412'>{
+      <font color='#00aaff' weight='0.166667' id='304'><font color='#001cff' weight='0.0277778' id='285'>int</font> <font color='#001cff' weight='0.0277778' id='288'>size1 </font>= <font color='#0003ff' weight='0.00308642' id='290'>arr<font color='#0003ff' weight='0.00308642' id='289'></font></font>.length <font color='#0009ff' weight='0.00925926' id='297'>/<font color='#0009ff' weight='0.00925926' id='296'></font> </font><font color='#0009ff' weight='0.00925926' id='299'>2<font color='#0009ff' weight='0.00925926' id='298'></font></font>;
+      </font><font color='#00aaff' weight='0.166667' id='325'><font color='#0054ff' weight='0.0833333' id='323'><font color='#001cff' weight='0.0277778' id='307'>int </font><font color='#001cff' weight='0.0277778' id='309'>size2 </font><font color='#001cff' weight='0.0277778' id='322'>= <font color='#001cff' weight='0.0277778' id='321'><font color='#0009ff' weight='0.00925926' id='316'><font color='#0003ff' weight='0.00308642' id='311'>arr<font color='#0003ff' weight='0.00308642' id='310'></font></font><font color='#0003ff' weight='0.00308642' id='313'>.<font color='#0003ff' weight='0.00308642' id='312'></font></font><font color='#0003ff' weight='0.00308642' id='315'>length<font color='#0003ff' weight='0.00308642' id='314'></font></font> </font><font color='#0009ff' weight='0.00925926' id='318'>-<font color='#0009ff' weight='0.00925926' id='317'></font> </font><font color='#0009ff' weight='0.00925926' id='320'>size1<font color='#0009ff' weight='0.00925926' id='319'></font></font></font></font>;</font><font color='#0054ff' weight='0.0833333' id='324'></font>
+      </font><font color='#00aaff' weight='0.166667' id='348'><font color='#0054ff' weight='0.0833333' id='346'><font color='#001cff' weight='0.0277778' id='331'><font color='#001cff' weight='0.0277778' id='330'><font color='#000eff' weight='0.0138889' id='327'>int<font color='#000eff' weight='0.0138889' id='326'></font></font><font color='#000eff' weight='0.0138889' id='329'>[]<font color='#000eff' weight='0.0138889' id='328'></font></font></font> </font><font color='#001cff' weight='0.0277778' id='333'>right<font color='#001cff' weight='0.0277778' id='332'></font> </font><font color='#001cff' weight='0.0277778' id='345'>= <font color='#001cff' weight='0.0277778' id='344'><font color='#000eff' weight='0.0138889' id='335'>new<font color='#000eff' weight='0.0138889' id='334'></font> </font><font color='#000eff' weight='0.0138889' id='343'><font color='#0007ff' weight='0.00694444' id='337'>int<font color='#0007ff' weight='0.00694444' id='336'></font></font><font color='#0007ff' weight='0.00694444' id='342'>[<font color='#0003ff' weight='0.00347222' id='340'><font color='#0003ff' weight='0.00347222' id='339'>size2<font color='#0003ff' weight='0.00347222' id='338'></font></font>]</font><font color='#0003ff' weight='0.00347222' id='341'></font></font></font></font></font>;</font><font color='#0054ff' weight='0.0833333' id='347'></font>
+      </font><font color='#00aaff' weight='0.166667' id='405'>for <font color='#0054ff' weight='0.0833333' id='377'>(int i = <font color='#0003ff' weight='0.00347222' id='355'>0<font color='#0003ff' weight='0.00347222' id='354'></font></font>; i &lt; <font color='#0003ff' weight='0.00347222' id='366'>size2</font>; i++) </font><font color='#0054ff' weight='0.0833333' id='404'>{
+         <font color='#002aff' weight='0.0416667' id='402'><font color='#0015ff' weight='0.0208333' id='400'><font color='#0007ff' weight='0.00694444' id='385'><font color='#0003ff' weight='0.00347222' id='379'>right<font color='#0003ff' weight='0.00347222' id='378'></font></font><font color='#0003ff' weight='0.00347222' id='384'>[<font color='#0001ff' weight='0.00173611' id='382'><font color='#0001ff' weight='0.00173611' id='381'>i<font color='#0001ff' weight='0.00173611' id='380'></font></font>]</font><font color='#0001ff' weight='0.00173611' id='383'></font></font> </font><font color='#0007ff' weight='0.00694444' id='387'>=<font color='#0007ff' weight='0.00694444' id='386'></font> </font><font color='#0007ff' weight='0.00694444' id='399'><font color='#0003ff' weight='0.00347222' id='389'>arr</font>[i <font color='#0000ff' weight='0.000578704' id='393'>+<font color='#0000ff' weight='0.000578704' id='392'></font> </font><font color='#0000ff' weight='0.000578704' id='395'>size1<font color='#0000ff' weight='0.000578704' id='394'></font></font>]</font>;</font><font color='#0015ff' weight='0.0208333' id='401'></font>
+      }</font><font color='#002aff' weight='0.0416667' id='403'></font></font>
+      </font><font color='#00aaff' weight='0.166667' id='410'>return <font color='#0054ff' weight='0.0833333' id='408'><font color='#0054ff' weight='0.0833333' id='407'>right<font color='#0054ff' weight='0.0833333' id='406'></font></font>;</font><font color='#0054ff' weight='0.0833333' id='409'></font>
+   }</font><font color='#00aaff' weight='0.166667' id='411'></font></font>
+
+   public static void mergeArrays(int[] arr, int[] left, int[] right) {
+      int i1 = 0;
+      int i2 = 0;
+
+      for (int i = 0; i &lt; arr.length; i++) {
+         if (i2 &gt;= right.length || (i1 &lt; left.length &amp;&amp; left[i1] &lt;= right[i2])) {
+            arr[i] = left[i1];
+            i1++;
+         } else {
+            arr[i] = right[i2];
+            i2++;
+         }
+      }
+   }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static void sort(long[] valuesArray, int[] gapsArray) throws SortException {
+
+        if(gapsArray.length == 0) throw new EmptyArrayException("Gaps array can not by empty");
+
+        int endGap = gapsArray[gapsArray.length-1];
+        if(endGap != 1) throw new InvalidGapSequenceException("Gaps sequence must end with 1");
+
+
+        int valuesArraySize = valuesArray.length;
+
+        for (int gap : gapsArray) {
+
+            for (int i = gap; i &lt; valuesArraySize; i++) {
+
+                long value = valuesArray[i];
+                int j = i;
+
+                while (j &gt;= gap &amp;&amp; valuesArray[j - gap] &gt; value) {
+                    valuesArray[j] = valuesArray[j - gap];
+                    j -= gap;
+                }
+
+                valuesArray[j] = value;
+            }
+        }
+    }</font>
+</pre>

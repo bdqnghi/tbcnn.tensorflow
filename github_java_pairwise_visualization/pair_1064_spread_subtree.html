@@ -1,0 +1,93 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+package org.burstsort4j;
+
+
+public class Shellsort {
+
+    private Shellsort() {
+    }
+
+    
+    public static &lt;T extends Comparable&lt;? super T&gt;&gt; void sort(T[] input) {
+        if (input == null || input.length &lt; 2) <font color='#ff0000' weight='1' id='86'>{
+            <font color='#00aaff' weight='0.166667' id='84'>return;
+        }</font></font>
+
+        int inc = input.length / 2;
+        while (inc &gt; 0) {
+            for (int ii = inc; ii &lt; input.length; ii++) {
+                T temp = input[ii];
+                int jj = ii;
+                while (jj &gt;= inc &amp;&amp; input[jj - inc].compareTo(temp) &gt; 0) {
+                    input[jj] = input[jj - inc];
+                    jj -= inc;
+                }
+                input[jj] = temp;
+            }
+            
+            inc = inc == 2 ? 1 : inc * 5 / 11;
+        }
+    }
+}
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+package com.dreamskiale.basic_algorithms.search;
+
+import java.util.Deque;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+
+import com.dreamskiale.basic_algorithms.pojos.Vertex;
+
+public class DepthFirstSearchRecursive&lt;T&gt; implements GraphSearch&lt;T&gt; {
+
+  private Set&lt;Vertex&lt;T&gt;&gt; visited = new LinkedHashSet&lt;&gt;();
+  private Deque&lt;Vertex&lt;T&gt;&gt; topologicalSort = new LinkedList&lt;&gt;();
+
+  @Override
+  public Iterable&lt;Vertex&lt;T&gt;&gt; search(Vertex&lt;T&gt; head) {
+    visited.clear();
+    topologicalSort.clear();
+    dfsRecursive(head);
+    return visited;
+  }
+  
+  public Iterable&lt;Vertex&lt;T&gt;&gt; dfs(List&lt;Vertex&lt;T&gt;&gt; graph) {
+    visited.clear();
+    topologicalSort.clear();
+    for (Vertex&lt;T&gt; v : graph) {
+      if (!visited.contains(v)) {
+        dfsRecursive(v);
+      }
+    }
+    return visited;
+  }
+  
+  private void dfsRecursive(Vertex&lt;T&gt; vertex) {
+    visit(vertex);
+    List&lt;Vertex&lt;T&gt;&gt; adj = vertex.getAdjacent();
+    for (Vertex&lt;T&gt; a : adj) {
+      if (!visited.contains(a)) {
+        <font color='#ff0000' weight='1' id='521'><font color='#00ff5c' weight='0.409091' id='519'><font color='#00ff8b' weight='0.363636' id='518'><font color='#0017ff' weight='0.0227273' id='511'>dfsRecursive</font><font color='#0073ff' weight='0.113636' id='517'>(<font color='#0022ff' weight='0.0340909' id='515'><font color='#0017ff' weight='0.0227273' id='514'>a</font>)</font></font></font>;</font>
+      }</font>
+    }
+    topologicalSort.addFirst(vertex);
+  }
+  
+  
+  public Deque&lt;Vertex&lt;T&gt;&gt; getTopologicalSort() {
+    return topologicalSort;
+  }
+  
+  private void visit(Vertex&lt;T&gt; v) {
+    visited.add(v);
+  }
+
+}</font>
+</pre>

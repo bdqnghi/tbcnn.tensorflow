@@ -1,0 +1,65 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void bubbleSort(int arr[]) {
+      int len = arr.length;
+      for (int i = len; i &gt;= 0; i--) {
+         for (int j = 0; j &lt; len - 1; j++) {
+            int k = j <font color='#ff0000' weight='1' id='109'>+<font color='#ff0000' weight='1' id='108'></font> </font><font color='#ff0000' weight='1' id='111'>1<font color='#ff0000' weight='1' id='110'></font></font>;
+            if <font color='#ff0000' weight='1' id='137'>(arr[j] &gt; <font color='#ff0000' weight='1' id='134'><font color='#ff0000' weight='1' id='128'>arr</font><font color='#ff0000' weight='1' id='133'>[<font color='#ff0000' weight='1' id='131'>k<font color='#ff0000' weight='1' id='129'></font>]</font></font></font>)<font color='#ff0000' weight='1' id='136'></font></font><font color='#ff0000' weight='1' id='160'> <font color='#ff0000' weight='1' id='159'>{
+               swapNumbers<font color='#ff0000' weight='1' id='153'>(<font color='#ff0000' weight='1' id='142'>j<font color='#ff0000' weight='1' id='140'></font></font>, k, <font color='#ff0000' weight='1' id='151'>arr)</font><font color='#ff0000' weight='1' id='152'></font></font>;<font color='#ff0000' weight='1' id='156'></font>
+            }</font></font>
+         }<font color='#ff0000' weight='1' id='162'></font>
+      }
+   }
+
+   private static void swapNumbers(int i, int j, int[] arr) {
+      int temp;
+      temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
+   }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static void sort(int arr[])
+    {       
+        heapify(arr);        
+        for (int i = N; i &gt; 0; i--)
+        {
+            swap(arr,0, i);
+            N = N-1;
+            maxheap(arr, 0);
+        }
+    }     
+       
+    public static void heapify(int arr[])
+    {
+        N = arr.length-1;
+        for (int i = N/2; i &gt;= 0; i--)
+            maxheap(arr, i);        
+    }
+            
+    public static void maxheap(int arr[], int i)
+    { 
+        int left = 2*i ;
+        int right = 2*i + 1;
+        int max = i;
+        if (left &lt;= N &amp;&amp; arr[left] &gt; arr[i])
+            max = left;
+        if (right &lt;= N &amp;&amp; arr[right] &gt; arr[max])        
+            max = right;
+ 
+        if (max != i)
+        {
+            swap(arr, i, max);
+            maxheap(arr, max);
+        }
+    }    
+    
+    public static void swap(int arr[], int i, int j)
+    {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp; 
+    }    </font>
+</pre>

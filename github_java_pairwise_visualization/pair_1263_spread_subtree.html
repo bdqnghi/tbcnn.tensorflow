@@ -1,0 +1,51 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static void bubbleSort(int[] arr) {
+        <font color='#0019ff' weight='0.0245399' id='38'><font color='#000aff' weight='0.0107362' id='36'>int length = <font color='#0001ff' weight='0.00178937' id='34'><font color='#0001ff' weight='0.00153374' id='33'>arr<font color='#0000ff' weight='8.52079e-05' id='30'>.</font><font color='#0000ff' weight='8.52079e-05' id='32'>length</font></font></font>;</font>
+        </font><font color='#000aff' weight='0.0107362' id='46'><font color='#0003ff' weight='0.00383436' id='44'>int <font color='#0000ff' weight='0.000383436' id='43'>k</font>;</font>
+
+        </font>for <font color='#0015ff' weight='0.0214724' id='75'>(<font color='#0002ff' weight='0.0021089' id='58'><font color='#0000ff' weight='0.00086273' id='56'><font color='#0000ff' weight='3.1953e-05' id='48'>int</font> i = length;</font> </font><font color='#0001ff' weight='0.00153374' id='67'><font color='#0000ff' weight='3.1953e-05' id='60'>i </font><font color='#0000ff' weight='3.1953e-05' id='62'>&gt;= </font><font color='#0000ff' weight='3.1953e-05' id='64'>0</font>; </font>i--) </font>{
+            for <font color='#0004ff' weight='0.00408998' id='108'>(<font color='#0000ff' weight='0.000351483' id='87'><font color='#0000ff' weight='5.32549e-06' id='77'>int</font> <font color='#0000ff' weight='5.32549e-06' id='80'>j </font>= 0; </font><font color='#0000ff' weight='0.000383436' id='100'><font color='#0000ff' weight='3.1953e-06' id='89'>j </font>&lt; length-1; </font><font color='#0000ff' weight='0.000159765' id='106'><font color='#0000ff' weight='0.000127812' id='105'><font color='#0000ff' weight='1.59765e-05' id='102'>j</font><font color='#0000ff' weight='1.59765e-05' id='104'>++</font></font>)</font> </font>{
+                <font color='#0000ff' weight='0.000511247' id='121'><font color='#0000ff' weight='0.00021302' id='119'><font color='#0000ff' weight='4.2604e-06' id='110'>k </font><font color='#0000ff' weight='4.2604e-06' id='112'>= </font><font color='#0000ff' weight='4.2604e-06' id='114'>j </font><font color='#0000ff' weight='4.2604e-06' id='116'>+ </font>1;</font>
+
+                </font>if (arr[j] &gt; arr[k])<font color='#0000ff' weight='0.000447341' id='164'>
+                    <font color='#0000ff' weight='0.00042604' id='163'><font color='#0000ff' weight='0.000170416' id='159'><font color='#0000ff' weight='5.32549e-06' id='144'>swap</font>(j, k, arr)</font>;</font></font>
+            }
+            <font color='#0002ff' weight='0.00281186' id='180'><font color='#0001ff' weight='0.00102249' id='177'>printArray<font color='#0000ff' weight='0.00031953' id='176'>(<font color='#0000ff' weight='9.58589e-05' id='174'>arr)</font></font></font>;
+        }</font>
+    }
+
+  
+
+    private static void swap(int j, int k, int[] arr) {
+        int temp = arr[j];
+        arr[j] = arr[k];
+        arr[k] = temp;
+
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public int[] sort(int[] arrayToSort) {
+        int max = getMaxFromArray(arrayToSort);
+        Map&lt;Integer, Integer&gt; bucketMap = new HashMap&lt;&gt;();
+        for (int i = 0; i &lt;= max; i++) {
+            bucketMap.put(i, 0);
+        }
+        for (int i = 0; i &lt; arrayToSort.length; i++) {
+            bucketMap.put(arrayToSort[i], bucketMap.get(arrayToSort[i])+1);
+        }
+        <font color='#ff0000' weight='1' id='211'>int</font> sortedArrayIndex = 0;
+        for (Map.Entry&lt;Integer, Integer&gt; entry: bucketMap.entrySet()) {
+            for (int i = 0; i &lt; entry.getValue(); i++) {
+                arrayToSort[sortedArrayIndex++] = entry.getKey();
+            }
+        }
+        return arrayToSort;
+    }
+
+    protected int getMaxFromArray(int[] arrayToSort) {
+        List&lt;Integer&gt; numbers = Arrays.stream(arrayToSort).boxed().collect(Collectors.toList());
+        return numbers.stream().mapToInt(Integer::intValue).max().getAsInt();
+    }</font>
+</pre>

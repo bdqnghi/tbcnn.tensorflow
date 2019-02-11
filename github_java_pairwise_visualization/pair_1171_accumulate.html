@@ -1,0 +1,56 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+<font color='#ff0000' weight='1' id='258'>    <font color='#ff0000' weight='1' id='257'>public void sort(<font color='#ff0000' weight='1' id='12'>Comparable<font color='#ff0000' weight='1' id='8'></font>[]<font color='#ff0000' weight='1' id='10'></font></font> a<font color='#ff0000' weight='1' id='14'></font>)<font color='#ff0000' weight='1' id='18'></font> <font color='#ff0000' weight='1' id='256'>{
+        <font color='#ff0000' weight='1' id='22'><font color='#ff0000' weight='1' id='21'>int</font> </font>N = a.length;
+        <font color='#ff0000' weight='1' id='48'>int h <font color='#ff0000' weight='1' id='45'>= 1</font>;
+        </font><font color='#ff0000' weight='1' id='80'>while (h &lt; N / 3)
+            h = h * 3 +<font color='#ff0000' weight='1' id='72'></font> 1;
+        </font><font color='#ff0000' weight='1' id='229'>while (<font color='#ff0000' weight='1' id='87'>h <font color='#ff0000' weight='1' id='84'>&gt;= </font><font color='#ff0000' weight='1' id='86'>1<font color='#ff0000' weight='1' id='85'></font></font>)</font><font color='#ff0000' weight='1' id='88'></font> <font color='#ff0000' weight='1' id='228'>{
+            <font color='#ff0000' weight='1' id='217'>for (<font color='#ff0000' weight='1' id='92'>int </font>i = 0; i &lt; N; <font color='#ff0000' weight='1' id='112'>i</font>++) <font color='#ff0000' weight='1' id='216'>{
+                <font color='#ff0000' weight='1' id='125'><font color='#ff0000' weight='1' id='123'>count++;</font>
+                </font>for (<font color='#ff0000' weight='1' id='135'>int j = i;</font><font color='#ff0000' weight='1' id='136'></font> <font color='#ff0000' weight='1' id='175'><font color='#ff0000' weight='1' id='139'>j<font color='#ff0000' weight='1' id='138'></font> </font><font color='#ff0000' weight='1' id='141'>&gt;= </font><font color='#ff0000' weight='1' id='143'>h </font>&amp;&amp; less<font color='#ff0000' weight='1' id='146'></font>(<font color='#ff0000' weight='1' id='157'><font color='#ff0000' weight='1' id='155'><font color='#ff0000' weight='1' id='149'>a<font color='#ff0000' weight='1' id='148'></font></font>[j]<font color='#ff0000' weight='1' id='153'></font></font>, </font>a[j - h]);</font><font color='#ff0000' weight='1' id='176'></font> j -= h) {
+                    <font color='#ff0000' weight='1' id='211'>exch(a<font color='#ff0000' weight='1' id='190'></font>, j, j - h);
+                }</font>
+            }<font color='#ff0000' weight='1' id='215'></font></font>
+            </font><font color='#ff0000' weight='1' id='226'>h<font color='#ff0000' weight='1' id='218'></font> <font color='#ff0000' weight='1' id='221'>/= </font><font color='#ff0000' weight='1' id='223'>3<font color='#ff0000' weight='1' id='222'></font></font>;
+        }</font><font color='#ff0000' weight='1' id='227'></font></font>
+        </font><font color='#ff0000' weight='1' id='254'><font color='#ff0000' weight='1' id='252'><font color='#ff0000' weight='1' id='251'><font color='#ff0000' weight='1' id='240'><font color='#ff0000' weight='1' id='231'>System<font color='#ff0000' weight='1' id='230'></font></font><font color='#ff0000' weight='1' id='233'>.<font color='#ff0000' weight='1' id='232'></font></font><font color='#ff0000' weight='1' id='235'>out</font><font color='#ff0000' weight='1' id='237'>.<font color='#ff0000' weight='1' id='236'></font></font><font color='#ff0000' weight='1' id='239'>println</font></font><font color='#ff0000' weight='1' id='250'>(<font color='#ff0000' weight='1' id='248'><font color='#ff0000' weight='1' id='247'><font color='#ff0000' weight='1' id='242'>count<font color='#ff0000' weight='1' id='241'></font> </font><font color='#ff0000' weight='1' id='244'>/ </font><font color='#ff0000' weight='1' id='246'>N<font color='#ff0000' weight='1' id='245'></font></font></font>)</font><font color='#ff0000' weight='1' id='249'></font></font></font>;</font><font color='#ff0000' weight='1' id='253'></font>
+    }</font><font color='#ff0000' weight='1' id='255'></font></font></font></font></font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public int[] sort(int num[]) {
+        
+        int h = 1;
+        
+        while (h &lt; num.length / 3)
+            h = h * 3 + 1;
+        for (<font color='#ff0000' weight='1' id='73'>;<font color='#ff0000' weight='1' id='72'></font> </font>h &gt; 0; h /= 3) {
+            
+            for (int k = 0; k &lt; h; k++) {
+                
+                for (int i = h + k; i &lt; num.length; i += h) {
+                    int j = i;
+                    
+                    while (j &gt;= h &amp;&amp; num[j] &lt; num[j - h]) {
+                        swap(num, j, j - h);
+                        j -= h;
+                    }
+
+                }
+            }
+        }
+
+        return num;
+    }
+
+    
+    private void swap(int arg[], int i, int j) {
+        
+        if (i != j) {
+            arg[i] = arg[i] ^ arg[j];
+            arg[j] = arg[j] ^ arg[i];
+            arg[i] = arg[j] ^ arg[i];
+        }
+    }</font>
+</pre>

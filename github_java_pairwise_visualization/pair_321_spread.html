@@ -1,0 +1,70 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static void selection_sort(int[]arr,int bi,int ei)<font color='#ff0000' weight='1' id='212'>{
+        <font color='#00cbff' weight='0.2' id='59'>if <font color='#0066ff' weight='0.1' id='53'>(<font color='#0033ff' weight='0.05' id='51'>bi==<font color='#000aff' weight='0.01' id='38'></font>arr<font color='#0003ff' weight='0.00333333' id='40'></font>.length<font color='#0003ff' weight='0.00333333' id='44'></font><font color='#000aff' weight='0.01' id='48'>-</font>1<font color='#000aff' weight='0.01' id='49'></font>)</font></font><font color='#0066ff' weight='0.1' id='58'>{
+            return;
+        }<font color='#0033ff' weight='0.05' id='56'></font></font>
+        </font>if (<font color='#0033ff' weight='0.05' id='71'><font color='#0010ff' weight='0.0166667' id='61'>ei<font color='#0010ff' weight='0.0166667' id='60'></font></font>==<font color='#0010ff' weight='0.0166667' id='70'>arr.length</font>)</font>{
+            <font color='#0022ff' weight='0.0333333' id='101'>selection_sort(arr,bi+1,bi+2);
+            </font>return;
+        }
+        if <font color='#0066ff' weight='0.1' id='128'>(<font color='#0010ff' weight='0.0166667' id='115'>arr[bi]</font>&gt;<font color='#0008ff' weight='0.00833333' id='119'>arr</font><font color='#0008ff' weight='0.00833333' id='124'>[ei]</font>)<font color='#0033ff' weight='0.05' id='127'></font></font>{
+            <font color='#0019ff' weight='0.025' id='146'><font color='#000cff' weight='0.0125' id='144'><font color='#0004ff' weight='0.00416667' id='131'>int </font>temp<font color='#0004ff' weight='0.00416667' id='132'></font> = <font color='#0002ff' weight='0.00208333' id='135'>arr</font>[bi<font color='#0001ff' weight='0.00104167' id='136'></font>];</font><font color='#000cff' weight='0.0125' id='145'></font>
+            </font>arr<font color='#0002ff' weight='0.00208333' id='147'></font>[<font color='#0001ff' weight='0.00104167' id='150'>bi</font>]<font color='#0001ff' weight='0.00104167' id='152'></font> <font color='#0004ff' weight='0.00416667' id='156'>= </font><font color='#0002ff' weight='0.00208333' id='158'>arr</font>[<font color='#0001ff' weight='0.00104167' id='160'>ei<font color='#0001ff' weight='0.00104167' id='159'></font></font>]<font color='#0001ff' weight='0.00104167' id='162'></font>;
+            <font color='#0019ff' weight='0.025' id='182'>arr[ei] = temp;
+        
+        }</font><font color='#0019ff' weight='0.025' id='183'></font>
+        <font color='#00cbff' weight='0.2' id='210'><font color='#0033ff' weight='0.05' id='188'>selection_sort</font><font color='#0033ff' weight='0.05' id='206'>(<font color='#000cff' weight='0.0125' id='192'>arr,</font>bi,<font color='#000cff' weight='0.0125' id='203'><font color='#0004ff' weight='0.00416667' id='198'>ei</font>+<font color='#0004ff' weight='0.00416667' id='202'>1</font></font>)<font color='#000cff' weight='0.0125' id='205'></font></font>;
+    }</font></font>
+    public static void display(int[] arr) {
+        for (int val : arr) {
+            
+            System.out.print(val + ",");
+        }
+        System.out.println("end");
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+    public static void sort(int[] a) {
+        
+        shuffleArray(a);
+        sort(a, 0, a.length - 1);
+    }
+
+    private static void sort(int[] a, int lo, int hi) {
+        
+        if(hi &lt;= lo)    return;
+        int j = partition(a, lo, hi);
+        sort(a, lo, j - 1);
+        sort(a, j + 1, hi);
+    }
+
+    private static int partition(int[] a, int lo, int hi) {
+        int i = lo, j = hi + 1;
+        while(true)<font color='#ff0000' weight='1' id='372'>{
+            
+            <font color='#00cbff' weight='0.2' id='296'>while<font color='#0066ff' weight='0.1' id='279'>(a[lo] &gt; a[<font color='#0002ff' weight='0.00208333' id='270'>++<font color='#0002ff' weight='0.00208333' id='269'></font></font>i]) </font><font color='#0066ff' weight='0.1' id='295'>{
+                <font color='#0033ff' weight='0.05' id='293'>if<font color='#0019ff' weight='0.025' id='288'>(<font color='#000cff' weight='0.0125' id='286'><font color='#0004ff' weight='0.00416667' id='281'>i </font><font color='#0004ff' weight='0.00416667' id='283'>==<font color='#0004ff' weight='0.00416667' id='282'></font> </font><font color='#0004ff' weight='0.00416667' id='285'>hi</font>)</font><font color='#000cff' weight='0.0125' id='287'></font></font><font color='#0019ff' weight='0.025' id='292'> <font color='#0019ff' weight='0.025' id='291'><font color='#0019ff' weight='0.025' id='290'>break;<font color='#0019ff' weight='0.025' id='289'></font></font></font></font>
+            }</font><font color='#0033ff' weight='0.05' id='294'></font></font>
+            
+            </font><font color='#00cbff' weight='0.2' id='336'>while<font color='#0066ff' weight='0.1' id='319'>(<font color='#0033ff' weight='0.05' id='317'>a[lo] <font color='#0010ff' weight='0.0166667' id='306'>&lt;<font color='#0010ff' weight='0.0166667' id='305'></font> </font>a[<font color='#0002ff' weight='0.00208333' id='310'>--<font color='#0002ff' weight='0.00208333' id='309'></font></font>j])</font><font color='#0033ff' weight='0.05' id='318'></font> </font><font color='#0066ff' weight='0.1' id='335'>{
+                <font color='#0033ff' weight='0.05' id='333'>if<font color='#0019ff' weight='0.025' id='328'>(<font color='#000cff' weight='0.0125' id='326'><font color='#0004ff' weight='0.00416667' id='321'>j<font color='#0004ff' weight='0.00416667' id='320'></font> </font>== <font color='#0004ff' weight='0.00416667' id='325'>lo</font>)</font><font color='#000cff' weight='0.0125' id='327'></font></font><font color='#0019ff' weight='0.025' id='332'> <font color='#0019ff' weight='0.025' id='331'><font color='#0019ff' weight='0.025' id='330'>break;<font color='#0019ff' weight='0.025' id='329'></font></font></font></font>
+            }</font><font color='#0033ff' weight='0.05' id='334'></font></font>
+            
+            </font><font color='#00cbff' weight='0.2' id='350'>if<font color='#0066ff' weight='0.1' id='345'>(<font color='#0033ff' weight='0.05' id='343'><font color='#0010ff' weight='0.0166667' id='338'>j<font color='#0010ff' weight='0.0166667' id='337'></font> </font><font color='#0010ff' weight='0.0166667' id='340'>&lt;=<font color='#0010ff' weight='0.0166667' id='339'></font> </font>i)</font><font color='#0033ff' weight='0.05' id='344'></font></font><font color='#0066ff' weight='0.1' id='349'> <font color='#0066ff' weight='0.1' id='348'><font color='#0066ff' weight='0.1' id='347'>break;<font color='#0066ff' weight='0.1' id='346'></font></font></font></font>
+            
+            </font><font color='#0066ff' weight='0.1' id='367'><font color='#0033ff' weight='0.05' id='352'>exch</font><font color='#0033ff' weight='0.05' id='366'>(<font color='#000cff' weight='0.0125' id='356'><font color='#000cff' weight='0.0125' id='355'>a</font>, </font><font color='#000cff' weight='0.0125' id='360'><font color='#000cff' weight='0.0125' id='359'><font color='#000cff' weight='0.0125' id='358'>i<font color='#000cff' weight='0.0125' id='357'></font></font></font>, </font><font color='#000cff' weight='0.0125' id='364'><font color='#000cff' weight='0.0125' id='363'><font color='#000cff' weight='0.0125' id='362'>j<font color='#000cff' weight='0.0125' id='361'></font></font></font>)</font><font color='#000cff' weight='0.0125' id='365'></font></font></font>;
+        }</font>
+        
+        exch(a, lo, j);
+        return j;
+    }
+
+    private static void exch(int[] a, int i, int j) {
+        int temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+    }</font>
+</pre>

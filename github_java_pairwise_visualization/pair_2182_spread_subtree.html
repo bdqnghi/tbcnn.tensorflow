@@ -1,0 +1,47 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+<font color='#ff0000' weight='1' id='298'><font color='#ff0300' weight='0.996633' id='297'>public static <font color='#0001ff' weight='0.00112233' id='7'>void </font><font color='#0000ff' weight='0.000561167' id='9'>selsort</font><font color='#0006ff' weight='0.00617284' id='21'>(<font color='#0002ff' weight='0.00224467' id='18'>int <font color='#0000ff' weight='7.01459e-05' id='14'>a</font>[]</font>)</font><font color='#009cff' weight='0.15376' id='296'>{
+        <font color='#0001ff' weight='0.00128267' id='38'><font color='#0000ff' weight='0.000561167' id='36'>int n=<font color='#0000ff' weight='9.35279e-05' id='34'>a<font color='#0000ff' weight='4.45371e-06' id='30'>.</font>length</font>;</font>
+        </font>int <font color='#0000ff' weight='2.00417e-05' id='43'>temp</font>;
+        <font color='#0000ff' weight='0.00036075' id='56'><font color='#0000ff' weight='1.33611e-05' id='48'>int</font> <font color='#0000ff' weight='1.33611e-05' id='51'>pos</font><font color='#0000ff' weight='4.00834e-05' id='55'>=<font color='#0000ff' weight='1.33611e-05' id='53'>0</font></font>;</font>
+        for<font color='#0001ff' weight='0.00112233' id='87'>(<font color='#0000ff' weight='0.000110229' id='70'>int <font color='#0000ff' weight='1.67014e-06' id='63'>i</font>=0;</font>i&lt;n;i++)</font>{
+            <font color='#0000ff' weight='0.000545134' id='156'>for<font color='#0000ff' weight='0.000128267' id='120'>(<font color='#0000ff' weight='1.50313e-05' id='103'><font color='#0000ff' weight='6.51355e-06' id='101'>int j<font color='#0000ff' weight='1.1691e-06' id='100'>=i+1</font>;</font></font><font color='#0000ff' weight='8.01667e-06' id='112'><font color='#0000ff' weight='3.00625e-06' id='110'><font color='#0000ff' weight='1.67014e-07' id='105'>j</font><font color='#0000ff' weight='1.67014e-07' id='107'>&lt;</font>n;</font></font><font color='#0000ff' weight='5.01042e-06' id='118'><font color='#0000ff' weight='4.00834e-06' id='117'><font color='#0000ff' weight='5.01042e-07' id='114'>j</font><font color='#0000ff' weight='5.01042e-07' id='116'>++</font></font>)</font></font><font color='#0000ff' weight='0.000136283' id='155'>{
+                if(<font color='#0000ff' weight='8.3507e-08' id='122'>a</font>[i]&gt;a[j])
+                    <font color='#0000ff' weight='1.67014e-07' id='143'>pos</font>=j;
+            }</font>
+           </font>temp<font color='#0000ff' weight='1.33611e-06' id='160'>=</font><font color='#0000ff' weight='6.68056e-07' id='162'>a</font>[i];
+           <font color='#0000ff' weight='0.000160333' id='192'><font color='#0000ff' weight='7.21501e-05' id='190'><font color='#0000ff' weight='9.35279e-06' id='179'>a<font color='#0000ff' weight='2.67222e-06' id='178'>[<font color='#0000ff' weight='6.68056e-07' id='176'>i]</font></font></font><font color='#0000ff' weight='1.33611e-06' id='181'>=</font>a[pos];</font>
+           </font><font color='#0000ff' weight='0.000112233' id='207'><font color='#0000ff' weight='9.35279e-06' id='200'>a<font color='#0000ff' weight='2.67222e-06' id='199'>[<font color='#0000ff' weight='6.68056e-07' id='197'>pos]</font></font></font>=temp;
+        }</font>
+      
+         <font color='#0001ff' weight='0.00160333' id='231'><font color='#0000ff' weight='0.000721501' id='229'><font color='#0000ff' weight='4.00834e-06' id='212'>System</font><font color='#0000ff' weight='4.00834e-06' id='214'>.</font>out<font color='#0000ff' weight='4.00834e-06' id='218'>.</font><font color='#0000ff' weight='4.00834e-06' id='220'>println</font>(<font color='#0000ff' weight='3.00625e-05' id='225'><font color='#0000ff' weight='1.00208e-05' id='223'>"the sorted array is "</font>)</font>;</font>
+         </font><font color='#0005ff' weight='0.00497034' id='294'>for(<font color='#0000ff' weight='0.000110229' id='243'><font color='#0000ff' weight='3.34028e-06' id='234'>int </font><font color='#0000ff' weight='1.67014e-06' id='236'>i</font>=<font color='#0000ff' weight='3.34028e-06' id='239'>0</font>;</font><font color='#0000ff' weight='1.67014e-06' id='245'>i</font><font color='#0000ff' weight='1.67014e-06' id='247'>&lt;</font>n;<font color='#0000ff' weight='5.01042e-05' id='258'><font color='#0000ff' weight='4.00834e-05' id='257'><font color='#0000ff' weight='5.01042e-06' id='254'>i</font><font color='#0000ff' weight='5.01042e-06' id='256'>++</font></font>)</font><font color='#0001ff' weight='0.00128267' id='293'>{
+             <font color='#0000ff' weight='0.000601251' id='291'><font color='#0000ff' weight='0.000280584' id='289'><font color='#0000ff' weight='0.000270563' id='288'><font color='#0000ff' weight='1.00208e-06' id='262'>System</font><font color='#0000ff' weight='1.00208e-06' id='264'>.</font><font color='#0000ff' weight='1.00208e-06' id='266'>out</font>.print<font color='#0000ff' weight='7.51563e-05' id='287'>(<font color='#0000ff' weight='3.00625e-05' id='284'>a<font color='#0000ff' weight='1.67014e-06' id='278'>[<font color='#0000ff' weight='4.17535e-07' id='276'>i]</font></font><font color='#0000ff' weight='8.3507e-07' id='281'>+ </font>" "</font>)</font></font>;</font>
+         }</font></font>
+    }</font></font></font></font></font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public int[] sort(int[] arrayToSort) {
+        int max = getMaxFromArray(arrayToSort);
+        Map&lt;Integer, Integer&gt; bucketMap = new HashMap&lt;&gt;();
+        for (int i = 0; i &lt;= max; i++) {
+            bucketMap.put(i, 0);
+        }
+        for (int i = 0; i &lt; arrayToSort.length; i++) {
+            bucketMap.put(arrayToSort[i], bucketMap.get(arrayToSort[i])+1);
+        }
+        <font color='#ff0000' weight='1' id='211'>int</font> sortedArrayIndex = 0;
+        for (Map.Entry&lt;Integer, Integer&gt; entry: bucketMap.entrySet()) {
+            for (int i = 0; i &lt; entry.getValue(); i++) {
+                arrayToSort[sortedArrayIndex++] = entry.getKey();
+            }
+        }
+        return arrayToSort;
+    }
+
+    protected int getMaxFromArray(int[] arrayToSort) {
+        List&lt;Integer&gt; numbers = Arrays.stream(arrayToSort).boxed().collect(Collectors.toList());
+        return numbers.stream().mapToInt(Integer::intValue).max().getAsInt();
+    }</font>
+</pre>

@@ -1,0 +1,104 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+
+public class AcyclicSP {
+
+    private double[] distTo;    
+    private DirectedEdge[] edgeTo;  
+
+    
+    
+    public AcyclicSP(EdgeWeightedDigraph G, int s) {
+        distTo = new double[G.V()];
+        edgeTo = new DirectedEdge[G.V()];
+
+        validateVertex(s);
+
+        for (int v = 0; v &lt; G.V(); v++) {
+            distTo[v] = Double.POSITIVE_INFINITY;
+        }
+        distTo[s] = 0.0;
+
+        
+        Topological topological = new Topological<font color='#ff0000' weight='1' id='202'>(<font color='#00ff00' weight='0.5' id='200'><font color='#00ff00' weight='0.5' id='199'><font color='#00ff00' weight='0.5' id='198'>G<font color='#00ff00' weight='0.5' id='197'></font></font></font>)</font><font color='#00ff00' weight='0.5' id='201'></font></font>;
+        if (!topological.hasOrder()) {
+            throw new IllegalArgumentException("Digraph is not acyclic.");
+        }
+        for (int v : topological.order()) {
+            for (DirectedEdge e : G.adj(v)) {
+                relax(e);
+            }
+        }
+    }
+
+    
+    private void relax(DirectedEdge e) {
+        int v = e.from(), w = e.to();
+        if (distTo[w] &gt; distTo[v] + e.weight()) {
+            distTo[w] = distTo[v] + e.weight();
+            edgeTo[w] = e;
+        }
+    }
+
+    
+    public double distTo(int v) {
+        validateVertex(v);
+        return distTo[v];
+    }
+
+    
+    public boolean hasPathTo(int v) {
+        validateVertex(v);
+        return distTo[v] &lt; Double.POSITIVE_INFINITY;
+    }
+
+    
+    public Iterable&lt;DirectedEdge&gt; pathTo(int v) {
+        validateVertex(v);
+        if (!hasPathTo(v)) {
+            return null;
+        }
+        Stack&lt;DirectedEdge&gt; path = new Stack&lt;DirectedEdge&gt;();
+        for (DirectedEdge e = edgeTo[v]; e != null; e = edgeTo[e.from()]) {
+            path.push(e);
+        }
+        return path;
+    }
+
+    
+    private void validateVertex(int v) {
+        int V = distTo.length;
+        if (v &lt; 0 || v &gt;= V) {
+            throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V - 1));
+        }
+    }
+
+
+}
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+import java.util.*;
+
+class BSorting{
+    public static void main(String[]args){
+     
+
+        for(int i = 0; i &lt;= numbers.length - 1; i++){
+            for(int j = 0; j &lt; numbers.length - 1; j++){
+                if(numbers[j] &gt; numbers[j + 1]){
+                    int temp = numbers[j];
+                    numbers[j] = numbers[j + 1];
+                    numbers[j + 1] = temp;
+                }
+            }
+        
+        }
+
+   
+    }
+}
+</font>
+</pre>

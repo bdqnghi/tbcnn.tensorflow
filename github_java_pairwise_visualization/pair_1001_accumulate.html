@@ -1,0 +1,54 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static int[] doInsertionSort(int[] input){
+         
+        int temp;
+        for (int i = 1; i &lt; input.length; i++) {
+            for(int j = i ; j &gt; 0 ; j--){
+                if(input[j] &lt; input[j-1]){
+                    temp = input[j];
+                    input[j] = input[j-1];
+                    input[j-1] = temp;
+                }
+            }
+        }
+        return input;
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public int[] sort(int num[]) {
+        
+        int h = 1;
+        
+        while (h &lt; num.length / 3)
+            h = h * 3 + 1;
+        for (; h &gt; 0; h /= 3) {
+            
+            for (int k = 0; k &lt; h; k++) {
+                
+                for (int i = h + k; i &lt; num.length; i += h) {
+                    int j = i;
+                    
+                    while (j &gt;= h &amp;&amp; num[j] &lt; num[j - h]) {
+                        swap(num, j, j - h);
+                        j -= h;
+                    }
+
+                }
+            }
+        }
+
+        return num;
+    }
+
+    
+    private void swap(int arg[], int i, int j) {
+        
+        if (i != j) {
+            arg[i] = arg[i] ^ arg[j];
+            arg[j] = arg[j] ^ arg[i];
+            arg[i] = arg[j] ^ arg[i];
+        }
+    }</font>
+</pre>

@@ -1,0 +1,191 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class RadixSort extends Sort {
+
+    private static final double LOG2 = Math.log(2);
+
+    private int temp[];
+    private ArrayList&lt;Integer&gt; tempSorted;
+    
+    private int b,r,k,d,n;
+
+    public RadixSort(boolean type, int size, int scope) {
+        super(type, size, scope);
+        n = size;
+        
+        b = (int)Math.ceil(log2(scope));
+        
+        if (b &lt; Math.floor(log2(n))){
+            r = b;
+        } else {
+            r = (int) Math.floor(log2(n));
+        }
+        k = (int) Math.pow(2,r); 
+        d = (int) Math.ceil((double)b/(double)r);
+    }
+
+    public void sort() {
+        temp = new int[k];
+        for (int position=0; position&lt;d; position++) {
+            countingSort(data.size(), position);
+        }
+    }
+
+
+    private void countingSort(int n, int position) {
+        tempSorted = new ArrayList&lt;&gt;(data);
+        Arrays.fill(temp, 0);
+
+        for (int j=0; j&lt;n; j++) {
+            
+            
+            temp[(data.get(j) &gt;&gt; r*position) % k]++;
+        }
+
+        for (int i=1; i&lt;k; i++) {
+            
+            
+            
+            temp[i] += temp[i-1];
+        }
+
+        for (int j=n-1; j&gt;=0; j--) {
+            
+            
+            tempSorted.set(temp[(data.get(j) &gt;&gt; r*position) % k] - 1, data.get(j));
+            
+            
+            
+            temp[(data.get(j) &gt;&gt; r*position) % k]--;
+        }
+
+        for (int i=0; i&lt;dataSize; i++) {
+            if (compare(tempSorted.get(i), data.get(i)) != 0) {
+                data.set(i, tempSorted.get(i));
+                swaps++;
+            }
+        }
+    }
+
+    public void sortLog() {
+        print_log("radix sort is starting");
+        temp = new int[k];
+        for (int position=0; position&lt;d; position++) {
+            print_log("position = " + position);
+            countingSortLog(data.size(), position);
+        }
+    }
+
+    private void countingSortLog(int n, int position) <font color='#ff0000' weight='1' id='1581'>{
+        <font color='#0066ff' weight='0.1' id='1063'><font color='#0033ff' weight='0.05' id='1061'><font color='#0033ff' weight='0.05' id='1060'><font color='#0019ff' weight='0.025' id='1053'>print_log<font color='#0019ff' weight='0.025' id='1052'></font></font><font color='#0019ff' weight='0.025' id='1059'>(<font color='#000cff' weight='0.0125' id='1057'><font color='#000cff' weight='0.0125' id='1056'><font color='#000cff' weight='0.0125' id='1055'>"counting sort is starting"<font color='#000cff' weight='0.0125' id='1054'></font></font></font>)</font><font color='#000cff' weight='0.0125' id='1058'></font></font></font>;</font><font color='#0033ff' weight='0.05' id='1062'></font>
+
+        </font><font color='#0066ff' weight='0.1' id='1084'><font color='#0033ff' weight='0.05' id='1082'><font color='#000cff' weight='0.0125' id='1065'>tempSorted<font color='#000cff' weight='0.0125' id='1064'></font> </font><font color='#000cff' weight='0.0125' id='1067'>=<font color='#000cff' weight='0.0125' id='1066'></font> </font><font color='#000cff' weight='0.0125' id='1069'>new<font color='#000cff' weight='0.0125' id='1068'></font> </font><font color='#000cff' weight='0.0125' id='1081'><font color='#0006ff' weight='0.00625' id='1074'><font color='#0003ff' weight='0.003125' id='1071'>ArrayList<font color='#0003ff' weight='0.003125' id='1070'></font></font><font color='#0003ff' weight='0.003125' id='1073'>&lt;&gt;<font color='#0003ff' weight='0.003125' id='1072'></font></font></font><font color='#0006ff' weight='0.00625' id='1080'>(<font color='#0003ff' weight='0.003125' id='1078'><font color='#0003ff' weight='0.003125' id='1077'><font color='#0003ff' weight='0.003125' id='1076'>data<font color='#0003ff' weight='0.003125' id='1075'></font></font></font>)</font><font color='#0003ff' weight='0.003125' id='1079'></font></font></font>;</font><font color='#0033ff' weight='0.05' id='1083'></font>
+        </font><font color='#0066ff' weight='0.1' id='1105'>Arrays.fill(<font color='#0008ff' weight='0.00833333' id='1093'>temp</font>, 0);
+
+        </font><font color='#0066ff' weight='0.1' id='1117'><font color='#0033ff' weight='0.05' id='1115'><font color='#0033ff' weight='0.05' id='1114'><font color='#0019ff' weight='0.025' id='1107'>print_log<font color='#0019ff' weight='0.025' id='1106'></font></font><font color='#0019ff' weight='0.025' id='1113'>(<font color='#000cff' weight='0.0125' id='1111'><font color='#000cff' weight='0.0125' id='1110'><font color='#000cff' weight='0.0125' id='1109'>"temp array is filled with 0's now"<font color='#000cff' weight='0.0125' id='1108'></font></font></font>)</font><font color='#000cff' weight='0.0125' id='1112'></font></font></font>;</font><font color='#0033ff' weight='0.05' id='1116'></font>
+
+        </font><font color='#0066ff' weight='0.1' id='1190'>for (int <font color='#0002ff' weight='0.00208333' id='1122'>j</font><font color='#0002ff' weight='0.00208333' id='1126'>=0</font>; <font color='#0002ff' weight='0.00208333' id='1131'>j</font>&lt;n; <font color='#0006ff' weight='0.00625' id='1140'>j</font>++) <font color='#0033ff' weight='0.05' id='1189'>{
+            <font color='#0003ff' weight='0.003125' id='1148'>temp</font>[(<font color='#0000ff' weight='0.000173611' id='1164'><font color='#0000ff' weight='8.68056e-05' id='1157'><font color='#0000ff' weight='2.89352e-05' id='1152'>data</font><font color='#0000ff' weight='2.89352e-05' id='1154'>.<font color='#0000ff' weight='2.89352e-05' id='1153'></font></font><font color='#0000ff' weight='2.89352e-05' id='1156'>get<font color='#0000ff' weight='2.89352e-05' id='1155'></font></font></font><font color='#0000ff' weight='8.68056e-05' id='1163'>(<font color='#0000ff' weight='4.34028e-05' id='1161'><font color='#0000ff' weight='4.34028e-05' id='1160'><font color='#0000ff' weight='4.34028e-05' id='1159'>j</font></font>)</font><font color='#0000ff' weight='4.34028e-05' id='1162'></font></font> </font><font color='#0000ff' weight='0.000173611' id='1166'>&gt;&gt; </font><font color='#0000ff' weight='0.000173611' id='1168'>r</font><font color='#0000ff' weight='0.000173611' id='1170'>*<font color='#0000ff' weight='0.000173611' id='1169'></font></font><font color='#0000ff' weight='0.000173611' id='1172'>position<font color='#0000ff' weight='0.000173611' id='1171'></font></font>) % <font color='#0000ff' weight='0.000173611' id='1178'>k<font color='#0000ff' weight='0.000173611' id='1177'></font></font>]++;
+        }<font color='#0019ff' weight='0.025' id='1188'></font></font>
+
+        </font><font color='#0066ff' weight='0.1' id='1247'>for (int i<font color='#0002ff' weight='0.00208333' id='1199'>=1</font>; i&lt;<font color='#0002ff' weight='0.00208333' id='1208'>k<font color='#0002ff' weight='0.00208333' id='1207'></font></font>; i++) <font color='#0033ff' weight='0.05' id='1246'>{
+            <font color='#0002ff' weight='0.00208333' id='1221'>temp</font>[i] += <font color='#0002ff' weight='0.00208333' id='1231'>temp</font>[i-1];
+        }<font color='#0019ff' weight='0.025' id='1245'></font></font>
+
+        </font><font color='#0066ff' weight='0.1' id='1395'>for (int <font color='#0002ff' weight='0.00208333' id='1252'>j</font><font color='#0002ff' weight='0.00208333' id='1260'>=n-1</font>; <font color='#0002ff' weight='0.00208333' id='1265'>j</font>&gt;=0; <font color='#0006ff' weight='0.00625' id='1274'>j</font>--) {
+            <font color='#0008ff' weight='0.00833333' id='1348'><font color='#0004ff' weight='0.00416667' id='1287'><font color='#0001ff' weight='0.00138889' id='1282'>tempSorted<font color='#0001ff' weight='0.00138889' id='1281'></font></font><font color='#0001ff' weight='0.00138889' id='1284'>.<font color='#0001ff' weight='0.00138889' id='1283'></font></font><font color='#0001ff' weight='0.00138889' id='1286'>set</font></font><font color='#0004ff' weight='0.00416667' id='1347'>(<font color='#0001ff' weight='0.00138889' id='1329'><font color='#0001ff' weight='0.00138889' id='1328'><font color='#0000ff' weight='0.000462963' id='1323'><font color='#0000ff' weight='0.000231481' id='1289'>temp</font>[(<font color='#0000ff' weight='1.28601e-05' id='1305'><font color='#0000ff' weight='6.43004e-06' id='1298'><font color='#0000ff' weight='2.14335e-06' id='1293'>data</font><font color='#0000ff' weight='2.14335e-06' id='1295'>.<font color='#0000ff' weight='2.14335e-06' id='1294'></font></font><font color='#0000ff' weight='2.14335e-06' id='1297'>get<font color='#0000ff' weight='2.14335e-06' id='1296'></font></font></font><font color='#0000ff' weight='6.43004e-06' id='1304'>(<font color='#0000ff' weight='3.21502e-06' id='1302'><font color='#0000ff' weight='3.21502e-06' id='1301'><font color='#0000ff' weight='3.21502e-06' id='1300'>j</font></font>)</font><font color='#0000ff' weight='3.21502e-06' id='1303'></font></font> </font><font color='#0000ff' weight='1.28601e-05' id='1307'>&gt;&gt; </font><font color='#0000ff' weight='1.28601e-05' id='1309'>r</font><font color='#0000ff' weight='1.28601e-05' id='1311'>*<font color='#0000ff' weight='1.28601e-05' id='1310'></font></font><font color='#0000ff' weight='1.28601e-05' id='1313'>position<font color='#0000ff' weight='1.28601e-05' id='1312'></font></font>) % <font color='#0000ff' weight='1.28601e-05' id='1319'>k<font color='#0000ff' weight='1.28601e-05' id='1318'></font></font>] </font><font color='#0000ff' weight='0.000462963' id='1325'>- </font><font color='#0000ff' weight='0.000462963' id='1327'>1</font></font>, </font><font color='#0001ff' weight='0.00138889' id='1345'><font color='#0001ff' weight='0.00138889' id='1344'><font color='#0001ff' weight='0.00138889' id='1343'><font color='#0000ff' weight='0.000694444' id='1336'><font color='#0000ff' weight='0.000231481' id='1331'>data<font color='#0000ff' weight='0.000231481' id='1330'></font></font><font color='#0000ff' weight='0.000231481' id='1333'>.<font color='#0000ff' weight='0.000231481' id='1332'></font></font><font color='#0000ff' weight='0.000231481' id='1335'>get</font></font><font color='#0000ff' weight='0.000694444' id='1342'>(<font color='#0000ff' weight='0.000347222' id='1340'><font color='#0000ff' weight='0.000347222' id='1339'><font color='#0000ff' weight='0.000347222' id='1338'>j</font></font>)</font><font color='#0000ff' weight='0.000347222' id='1341'></font></font></font></font>)</font><font color='#0001ff' weight='0.00138889' id='1346'></font></font></font>;
+            <font color='#0002ff' weight='0.00208333' id='1353'>temp</font>[(<font color='#0000ff' weight='0.000115741' id='1369'><font color='#0000ff' weight='5.78704e-05' id='1362'><font color='#0000ff' weight='1.92901e-05' id='1357'>data</font><font color='#0000ff' weight='1.92901e-05' id='1359'>.<font color='#0000ff' weight='1.92901e-05' id='1358'></font></font><font color='#0000ff' weight='1.92901e-05' id='1361'>get<font color='#0000ff' weight='1.92901e-05' id='1360'></font></font></font><font color='#0000ff' weight='5.78704e-05' id='1368'>(<font color='#0000ff' weight='2.89352e-05' id='1366'><font color='#0000ff' weight='2.89352e-05' id='1365'><font color='#0000ff' weight='2.89352e-05' id='1364'>j</font></font>)</font><font color='#0000ff' weight='2.89352e-05' id='1367'></font></font> </font><font color='#0000ff' weight='0.000115741' id='1371'>&gt;&gt; </font><font color='#0000ff' weight='0.000115741' id='1373'>r</font><font color='#0000ff' weight='0.000115741' id='1375'>*<font color='#0000ff' weight='0.000115741' id='1374'></font></font><font color='#0000ff' weight='0.000115741' id='1377'>position<font color='#0000ff' weight='0.000115741' id='1376'></font></font>) % <font color='#0000ff' weight='0.000115741' id='1383'>k<font color='#0000ff' weight='0.000115741' id='1382'></font></font>]--;
+        }
+
+        </font><font color='#0066ff' weight='0.1' id='1547'>for <font color='#0033ff' weight='0.05' id='1424'>(int i<font color='#0002ff' weight='0.00208333' id='1404'>=0</font>; i&lt;<font color='#0002ff' weight='0.00208333' id='1413'>dataSize</font>; i++) </font><font color='#0033ff' weight='0.05' id='1546'>{
+            <font color='#0019ff' weight='0.025' id='1544'>if <font color='#000cff' weight='0.0125' id='1468'>(<font color='#0006ff' weight='0.00625' id='1466'><font color='#0002ff' weight='0.00208333' id='1461'><font color='#0001ff' weight='0.00104167' id='1426'>compare<font color='#0001ff' weight='0.00104167' id='1425'></font></font><font color='#0001ff' weight='0.00104167' id='1460'>(<font color='#0000ff' weight='0.000347222' id='1442'><font color='#0000ff' weight='0.000347222' id='1441'><font color='#0000ff' weight='0.000347222' id='1440'><font color='#0000ff' weight='0.000173611' id='1433'><font color='#0000ff' weight='5.78704e-05' id='1428'>tempSorted<font color='#0000ff' weight='5.78704e-05' id='1427'></font></font><font color='#0000ff' weight='5.78704e-05' id='1430'>.<font color='#0000ff' weight='5.78704e-05' id='1429'></font></font><font color='#0000ff' weight='5.78704e-05' id='1432'>get<font color='#0000ff' weight='5.78704e-05' id='1431'></font></font></font><font color='#0000ff' weight='0.000173611' id='1439'>(<font color='#0000ff' weight='8.68056e-05' id='1437'><font color='#0000ff' weight='8.68056e-05' id='1436'><font color='#0000ff' weight='8.68056e-05' id='1435'>i</font></font>)</font><font color='#0000ff' weight='8.68056e-05' id='1438'></font></font></font></font>, </font><font color='#0000ff' weight='0.000347222' id='1458'><font color='#0000ff' weight='0.000347222' id='1457'><font color='#0000ff' weight='0.000347222' id='1456'><font color='#0000ff' weight='0.000173611' id='1449'><font color='#0000ff' weight='5.78704e-05' id='1444'>data<font color='#0000ff' weight='5.78704e-05' id='1443'></font></font><font color='#0000ff' weight='5.78704e-05' id='1446'>.<font color='#0000ff' weight='5.78704e-05' id='1445'></font></font><font color='#0000ff' weight='5.78704e-05' id='1448'>get</font></font><font color='#0000ff' weight='0.000173611' id='1455'>(<font color='#0000ff' weight='8.68056e-05' id='1453'><font color='#0000ff' weight='8.68056e-05' id='1452'><font color='#0000ff' weight='8.68056e-05' id='1451'>i</font></font>)</font><font color='#0000ff' weight='8.68056e-05' id='1454'></font></font></font></font>)</font><font color='#0000ff' weight='0.000347222' id='1459'></font></font> </font><font color='#0002ff' weight='0.00208333' id='1463'>!=<font color='#0002ff' weight='0.00208333' id='1462'></font> </font><font color='#0002ff' weight='0.00208333' id='1465'>0<font color='#0002ff' weight='0.00208333' id='1464'></font></font>)</font><font color='#0006ff' weight='0.00625' id='1467'></font></font><font color='#000cff' weight='0.0125' id='1543'> <font color='#000cff' weight='0.0125' id='1542'>{
+                <font color='#0003ff' weight='0.003125' id='1501'><font color='#0001ff' weight='0.0015625' id='1499'><font color='#0001ff' weight='0.0015625' id='1498'><font color='#0000ff' weight='0.00078125' id='1475'><font color='#0000ff' weight='0.000260417' id='1470'>data</font><font color='#0000ff' weight='0.000260417' id='1472'>.</font><font color='#0000ff' weight='0.000260417' id='1474'>set</font></font><font color='#0000ff' weight='0.00078125' id='1497'>(<font color='#0000ff' weight='0.000260417' id='1479'><font color='#0000ff' weight='0.000260417' id='1478'><font color='#0000ff' weight='0.000260417' id='1477'>i<font color='#0000ff' weight='0.000260417' id='1476'></font></font></font>, </font><font color='#0000ff' weight='0.000260417' id='1495'><font color='#0000ff' weight='0.000260417' id='1494'><font color='#0000ff' weight='0.000260417' id='1493'><font color='#0000ff' weight='0.000130208' id='1486'><font color='#0000ff' weight='4.34028e-05' id='1481'>tempSorted<font color='#0000ff' weight='4.34028e-05' id='1480'></font></font><font color='#0000ff' weight='4.34028e-05' id='1483'>.</font><font color='#0000ff' weight='4.34028e-05' id='1485'>get<font color='#0000ff' weight='4.34028e-05' id='1484'></font></font></font><font color='#0000ff' weight='0.000130208' id='1492'>(<font color='#0000ff' weight='6.51042e-05' id='1490'><font color='#0000ff' weight='6.51042e-05' id='1489'><font color='#0000ff' weight='6.51042e-05' id='1488'>i<font color='#0000ff' weight='6.51042e-05' id='1487'></font></font></font>)</font><font color='#0000ff' weight='6.51042e-05' id='1491'></font></font></font></font>)</font><font color='#0000ff' weight='0.000260417' id='1496'></font></font></font>;</font><font color='#0001ff' weight='0.0015625' id='1500'></font>
+                </font><font color='#0003ff' weight='0.003125' id='1533'><font color='#0001ff' weight='0.0015625' id='1531'><font color='#0001ff' weight='0.0015625' id='1530'><font color='#0000ff' weight='0.00078125' id='1503'>print_log<font color='#0000ff' weight='0.00078125' id='1502'></font></font><font color='#0000ff' weight='0.00078125' id='1529'>(<font color='#0000ff' weight='0.000390625' id='1527'><font color='#0000ff' weight='0.000390625' id='1526'><font color='#0000ff' weight='7.8125e-05' id='1517'><font color='#0000ff' weight='1.30208e-05' id='1505'>tempSorted</font>.<font color='#0000ff' weight='1.30208e-05' id='1509'>get</font>(<font color='#0000ff' weight='1.95312e-05' id='1512'>i</font>) </font><font color='#0000ff' weight='7.8125e-05' id='1519'>+ </font><font color='#0000ff' weight='7.8125e-05' id='1521'>" was swapped, now on index "<font color='#0000ff' weight='7.8125e-05' id='1520'></font> </font><font color='#0000ff' weight='7.8125e-05' id='1523'>+<font color='#0000ff' weight='7.8125e-05' id='1522'></font> </font><font color='#0000ff' weight='7.8125e-05' id='1525'>i<font color='#0000ff' weight='7.8125e-05' id='1524'></font></font></font>)</font><font color='#0000ff' weight='0.000390625' id='1528'></font></font></font>;</font><font color='#0001ff' weight='0.0015625' id='1532'></font>
+                </font><font color='#0003ff' weight='0.003125' id='1540'><font color='#0001ff' weight='0.0015625' id='1538'><font color='#0000ff' weight='0.00078125' id='1535'>swaps<font color='#0000ff' weight='0.00078125' id='1534'></font></font><font color='#0000ff' weight='0.00078125' id='1537'>++<font color='#0000ff' weight='0.00078125' id='1536'></font></font>;</font><font color='#0001ff' weight='0.0015625' id='1539'></font>
+            }</font><font color='#0003ff' weight='0.003125' id='1541'></font></font></font>
+        }</font><font color='#0019ff' weight='0.025' id='1545'></font></font>
+
+        </font><font color='#0066ff' weight='0.1' id='1579'>for <font color='#0033ff' weight='0.05' id='1560'>(<font color='#0019ff' weight='0.025' id='1558'><font color='#0019ff' weight='0.025' id='1557'><font color='#0008ff' weight='0.00833333' id='1550'><font color='#0008ff' weight='0.00833333' id='1549'>int<font color='#0008ff' weight='0.00833333' id='1548'></font></font> </font><font color='#0008ff' weight='0.00833333' id='1552'>i<font color='#0008ff' weight='0.00833333' id='1551'></font> </font><font color='#0008ff' weight='0.00833333' id='1556'>: <font color='#0008ff' weight='0.00833333' id='1555'><font color='#0008ff' weight='0.00833333' id='1554'>data<font color='#0008ff' weight='0.00833333' id='1553'></font></font></font></font></font>)</font><font color='#0019ff' weight='0.025' id='1559'></font> </font><font color='#0033ff' weight='0.05' id='1578'>{
+            <font color='#0019ff' weight='0.025' id='1576'><font color='#000cff' weight='0.0125' id='1574'><font color='#000cff' weight='0.0125' id='1573'><font color='#0006ff' weight='0.00625' id='1562'>print_log</font>(<font color='#0001ff' weight='0.00104167' id='1564'>i </font><font color='#0001ff' weight='0.00104167' id='1566'>+ </font><font color='#0001ff' weight='0.00104167' id='1568'>""<font color='#0001ff' weight='0.00104167' id='1567'></font></font>)</font>;</font><font color='#000cff' weight='0.0125' id='1575'></font>
+        }</font><font color='#0019ff' weight='0.025' id='1577'></font></font>
+    }</font><font color='#0066ff' weight='0.1' id='1580'></font></font>
+
+    private double log2(double a) {
+        return Math.log(a)/LOG2;
+    }
+
+    public static void main(String[] args) {
+        boolean type;
+        if(Integer.parseInt(args[0]) &lt;= 0)
+            type = false;
+        else
+            type = true;
+
+        int size = Integer.parseInt(args[1]);
+        int scope = Integer.parseInt(args[2]);
+        
+        RadixSort rs = new RadixSort(type, size, scope);
+        rs.sortLog();
+
+        System.out.println("data is now sorted (" + rs.compares + " compares, " + rs.swaps + " swaps)!");
+        System.out.println("");
+        System.out.println("b - liczba bitÃ³w w sÅowie: " + rs.b);
+        System.out.println("r - liczba bitÃ³w w 'cyfrze': " + rs.r);
+        System.out.println("k - iloÅÄ wartoÅci jakie moÅ¼e przyjmowaÄ cyfra: " + rs.k);
+        System.out.println("d - iloÅÄ cyfr w sÅowie: " + rs.d);
+        System.out.println("n - iloÅÄ danych do posortowania: " + rs.n);
+        rs.printBinary(rs.b);
+        rs.print();
+        
+    }
+
+}
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+package leetcode.common.utils;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+
+public class Radix {
+    static int getMax(int[] arr) {
+        return Arrays.stream(arr).max().getAsInt();
+    }
+
+    static void countSort(int[] arr, int exp) <font color='#ff0000' weight='1' id='569'>{
+        <font color='#0066ff' weight='0.1' id='143'><font color='#0033ff' weight='0.05' id='141'>int <font color='#0010ff' weight='0.0166667' id='131'>n </font><font color='#0010ff' weight='0.0166667' id='140'>= <font color='#0010ff' weight='0.0166667' id='139'><font color='#0010ff' weight='0.0166667' id='138'><font color='#0005ff' weight='0.00555556' id='133'>arr</font>.<font color='#0005ff' weight='0.00555556' id='137'>length</font></font></font></font>;</font><font color='#0033ff' weight='0.05' id='142'></font>
+        </font><font color='#0066ff' weight='0.1' id='166'><font color='#0033ff' weight='0.05' id='164'><font color='#0010ff' weight='0.0166667' id='149'><font color='#0010ff' weight='0.0166667' id='148'><font color='#0008ff' weight='0.00833333' id='145'>int</font><font color='#0008ff' weight='0.00833333' id='147'>[]<font color='#0008ff' weight='0.00833333' id='146'></font></font></font> </font><font color='#0010ff' weight='0.0166667' id='151'>output </font><font color='#0010ff' weight='0.0166667' id='163'>= <font color='#0010ff' weight='0.0166667' id='162'><font color='#0008ff' weight='0.00833333' id='153'>new </font><font color='#0004ff' weight='0.00416667' id='155'>int</font>[<font color='#0002ff' weight='0.00208333' id='157'>n</font>]</font></font>;</font><font color='#0033ff' weight='0.05' id='165'></font>
+        </font><font color='#0066ff' weight='0.1' id='189'><font color='#0033ff' weight='0.05' id='187'><font color='#0010ff' weight='0.0166667' id='172'><font color='#0010ff' weight='0.0166667' id='171'><font color='#0008ff' weight='0.00833333' id='168'>int</font><font color='#0008ff' weight='0.00833333' id='170'>[]<font color='#0008ff' weight='0.00833333' id='169'></font></font></font> </font><font color='#0010ff' weight='0.0166667' id='174'>count </font><font color='#0010ff' weight='0.0166667' id='186'>= <font color='#0010ff' weight='0.0166667' id='185'>new int[<font color='#0002ff' weight='0.00208333' id='180'>10<font color='#0002ff' weight='0.00208333' id='179'></font></font>]</font></font>;</font><font color='#0033ff' weight='0.05' id='188'></font>
+        </font>Arrays.fill(<font color='#0008ff' weight='0.00833333' id='198'>count</font>, 0);
+
+        for (int <font color='#0002ff' weight='0.00208333' id='215'>i </font><font color='#0002ff' weight='0.00208333' id='219'>= 0</font>; <font color='#0002ff' weight='0.00208333' id='224'>i </font>&lt; n; <font color='#0006ff' weight='0.00625' id='233'>i</font>++)
+            <font color='#0033ff' weight='0.05' id='271'><font color='#0006ff' weight='0.00625' id='241'>count</font>[(<font color='#0000ff' weight='0.000446429' id='251'><font color='#0000ff' weight='0.000223214' id='245'>arr</font><font color='#0000ff' weight='0.000223214' id='250'>[<font color='#0000ff' weight='0.000111607' id='248'><font color='#0000ff' weight='0.000111607' id='247'>i</font>]</font><font color='#0000ff' weight='0.000111607' id='249'></font></font></font><font color='#0000ff' weight='0.000446429' id='253'>/</font><font color='#0000ff' weight='0.000446429' id='255'>exp</font>) % <font color='#0000ff' weight='0.000446429' id='261'>10<font color='#0000ff' weight='0.000446429' id='260'></font></font>]++;</font>
+
+        for (int i <font color='#0002ff' weight='0.00208333' id='281'>= 1</font>; i &lt; <font color='#0002ff' weight='0.00208333' id='290'>10<font color='#0002ff' weight='0.00208333' id='289'></font></font>; i++)
+            <font color='#0033ff' weight='0.05' id='327'><font color='#0004ff' weight='0.00416667' id='303'>count</font>[i] += <font color='#0004ff' weight='0.00416667' id='313'>count</font>[i-1];</font>
+
+        for (int <font color='#0002ff' weight='0.00208333' id='333'>i </font><font color='#0002ff' weight='0.00208333' id='341'>= n-1</font>; <font color='#0002ff' weight='0.00208333' id='346'>i </font>&gt;= 0; <font color='#0006ff' weight='0.00625' id='355'>i</font>--) {
+            <font color='#0002ff' weight='0.00277778' id='397'><font color='#0001ff' weight='0.00138889' id='363'>output</font><font color='#0001ff' weight='0.00138889' id='396'>[<font color='#0000ff' weight='0.000694444' id='394'><font color='#0000ff' weight='0.000115741' id='365'>count</font>[(<font color='#0000ff' weight='8.2672e-06' id='375'><font color='#0000ff' weight='4.1336e-06' id='369'>arr</font><font color='#0000ff' weight='4.1336e-06' id='374'>[<font color='#0000ff' weight='2.0668e-06' id='372'><font color='#0000ff' weight='2.0668e-06' id='371'>i</font>]</font><font color='#0000ff' weight='2.0668e-06' id='373'></font></font></font><font color='#0000ff' weight='8.2672e-06' id='377'>/</font><font color='#0000ff' weight='8.2672e-06' id='379'>exp</font>)%<font color='#0000ff' weight='8.2672e-06' id='385'>10<font color='#0000ff' weight='8.2672e-06' id='384'></font></font>] - 1]</font><font color='#0000ff' weight='0.000694444' id='395'></font></font> </font><font color='#0002ff' weight='0.00277778' id='399'>= </font><font color='#0002ff' weight='0.00277778' id='407'><font color='#0001ff' weight='0.00138889' id='401'>arr</font><font color='#0001ff' weight='0.00138889' id='406'>[<font color='#0000ff' weight='0.000694444' id='404'><font color='#0000ff' weight='0.000694444' id='403'>i</font>]</font><font color='#0000ff' weight='0.000694444' id='405'></font></font></font>;
+            <font color='#0002ff' weight='0.00208333' id='412'>count</font>[(<font color='#0000ff' weight='0.00014881' id='422'><font color='#0000ff' weight='7.44048e-05' id='416'>arr</font><font color='#0000ff' weight='7.44048e-05' id='421'>[<font color='#0000ff' weight='3.72024e-05' id='419'><font color='#0000ff' weight='3.72024e-05' id='418'>i</font>]</font><font color='#0000ff' weight='3.72024e-05' id='420'></font></font></font><font color='#0000ff' weight='0.00014881' id='424'>/</font><font color='#0000ff' weight='0.00014881' id='426'>exp</font>)%<font color='#0000ff' weight='0.00014881' id='432'>10<font color='#0000ff' weight='0.00014881' id='431'></font></font>]--;
+        }
+        <font color='#0066ff' weight='0.1' id='496'>for (int i <font color='#0002ff' weight='0.00208333' id='453'>= 0</font>; i &lt; <font color='#0002ff' weight='0.00208333' id='462'>n</font>; i++)
+            <font color='#0033ff' weight='0.05' id='495'><font color='#0033ff' weight='0.05' id='494'><font color='#0019ff' weight='0.025' id='492'><font color='#0008ff' weight='0.00833333' id='481'><font color='#0004ff' weight='0.00416667' id='475'>arr</font><font color='#0004ff' weight='0.00416667' id='480'>[<font color='#0002ff' weight='0.00208333' id='478'>i]</font><font color='#0002ff' weight='0.00208333' id='479'></font></font> </font><font color='#0008ff' weight='0.00833333' id='483'>= </font><font color='#0008ff' weight='0.00833333' id='491'><font color='#0004ff' weight='0.00416667' id='485'>output</font><font color='#0004ff' weight='0.00416667' id='490'>[<font color='#0002ff' weight='0.00208333' id='488'>i]</font><font color='#0002ff' weight='0.00208333' id='489'></font></font></font>;</font><font color='#0019ff' weight='0.025' id='493'></font></font></font>
+        </font><font color='#0066ff' weight='0.1' id='567'><font color='#0033ff' weight='0.05' id='565'><font color='#0033ff' weight='0.05' id='564'><font color='#0019ff' weight='0.025' id='507'><font color='#0005ff' weight='0.005' id='498'>System</font>.<font color='#0005ff' weight='0.005' id='502'>out</font>.<font color='#0005ff' weight='0.005' id='506'>println</font></font><font color='#0019ff' weight='0.025' id='563'>(<font color='#000cff' weight='0.0125' id='561'><font color='#000cff' weight='0.0125' id='560'><font color='#0000ff' weight='0.000416667' id='509'>Arrays</font>.<font color='#0000ff' weight='0.000416667' id='513'>stream</font>(<font color='#0000ff' weight='0.000625' id='516'>arr</font>)<font color='#0002ff' weight='0.0025' id='523'>.</font><font color='#0001ff' weight='0.00125' id='525'>mapToObj</font>(<font color='#0000ff' weight='0.000208333' id='527'>String</font><font color='#0000ff' weight='0.000208333' id='529'>::</font><font color='#0000ff' weight='0.000208333' id='531'>valueOf<font color='#0000ff' weight='0.000208333' id='530'></font></font>)<font color='#0002ff' weight='0.0025' id='538'>.<font color='#0002ff' weight='0.0025' id='537'></font></font><font color='#0002ff' weight='0.0025' id='559'><font color='#0001ff' weight='0.00125' id='540'>collect</font><font color='#0001ff' weight='0.00125' id='558'>(<font color='#0000ff' weight='0.000625' id='556'><font color='#0000ff' weight='0.000625' id='555'><font color='#0000ff' weight='0.000104167' id='542'>Collectors</font>.<font color='#0000ff' weight='0.000104167' id='546'>joining</font>(<font color='#0000ff' weight='0.00015625' id='549'>","<font color='#0000ff' weight='0.00015625' id='548'></font></font>)</font>)</font><font color='#0000ff' weight='0.000625' id='557'></font></font></font></font>)</font><font color='#000cff' weight='0.0125' id='562'></font></font></font>;</font><font color='#0033ff' weight='0.05' id='566'></font>
+    }</font></font>
+
+    public static void radixSort(int[] arr) {
+        int m = getMax(arr);
+        for (int exp = 1; m / exp &gt; 0; exp *= 10)
+            countSort(arr, exp);
+    }
+
+
+}
+</font>
+</pre>

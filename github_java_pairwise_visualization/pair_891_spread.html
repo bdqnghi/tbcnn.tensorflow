@@ -1,0 +1,42 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+   public static &lt;Key extends Comparable&lt;Key&gt;&gt; void sort(Key[]<font color='#ff0000' weight='1' id='26'></font> a) {
+        int n = a.length;
+        for (int i = 0; i &lt; n; i++) {
+            int exchanges = 0;
+            for (int j = n - 1; j &gt; i; j--) {
+                if (less(a[j], a[j - 1])) {
+                    exch(a, j, j - 1);
+                    exchanges++;
+                }
+            }
+            if (exchanges == 0) break;
+        }
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static void selection_sort(int[]arr,int bi,int ei)<font color='#ff0000' weight='1' id='212'>{
+        <font color='#00cbff' weight='0.2' id='59'>if <font color='#0066ff' weight='0.1' id='53'>(<font color='#0033ff' weight='0.05' id='51'><font color='#000aff' weight='0.01' id='37'>bi<font color='#000aff' weight='0.01' id='36'></font></font><font color='#000aff' weight='0.01' id='39'>==<font color='#000aff' weight='0.01' id='38'></font></font>arr.length<font color='#000aff' weight='0.01' id='48'>-<font color='#000aff' weight='0.01' id='47'></font></font><font color='#000aff' weight='0.01' id='50'>1<font color='#000aff' weight='0.01' id='49'></font></font>)</font><font color='#0033ff' weight='0.05' id='52'></font></font><font color='#0066ff' weight='0.1' id='58'><font color='#0066ff' weight='0.1' id='57'>{
+            <font color='#0033ff' weight='0.05' id='55'>return;<font color='#0033ff' weight='0.05' id='54'></font>
+        }</font><font color='#0033ff' weight='0.05' id='56'></font></font></font>
+        </font><font color='#00cbff' weight='0.2' id='107'>if <font color='#0066ff' weight='0.1' id='73'>(<font color='#0010ff' weight='0.0166667' id='61'>ei</font><font color='#0010ff' weight='0.0166667' id='63'>==</font><font color='#0010ff' weight='0.0166667' id='70'><font color='#0005ff' weight='0.00555556' id='65'>arr</font><font color='#0005ff' weight='0.00555556' id='67'>.<font color='#0005ff' weight='0.00555556' id='66'></font></font><font color='#0005ff' weight='0.00555556' id='69'>length<font color='#0005ff' weight='0.00555556' id='68'></font></font></font>)</font><font color='#0066ff' weight='0.1' id='106'><font color='#0066ff' weight='0.1' id='105'>{
+            <font color='#0022ff' weight='0.0333333' id='101'><font color='#0010ff' weight='0.0166667' id='99'><font color='#0010ff' weight='0.0166667' id='98'><font color='#0008ff' weight='0.00833333' id='75'>selection_sort<font color='#0008ff' weight='0.00833333' id='74'></font></font><font color='#0008ff' weight='0.00833333' id='97'>(<font color='#0002ff' weight='0.00208333' id='79'><font color='#0002ff' weight='0.00208333' id='78'><font color='#0002ff' weight='0.00208333' id='77'>arr<font color='#0002ff' weight='0.00208333' id='76'></font></font></font>,</font><font color='#0002ff' weight='0.00208333' id='87'><font color='#0002ff' weight='0.00208333' id='86'>bi+<font color='#0000ff' weight='0.000694444' id='85'>1<font color='#0000ff' weight='0.000694444' id='84'></font></font></font>,</font><font color='#0002ff' weight='0.00208333' id='95'><font color='#0002ff' weight='0.00208333' id='94'><font color='#0000ff' weight='0.000694444' id='89'>bi<font color='#0000ff' weight='0.000694444' id='88'></font></font><font color='#0000ff' weight='0.000694444' id='91'>+<font color='#0000ff' weight='0.000694444' id='90'></font></font><font color='#0000ff' weight='0.000694444' id='93'>2<font color='#0000ff' weight='0.000694444' id='92'></font></font></font>)</font><font color='#0002ff' weight='0.00208333' id='96'></font></font></font>;</font><font color='#0010ff' weight='0.0166667' id='100'></font>
+            </font><font color='#0022ff' weight='0.0333333' id='103'>return;<font color='#0022ff' weight='0.0333333' id='102'></font>
+        }</font><font color='#0022ff' weight='0.0333333' id='104'></font></font></font>
+        </font><font color='#00cbff' weight='0.2' id='186'>if <font color='#0066ff' weight='0.1' id='128'>(<font color='#0033ff' weight='0.05' id='126'><font color='#0010ff' weight='0.0166667' id='115'><font color='#0008ff' weight='0.00833333' id='109'>arr</font><font color='#0008ff' weight='0.00833333' id='114'>[<font color='#0004ff' weight='0.00416667' id='112'><font color='#0004ff' weight='0.00416667' id='111'>bi</font>]</font><font color='#0004ff' weight='0.00416667' id='113'></font></font></font><font color='#0010ff' weight='0.0166667' id='117'>&gt;<font color='#0010ff' weight='0.0166667' id='116'></font></font><font color='#0010ff' weight='0.0166667' id='125'><font color='#0008ff' weight='0.00833333' id='119'>arr<font color='#0008ff' weight='0.00833333' id='118'></font></font><font color='#0008ff' weight='0.00833333' id='124'>[<font color='#0004ff' weight='0.00416667' id='122'><font color='#0004ff' weight='0.00416667' id='121'>ei<font color='#0004ff' weight='0.00416667' id='120'></font></font>]</font><font color='#0004ff' weight='0.00416667' id='123'></font></font></font>)</font><font color='#0033ff' weight='0.05' id='127'></font></font><font color='#0066ff' weight='0.1' id='185'><font color='#0066ff' weight='0.1' id='184'>{
+            <font color='#0019ff' weight='0.025' id='146'><font color='#000cff' weight='0.0125' id='144'>int temp = <font color='#0004ff' weight='0.00416667' id='141'><font color='#0002ff' weight='0.00208333' id='135'>arr</font><font color='#0002ff' weight='0.00208333' id='140'>[<font color='#0001ff' weight='0.00104167' id='138'><font color='#0001ff' weight='0.00104167' id='137'>bi<font color='#0001ff' weight='0.00104167' id='136'></font></font>]</font><font color='#0001ff' weight='0.00104167' id='139'></font></font></font>;</font><font color='#000cff' weight='0.0125' id='145'></font>
+            </font><font color='#0019ff' weight='0.025' id='167'><font color='#000cff' weight='0.0125' id='165'><font color='#0004ff' weight='0.00416667' id='154'><font color='#0002ff' weight='0.00208333' id='148'>arr</font><font color='#0002ff' weight='0.00208333' id='153'>[<font color='#0001ff' weight='0.00104167' id='151'>bi]</font><font color='#0001ff' weight='0.00104167' id='152'></font></font> </font>= arr[ei];</font><font color='#000cff' weight='0.0125' id='166'></font>
+            </font><font color='#0019ff' weight='0.025' id='182'><font color='#000cff' weight='0.0125' id='180'>arr[ei] <font color='#0004ff' weight='0.00416667' id='177'>=<font color='#0004ff' weight='0.00416667' id='176'></font> </font><font color='#0004ff' weight='0.00416667' id='179'>temp<font color='#0004ff' weight='0.00416667' id='178'></font></font>;</font><font color='#000cff' weight='0.0125' id='181'></font>
+        
+        }</font><font color='#0019ff' weight='0.025' id='183'></font></font></font>
+        </font><font color='#0033ff' weight='0.05' id='188'>selection_sort</font>(<font color='#000cff' weight='0.0125' id='190'>arr</font>,<font color='#000cff' weight='0.0125' id='194'>bi</font>,<font color='#0004ff' weight='0.00416667' id='198'>ei</font><font color='#0004ff' weight='0.00416667' id='200'>+</font>1);
+    }<font color='#00cbff' weight='0.2' id='211'></font></font>
+    public static void display(int[] arr) {
+        for (int val : arr) {
+            
+            System.out.print(val + ",");
+        }
+        System.out.println("end");
+    }</font>
+</pre>

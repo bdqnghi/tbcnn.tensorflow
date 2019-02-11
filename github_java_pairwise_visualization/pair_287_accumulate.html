@@ -1,0 +1,47 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static void bubbleSort(int[] arr) {
+        int length = arr.length;
+        int k;
+
+        for (int i = length; i &gt;= 0; i--) {
+            for (int j = 0; j &lt; length-1; j++) {
+                k = j + 1;
+
+                if (arr[j] &gt; arr[k])
+                    swap(j, k, arr);
+            }
+            printArray(arr);
+        }
+    }
+
+  
+
+    private static void swap(int j, int k, int[] arr) {
+        int temp = arr[j];
+        arr[j] = arr[k];
+        arr[k] = temp;
+
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public void <font color='#ff0000' weight='1' id='7'>sort</font><font color='#ff0000' weight='1' id='26'>(<font color='#ff0000' weight='1' id='9'>Object</font>[] <font color='#ff0000' weight='1' id='15'>a</font>, <font color='#ff0000' weight='1' id='24'><font color='#ff0000' weight='1' id='23'><font color='#ff0000' weight='1' id='19'>Comparator</font> <font color='#ff0000' weight='1' id='22'>comparator</font></font>)</font><font color='#ff0000' weight='1' id='25'></font>
+    </font><font color='#ff0000' weight='1' id='166'>{
+        for (int i = <font color='#ff0000' weight='1' id='33'>1<font color='#ff0000' weight='1' id='32'></font></font>; i <font color='#ff0000' weight='1' id='42'>&lt; </font><font color='#ff0000' weight='1' id='49'><font color='#ff0000' weight='1' id='44'>a<font color='#ff0000' weight='1' id='43'></font></font><font color='#ff0000' weight='1' id='46'>.<font color='#ff0000' weight='1' id='45'></font></font><font color='#ff0000' weight='1' id='48'>length<font color='#ff0000' weight='1' id='47'></font></font></font>; i<font color='#ff0000' weight='1' id='56'>++</font>)
+        {
+            for (int j = <font color='#ff0000' weight='1' id='67'>i<font color='#ff0000' weight='1' id='66'></font></font>; j <font color='#ff0000' weight='1' id='76'>&gt;= </font>1; j<font color='#ff0000' weight='1' id='85'>--</font>)
+            {
+                if (<font color='#ff0000' weight='1' id='122'><font color='#ff0000' weight='1' id='91'>less<font color='#ff0000' weight='1' id='90'></font></font><font color='#ff0000' weight='1' id='121'>(<font color='#ff0000' weight='1' id='95'><font color='#ff0000' weight='1' id='94'><font color='#ff0000' weight='1' id='93'>comparator<font color='#ff0000' weight='1' id='92'></font></font></font>, </font><font color='#ff0000' weight='1' id='105'><font color='#ff0000' weight='1' id='104'><font color='#ff0000' weight='1' id='97'>a</font>[j]</font>, </font><font color='#ff0000' weight='1' id='119'><font color='#ff0000' weight='1' id='118'><font color='#ff0000' weight='1' id='107'>a</font>[<font color='#ff0000' weight='1' id='109'>j </font><font color='#ff0000' weight='1' id='111'>-<font color='#ff0000' weight='1' id='110'></font> </font><font color='#ff0000' weight='1' id='113'>1<font color='#ff0000' weight='1' id='112'></font></font>]</font>)</font><font color='#ff0000' weight='1' id='120'></font></font></font>)<font color='#ff0000' weight='1' id='152'>
+                <font color='#ff0000' weight='1' id='151'>{
+                    <font color='#ff0000' weight='1' id='127'>exchange</font>(<font color='#ff0000' weight='1' id='129'>a</font>, <font color='#ff0000' weight='1' id='133'>j</font>, <font color='#ff0000' weight='1' id='137'>j </font><font color='#ff0000' weight='1' id='139'>-<font color='#ff0000' weight='1' id='138'></font> </font><font color='#ff0000' weight='1' id='141'>1<font color='#ff0000' weight='1' id='140'></font></font>);
+                }<font color='#ff0000' weight='1' id='150'></font></font>
+                </font><font color='#ff0000' weight='1' id='157'>else
+                <font color='#ff0000' weight='1' id='156'>{
+                    <font color='#ff0000' weight='1' id='154'>break;<font color='#ff0000' weight='1' id='153'></font>
+                }</font><font color='#ff0000' weight='1' id='155'></font></font></font>
+            }
+        }<font color='#ff0000' weight='1' id='162'></font>
+    }</font>
+</font>
+</pre>

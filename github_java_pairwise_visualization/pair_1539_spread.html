@@ -1,0 +1,117 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static int partition(int arr[], int low, int high)
+ {
+     <font color='#0015ff' weight='0.0208333' id='37'>int</font> pivot<font color='#0015ff' weight='0.0208333' id='39'></font> = <font color='#000aff' weight='0.0104167' id='42'>arr<font color='#000aff' weight='0.0104167' id='41'></font></font>[<font color='#0005ff' weight='0.00520833' id='45'>high<font color='#0005ff' weight='0.00520833' id='43'></font>]</font>; 
+     <font color='#007fff' weight='0.125' id='73'>int<font color='#0015ff' weight='0.0208333' id='54'></font> <font color='#0015ff' weight='0.0208333' id='58'>i </font>= <font color='#0004ff' weight='0.00416667' id='60'>(</font><font color='#0004ff' weight='0.00416667' id='62'>low</font>-<font color='#0004ff' weight='0.00416667' id='63'></font><font color='#0004ff' weight='0.00416667' id='66'>1<font color='#0004ff' weight='0.00416667' id='65'></font></font><font color='#0004ff' weight='0.00416667' id='68'>)<font color='#0004ff' weight='0.00416667' id='67'></font></font>; 
+     </font>for <font color='#003fff' weight='0.0625' id='102'>(<font color='#000fff' weight='0.015625' id='85'><font color='#0002ff' weight='0.00260417' id='76'>int </font>j<font color='#0002ff' weight='0.00260417' id='82'>=low</font>; </font>j<font color='#0002ff' weight='0.00260417' id='89'>&lt;</font>high;<font color='#0007ff' weight='0.0078125' id='93'></font> <font color='#000fff' weight='0.015625' id='100'><font color='#0007ff' weight='0.0078125' id='96'>j<font color='#0007ff' weight='0.0078125' id='95'></font></font>++<font color='#0007ff' weight='0.0078125' id='97'></font>)</font><font color='#000fff' weight='0.015625' id='101'></font>
+     </font>{
+         
+         
+         <font color='#001fff' weight='0.03125' id='182'>if <font color='#000fff' weight='0.015625' id='117'>(<font color='#0007ff' weight='0.0078125' id='115'><font color='#0002ff' weight='0.00260417' id='110'>arr<font color='#0001ff' weight='0.00130208' id='103'></font><font color='#0001ff' weight='0.00130208' id='109'>[<font color='#0000ff' weight='0.000651042' id='106'>j</font>]<font color='#0000ff' weight='0.000651042' id='108'></font></font> </font>&lt;= <font color='#0002ff' weight='0.00260417' id='114'>pivot<font color='#0002ff' weight='0.00260417' id='113'></font></font>)</font><font color='#0007ff' weight='0.0078125' id='116'></font></font><font color='#000fff' weight='0.015625' id='181'>
+         <font color='#000fff' weight='0.015625' id='180'>{
+             i++<font color='#0000ff' weight='0.00078125' id='120'></font>;<font color='#0001ff' weight='0.0015625' id='123'></font>
+
+             
+             int temp = arr[i];
+             arr[i] = arr[j];
+             arr[j] = temp;
+         }</font></font>
+     }</font><font color='#001fff' weight='0.03125' id='183'></font>
+
+     
+     <font color='#0015ff' weight='0.0208333' id='187'>int</font> temp<font color='#0015ff' weight='0.0208333' id='189'></font> = arr<font color='#000aff' weight='0.0104167' id='191'></font>[<font color='#0005ff' weight='0.00520833' id='199'>i<font color='#0001ff' weight='0.00173611' id='196'>+</font><font color='#0001ff' weight='0.00173611' id='198'>1</font>]</font>;
+     arr<font color='#000aff' weight='0.0104167' id='208'></font>[i+1] = arr[high<font color='#0005ff' weight='0.00520833' id='224'></font>];
+     <font color='#007fff' weight='0.125' id='247'><font color='#000aff' weight='0.0104167' id='234'>arr</font>[<font color='#0005ff' weight='0.00520833' id='237'>high<font color='#0005ff' weight='0.00520833' id='235'></font>]</font> = temp;<font color='#003fff' weight='0.0625' id='246'></font>
+
+     </font><font color='#007fff' weight='0.125' id='256'>return <font color='#003fff' weight='0.0625' id='254'><font color='#0015ff' weight='0.0208333' id='249'>i<font color='#0015ff' weight='0.0208333' id='248'></font></font><font color='#0015ff' weight='0.0208333' id='251'>+<font color='#0015ff' weight='0.0208333' id='250'></font></font>1;</font>
+ }</font><font color='#007fff' weight='0.125' id='257'></font>
+
+
+ 
+ public static void sort(int arr[], int low, int high)
+ {
+     if (low &lt; high)
+     {
+         
+         int pi = partition(arr, low, high);
+
+         
+         
+         sort(arr, low, pi-1);
+         sort(arr, pi+1, high);
+     }
+ }
+
+ </font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static void sort(int[] a, int ulimit, int llimit)
+    {
+        quicksort(a, 0, a.length, ulimit, llimit);
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    private static void quicksort(int[] a, int start, int stop, int ulimit, int llimit)
+    {
+        if (stop - start &gt; 1) {
+            int p = pivot(a, start, stop, ulimit, llimit);
+            quicksort(a, start, p, a[p], llimit);
+            quicksort(a, p+1, stop, ulimit, a[p]);
+        }
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    private static int pivot(int[] a, int start, int stop, int ulimit, int llimit)
+    {
+        int p = partition(a, a[start], start+1, stop, ulimit, llimit);
+        if (start &lt; p)
+            swap(a, start, p);
+        return p;
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    private static int partition(int[] a, int pivot, int start, int stop, int ulimit, int llimit)
+    <font color='#ff0000' weight='1' id='646'>{
+        <font color='#00cbff' weight='0.2' id='462'>if <font color='#0066ff' weight='0.1' id='450'>(<font color='#0033ff' weight='0.05' id='448'><font color='#0010ff' weight='0.0166667' id='443'>start<font color='#0010ff' weight='0.0166667' id='442'></font> </font><font color='#0010ff' weight='0.0166667' id='445'>&gt;=<font color='#0010ff' weight='0.0166667' id='444'></font> </font><font color='#0010ff' weight='0.0166667' id='447'>stop<font color='#0010ff' weight='0.0166667' id='446'></font></font>)</font><font color='#0033ff' weight='0.05' id='449'></font></font><font color='#0066ff' weight='0.1' id='461'> 
+            <font color='#0066ff' weight='0.1' id='460'><font color='#0066ff' weight='0.1' id='459'>return <font color='#0033ff' weight='0.05' id='457'><font color='#0010ff' weight='0.0166667' id='452'>start<font color='#0010ff' weight='0.0166667' id='451'></font> </font><font color='#0010ff' weight='0.0166667' id='454'>-<font color='#0010ff' weight='0.0166667' id='453'></font> </font><font color='#0010ff' weight='0.0166667' id='456'>1<font color='#0010ff' weight='0.0166667' id='455'></font></font>;</font><font color='#0033ff' weight='0.05' id='458'></font></font></font></font>
+        </font><font color='#00cbff' weight='0.2' id='516'>if (<font color='#0010ff' weight='0.0166667' id='470'><font color='#0008ff' weight='0.00833333' id='464'>a</font><font color='#0008ff' weight='0.00833333' id='469'>[<font color='#0004ff' weight='0.00416667' id='467'><font color='#0004ff' weight='0.00416667' id='466'>start<font color='#0004ff' weight='0.00416667' id='465'></font></font>]</font><font color='#0004ff' weight='0.00416667' id='468'></font></font> </font>&lt; <font color='#0010ff' weight='0.0166667' id='474'>pivot</font>)<font color='#0066ff' weight='0.1' id='515'>
+            <font color='#0066ff' weight='0.1' id='514'><font color='#0066ff' weight='0.1' id='513'>return <font color='#0033ff' weight='0.05' id='511'><font color='#0033ff' weight='0.05' id='510'><font color='#0019ff' weight='0.025' id='479'>partition<font color='#0019ff' weight='0.025' id='478'></font></font><font color='#0019ff' weight='0.025' id='509'>(<font color='#0003ff' weight='0.00357143' id='483'><font color='#0003ff' weight='0.00357143' id='482'><font color='#0003ff' weight='0.00357143' id='481'>a<font color='#0003ff' weight='0.00357143' id='480'></font></font></font>, </font><font color='#0003ff' weight='0.00357143' id='487'><font color='#0003ff' weight='0.00357143' id='486'><font color='#0003ff' weight='0.00357143' id='485'>pivot</font></font>, </font><font color='#0003ff' weight='0.00357143' id='495'><font color='#0003ff' weight='0.00357143' id='494'><font color='#0001ff' weight='0.00119048' id='489'>start<font color='#0001ff' weight='0.00119048' id='488'></font> </font><font color='#0001ff' weight='0.00119048' id='491'>+<font color='#0001ff' weight='0.00119048' id='490'></font> </font><font color='#0001ff' weight='0.00119048' id='493'>1<font color='#0001ff' weight='0.00119048' id='492'></font></font></font>, </font><font color='#0003ff' weight='0.00357143' id='499'><font color='#0003ff' weight='0.00357143' id='498'><font color='#0003ff' weight='0.00357143' id='497'>stop<font color='#0003ff' weight='0.00357143' id='496'></font></font></font>, </font><font color='#0003ff' weight='0.00357143' id='503'><font color='#0003ff' weight='0.00357143' id='502'><font color='#0003ff' weight='0.00357143' id='501'>ulimit<font color='#0003ff' weight='0.00357143' id='500'></font></font></font>, </font><font color='#0003ff' weight='0.00357143' id='507'><font color='#0003ff' weight='0.00357143' id='506'><font color='#0003ff' weight='0.00357143' id='505'>llimit<font color='#0003ff' weight='0.00357143' id='504'></font></font></font>)</font><font color='#0003ff' weight='0.00357143' id='508'></font></font></font>;</font><font color='#0033ff' weight='0.05' id='512'></font></font></font></font>
+        </font><font color='#00cbff' weight='0.2' id='568'>if <font color='#0066ff' weight='0.1' id='533'>(<font color='#0033ff' weight='0.05' id='531'><font color='#0010ff' weight='0.0166667' id='526'><font color='#0008ff' weight='0.00833333' id='518'>a<font color='#0008ff' weight='0.00833333' id='517'></font></font><font color='#0008ff' weight='0.00833333' id='525'>[<font color='#0004ff' weight='0.00416667' id='523'><font color='#0002ff' weight='0.00208333' id='520'>--<font color='#0002ff' weight='0.00208333' id='519'></font></font><font color='#0002ff' weight='0.00208333' id='522'>stop<font color='#0002ff' weight='0.00208333' id='521'></font></font>]</font><font color='#0004ff' weight='0.00416667' id='524'></font></font> </font><font color='#0010ff' weight='0.0166667' id='528'>&gt;<font color='#0010ff' weight='0.0166667' id='527'></font> </font><font color='#0010ff' weight='0.0166667' id='530'>pivot</font>)</font><font color='#0033ff' weight='0.05' id='532'></font></font><font color='#0066ff' weight='0.1' id='567'>
+            <font color='#0066ff' weight='0.1' id='566'><font color='#0066ff' weight='0.1' id='565'>return <font color='#0033ff' weight='0.05' id='563'>partition(a, pivot, start, <font color='#0003ff' weight='0.00357143' id='551'><font color='#0003ff' weight='0.00357143' id='550'><font color='#0003ff' weight='0.00357143' id='549'>stop<font color='#0003ff' weight='0.00357143' id='548'></font></font></font>, </font><font color='#0003ff' weight='0.00357143' id='555'><font color='#0003ff' weight='0.00357143' id='554'><font color='#0003ff' weight='0.00357143' id='553'>ulimit<font color='#0003ff' weight='0.00357143' id='552'></font></font></font>, </font><font color='#0003ff' weight='0.00357143' id='559'><font color='#0003ff' weight='0.00357143' id='558'><font color='#0003ff' weight='0.00357143' id='557'>llimit<font color='#0003ff' weight='0.00357143' id='556'></font></font></font>)</font><font color='#0003ff' weight='0.00357143' id='560'></font>;</font><font color='#0033ff' weight='0.05' id='564'></font></font></font></font>
+        </font><font color='#00cbff' weight='0.2' id='644'>if <font color='#0043ff' weight='0.0666667' id='577'>(<font color='#0022ff' weight='0.0333333' id='575'><font color='#000bff' weight='0.0111111' id='570'>start<font color='#000bff' weight='0.0111111' id='569'></font> </font><font color='#000bff' weight='0.0111111' id='572'>&lt;<font color='#000bff' weight='0.0111111' id='571'></font> </font><font color='#000bff' weight='0.0111111' id='574'>stop<font color='#000bff' weight='0.0111111' id='573'></font></font>)</font><font color='#0022ff' weight='0.0333333' id='576'></font></font><font color='#0043ff' weight='0.0666667' id='636'> <font color='#0043ff' weight='0.0666667' id='635'>{
+            swap(a, start, stop);
+            <font color='#0016ff' weight='0.0222222' id='633'>return <font color='#000bff' weight='0.0111111' id='631'><font color='#0005ff' weight='0.00555556' id='599'>partition</font>(a, <font color='#0000ff' weight='0.000793651' id='607'><font color='#0000ff' weight='0.000793651' id='606'><font color='#0000ff' weight='0.000793651' id='605'>pivot<font color='#0000ff' weight='0.000793651' id='604'></font></font></font>, </font>start+1, stop, <font color='#0000ff' weight='0.000793651' id='623'><font color='#0000ff' weight='0.000793651' id='622'><font color='#0000ff' weight='0.000793651' id='621'>ulimit<font color='#0000ff' weight='0.000793651' id='620'></font></font></font>, </font><font color='#0000ff' weight='0.000793651' id='627'><font color='#0000ff' weight='0.000793651' id='626'><font color='#0000ff' weight='0.000793651' id='625'>llimit<font color='#0000ff' weight='0.000793651' id='624'></font></font></font>)</font><font color='#0000ff' weight='0.000793651' id='628'></font>;</font><font color='#000bff' weight='0.0111111' id='632'></font>
+        }</font></font> </font><font color='#0043ff' weight='0.0666667' id='643'>else
+            <font color='#0043ff' weight='0.0666667' id='642'><font color='#0043ff' weight='0.0666667' id='641'>return <font color='#0022ff' weight='0.0333333' id='639'><font color='#0022ff' weight='0.0333333' id='638'>start<font color='#0022ff' weight='0.0333333' id='637'></font></font>;</font><font color='#0022ff' weight='0.0333333' id='640'></font></font></font></font>
+    }</font><font color='#00cbff' weight='0.2' id='645'></font></font>
+
+    
+    public static void swap(int[] a, int i, int j)
+    {
+        int temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+    }</font>
+</pre>

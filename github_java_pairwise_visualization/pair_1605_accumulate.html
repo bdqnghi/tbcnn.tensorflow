@@ -1,0 +1,67 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public void bubbleSortWhile(int[] array) {
+
+        System.out.println(Arrays.toString(array));
+        int aux;
+        int i = array.length;
+
+        while (i &gt; 0) {
+            int j = 0;
+            while (j &lt; i - 1) {
+                if <font color='#ff0000' weight='1' id='136'>(<font color='#ff0000' weight='1' id='113'>array<font color='#ff0000' weight='1' id='112'></font></font><font color='#ff0000' weight='1' id='118'>[<font color='#ff0000' weight='1' id='115'>j<font color='#ff0000' weight='1' id='114'></font></font>]</font> <font color='#ff0000' weight='1' id='121'>&gt;<font color='#ff0000' weight='1' id='120'></font> </font><font color='#ff0000' weight='1' id='123'>array<font color='#ff0000' weight='1' id='122'></font></font><font color='#ff0000' weight='1' id='132'>[<font color='#ff0000' weight='1' id='125'>j<font color='#ff0000' weight='1' id='124'></font> </font>+<font color='#ff0000' weight='1' id='126'></font> 1]<font color='#ff0000' weight='1' id='131'></font></font>)<font color='#ff0000' weight='1' id='135'></font></font> {
+                    <font color='#ff0000' weight='1' id='149'><font color='#ff0000' weight='1' id='138'>aux<font color='#ff0000' weight='1' id='137'></font> </font><font color='#ff0000' weight='1' id='140'>=<font color='#ff0000' weight='1' id='139'></font> </font><font color='#ff0000' weight='1' id='148'>array<font color='#ff0000' weight='1' id='141'></font><font color='#ff0000' weight='1' id='147'>[<font color='#ff0000' weight='1' id='145'><font color='#ff0000' weight='1' id='144'>j<font color='#ff0000' weight='1' id='143'></font></font>]</font></font></font>;</font>
+                    <font color='#ff0000' weight='1' id='153'>array<font color='#ff0000' weight='1' id='152'></font></font>[<font color='#ff0000' weight='1' id='156'><font color='#ff0000' weight='1' id='155'>j<font color='#ff0000' weight='1' id='154'></font></font>]</font> = array[<font color='#ff0000' weight='1' id='170'>j + 1]</font><font color='#ff0000' weight='1' id='171'></font>;
+                    <font color='#ff0000' weight='1' id='188'>array<font color='#ff0000' weight='1' id='187'>[<font color='#ff0000' weight='1' id='185'>j +<font color='#ff0000' weight='1' id='181'></font> 1<font color='#ff0000' weight='1' id='183'></font>]</font><font color='#ff0000' weight='1' id='186'></font></font> </font>=<font color='#ff0000' weight='1' id='189'></font> aux;
+                }
+                <font color='#ff0000' weight='1' id='206'><font color='#ff0000' weight='1' id='204'>j<font color='#ff0000' weight='1' id='200'></font><font color='#ff0000' weight='1' id='203'>++<font color='#ff0000' weight='1' id='202'></font></font>;</font><font color='#ff0000' weight='1' id='205'></font>
+                </font><font color='#ff0000' weight='1' id='237'><font color='#ff0000' weight='1' id='236'><font color='#ff0000' weight='1' id='217'><font color='#ff0000' weight='1' id='208'>System<font color='#ff0000' weight='1' id='207'></font></font><font color='#ff0000' weight='1' id='210'>.<font color='#ff0000' weight='1' id='209'></font></font>out<font color='#ff0000' weight='1' id='214'>.<font color='#ff0000' weight='1' id='213'></font></font>println<font color='#ff0000' weight='1' id='215'></font></font><font color='#ff0000' weight='1' id='235'>(<font color='#ff0000' weight='1' id='233'><font color='#ff0000' weight='1' id='231'><font color='#ff0000' weight='1' id='224'>Arrays<font color='#ff0000' weight='1' id='218'></font><font color='#ff0000' weight='1' id='221'>.<font color='#ff0000' weight='1' id='220'></font></font><font color='#ff0000' weight='1' id='223'>toString</font></font><font color='#ff0000' weight='1' id='230'>(<font color='#ff0000' weight='1' id='227'><font color='#ff0000' weight='1' id='226'>array<font color='#ff0000' weight='1' id='225'></font></font></font>)<font color='#ff0000' weight='1' id='229'></font></font></font>)</font><font color='#ff0000' weight='1' id='234'></font></font></font>;</font>
+            }
+            i--;
+        }
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static void sort(int arr[])
+    {       
+        heapify(arr);        
+        for (int i = N; i &gt; 0; i--)
+        {
+            swap(arr,0, i);
+            N = N-1;
+            maxheap(arr, 0);
+        }
+    }     
+       
+    public static void heapify(int arr[])
+    {
+        N = arr.length-1;
+        for (int i = N/2; i &gt;= 0; i--)
+            maxheap(arr, i);        
+    }
+            
+    public static void maxheap(int arr[], int i)
+    <font color='#ff0000' weight='1' id='419'>{ 
+        int left = 2<font color='#ff0000' weight='1' id='247'>*<font color='#ff0000' weight='1' id='246'></font></font><font color='#ff0000' weight='1' id='249'>i<font color='#ff0000' weight='1' id='248'></font></font> ;
+        <font color='#ff0000' weight='1' id='274'><font color='#ff0000' weight='1' id='272'><font color='#ff0000' weight='1' id='257'><font color='#ff0000' weight='1' id='256'>int</font> </font><font color='#ff0000' weight='1' id='259'>right<font color='#ff0000' weight='1' id='258'></font> </font><font color='#ff0000' weight='1' id='271'>= <font color='#ff0000' weight='1' id='270'><font color='#ff0000' weight='1' id='261'>2<font color='#ff0000' weight='1' id='260'></font></font>*i + 1</font></font>;</font><font color='#ff0000' weight='1' id='273'></font>
+        </font><font color='#ff0000' weight='1' id='286'><font color='#ff0000' weight='1' id='284'><font color='#ff0000' weight='1' id='277'><font color='#ff0000' weight='1' id='276'>int<font color='#ff0000' weight='1' id='275'></font></font> </font><font color='#ff0000' weight='1' id='279'>max<font color='#ff0000' weight='1' id='278'></font> </font><font color='#ff0000' weight='1' id='283'>= <font color='#ff0000' weight='1' id='282'><font color='#ff0000' weight='1' id='281'>i<font color='#ff0000' weight='1' id='280'></font></font></font></font>;</font><font color='#ff0000' weight='1' id='285'></font>
+        </font><font color='#ff0000' weight='1' id='327'>if (<font color='#ff0000' weight='1' id='288'>left<font color='#ff0000' weight='1' id='287'></font> </font><font color='#ff0000' weight='1' id='290'>&lt;=<font color='#ff0000' weight='1' id='289'></font> </font><font color='#ff0000' weight='1' id='292'>N<font color='#ff0000' weight='1' id='291'></font> </font><font color='#ff0000' weight='1' id='294'>&amp;&amp;<font color='#ff0000' weight='1' id='293'></font> </font>arr[left] &gt; arr[i])<font color='#ff0000' weight='1' id='326'>
+            <font color='#ff0000' weight='1' id='325'><font color='#ff0000' weight='1' id='324'><font color='#ff0000' weight='1' id='322'>max = <font color='#ff0000' weight='1' id='321'>left<font color='#ff0000' weight='1' id='320'></font></font>;</font><font color='#ff0000' weight='1' id='323'></font></font></font></font>
+        </font><font color='#ff0000' weight='1' id='368'>if <font color='#ff0000' weight='1' id='356'>(<font color='#ff0000' weight='1' id='354'><font color='#ff0000' weight='1' id='329'>right<font color='#ff0000' weight='1' id='328'></font> </font><font color='#ff0000' weight='1' id='331'>&lt;=<font color='#ff0000' weight='1' id='330'></font> </font><font color='#ff0000' weight='1' id='333'>N<font color='#ff0000' weight='1' id='332'></font> </font><font color='#ff0000' weight='1' id='335'>&amp;&amp;<font color='#ff0000' weight='1' id='334'></font> </font>arr[right] <font color='#ff0000' weight='1' id='345'>&gt;<font color='#ff0000' weight='1' id='344'></font> </font>arr[max])</font><font color='#ff0000' weight='1' id='355'></font></font><font color='#ff0000' weight='1' id='367'>        
+            <font color='#ff0000' weight='1' id='366'><font color='#ff0000' weight='1' id='365'><font color='#ff0000' weight='1' id='363'><font color='#ff0000' weight='1' id='358'>max<font color='#ff0000' weight='1' id='357'></font> </font>= <font color='#ff0000' weight='1' id='362'>right</font>;</font><font color='#ff0000' weight='1' id='364'></font></font></font></font>
+ 
+        </font><font color='#ff0000' weight='1' id='417'>if <font color='#ff0000' weight='1' id='377'>(<font color='#ff0000' weight='1' id='375'>max != <font color='#ff0000' weight='1' id='374'>i<font color='#ff0000' weight='1' id='373'></font></font>)</font><font color='#ff0000' weight='1' id='376'></font></font><font color='#ff0000' weight='1' id='416'>
+        <font color='#ff0000' weight='1' id='415'>{
+            <font color='#ff0000' weight='1' id='397'><font color='#ff0000' weight='1' id='395'><font color='#ff0000' weight='1' id='394'><font color='#ff0000' weight='1' id='379'>swap<font color='#ff0000' weight='1' id='378'></font></font><font color='#ff0000' weight='1' id='393'>(<font color='#ff0000' weight='1' id='383'><font color='#ff0000' weight='1' id='382'><font color='#ff0000' weight='1' id='381'>arr</font></font>, </font><font color='#ff0000' weight='1' id='387'><font color='#ff0000' weight='1' id='386'>i</font>, </font><font color='#ff0000' weight='1' id='391'><font color='#ff0000' weight='1' id='390'><font color='#ff0000' weight='1' id='389'>max<font color='#ff0000' weight='1' id='388'></font></font></font>)</font><font color='#ff0000' weight='1' id='392'></font></font></font>;</font><font color='#ff0000' weight='1' id='396'></font>
+            </font><font color='#ff0000' weight='1' id='413'><font color='#ff0000' weight='1' id='411'><font color='#ff0000' weight='1' id='410'><font color='#ff0000' weight='1' id='399'>maxheap<font color='#ff0000' weight='1' id='398'></font></font><font color='#ff0000' weight='1' id='409'>(<font color='#ff0000' weight='1' id='403'><font color='#ff0000' weight='1' id='402'>arr</font>, </font><font color='#ff0000' weight='1' id='407'><font color='#ff0000' weight='1' id='406'><font color='#ff0000' weight='1' id='405'>max<font color='#ff0000' weight='1' id='404'></font></font></font>)</font><font color='#ff0000' weight='1' id='408'></font></font></font>;</font><font color='#ff0000' weight='1' id='412'></font>
+        }</font><font color='#ff0000' weight='1' id='414'></font></font></font>
+    }</font><font color='#ff0000' weight='1' id='418'></font></font>    
+    
+    public static void swap(int arr[], int i, int j)
+    {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp; 
+    }    </font>
+</pre>

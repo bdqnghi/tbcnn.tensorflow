@@ -1,0 +1,100 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ private void setSort(int[] input ){
+        for (int sq = 1; sq &lt; input.length; sq += sq){
+            for (int j =0;j&lt;input.length-sq;j += sq*2){
+                setMergeSort(input,j,j+sq-1,Math.min(j+sq+sq,input.length-1));
+            }
+        }
+    }
+    private void setMergeSort(int[] input,int start,int mid , int end){
+        int[] tem = new int[input.length];
+
+       for ( int i = start; i &lt;= end ; i ++){
+           tem[i] = input[i];
+       }
+        int i= start,j=mid +1;
+       for (int h = start;h&lt;= end;h++){
+           <font color='#ff0000' weight='1' id='518'>if (i &gt; mid<font color='#0022ff' weight='0.0333333' id='352'></font>)<font color='#00cbff' weight='0.2' id='382'>{
+               <font color='#0066ff' weight='0.1' id='379'><font color='#0033ff' weight='0.05' id='377'><font color='#0010ff' weight='0.0166667' id='364'><font color='#0008ff' weight='0.00833333' id='358'>input</font><font color='#0008ff' weight='0.00833333' id='363'>[h<font color='#0004ff' weight='0.00416667' id='359'></font>]</font> </font>= <font color='#0010ff' weight='0.0166667' id='376'><font color='#0008ff' weight='0.00833333' id='368'>tem<font color='#0008ff' weight='0.00833333' id='367'></font></font><font color='#0008ff' weight='0.00833333' id='375'>[j<font color='#0002ff' weight='0.00208333' id='369'></font><font color='#0002ff' weight='0.00208333' id='372'>++</font>]<font color='#0004ff' weight='0.00416667' id='374'></font></font></font>;</font><font color='#0033ff' weight='0.05' id='378'></font>
+           }</font></font>else <font color='#00cbff' weight='0.2' id='418'>if(<font color='#0010ff' weight='0.0166667' id='384'>j<font color='#0010ff' weight='0.0166667' id='383'></font> </font>&gt;<font color='#0010ff' weight='0.0166667' id='385'></font> end)<font color='#0033ff' weight='0.05' id='390'></font>{
+               <font color='#0033ff' weight='0.05' id='414'><font color='#0019ff' weight='0.025' id='412'><font color='#0004ff' weight='0.00416667' id='393'>input<font color='#0004ff' weight='0.00416667' id='392'></font></font>[<font color='#0002ff' weight='0.00208333' id='395'>h<font color='#0002ff' weight='0.00208333' id='394'></font></font>]<font color='#0002ff' weight='0.00208333' id='397'></font> <font color='#0008ff' weight='0.00833333' id='401'>= </font><font color='#0008ff' weight='0.00833333' id='411'><font color='#0004ff' weight='0.00416667' id='403'>tem<font color='#0004ff' weight='0.00416667' id='402'></font></font><font color='#0004ff' weight='0.00416667' id='410'>[<font color='#0002ff' weight='0.00208333' id='408'><font color='#0001ff' weight='0.00104167' id='405'>i<font color='#0001ff' weight='0.00104167' id='404'></font></font>++<font color='#0001ff' weight='0.00104167' id='406'></font>]</font></font></font>;</font><font color='#0019ff' weight='0.025' id='413'></font>
+           }</font></font> <font color='#00cbff' weight='0.2' id='468'>else <font color='#00cbff' weight='0.2' id='467'>if (<font color='#0010ff' weight='0.0166667' id='427'><font color='#0008ff' weight='0.00833333' id='421'>tem</font>[<font color='#0004ff' weight='0.00416667' id='424'><font color='#0004ff' weight='0.00416667' id='423'>i</font>]</font> </font><font color='#0010ff' weight='0.0166667' id='429'>&lt;<font color='#0010ff' weight='0.0166667' id='428'></font> </font>tem<font color='#0008ff' weight='0.00833333' id='430'></font>[<font color='#0004ff' weight='0.00416667' id='433'>j</font>])<font color='#0066ff' weight='0.1' id='466'><font color='#0066ff' weight='0.1' id='465'>{
+               <font color='#0033ff' weight='0.05' id='463'>input<font color='#0004ff' weight='0.00416667' id='441'></font>[<font color='#0002ff' weight='0.00208333' id='444'>h</font>] = <font color='#0004ff' weight='0.00416667' id='452'>tem</font>[<font color='#0001ff' weight='0.00104167' id='454'>i</font><font color='#0001ff' weight='0.00104167' id='456'>++</font>];
+           }</font></font></font></font></font><font color='#00cbff' weight='0.2' id='517'>else <font color='#00cbff' weight='0.2' id='516'>if <font color='#0066ff' weight='0.1' id='489'>(<font color='#0033ff' weight='0.05' id='487'><font color='#0010ff' weight='0.0166667' id='476'><font color='#0008ff' weight='0.00833333' id='470'>tem<font color='#0008ff' weight='0.00833333' id='469'></font></font><font color='#0008ff' weight='0.00833333' id='475'>[<font color='#0004ff' weight='0.00416667' id='473'><font color='#0004ff' weight='0.00416667' id='472'>i<font color='#0004ff' weight='0.00416667' id='471'></font></font>]</font><font color='#0004ff' weight='0.00416667' id='474'></font></font> </font><font color='#0010ff' weight='0.0166667' id='478'>&gt;<font color='#0010ff' weight='0.0166667' id='477'></font> </font><font color='#0008ff' weight='0.00833333' id='480'>tem<font color='#0008ff' weight='0.00833333' id='479'></font></font><font color='#0008ff' weight='0.00833333' id='485'>[<font color='#0004ff' weight='0.00416667' id='482'>j<font color='#0004ff' weight='0.00416667' id='481'></font></font>]</font>)</font><font color='#0033ff' weight='0.05' id='488'></font></font><font color='#0066ff' weight='0.1' id='515'><font color='#0066ff' weight='0.1' id='514'>{
+               <font color='#0033ff' weight='0.05' id='512'><font color='#0019ff' weight='0.025' id='510'><font color='#0004ff' weight='0.00416667' id='491'>input<font color='#0004ff' weight='0.00416667' id='490'></font></font><font color='#0004ff' weight='0.00416667' id='496'>[h<font color='#0002ff' weight='0.00208333' id='492'></font>]<font color='#0002ff' weight='0.00208333' id='495'></font></font> <font color='#0008ff' weight='0.00833333' id='499'>=<font color='#0008ff' weight='0.00833333' id='498'></font> </font><font color='#0008ff' weight='0.00833333' id='509'><font color='#0004ff' weight='0.00416667' id='501'>tem<font color='#0004ff' weight='0.00416667' id='500'></font></font><font color='#0004ff' weight='0.00416667' id='508'>[<font color='#0002ff' weight='0.00208333' id='506'><font color='#0001ff' weight='0.00104167' id='503'>j</font><font color='#0001ff' weight='0.00104167' id='505'>++</font>]</font><font color='#0002ff' weight='0.00208333' id='507'></font></font></font>;</font><font color='#0019ff' weight='0.025' id='511'></font>
+           }</font><font color='#0033ff' weight='0.05' id='513'></font></font></font></font></font>
+       }</font>
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+package PukyungUniv;
+
+import static org.junit.Assert.assertEquals;
+
+import java.util.Arrays;
+
+import org.junit.Test;
+
+public class Sort_HeapSort {
+
+    private static int getLeftChildIdx(int parent) {
+        return (parent + 1) * 2 - 1;
+    }
+
+    private int getParentIdx(int child) {
+        if (child &lt; 1) {
+            return -1;
+        } else {
+            return (child + 1) / 2 - 1;
+        }
+    }
+
+    private static void maxHeapify(int[] data, int i, int end) {
+        int leftChild = getLeftChildIdx(i);
+        while (leftChild &lt;= end) {
+            int largeChild;
+            if (leftChild == end) {
+                largeChild = leftChild;
+            } else {
+                largeChild = data[leftChild] &gt; data[leftChild + 1] ? leftChild : leftChild + 1;
+            }
+            if (data[i] &gt;= data[largeChild]) {
+                return;
+            }
+            swap(data, i, largeChild);
+            i = largeChild;
+            leftChild = getLeftChildIdx(i);
+        }
+    }
+
+    private static void swap(int[] data, int i, int j) {
+        int t = data[i];
+        data[i] = data[j];
+        data[j] = t;
+    }
+
+    public static void sort(int[] data) {
+        makeHeap(data);
+        sortFromHeap(data);
+    }
+
+    private static void makeHeap(int[] data) {
+        for (int i = data.length / 2 - 1; i &gt;= 0; i--) {
+            maxHeapify(data, i, data.length - 1);
+        }
+    }
+
+    private static void sortFromHeap(int[] data) {
+        int last = data.length - 1;<font color='#ff0000' weight='1' id='655'></font>
+        while (last &gt; 0) {
+            swap(data, 0, last);
+            last--;
+            maxHeapify(data, 0, last);
+        }
+    }
+
+}
+</font>
+</pre>

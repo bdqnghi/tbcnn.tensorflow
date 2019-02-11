@@ -1,0 +1,91 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+package search.search;
+
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Stack;
+
+public class Topological {
+	
+	private int vertices;
+    private LinkedList&lt;Integer&gt; adj[];
+	
+	Topological(Graph g) {
+		vertices = g.getVertices();
+		adj = g.getAdjacencyList();
+	}
+
+    
+    void topologicalSortUtil(int v, boolean visited[],
+                             Stack&lt;Integer&gt; stack)
+    {
+        
+        visited[v] = true;
+        Integer i;
+ 
+        
+        
+        Iterator&lt;Integer&gt; it = adj[v].iterator();
+        while (it.hasNext())
+        {
+            i = it.next();
+            if (!visited[i])
+                topologicalSortUtil(i, visited, stack);
+        }
+ 
+        
+        stack.push(new Integer(v));
+    }
+ 
+    
+    
+    public void topologicalSort()
+    {
+        Stack&lt;Integer&gt; stack = new Stack&lt;Integer&gt;();
+ 
+        
+        boolean visited[] = new boolean[vertices];
+        for (int i = 0; i &lt; vertices; i++)
+            <font color='#ff0000' weight='1' id='421'><font color='#ff0000' weight='1' id='416'><font color='#ff0000' weight='1' id='410'>visited</font>[<font color='#ff0000' weight='1' id='412'>i</font>] </font><font color='#ff0000' weight='1' id='418'>= </font><font color='#ff0000' weight='1' id='420'>false<font color='#ff0000' weight='1' id='419'></font></font>;</font>
+ 
+        
+        
+        
+        for (int i = 0; i &lt; vertices; i++)
+            if (visited[i] == false)
+                topologicalSortUtil(i, visited, stack);
+ 
+        
+        while (stack.empty()==false)
+            System.out.print(stack.pop() + " ");
+    }
+}
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static void bubbleSort(int[] arr) {
+        int length = arr.length;
+        int k;
+
+        for (int i = length; i &gt;= 0; i--) {
+            for (int j = 0; j &lt; length-1; j++) {
+                k = j + 1;
+
+                if (arr[j] &gt; arr[k])
+                    swap(j, k, arr);
+            }
+            printArray(arr);
+        }
+    }
+
+  
+
+    private static void swap(int j, int k, int[] arr) {
+        int temp = arr[j];
+        arr[j] = arr[k];
+        arr[k] = temp;
+
+    }</font>
+</pre>

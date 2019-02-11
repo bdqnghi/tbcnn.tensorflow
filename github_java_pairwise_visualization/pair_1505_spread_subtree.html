@@ -1,0 +1,66 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public int[] mergesort(int[] arr) <font color='#ff0000' weight='1' id='274'>{
+    <font color='#0000ff' weight='6.64011e-05' id='24'>int</font> len <font color='#0000ff' weight='0.000531209' id='36'>= <font color='#0000ff' weight='0.000464807' id='35'><font color='#0000ff' weight='0.000398406' id='34'><font color='#0000ff' weight='2.21337e-05' id='29'>arr</font>.length</font></font></font>; 
+    if <font color='#0001ff' weight='0.00159363' id='48'>(len &lt;= <font color='#0000ff' weight='3.32005e-05' id='45'>1</font>)</font>
+      return <font color='#0000ff' weight='0.000199203' id='51'>arr;</font> 
+    int <font color='#0000ff' weight='6.64011e-05' id='61'>alen </font>= <font color='#0000ff' weight='2.21337e-05' id='63'>len </font><font color='#0000ff' weight='2.21337e-05' id='65'>/ </font>2; 
+    int blen = len - alen; 
+    <font color='#0008ff' weight='0.00876494' id='111'>int[] <font color='#0000ff' weight='6.64011e-05' id='96'>a </font>= new <font color='#0000ff' weight='0.000232404' id='106'>int[<font color='#0000ff' weight='1.66003e-05' id='103'>alen]</font></font>;
+    </font><font color='#0008ff' weight='0.00876494' id='134'><font color='#0000ff' weight='0.000332005' id='117'><font color='#0000ff' weight='0.000265604' id='116'><font color='#0000ff' weight='3.32005e-05' id='113'>int</font>[]</font> </font><font color='#0000ff' weight='6.64011e-05' id='119'>b </font>= <font color='#0000ff' weight='3.32005e-05' id='121'>new </font>int[blen]; 
+    </font><font color='#0014ff' weight='0.0203187' id='186'>for (<font color='#0000ff' weight='0.000547809' id='146'>int i <font color='#0000ff' weight='2.49004e-05' id='143'>= 0</font>; </font>i <font color='#0000ff' weight='8.30013e-06' id='150'>&lt; </font><font color='#0000ff' weight='8.30013e-06' id='152'>alen</font>; i++) 
+      <font color='#0004ff' weight='0.00418327' id='185'><font color='#0000ff' weight='1.66003e-05' id='165'>a</font>[i] = <font color='#0000ff' weight='1.66003e-05' id='175'>arr</font>[<font color='#0000ff' weight='8.30013e-06' id='177'>i</font>];</font>
+    </font><font color='#0016ff' weight='0.0219124' id='242'>for <font color='#0005ff' weight='0.00557769' id='215'>(<font color='#0000ff' weight='0.000547809' id='198'>int i = 0; </font><font color='#0000ff' weight='0.000398406' id='207'><font color='#0000ff' weight='0.000149402' id='205'>i <font color='#0000ff' weight='8.30013e-06' id='202'>&lt; </font><font color='#0000ff' weight='8.30013e-06' id='204'>blen</font>;</font> </font>i++)
+      </font><font color='#0005ff' weight='0.00498008' id='241'><font color='#0004ff' weight='0.00478088' id='240'><font color='#0002ff' weight='0.00219124' id='238'><font color='#0000ff' weight='0.000232404' id='223'><font color='#0000ff' weight='1.66003e-05' id='217'>b</font><font color='#0000ff' weight='6.64011e-05' id='222'>[<font color='#0000ff' weight='1.66003e-05' id='220'><font color='#0000ff' weight='8.30013e-06' id='219'>i</font>]</font></font> </font><font color='#0000ff' weight='3.32005e-05' id='225'>= </font><font color='#0000ff' weight='0.000365206' id='237'><font color='#0000ff' weight='1.66003e-05' id='227'>arr</font>[<font color='#0000ff' weight='2.76671e-06' id='229'>alen </font><font color='#0000ff' weight='2.76671e-06' id='231'>+ </font>i]</font>;</font></font></font>
+    </font><font color='#000bff' weight='0.0115538' id='272'>return <font color='#0005ff' weight='0.00537849' id='270'><font color='#0005ff' weight='0.00517928' id='269'><font color='#0000ff' weight='9.96016e-05' id='244'>merge</font><font color='#0002ff' weight='0.00229084' id='268'>(<font color='#0000ff' weight='0.000332005' id='255'><font color='#0000ff' weight='0.000298805' id='254'><font color='#0000ff' weight='0.000265604' id='253'><font color='#0000ff' weight='1.66003e-05' id='246'>mergesort</font><font color='#0000ff' weight='8.30013e-05' id='252'>(<font color='#0000ff' weight='2.49004e-05' id='250'><font color='#0000ff' weight='1.66003e-05' id='249'><font color='#0000ff' weight='8.30013e-06' id='248'>a</font></font>)</font></font></font></font>, </font><font color='#0000ff' weight='0.000332005' id='266'><font color='#0000ff' weight='0.000265604' id='264'><font color='#0000ff' weight='1.66003e-05' id='257'>mergesort</font><font color='#0000ff' weight='8.30013e-05' id='263'>(<font color='#0000ff' weight='2.49004e-05' id='261'><font color='#0000ff' weight='1.66003e-05' id='260'><font color='#0000ff' weight='8.30013e-06' id='259'>b</font></font>)</font></font></font>)</font></font></font>;</font>
+  }</font></font>
+  
+  public int[] merge(int[] a, int[] b) {
+    int alen = a.length; 
+    int blen = b.length; 
+    int len = alen + blen; 
+    int[] arr = new int[len];
+    int i = 0, j = 0, k = 0; 
+    while (k &lt; len) { 
+      while (i &lt; alen &amp;&amp; j &lt; blen) 
+        if (a[i] &lt; b[j])  
+          arr[k++] = a[i++];
+        else if (a[i] &gt; b[j]) 
+          arr[k++] = b[j++];
+        else { 
+          arr[k++] = a[i++]; 
+          arr[k++] = b[j++];
+        }
+        while (i &lt; alen)  
+          arr[k++] = a[i++];
+        while (j &lt; blen)
+          arr[k++] = b[j++];
+    }
+    return arr; 
+  }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public int[] sort(int[] arrayToSort) {
+        int max = getMaxFromArray(arrayToSort);
+        Map&lt;Integer, Integer&gt; bucketMap = new HashMap&lt;&gt;();
+        for (int i = 0; i &lt;= max; i++) {
+            bucketMap.put(i, 0);
+        }
+        for (int i = 0; i &lt; arrayToSort.length; i++) {
+            bucketMap.put(arrayToSort[i], bucketMap.get(arrayToSort[i])+1);
+        }
+        int sortedArrayIndex = 0;
+        for (Map.Entry&lt;Integer, Integer&gt; entry: bucketMap.entrySet()) {
+            for (int i = 0; i &lt; entry.getValue(); i++) {
+                arrayToSort[sortedArrayIndex++] = entry.getKey();
+            }
+        }
+        return arrayToSort;
+    }
+
+    protected int getMaxFromArray(int[] arrayToSort) {
+        List&lt;Integer&gt; numbers = Arrays.stream(arrayToSort).boxed().collect(Collectors.toList());
+        return numbers.stream().mapToInt(Integer::intValue).max().getAsInt();
+    }</font>
+</pre>

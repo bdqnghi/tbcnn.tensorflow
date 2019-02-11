@@ -1,0 +1,133 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public void bubbleSortWhile(int[] array) {
+
+        System.out.println(Arrays.toString(array));
+        int aux;
+        int i = array.length;
+
+        while (i &gt; 0) {
+            int j = 0;
+            while (j &lt; i - 1) {
+                if (array[j] &gt; <font color='#0001ff' weight='0.00177649' id='133'><font color='#0000ff' weight='8.07494e-05' id='123'>array</font>[j + 1]</font>) {
+                    aux = array[j];
+                    <font color='#0000ff' weight='0.000282623' id='159'>array<font color='#0000ff' weight='8.07494e-05' id='158'>[j]</font> </font>= array[j <font color='#0000ff' weight='3.36456e-06' id='167'>+ </font><font color='#0000ff' weight='3.36456e-06' id='169'>1</font>];
+                    <font color='#0004ff' weight='0.00436047' id='195'><font color='#0001ff' weight='0.00193798' id='193'>array[j + 1] = aux;</font>
+                }</font>
+                <font color='#000bff' weight='0.0116279' id='206'>j++;
+                </font><font color='#003fff' weight='0.0620155' id='239'>System.out.println(<font color='#0003ff' weight='0.00339147' id='232'>Arrays.toString(<font color='#0000ff' weight='0.000121124' id='227'>array</font>)</font>);
+            }</font>
+            i--;
+        }
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+import java.util.Arrays;
+
+public class HeapSortSelectHeap {
+
+    public enum Heap { MINHEAP, MAXHEAP };
+
+    private Heap heap;
+
+    public HeapSortSelectHeap(Heap heap) {
+        this.heap = heap;
+    }
+
+    private void swap(int[] list, int i, int j) {
+        int temp = list[j];
+        list[j] = list[i];
+        list[i] = temp;
+    }
+
+    private void siftDown(int[] list, int start, int end) {
+        switch(heap) {
+            case MINHEAP:
+                siftDownMin(list, start, end);
+                break;
+            case MAXHEAP:
+                siftDownMax(list, <font color='#ff0000' weight='1' id='241'><font color='#00ff00' weight='0.5' id='240'>start</font></font>, end);
+                break;
+        }
+    }
+
+    private void siftDownMin(int[] list, int start, int end) {
+        int root = start;
+
+        while(root * 2 + 1 &lt;= end) {
+            int child = root * 2 + 1;
+            int swap = root;
+            if(list[swap] &gt; list[child]) {
+                swap = child;
+            }
+
+            if(child + 1 &lt;= end &amp;&amp; list[swap] &gt; list[child + 1]) {
+                swap = child + 1;
+            }
+
+            if(swap != root) {
+                swap(list, root, swap);
+                root = swap;
+            } else {
+                return;
+            }
+        }
+    }
+
+
+
+    private void siftDownMax(int[] list, int start, int end) {
+        int root = start;
+
+        while(root * 2 + 1 &lt;= end) {
+            int child = root * 2 + 1;
+            int swap = root;
+            if(list[swap] &lt; list[child]) {
+                swap = child;
+            }
+
+            if(child + 1 &lt;= end &amp;&amp; list[swap] &lt; list[child + 1]) {
+                swap = child + 1;
+            }
+
+            if(swap != root) {
+                swap(list, root, swap);
+                root = swap;
+            } else {
+                return;
+            }
+        }
+    }
+
+    public void heapify(int[] list) {
+        int start = (list.length - 2) / 2;
+        while(start &gt;= 0) {
+            siftDown(list, start, list.length - 1);
+            start -= 1;
+        }
+    }
+
+    public void sort(int[] list) {
+        heapify(list);
+        int end = list.length - 1;
+        while(end &gt; 0) {
+            swap(list, end, 0);
+            end -= 1;
+            siftDown(list, 0, end);
+        }
+    }
+
+    public static void runList(int[] list, Heap heap) {
+        System.out.println("before: " + Arrays.toString(list));
+        HeapSortSelectHeap s = new HeapSortSelectHeap(heap);
+        s.heapify(list);
+        System.out.println("heap: " + Arrays.toString(list));
+        s.sort(list);
+        System.out.println("after: " + Arrays.toString(list));
+    }
+
+
+}
+</font>
+</pre>

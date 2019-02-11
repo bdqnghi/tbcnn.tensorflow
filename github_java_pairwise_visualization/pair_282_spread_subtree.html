@@ -1,0 +1,116 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+package com.xdc.basic.algorithm.basic.sort;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+
+public class RadixSort
+{
+    public static void sort(int[] n)
+    {
+        
+        ArrayList&lt;ArrayList&lt;Integer&gt;&gt; ll = new ArrayList&lt;ArrayList&lt;Integer&gt;&gt;();
+        for (int i = 0; i &lt; 10; i++)
+        {
+            ll.add(new ArrayList&lt;Integer&gt;());
+        }
+
+        
+        int maxPower = getMaxPower(n);
+
+        
+        for (int power = 0; power &lt;= maxPower; power++)
+        {
+            
+            distribute(n, ll, power);
+
+            
+            collect(n, ll);
+        }
+    }
+
+    
+    private static void collect(int[] n, ArrayList&lt;ArrayList&lt;Integer&gt;&gt; ll)
+    {
+        int k = 0;
+        for (ArrayList&lt;Integer&gt; l : ll)
+        {
+            for (Integer i : l)
+            {
+                n[k] = i;
+                k++;
+            }
+            l.clear();
+        }
+    }
+
+    
+    private static void distribute(int[] n, ArrayList&lt;ArrayList&lt;Integer&gt;&gt; ll, int power)
+    {
+        for (int i = 0; i &lt; n.length; i++)
+        {
+            int digit = (n[i] / ((int) (Math.pow(10, power)))) % 10;
+            ll.get(digit).add(n[i]);
+        }
+    }
+
+    
+    private static int getMaxPower(int[] n)
+    {
+        
+        int max = n[0];
+        for (int i = 1; i &lt; n.length; i++)
+        {
+            if (n[i] &gt; max)
+            {
+                max = n[i];
+            }
+        }
+
+        
+        int digitalCount = 0;
+        while (max != 0)
+        {
+            digitalCount++;
+            max /= 10;
+        }
+
+        return digitalCount;
+    }
+
+    public static void main(String[] args)
+    {
+        int[] n = new int[] <font color='#ff0000' weight='1' id='829'>{ <font color='#0001ff' weight='0.00156128' id='770'><font color='#0000ff' weight='0.00078064' id='769'>44</font>, </font><font color='#0001ff' weight='0.00156128' id='773'><font color='#0000ff' weight='0.00078064' id='772'>22</font>, </font><font color='#0001ff' weight='0.00156128' id='776'><font color='#0000ff' weight='0.00078064' id='775'>46</font>, </font><font color='#0001ff' weight='0.00156128' id='779'><font color='#0000ff' weight='0.00078064' id='778'>47</font>, </font><font color='#0001ff' weight='0.00156128' id='782'><font color='#0000ff' weight='0.00078064' id='781'>82</font>, </font><font color='#0001ff' weight='0.00156128' id='785'><font color='#0000ff' weight='0.00078064' id='784'>76</font>, </font><font color='#0001ff' weight='0.00156128' id='788'><font color='#0000ff' weight='0.00078064' id='787'>96</font>, </font><font color='#0001ff' weight='0.00156128' id='791'><font color='#0000ff' weight='0.00078064' id='790'>82</font>, </font><font color='#0001ff' weight='0.00156128' id='794'><font color='#0000ff' weight='0.00078064' id='793'>79</font>, </font><font color='#0001ff' weight='0.00156128' id='797'><font color='#0000ff' weight='0.00078064' id='796'>35</font>, </font><font color='#0001ff' weight='0.00156128' id='800'><font color='#0000ff' weight='0.00078064' id='799'>8</font>, </font><font color='#0001ff' weight='0.00156128' id='803'><font color='#0000ff' weight='0.00078064' id='802'>75</font>, </font><font color='#0001ff' weight='0.00156128' id='806'><font color='#0000ff' weight='0.00078064' id='805'>85</font>, </font><font color='#0001ff' weight='0.00156128' id='809'><font color='#0000ff' weight='0.00078064' id='808'>84</font>, </font><font color='#0001ff' weight='0.00156128' id='812'><font color='#0000ff' weight='0.00078064' id='811'>78</font>, </font><font color='#0001ff' weight='0.00156128' id='815'><font color='#0000ff' weight='0.00078064' id='814'>98</font>, </font><font color='#0001ff' weight='0.00156128' id='818'><font color='#0000ff' weight='0.00078064' id='817'>59</font>, </font><font color='#0001ff' weight='0.00156128' id='821'><font color='#0000ff' weight='0.00078064' id='820'>72</font>, </font><font color='#0001ff' weight='0.00156128' id='824'><font color='#0000ff' weight='0.00078064' id='823'>81</font>, </font><font color='#0001ff' weight='0.00156128' id='827'><font color='#0000ff' weight='0.00078064' id='826'>44</font> }</font></font>;
+        RadixSort.sort(n);
+        System.out.println(Arrays.toString(n));
+    }
+}
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public int[] sort(int[] arrayToSort) <font color='#ff0000' weight='1' id='331'>{
+        <font color='#0000ff' weight='6.76407e-05' id='24'>int</font> <font color='#0000ff' weight='6.76407e-05' id='27'>max </font>= <font color='#0000ff' weight='3.38203e-05' id='29'>getMaxFromArray</font><font color='#0000ff' weight='0.000169102' id='35'>(<font color='#0000ff' weight='3.38203e-05' id='32'><font color='#0000ff' weight='1.69102e-05' id='31'>arrayToSort</font></font>)</font>;
+        <font color='#000bff' weight='0.0113636' id='70'><font color='#0005ff' weight='0.00527597' id='68'><font color='#0000ff' weight='0.000744048' id='53'><font color='#0000ff' weight='0.000676407' id='52'><font color='#0000ff' weight='3.38203e-05' id='43'>Map</font><font color='#0000ff' weight='0.000236742' id='51'>&lt;<font color='#0000ff' weight='2.25469e-05' id='46'><font color='#0000ff' weight='1.12734e-05' id='45'>Integer</font>, </font><font color='#0000ff' weight='2.25469e-05' id='49'><font color='#0000ff' weight='1.12734e-05' id='48'>Integer</font>&gt;</font></font></font> </font><font color='#0000ff' weight='6.76407e-05' id='55'>bucketMap </font><font color='#0000ff' weight='0.000744048' id='67'>= <font color='#0000ff' weight='0.000676407' id='66'>new <font color='#0000ff' weight='8.45509e-06' id='59'>HashMap</font><font color='#0000ff' weight='8.45509e-06' id='61'>&lt;&gt;</font>()</font></font>;</font>
+        </font>for (int <font color='#0000ff' weight='8.45509e-06' id='75'>i </font>= 0; <font color='#0000ff' weight='8.45509e-06' id='84'>i </font>&lt;= <font color='#0000ff' weight='8.45509e-06' id='88'>max</font>; <font color='#0000ff' weight='2.53653e-05' id='93'>i</font>++) <font color='#0004ff' weight='0.00446429' id='122'>{
+            <font color='#0002ff' weight='0.00202922' id='120'><font color='#0000ff' weight='0.000913149' id='118'><font color='#0000ff' weight='0.000862419' id='117'><font color='#0000ff' weight='0.000152192' id='106'><font color='#0000ff' weight='8.45509e-06' id='101'>bucketMap</font><font color='#0000ff' weight='8.45509e-06' id='103'>.</font><font color='#0000ff' weight='8.45509e-06' id='105'>put</font></font>(<font color='#0000ff' weight='8.45509e-06' id='108'>i</font>, <font color='#0000ff' weight='8.45509e-06' id='112'>0</font>)</font>;</font>
+        }</font></font>
+        for (int i = 0; i &lt; <font color='#0000ff' weight='2.81836e-06' id='141'>arrayToSort</font>.length; i++) {
+            <font color='#0004ff' weight='0.00487013' id='206'><font color='#0002ff' weight='0.0023336' id='204'><font color='#0002ff' weight='0.00228287' id='203'><font color='#0000ff' weight='0.000152192' id='164'><font color='#0000ff' weight='8.45509e-06' id='159'>bucketMap</font><font color='#0000ff' weight='8.45509e-06' id='161'>.</font><font color='#0000ff' weight='8.45509e-06' id='163'>put</font></font><font color='#0000ff' weight='0.000938515' id='202'>(<font color='#0000ff' weight='7.60958e-05' id='174'><font color='#0000ff' weight='6.76407e-05' id='173'><font color='#0000ff' weight='4.22754e-06' id='166'>arrayToSort</font>[i]</font>, </font><font color='#0000ff' weight='0.000211377' id='200'><font color='#0000ff' weight='0.000202922' id='199'><font color='#0000ff' weight='5.35489e-05' id='194'><font color='#0000ff' weight='4.69727e-07' id='176'>bucketMap</font>.get(<font color='#0000ff' weight='3.52295e-07' id='183'>arrayToSort</font>[i])</font><font color='#0000ff' weight='2.81836e-06' id='196'>+</font><font color='#0000ff' weight='2.81836e-06' id='198'>1</font></font>)</font></font></font>;</font>
+        }</font>
+        <font color='#0004ff' weight='0.00446429' id='221'><font color='#0001ff' weight='0.0018263' id='219'><font color='#0000ff' weight='0.000135281' id='212'>int </font><font color='#0000ff' weight='6.76407e-05' id='214'>sortedArrayIndex </font><font color='#0000ff' weight='0.000202922' id='218'>= <font color='#0000ff' weight='0.000135281' id='217'><font color='#0000ff' weight='6.76407e-05' id='216'>0</font></font></font>;</font>
+        </font><font color='#002aff' weight='0.0413961' id='324'>for <font color='#0007ff' weight='0.00689935' id='256'>(<font color='#0003ff' weight='0.00324675' id='254'><font color='#0003ff' weight='0.00314529' id='253'><font color='#0000ff' weight='0.000541126' id='238'><font color='#0000ff' weight='0.000507305' id='237'><font color='#0000ff' weight='1.12734e-05' id='223'>Map</font><font color='#0000ff' weight='1.12734e-05' id='225'>.</font><font color='#0000ff' weight='0.000112734' id='236'><font color='#0000ff' weight='5.63672e-06' id='227'>Entry</font><font color='#0000ff' weight='3.94571e-05' id='235'>&lt;<font color='#0000ff' weight='3.75782e-06' id='230'><font color='#0000ff' weight='1.87891e-06' id='229'>Integer</font>, </font><font color='#0000ff' weight='3.75782e-06' id='233'><font color='#0000ff' weight='1.87891e-06' id='232'>Integer</font>&gt;</font></font></font></font> </font><font color='#0000ff' weight='3.38203e-05' id='240'>entry</font><font color='#0000ff' weight='0.000372024' id='252'>: <font color='#0000ff' weight='0.000338203' id='251'><font color='#0000ff' weight='0.000304383' id='250'><font color='#0000ff' weight='0.000101461' id='247'><font color='#0000ff' weight='5.63672e-06' id='242'>bucketMap</font><font color='#0000ff' weight='5.63672e-06' id='244'>.</font><font color='#0000ff' weight='5.63672e-06' id='246'>entrySet</font></font><font color='#0000ff' weight='1.69102e-05' id='249'>()</font></font></font></font></font>)</font> </font><font color='#000dff' weight='0.0133929' id='323'>{
+            for (int i = <font color='#0000ff' weight='2.11377e-06' id='263'>0</font>; i &lt; <font color='#0000ff' weight='1.90239e-05' id='282'><font color='#0000ff' weight='6.34132e-06' id='279'><font color='#0000ff' weight='3.52295e-07' id='274'>entry</font>.<font color='#0000ff' weight='3.52295e-07' id='278'>getValue</font></font><font color='#0000ff' weight='1.05689e-06' id='281'>()</font></font>; i++) <font color='#0001ff' weight='0.00131899' id='320'>{
+                <font color='#0000ff' weight='0.000608766' id='318'><font color='#0000ff' weight='0.000279018' id='316'><font color='#0000ff' weight='2.11377e-06' id='295'>arrayToSort</font>[<font color='#0000ff' weight='5.28443e-07' id='297'>sortedArrayIndex</font><font color='#0000ff' weight='5.28443e-07' id='299'>++</font>] <font color='#0000ff' weight='4.22754e-06' id='305'>= </font><font color='#0000ff' weight='3.80479e-05' id='315'><font color='#0000ff' weight='1.26826e-05' id='312'><font color='#0000ff' weight='7.04591e-07' id='307'>entry</font><font color='#0000ff' weight='7.04591e-07' id='309'>.</font><font color='#0000ff' weight='7.04591e-07' id='311'>getKey</font></font><font color='#0000ff' weight='2.11377e-06' id='314'>()</font></font>;</font>
+            }</font></font>
+        }</font>
+        </font>return <font color='#0000ff' weight='0.000202922' id='326'>arrayToSort</font>;
+    }</font>
+
+    protected int getMaxFromArray(int[] arrayToSort) {
+        List&lt;Integer&gt; numbers = Arrays.stream(arrayToSort).boxed().collect(Collectors.toList());
+        return numbers.stream().mapToInt(Integer::intValue).max().getAsInt();
+    }</font>
+</pre>

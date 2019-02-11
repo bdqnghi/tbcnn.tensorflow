@@ -1,0 +1,174 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+import java.util.Arrays;
+class SortingHeap{
+
+void heapify(int arr[],int size,int i)
+<font color='#ff0000' weight='1' id='271'>{
+	<font color='#ff0000' weight='1' id='49'><font color='#ff0000' weight='1' id='48'>int</font> </font>swapwith<font color='#ff0000' weight='1' id='55'>=<font color='#ff0000' weight='1' id='54'><font color='#ff0000' weight='1' id='53'>i</font></font></font>;
+	int l<font color='#ff0000' weight='1' id='62'></font>=<font color='#ff0000' weight='1' id='74'>2*i+<font color='#ff0000' weight='1' id='70'></font><font color='#ff0000' weight='1' id='73'>1</font></font>;
+	int <font color='#ff0000' weight='1' id='83'>r</font>=2*i+2;
+	
+	
+	
+	<font color='#ff0000' weight='1' id='140'>if(<font color='#ff0000' weight='1' id='125'>l&lt;size &amp;&amp; arr[l]&gt;<font color='#ff0000' weight='1' id='118'>arr</font>[swapwith<font color='#ff0000' weight='1' id='119'></font>])</font> 
+	{
+		swapwith<font color='#ff0000' weight='1' id='131'>=<font color='#ff0000' weight='1' id='130'></font></font>l<font color='#ff0000' weight='1' id='132'></font>;<font color='#ff0000' weight='1' id='135'></font>
+	}
+	</font><font color='#ff0000' weight='1' id='182'>if<font color='#ff0000' weight='1' id='169'>(<font color='#ff0000' weight='1' id='167'><font color='#ff0000' weight='1' id='142'>r</font>&lt;<font color='#ff0000' weight='1' id='144'>size </font><font color='#ff0000' weight='1' id='146'>&amp;&amp;<font color='#ff0000' weight='1' id='145'></font> </font>arr[<font color='#ff0000' weight='1' id='151'><font color='#ff0000' weight='1' id='150'>r<font color='#ff0000' weight='1' id='149'></font></font>]</font><font color='#ff0000' weight='1' id='152'></font>&gt;<font color='#ff0000' weight='1' id='166'><font color='#ff0000' weight='1' id='160'>arr</font>[swapwith<font color='#ff0000' weight='1' id='161'></font>]<font color='#ff0000' weight='1' id='164'></font></font>)</font><font color='#ff0000' weight='1' id='168'></font></font> 
+	{
+		<font color='#ff0000' weight='1' id='178'>swapwith=r;
+	}</font><font color='#ff0000' weight='1' id='179'></font>	
+	
+	</font>if(<font color='#ff0000' weight='1' id='189'>swapwith <font color='#ff0000' weight='1' id='186'>!=<font color='#ff0000' weight='1' id='185'></font> </font><font color='#ff0000' weight='1' id='188'>i</font>)</font><font color='#ff0000' weight='1' id='190'></font>
+	{
+		<font color='#ff0000' weight='1' id='194'><font color='#ff0000' weight='1' id='193'>int<font color='#ff0000' weight='1' id='192'></font></font> </font>tmp =<font color='#ff0000' weight='1' id='205'><font color='#ff0000' weight='1' id='204'><font color='#ff0000' weight='1' id='198'>arr<font color='#ff0000' weight='1' id='197'></font></font><font color='#ff0000' weight='1' id='203'>[<font color='#ff0000' weight='1' id='200'>i</font>]</font></font></font>;
+		<font color='#ff0000' weight='1' id='230'>arr[i] = arr<font color='#ff0000' weight='1' id='226'>[<font color='#ff0000' weight='1' id='224'>swapwith]</font></font>;
+		</font>arr<font color='#ff0000' weight='1' id='231'></font>[swapwith] = tmp;
+
+		<font color='#ff0000' weight='1' id='263'>heapify(<font color='#ff0000' weight='1' id='251'><font color='#ff0000' weight='1' id='250'><font color='#ff0000' weight='1' id='249'>arr</font></font>,</font><font color='#ff0000' weight='1' id='255'><font color='#ff0000' weight='1' id='254'><font color='#ff0000' weight='1' id='253'>size<font color='#ff0000' weight='1' id='252'></font></font></font>,</font>swapwith<font color='#ff0000' weight='1' id='256'></font>);</font> 
+	}<font color='#ff0000' weight='1' id='266'></font>	
+		
+}</font>	
+void sort(int arr[],int size)
+{
+	for(int i=(size/2)-1;i&gt;=0;i--)
+	{
+		
+		heapify(arr,size,i);
+	}
+	
+	for (int i=size-1; i&gt;=0; i--)
+    {
+        
+        
+		int tmp =arr[0];
+		arr[0] = arr[i];
+		arr[i] = tmp;
+		
+		
+        
+        heapify(arr, i, 0);
+    }	
+	 
+	 
+		 
+		 
+		 
+		
+		 
+	 
+}
+}
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+import java.util.Arrays;
+
+public class HeapSortSelectHeap {
+
+    public enum Heap { MINHEAP, MAXHEAP };
+
+    private Heap heap;
+
+    public HeapSortSelectHeap(Heap heap) {
+        this.heap = heap;
+    }
+
+    private void swap(int[] list, int i, int j) {
+        int temp = list[j];
+        list[j] = list[i];
+        list[i] = temp;
+    }
+
+    private void siftDown(int[] list, int start, int end) {
+        switch(heap) {
+            case MINHEAP:
+                siftDownMin(list, start, end);
+                break;
+            case MAXHEAP:
+                siftDownMax(list, <font color='#ff0000' weight='1' id='241'><font color='#ff0000' weight='1' id='240'>start<font color='#ff0000' weight='1' id='239'></font></font></font>, end);
+                break;
+        }
+    }
+
+    private void siftDownMin(int[] list, int start, int end) {
+        int root = start;
+
+        while(root * 2 + 1 &lt;= end) {
+            int child = root * 2 + 1;
+            int swap = root;
+            if(list[swap] &gt; list[child]) {
+                swap = child;
+            }
+
+            if(child + 1 &lt;= end &amp;&amp; list[swap] &gt; list[child + 1]) {
+                swap = child + 1;
+            }
+
+            if(swap != root) {
+                swap(list, root, swap);
+                root = swap;
+            } else {
+                return;
+            }
+        }
+    }
+
+
+
+    private void siftDownMax(int[] list, int start, int end) {
+        int root = start;
+
+        while(root * 2 + 1 &lt;= end) {
+            int child = root * 2 + 1;
+            int swap = root;
+            if(list[swap] &lt; list[child]) {
+                swap = child;
+            }
+
+            if(child + 1 &lt;= end &amp;&amp; list[swap] &lt; list[child + 1]) {
+                swap = child + 1;
+            }
+
+            if(swap != root) {
+                swap(list, root, swap);
+                root = swap;
+            } else {
+                return;
+            }
+        }
+    }
+
+    public void heapify(int[] list) {
+        int start = (list.length - 2) / 2;
+        while(start &gt;= 0) {
+            siftDown(list, start, list.length - 1);
+            start -= 1;
+        }
+    }
+
+    public void sort(int[] list) {
+        heapify(list);
+        int end = list.length - 1;
+        while(end &gt; 0) {
+            swap(list, end, 0);
+            end -= 1;
+            siftDown(list, 0, end);
+        }
+    }
+
+    public static void runList(int[] list, Heap heap) {
+        System.out.println("before: " + Arrays.toString(list));
+        HeapSortSelectHeap s = new HeapSortSelectHeap(heap);
+        s.heapify(list);
+        System.out.println("heap: " + Arrays.toString(list));
+        s.sort(list);
+        System.out.println("after: " + Arrays.toString(list));
+    }
+
+
+}
+</font>
+</pre>

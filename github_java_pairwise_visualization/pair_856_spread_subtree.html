@@ -1,0 +1,60 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+    public <font color='#0001ff' weight='0.00155642' id='5'>void </font><font color='#0000ff' weight='0.00077821' id='7'>sort</font><font color='#0008ff' weight='0.00856031' id='19'>(Comparable[] a) </font>{
+        <font color='#0002ff' weight='0.00207523' id='36'>int N = a.length;
+        </font><font color='#0001ff' weight='0.00142672' id='48'><font color='#0000ff' weight='0.000583658' id='46'>int h = <font color='#0000ff' weight='4.32339e-05' id='44'>1</font>;</font>
+        </font>while (h <font color='#0000ff' weight='6.48508e-06' id='52'>&lt; </font>N / 3)
+            <font color='#0001ff' weight='0.00110246' id='79'><font color='#0001ff' weight='0.00103761' id='78'><font color='#0000ff' weight='4.6322e-06' id='63'>h </font><font color='#0000ff' weight='4.6322e-06' id='65'>= </font>h * 3 + <font color='#0000ff' weight='4.6322e-06' id='75'>1</font>;</font></font>
+        while (h <font color='#0000ff' weight='1.08085e-05' id='84'>&gt;= </font>1) {
+            <font color='#0002ff' weight='0.00274535' id='217'>for <font color='#0000ff' weight='0.000302637' id='118'>(<font color='#0000ff' weight='9.00706e-07' id='92'><font color='#0000ff' weight='4.50353e-07' id='91'>int</font> </font><font color='#0000ff' weight='4.50353e-07' id='94'>i </font>= <font color='#0000ff' weight='4.50353e-07' id='96'>0</font>; <font color='#0000ff' weight='8.10636e-06' id='108'>i <font color='#0000ff' weight='4.50353e-07' id='105'>&lt; </font>N;</font> <font color='#0000ff' weight='1.35106e-05' id='116'>i<font color='#0000ff' weight='1.35106e-06' id='114'>++</font>)</font> </font>{
+                <font color='#0000ff' weight='2.16169e-05' id='125'><font color='#0000ff' weight='7.20565e-06' id='123'>count++;</font>
+                </font>for (<font color='#0000ff' weight='4.95388e-06' id='137'><font color='#0000ff' weight='1.50118e-07' id='128'>int </font><font color='#0000ff' weight='7.50588e-08' id='130'>j </font><font color='#0000ff' weight='2.25177e-07' id='134'>= <font color='#0000ff' weight='1.50118e-07' id='133'>i</font></font>; </font><font color='#0000ff' weight='8.33153e-06' id='175'><font color='#0000ff' weight='4.50353e-08' id='139'>j </font>&gt;= <font color='#0000ff' weight='4.50353e-08' id='143'>h </font>&amp;&amp; <font color='#0000ff' weight='2.25177e-08' id='147'>less</font>(<font color='#0000ff' weight='6.7553e-08' id='157'><font color='#0000ff' weight='6.00471e-08' id='156'><font color='#0000ff' weight='5.25412e-08' id='155'>a<font color='#0000ff' weight='1.50118e-08' id='154'>[<font color='#0000ff' weight='3.75294e-09' id='152'>j]</font></font></font></font>, </font><font color='#0000ff' weight='9.75765e-08' id='171'><font color='#0000ff' weight='9.00706e-08' id='170'><font color='#0000ff' weight='3.75294e-09' id='159'>a</font>[<font color='#0000ff' weight='6.2549e-10' id='161'>j </font>- <font color='#0000ff' weight='6.2549e-10' id='165'>h</font>]</font>)</font>;</font> <font color='#0000ff' weight='3.15247e-06' id='185'><font color='#0000ff' weight='2.70212e-06' id='184'>j -= <font color='#0000ff' weight='1.50118e-07' id='183'>h</font></font>)</font> {
+                    exch(a, j, j - h);
+                }
+            }
+            </font><font color='#0000ff' weight='0.000172936' id='226'><font color='#0000ff' weight='6.48508e-05' id='224'>h /= <font color='#0000ff' weight='3.60282e-06' id='223'>3</font>;</font>
+        }</font>
+        <font color='#0003ff' weight='0.00311284' id='254'>System.out<font color='#0000ff' weight='6.48508e-06' id='237'>.</font><font color='#0000ff' weight='6.48508e-06' id='239'>println</font>(<font color='#0000ff' weight='5.40424e-06' id='242'>count </font><font color='#0000ff' weight='5.40424e-06' id='244'>/ </font>N);
+    }</font></font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public int[] mergesort(int[] arr) {
+    int len = arr.length; 
+    if (len &lt;= 1)
+      return arr; 
+    int alen = len / 2; 
+    int blen = len - alen; 
+    int[] a = new int[alen];
+    int[] b = new int[blen]; 
+    for (int i = 0; i &lt; alen; i++) 
+      a[i] = arr[i];
+    for (int i = 0; i &lt; blen; i++)
+      b[i] = arr[alen + i];
+    return merge(mergesort(a), mergesort(b));
+  }
+  
+  public int[] merge(int[] a, int[] b) {
+    int alen = a.length; 
+    int blen = b.length; 
+    int len = alen + blen; 
+    int[] arr = new int[len];
+    int i = 0, j = 0, k = 0; 
+    while (k &lt; len) { 
+      while (i &lt; alen &amp;&amp; j &lt; blen) 
+        if (a[i] &lt; b[j])  
+          arr[k++] = a[i++];
+        else if (a[i] &gt; b[j])<font color='#ff0000' weight='1' id='502'></font> 
+          arr[k++] = b[j++];
+        else { 
+          arr[k++] = a[i++]; 
+          arr[k++] = b[j++];
+        }
+        while (i &lt; alen)  
+          arr[k++] = a[i++];
+        while (j &lt; blen)
+          arr[k++] = b[j++];
+    }
+    return arr; 
+  }</font>
+</pre>

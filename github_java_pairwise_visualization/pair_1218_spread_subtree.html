@@ -1,0 +1,76 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public void shellSort(int[] array) {
+        for(int gap = array.length / 2; gap &gt; 0; gap /= 2) {
+            for(int i = 0; i &lt; gap; i++) {
+                for(int j = i; j &lt; array.length; j += gap) {
+                    int min = j;
+                    for(int k = j + gap; k &lt; array.length; k += gap) {
+                        if(array[k] &lt; array[min]) {
+                            min = k;
+                        }
+                    }
+                    swap(array, j, min);
+                }
+            }
+        }
+    }
+
+    public void swap(int[] array, int a, int b) {
+        int temp = array[a];
+        array[a] = array[b];
+        array[b] = temp;
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+package Sorting;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class RadixSort {
+public static void main(String[] args) {
+	int n[]=new int[]{15,3,0,2,4,11,0,25,2,3,21,4,35,6};
+	sort(n);
+	System.out.println(Arrays.toString(n));
+}
+public static void sort(int []input)
+{ final int RADIX = 10;
+	List&lt;Integer&gt;[] bucket = new ArrayList[RADIX];
+	  for (int i = 0; i &lt; bucket.length; i++) {
+	    bucket[i] = new ArrayList&lt;Integer&gt;();
+	  }
+	 
+	  
+	  boolean condition = false;
+	  int tmp = -1, placement = 1;
+	  while (!condition) <font color='#ff0000' weight='1' id='637'>{
+		  <font color='#0003ff' weight='0.00308642' id='357'><font color='#0001ff' weight='0.00115741' id='355'><font color='#0000ff' weight='6.43004e-05' id='350'>condition </font><font color='#0000ff' weight='6.43004e-05' id='352'>= </font><font color='#0000ff' weight='6.43004e-05' id='354'>true</font>;</font>
+	    
+	    </font><font color='#001fff' weight='0.0308642' id='438'>for <font color='#0002ff' weight='0.00231481' id='370'>(<font color='#0000ff' weight='0.000964506' id='368'><font color='#0000ff' weight='0.000868056' id='367'><font color='#0000ff' weight='6.43004e-05' id='360'><font color='#0000ff' weight='3.21502e-05' id='359'>Integer</font> </font><font color='#0000ff' weight='3.21502e-05' id='362'>i </font><font color='#0000ff' weight='9.64506e-05' id='366'>: <font color='#0000ff' weight='6.43004e-05' id='365'><font color='#0000ff' weight='3.21502e-05' id='364'>input</font></font></font></font>)</font> </font><font color='#000cff' weight='0.0127315' id='437'>{
+	      <font color='#0000ff' weight='0.000578704' id='383'><font color='#0000ff' weight='0.000241127' id='381'>tmp = i <font color='#0000ff' weight='4.82253e-06' id='378'>/ </font><font color='#0000ff' weight='4.82253e-06' id='380'>placement</font>;</font>
+	      </font><font color='#0001ff' weight='0.00120563' id='409'><font color='#0000ff' weight='0.000554591' id='407'>bucket[tmp <font color='#0000ff' weight='6.69796e-07' id='389'>% </font><font color='#0000ff' weight='6.69796e-07' id='391'>RADIX</font>].<font color='#0000ff' weight='6.43004e-05' id='406'><font color='#0000ff' weight='4.01878e-06' id='399'>add</font><font color='#0000ff' weight='2.00939e-05' id='405'>(<font color='#0000ff' weight='6.02816e-06' id='403'><font color='#0000ff' weight='4.01878e-06' id='402'>i</font>)</font></font></font>;</font>
+	      </font><font color='#0001ff' weight='0.00120563' id='435'>if <font color='#0000ff' weight='0.000289352' id='422'>(<font color='#0000ff' weight='0.000120563' id='420'><font color='#0000ff' weight='2.41127e-06' id='411'>condition </font><font color='#0000ff' weight='2.41127e-06' id='413'>&amp;&amp; </font><font color='#0000ff' weight='2.41127e-06' id='415'>tmp </font><font color='#0000ff' weight='2.41127e-06' id='417'>&gt; </font><font color='#0000ff' weight='2.41127e-06' id='419'>0</font>)</font></font> {
+	    	  condition = <font color='#0000ff' weight='2.00939e-06' id='428'>false</font>;
+	      }
+	    }</font></font>
+	    </font><font color='#0000ff' weight='0.000964506' id='449'><font color='#0000ff' weight='1.92901e-05' id='440'>System</font><font color='#0000ff' weight='1.92901e-05' id='442'>.</font><font color='#0000ff' weight='1.92901e-05' id='444'>out</font><font color='#0000ff' weight='1.92901e-05' id='446'>.</font><font color='#0000ff' weight='1.92901e-05' id='448'>println</font></font><font color='#0000ff' weight='0.000482253' id='455'>(<font color='#0000ff' weight='4.82253e-05' id='451'>"bucket"</font>)</font>;
+	    <font color='#000cff' weight='0.0123457' id='492'><font color='#0005ff' weight='0.00578704' id='490'><font color='#0005ff' weight='0.00559414' id='489'><font color='#0000ff' weight='0.000964506' id='470'><font color='#0000ff' weight='1.92901e-05' id='461'>System</font><font color='#0000ff' weight='1.92901e-05' id='463'>.</font><font color='#0000ff' weight='1.92901e-05' id='465'>out</font><font color='#0000ff' weight='1.92901e-05' id='467'>.</font><font color='#0000ff' weight='1.92901e-05' id='469'>println</font></font><font color='#0001ff' weight='0.00163966' id='488'>(<font color='#0000ff' weight='0.00072338' id='486'><font color='#0000ff' weight='0.000675154' id='485'><font color='#0000ff' weight='0.000626929' id='484'><font color='#0000ff' weight='0.000144676' id='477'><font color='#0000ff' weight='8.03755e-06' id='472'>Arrays</font><font color='#0000ff' weight='8.03755e-06' id='474'>.</font><font color='#0000ff' weight='8.03755e-06' id='476'>toString</font></font><font color='#0000ff' weight='0.000120563' id='483'>(<font color='#0000ff' weight='3.6169e-05' id='481'><font color='#0000ff' weight='2.41127e-05' id='480'><font color='#0000ff' weight='1.20563e-05' id='479'>bucket</font></font>)</font></font></font></font>)</font></font></font>;</font>
+	    
+	    </font><font color='#0004ff' weight='0.00424383' id='504'><font color='#0001ff' weight='0.00173611' id='502'>int a <font color='#0000ff' weight='0.000192901' id='501'>= <font color='#0000ff' weight='0.000128601' id='500'><font color='#0000ff' weight='6.43004e-05' id='499'>0</font></font></font>;</font>
+	    </font><font color='#0022ff' weight='0.0339506' id='593'>for <font color='#0005ff' weight='0.00540123' id='533'>(<font color='#0000ff' weight='0.000530478' id='516'><font color='#0000ff' weight='0.000217014' id='514'>int b <font color='#0000ff' weight='2.41127e-05' id='513'>= <font color='#0000ff' weight='1.60751e-05' id='512'><font color='#0000ff' weight='8.03755e-06' id='511'>0</font></font></font>;</font> </font><font color='#0000ff' weight='0.000385802' id='525'><font color='#0000ff' weight='0.000144676' id='523'><font color='#0000ff' weight='8.03755e-06' id='518'>b </font><font color='#0000ff' weight='8.03755e-06' id='520'>&lt; </font><font color='#0000ff' weight='8.03755e-06' id='522'>RADIX</font>;</font> </font><font color='#0000ff' weight='0.000241127' id='531'><font color='#0000ff' weight='0.000192901' id='530'><font color='#0000ff' weight='2.41127e-05' id='527'>b</font><font color='#0000ff' weight='2.41127e-05' id='529'>++</font></font>)</font> </font><font color='#000bff' weight='0.0111883' id='592'>{
+	      <font color='#0002ff' weight='0.00244342' id='572'>for <font color='#0000ff' weight='0.000578704' id='552'>(<font color='#0000ff' weight='0.000257202' id='550'><font color='#0000ff' weight='0.000241127' id='549'>Integer i <font color='#0000ff' weight='4.82253e-05' id='548'>: <font color='#0000ff' weight='4.28669e-05' id='547'>bucket[b]</font></font></font>)</font> </font><font color='#0000ff' weight='0.000578704' id='571'>{
+	        <font color='#0000ff' weight='0.000257202' id='569'><font color='#0000ff' weight='0.000112526' id='567'>input[a<font color='#0000ff' weight='3.34898e-07' id='558'>++</font>] = <font color='#0000ff' weight='2.67918e-06' id='566'>i</font>;</font>
+	      }</font></font>
+	      </font><font color='#0001ff' weight='0.00109311' id='590'><font color='#0000ff' weight='0.000482253' id='588'>bucket[b]<font color='#0000ff' weight='1.07167e-05' id='582'>.</font><font color='#0000ff' weight='4.28669e-05' id='587'><font color='#0000ff' weight='5.35837e-06' id='584'>clear</font><font color='#0000ff' weight='5.35837e-06' id='586'>()</font></font>;</font>
+	    }</font></font>
+	    </font><font color='#0005ff' weight='0.00559414' id='623'><font color='#0000ff' weight='0.000964506' id='604'>System<font color='#0000ff' weight='1.92901e-05' id='597'>.</font><font color='#0000ff' weight='1.92901e-05' id='599'>out</font><font color='#0000ff' weight='1.92901e-05' id='601'>.</font><font color='#0000ff' weight='1.92901e-05' id='603'>println</font></font><font color='#0001ff' weight='0.00163966' id='622'>(<font color='#0000ff' weight='0.00072338' id='620'><font color='#0000ff' weight='0.000675154' id='619'><font color='#0000ff' weight='0.000626929' id='618'><font color='#0000ff' weight='0.000144676' id='611'><font color='#0000ff' weight='8.03755e-06' id='606'>Arrays</font><font color='#0000ff' weight='8.03755e-06' id='608'>.</font><font color='#0000ff' weight='8.03755e-06' id='610'>toString</font></font><font color='#0000ff' weight='0.000120563' id='617'>(<font color='#0000ff' weight='3.6169e-05' id='615'><font color='#0000ff' weight='2.41127e-05' id='614'><font color='#0000ff' weight='1.20563e-05' id='613'>input</font></font>)</font></font></font></font>)</font></font></font>;
+	    
+	    <font color='#0003ff' weight='0.00308642' id='635'><font color='#0001ff' weight='0.00115741' id='633'><font color='#0000ff' weight='6.43004e-05' id='628'>placement </font><font color='#0000ff' weight='6.43004e-05' id='630'>*= </font><font color='#0000ff' weight='6.43004e-05' id='632'>RADIX</font>;</font>
+	  }</font></font>
+}
+}
+</font>
+</pre>

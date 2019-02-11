@@ -1,0 +1,79 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+   public static void mergeSort(int[] arr) {
+      if (arr.length &gt; 1) {
+         int[] left = leftHalf(arr);
+         int[] right = rightHalf(arr);
+
+         mergeSort(left);
+         mergeSort(right);
+
+         mergeArrays(arr, left, right);
+      }
+   }
+
+   public static int[] leftHalf(int[] arr) {
+      int size = arr.length / 2;
+      int[] left = new int[size];
+      for (int i = 0; i &lt; size; i++) {
+         left[i] = arr[i];
+      }
+      return left;
+   }
+
+   public static int[] rightHalf(int[] arr) {
+      int size1 = arr.length / 2;
+      int size2 = arr.length - size1;
+      int[] right = new int[size2];
+      for (int i = 0; i &lt; size2; i++) {
+         right[i] = arr[i + size1];
+      }
+      return right;
+   }
+
+   public static void mergeArrays(int[] arr, int[] left, int[] right) {
+      int i1 = 0;
+      int i2 = 0;
+
+      for (int i = 0; i &lt; arr.length; i++) {
+         if (i2 &gt;= right.length || (i1 &lt; left.length &amp;&amp; left[i1] &lt;= right[i2])) {
+            arr[i] = left[i1];
+            i1++;
+         } else {
+            arr[i] = right[i2];
+            i2++;
+         }
+      }
+   }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void bucketSort(int[] a) <font color='#ff0000' weight='1' id='397'>{
+        int <font color='#0000ff' weight='5.55556e-05' id='26'>n </font>= <font color='#0000ff' weight='1.85185e-05' id='28'>a</font>.length;
+        
+        <font color='#0000ff' weight='0.000722222' id='52'><font color='#0000ff' weight='2.77778e-05' id='40'>List</font><font color='#0000ff' weight='0.000277778' id='51'>&lt;<font color='#0000ff' weight='0.000111111' id='49'><font color='#0000ff' weight='9.72222e-05' id='48'><font color='#0000ff' weight='6.94444e-06' id='42'>List</font><font color='#0000ff' weight='2.77778e-05' id='47'>&lt;<font color='#0000ff' weight='6.94444e-06' id='45'><font color='#0000ff' weight='3.47222e-06' id='44'>Integer</font>&gt;</font></font></font>&gt;</font></font></font> <font color='#0000ff' weight='5.55556e-05' id='55'>bucket </font>= new <font color='#0000ff' weight='0.000194444' id='65'><font color='#0000ff' weight='5.55556e-05' id='62'><font color='#0000ff' weight='6.94444e-06' id='59'>ArrayList</font><font color='#0000ff' weight='6.94444e-06' id='61'>&lt;&gt;</font></font><font color='#0000ff' weight='1.38889e-05' id='64'>()</font></font>;
+        
+        for (int i = 0; i &lt; <font color='#0000ff' weight='6.94444e-06' id='88'>n</font>; i++) <font color='#0004ff' weight='0.00433333' id='126'>{
+            <font color='#0000ff' weight='0.000875' id='121'><font color='#0000ff' weight='0.000125' id='106'><font color='#0000ff' weight='6.94444e-06' id='101'>bucket</font><font color='#0000ff' weight='6.94444e-06' id='103'>.</font><font color='#0000ff' weight='6.94444e-06' id='105'>add</font></font><font color='#0000ff' weight='0.000270833' id='120'>(<font color='#0000ff' weight='0.000114583' id='118'><font color='#0000ff' weight='0.000104167' id='117'><font color='#0000ff' weight='5.20833e-06' id='108'>new </font><font color='#0000ff' weight='3.64583e-05' id='116'><font color='#0000ff' weight='1.04167e-05' id='113'><font color='#0000ff' weight='1.30208e-06' id='110'>ArrayList</font><font color='#0000ff' weight='1.30208e-06' id='112'>&lt;&gt;</font></font><font color='#0000ff' weight='2.60417e-06' id='115'>()</font></font></font>)</font></font></font>;
+        }</font>
+
+        
+        <font color='#0018ff' weight='0.024' id='200'>for <font color='#0004ff' weight='0.00466667' id='156'>(<font color='#0000ff' weight='0.000458333' id='139'><font color='#0000ff' weight='0.0001875' id='137'><font color='#0000ff' weight='1.38889e-05' id='130'><font color='#0000ff' weight='6.94444e-06' id='129'>int</font> </font><font color='#0000ff' weight='6.94444e-06' id='132'>i </font><font color='#0000ff' weight='2.08333e-05' id='136'>= <font color='#0000ff' weight='1.38889e-05' id='135'><font color='#0000ff' weight='6.94444e-06' id='134'>0</font></font></font>;</font> </font><font color='#0000ff' weight='0.000333333' id='148'><font color='#0000ff' weight='0.000125' id='146'><font color='#0000ff' weight='6.94444e-06' id='141'>i </font><font color='#0000ff' weight='6.94444e-06' id='143'>&lt; </font><font color='#0000ff' weight='6.94444e-06' id='145'>n</font>;</font> </font><font color='#0000ff' weight='0.000208333' id='154'><font color='#0000ff' weight='0.000166667' id='153'><font color='#0000ff' weight='2.08333e-05' id='150'>i</font><font color='#0000ff' weight='2.08333e-05' id='152'>++</font></font>)</font> </font><font color='#0007ff' weight='0.007' id='199'>{
+            <font color='#0003ff' weight='0.00333333' id='197'><font color='#0001ff' weight='0.00158333' id='195'><font color='#0000ff' weight='0.000277778' id='177'><font color='#0000ff' weight='4.16667e-05' id='163'><font color='#0000ff' weight='2.31481e-06' id='158'>bucket</font>.<font color='#0000ff' weight='2.31481e-06' id='162'>get</font></font><font color='#0000ff' weight='8.33333e-05' id='176'>(<font color='#0000ff' weight='3.47222e-05' id='174'><font color='#0000ff' weight='3.125e-05' id='173'><font color='#0000ff' weight='2.77778e-05' id='172'><font color='#0000ff' weight='1.73611e-06' id='165'>f</font><font color='#0000ff' weight='8.68055e-06' id='171'>(<font color='#0000ff' weight='2.60417e-06' id='169'><font color='#0000ff' weight='1.73611e-06' id='168'><font color='#0000ff' weight='8.68055e-07' id='167'>i</font></font>)</font></font></font></font>)</font></font></font><font color='#0000ff' weight='1.38889e-05' id='179'>.</font><font color='#0000ff' weight='0.000194444' id='194'><font color='#0000ff' weight='6.94444e-06' id='181'>add</font><font color='#0000ff' weight='7.63889e-05' id='193'>(<font color='#0000ff' weight='3.125e-05' id='191'><font color='#0000ff' weight='2.77778e-05' id='190'><font color='#0000ff' weight='1.73611e-06' id='183'>a</font>[<font color='#0000ff' weight='8.68056e-07' id='185'>i</font>]</font>)</font></font></font>;</font>
+        }</font></font>
+
+        
+        </font><font color='#0020ff' weight='0.0323333' id='298'>for (int i = 0; i &lt; <font color='#0000ff' weight='6.25e-05' id='226'><font color='#0000ff' weight='2.08333e-05' id='223'><font color='#0000ff' weight='1.15741e-06' id='218'>bucket</font><font color='#0000ff' weight='1.15741e-06' id='220'>.</font><font color='#0000ff' weight='1.15741e-06' id='222'>size</font></font><font color='#0000ff' weight='3.47222e-06' id='225'>()</font></font>; i++) <font color='#000aff' weight='0.00983333' id='297'>{
+            <font color='#0004ff' weight='0.00475' id='295'>if <font color='#0001ff' weight='0.00104167' id='263'>(<font color='#0000ff' weight='0.000479167' id='261'><font color='#0000ff' weight='5.20833e-06' id='239'>!</font><font color='#0000ff' weight='6.77083e-05' id='253'><font color='#0000ff' weight='1.5625e-05' id='246'><font color='#0000ff' weight='8.68055e-07' id='241'>bucket</font><font color='#0000ff' weight='8.68055e-07' id='243'>.</font><font color='#0000ff' weight='8.68055e-07' id='245'>get</font></font><font color='#0000ff' weight='1.30208e-05' id='252'>(<font color='#0000ff' weight='3.90625e-06' id='250'><font color='#0000ff' weight='2.60417e-06' id='249'><font color='#0000ff' weight='1.30208e-06' id='248'>i</font></font>)</font></font></font><font color='#0000ff' weight='5.20833e-06' id='255'>.</font><font color='#0000ff' weight='2.08333e-05' id='260'><font color='#0000ff' weight='2.60417e-06' id='257'>isEmpty</font><font color='#0000ff' weight='2.60417e-06' id='259'>()</font></font>)</font></font><font color='#0001ff' weight='0.00125' id='294'>
+                <font color='#0001ff' weight='0.00120833' id='293'><font color='#0001ff' weight='0.00116667' id='292'><font color='#0000ff' weight='0.000541667' id='290'><font color='#0000ff' weight='0.000520833' id='289'><font color='#0000ff' weight='6.25e-05' id='270'><font color='#0000ff' weight='3.47222e-06' id='265'>Collections</font><font color='#0000ff' weight='3.47222e-06' id='267'>.</font><font color='#0000ff' weight='3.47222e-06' id='269'>sort</font></font><font color='#0000ff' weight='0.000177083' id='288'>(<font color='#0000ff' weight='7.8125e-05' id='286'><font color='#0000ff' weight='7.29167e-05' id='285'><font color='#0000ff' weight='6.77083e-05' id='284'><font color='#0000ff' weight='1.5625e-05' id='277'><font color='#0000ff' weight='8.68055e-07' id='272'>bucket</font><font color='#0000ff' weight='8.68055e-07' id='274'>.</font><font color='#0000ff' weight='8.68055e-07' id='276'>get</font></font><font color='#0000ff' weight='1.30208e-05' id='283'>(<font color='#0000ff' weight='3.90625e-06' id='281'><font color='#0000ff' weight='2.60417e-06' id='280'><font color='#0000ff' weight='1.30208e-06' id='279'>i</font></font>)</font></font></font></font>)</font></font></font>;</font></font></font></font> 
+        }</font></font>
+
+        
+        </font>int <font color='#0000ff' weight='5.55556e-05' id='303'>k </font>= 0;
+        for (int i = 0; i &lt; <font color='#0000ff' weight='6.25e-05' id='336'><font color='#0000ff' weight='2.08333e-05' id='333'><font color='#0000ff' weight='1.15741e-06' id='328'>bucket</font>.<font color='#0000ff' weight='1.15741e-06' id='332'>size</font></font><font color='#0000ff' weight='3.47222e-06' id='335'>()</font></font>; i++) <font color='#0007ff' weight='0.00766667' id='394'>{
+            <font color='#0003ff' weight='0.00366667' id='392'>for <font color='#0001ff' weight='0.001' id='372'>(<font color='#0000ff' weight='0.000458333' id='370'><font color='#0000ff' weight='0.0004375' id='369'><font color='#0000ff' weight='1.38889e-05' id='350'><font color='#0000ff' weight='6.94444e-06' id='349'>int</font> </font><font color='#0000ff' weight='6.94444e-06' id='352'>item </font><font color='#0000ff' weight='0.000104167' id='368'>: <font color='#0000ff' weight='9.72222e-05' id='367'><font color='#0000ff' weight='9.02778e-05' id='366'><font color='#0000ff' weight='2.08333e-05' id='359'><font color='#0000ff' weight='1.15741e-06' id='354'>bucket</font>.<font color='#0000ff' weight='1.15741e-06' id='358'>get</font></font><font color='#0000ff' weight='1.73611e-05' id='365'>(<font color='#0000ff' weight='5.20833e-06' id='363'><font color='#0000ff' weight='3.47222e-06' id='362'>i</font>)</font></font></font></font></font></font>)</font> </font><font color='#0000ff' weight='0.00075' id='391'>{
+                <font color='#0000ff' weight='0.000145833' id='387'><font color='#0000ff' weight='1.73611e-06' id='374'>a</font>[<font color='#0000ff' weight='4.34028e-07' id='376'>k</font><font color='#0000ff' weight='4.34028e-07' id='378'>++</font>] = <font color='#0000ff' weight='3.47222e-06' id='386'>item</font>;</font>
+            }</font>
+        }</font></font>
+    }</font></font>
+</pre>

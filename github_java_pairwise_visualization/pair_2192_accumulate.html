@@ -1,0 +1,58 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static void sort(long[] valuesArray, int[] gapsArray) throws SortException {
+
+        if(gapsArray.length == 0) throw new EmptyArrayException("Gaps array can not by empty");
+
+        int endGap = gapsArray[gapsArray.length-1];
+        if(endGap != 1) throw new InvalidGapSequenceException("Gaps sequence must end with 1");
+
+
+        int valuesArraySize = valuesArray.length;
+
+        for (int gap : gapsArray) {
+
+            for (int i = gap; i &lt; valuesArraySize; i++) {
+
+                long value = valuesArray[i];
+                int j = i;
+
+                while (j &gt;= gap &amp;&amp; valuesArray[j - gap] &gt; value) {
+                    valuesArray[j] = valuesArray[j - gap];
+                    j -= gap;
+                }
+
+                valuesArray[j] = value;
+            }
+        }
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ private void setSort(int[] input ){
+        for (int sq = 1; sq &lt; input.length; sq += sq){
+            for (int j =0;j&lt;input.length-sq;j += sq*2){
+                setMergeSort(input,j,j+sq-1,Math.min(j+sq+sq,input.length-1));
+            }
+        }
+    }
+    private void setMergeSort(int[] input,int start,int mid , int end){
+        int[] tem = new int[input.length];
+
+       for ( int i = start; i &lt;= end ; i ++){
+           tem[i] = input[i];
+       }
+        int i= start,j=mid +1;
+       for (int h = start;h&lt;= end;h++){
+           <font color='#ff0000' weight='1' id='518'>if <font color='#ff0000' weight='1' id='356'>(<font color='#ff0000' weight='1' id='354'><font color='#ff0000' weight='1' id='349'>i </font><font color='#ff0000' weight='1' id='351'>&gt;<font color='#ff0000' weight='1' id='350'></font> </font><font color='#ff0000' weight='1' id='353'>mid</font>)</font><font color='#ff0000' weight='1' id='355'></font></font><font color='#ff0000' weight='1' id='382'><font color='#ff0000' weight='1' id='381'>{
+               <font color='#ff0000' weight='1' id='379'><font color='#ff0000' weight='1' id='377'>input[h] <font color='#ff0000' weight='1' id='366'>=<font color='#ff0000' weight='1' id='365'></font> </font><font color='#ff0000' weight='1' id='376'><font color='#ff0000' weight='1' id='368'>tem</font><font color='#ff0000' weight='1' id='375'>[<font color='#ff0000' weight='1' id='373'><font color='#ff0000' weight='1' id='370'>j</font><font color='#ff0000' weight='1' id='372'>++<font color='#ff0000' weight='1' id='371'></font></font>]</font><font color='#ff0000' weight='1' id='374'></font></font></font>;</font><font color='#ff0000' weight='1' id='378'></font>
+           }</font><font color='#ff0000' weight='1' id='380'></font></font></font><font color='#ff0000' weight='1' id='419'>else <font color='#ff0000' weight='1' id='418'>if<font color='#ff0000' weight='1' id='391'>(<font color='#ff0000' weight='1' id='389'>j &gt; end)</font><font color='#ff0000' weight='1' id='390'></font></font><font color='#ff0000' weight='1' id='417'><font color='#ff0000' weight='1' id='416'>{
+               <font color='#ff0000' weight='1' id='414'><font color='#ff0000' weight='1' id='412'><font color='#ff0000' weight='1' id='399'><font color='#ff0000' weight='1' id='393'>input<font color='#ff0000' weight='1' id='392'></font></font><font color='#ff0000' weight='1' id='398'>[<font color='#ff0000' weight='1' id='396'><font color='#ff0000' weight='1' id='395'>h<font color='#ff0000' weight='1' id='394'></font></font>]</font><font color='#ff0000' weight='1' id='397'></font></font> </font>= tem[i++];</font><font color='#ff0000' weight='1' id='413'></font>
+           }</font><font color='#ff0000' weight='1' id='415'></font></font></font></font> </font><font color='#ff0000' weight='1' id='468'>else <font color='#ff0000' weight='1' id='467'>if <font color='#ff0000' weight='1' id='440'>(<font color='#ff0000' weight='1' id='438'><font color='#ff0000' weight='1' id='427'><font color='#ff0000' weight='1' id='421'>tem<font color='#ff0000' weight='1' id='420'></font></font><font color='#ff0000' weight='1' id='426'>[<font color='#ff0000' weight='1' id='424'><font color='#ff0000' weight='1' id='423'>i<font color='#ff0000' weight='1' id='422'></font></font>]</font><font color='#ff0000' weight='1' id='425'></font></font> </font><font color='#ff0000' weight='1' id='429'>&lt; </font><font color='#ff0000' weight='1' id='437'><font color='#ff0000' weight='1' id='431'>tem</font><font color='#ff0000' weight='1' id='436'>[<font color='#ff0000' weight='1' id='434'><font color='#ff0000' weight='1' id='433'>j<font color='#ff0000' weight='1' id='432'></font></font>]</font><font color='#ff0000' weight='1' id='435'></font></font></font>)</font><font color='#ff0000' weight='1' id='439'></font></font><font color='#ff0000' weight='1' id='466'><font color='#ff0000' weight='1' id='465'>{
+               input[h] = tem[i++];
+           }<font color='#ff0000' weight='1' id='464'></font></font></font></font></font><font color='#ff0000' weight='1' id='517'>else <font color='#ff0000' weight='1' id='516'>if <font color='#ff0000' weight='1' id='489'>(<font color='#ff0000' weight='1' id='487'><font color='#ff0000' weight='1' id='476'><font color='#ff0000' weight='1' id='470'>tem</font><font color='#ff0000' weight='1' id='475'>[<font color='#ff0000' weight='1' id='473'><font color='#ff0000' weight='1' id='472'>i<font color='#ff0000' weight='1' id='471'></font></font>]</font><font color='#ff0000' weight='1' id='474'></font></font> </font><font color='#ff0000' weight='1' id='478'>&gt; </font><font color='#ff0000' weight='1' id='486'><font color='#ff0000' weight='1' id='480'>tem</font><font color='#ff0000' weight='1' id='485'>[<font color='#ff0000' weight='1' id='483'><font color='#ff0000' weight='1' id='482'>j<font color='#ff0000' weight='1' id='481'></font></font>]</font><font color='#ff0000' weight='1' id='484'></font></font></font>)</font><font color='#ff0000' weight='1' id='488'></font></font><font color='#ff0000' weight='1' id='515'><font color='#ff0000' weight='1' id='514'>{
+               input[h] = <font color='#ff0000' weight='1' id='509'><font color='#ff0000' weight='1' id='501'>tem</font><font color='#ff0000' weight='1' id='508'>[<font color='#ff0000' weight='1' id='506'><font color='#ff0000' weight='1' id='503'>j<font color='#ff0000' weight='1' id='502'></font></font><font color='#ff0000' weight='1' id='505'>++<font color='#ff0000' weight='1' id='504'></font></font>]</font><font color='#ff0000' weight='1' id='507'></font></font></font>;
+           }</font></font></font></font>
+       }</font>
+    }</font>
+</pre>

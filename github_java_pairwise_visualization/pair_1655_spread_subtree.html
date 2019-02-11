@@ -1,0 +1,101 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static int[] sortiereIterativ(int[] a) {
+        
+        <font color='#0000ff' weight='0.00025025' id='27'><font color='#0000ff' weight='0.000125125' id='26'>int</font> </font><font color='#0000ff' weight='0.000125125' id='29'>i </font>= <font color='#0000ff' weight='0.00025025' id='32'><font color='#0000ff' weight='0.000125125' id='31'>0</font></font>;
+        <font color='#0003ff' weight='0.00337838' id='46'><font color='#0000ff' weight='0.00025025' id='39'><font color='#0000ff' weight='0.000125125' id='38'>int</font> </font><font color='#0000ff' weight='0.000125125' id='41'>position </font><font color='#0000ff' weight='0.000375375' id='45'>= <font color='#0000ff' weight='0.00025025' id='44'><font color='#0000ff' weight='0.000125125' id='43'>0</font></font></font>;</font>
+        
+        for (<font color='#0000ff' weight='3.12813e-05' id='51'><font color='#0000ff' weight='1.56406e-05' id='50'>int</font> </font>sortiert = 0; sortiert &lt; a.length; sortiert++) {
+            
+            
+            <font color='#0000ff' weight='0.000429' id='91'><font color='#0000ff' weight='0.000160875' id='89'>i = <font color='#0000ff' weight='8.93751e-06' id='88'>sortiert</font>;</font>
+            </font><font color='#0000ff' weight='0.000429' id='100'><font color='#0000ff' weight='0.000160875' id='98'><font color='#0000ff' weight='8.93751e-06' id='93'>position </font>= sortiert;</font>
+            
+            
+            </font><font color='#0003ff' weight='0.003003' id='157'>while (i &lt; a.length) <font color='#0001ff' weight='0.00109931' id='156'>{
+                if (a[<font color='#0000ff' weight='1.86198e-07' id='118'>i</font>] &lt; a[<font color='#0000ff' weight='1.86198e-07' id='128'>position</font>]) position = i;
+                <font color='#0000ff' weight='5.3625e-05' id='154'><font color='#0000ff' weight='1.7875e-05' id='152'>i++;</font>
+            }</font></font>
+            
+            
+            </font><font color='#0001ff' weight='0.0010725' id='178'><font color='#0000ff' weight='6.25626e-05' id='165'><font color='#0000ff' weight='4.46875e-06' id='159'>a</font>[<font color='#0000ff' weight='4.46875e-06' id='162'><font color='#0000ff' weight='2.23438e-06' id='161'>0</font>]</font> </font>= <font color='#0000ff' weight='6.25626e-05' id='175'>a<font color='#0000ff' weight='1.7875e-05' id='174'>[sortiert]</font></font>;
+            </font><font color='#0001ff' weight='0.0010725' id='199'><font color='#0000ff' weight='4.46875e-06' id='180'>a</font><font color='#0000ff' weight='1.7875e-05' id='185'>[<font color='#0000ff' weight='2.23438e-06' id='182'>sortiert</font>]</font> <font color='#0000ff' weight='8.93751e-06' id='188'>= </font>a[position];
+            </font>a[position] <font color='#0000ff' weight='8.93751e-06' id='209'>= </font>a[0]; 
+        }
+        
+        <font color='#000cff' weight='0.012012' id='240'>a[<font color='#0000ff' weight='2.3461e-05' id='227'>0</font>] = -1;
+        
+        </font>return a;
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+package PukyungUniv;
+
+import static org.junit.Assert.assertEquals;
+
+import java.util.Arrays;
+
+import org.junit.Test;
+
+public class Sort_HeapSort {
+
+    private static int getLeftChildIdx(int parent) {
+        return (parent + 1) * 2 - 1;
+    }
+
+    private int getParentIdx(int child) {
+        if (child &lt; 1) {
+            return -1;
+        } else {
+            return (child + 1) / 2 - 1;
+        }
+    }
+
+    private static void maxHeapify(int[] data, int i, int end) {
+        int leftChild = getLeftChildIdx(i);
+        while (leftChild &lt;= end) {
+            int largeChild;
+            if (leftChild == end) {
+                largeChild = leftChild;
+            } else {
+                largeChild = data[leftChild] &gt; data[leftChild + 1] ? leftChild : leftChild + 1;
+            }
+            if (data[i] &gt;= data[largeChild]) {
+                return;
+            }
+            swap(data, i, largeChild);
+            i = largeChild;
+            leftChild = getLeftChildIdx(i);
+        }
+    }
+
+    private static void swap(int[] data, int i, int j) {
+        int t = data[i];
+        data[i] = data[j];
+        data[j] = t;
+    }
+
+    public static void sort(int[] data) {
+        makeHeap(data);
+        sortFromHeap(data);
+    }
+
+    private static void makeHeap(int[] data) {
+        for (int i = data.length / 2 - 1; i &gt;= 0; i--) {
+            maxHeapify(data, i, data.length - 1);
+        }
+    }
+
+    private static void sortFromHeap(int[] data) {
+        int last = data.length - 1;
+        while (last &gt; 0) {
+            swap(data, 0, last);
+            last--;
+            maxHeapify(data, 0, last);
+        }
+    }
+
+}
+</font>
+</pre>

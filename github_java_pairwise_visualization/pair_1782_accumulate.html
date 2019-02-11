@@ -1,0 +1,51 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public void topSort(Graph g) {
+        initDfs(g);
+        for (int i = 1; i &lt;= g.numV; i++) <font color='#ff0000' weight='1' id='107'>{
+            if (!mDiscovered[i<font color='#ff0000' weight='1' id='67'></font>]<font color='#ff0000' weight='1' id='70'></font>) {
+                <font color='#ff0000' weight='1' id='88'>idfs(<font color='#ff0000' weight='1' id='81'><font color='#ff0000' weight='1' id='80'><font color='#ff0000' weight='1' id='79'>i</font></font>, </font><font color='#ff0000' weight='1' id='84'>g</font>)</font>;
+            }
+            if (mFinished) return;
+        }</font>
+        while (mSorted.size() &gt; 0) {
+            out(mSorted.pop() + " ");
+        }
+        outln("");
+    }
+
+    </font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public void sort(int a[]) {
+
+        if(a == null || a.length &lt;= 1) {
+            return;
+        }
+
+        insertNumberAtIndexInSortedArray(a, 1);
+    }
+
+    private void insertNumberAtIndexInSortedArray(int a[], int index) {
+
+        if (index == a.length) {
+            return;
+        }
+
+        int number = a[index];
+        int i;
+        for (i=index-1; i &gt;= 0; i--) {
+            if (number &lt; a[i]) {
+                a[i+1] = a[i];
+            } else {
+                break;
+            }
+        }
+
+        a[i+1] = number;
+
+        insertNumberAtIndexInSortedArray(a, index+1);
+    }
+</font>
+</pre>

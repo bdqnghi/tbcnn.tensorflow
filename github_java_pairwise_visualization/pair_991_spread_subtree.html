@@ -1,0 +1,38 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+  <font color='#ff0500' weight='0.994924' id='197'>public <font color='#0000ff' weight='0.000846024' id='4'>static </font><font color='#0004ff' weight='0.00423012' id='10'>int[] </font><font color='#0000ff' weight='0.000846024' id='12'>doInsertionSort</font><font color='#0009ff' weight='0.00930626' id='24'>(<font color='#0003ff' weight='0.00380711' id='22'><font color='#0003ff' weight='0.00338409' id='21'><font color='#0001ff' weight='0.00105753' id='18'><font color='#0000ff' weight='0.000846024' id='17'>int[]</font> </font>input</font>)</font></font><font color='#0093ff' weight='0.14467' id='196'>{
+         
+        <font color='#0000ff' weight='0.000528765' id='30'><font color='#0000ff' weight='5.28765e-05' id='26'>int</font> temp;</font>
+        <font color='#0021ff' weight='0.0329949' id='189'>for <font color='#0003ff' weight='0.00348985' id='66'>(<font color='#0000ff' weight='8.81275e-06' id='35'><font color='#0000ff' weight='4.40637e-06' id='34'>int</font> </font>i = 1; i &lt; <font color='#0000ff' weight='1.46879e-06' id='50'>input</font>.length; i++) </font><font color='#000dff' weight='0.0127961' id='188'>{
+            <font color='#0006ff' weight='0.0062923' id='186'>for(<font color='#0000ff' weight='2.20319e-06' id='69'>int </font>j <font color='#0000ff' weight='3.30478e-06' id='75'>= <font color='#0000ff' weight='2.20319e-06' id='74'>i</font></font> ; <font color='#0000ff' weight='1.98287e-05' id='85'>j &gt; 0 ;</font> j--)<font color='#0002ff' weight='0.002353' id='185'>{
+                <font color='#0001ff' weight='0.00115006' id='183'>if(<font color='#0000ff' weight='7.71115e-06' id='103'>input[j] </font><font color='#0000ff' weight='1.10159e-06' id='105'>&lt; </font><font color='#0000ff' weight='1.21175e-05' id='117'>input[j-1]</font>)<font color='#0000ff' weight='0.000403183' id='182'><font color='#0000ff' weight='0.000396574' id='181'>{
+                    <font color='#0000ff' weight='2.75398e-07' id='122'>temp </font>= <font color='#0000ff' weight='1.37699e-07' id='126'>input</font><font color='#0000ff' weight='5.50797e-07' id='131'>[j]</font>;
+                    <font color='#0000ff' weight='3.96574e-05' id='160'><font color='#0000ff' weight='1.81763e-05' id='158'><font color='#0000ff' weight='1.37699e-07' id='137'>input</font>[<font color='#0000ff' weight='1.37699e-07' id='140'><font color='#0000ff' weight='6.88496e-08' id='139'>j</font>]</font> = <font color='#0000ff' weight='3.02938e-06' id='157'><font color='#0000ff' weight='1.37699e-07' id='147'>input</font><font color='#0000ff' weight='1.10159e-06' id='156'>[<font color='#0000ff' weight='4.13097e-07' id='154'><font color='#0000ff' weight='2.29499e-08' id='149'>j</font><font color='#0000ff' weight='2.29499e-08' id='151'>-</font><font color='#0000ff' weight='2.29499e-08' id='153'>1</font>]</font></font></font>;</font>
+                    </font><font color='#0000ff' weight='2.9743e-05' id='179'><font color='#0000ff' weight='1.37699e-07' id='162'>input</font><font color='#0000ff' weight='1.10159e-06' id='171'>[<font color='#0000ff' weight='4.13098e-07' id='169'><font color='#0000ff' weight='2.29499e-08' id='164'>j</font><font color='#0000ff' weight='2.29499e-08' id='166'>-</font><font color='#0000ff' weight='2.29499e-08' id='168'>1</font>]</font></font> <font color='#0000ff' weight='2.75398e-07' id='174'>= </font>temp;
+                }</font></font></font>
+            }</font></font>
+        }</font></font>
+        </font><font color='#0000ff' weight='0.000846024' id='194'>return <font color='#0000ff' weight='0.000211506' id='192'><font color='#0000ff' weight='0.000105753' id='191'>input</font>;</font>
+    }</font></font></font></font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+    public static void insertionSort() {
+        int ii = 0, jj = 0;
+        for (ii = 1; ii &lt; InsertionSort.ITEMS.length; ii++) {
+            jj = ii;
+            while ((jj &gt; 0)
+                    &amp;&amp; (InsertionSort.ITEMS[jj] &lt; InsertionSort<font color='#0010ff' weight='0.0166667' id='107'>.</font><font color='#0010ff' weight='0.0166667' id='109'>ITEMS</font>[jj - 1])) {
+                swap(jj, jj - 1);
+                jj -= 1;
+            }
+        }
+    }
+
+    public static void swap(final int ii, final int jj) {
+        final int temp = InsertionSort.ITEMS[ii];
+        InsertionSort.ITEMS[ii] = InsertionSort.ITEMS[jj];
+        InsertionSort.ITEMS[jj] = temp;
+    }</font>
+</pre>

@@ -1,0 +1,56 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+<font color='#ff0000' weight='1' id='258'>    <font color='#ff0300' weight='0.996109' id='257'>public void sort(<font color='#0000ff' weight='0.00077821' id='12'>Comparable[]</font> a) <font color='#00bbff' weight='0.183658' id='256'>{
+        <font color='#0000ff' weight='4.32339e-05' id='22'><font color='#0000ff' weight='2.16169e-05' id='21'>int</font> </font>N = a.length;
+        <font color='#0001ff' weight='0.00142672' id='48'>int h <font color='#0000ff' weight='6.48509e-05' id='45'>= 1</font>;
+        </font><font color='#0004ff' weight='0.00402075' id='80'>while (h &lt; N / 3)
+            h = h * 3 + 1;
+        </font><font color='#0013ff' weight='0.0191958' id='229'>while (<font color='#0000ff' weight='0.000194553' id='87'>h <font color='#0000ff' weight='1.08085e-05' id='84'>&gt;= </font><font color='#0000ff' weight='1.08085e-05' id='86'>1</font>)</font> <font color='#0009ff' weight='0.00894942' id='228'>{
+            <font color='#0002ff' weight='0.00274535' id='217'>for (<font color='#0000ff' weight='9.00706e-07' id='92'>int </font>i = 0; i &lt; N; <font color='#0000ff' weight='1.35106e-06' id='112'>i</font>++) <font color='#0001ff' weight='0.00104842' id='216'>{
+                <font color='#0000ff' weight='2.16169e-05' id='125'><font color='#0000ff' weight='7.20565e-06' id='123'>count++;</font>
+                </font>for (<font color='#0000ff' weight='2.02659e-06' id='135'>int j = i;</font> <font color='#0000ff' weight='8.33153e-06' id='175'><font color='#0000ff' weight='4.50353e-08' id='139'>j </font><font color='#0000ff' weight='4.50353e-08' id='141'>&gt;= </font><font color='#0000ff' weight='4.50353e-08' id='143'>h </font>&amp;&amp; less(<font color='#0000ff' weight='6.7553e-08' id='157'><font color='#0000ff' weight='5.25412e-08' id='155'><font color='#0000ff' weight='3.75294e-09' id='149'>a</font>[j]</font>, </font>a[j - h]);</font> j -= h) {
+                    <font color='#0000ff' weight='2.07162e-05' id='211'>exch(a, j, j - h);
+                }</font>
+            }</font>
+            </font><font color='#0000ff' weight='0.000172936' id='226'>h <font color='#0000ff' weight='3.60282e-06' id='221'>/= </font><font color='#0000ff' weight='3.60282e-06' id='223'>3</font>;
+        }</font></font>
+        </font><font color='#0003ff' weight='0.00311284' id='254'><font color='#0001ff' weight='0.00142672' id='252'><font color='#0001ff' weight='0.00136187' id='251'><font color='#0000ff' weight='0.000324254' id='240'><font color='#0000ff' weight='6.48508e-06' id='231'>System</font><font color='#0000ff' weight='6.48508e-06' id='233'>.</font><font color='#0000ff' weight='6.48508e-06' id='235'>out</font><font color='#0000ff' weight='6.48508e-06' id='237'>.</font><font color='#0000ff' weight='6.48508e-06' id='239'>println</font></font><font color='#0000ff' weight='0.000291829' id='250'>(<font color='#0000ff' weight='0.000113489' id='248'><font color='#0000ff' weight='9.72763e-05' id='247'><font color='#0000ff' weight='5.40424e-06' id='242'>count </font><font color='#0000ff' weight='5.40424e-06' id='244'>/ </font><font color='#0000ff' weight='5.40424e-06' id='246'>N</font></font>)</font></font></font>;</font>
+    }</font></font></font></font></font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public int[] sort(int num[]) {
+        
+        int h = 1;
+        
+        while (h &lt; num.length / 3)
+            h = h * 3 + 1;
+        for (<font color='#ff0000' weight='1' id='73'>; </font>h &gt; 0; h /= 3) {
+            
+            for (int k = 0; k &lt; h; k++) {
+                
+                for (int i = h + k; i &lt; num.length; i += h) {
+                    int j = i;
+                    
+                    while (j &gt;= h &amp;&amp; num[j] &lt; num[j - h]) {
+                        swap(num, j, j - h);
+                        j -= h;
+                    }
+
+                }
+            }
+        }
+
+        return num;
+    }
+
+    
+    private void swap(int arg[], int i, int j) {
+        
+        if (i != j) {
+            arg[i] = arg[i] ^ arg[j];
+            arg[j] = arg[j] ^ arg[i];
+            arg[i] = arg[j] ^ arg[i];
+        }
+    }</font>
+</pre>

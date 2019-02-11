@@ -1,0 +1,77 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static void sort(long[] valuesArray, int[] gapsArray) throws SortException <font color='#ff0000' weight='1' id='296'>{
+
+        <font color='#ff0000' weight='1' id='67'>if(<font color='#ff0000' weight='1' id='43'>gapsArray<font color='#ff0000' weight='1' id='40'>.</font><font color='#ff0000' weight='1' id='42'>length<font color='#ff0000' weight='1' id='41'></font></font> </font>== 0) throw <font color='#ff0000' weight='1' id='62'>new EmptyArrayException<font color='#ff0000' weight='1' id='53'></font>("Gaps array can not by empty"<font color='#ff0000' weight='1' id='55'></font>);</font>
+
+        </font><font color='#ff0000' weight='1' id='94'>int endGap = gapsArray[gapsArray.length-1];
+        </font>if<font color='#ff0000' weight='1' id='103'>(endGap != <font color='#ff0000' weight='1' id='100'>1</font>)</font> throw new InvalidGapSequenceException("Gaps sequence must end with 1");
+
+
+        <font color='#ff0000' weight='1' id='137'>int <font color='#ff0000' weight='1' id='125'>valuesArraySize </font>= valuesArray.length;
+
+        </font>for <font color='#ff0000' weight='1' id='150'>(<font color='#ff0000' weight='1' id='148'><font color='#ff0000' weight='1' id='140'><font color='#ff0000' weight='1' id='139'>int</font> </font><font color='#ff0000' weight='1' id='142'>gap </font>: <font color='#ff0000' weight='1' id='145'>gapsArray<font color='#ff0000' weight='1' id='143'></font></font>)</font> </font>{
+
+            for <font color='#ff0000' weight='1' id='179'>(int<font color='#ff0000' weight='1' id='151'></font> i<font color='#ff0000' weight='1' id='154'></font> = gap; i &lt; valuesArraySize; <font color='#ff0000' weight='1' id='177'>i++)</font> </font>{
+
+                <font color='#ff0000' weight='1' id='197'><font color='#ff0000' weight='1' id='195'><font color='#ff0000' weight='1' id='181'>long</font> <font color='#ff0000' weight='1' id='184'>value<font color='#ff0000' weight='1' id='183'></font> </font>= <font color='#ff0000' weight='1' id='193'><font color='#ff0000' weight='1' id='192'>valuesArray<font color='#ff0000' weight='1' id='185'></font>[i]</font></font>;</font>
+                </font><font color='#ff0000' weight='1' id='209'><font color='#ff0000' weight='1' id='207'>int <font color='#ff0000' weight='1' id='202'>j<font color='#ff0000' weight='1' id='201'></font> </font>= i;</font>
+
+                </font><font color='#ff0000' weight='1' id='273'>while (<font color='#ff0000' weight='1' id='234'>j &gt;= gap &amp;&amp; valuesArray[j - gap]<font color='#ff0000' weight='1' id='227'></font> &gt; value)</font><font color='#ff0000' weight='1' id='235'></font> {
+                    <font color='#ff0000' weight='1' id='261'><font color='#ff0000' weight='1' id='259'><font color='#ff0000' weight='1' id='244'>valuesArray[j] </font>= <font color='#ff0000' weight='1' id='258'>valuesArray<font color='#ff0000' weight='1' id='257'>[<font color='#ff0000' weight='1' id='255'><font color='#ff0000' weight='1' id='250'>j<font color='#ff0000' weight='1' id='249'></font> </font>-<font color='#ff0000' weight='1' id='251'></font> <font color='#ff0000' weight='1' id='254'>gap</font>]</font><font color='#ff0000' weight='1' id='256'></font></font></font>;</font><font color='#ff0000' weight='1' id='260'></font>
+                    </font><font color='#ff0000' weight='1' id='270'><font color='#ff0000' weight='1' id='263'>j<font color='#ff0000' weight='1' id='262'></font> </font>-=<font color='#ff0000' weight='1' id='264'></font> gap<font color='#ff0000' weight='1' id='266'></font>;<font color='#ff0000' weight='1' id='269'></font>
+                }</font><font color='#ff0000' weight='1' id='271'></font>
+
+                </font><font color='#ff0000' weight='1' id='275'>valuesArray<font color='#ff0000' weight='1' id='274'></font></font>[<font color='#ff0000' weight='1' id='278'><font color='#ff0000' weight='1' id='277'>j</font>]</font><font color='#ff0000' weight='1' id='279'></font> <font color='#ff0000' weight='1' id='283'>= </font>value;
+            }
+        }
+    }</font></font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+   public static void mergeSort(int[] arr) {
+      if (arr.length &gt; 1) {
+         int[] left = leftHalf(arr);
+         int[] right = rightHalf(arr);
+
+         mergeSort(left);
+         mergeSort(right);
+
+         mergeArrays(arr, left, right);
+      }
+   }
+
+   public static int[] leftHalf(int[] arr) {
+      int size = arr.length / 2;
+      int[] left = new int[size];
+      for (int i = 0; i &lt; size; i++) {
+         left<font color='#ff0000' weight='1' id='228'></font>[i] = arr[i];
+      }
+      return left;
+   }
+
+   public static int[] rightHalf(int[] arr) {
+      int size1 = arr.length / 2;
+      int size2 = arr.length - size1;
+      int[] right = new int[size2];
+      for (int i = 0; i &lt; size2; i++) {
+         right[i] = arr[i + size1];
+      }
+      return right;
+   }
+
+   public static void mergeArrays(int[] arr, int[] left, int[] right) {
+      int i1 = 0;
+      int i2 = 0;
+
+      for (int i = 0; i &lt; arr.length; i++) {
+         if (i2 &gt;= right.length || (i1 &lt; left.length &amp;&amp; left[i1] &lt;= right[i2])) {
+            arr[i] = left[i1];
+            i1++;
+         } else {
+            arr[i] = right[i2];
+            i2++;
+         }
+      }
+   }</font>
+</pre>

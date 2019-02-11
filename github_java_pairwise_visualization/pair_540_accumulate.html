@@ -1,0 +1,57 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static void quicksort(int[] a, int start, int end) {
+        if (start &gt;= end)
+            return;
+
+        int pavot = a[start];
+        int i = start;
+        int j = end;
+
+        while (i &lt; j) {
+            while (i &lt; <font color='#ff0000' weight='1' id='115'>j<font color='#ff0000' weight='1' id='103'></font> <font color='#ff0000' weight='1' id='106'>&amp;&amp;<font color='#ff0000' weight='1' id='105'></font> </font>a<font color='#ff0000' weight='1' id='107'></font><font color='#ff0000' weight='1' id='113'>[j<font color='#ff0000' weight='1' id='109'></font>]</font> &gt;</font> pavot)
+                j--;
+            while (i &lt; j &amp;&amp; a[i] &lt;= pavot)
+                i++;
+            if (i != j) {
+                int t = a[i];
+                a[i] = a[j];
+                a[j] = t;
+            }
+        }
+        if (i == j) {
+            int t = a[start];
+            a[start] = a[i];
+            a[j] = t;
+        }
+        quicksort(a, start, i - 1);
+        quicksort(a, i + 1, end);
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+   public static void shellSort0(int[] array) {
+     
+        int step;
+        
+        for (step = array.length / 2; step &gt; 0; step /= 2) {
+            
+            for (int i = 0; i &lt; step; i++) {
+                
+                for (int j = i; j &lt; array.length - step; j += step) {
+                    for (int k = j + step; k - step &gt;= 0; k -= step) {
+                        if (array[k - step] &gt; array[k]) {
+                            int temp = array[k - step];
+                            array[k - step] = array[k];
+                            array[k] = <font color='#ff0000' weight='1' id='258'>temp</font>;
+                        } else {
+                            break;
+                        }
+                    }
+                }
+            }
+            SortUtil.logArray(step, array);
+        }
+
+    }</font>
+</pre>

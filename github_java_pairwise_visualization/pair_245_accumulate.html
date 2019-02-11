@@ -1,0 +1,94 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+    public static void sort(int[] a) {
+        
+        shuffleArray(a);
+        sort(a, 0, a.length - 1);
+    }
+
+    private static void sort(int[] a, int lo, int hi) {
+        
+        if(hi &lt;= lo)    return;
+        int j = partition(a, lo, hi);
+        sort(a, lo, j - 1);
+        sort(a, j + 1, hi);
+    }
+
+    private static int partition(int[] a, int lo, int hi) {
+        int i = lo, j = hi + 1;
+        while(true)<font color='#ff0000' weight='1' id='372'>{
+            
+            <font color='#ff0000' weight='1' id='296'>while<font color='#ff0000' weight='1' id='279'>(<font color='#ff0000' weight='1' id='258'>a</font><font color='#ff0000' weight='1' id='263'>[<font color='#ff0000' weight='1' id='261'><font color='#ff0000' weight='1' id='260'>lo<font color='#ff0000' weight='1' id='259'></font></font>]</font></font> <font color='#ff0000' weight='1' id='266'>&gt;<font color='#ff0000' weight='1' id='265'></font> </font><font color='#ff0000' weight='1' id='276'>a<font color='#ff0000' weight='1' id='267'></font><font color='#ff0000' weight='1' id='275'>[<font color='#ff0000' weight='1' id='273'><font color='#ff0000' weight='1' id='270'>++</font>i]</font><font color='#ff0000' weight='1' id='274'></font></font></font>) </font><font color='#ff0000' weight='1' id='295'>{
+                <font color='#ff0000' weight='1' id='293'>if<font color='#ff0000' weight='1' id='288'>(<font color='#ff0000' weight='1' id='281'>i<font color='#ff0000' weight='1' id='280'></font> </font><font color='#ff0000' weight='1' id='283'>== </font><font color='#ff0000' weight='1' id='285'>hi</font>)<font color='#ff0000' weight='1' id='287'></font></font><font color='#ff0000' weight='1' id='292'> <font color='#ff0000' weight='1' id='290'>break;<font color='#ff0000' weight='1' id='289'></font></font></font>
+            }</font><font color='#ff0000' weight='1' id='294'></font></font>
+            
+            </font><font color='#ff0000' weight='1' id='336'>while<font color='#ff0000' weight='1' id='319'>(<font color='#ff0000' weight='1' id='317'><font color='#ff0000' weight='1' id='304'><font color='#ff0000' weight='1' id='298'>a<font color='#ff0000' weight='1' id='297'></font></font><font color='#ff0000' weight='1' id='303'>[<font color='#ff0000' weight='1' id='301'><font color='#ff0000' weight='1' id='300'>lo<font color='#ff0000' weight='1' id='299'></font></font>]</font><font color='#ff0000' weight='1' id='302'></font></font> </font><font color='#ff0000' weight='1' id='306'>&lt;<font color='#ff0000' weight='1' id='305'></font> </font><font color='#ff0000' weight='1' id='316'><font color='#ff0000' weight='1' id='308'>a</font><font color='#ff0000' weight='1' id='315'>[<font color='#ff0000' weight='1' id='313'><font color='#ff0000' weight='1' id='310'>--<font color='#ff0000' weight='1' id='309'></font></font><font color='#ff0000' weight='1' id='312'>j<font color='#ff0000' weight='1' id='311'></font></font>]</font><font color='#ff0000' weight='1' id='314'></font></font></font>)</font><font color='#ff0000' weight='1' id='318'></font> </font><font color='#ff0000' weight='1' id='335'>{
+                <font color='#ff0000' weight='1' id='333'>if<font color='#ff0000' weight='1' id='328'>(<font color='#ff0000' weight='1' id='326'><font color='#ff0000' weight='1' id='321'>j<font color='#ff0000' weight='1' id='320'></font> </font><font color='#ff0000' weight='1' id='323'>==<font color='#ff0000' weight='1' id='322'></font> </font><font color='#ff0000' weight='1' id='325'>lo<font color='#ff0000' weight='1' id='324'></font></font>)</font><font color='#ff0000' weight='1' id='327'></font></font><font color='#ff0000' weight='1' id='332'> <font color='#ff0000' weight='1' id='331'><font color='#ff0000' weight='1' id='330'>break;<font color='#ff0000' weight='1' id='329'></font></font></font></font>
+            }</font><font color='#ff0000' weight='1' id='334'></font></font>
+            
+            </font><font color='#ff0000' weight='1' id='350'>if<font color='#ff0000' weight='1' id='345'>(<font color='#ff0000' weight='1' id='343'><font color='#ff0000' weight='1' id='338'>j<font color='#ff0000' weight='1' id='337'></font> </font><font color='#ff0000' weight='1' id='340'>&lt;=<font color='#ff0000' weight='1' id='339'></font> </font><font color='#ff0000' weight='1' id='342'>i<font color='#ff0000' weight='1' id='341'></font></font>)</font><font color='#ff0000' weight='1' id='344'></font></font><font color='#ff0000' weight='1' id='349'> <font color='#ff0000' weight='1' id='348'><font color='#ff0000' weight='1' id='347'>break;<font color='#ff0000' weight='1' id='346'></font></font></font></font>
+            
+            </font><font color='#ff0000' weight='1' id='370'><font color='#ff0000' weight='1' id='368'><font color='#ff0000' weight='1' id='367'><font color='#ff0000' weight='1' id='352'>exch<font color='#ff0000' weight='1' id='351'></font></font><font color='#ff0000' weight='1' id='366'>(<font color='#ff0000' weight='1' id='356'><font color='#ff0000' weight='1' id='355'><font color='#ff0000' weight='1' id='354'>a<font color='#ff0000' weight='1' id='353'></font></font></font>, </font><font color='#ff0000' weight='1' id='360'><font color='#ff0000' weight='1' id='359'><font color='#ff0000' weight='1' id='358'>i<font color='#ff0000' weight='1' id='357'></font></font></font>, </font><font color='#ff0000' weight='1' id='364'><font color='#ff0000' weight='1' id='363'><font color='#ff0000' weight='1' id='362'>j<font color='#ff0000' weight='1' id='361'></font></font></font>)</font><font color='#ff0000' weight='1' id='365'></font></font></font>;</font><font color='#ff0000' weight='1' id='369'></font>
+        }</font><font color='#ff0000' weight='1' id='371'></font></font>
+        
+        exch(a, lo, j);
+        return j;
+    }
+
+    private static void exch(int[] a, int i, int j) {
+        int temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+package org.hibernate.envers.internal.tools.graph;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+
+public class TopologicalSort&lt;R&gt; {
+	private List&lt;R&gt; sorted;
+	private int time;
+
+	private void process(Vertex&lt;R&gt; v) {
+		if ( v.getStartTime() != 0 ) {
+			
+			return;
+		}
+
+		v.setStartTime( time++ );
+
+		for ( Vertex&lt;R&gt; n : v.getNeighbours() ) {
+			process( n );
+		}
+
+		v.setEndTime( time++ );
+
+		sorted.add( v.getRepresentation() );
+	}
+
+	public List&lt;R&gt; sort(Collection&lt;Vertex&lt;R&gt;&gt; vertices) {
+		sorted = new ArrayList&lt;&gt;( vertices.size() );
+
+		time = 1;
+
+		for ( Vertex&lt;R&gt; v : vertices ) {
+			if ( v.getEndTime() == 0 ) {
+				process( v );
+			}
+		}
+
+		Collections.reverse( sorted );
+
+		return sorted;
+	}
+}
+</font>
+</pre>
