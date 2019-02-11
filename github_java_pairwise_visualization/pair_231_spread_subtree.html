@@ -1,0 +1,51 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+    public static void <font color='#0000ff' weight='0.00085034' id='9'>selectionSortLargest</font>(<font color='#0003ff' weight='0.00382653' id='19'>double[] array)</font>
+    {
+        for <font color='#0008ff' weight='0.00786565' id='59'>(int r = array.length - 1; <font color='#0000ff' weight='0.000159439' id='49'><font color='#0000ff' weight='8.85771e-06' id='44'>r </font><font color='#0000ff' weight='8.85771e-06' id='46'>&gt; </font><font color='#0000ff' weight='8.85771e-06' id='48'>0</font>;</font> <font color='#0000ff' weight='2.65731e-05' id='53'>--</font>r)
+        </font>{
+            <font color='#0000ff' weight='0.000389739' id='71'>int <font color='#0000ff' weight='5.90514e-06' id='64'>largestElementIndex </font>= <font color='#0000ff' weight='5.90514e-06' id='66'>r</font>;
+            
+            </font><font color='#0002ff' weight='0.00226757' id='136'>for (<font color='#0000ff' weight='1.47628e-06' id='74'>int </font><font color='#0000ff' weight='7.38142e-07' id='76'>l </font><font color='#0000ff' weight='2.21443e-06' id='80'>= 0</font>; <font color='#0000ff' weight='1.32866e-05' id='90'><font color='#0000ff' weight='7.38142e-07' id='85'>l </font>&lt; <font color='#0000ff' weight='7.38142e-07' id='89'>r</font>;</font> ++l)
+            {
+                <font color='#0000ff' weight='0.000283447' id='133'>if (<font color='#0000ff' weight='3.98597e-05' id='119'><font color='#0000ff' weight='3.69071e-07' id='102'>array</font>[l] &gt; <font color='#0000ff' weight='5.167e-06' id='118'><font color='#0000ff' weight='3.69071e-07' id='112'>array</font><font color='#0000ff' weight='1.47628e-06' id='117'>[largestElementIndex]</font></font>)</font><font color='#0000ff' weight='4.42885e-05' id='132'>
+                    <font color='#0000ff' weight='3.54308e-05' id='130'><font color='#0000ff' weight='1.32866e-05' id='128'>largestElementIndex <font color='#0000ff' weight='7.38142e-07' id='125'>= </font>l;</font></font></font>
+            }</font>
+            
+            
+            </font><font color='#0000ff' weight='0.000602324' id='154'><font color='#0000ff' weight='0.000265731' id='152'><font color='#0000ff' weight='5.90514e-06' id='138'>double</font> <font color='#0000ff' weight='5.90514e-06' id='141'>temp </font><font color='#0000ff' weight='5.31463e-05' id='151'>= <font color='#0000ff' weight='4.1336e-05' id='149'>array<font color='#0000ff' weight='1.18103e-05' id='148'>[<font color='#0000ff' weight='1.47629e-06' id='145'>r</font>]</font></font></font>;</font>
+            </font><font color='#0000ff' weight='0.000708617' id='175'><font color='#0000ff' weight='0.000318878' id='173'><font color='#0000ff' weight='2.95257e-06' id='156'>array</font><font color='#0000ff' weight='1.18103e-05' id='161'>[r]</font> <font color='#0000ff' weight='5.90514e-06' id='164'>= </font><font color='#0000ff' weight='2.95257e-06' id='166'>array</font>[largestElementIndex];</font>
+            </font><font color='#0000ff' weight='0.000496032' id='190'><font color='#0000ff' weight='2.95257e-06' id='177'>array</font>[<font color='#0000ff' weight='2.95257e-06' id='180'>largestElementIndex]</font> = <font color='#0000ff' weight='5.90514e-06' id='187'>temp</font>;
+        }</font>
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static void quicksort(int[] a, int start, int end) {
+        if (start &gt;= end)
+            return;
+
+        int pavot = a[start];
+        int i = start;
+        int j = end;
+
+        while (i &lt; j) {
+            while (i &lt; j &amp;&amp; a[j] &gt; pavot)
+                j--;
+            while (i &lt; j &amp;&amp; a[i] &lt;= pavot)
+                i++;
+            if (i != j) {
+                int t = a[i];
+                a[i] = a[j];
+                a[j] = t;
+            }
+        }
+        if (i == j) {
+            int t = a[start];
+            a[start] = a[i];
+            a[j] = t;
+        }
+        quicksort(a, start, i - 1);
+        quicksort(a, i + 1, end);
+    }</font>
+</pre>

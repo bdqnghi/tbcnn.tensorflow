@@ -1,0 +1,46 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+<font color='#0000ff' weight='0.000782473' id='2'>private </font>static void <font color='#0000ff' weight='0.000782473' id='9'>selectionsort</font>(double tablica<font color='#0000ff' weight='6.52061e-05' id='16'>[]</font>, int ile_liczb) <font color='#0092ff' weight='0.143192' id='212'>{
+    <font color='#0002ff' weight='0.00293427' id='44'><font color='#0000ff' weight='0.000244523' id='34'><font color='#0000ff' weight='4.89045e-05' id='31'>int </font><font color='#0000ff' weight='2.44523e-05' id='33'>min</font>,</font><font color='#0000ff' weight='0.000146714' id='38'><font color='#0000ff' weight='2.44523e-05' id='37'>i</font>,</font>j;
+    </font>double <font color='#0000ff' weight='4.89045e-05' id='49'>temp</font>;
+    <font color='#001fff' weight='0.030712' id='210'>for (<font color='#0000ff' weight='0.000195618' id='61'><font color='#0000ff' weight='7.33568e-05' id='59'>i=0;</font></font>i&lt;ile_liczb<font color='#0000ff' weight='2.44523e-06' id='69'>-</font>1;i++)  <font color='#000cff' weight='0.0123239' id='209'>{
+    min<font color='#0000ff' weight='2.71692e-06' id='86'>=</font>i;
+    for (<font color='#0000ff' weight='2.44523e-05' id='104'><font color='#0000ff' weight='1.01884e-05' id='102'>j=<font color='#0000ff' weight='2.03769e-07' id='97'>i</font>+1;</font></font><font color='#0000ff' weight='6.11307e-06' id='111'><font color='#0000ff' weight='3.39615e-07' id='106'>j</font>&lt;<font color='#0000ff' weight='3.39615e-07' id='110'>ile_liczb</font>;</font><font color='#0000ff' weight='8.15076e-06' id='118'>j++</font>)
+    <font color='#0000ff' weight='0.000268975' id='155'><font color='#0000ff' weight='0.000260824' id='154'>if <font color='#0000ff' weight='8.15076e-05' id='142'>(<font color='#0000ff' weight='4.75461e-06' id='129'><font color='#0000ff' weight='3.39615e-07' id='123'>tablica</font><font color='#0000ff' weight='1.35846e-06' id='128'>[j]</font></font><font color='#0000ff' weight='6.7923e-07' id='131'>&lt;</font>tablica[min])</font><font color='#0000ff' weight='4.07538e-05' id='153'>
+    <font color='#0000ff' weight='3.2603e-05' id='151'>min<font color='#0000ff' weight='6.7923e-07' id='146'>=</font><font color='#0000ff' weight='6.7923e-07' id='148'>j</font>;</font></font></font></font>
+    <font color='#0000ff' weight='2.71692e-06' id='158'>temp</font><font color='#0000ff' weight='2.71692e-06' id='160'>=</font><font color='#0000ff' weight='1.90184e-05' id='168'>tablica[min]</font>;
+    <font color='#0000ff' weight='0.00032603' id='192'><font color='#0000ff' weight='0.000146714' id='190'><font color='#0000ff' weight='1.35846e-06' id='173'>tablica</font><font color='#0000ff' weight='5.43384e-06' id='178'>[<font color='#0000ff' weight='1.35846e-06' id='176'>min]</font></font>=<font color='#0000ff' weight='1.35846e-06' id='183'>tablica</font><font color='#0000ff' weight='5.43384e-06' id='188'>[i]</font>;</font>
+    </font><font color='#0000ff' weight='0.000228221' id='207'><font color='#0000ff' weight='1.35846e-06' id='194'>tablica</font>[<font color='#0000ff' weight='6.7923e-07' id='196'>i</font>]=<font color='#0000ff' weight='2.71692e-06' id='204'>temp</font>;
+    }</font></font>
+}</font></font></font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static void quicksort(int[] a, int start, int end) {
+        if (start &gt;= end)
+            return;
+
+        int pavot = a[start];
+        int i = start;
+        int j = end;
+
+        while (i &lt; j) {
+            while (i &lt; j &amp;&amp; a[j] &gt; pavot)
+                j--;
+            while (i &lt; j &amp;&amp; a[i] &lt;= pavot)
+                i++;
+            if (i != j) {
+                int t = a[i];
+                a[i] = a[j];
+                a[j] = t;
+            }
+        }
+        if (i == j) {
+            int t = a[start];
+            a[start] = a[i];
+            a[j] = t;
+        }
+        quicksort(a, start, i - 1);
+        quicksort(a, i + 1, end);
+    }</font>
+</pre>

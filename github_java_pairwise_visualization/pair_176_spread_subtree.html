@@ -1,0 +1,132 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+import java.util.Arrays;
+
+public class HeapSortSelectHeap {
+
+    public enum Heap { MINHEAP, MAXHEAP };
+
+    private Heap heap;
+
+    public HeapSortSelectHeap(Heap heap) {
+        this.heap = heap;
+    }
+
+    private void swap(int[] list, int i, int j) {
+        int temp = list[j];
+        list[j] = list[i];
+        list[i] = temp;
+    }
+
+    private void siftDown(int[] list, int start, int end) {
+        switch(heap) {
+            case MINHEAP:
+                siftDownMin(list, start, end);
+                break;
+            case MAXHEAP:
+                siftDownMax(list, <font color='#ff0000' weight='1' id='241'><font color='#00ff00' weight='0.5' id='240'>start</font></font>, end);
+                break;
+        }
+    }
+
+    private void siftDownMin(int[] list, int start, int end) {
+        int root = start;
+
+        while(root * 2 + 1 &lt;= end) {
+            int child = root * 2 + 1;
+            int swap = root;
+            if(list[swap] &gt; list[child]) {
+                swap = child;
+            }
+
+            if(child + 1 &lt;= end &amp;&amp; list[swap] &gt; list[child + 1]) {
+                swap = child + 1;
+            }
+
+            if(swap != root) {
+                swap(list, root, swap);
+                root = swap;
+            } else {
+                return;
+            }
+        }
+    }
+
+
+
+    private void siftDownMax(int[] list, int start, int end) {
+        int root = start;
+
+        while(root * 2 + 1 &lt;= end) {
+            int child = root * 2 + 1;
+            int swap = root;
+            if(list[swap] &lt; list[child]) {
+                swap = child;
+            }
+
+            if(child + 1 &lt;= end &amp;&amp; list[swap] &lt; list[child + 1]) {
+                swap = child + 1;
+            }
+
+            if(swap != root) {
+                swap(list, root, swap);
+                root = swap;
+            } else {
+                return;
+            }
+        }
+    }
+
+    public void heapify(int[] list) {
+        int start = (list.length - 2) / 2;
+        while(start &gt;= 0) {
+            siftDown(list, start, list.length - 1);
+            start -= 1;
+        }
+    }
+
+    public void sort(int[] list) {
+        heapify(list);
+        int end = list.length - 1;
+        while(end &gt; 0) {
+            swap(list, end, 0);
+            end -= 1;
+            siftDown(list, 0, end);
+        }
+    }
+
+    public static void runList(int[] list, Heap heap) {
+        System.out.println("before: " + Arrays.toString(list));
+        HeapSortSelectHeap s = new HeapSortSelectHeap(heap);
+        s.heapify(list);
+        System.out.println("heap: " + Arrays.toString(list));
+        s.sort(list);
+        System.out.println("after: " + Arrays.toString(list));
+    }
+
+
+}
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+<font color='#ff0400' weight='0.995516' id='223'><font color='#0000ff' weight='0.000747384' id='2'>public </font><font color='#0000ff' weight='0.000747384' id='4'>static </font>void <font color='#0000ff' weight='0.000747384' id='9'>InsertionSort</font>(int[] <font color='#0000ff' weight='0.000186846' id='17'>A</font>)
+    <font color='#0098ff' weight='0.149477' id='222'>{
+        <font color='#0002ff' weight='0.00205531' id='33'>int temp,<font color='#0000ff' weight='0.000186846' id='31'><font color='#0000ff' weight='3.1141e-05' id='30'>j</font>;</font>
+        </font><font color='#001dff' weight='0.0285874' id='187'>for <font color='#0003ff' weight='0.00308296' id='67'>(<font color='#0000ff' weight='0.000256913' id='45'><font color='#0000ff' weight='0.000105101' id='43'>int <font color='#0000ff' weight='3.89263e-06' id='38'>i </font>= <font color='#0000ff' weight='3.89263e-06' id='40'>0</font>;</font> </font><font color='#0000ff' weight='0.000303625' id='59'><font color='#0000ff' weight='3.89263e-06' id='47'>i </font><font color='#0000ff' weight='3.89263e-06' id='49'>&lt; </font><font color='#0000ff' weight='2.33558e-05' id='56'><font color='#0000ff' weight='1.29754e-06' id='51'>A</font><font color='#0000ff' weight='1.29754e-06' id='53'>.</font><font color='#0000ff' weight='1.29754e-06' id='55'>length</font></font>; </font><font color='#0000ff' weight='0.000116779' id='65'><font color='#0000ff' weight='9.3423e-05' id='64'><font color='#0000ff' weight='1.16779e-05' id='61'>i</font><font color='#0000ff' weight='1.16779e-05' id='63'>++</font></font>)</font>
+        </font><font color='#000bff' weight='0.0110239' id='186'>{
+            <font color='#0000ff' weight='5.19017e-06' id='69'>j </font>= <font color='#0000ff' weight='5.19017e-06' id='73'>i</font>;
+            <font color='#0003ff' weight='0.00333209' id='184'>while <font color='#0000ff' weight='0.000498256' id='109'>(<font color='#0000ff' weight='1.11218e-06' id='78'>j </font><font color='#0000ff' weight='1.11218e-06' id='80'>&gt; </font><font color='#0000ff' weight='1.11218e-06' id='82'>0 </font>&amp;&amp; <font color='#0000ff' weight='5.56089e-07' id='86'>A</font>[<font color='#0000ff' weight='9.26816e-08' id='88'>j</font><font color='#0000ff' weight='9.26816e-08' id='90'>-</font><font color='#0000ff' weight='9.26816e-08' id='92'>1</font>] &gt; <font color='#0000ff' weight='5.56089e-07' id='100'>A</font>[<font color='#0000ff' weight='2.78045e-07' id='102'>j</font>])
+            </font><font color='#0001ff' weight='0.00113665' id='183'>{
+                <font color='#0000ff' weight='4.35974e-05' id='124'><font color='#0000ff' weight='1.86846e-05' id='122'><font color='#0000ff' weight='5.19017e-07' id='111'>temp </font>= <font color='#0000ff' weight='2.59508e-07' id='115'>A</font>[<font color='#0000ff' weight='1.29754e-07' id='117'>j</font>];</font>
+                </font><font color='#0000ff' weight='7.47384e-05' id='149'><font color='#0000ff' weight='3.42551e-05' id='147'><font color='#0000ff' weight='2.59508e-07' id='126'>A</font>[<font color='#0000ff' weight='1.29754e-07' id='128'>j</font>] = <font color='#0000ff' weight='2.59508e-07' id='136'>A</font>[<font color='#0000ff' weight='4.32514e-08' id='138'>j</font><font color='#0000ff' weight='4.32514e-08' id='140'>-</font>1];</font>
+                </font><font color='#0000ff' weight='5.60538e-05' id='168'><font color='#0000ff' weight='2.49128e-05' id='166'><font color='#0000ff' weight='5.70918e-06' id='161'><font color='#0000ff' weight='2.59508e-07' id='151'>A</font><font color='#0000ff' weight='2.07607e-06' id='160'>[<font color='#0000ff' weight='7.78525e-07' id='158'><font color='#0000ff' weight='4.32514e-08' id='153'>j</font>-1]</font></font> </font><font color='#0000ff' weight='5.19017e-07' id='163'>= </font><font color='#0000ff' weight='5.19017e-07' id='165'>temp</font>;</font>
+                </font><font color='#0000ff' weight='3.73692e-05' id='181'><font color='#0000ff' weight='1.55705e-05' id='179'><font color='#0000ff' weight='3.1141e-07' id='170'>j </font><font color='#0000ff' weight='3.1141e-07' id='172'>= </font><font color='#0000ff' weight='3.1141e-07' id='174'>j</font>-1;</font>
+            }</font></font>           
+        }</font></font>
+        </font>System.out.println(Arrays.toString(<font color='#0000ff' weight='5.83894e-06' id='207'>A</font>));
+    }</font>
+
+      
+    </font></font>
+</pre>

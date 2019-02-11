@@ -1,0 +1,114 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ static int[] mergeSort(int[] a)<font color='#ff0000' weight='1' id='321'>{
+        <font color='#0002ff' weight='0.00260999' id='37'><font color='#0000ff' weight='6.21427e-05' id='24'>int</font> n = <font color='#0000ff' weight='0.000372856' id='34'><font color='#0000ff' weight='2.07142e-05' id='29'>a</font>.<font color='#0000ff' weight='2.07142e-05' id='33'>length</font></font>;</font>
+        <font color='#0001ff' weight='0.00149142' id='48'><font color='#0000ff' weight='0.00046607' id='45'><font color='#0000ff' weight='4.6607e-05' id='41'>int</font>[] </font><font color='#0000ff' weight='9.3214e-05' id='47'>left</font>;</font>
+        <font color='#0003ff' weight='0.00372856' id='61'><font color='#0000ff' weight='0.00046607' id='56'><font color='#0000ff' weight='0.000372856' id='55'><font color='#0000ff' weight='4.6607e-05' id='52'>int</font><font color='#0000ff' weight='4.6607e-05' id='54'>[]</font></font> </font><font color='#0000ff' weight='9.3214e-05' id='58'>right</font>;
+
+        </font><font color='#0028ff' weight='0.0398956' id='169'>if(n % <font color='#0000ff' weight='1.24285e-05' id='67'>2 </font><font color='#0000ff' weight='1.24285e-05' id='69'>== </font><font color='#0000ff' weight='1.24285e-05' id='71'>0</font>)<font color='#0005ff' weight='0.00546856' id='119'><font color='#0005ff' weight='0.00534427' id='118'>{
+            left  = <font color='#0000ff' weight='5.17856e-06' id='80'>new </font><font color='#0000ff' weight='2.58928e-06' id='82'>int</font>[n <font color='#0000ff' weight='4.31546e-07' id='86'>/ </font><font color='#0000ff' weight='4.31546e-07' id='88'>2</font>];
+            right <font color='#0000ff' weight='5.17856e-06' id='99'>= </font><font color='#0000ff' weight='5.17856e-06' id='101'>new </font><font color='#0000ff' weight='5.69641e-05' id='113'><font color='#0000ff' weight='2.58928e-06' id='103'>int</font><font color='#0000ff' weight='2.07142e-05' id='112'>[<font color='#0000ff' weight='7.76783e-06' id='110'><font color='#0000ff' weight='4.31546e-07' id='105'>n </font><font color='#0000ff' weight='4.31546e-07' id='107'>/ </font><font color='#0000ff' weight='4.31546e-07' id='109'>2</font>]</font></font></font>;
+        }</font> </font>else {
+            <font color='#0000ff' weight='0.000828569' id='140'><font color='#0000ff' weight='0.000372856' id='138'><font color='#0000ff' weight='5.17856e-06' id='121'>left  </font><font color='#0000ff' weight='5.17856e-06' id='123'>= </font><font color='#0000ff' weight='5.17856e-06' id='125'>new </font><font color='#0000ff' weight='5.69641e-05' id='137'><font color='#0000ff' weight='2.58928e-06' id='127'>int</font><font color='#0000ff' weight='2.07142e-05' id='136'>[<font color='#0000ff' weight='7.76783e-06' id='134'><font color='#0000ff' weight='4.31546e-07' id='129'>n </font><font color='#0000ff' weight='4.31546e-07' id='131'>/ </font><font color='#0000ff' weight='4.31546e-07' id='133'>2</font>]</font></font></font>;</font>
+            </font><font color='#0001ff' weight='0.000994283' id='165'><font color='#0000ff' weight='5.17856e-06' id='142'>right </font>= <font color='#0000ff' weight='5.17856e-06' id='146'>new </font><font color='#0000ff' weight='2.58928e-06' id='148'>int</font>[<font color='#0000ff' weight='1.29464e-05' id='159'><font color='#0000ff' weight='2.58928e-07' id='150'>n </font><font color='#0000ff' weight='2.58928e-07' id='152'>/ </font><font color='#0000ff' weight='2.58928e-07' id='154'>2 </font><font color='#0000ff' weight='2.58928e-07' id='156'>+ </font><font color='#0000ff' weight='2.58928e-07' id='158'>1</font>]</font>;
+        }</font>
+
+        </font>for<font color='#0005ff' weight='0.00521999' id='198'>(<font color='#0000ff' weight='1.55357e-05' id='172'><font color='#0000ff' weight='7.76784e-06' id='171'>int</font> </font><font color='#0000ff' weight='7.76784e-06' id='174'>i </font>= 0; <font color='#0000ff' weight='0.000372856' id='190'><font color='#0000ff' weight='7.76784e-06' id='183'>i </font><font color='#0000ff' weight='7.76784e-06' id='185'>&lt; </font><font color='#0000ff' weight='7.76784e-06' id='187'>n</font>; </font><font color='#0000ff' weight='0.000186428' id='195'>i<font color='#0000ff' weight='2.33035e-05' id='194'>++</font></font>)</font><font color='#000dff' weight='0.0132364' id='270'>{
+            if<font color='#0000ff' weight='0.000372856' id='211'>(<font color='#0000ff' weight='0.000155357' id='209'>i &lt; <font color='#0000ff' weight='3.10713e-06' id='204'>n</font><font color='#0000ff' weight='3.10713e-06' id='206'>/</font>2)</font></font><font color='#0000ff' weight='0.000714641' id='235'><font color='#0000ff' weight='0.000683569' id='234'>{
+                left[i] <font color='#0000ff' weight='2.58928e-06' id='221'>= </font><font color='#0000ff' weight='1.29464e-06' id='223'>a</font><font color='#0000ff' weight='5.17856e-06' id='228'>[<font color='#0000ff' weight='1.29464e-06' id='226'><font color='#0000ff' weight='6.4732e-07' id='225'>i</font>]</font></font>;
+            }</font> </font>else {
+                <font color='#0000ff' weight='0.000434999' id='264'><font color='#0000ff' weight='3.88392e-05' id='251'><font color='#0000ff' weight='1.29464e-06' id='237'>right</font>[<font color='#0000ff' weight='6.4732e-06' id='248'>i - n/<font color='#0000ff' weight='1.29464e-07' id='247'>2</font>]</font> </font>= a[i];
+            }</font>
+        }</font>
+
+        <font color='#0005ff' weight='0.00559284' id='287'><font color='#0002ff' weight='0.00242356' id='285'>left = <font color='#0000ff' weight='3.10713e-05' id='277'>mergeSort</font><font color='#0000ff' weight='0.000155357' id='283'>(<font color='#0000ff' weight='4.6607e-05' id='281'>left)</font></font>;</font>
+        </font><font color='#0005ff' weight='0.00559284' id='303'><font color='#0002ff' weight='0.00242356' id='301'><font color='#0000ff' weight='6.21427e-05' id='289'>right </font>= <font color='#0000ff' weight='0.000497141' id='300'><font color='#0000ff' weight='3.10713e-05' id='293'>mergeSort</font>(<font color='#0000ff' weight='4.6607e-05' id='297'>right)</font></font>;</font>
+
+        </font><font color='#0005ff' weight='0.00559284' id='319'>return merge(<font color='#0000ff' weight='3.10713e-05' id='307'>left</font>, <font color='#0000ff' weight='9.3214e-05' id='313'>right)</font>;
+
+    }</font></font>
+
+    static int[] merge(int[] left, int[] right){
+        int[] result = new int[left.length + right.length];
+        
+        int i = 0;
+        int j = 0;
+        int index = 0;
+
+        while(i &lt; left.length &amp;&amp; j &lt; right.length){
+            if(left[i] &lt; right[i]){
+                result[index++] = left[i++];
+            } else {
+                result[index++] = right[j++];
+            }
+        }
+
+        while(i &lt; left.length){
+            result[index++] = left[i++];
+        }
+
+        while (j &lt; right.length) {
+            result[index++] = right[j++];
+        }
+        
+        return result;
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+package com.dreamskiale.basic_algorithms.search;
+
+import java.util.Deque;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+
+import com.dreamskiale.basic_algorithms.pojos.Vertex;
+
+public class DepthFirstSearchRecursive&lt;T&gt; implements GraphSearch&lt;T&gt; {
+
+  private Set&lt;Vertex&lt;T&gt;&gt; visited = new LinkedHashSet&lt;&gt;();
+  private Deque&lt;Vertex&lt;T&gt;&gt; topologicalSort = new LinkedList&lt;&gt;();
+
+  @Override
+  public Iterable&lt;Vertex&lt;T&gt;&gt; search(Vertex&lt;T&gt; head) {
+    visited.clear();
+    topologicalSort.clear();
+    dfsRecursive(head);
+    return visited;
+  }
+  
+  public Iterable&lt;Vertex&lt;T&gt;&gt; dfs(List&lt;Vertex&lt;T&gt;&gt; graph) {
+    visited.clear();
+    topologicalSort.clear();
+    for (Vertex&lt;T&gt; v : graph) {
+      if (!visited.contains(v)) {
+        dfsRecursive(v);
+      }
+    }
+    return visited;
+  }
+  
+  private void dfsRecursive(Vertex&lt;T&gt; vertex) {
+    visit(vertex);
+    List&lt;Vertex&lt;T&gt;&gt; adj = vertex.getAdjacent();
+    for (Vertex&lt;T&gt; a : adj) {
+      if (!visited.contains(a)) {
+        <font color='#00ff8b' weight='0.363636' id='518'><font color='#0017ff' weight='0.0227273' id='511'>dfsRecursive</font><font color='#0073ff' weight='0.113636' id='517'>(<font color='#0022ff' weight='0.0340909' id='515'><font color='#0017ff' weight='0.0227273' id='514'><font color='#000bff' weight='0.0113636' id='513'>a</font></font>)</font></font></font>;
+      }
+    }
+    topologicalSort.addFirst(vertex);
+  }
+  
+  
+  public Deque&lt;Vertex&lt;T&gt;&gt; getTopologicalSort() {
+    return topologicalSort;
+  }
+  
+  private void visit(Vertex&lt;T&gt; v) {
+    visited.add(v);
+  }
+
+}</font>
+</pre>

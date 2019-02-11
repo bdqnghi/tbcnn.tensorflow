@@ -1,0 +1,38 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+   <font color='#ff0500' weight='0.994505' id='182'>public static <font color='#0001ff' weight='0.0018315' id='7'>void </font><font color='#0000ff' weight='0.000915751' id='9'>insertionSort</font>(<font color='#0002ff' weight='0.00274725' id='19'><font color='#0000ff' weight='0.000763126' id='15'><font color='#0000ff' weight='7.63126e-05' id='11'>int</font>[] </font><font color='#0000ff' weight='0.000152625' id='17'>list</font>, </font><font color='#0000ff' weight='0.000152625' id='21'>int</font> <font color='#0000ff' weight='0.000152625' id='24'>n</font>) <font color='#008dff' weight='0.139194' id='181'>{
+        <font color='#0004ff' weight='0.00457875' id='44'><font color='#0000ff' weight='0.000381563' id='34'><font color='#0000ff' weight='3.81563e-05' id='30'>int</font> <font color='#0000ff' weight='3.81563e-05' id='33'>i</font>, </font><font color='#0000ff' weight='3.81563e-05' id='37'>j</font>, <font color='#0000ff' weight='0.000228938' id='42'><font color='#0000ff' weight='3.81563e-05' id='41'>key</font>;</font>
+        
+        
+        </font><font color='#0029ff' weight='0.0409035' id='179'>for <font color='#0003ff' weight='0.00381563' id='70'>(<font color='#0000ff' weight='0.000114469' id='51'><font color='#0000ff' weight='6.35938e-06' id='46'>i </font>= 1;</font> <font color='#0000ff' weight='0.00030525' id='62'>i &lt; n; </font><font color='#0000ff' weight='0.000190781' id='68'>i<font color='#0000ff' weight='1.90781e-05' id='66'>++</font>)</font> </font><font color='#0010ff' weight='0.0163309' id='178'>{
+            <font color='#0000ff' weight='0.000534188' id='85'>key = list[i]; 
+            
+            
+            
+            
+            </font><font color='#0002ff' weight='0.0027091' id='157'>for <font color='#0000ff' weight='0.00082036' id='129'>(<font color='#0000ff' weight='2.38477e-05' id='96'>j = i - <font color='#0000ff' weight='4.76954e-07' id='95'>1</font>;</font> <font color='#0000ff' weight='0.00010493' id='121'>j <font color='#0000ff' weight='3.40681e-07' id='102'>&gt;= </font><font color='#0000ff' weight='3.40681e-07' id='104'>0 </font><font color='#0000ff' weight='3.40681e-07' id='106'>&amp;&amp; </font><font color='#0000ff' weight='2.38477e-06' id='114'><font color='#0000ff' weight='1.70341e-07' id='108'>list</font>[<font color='#0000ff' weight='8.51703e-08' id='110'>j</font>] </font><font color='#0000ff' weight='3.40681e-07' id='116'>&gt; </font><font color='#0000ff' weight='3.40681e-07' id='118'>key</font>; </font><font color='#0000ff' weight='2.38477e-05' id='127'><font color='#0000ff' weight='1.90781e-05' id='126'><font color='#0000ff' weight='2.38477e-06' id='123'>j</font><font color='#0000ff' weight='2.38477e-06' id='125'>--</font></font>)</font> </font><font color='#0000ff' weight='0.000496032' id='156'>{
+                <font color='#0000ff' weight='0.000228938' id='154'><font color='#0000ff' weight='1.74883e-05' id='141'><font color='#0000ff' weight='7.94923e-07' id='131'>list</font><font color='#0000ff' weight='6.35938e-06' id='140'>[<font color='#0000ff' weight='1.32487e-07' id='133'>j</font><font color='#0000ff' weight='1.32487e-07' id='135'>+</font><font color='#0000ff' weight='1.32487e-07' id='137'>1</font>]</font> </font><font color='#0000ff' weight='1.58985e-06' id='143'>= </font><font color='#0000ff' weight='7.94923e-07' id='145'>list</font>[<font color='#0000ff' weight='3.97461e-07' id='147'>j</font>];
+            }</font></font>
+            
+            </font><font color='#0000ff' weight='0.000686813' id='176'><font color='#0000ff' weight='6.99532e-05' id='169'><font color='#0000ff' weight='3.17969e-06' id='159'>list</font>[<font color='#0000ff' weight='5.29948e-07' id='161'>j</font><font color='#0000ff' weight='5.29948e-07' id='163'>+</font><font color='#0000ff' weight='5.29948e-07' id='165'>1</font>] </font>= <font color='#0000ff' weight='6.35938e-06' id='173'>key</font>;
+        }</font></font>
+    }</font></font></font></font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public void bubbleSort(){
+        for(int i=0; i&lt;length-1;i++){
+            for(int j=0;j&lt;length-1-i;j++){
+                compare(j,j+1);
+            }
+        }
+    }
+    public void compare(int x, int y){
+        int z=0;
+        if(a[x]&gt;a[y]){
+            z=a[x];
+            a[x]=a[y];
+            a[y]=z;
+        }   
+    }</font>
+</pre>

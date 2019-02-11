@@ -1,0 +1,87 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+package Graph;
+
+import java.util.Iterator;
+import java.util.LinkedList;
+
+import java.util.ArrayList;
+import java.util.Stack;
+
+
+public class TopologicalSort {
+    private int vertex;
+    private LinkedList&lt;Integer&gt; adj[];
+
+    public TopologicalSort(int v) {
+        vertex = v;
+        adj = new LinkedList[v];
+        for (int i = 0; i &lt; v; i++) {
+            adj[i] = new LinkedList&lt;&gt;();
+        }
+    }
+    void addEdge(int v, int e) {
+        adj[v].add(e);
+    }
+
+   
+
+    public  void topologicalSort() {
+        Stack stack=new Stack();
+        boolean visited[]=new boolean[vertex];
+        for(int i=0;i&lt;vertex;i++) {
+            visited[i]=false;
+        }
+        for(int j=0;j&lt;vertex;j++) {
+            if(visited[j]==false) {
+                topologicalSortUtil(visited,stack,j);
+            }
+        }
+        while(stack.empty()==false) {
+            System.out.println(stack.pop() + " ");
+        }
+    }
+
+    public void topologicalSortUtil(boolean[] visited, Stack stack,int vertexData) {
+        
+            visited[vertexData] = true;
+            
+           
+            Iterator&lt;Integer&gt; iterator = adj[vertexData].iterator();
+            while (iterator.hasNext()) {
+                
+                int nextData = iterator.next();
+                
+                if (!visited[nextData]) {
+                    topologicalSortUtil(visited, stack, nextData);
+                }
+                
+
+            }
+            stack.push(vertexData);
+        
+    }
+
+}
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+<font color='#ff0600' weight='0.994048' id='168'><font color='#0001ff' weight='0.00119048' id='2'>private </font><font color='#0002ff' weight='0.00238095' id='5'><font color='#0001ff' weight='0.00119048' id='4'>void</font> </font><font color='#0001ff' weight='0.00119048' id='7'>insertionSort</font><font color='#0015ff' weight='0.0214286' id='26'>(<font color='#0003ff' weight='0.00357143' id='17'><font color='#0003ff' weight='0.0031746' id='16'><font color='#0000ff' weight='9.92064e-05' id='9'>int</font><font color='#0000ff' weight='9.92064e-05' id='11'>[]</font> <font color='#0000ff' weight='0.000198413' id='15'>a</font></font>, </font>int <font color='#0000ff' weight='0.000198413' id='22'>len</font>) </font><font color='#00aaff' weight='0.166667' id='167'>{
+        
+        <font color='#0053ff' weight='0.0821429' id='165'>for (int i = <font color='#0000ff' weight='1.24008e-05' id='33'>1</font>; i &lt; <font color='#0000ff' weight='1.24008e-05' id='44'>len</font>; i++) <font color='#0020ff' weight='0.0321429' id='164'>{
+            <font color='#0001ff' weight='0.0010119' id='73'><font color='#0000ff' weight='0.000446429' id='71'>int <font color='#0000ff' weight='9.92063e-06' id='60'>value </font><font color='#0000ff' weight='8.92857e-05' id='70'>= <font color='#0000ff' weight='7.93651e-05' id='69'><font color='#0000ff' weight='4.96032e-06' id='62'>a</font>[<font color='#0000ff' weight='2.48016e-06' id='64'>i</font>]</font></font>;</font>   
+            </font><font color='#0000ff' weight='9.92063e-06' id='75'>int</font> <font color='#0000ff' weight='9.92063e-06' id='78'>position </font><font color='#0000ff' weight='2.97619e-05' id='82'>= <font color='#0000ff' weight='9.92063e-06' id='80'>i</font></font>;   
+            
+            
+            <font color='#0003ff' weight='0.00363095' id='147'>while <font color='#0000ff' weight='0.00077381' id='112'>(<font color='#0000ff' weight='0.000357143' id='110'><font color='#0000ff' weight='2.12585e-06' id='87'>position </font><font color='#0000ff' weight='2.12585e-06' id='89'>&gt; </font>0 <font color='#0000ff' weight='2.12585e-06' id='93'>&amp;&amp; </font><font color='#0000ff' weight='2.33844e-05' id='105'><font color='#0000ff' weight='1.06293e-06' id='95'>a</font><font color='#0000ff' weight='8.5034e-06' id='104'>[<font color='#0000ff' weight='3.18878e-06' id='102'><font color='#0000ff' weight='1.77154e-07' id='97'>position</font><font color='#0000ff' weight='1.77154e-07' id='99'>-</font><font color='#0000ff' weight='1.77154e-07' id='101'>1</font>]</font></font> </font><font color='#0000ff' weight='2.12585e-06' id='107'>&gt; </font><font color='#0000ff' weight='2.12585e-06' id='109'>value</font>)</font> </font><font color='#0001ff' weight='0.000982143' id='146'>{
+                <font color='#0000ff' weight='0.000238095' id='137'><font color='#0000ff' weight='0.000109127' id='135'><font color='#0000ff' weight='8.26719e-07' id='114'>a</font>[<font color='#0000ff' weight='4.1336e-07' id='116'>position</font>] <font color='#0000ff' weight='1.65344e-06' id='122'>= </font><font color='#0000ff' weight='1.81878e-05' id='134'><font color='#0000ff' weight='8.26719e-07' id='124'>a</font><font color='#0000ff' weight='6.61376e-06' id='133'>[<font color='#0000ff' weight='2.48016e-06' id='131'><font color='#0000ff' weight='1.37787e-07' id='126'>position</font><font color='#0000ff' weight='1.37787e-07' id='128'>-</font><font color='#0000ff' weight='1.37787e-07' id='130'>1</font>]</font></font></font>;</font>    
+                </font><font color='#0000ff' weight='2.48016e-06' id='139'>position</font><font color='#0000ff' weight='2.48016e-06' id='141'>--</font>;                     
+            }</font>
+            
+            
+            </font><font color='#0000ff' weight='0.000833333' id='162'><font color='#0000ff' weight='0.000357143' id='160'><font color='#0000ff' weight='4.96032e-06' id='149'>a</font>[<font color='#0000ff' weight='2.48016e-06' id='151'>position</font>] <font color='#0000ff' weight='9.92063e-06' id='157'>= </font><font color='#0000ff' weight='9.92063e-06' id='159'>value</font>;</font>
+        }</font></font>
+    }</font></font>
+    </font></font>
+</pre>

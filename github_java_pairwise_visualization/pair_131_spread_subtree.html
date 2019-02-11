@@ -1,0 +1,64 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public void bubbleSortWhile(int[] array) {
+
+        System.out.println(Arrays.toString(array));
+        int aux;
+        int i = array.length;
+
+        while (i &gt; 0) {
+            int j = 0;
+            while (j &lt; i - 1) <font color='#ff0000' weight='1' id='241'>{
+                if (<font color='#000aff' weight='0.0106589' id='134'><font color='#0001ff' weight='0.00113049' id='119'><font color='#0000ff' weight='8.07494e-05' id='113'>array</font>[<font color='#0000ff' weight='8.07494e-05' id='116'><font color='#0000ff' weight='4.03747e-05' id='115'>j</font>]</font> </font>&gt; <font color='#0001ff' weight='0.00177649' id='133'>array<font color='#0000ff' weight='0.000645995' id='132'>[j + <font color='#0000ff' weight='1.34582e-05' id='129'>1</font>]</font></font>)</font> {
+                    aux = <font color='#0000ff' weight='0.000282623' id='148'>array[<font color='#0000ff' weight='2.01873e-05' id='145'>j]</font></font>;
+                    <font color='#0000ff' weight='0.000282623' id='159'>array[<font color='#0000ff' weight='1.00937e-05' id='155'>j</font>] </font>= <font color='#0000ff' weight='0.000444122' id='173'><font color='#0000ff' weight='2.01873e-05' id='163'>array</font>[j + 1]</font>;
+                    <font color='#0004ff' weight='0.00436047' id='195'>array[<font color='#0000ff' weight='6.0562e-05' id='185'>j + 1]</font> = aux;
+                }</font>
+                <font color='#000bff' weight='0.0116279' id='206'>j++;
+                </font><font color='#001dff' weight='0.0290698' id='237'>System.out.println(Arrays.<font color='#0000ff' weight='4.03747e-05' id='223'>toString</font>(array));</font>
+            }</font>
+            i--;
+        }
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public int[] mergesort(int[] arr) {
+    int len = arr.length; 
+    if (len &lt;= 1)
+      return arr; 
+    int alen = len / 2; 
+    int blen = len - alen; 
+    int[] a = new int[alen];
+    int[] b = new int[blen]; 
+    for (int i = 0; i &lt; alen; i++) 
+      a[i] = arr[i];
+    for (int i = 0;<font color='#ff0000' weight='1' id='197'></font> i &lt; blen; i++)
+      b[i] = arr[alen + i];
+    return merge(mergesort(a), mergesort(b));
+  }
+  
+  public int[] merge(int[] a, int[] b) {
+    int alen = a.length; 
+    int blen = b.length; 
+    int len = alen + blen; 
+    int[] arr = new int[len];
+    int i = 0, j = 0, k = 0; 
+    while (k &lt; len) { 
+      while (i &lt; alen &amp;&amp; j &lt; blen) 
+        if (a[i] &lt; b[j])  
+          arr[k++] = a[i++];
+        else if (a[i] &gt; b[j]) 
+          arr[k++] = b[j++];
+        else { 
+          arr[k++] = a[i++]; 
+          arr[k++] = b[j++];
+        }
+        while (i &lt; alen)  
+          arr[k++] = a[i++];
+        while (j &lt; blen)
+          arr[k++] = b[j++];
+    }
+    return arr; 
+  }</font>
+</pre>

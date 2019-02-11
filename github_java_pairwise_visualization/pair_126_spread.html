@@ -1,0 +1,49 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static int[] <font color='#00a9ff' weight='0.166663' id='12'>doInsertionSort</font>(int[] input)<font color='#00a9ff' weight='0.166663' id='196'>{
+         
+        <font color='#002aff' weight='0.0416623' id='32'><font color='#0015ff' weight='0.0208289' id='30'><font color='#000aff' weight='0.0104122' id='27'>int </font><font color='#000aff' weight='0.0104122' id='29'>temp<font color='#000aff' weight='0.0104122' id='28'></font></font>;</font><font color='#0015ff' weight='0.0208289' id='31'></font>
+        </font><font color='#002aff' weight='0.0416623' id='189'>for <font color='#0015ff' weight='0.0208289' id='66'>(<font color='#0005ff' weight='0.00520384' id='44'>int<font color='#0000ff' weight='0.000863538' id='33'></font> i = 1; </font>i<font color='#0000ff' weight='0.000863538' id='45'></font> &lt; input<font color='#0000ff' weight='0.000284832' id='49'></font>.length; i++) </font><font color='#0015ff' weight='0.0208289' id='188'>{
+            for<font color='#0005ff' weight='0.00520384' id='95'>(int j = i ; j &gt; 0 ; <font color='#0001ff' weight='0.00129757' id='92'>j--</font>)</font>{
+                if(input[<font color='#0000ff' weight='4.97326e-05' id='100'>j]</font> &lt; <font color='#0000ff' weight='0.000212494' id='117'>input<font color='#0000ff' weight='0.000103986' id='116'>[j-1]</font></font>)<font color='#0001ff' weight='0.00129757' id='182'>{
+                    temp<font color='#0000ff' weight='4.97326e-05' id='121'></font> <font color='#0000ff' weight='4.97326e-05' id='124'>=<font color='#0000ff' weight='4.97326e-05' id='123'></font> </font>input[j];
+                    <font color='#0000ff' weight='0.000321001' id='160'>input[j] <font color='#0000ff' weight='4.97326e-05' id='145'>= </font>input[j-1];
+                    </font><font color='#0000ff' weight='2.26057e-05' id='162'>input</font><font color='#0000ff' weight='2.26057e-05' id='171'>[<font color='#0000ff' weight='9.04229e-06' id='169'>j-1]</font><font color='#0000ff' weight='9.04229e-06' id='170'></font></font> <font color='#0000ff' weight='4.97326e-05' id='174'>=<font color='#0000ff' weight='4.97326e-05' id='173'></font> </font>temp<font color='#0000ff' weight='4.97326e-05' id='175'></font>;<font color='#0000ff' weight='0.00015824' id='178'></font>
+                }<font color='#0000ff' weight='0.000321001' id='180'></font></font>
+            }
+        }</font>
+        </font>return input<font color='#0015ff' weight='0.0208289' id='190'></font>;
+    }</font></font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void sort(int[] arr) {
+        int max = Integer.MAX_VALUE;
+        int min = Integer.MIN_VALUE;
+
+        for (int i = 0; i &lt; arr.length; i++) {
+            max = Math.max(max, arr[i]);
+            min = Math.min(min, arr[i]);
+        }
+        
+        
+        int bucketNum = (max - min) / arr.length + 1;
+        ArrayList&lt;ArrayList&lt;Integer&gt;&gt; bucketArr = new ArrayList&lt;&gt;(bucketNum);
+        for (int i = 0; i &lt; bucketNum; i++) {
+            bucketArr.add(new ArrayList&lt;&gt;());
+        }
+
+        
+        for (int i = 0; i &lt; arr.length; i++) {
+            int num = (arr[i] - min) / (arr.length);
+            bucketArr.get(num).add(arr[i]);
+        }
+
+        
+        for (int i = 0; i &lt; bucketArr.size(); i++) {
+            Collections.sort(bucketArr.get(i));
+        }
+
+        System.out.println(bucketArr.toString());
+    }</font>
+</pre>

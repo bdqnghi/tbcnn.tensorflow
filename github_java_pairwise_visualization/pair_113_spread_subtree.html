@@ -1,0 +1,60 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static <font color='#0001ff' weight='0.00169205' id='7'><font color='#0000ff' weight='0.000846024' id='6'>void</font> </font><font color='#0000ff' weight='0.000846024' id='9'>sort</font>(int[] data) {
+        for (<font color='#0000ff' weight='8.81275e-06' id='23'>int</font> k = data.length - 1; <font color='#0000ff' weight='0.000423012' id='51'>k &gt; 0; </font><font color='#0000ff' weight='2.64382e-05' id='53'>k</font>--) {
+            <font color='#0000ff' weight='0.000387761' id='71'>int <font color='#0000ff' weight='5.87516e-06' id='64'>largestIdx </font><font color='#0000ff' weight='1.76255e-05' id='68'>= <font color='#0000ff' weight='5.87516e-06' id='66'>0</font></font>;
+            </font>for <font color='#0000ff' weight='0.000493514' id='100'>(int i = 0; <font color='#0000ff' weight='1.32191e-05' id='90'>i <font color='#0000ff' weight='7.34396e-07' id='87'>&lt;= </font><font color='#0000ff' weight='7.34396e-07' id='89'>k</font>;</font> <font color='#0000ff' weight='2.20319e-06' id='94'>i</font>++) </font>{
+                if (data<font color='#0000ff' weight='1.46879e-06' id='107'>[<font color='#0000ff' weight='3.67198e-07' id='105'><font color='#0000ff' weight='1.83599e-07' id='104'>i</font>]</font></font> &gt; data[largestIdx]) {
+                    <font color='#0000ff' weight='1.76255e-05' id='130'>largestIdx = i;
+                }</font>
+            }
+            <font color='#0000ff' weight='0.000599267' id='155'>int tmp = data[<font color='#0000ff' weight='2.93758e-06' id='147'>k]</font>;
+            </font><font color='#0000ff' weight='0.00070502' id='176'>data<font color='#0000ff' weight='1.17503e-05' id='162'>[k]</font> = data[largestIdx];
+            </font><font color='#0000ff' weight='0.000493514' id='191'><font color='#0000ff' weight='0.000211506' id='189'>data[largestIdx] <font color='#0000ff' weight='5.87516e-06' id='186'>= </font>tmp;</font>
+        }</font>
+    }
+
+}</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static int[] bucketSort(int[] input, int bucketCount) {
+        if (input == null || input.length &lt;= 1) {
+            return input;
+        }
+        int[] output = new int[input.length];
+        int lowerBound = Integer.MAX_VALUE;
+        int upperBound = Integer.MIN_VALUE;
+        for (int i = 0; i &lt; input.length; i++) {
+            upperBound = Math.max(upperBound, input[i]);
+            lowerBound = Math.min(lowerBound, input[i]);
+        }
+        
+        double interval = (double)(upperBound - lowerBound + 1)/bucketCount;
+
+        ArrayList&lt;ArrayList&lt;Integer&gt;&gt; buckets = new ArrayList&lt;ArrayList&lt;Integer&gt;&gt;();
+        
+        
+        for (int i = <font color='#ff0000' weight='1' id='302'>0</font>; i &lt; bucketCount; i++) {
+            ArrayList&lt;Integer&gt; line = new ArrayList&lt;Integer&gt;();
+            buckets.add(line);
+        }
+        for (int i = 0; i &lt; input.length; i++) {    
+            int pos = (int) ((input[i] - lowerBound)/interval);
+            buckets.get(pos).add(input[i]);
+        }
+        
+        
+        for (int i = 0; i &lt; bucketCount; i++) {
+            Collections.sort(buckets.get(i));
+        }
+        int pointer = 0;
+        for (int i = 0; i &lt; bucketCount; i++) {
+            for (int j = 0; j &lt; buckets.get(i).size(); j++) {
+                output[pointer] = buckets.get(i).get(j);
+                pointer ++;
+            }
+        }
+        return output;
+    }</font>
+</pre>

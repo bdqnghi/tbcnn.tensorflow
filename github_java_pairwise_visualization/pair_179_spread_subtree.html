@@ -1,0 +1,52 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void bubbleSort(int arr[]) {
+      int len = arr.length;
+      for (int i = len; i &gt;= 0; i--) {
+         for (int j = 0; j &lt; len - 1; j++) {
+            <font color='#0052ff' weight='0.0806452' id='116'><font color='#0001ff' weight='0.00179211' id='103'><font color='#0000ff' weight='0.000896057' id='102'>int</font> </font><font color='#0000ff' weight='0.000896057' id='105'>k </font>= <font color='#0005ff' weight='0.00537634' id='112'><font color='#0000ff' weight='0.000298686' id='107'>j </font><font color='#0000ff' weight='0.000298686' id='109'>+ </font><font color='#0000ff' weight='0.000298686' id='111'>1</font></font>;
+            </font>if <font color='#0036ff' weight='0.0537634' id='137'>(<font color='#0000ff' weight='0.000224014' id='118'>arr</font>[j] <font color='#0000ff' weight='0.000448029' id='126'>&gt; </font><font color='#0000ff' weight='0.000224014' id='128'>arr</font>[<font color='#0000ff' weight='0.000112007' id='130'>k</font>])</font> {
+               <font color='#001aff' weight='0.0255376' id='157'><font color='#000bff' weight='0.0114247' id='155'><font color='#000aff' weight='0.0107527' id='154'><font color='#0000ff' weight='0.000336022' id='139'>swapNumbers</font><font color='#0004ff' weight='0.00436828' id='153'>(j, k, <font color='#0000ff' weight='0.000252016' id='151'>arr)</font></font></font>;</font>
+            }</font>
+         }
+      }
+   }
+
+   private static void swapNumbers(int i, int j, int[] arr) {
+      int temp;
+      temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
+   }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+private List&lt;Stmt&gt; topologicalSort(StmtList stmts) {
+
+        List&lt;Stmt&gt; out = new ArrayList&lt;Stmt&gt;(stmts.getSize());
+        Stack&lt;Stmt&gt; stack = new Stack&lt;Stmt&gt;();
+        stack.push(stmts.getFirst());
+
+        boolean visitedFlag = false;
+
+        while (!stack.empty()) {
+            Stmt stmt = stack.pop();
+            if (<font color='#000aff' weight='0.010101' id='166'>stmt</font><font color='#000aff' weight='0.010101' id='168'>.</font><font color='#000aff' weight='0.010101' id='170'>_cfg_visited</font> <font color='#001eff' weight='0.030303' id='173'>== </font><font color='#001eff' weight='0.030303' id='175'>visitedFlag</font>) {
+                continue;
+            }
+            if (stmt._cfg_froms.size() == 0 || stack.size() == 0) {
+                stmt._cfg_visited = visitedFlag;
+                out.add(stmt);
+                for (Stmt t : stmt._cfg_tos) {
+                    t._cfg_froms.remove(stmt);
+                    if (t._cfg_visited != visitedFlag) {
+                        stack.push(t);
+                    }
+                }
+            }
+        }
+        return out;
+    }
+
+    </font>
+</pre>

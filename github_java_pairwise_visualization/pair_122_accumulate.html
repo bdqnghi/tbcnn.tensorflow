@@ -1,0 +1,36 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+private static void selectionsort(double tablica[], int ile_liczb) {
+    int min,i,j;
+    double temp;
+    for (i=0;i&lt;ile_liczb-1;i++)  {
+    min=i;
+    for (j=i+1;j&lt;ile_liczb;j++)
+    if (tablica[j]&lt;tablica[min])
+    min=j;
+    temp=tablica[min];
+    tablica[min]=tablica[i];
+    tablica[i]=temp;
+    }
+}</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+    public static int[] swap(int numbers[], int i, int j) {
+        int temp = numbers[i];
+        numbers[i] = numbers[j];
+        numbers[j] = temp;
+        return numbers;
+    }
+
+    public static int[] sort(int array[]) {
+        for (int index = 1; index &lt; array.length; index++) {
+            for (int indexj = 0; indexj &lt; index-1; indexj++)
+                <font color='#ff0000' weight='1' id='241'><font color='#ff0000' weight='1' id='240'>if (array[indexj] <font color='#ff0000' weight='1' id='201'>&gt; </font><font color='#ff0000' weight='1' id='203'>array</font>[<font color='#ff0000' weight='1' id='205'>index</font>])<font color='#ff0000' weight='1' id='239'> <font color='#ff0000' weight='1' id='238'>{
+                    <font color='#ff0000' weight='1' id='236'><font color='#ff0000' weight='1' id='234'><font color='#ff0000' weight='1' id='214'>array </font>= <font color='#ff0000' weight='1' id='233'><font color='#ff0000' weight='1' id='218'>swap</font><font color='#ff0000' weight='1' id='232'>(<font color='#ff0000' weight='1' id='222'><font color='#ff0000' weight='1' id='221'><font color='#ff0000' weight='1' id='220'>array</font></font>, </font><font color='#ff0000' weight='1' id='226'><font color='#ff0000' weight='1' id='225'><font color='#ff0000' weight='1' id='224'>indexj</font></font>, </font><font color='#ff0000' weight='1' id='230'><font color='#ff0000' weight='1' id='229'><font color='#ff0000' weight='1' id='228'>index</font></font>)</font><font color='#ff0000' weight='1' id='231'></font></font></font>;</font><font color='#ff0000' weight='1' id='235'></font>
+                }</font><font color='#ff0000' weight='1' id='237'></font></font></font></font></font>
+        }
+        return array;
+    }
+</font>
+</pre>

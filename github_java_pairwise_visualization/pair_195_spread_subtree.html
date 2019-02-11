@@ -1,0 +1,115 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+    public static void sort(int[] a) {
+        
+        shuffleArray(a);
+        sort(a, 0, a.length - 1);
+    }
+
+    private static void sort(int[] a, int lo, int hi) {
+        
+        if(hi &lt;= lo)    return;
+        int j = partition(a, lo, hi);
+        sort(a, lo, j - 1);
+        sort(a, j + 1, hi);
+    }
+
+    private static int partition(int[] a, int lo, int hi) {
+        int i = lo, j = hi + 1;
+        while(true){
+            
+            while(<font color='#0008ff' weight='0.00869565' id='277'><font color='#0000ff' weight='7.24638e-05' id='258'>a</font>[lo] &gt; <font color='#0000ff' weight='7.24638e-05' id='268'>a</font>[++i])</font> <font color='#000dff' weight='0.0130435' id='295'>{
+                if(<font color='#0000ff' weight='0.000652174' id='286'><font color='#0000ff' weight='3.62319e-05' id='281'>i </font><font color='#0000ff' weight='3.62319e-05' id='283'>== </font><font color='#0000ff' weight='3.62319e-05' id='285'>hi</font>)</font> <font color='#0000ff' weight='0.000434783' id='291'>break;</font>
+            }</font>
+            
+            <font color='#0045ff' weight='0.0678261' id='336'>while(<font color='#0008ff' weight='0.00869565' id='317'><font color='#0001ff' weight='0.00101449' id='304'><font color='#0000ff' weight='7.24638e-05' id='298'>a</font><font color='#0000ff' weight='0.000289855' id='303'>[lo]</font> </font><font color='#0000ff' weight='0.000144928' id='306'>&lt; </font><font color='#0000ff' weight='7.24638e-05' id='308'>a</font>[--<font color='#0000ff' weight='1.81159e-05' id='312'>j</font>])</font> <font color='#000dff' weight='0.0130435' id='335'>{
+                <font color='#0005ff' weight='0.00565217' id='333'>if<font color='#0001ff' weight='0.00173913' id='328'>(<font color='#0000ff' weight='3.62319e-05' id='321'>j </font><font color='#0000ff' weight='3.62319e-05' id='323'>== </font><font color='#0000ff' weight='3.62319e-05' id='325'>lo</font>)</font> <font color='#0000ff' weight='0.000434783' id='331'><font color='#0000ff' weight='0.000217391' id='330'>break;</font></font>
+            }</font></font>
+            
+            </font><font color='#0017ff' weight='0.0226087' id='350'>if<font color='#0007ff' weight='0.00695652' id='345'>(<font color='#0000ff' weight='0.000144928' id='338'>j </font><font color='#0000ff' weight='0.000144928' id='340'>&lt;= </font><font color='#0000ff' weight='0.000144928' id='342'>i</font>)</font> <font color='#0001ff' weight='0.00173913' id='348'>break;</font>
+            
+            </font><font color='#0021ff' weight='0.0330435' id='370'>exch(a, i, j);
+        }</font>
+        
+        exch(a, lo, j);
+        return j;
+    }
+
+    private static void exch(int[] a, int i, int j) {
+        int temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+package heap;
+
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Heap {
+
+    
+
+        
+        
+    private int array[];
+    public static int n; 
+    
+    public static void sort(int arr[])  
+    {
+            buildMaxHeap(arr);
+            
+            for(int i=arr.length-1; i&gt;=0; i--){
+                int temp=arr[0];
+                arr[0] = arr[i];
+                arr[i]= temp;
+
+                n--;
+                
+                maxHeapify(arr,0);
+		}
+    }
+    
+    public static void maxHeapify(int[] arr, int i) 
+    {
+		int leftChild= (2*i)+1;
+		int rightChild=(2*i)+2;
+		
+                int max;
+                
+                if((leftChild &lt; n) &amp;&amp; (arr[leftChild] &gt; arr[i])) 
+			max=leftChild;
+                else max = i;
+                
+		if( (rightChild &lt; n) &amp;&amp; (arr[rightChild] &gt; arr[max])) 
+			max=rightChild;
+		
+                if(max!=i){
+			int temp = arr[max];
+			arr[max] = arr[i];
+			arr[i] = temp;
+                        maxHeapify(arr, max);
+		}
+	}  
+    
+    
+    
+    public static void buildMaxHeap(int [] array){
+    
+        n=array.length;
+        
+        for(int i=array.length/2; i&gt;=0; i--){
+            maxHeapify(array, i);
+        }
+    }
+}
+</font>
+</pre>

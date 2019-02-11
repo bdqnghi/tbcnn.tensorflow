@@ -1,0 +1,114 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ static int[] mergeSort(int[] a)<font color='#ff0000' weight='1' id='321'>{
+        <font color='#ff0000' weight='1' id='37'><font color='#ff0000' weight='1' id='24'>int</font> n = <font color='#ff0000' weight='1' id='34'><font color='#ff0000' weight='1' id='29'>a<font color='#ff0000' weight='1' id='28'></font></font>.<font color='#ff0000' weight='1' id='30'></font><font color='#ff0000' weight='1' id='33'>length<font color='#ff0000' weight='1' id='32'></font></font></font>;</font><font color='#ff0000' weight='1' id='38'></font>
+        <font color='#ff0000' weight='1' id='48'><font color='#ff0000' weight='1' id='45'><font color='#ff0000' weight='1' id='41'>int<font color='#ff0000' weight='1' id='40'></font></font>[]<font color='#ff0000' weight='1' id='42'></font> </font><font color='#ff0000' weight='1' id='47'>left</font>;</font>
+        <font color='#ff0000' weight='1' id='61'><font color='#ff0000' weight='1' id='56'><font color='#ff0000' weight='1' id='55'><font color='#ff0000' weight='1' id='52'>int</font><font color='#ff0000' weight='1' id='54'>[]<font color='#ff0000' weight='1' id='53'></font></font></font> </font><font color='#ff0000' weight='1' id='58'>right</font>;<font color='#ff0000' weight='1' id='60'></font>
+
+        </font><font color='#ff0000' weight='1' id='169'>if(n<font color='#ff0000' weight='1' id='62'></font> %<font color='#ff0000' weight='1' id='64'></font> <font color='#ff0000' weight='1' id='67'>2 </font><font color='#ff0000' weight='1' id='69'>==<font color='#ff0000' weight='1' id='68'></font> </font><font color='#ff0000' weight='1' id='71'>0</font>)<font color='#ff0000' weight='1' id='73'></font><font color='#ff0000' weight='1' id='119'><font color='#ff0000' weight='1' id='118'>{
+            left<font color='#ff0000' weight='1' id='75'></font>  =<font color='#ff0000' weight='1' id='77'></font> <font color='#ff0000' weight='1' id='80'>new </font><font color='#ff0000' weight='1' id='82'>int<font color='#ff0000' weight='1' id='81'></font></font>[n<font color='#ff0000' weight='1' id='83'></font> <font color='#ff0000' weight='1' id='86'>/<font color='#ff0000' weight='1' id='85'></font> </font><font color='#ff0000' weight='1' id='88'>2<font color='#ff0000' weight='1' id='87'></font></font>]<font color='#ff0000' weight='1' id='90'></font>;<font color='#ff0000' weight='1' id='94'></font>
+            right<font color='#ff0000' weight='1' id='96'></font> <font color='#ff0000' weight='1' id='99'>=<font color='#ff0000' weight='1' id='98'></font> </font><font color='#ff0000' weight='1' id='101'>new<font color='#ff0000' weight='1' id='100'></font> </font><font color='#ff0000' weight='1' id='113'><font color='#ff0000' weight='1' id='103'>int<font color='#ff0000' weight='1' id='102'></font></font><font color='#ff0000' weight='1' id='112'>[<font color='#ff0000' weight='1' id='110'><font color='#ff0000' weight='1' id='105'>n<font color='#ff0000' weight='1' id='104'></font> </font><font color='#ff0000' weight='1' id='107'>/<font color='#ff0000' weight='1' id='106'></font> </font><font color='#ff0000' weight='1' id='109'>2</font>]</font><font color='#ff0000' weight='1' id='111'></font></font></font>;
+        }<font color='#ff0000' weight='1' id='117'></font></font> </font>else {
+            <font color='#ff0000' weight='1' id='140'><font color='#ff0000' weight='1' id='138'><font color='#ff0000' weight='1' id='121'>left<font color='#ff0000' weight='1' id='120'></font>  </font><font color='#ff0000' weight='1' id='123'>=<font color='#ff0000' weight='1' id='122'></font> </font><font color='#ff0000' weight='1' id='125'>new<font color='#ff0000' weight='1' id='124'></font> </font><font color='#ff0000' weight='1' id='137'><font color='#ff0000' weight='1' id='127'>int<font color='#ff0000' weight='1' id='126'></font></font><font color='#ff0000' weight='1' id='136'>[<font color='#ff0000' weight='1' id='134'><font color='#ff0000' weight='1' id='129'>n<font color='#ff0000' weight='1' id='128'></font> </font><font color='#ff0000' weight='1' id='131'>/ </font><font color='#ff0000' weight='1' id='133'>2<font color='#ff0000' weight='1' id='132'></font></font>]</font><font color='#ff0000' weight='1' id='135'></font></font></font>;</font><font color='#ff0000' weight='1' id='139'></font>
+            </font><font color='#ff0000' weight='1' id='165'><font color='#ff0000' weight='1' id='142'>right </font>= <font color='#ff0000' weight='1' id='146'>new </font><font color='#ff0000' weight='1' id='148'>int</font>[<font color='#ff0000' weight='1' id='159'><font color='#ff0000' weight='1' id='150'>n </font><font color='#ff0000' weight='1' id='152'>/<font color='#ff0000' weight='1' id='151'></font> </font><font color='#ff0000' weight='1' id='154'>2<font color='#ff0000' weight='1' id='153'></font> </font><font color='#ff0000' weight='1' id='156'>+<font color='#ff0000' weight='1' id='155'></font> </font><font color='#ff0000' weight='1' id='158'>1<font color='#ff0000' weight='1' id='157'></font></font>]</font><font color='#ff0000' weight='1' id='160'></font>;
+        }</font><font color='#ff0000' weight='1' id='166'></font>
+
+        </font>for<font color='#ff0000' weight='1' id='198'>(<font color='#ff0000' weight='1' id='172'><font color='#ff0000' weight='1' id='171'>int<font color='#ff0000' weight='1' id='170'></font></font> </font><font color='#ff0000' weight='1' id='174'>i<font color='#ff0000' weight='1' id='173'></font> </font>= 0;<font color='#ff0000' weight='1' id='180'></font> <font color='#ff0000' weight='1' id='190'><font color='#ff0000' weight='1' id='183'>i<font color='#ff0000' weight='1' id='182'></font> </font><font color='#ff0000' weight='1' id='185'>&lt;<font color='#ff0000' weight='1' id='184'></font> </font><font color='#ff0000' weight='1' id='187'>n<font color='#ff0000' weight='1' id='186'></font></font>;<font color='#ff0000' weight='1' id='189'></font> </font><font color='#ff0000' weight='1' id='195'>i<font color='#ff0000' weight='1' id='191'></font><font color='#ff0000' weight='1' id='194'>++<font color='#ff0000' weight='1' id='193'></font></font></font>)</font><font color='#ff0000' weight='1' id='270'>{
+            if<font color='#ff0000' weight='1' id='211'>(<font color='#ff0000' weight='1' id='209'>i<font color='#ff0000' weight='1' id='199'></font> &lt; <font color='#ff0000' weight='1' id='204'>n<font color='#ff0000' weight='1' id='203'></font></font><font color='#ff0000' weight='1' id='206'>/<font color='#ff0000' weight='1' id='205'></font></font>2<font color='#ff0000' weight='1' id='207'></font>)</font><font color='#ff0000' weight='1' id='210'></font></font><font color='#ff0000' weight='1' id='235'><font color='#ff0000' weight='1' id='234'>{
+                left<font color='#ff0000' weight='1' id='212'></font>[i] <font color='#ff0000' weight='1' id='221'>=<font color='#ff0000' weight='1' id='220'></font> </font><font color='#ff0000' weight='1' id='223'>a<font color='#ff0000' weight='1' id='222'></font></font><font color='#ff0000' weight='1' id='228'>[<font color='#ff0000' weight='1' id='226'><font color='#ff0000' weight='1' id='225'>i<font color='#ff0000' weight='1' id='224'></font></font>]</font><font color='#ff0000' weight='1' id='227'></font></font>;
+            }</font> </font>else {
+                <font color='#ff0000' weight='1' id='264'><font color='#ff0000' weight='1' id='251'><font color='#ff0000' weight='1' id='237'>right</font>[<font color='#ff0000' weight='1' id='248'>i<font color='#ff0000' weight='1' id='238'></font> - n/<font color='#ff0000' weight='1' id='247'>2</font>]</font><font color='#ff0000' weight='1' id='249'></font> </font>= a[i];
+            }</font>
+        }<font color='#ff0000' weight='1' id='269'></font></font>
+
+        <font color='#ff0000' weight='1' id='287'><font color='#ff0000' weight='1' id='285'>left =<font color='#ff0000' weight='1' id='274'></font> <font color='#ff0000' weight='1' id='277'>mergeSort</font><font color='#ff0000' weight='1' id='283'>(<font color='#ff0000' weight='1' id='281'>left<font color='#ff0000' weight='1' id='278'></font>)</font><font color='#ff0000' weight='1' id='282'></font></font>;</font><font color='#ff0000' weight='1' id='286'></font>
+        </font><font color='#ff0000' weight='1' id='303'><font color='#ff0000' weight='1' id='301'><font color='#ff0000' weight='1' id='289'>right<font color='#ff0000' weight='1' id='288'></font> </font>=<font color='#ff0000' weight='1' id='290'></font> <font color='#ff0000' weight='1' id='300'><font color='#ff0000' weight='1' id='293'>mergeSort</font>(<font color='#ff0000' weight='1' id='297'>right)</font><font color='#ff0000' weight='1' id='298'></font></font>;</font><font color='#ff0000' weight='1' id='302'></font>
+
+        </font><font color='#ff0000' weight='1' id='319'>return merge(<font color='#ff0000' weight='1' id='307'>left<font color='#ff0000' weight='1' id='306'></font></font>, <font color='#ff0000' weight='1' id='313'>right)</font><font color='#ff0000' weight='1' id='314'></font>;
+
+    }</font><font color='#ff0000' weight='1' id='320'></font></font>
+
+    static int[] merge(int[] left, int[] right){
+        int[] result = new int[left.length + right.length];
+        
+        int i = 0;
+        int j = 0;
+        int index = 0;
+
+        while(i &lt; left.length &amp;&amp; j &lt; right.length){
+            if(left[i] &lt; right[i]){
+                result[index++] = left[i++];
+            } else {
+                result[index++] = right[j++];
+            }
+        }
+
+        while(i &lt; left.length){
+            result[index++] = left[i++];
+        }
+
+        while (j &lt; right.length) {
+            result[index++] = right[j++];
+        }
+        
+        return result;
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+package com.dreamskiale.basic_algorithms.search;
+
+import java.util.Deque;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+
+import com.dreamskiale.basic_algorithms.pojos.Vertex;
+
+public class DepthFirstSearchRecursive&lt;T&gt; implements GraphSearch&lt;T&gt; {
+
+  private Set&lt;Vertex&lt;T&gt;&gt; visited = new LinkedHashSet&lt;&gt;();
+  private Deque&lt;Vertex&lt;T&gt;&gt; topologicalSort = new LinkedList&lt;&gt;();
+
+  @Override
+  public Iterable&lt;Vertex&lt;T&gt;&gt; search(Vertex&lt;T&gt; head) {
+    visited.clear();
+    topologicalSort.clear();
+    dfsRecursive(head);
+    return visited;
+  }
+  
+  public Iterable&lt;Vertex&lt;T&gt;&gt; dfs(List&lt;Vertex&lt;T&gt;&gt; graph) {
+    visited.clear();
+    topologicalSort.clear();
+    for (Vertex&lt;T&gt; v : graph) {
+      if (!visited.contains(v)) {
+        dfsRecursive(v);
+      }
+    }
+    return visited;
+  }
+  
+  private void dfsRecursive(Vertex&lt;T&gt; vertex) {
+    visit(vertex);
+    List&lt;Vertex&lt;T&gt;&gt; adj = vertex.getAdjacent();
+    for (Vertex&lt;T&gt; a : adj) {
+      if (!visited.contains(a)) {
+        <font color='#ff0000' weight='1' id='518'><font color='#ff0000' weight='1' id='511'>dfsRecursive</font><font color='#ff0000' weight='1' id='517'>(<font color='#ff0000' weight='1' id='515'><font color='#ff0000' weight='1' id='514'><font color='#ff0000' weight='1' id='513'>a</font></font>)</font><font color='#ff0000' weight='1' id='516'></font></font></font>;
+      }
+    }
+    topologicalSort.addFirst(vertex);
+  }
+  
+  
+  public Deque&lt;Vertex&lt;T&gt;&gt; getTopologicalSort() {
+    return topologicalSort;
+  }
+  
+  private void visit(Vertex&lt;T&gt; v) {
+    visited.add(v);
+  }
+
+}</font>
+</pre>

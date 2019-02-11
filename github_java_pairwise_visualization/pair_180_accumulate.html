@@ -1,0 +1,47 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public static void sort(Comparable[] a){
+        int N = a.length;               
+        int h = 1;                      
+        while(h &lt; N / 3) h = 3*h + 1;   
+        while(h &gt;= 1){                  
+            for(int i = h; i &lt; N; i++){
+                
+                for(int j = i; j &gt;= h &amp;&amp; less(a[j], <font color='#ff0000' weight='1' id='164'><font color='#ff0000' weight='1' id='154'>a<font color='#ff0000' weight='1' id='153'></font></font><font color='#ff0000' weight='1' id='163'>[<font color='#ff0000' weight='1' id='161'><font color='#ff0000' weight='1' id='156'>j<font color='#ff0000' weight='1' id='155'></font> </font><font color='#ff0000' weight='1' id='158'>-<font color='#ff0000' weight='1' id='157'></font> </font><font color='#ff0000' weight='1' id='160'>h<font color='#ff0000' weight='1' id='159'></font></font>]</font><font color='#ff0000' weight='1' id='162'></font></font></font>); j-= h)
+                    exch(a, j, j - h);
+            } 
+            h = h / 3;                  
+        }                              
+    }
+    
+    
+    
+    
+    
+    
+    public static boolean less(Comparable v, Comparable w)
+    {    return v.compareTo(w) &lt; 0; }
+    
+    
+    private static void exch(Comparable[] a, int i, int j){
+        Comparable swap = a[i];
+        a[i] = a[j];
+        a[j] = swap;
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static &lt;T extends Comparable&lt;T&gt;&gt; void sort(List&lt;T&gt; itemsToSort) {
+        for (int i = 0; i &lt; itemsToSort.size(); i++) {
+            for (int j = itemsToSort.size() - 1; j &gt; 0; j--) <font color='#ff0000' weight='1' id='241'>{
+                <font color='#ff0000' weight='1' id='140'><font color='#ff0000' weight='1' id='138'><font color='#ff0000' weight='1' id='118'>T</font> <font color='#ff0000' weight='1' id='121'>secondItem </font><font color='#ff0000' weight='1' id='137'>= <font color='#ff0000' weight='1' id='136'><font color='#ff0000' weight='1' id='135'><font color='#ff0000' weight='1' id='128'><font color='#ff0000' weight='1' id='123'>itemsToSort</font><font color='#ff0000' weight='1' id='125'>.</font><font color='#ff0000' weight='1' id='127'>get</font></font>(<font color='#ff0000' weight='1' id='131'>j</font>)<font color='#ff0000' weight='1' id='133'></font></font></font></font>;</font><font color='#ff0000' weight='1' id='139'></font>
+                </font><font color='#ff0000' weight='1' id='168'><font color='#ff0000' weight='1' id='166'><font color='#ff0000' weight='1' id='143'><font color='#ff0000' weight='1' id='142'>T</font> </font><font color='#ff0000' weight='1' id='145'>firstItem </font><font color='#ff0000' weight='1' id='165'>= <font color='#ff0000' weight='1' id='164'><font color='#ff0000' weight='1' id='152'><font color='#ff0000' weight='1' id='147'>itemsToSort</font><font color='#ff0000' weight='1' id='149'>.<font color='#ff0000' weight='1' id='148'></font></font><font color='#ff0000' weight='1' id='151'>get</font></font><font color='#ff0000' weight='1' id='162'>(j - <font color='#ff0000' weight='1' id='158'>1<font color='#ff0000' weight='1' id='157'></font></font>)</font></font></font>;</font><font color='#ff0000' weight='1' id='167'></font>
+
+                </font><font color='#ff0000' weight='1' id='239'>if <font color='#ff0000' weight='1' id='189'>(<font color='#ff0000' weight='1' id='187'><font color='#ff0000' weight='1' id='170'>secondItem</font>.compareTo(<font color='#ff0000' weight='1' id='177'>firstItem</font>) &lt; 0)</font><font color='#ff0000' weight='1' id='188'></font></font><font color='#ff0000' weight='1' id='238'> <font color='#ff0000' weight='1' id='237'>{
+                    <font color='#ff0000' weight='1' id='210'><font color='#ff0000' weight='1' id='208'><font color='#ff0000' weight='1' id='207'><font color='#ff0000' weight='1' id='196'><font color='#ff0000' weight='1' id='191'>itemsToSort</font><font color='#ff0000' weight='1' id='193'>.<font color='#ff0000' weight='1' id='192'></font></font><font color='#ff0000' weight='1' id='195'>set</font></font><font color='#ff0000' weight='1' id='206'>(<font color='#ff0000' weight='1' id='200'><font color='#ff0000' weight='1' id='199'><font color='#ff0000' weight='1' id='198'>j</font></font>, </font><font color='#ff0000' weight='1' id='204'><font color='#ff0000' weight='1' id='203'><font color='#ff0000' weight='1' id='202'>firstItem</font></font>)</font><font color='#ff0000' weight='1' id='205'></font></font></font>;</font><font color='#ff0000' weight='1' id='209'></font>
+                    </font><font color='#ff0000' weight='1' id='235'><font color='#ff0000' weight='1' id='233'><font color='#ff0000' weight='1' id='232'><font color='#ff0000' weight='1' id='217'><font color='#ff0000' weight='1' id='212'>itemsToSort</font><font color='#ff0000' weight='1' id='214'>.</font><font color='#ff0000' weight='1' id='216'>set</font></font><font color='#ff0000' weight='1' id='231'>(<font color='#ff0000' weight='1' id='225'><font color='#ff0000' weight='1' id='224'>j <font color='#ff0000' weight='1' id='221'>-<font color='#ff0000' weight='1' id='220'></font> </font><font color='#ff0000' weight='1' id='223'>1<font color='#ff0000' weight='1' id='222'></font></font></font>, </font><font color='#ff0000' weight='1' id='229'><font color='#ff0000' weight='1' id='228'><font color='#ff0000' weight='1' id='227'>secondItem</font></font>)</font><font color='#ff0000' weight='1' id='230'></font></font></font>;</font><font color='#ff0000' weight='1' id='234'></font>
+                }</font><font color='#ff0000' weight='1' id='236'></font></font></font>
+            }</font><font color='#ff0000' weight='1' id='240'></font></font>
+        }
+    }</font>
+</pre>

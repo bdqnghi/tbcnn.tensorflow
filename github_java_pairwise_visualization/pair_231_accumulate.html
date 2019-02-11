@@ -1,0 +1,51 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+    public static void <font color='#ff0000' weight='1' id='9'>selectionSortLargest</font>(<font color='#ff0000' weight='1' id='19'>double[] array)</font>
+    {
+        for <font color='#ff0000' weight='1' id='59'>(int r = array.<font color='#ff0000' weight='1' id='29'></font>length<font color='#ff0000' weight='1' id='31'></font> - 1; <font color='#ff0000' weight='1' id='49'><font color='#ff0000' weight='1' id='44'>r </font><font color='#ff0000' weight='1' id='46'>&gt; </font><font color='#ff0000' weight='1' id='48'>0<font color='#ff0000' weight='1' id='47'></font></font>;</font><font color='#ff0000' weight='1' id='50'></font> <font color='#ff0000' weight='1' id='53'>--<font color='#ff0000' weight='1' id='52'></font></font>r<font color='#ff0000' weight='1' id='54'></font>)
+        </font>{
+            <font color='#ff0000' weight='1' id='71'>int<font color='#ff0000' weight='1' id='60'></font> <font color='#ff0000' weight='1' id='64'>largestElementIndex<font color='#ff0000' weight='1' id='63'></font> </font>= <font color='#ff0000' weight='1' id='66'>r</font>;
+            
+            </font><font color='#ff0000' weight='1' id='136'>for (<font color='#ff0000' weight='1' id='74'>int </font><font color='#ff0000' weight='1' id='76'>l </font><font color='#ff0000' weight='1' id='80'>= 0</font>; <font color='#ff0000' weight='1' id='90'><font color='#ff0000' weight='1' id='85'>l </font>&lt; <font color='#ff0000' weight='1' id='89'>r</font>;</font><font color='#ff0000' weight='1' id='91'></font> ++l)
+            {
+                <font color='#ff0000' weight='1' id='133'>if (<font color='#ff0000' weight='1' id='119'><font color='#ff0000' weight='1' id='102'>array</font>[l] &gt; <font color='#ff0000' weight='1' id='118'><font color='#ff0000' weight='1' id='112'>array<font color='#ff0000' weight='1' id='111'></font></font><font color='#ff0000' weight='1' id='117'>[largestElementIndex]</font></font>)</font><font color='#ff0000' weight='1' id='120'></font><font color='#ff0000' weight='1' id='132'>
+                    <font color='#ff0000' weight='1' id='130'><font color='#ff0000' weight='1' id='128'>largestElementIndex <font color='#ff0000' weight='1' id='125'>= </font>l;</font><font color='#ff0000' weight='1' id='129'></font></font></font>
+            }</font><font color='#ff0000' weight='1' id='134'></font>
+            
+            
+            </font><font color='#ff0000' weight='1' id='154'><font color='#ff0000' weight='1' id='152'><font color='#ff0000' weight='1' id='138'>double<font color='#ff0000' weight='1' id='137'></font></font> <font color='#ff0000' weight='1' id='141'>temp<font color='#ff0000' weight='1' id='140'></font> </font><font color='#ff0000' weight='1' id='151'>= <font color='#ff0000' weight='1' id='149'>array<font color='#ff0000' weight='1' id='148'>[<font color='#ff0000' weight='1' id='145'>r<font color='#ff0000' weight='1' id='144'></font></font>]</font></font></font>;</font>
+            </font><font color='#ff0000' weight='1' id='175'><font color='#ff0000' weight='1' id='173'><font color='#ff0000' weight='1' id='156'>array<font color='#ff0000' weight='1' id='155'></font></font><font color='#ff0000' weight='1' id='161'>[r]</font> <font color='#ff0000' weight='1' id='164'>=<font color='#ff0000' weight='1' id='163'></font> </font><font color='#ff0000' weight='1' id='166'>array<font color='#ff0000' weight='1' id='165'></font></font>[largestElementIndex<font color='#ff0000' weight='1' id='167'></font>];</font>
+            </font><font color='#ff0000' weight='1' id='190'><font color='#ff0000' weight='1' id='177'>array</font>[<font color='#ff0000' weight='1' id='180'>largestElementIndex]</font> = <font color='#ff0000' weight='1' id='187'>temp</font>;<font color='#ff0000' weight='1' id='189'></font>
+        }</font><font color='#ff0000' weight='1' id='191'></font>
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static void quicksort(int[] a, int start, int end) {
+        if (start &gt;= end)
+            return;
+
+        int pavot = a[start];
+        int i = start;
+        int j = end;
+
+        while (i &lt; j) {
+            while (i &lt; j &amp;&amp; a[j] &gt; pavot)
+                j--;
+            while (i &lt; j &amp;&amp; a[i] &lt;= pavot)
+                i++;
+            if (i != j) {
+                int t = a[i];
+                a[i] = a[j];
+                a[j] = t;
+            }
+        }
+        if (i == j) {
+            int t = a[start];
+            a[start] = a[i];
+            a[j] = t;
+        }
+        quicksort(a, start, i - 1);
+        quicksort(a, i + 1, end);
+    }</font>
+</pre>

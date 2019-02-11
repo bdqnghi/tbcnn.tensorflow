@@ -1,0 +1,50 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static void quicksort(int[] a, int start, int end) {
+        if (start &gt;= end)
+            return;
+
+        int pavot = a[start];
+        int i = start;
+        int j = end;
+
+        while (i &lt; j) {
+            while (i &lt; <font color='#ff0000' weight='1' id='115'><font color='#00ffa9' weight='0.333333' id='104'>j<font color='#00ffa9' weight='0.333333' id='103'></font> </font><font color='#00ffa9' weight='0.333333' id='106'>&amp;&amp;<font color='#00ffa9' weight='0.333333' id='105'></font> </font><font color='#00ffa9' weight='0.333333' id='114'><font color='#00aaff' weight='0.166667' id='108'>a<font color='#00aaff' weight='0.166667' id='107'></font></font><font color='#00aaff' weight='0.166667' id='113'>[<font color='#0054ff' weight='0.0833333' id='111'><font color='#0054ff' weight='0.0833333' id='110'>j<font color='#0054ff' weight='0.0833333' id='109'></font></font>]</font><font color='#0054ff' weight='0.0833333' id='112'></font></font></font> &gt;</font> pavot)
+                j--;
+            while (i &lt; j &amp;&amp; a[i] &lt;= pavot)
+                i++;
+            if (i != j) {
+                int t = a[i];
+                a[i] = a[j];
+                a[j] = t;
+            }
+        }
+        if (i == j) {
+            int t = a[start];
+            a[start] = a[i];
+            a[j] = t;
+        }
+        quicksort(a, start, i - 1);
+        quicksort(a, i + 1, end);
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+   public static void insertionSort(int[] list, int n) {
+        int i, j, key;
+        
+        
+        for (i = 1; i &lt; n; i++) {
+            key = list[i]; 
+            
+            
+            
+            
+            for (j = i - 1; j &gt;= 0 &amp;&amp; list[j] &gt; key; j--) {
+                list[j+1] = list[j];
+            }
+            
+            list[j+1] = key;
+        }
+    }</font>
+</pre>

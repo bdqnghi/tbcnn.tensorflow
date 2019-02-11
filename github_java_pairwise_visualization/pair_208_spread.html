@@ -1,0 +1,54 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public static void quicksort(int[] a, int start, int end) {
+        if (start &gt;= end)
+            return;
+
+        int pavot = a[start];
+        int i = start;
+        int j = end;
+
+        while (i &lt; j) {
+            while (i &lt; j <font color='#00ffa9' weight='0.333333' id='106'>&amp;&amp; </font><font color='#00aaff' weight='0.166667' id='108'>a<font color='#00aaff' weight='0.166667' id='107'></font></font>[<font color='#0054ff' weight='0.0833333' id='111'><font color='#0054ff' weight='0.0833333' id='110'>j<font color='#0054ff' weight='0.0833333' id='109'></font></font>]</font> &gt; pavot)
+                j--;
+            while (i &lt; j &amp;&amp; a[i] &lt;= pavot)
+                i++;
+            if (i != j) {
+                int t = a[i];
+                a[i] = a[j];
+                a[j] = t;
+            }
+        }
+        if (i == j) {
+            int t = a[start];
+            a[start] = a[i];
+            a[j] = t;
+        }
+        quicksort(a, start, i - 1);
+        quicksort(a, i + 1, end);
+    }</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+public void shellSort(int[] array) {
+        for(int gap = array.length / 2; gap &gt; 0; gap /= 2) {
+            for(int i = 0; i &lt; gap; i++) {
+                for(int j = i; j &lt; array.length; j += gap) {
+                    int min = j;
+                    for(int k = j + gap; k &lt; array.length; k += gap) <font color='#ff0000' weight='1' id='212'>{
+                        <font color='#00ff00' weight='0.5' id='210'>if<font color='#00ffff' weight='0.25' id='197'>(<font color='#007fff' weight='0.125' id='195'><font color='#0015ff' weight='0.0208333' id='178'>array</font>[<font color='#000aff' weight='0.0104167' id='180'>k</font>] <font color='#002aff' weight='0.0416667' id='186'>&lt;<font color='#002aff' weight='0.0416667' id='185'></font> </font><font color='#0015ff' weight='0.0208333' id='188'>array</font>[<font color='#000aff' weight='0.0104167' id='190'>min</font>])</font><font color='#007fff' weight='0.125' id='196'></font></font><font color='#00ffff' weight='0.25' id='209'> <font color='#00ffff' weight='0.25' id='208'>{
+                            <font color='#007fff' weight='0.125' id='206'><font color='#003fff' weight='0.0625' id='204'><font color='#0015ff' weight='0.0208333' id='199'>min<font color='#0015ff' weight='0.0208333' id='198'></font> </font>= <font color='#0015ff' weight='0.0208333' id='203'>k</font>;</font><font color='#003fff' weight='0.0625' id='205'></font>
+                        }</font><font color='#007fff' weight='0.125' id='207'></font></font></font>
+                    }</font><font color='#00ff00' weight='0.5' id='211'></font></font>
+                    swap(array, j, min);
+                }
+            }
+        }
+    }
+
+    public void swap(int[] array, int a, int b) {
+        int temp = array[a];
+        array[a] = array[b];
+        array[b] = temp;
+    }</font>
+</pre>

@@ -1,0 +1,145 @@
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+
+public static int getmin(ArrayList&lt;Integer&gt; a){
+	int retVal = a.get(0);
+	a.set(0, a.get(a.size()-1));
+	a.remove(a.size()-1);
+	if(!a.isEmpty()) siftd(a,0);
+	
+	return retVal;
+}
+
+public static boolean verify(ArrayList&lt;Integer&gt; a){
+	
+	for(int i = 0; i &lt; a.size()-1; i++){
+		if(a.get(i) &gt; a.get(i+1)) return false;
+	}
+	return true;
+	
+}
+
+
+public static void heapify(ArrayList&lt;Integer&gt; a){
+	for(int i = a.size()/2; i &gt;=0 ; i--){
+		siftd(a,i);
+	}
+	
+}
+
+public static void siftd(ArrayList&lt;Integer&gt; a, int i)<font color='#ff0000' weight='1' id='684'>{
+	<font color='#ff0000' weight='1' id='419'><font color='#ff0000' weight='1' id='406'><font color='#ff0000' weight='1' id='405'>int<font color='#ff0000' weight='1' id='404'></font></font> </font><font color='#ff0000' weight='1' id='408'>left </font>= <font color='#ff0000' weight='1' id='410'>i</font>*2;<font color='#ff0000' weight='1' id='418'></font>
+	</font><font color='#ff0000' weight='1' id='439'><font color='#ff0000' weight='1' id='421'>int</font> <font color='#ff0000' weight='1' id='424'>right </font>= 2*i +1;
+	</font><font color='#ff0000' weight='1' id='451'><font color='#ff0000' weight='1' id='441'>int</font> <font color='#ff0000' weight='1' id='444'>smallest </font>= i;<font color='#ff0000' weight='1' id='450'></font>
+	
+	</font>if<font color='#ff0000' weight='1' id='500'>(<font color='#ff0000' weight='1' id='453'>left </font><font color='#ff0000' weight='1' id='455'>&lt;<font color='#ff0000' weight='1' id='454'></font> </font><font color='#ff0000' weight='1' id='465'>a<font color='#ff0000' weight='1' id='456'></font><font color='#ff0000' weight='1' id='459'>.</font>size<font color='#ff0000' weight='1' id='460'></font><font color='#ff0000' weight='1' id='464'>()<font color='#ff0000' weight='1' id='463'></font></font> </font>&amp;&amp;<font color='#ff0000' weight='1' id='466'></font> <font color='#ff0000' weight='1' id='481'><font color='#ff0000' weight='1' id='469'>a</font>.<font color='#ff0000' weight='1' id='473'>get<font color='#ff0000' weight='1' id='472'></font></font>(<font color='#ff0000' weight='1' id='476'>left</font>) </font>&lt; <font color='#ff0000' weight='1' id='490'>a<font color='#ff0000' weight='1' id='484'></font><font color='#ff0000' weight='1' id='487'>.</font><font color='#ff0000' weight='1' id='489'>get<font color='#ff0000' weight='1' id='488'></font></font></font><font color='#ff0000' weight='1' id='496'>(<font color='#ff0000' weight='1' id='494'><font color='#ff0000' weight='1' id='492'>i<font color='#ff0000' weight='1' id='491'></font></font>)</font><font color='#ff0000' weight='1' id='495'></font></font> )<font color='#ff0000' weight='1' id='499'></font></font>{
+		<font color='#ff0000' weight='1' id='507'>smallest<font color='#ff0000' weight='1' id='501'></font> <font color='#ff0000' weight='1' id='504'>=<font color='#ff0000' weight='1' id='503'></font> </font><font color='#ff0000' weight='1' id='506'>left<font color='#ff0000' weight='1' id='505'></font></font>;</font>
+	}
+	<font color='#ff0000' weight='1' id='575'>if(<font color='#ff0000' weight='1' id='560'><font color='#ff0000' weight='1' id='515'>right </font><font color='#ff0000' weight='1' id='517'>&lt; </font><font color='#ff0000' weight='1' id='527'><font color='#ff0000' weight='1' id='519'>a</font><font color='#ff0000' weight='1' id='521'>.</font>size<font color='#ff0000' weight='1' id='522'></font>() </font><font color='#ff0000' weight='1' id='529'>&amp;&amp;<font color='#ff0000' weight='1' id='528'></font> </font><font color='#ff0000' weight='1' id='543'><font color='#ff0000' weight='1' id='531'>a</font><font color='#ff0000' weight='1' id='533'>.<font color='#ff0000' weight='1' id='532'></font></font><font color='#ff0000' weight='1' id='535'>get</font>(<font color='#ff0000' weight='1' id='538'>right</font>) </font>&lt; <font color='#ff0000' weight='1' id='559'><font color='#ff0000' weight='1' id='547'>a</font>.<font color='#ff0000' weight='1' id='551'>get</font>(<font color='#ff0000' weight='1' id='555'><font color='#ff0000' weight='1' id='554'>smallest<font color='#ff0000' weight='1' id='553'></font></font></font>)<font color='#ff0000' weight='1' id='557'></font></font> )</font><font color='#ff0000' weight='1' id='574'><font color='#ff0000' weight='1' id='573'>{
+		<font color='#ff0000' weight='1' id='571'><font color='#ff0000' weight='1' id='564'>smallest </font>= <font color='#ff0000' weight='1' id='568'>right</font>;<font color='#ff0000' weight='1' id='570'></font>
+	}</font><font color='#ff0000' weight='1' id='572'></font></font></font>
+	</font><font color='#ff0000' weight='1' id='682'>if<font color='#ff0000' weight='1' id='584'>(<font color='#ff0000' weight='1' id='577'>smallest<font color='#ff0000' weight='1' id='576'></font> </font>!=<font color='#ff0000' weight='1' id='578'></font> <font color='#ff0000' weight='1' id='581'>i<font color='#ff0000' weight='1' id='580'></font></font>)<font color='#ff0000' weight='1' id='583'></font></font><font color='#ff0000' weight='1' id='680'>{
+		<font color='#ff0000' weight='1' id='587'><font color='#ff0000' weight='1' id='586'>int</font> </font><font color='#ff0000' weight='1' id='589'>temp<font color='#ff0000' weight='1' id='588'></font> </font>= <font color='#ff0000' weight='1' id='603'><font color='#ff0000' weight='1' id='591'>a<font color='#ff0000' weight='1' id='590'></font></font>.get(<font color='#ff0000' weight='1' id='600'><font color='#ff0000' weight='1' id='599'><font color='#ff0000' weight='1' id='598'>i</font></font>)</font></font>;<font color='#ff0000' weight='1' id='607'></font>
+		<font color='#ff0000' weight='1' id='639'><font color='#ff0000' weight='1' id='610'>a</font>.set<font color='#ff0000' weight='1' id='637'>(<font color='#ff0000' weight='1' id='618'><font color='#ff0000' weight='1' id='617'>i</font></font>,<font color='#ff0000' weight='1' id='635'><font color='#ff0000' weight='1' id='633'><font color='#ff0000' weight='1' id='621'>a</font>.<font color='#ff0000' weight='1' id='625'>get</font><font color='#ff0000' weight='1' id='632'>(<font color='#ff0000' weight='1' id='630'><font color='#ff0000' weight='1' id='629'><font color='#ff0000' weight='1' id='628'>smallest<font color='#ff0000' weight='1' id='627'></font></font></font>)</font></font></font>)</font><font color='#ff0000' weight='1' id='636'></font></font>;</font><font color='#ff0000' weight='1' id='640'></font>
+		<font color='#ff0000' weight='1' id='662'><font color='#ff0000' weight='1' id='659'><font color='#ff0000' weight='1' id='648'><font color='#ff0000' weight='1' id='643'>a<font color='#ff0000' weight='1' id='642'></font></font><font color='#ff0000' weight='1' id='645'>.<font color='#ff0000' weight='1' id='644'></font></font><font color='#ff0000' weight='1' id='647'>set<font color='#ff0000' weight='1' id='646'></font></font></font><font color='#ff0000' weight='1' id='658'>(<font color='#ff0000' weight='1' id='652'><font color='#ff0000' weight='1' id='651'>smallest</font>, </font>temp)</font></font>;<font color='#ff0000' weight='1' id='661'></font>
+		</font><font color='#ff0000' weight='1' id='678'><font color='#ff0000' weight='1' id='664'>siftd<font color='#ff0000' weight='1' id='663'></font></font>(<font color='#ff0000' weight='1' id='668'><font color='#ff0000' weight='1' id='666'>a<font color='#ff0000' weight='1' id='665'></font></font>,</font><font color='#ff0000' weight='1' id='670'>smallest<font color='#ff0000' weight='1' id='669'></font></font>);
+	}</font><font color='#ff0000' weight='1' id='679'></font></font>
+}</font><font color='#ff0000' weight='1' id='683'></font></font>
+	
+
+</font>
+</pre>
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+    public static &lt;T extends Comparable&lt;T&gt;&gt; List&lt;T&gt; heapSort(List&lt;T&gt; list, int n){
+        if(n &lt;= 0){
+            return new ArrayList&lt;T&gt;();
+        }
+        
+        List&lt;T&gt; heapSortList = new ArrayList&lt;T&gt;();
+        heapSortList.add(null);
+        for(T item : list){
+            if(heapSortList.size() &lt; n+1){
+                
+                heapSortList.add(item);
+                int index = heapSortList.size()/2;
+                while(true){
+                    int leftChildIndex = index*2;
+                    int rightChildIndex = index *2 + 1;
+                    int minIndex = getMinIndex(heapSortList, index, leftChildIndex, rightChildIndex);
+                    if(minIndex == index || index == 1){
+                        break;
+                    }else{
+                        index = index/2;
+                    }
+                }
+            }else{
+                
+                T minItem = heapSortList.get(1);
+                if(minItem.compareTo(item) &lt; 0){
+                    heapSortList.set(1, item);
+                }
+                int index = 1;
+                while(true)<font color='#ff0000' weight='1' id='501'>{
+                    <font color='#ff0000' weight='1' id='421'><font color='#ff0000' weight='1' id='419'><font color='#ff0000' weight='1' id='408'><font color='#ff0000' weight='1' id='407'>int<font color='#ff0000' weight='1' id='406'></font></font> </font><font color='#ff0000' weight='1' id='410'>leftChildIndex<font color='#ff0000' weight='1' id='409'></font> </font><font color='#ff0000' weight='1' id='418'>= <font color='#ff0000' weight='1' id='417'><font color='#ff0000' weight='1' id='412'>index<font color='#ff0000' weight='1' id='411'></font></font><font color='#ff0000' weight='1' id='414'>*<font color='#ff0000' weight='1' id='413'></font></font>2</font></font>;</font><font color='#ff0000' weight='1' id='420'></font>
+                    </font><font color='#ff0000' weight='1' id='441'><font color='#ff0000' weight='1' id='439'><font color='#ff0000' weight='1' id='424'><font color='#ff0000' weight='1' id='423'>int<font color='#ff0000' weight='1' id='422'></font></font> </font><font color='#ff0000' weight='1' id='426'>rightChildIndex<font color='#ff0000' weight='1' id='425'></font> </font><font color='#ff0000' weight='1' id='438'>= <font color='#ff0000' weight='1' id='437'><font color='#ff0000' weight='1' id='428'>index<font color='#ff0000' weight='1' id='427'></font> </font><font color='#ff0000' weight='1' id='430'>*<font color='#ff0000' weight='1' id='429'></font></font><font color='#ff0000' weight='1' id='432'>2<font color='#ff0000' weight='1' id='431'></font> </font><font color='#ff0000' weight='1' id='434'>+<font color='#ff0000' weight='1' id='433'></font> </font><font color='#ff0000' weight='1' id='436'>1<font color='#ff0000' weight='1' id='435'></font></font></font></font>;</font><font color='#ff0000' weight='1' id='440'></font>
+                    </font><font color='#ff0000' weight='1' id='472'><font color='#ff0000' weight='1' id='470'><font color='#ff0000' weight='1' id='444'>int </font><font color='#ff0000' weight='1' id='446'>minIndex<font color='#ff0000' weight='1' id='445'></font> </font><font color='#ff0000' weight='1' id='469'>= <font color='#ff0000' weight='1' id='468'><font color='#ff0000' weight='1' id='467'><font color='#ff0000' weight='1' id='448'>getMinIndex<font color='#ff0000' weight='1' id='447'></font></font><font color='#ff0000' weight='1' id='466'>(<font color='#ff0000' weight='1' id='452'><font color='#ff0000' weight='1' id='451'><font color='#ff0000' weight='1' id='450'>heapSortList</font></font>, </font><font color='#ff0000' weight='1' id='456'><font color='#ff0000' weight='1' id='455'><font color='#ff0000' weight='1' id='454'>index<font color='#ff0000' weight='1' id='453'></font></font></font>, </font><font color='#ff0000' weight='1' id='460'><font color='#ff0000' weight='1' id='459'><font color='#ff0000' weight='1' id='458'>leftChildIndex<font color='#ff0000' weight='1' id='457'></font></font></font>, </font><font color='#ff0000' weight='1' id='464'><font color='#ff0000' weight='1' id='463'><font color='#ff0000' weight='1' id='462'>rightChildIndex<font color='#ff0000' weight='1' id='461'></font></font></font>)</font><font color='#ff0000' weight='1' id='465'></font></font></font></font></font>;</font><font color='#ff0000' weight='1' id='471'></font>
+                    </font><font color='#ff0000' weight='1' id='499'>if<font color='#ff0000' weight='1' id='481'>(<font color='#ff0000' weight='1' id='479'><font color='#ff0000' weight='1' id='474'>minIndex<font color='#ff0000' weight='1' id='473'></font> </font><font color='#ff0000' weight='1' id='476'>==<font color='#ff0000' weight='1' id='475'></font> </font><font color='#ff0000' weight='1' id='478'>index<font color='#ff0000' weight='1' id='477'></font></font>)</font><font color='#ff0000' weight='1' id='480'></font></font><font color='#ff0000' weight='1' id='486'><font color='#ff0000' weight='1' id='485'>{
+                        <font color='#ff0000' weight='1' id='483'>break;<font color='#ff0000' weight='1' id='482'></font>
+                    }</font><font color='#ff0000' weight='1' id='484'></font></font></font><font color='#ff0000' weight='1' id='498'>else<font color='#ff0000' weight='1' id='497'>{
+                        <font color='#ff0000' weight='1' id='495'><font color='#ff0000' weight='1' id='493'><font color='#ff0000' weight='1' id='488'>index<font color='#ff0000' weight='1' id='487'></font> </font><font color='#ff0000' weight='1' id='490'>=<font color='#ff0000' weight='1' id='489'></font> </font><font color='#ff0000' weight='1' id='492'>minIndex<font color='#ff0000' weight='1' id='491'></font></font>;</font><font color='#ff0000' weight='1' id='494'></font>
+                    }</font><font color='#ff0000' weight='1' id='496'></font></font></font>
+                }</font><font color='#ff0000' weight='1' id='500'></font></font>
+            }
+        }
+        
+        
+        List&lt;T&gt; resultList = new ArrayList&lt;T&gt;();
+        while(heapSortList.size() &gt; 1){
+            resultList.add(heapSortList.get(1));
+            if(heapSortList.size() == 2){
+                break;
+            }
+            heapSortList.set(1, heapSortList.remove(heapSortList.size() -1));
+            
+            int index = 1;
+            while(true){
+                int leftChildIndex = index*2;
+                int rightChildIndex = index *2 + 1;
+                int minIndex = getMinIndex(heapSortList, index, leftChildIndex, rightChildIndex);
+                if(minIndex == index){
+                    break;
+                }else{
+                    index = minIndex;
+                }
+            }
+        }
+
+        
+        Collections.reverse(resultList);
+        return resultList;
+    }
+    
+    
+    private static &lt;T extends Comparable&lt;T&gt;&gt; int getMinIndex(List&lt;T&gt; heapSortList, int index, int leftChildIndex, int rightChildIndex){
+        int minIndex = index;
+        
+        T minItem = heapSortList.get(minIndex);
+        if(leftChildIndex &lt; heapSortList.size()){
+            T leftChildItem = heapSortList.get(leftChildIndex);
+            if(minItem.compareTo(leftChildItem) &gt;  0){
+                minIndex = leftChildIndex;
+                minItem = leftChildItem;
+            }
+        }
+        
+        if(rightChildIndex &lt; heapSortList.size()){
+            T rightChildItem = heapSortList.get(rightChildIndex);
+            if(minItem.compareTo(rightChildItem) &gt;  0){
+                minIndex = rightChildIndex;
+                minItem = rightChildItem;
+            }
+        }</font>
+</pre>
