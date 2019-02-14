@@ -25,6 +25,11 @@ from utils import scale_attention_score_by_group
 from utils import robust_scale
 import math
 import operator
+from numpy import dot
+from numpy.linalg import norm
+
+
+
 
 os.environ['CUDA_VISIBLE_DEVICES'] = "0"
 
@@ -35,9 +40,10 @@ parser.add_argument('--lr', type=float, default=0.01, help='learning rate')
 parser.add_argument('--cuda', action='store_true', help='enables cuda')
 parser.add_argument('--verbal', type=bool, default=True, help='print training info or not')
 parser.add_argument('--manualSeed', type=int, help='manual seed')
-parser.add_argument('--n_classes', type=int, default=50, help='manual seed')
-parser.add_argument('--test_file', default="live_test/github_cpp/26/10.cpp", help='test program')
-parser.add_argument('--model_path', default="model/github_50_cpp", help='path to save the model')
+parser.add_argument('--n_classes', type=int, default=10, help='manual seed')
+parser.add_argument('--test_file', default="test/0.java", help='test program')
+parser.add_argument('--output_file', default="test/0.csv", help='test program')
+parser.add_argument('--model_path', default="model/github_sort_10_java_attention_sum_softmax", help='path to save the model')
 parser.add_argument('--n_hidden', type=int, default=50, help='number of hidden layers')
 parser.add_argument('--log_path', default="" ,help='log path for tensorboard')
 parser.add_argument('--epoch', type=int, default=0, help='epoch to test')
@@ -49,20 +55,27 @@ parser.add_argument('--embeddings_directory', default="embedding/fast_pretrained
 
 opt = parser.parse_args()
 
+aggregation_name = ""
 if opt.aggregation == 0:
     print("Using max pooling...........")
 if opt.aggregation == 1:
     print("Using attention with sum pooling...........")
+    aggregation_name = "sum"
 if opt.aggregation == 2:
     print("Using attention with max pooling...........")
+    aggregation_name = "max"
 if opt.aggregation == 3:
     print("Using attention with average pooling...........")
+    aggregation_name = "average"
 
 
+distributed_function_name = ""
 if opt.distributed_function == 0:
     print("Using softmax as the distributed_function...........")
+    distributed_function_name = "softmax"
 if opt.distributed_function == 1:
     print("Using sigmoid as the distributed_function...........")
+    distributed_function_name = "sigmoid"
 
 
 
@@ -71,52 +84,22 @@ if not os.path.isdir("cached"):
 
 
 def generate_pb(src_path):
-    path_splits = src_path.split("/")
-    file_name = path_splits[len(path_splits)-1].split(".")[0]
-    generated_dir = os.path.join("/".join(path_splits[:len(path_splits)-1]),file_name)
-    if not os.path.isdir(generated_dir):
-        os.mkdir(generated_dir)
-    pb_path = os.path.join(generated_dir, file_name + ".pb")
-
-    cmd = "docker run --rm -v $(pwd):/e -it yijun/fast -p " + src_path + " " + pb_path
-    os.system(cmd)
+    pb_path = os.path.join(src_path.split(".")[0] + ".pb")
+    if not os.path.exists(src_path):
+        cmd = "docker run --rm -v $(pwd):/e -it yijun/fast -p " + src_path + " " + pb_path
+        os.system(cmd)
     return pb_path
 
 
 def generate_pkl(pb_path):
     pkl_path = os.path.join(pb_path.split(".")[0] + ".pkl")
-    cmd = "docker run --rm -v $(pwd):/e -it yijun/fast " + pb_path + " " + pkl_path
-    print(cmd)
-    os.system(cmd)
+    if not os.path.exists(pkl_path):
+        cmd = "docker run --rm -v $(pwd):/e -it yijun/fast " + pb_path + " " + pkl_path
+        print(cmd)
+        os.system(cmd)
     return pkl_path
 
-def generate_visualization_accumulation(pkl_path):
-    path_splits = pkl_path.split("/")
-    file_name = path_splits[len(path_splits)-1].split(".")[0]
-    attention_path = os.path.join(file_name + "_raw_attention_without_node_type.csv")
-    pb_path = os.path.join(file_name + ".pb")
-    html_path = os.path.join(file_name + "_accumulation.html")
-    cmd = "docker run --rm -v $(pwd):/e -it yijun/fast -H -a -t -y " + attention_path + " " + pb_path  + " > " + html_path
-    os.system(cmd)
-    return html_path
-
-def generate_visualization_normal(pkl_path):
-    path_splits = pkl_path.split("/")
-    file_name = path_splits[len(path_splits)-1].split(".")[0]
-    attention_path = os.path.join(file_name + "_scaled_attention_without_node_type.csv")
-    pb_path = os.path.join(file_name + ".pb")
-    html_path = os.path.join(file_name + "_normal.html")
-    cmd = "docker run --rm -v $(pwd):/e -it yijun/fast -H -t -y " + attention_path + " " + pb_path  + " > " + html_path
-    os.system(cmd)
-    return html_path
-
-def generate_subtree_ids(pb_path, node_id):
-    subtree_ids_path = os.path.join(pb_path.split(".")[0] + "_subtree_ids.txt")
-    cmd = "docker run -v $(pwd):/e yijun/fast -CA " +  str(node_id) + " " + pb_path + " > " + subtree_ids_path
-    os.system(cmd)
-    return subtree_ids_path
-
-def predict(sess, out_node, attention_score_node, nodes_node, children_node, path, test_trees, labels, node_ids, node_types, embeddings, embedding_lookup):
+def predict(sess, out_node, attention_score_node, nodes_node, children_node, pkl_path, pb_path, test_trees, labels, node_ids, node_types, embeddings, embedding_lookup):
     for batch in sampling.batch_samples(
             sampling.gen_samples(test_trees, labels, embeddings, embedding_lookup), 1
         ):
@@ -128,97 +111,122 @@ def predict(sess, out_node, attention_score_node, nodes_node, children_node, pat
             }
         )
 
-        print(output)
+        # print(output)
 
-        splits = path.split(".")
-        node_ids = node_ids[0]
-        node_types = node_types[0]
+        splits = pkl_path.split(".")
+        # node_ids = node_ids[0]
+        # node_types = node_types[0]
 
-       
+        confidence_score = output[0]
+        actual = str(np.argmax(batch_labels)+1)
+        predicted = str(np.argmax(output)+1)
+
+        print("Probability : " + str(confidence_score))
         print("Actual classes : " + str(np.argmax(batch_labels)+1))
         print("Predicted classes : " + str(np.argmax(output)+1))
 
         max_node = len(nodes[0])
 
         attention_score = np.reshape(attention_score, (max_node))
-
+        # print(attention_score)
 
         attention_score_map = {}
         for i, score in enumerate(attention_score):
-            key = str(node_ids[i]) + "," + str(node_types[i])
+            key = str(node_ids[i])
             attention_score_map[key] = float(score)
 
-        
-        print(attention_score_map)
+        # Sort the scores
         attention_score_sorted = sorted(attention_score_map.items(), key=operator.itemgetter(1))
         attention_score_sorted.reverse() 
 
+
         node_ids = []
-        node_types = []
         attention_score = []
         for element in attention_score_sorted:
-            node_id, node_type = element[0].split(",")
-            node_ids.append(node_id)
-            node_types.append(node_type)
+            node_ids.append(element[0])
             attention_score.append(element[1])
 
-        attention_file_path_raw = splits[0] + "_raw_attention_with_node_type.csv"
+        attention_score_scaled = scale_attention_score_by_group(attention_score)
 
-        with open(attention_file_path_raw,"w") as f:
-            for i, score in enumerate(attention_score):
-                line = str(node_ids[i]) + "," + str(node_types[i])  + "," + str(score)
-                f.write("%s\n" % line)
+        attention_score_scaled_map = {}
+        for i, score in enumerate(attention_score_scaled):
+            key = str(node_ids[i])
+            attention_score_scaled_map[key] = float(score)
+        
+        return attention_score_scaled_map
 
-        attention_file_path_raw_no_node_type = splits[0] + "_raw_attention_without_node_type.csv"
-
-        with open(attention_file_path_raw_no_node_type,"w") as f:
-            for i, score in enumerate(attention_score):
-                line = str(node_ids[i]) + "," + str(score)
-                f.write("%s\n" % line)
-
-        attention_score = scale_attention_score_by_group(attention_score)
-        # attention_score = scale_attention_score(attention_score, 50)
+def cosine_simlarity(a, b):
+    return dot(a, b)/(norm(a)*norm(b))
 
 
-        attention_file_path = splits[0] + "_scaled_attention_with_node_type.csv"
-        with open(attention_file_path,"w") as f:
-            for i, score in enumerate(attention_score):
-                line = str(node_ids[i]) + "," + str(node_types[i])  + "," + str(score)
-                f.write("%s\n" % line)
+def read_node_count(histogram_path):
+    node_count_map = {}
+    with open(histogram_path,"r") as f:
+        data = f.readlines()
+        for line in data:
+           
+            line = line.replace("\n","")
+            splits = line.split(",")
+            node_count_map[splits[1].split(":")[0]] = int(splits[1])
+    return node_count_map
 
-        attention_file_path_no_node_type = splits[0] + "_scaled_attention_without_node_type.csv"
-        with open(attention_file_path_no_node_type,"w") as f:
-            for i, score in enumerate(attention_score):
-                line = str(node_ids[i]) + "," + str(score)
-                f.write("%s\n" % line)
 
-        generate_visualization_accumulation(path)
-        generate_visualization_normal(path)
+def read_common_part():
+    common_part = "github_java_sort_function_histogram/" 
+    common_part_map = {}
+    for i in range(1,10):
+        common_part_map[str(i)] = {}
+        path = common_part + str(i) + ".txt"
+        with open(path,"r") as f:
+            data = f.readlines()
+            for line in data:
+                line = line.replace("\n","")
+                splits = line.split(",")
+                common_part_map[str(i)][splits[1].split(":")[0]] = int(splits[1])
 
+    return common_part_map
+
+
+def load_program(file_path):
+
+    pb_path = generate_pb(file_path)
+    pkl_path = generate_pkl(pb_path)
+    
+    ast_representation = build_tree(pkl_path)
+    sort_function_id = search_function_node(ast_representation, "sort")
+   
+    ast_representation_path = pkl_path.split(".")[0] + "_ast.txt"
+    if not os.path.exists(ast_representation_path):
+        with open(ast_representation_path,"w") as f:
+            f.write(str(ast_representation))    
+
+
+    # label = file_path.split("/")[-2]
+
+    # print(label)
+    # an array of only 1 tree, just wrap it into 1 more dimension to make it consistent with the training process
+    test_trees, label , node_ids, node_types = load_single_program_for_live_test(pkl_path)
+    return test_trees, node_ids, node_types, pkl_path, pb_path
 
 def main(opt):
+
+    target_directory = "live_test/github_java/sort_function/"
+    file_name = aggregation_name + "_" + distributed_function_name + "_function.csv"
 
     print("Loading embeddings....")
     with open(opt.embeddings_directory, 'rb') as fh:
         embeddings, embed_lookup = pickle.load(fh,encoding='latin1')
+    labels = [str(i) for i in range(1, opt.n_classes+1)]
     logdir = opt.model_path
     batch_size = opt.test_batch_size
     epochs = opt.niter
     node_embedding_size = len(embeddings[0])
 
-    pb_path = generate_pb(opt.test_file)
-    pkl_path = generate_pkl(pb_path)
-    ast_representation = build_tree(pkl_path)
-    sort_function_id = search_function_node(ast_representation, "sort")
-    ast_representation_path = pkl_path.split(".")[0] + "_ast.txt"
-    with open(ast_representation_path,"w") as f:
-        f.write(str(ast_representation))    
+    # Loading program file
+    # test_trees, node_ids, node_types, subtree_ids, pkl_path = load_program(opt)
 
-    # an array of only 1 tree, just wrap it into 1 more dimension to make it consistent with the training process
-    test_trees, _ , node_ids, node_types = load_single_program_for_live_test(pkl_path)
-    labels = [str(i) for i in range(1, opt.n_classes+1)]
-
-
+   
+    # Init model
     checkfile = os.path.join(logdir, 'cnn_tree.ckpt')   
     ckpt = tf.train.get_checkpoint_state(logdir)
     
@@ -268,11 +276,16 @@ def main(opt):
             for i, var in enumerate(saver._var_list):
                 print('Var {}: {}'.format(i, var))
 
+       
 
-        predict(sess, out_node, attention_score_node, nodes_node, children_node, pkl_path, test_trees, labels, node_ids, node_types, embeddings, embed_lookup)
- 
+        test_trees, node_ids, node_types, pkl_path, pb_path = load_program(opt.test_file)
+
+        attention_score_scaled_map = predict(sess, out_node, attention_score_node, nodes_node, children_node, pkl_path, pb_path, test_trees, labels, node_ids, node_types, embeddings, embed_lookup)
+        
+        with open(opt.output_file,"a") as f:
+           for k, v in attention_score_scaled_map.items():
+                f.write(str(k) + "," + str(v))
+                f.write("\n")
 
 if __name__ == "__main__":
     main(opt)
-
-
