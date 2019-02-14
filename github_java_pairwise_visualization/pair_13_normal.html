@@ -1,0 +1,95 @@
+Highlighting both left and right by computing their weighted differences
+n = 1
+<pre style='background-color:blue;'>
+<font color='blue'>
+public static void sort(Comparable[] data){
+        long start = System.nanoTime();
+        int len = data.length-1;
+        mergeSort(data,0,len);
+        long end = System.nanoTime();
+        System.out.println("\nMergeSort Execute time:"+(end-start));
+    }
+
+    private static void mergeSort(Comparable[] data, int begin, int end) {
+        if(begin&lt;end){
+            int mid = (begin+end)/2;
+            mergeSort(data, begin, mid);
+            mergeSort(data, mid+1, end);
+            merge(data,begin,mid,end);
+        }
+    }
+
+    private static void merge(Comparable[] data, int begin, int mid, int end) {
+        int leftIndex = begin;
+        int rightIndex = mid+1;
+        Comparable[] tmp = new Comparable[end-begin+1];
+        int tmpIndex = 0;
+        while (leftIndex&lt;=mid &amp;&amp; rightIndex&lt;=end) {
+            if(data[leftIndex].compareTo(data[rightIndex])&gt;0)
+            {
+                tmp[tmpIndex] = data[rightIndex];
+                rightIndex++;
+            }else{
+                tmp[tmpIndex] = data[leftIndex];
+                leftIndex++;
+            }
+            tmpIndex++;         
+        }
+        while(leftIndex&lt;=mid){
+            tmp[tmpIndex]=data[leftIndex];
+            tmpIndex++;
+            leftIndex++;
+        }
+        while(rightIndex&lt;=end){
+            tmp[tmpIndex]=data[rightIndex];
+            tmpIndex++;
+            rightIndex++;
+        }
+        for(int i=0;i&lt;tmpIndex;i++)
+        {
+            data[begin+i] = tmp[i];
+        }
+    }</font>
+</pre>
+n = 1
+<pre style='background-color:blue;'>
+<font color='blue'>
+ public int[] mergesort(int[] arr) {
+    int len = arr.length; 
+    if (len &lt;= 1)
+      return arr; 
+    int alen = len / 2; 
+    int blen = len - alen; 
+    int[] a = new int[alen];
+    int[] b = new int[blen]; 
+    for (int i = 0; i &lt; alen; i++) 
+      a[i] = arr[i];
+    for (int i = 0; i &lt; blen; i++)
+      b[i] = arr[alen + i];
+    return merge(mergesort(a), mergesort(b));
+  }
+  
+  public int[] merge(int[] a, int[] b) {
+    int alen = a.length; 
+    int blen = b.length; 
+    int len = alen + blen; 
+    int[] arr = new int[len];
+    int i = 0, j = 0, k = 0; 
+    while (k &lt; len) { 
+      while (i &lt; alen &amp;&amp; j &lt; blen) 
+        if (a[i] &lt; b[j])  
+          arr[k++] = a[i++];
+        else if (a[i] &gt; b[j]) 
+          arr[k++] = b[j++];
+        else { 
+          arr[k++] = a[i++]; 
+          arr[k++] = b[j++];
+        }
+        while (i &lt; alen)  
+          arr[k++] = a[i++];
+        while (j &lt; blen)
+          arr[k++] = b[j++];
+    }
+    return arr; 
+  }</font>
+</pre>

@@ -1,0 +1,97 @@
+Highlighting both left and right by computing their weighted differences
+n = 1
+<pre style='background-color:blue;'>
+<font color='blue'>
+ private void setSort(int[] input ){
+        for (int sq = 1; sq &lt; input.length; sq += sq){
+            for (int j =0;j&lt;input.length-sq;j += sq*2){
+                setMergeSort(input,j,j+sq-1,Math.min(j+sq+sq,input.length-1));
+            }
+        }
+    }
+    private void setMergeSort(int[] input,int start,int mid , int end){
+        int[] tem = new int[input.length];
+
+       for ( int i = start; i &lt;= end ; i ++){
+           tem[i] = input[i];
+       }
+        int i= start,j=mid +1;
+       for (int h = start;h&lt;= end;h++){
+           if (i &gt; mid){
+               input[h] = tem[j++];
+           }else if(j &gt; end){
+               input[h] = tem[i++];
+           } else if (tem[i] &lt; tem[j]){
+               input[h] = tem[i++];
+           }else if (tem[i] &gt; tem[j]){
+               input[h] = tem[j++];
+           }
+       }
+    }</font>
+</pre>
+n = 1
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+    public static void main(String a[]){
+
+        int[] inputArr = {45,23,11,89,77,98,4,28,65,43};
+        MergeSort mms = new MergeSort();
+        mms.sort(inputArr);
+        for(int i:inputArr){
+            System.out.print(i);
+            System.out.print(" ");
+        }
+    }
+
+    private void sort(int[] inputArr) {
+
+        this.array = inputArr;
+        this.length = inputArr.length;
+        this.tempMergArr = new int[length];
+        doMergeSort(0, length - 1);
+       
+
+    }
+
+    private void doMergeSort(int lowerIndex, int higherIndex) {
+        if (lowerIndex &lt; higherIndex) {
+            int middle = lowerIndex + (higherIndex - lowerIndex) / 2;
+            
+            doMergeSort(lowerIndex, middle);
+            
+            doMergeSort(middle + 1, higherIndex);
+            
+            mergeParts(lowerIndex, middle, higherIndex);
+        }
+       
+    }
+    
+
+
+    private void mergeParts(int lowerIndex, int middle, int higherIndex) {
+
+        for (int i = lowerIndex; i &lt;= higherIndex; i++) {
+            tempMergArr[i] = array[i];
+        }
+        int i = lowerIndex;
+        int j = middle + 1;
+        int k = lowerIndex;
+        while (i &lt;= middle &amp;&amp; j &lt;= higherIndex) {
+            if (tempMergArr[i] &lt;= tempMergArr[j]) {
+                array[k] = tempMergArr[i];
+                i++;
+            } else {
+                array[k] = tempMergArr[j];
+                j++;
+            }
+            k++;
+        }
+        while (i &lt;= middle) {
+            array[k] = tempMergArr[i];
+            k++;
+            i++;
+        }
+
+    }</font>
+</pre>

@@ -1,0 +1,67 @@
+Highlighting both left and right by computing their weighted differences
+n = 1
+<pre style='background-color:blue;'>
+<font color='blue'>
+  public void sort(Object[] a, Comparator comparator)
+    {
+        for (int i = 1; i &lt; a.length; i++)
+        {
+            for (int j = i; j &gt;= 1; j--)
+            {
+                if (less(comparator, a[j], a[j - 1]))
+                {
+                    exchange(a, j, j - 1);
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+    }
+</font>
+</pre>
+n = 1
+<pre style='background-color:blue;'>
+<font color='blue'>
+public ListNode insertionSortList(ListNode head) {      
+    
+        if (head == null)
+            return null;
+        if (head.next == null) {
+            return head;
+        }
+        ListNode first = head;
+        ListNode testNode = head;
+
+        while (testNode.next != null) {
+            ListNode insertNode = testNode.next;
+            
+            if (testNode.val &lt;= insertNode.val) {
+                testNode = testNode.next;
+                continue;
+            }
+            
+            if (insertNode.val &lt;= first.val) {
+                testNode.next = insertNode.next;
+                insertNode.next = first;
+                first = insertNode;
+                continue;
+            }
+
+            for (ListNode pointer = first; pointer != testNode; pointer = pointer.next) {
+                if (pointer.val &lt;= insertNode.val
+                        &amp;&amp; insertNode.val &lt;= pointer.next.val) {
+                    testNode.next = insertNode.next;
+                    insertNode.next = pointer.next;
+                    pointer.next = insertNode;
+                    break;
+                }
+            }
+        }
+
+        return first;
+    }
+
+    </font>
+</pre>

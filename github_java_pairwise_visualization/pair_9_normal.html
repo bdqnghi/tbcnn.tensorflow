@@ -1,0 +1,101 @@
+Highlighting both left and right by computing their weighted differences
+n = 1
+<pre style='background-color:blue;'>
+<font color='blue'>
+
+
+public class AcyclicSP {
+
+    private double[] distTo;    
+    private DirectedEdge[] edgeTo;  
+
+    
+    
+    public AcyclicSP(EdgeWeightedDigraph G, int s) {
+        distTo = new double[G.V()];
+        edgeTo = new DirectedEdge[G.V()];
+
+        validateVertex(s);
+
+        for (int v = 0; v &lt; G.V(); v++) {
+            distTo[v] = Double.POSITIVE_INFINITY;
+        }
+        distTo[s] = 0.0;
+
+        
+        Topological topological = new Topological(G);
+        if (!topological.hasOrder()) {
+            throw new IllegalArgumentException("Digraph is not acyclic.");
+        }
+        for (int v : topological.order()) {
+            for (DirectedEdge e : G.adj(v)) {
+                relax(e);
+            }
+        }
+    }
+
+    
+    private void relax(DirectedEdge e) {
+        int v = e.from(), w = e.to();
+        if (distTo[w] &gt; distTo[v] + e.weight()) {
+            distTo[w] = distTo[v] + e.weight();
+            edgeTo[w] = e;
+        }
+    }
+
+    
+    public double distTo(int v) {
+        validateVertex(v);
+        return distTo[v];
+    }
+
+    
+    public boolean hasPathTo(int v) {
+        validateVertex(v);
+        return distTo[v] &lt; Double.POSITIVE_INFINITY;
+    }
+
+    
+    public Iterable&lt;DirectedEdge&gt; pathTo(int v) {
+        validateVertex(v);
+        if (!hasPathTo(v)) {
+            return null;
+        }
+        Stack&lt;DirectedEdge&gt; path = new Stack&lt;DirectedEdge&gt;();
+        for (DirectedEdge e = edgeTo[v]; e != null; e = edgeTo[e.from()]) {
+            path.push(e);
+        }
+        return path;
+    }
+
+    
+    private void validateVertex(int v) {
+        int V = distTo.length;
+        if (v &lt; 0 || v &gt;= V) {
+            throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V - 1));
+        }
+    }
+
+
+}
+</font>
+</pre>
+n = 2
+<pre style='background-color:blue;'>
+<font color='blue'>
+<font color='#ff0000' weight='1' id='167'><font color='#ff0000' weight='1' id='2'>public </font><font color='#ff0000' weight='1' id='5'><font color='#ff0000' weight='1' id='4'>void</font> </font><font color='#ff0000' weight='1' id='7'>topSort</font><font color='#ff0000' weight='1' id='16'>(<font color='#ff0000' weight='1' id='9'>Graph</font> <font color='#ff0000' weight='1' id='12'>g</font>)<font color='#ff0000' weight='1' id='15'></font> </font><font color='#ff0000' weight='1' id='166'>{
+        <font color='#ff0000' weight='1' id='18'>initDfs</font>(<font color='#ff0000' weight='1' id='20'>g</font>);
+        <font color='#ff0000' weight='1' id='108'>for (int <font color='#ff0000' weight='1' id='33'>i </font>= <font color='#ff0000' weight='1' id='35'>1</font>; <font color='#ff0000' weight='1' id='42'>i </font><font color='#ff0000' weight='1' id='44'>&lt;= </font><font color='#ff0000' weight='1' id='51'><font color='#ff0000' weight='1' id='46'>g</font>.<font color='#ff0000' weight='1' id='50'>numV</font></font>; <font color='#ff0000' weight='1' id='56'>i</font>++) <font color='#ff0000' weight='1' id='107'>{
+            if (<font color='#ff0000' weight='1' id='64'>!</font><font color='#ff0000' weight='1' id='66'>mDiscovered</font>[<font color='#ff0000' weight='1' id='68'>i</font>]) <font color='#ff0000' weight='1' id='93'>{
+                <font color='#ff0000' weight='1' id='88'><font color='#ff0000' weight='1' id='77'>idfs</font><font color='#ff0000' weight='1' id='87'>(<font color='#ff0000' weight='1' id='81'><font color='#ff0000' weight='1' id='80'><font color='#ff0000' weight='1' id='79'>i</font></font>, </font><font color='#ff0000' weight='1' id='85'><font color='#ff0000' weight='1' id='84'><font color='#ff0000' weight='1' id='83'>g</font></font>)</font><font color='#ff0000' weight='1' id='86'></font></font></font>;
+            }<font color='#ff0000' weight='1' id='92'></font></font>
+            if (<font color='#ff0000' weight='1' id='98'><font color='#ff0000' weight='1' id='97'>mFinished</font>)</font><font color='#ff0000' weight='1' id='99'></font> <font color='#ff0000' weight='1' id='103'><font color='#ff0000' weight='1' id='102'>return;<font color='#ff0000' weight='1' id='101'></font></font></font>
+        }<font color='#ff0000' weight='1' id='106'></font></font>
+        </font><font color='#ff0000' weight='1' id='152'>while <font color='#ff0000' weight='1' id='125'>(<font color='#ff0000' weight='1' id='123'><font color='#ff0000' weight='1' id='118'><font color='#ff0000' weight='1' id='115'><font color='#ff0000' weight='1' id='110'>mSorted</font><font color='#ff0000' weight='1' id='112'>.</font><font color='#ff0000' weight='1' id='114'>size</font></font>() </font><font color='#ff0000' weight='1' id='120'>&gt; </font><font color='#ff0000' weight='1' id='122'>0</font>)</font> </font><font color='#ff0000' weight='1' id='151'>{
+            <font color='#ff0000' weight='1' id='149'><font color='#ff0000' weight='1' id='147'><font color='#ff0000' weight='1' id='146'><font color='#ff0000' weight='1' id='127'>out</font><font color='#ff0000' weight='1' id='145'>(<font color='#ff0000' weight='1' id='143'><font color='#ff0000' weight='1' id='142'><font color='#ff0000' weight='1' id='129'>mSorted</font>.<font color='#ff0000' weight='1' id='133'>pop</font>() <font color='#ff0000' weight='1' id='139'>+ </font><font color='#ff0000' weight='1' id='141'>" "</font></font>)</font><font color='#ff0000' weight='1' id='144'></font></font></font>;</font><font color='#ff0000' weight='1' id='148'></font>
+        }</font><font color='#ff0000' weight='1' id='150'></font></font>
+        </font><font color='#ff0000' weight='1' id='164'><font color='#ff0000' weight='1' id='162'><font color='#ff0000' weight='1' id='154'>outln</font>(<font color='#ff0000' weight='1' id='156'>""</font>);</font><font color='#ff0000' weight='1' id='163'></font>
+    }</font></font>
+
+    </font></font>
+</pre>

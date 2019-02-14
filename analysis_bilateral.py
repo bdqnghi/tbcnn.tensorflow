@@ -31,7 +31,7 @@ parser.add_argument('--lr', type=float, default=0.01, help='learning rate')
 parser.add_argument('--verbal', type=bool, default=True, help='print training info or not')
 parser.add_argument('--manualSeed', type=int, help='manual seed')
 parser.add_argument('--n_classes', type=int, default=10, help='number of classes')
-parser.add_argument('--test_data', default="pairwise/github_java_sort_function_pkl_train_test_val__val.txt", help='test program data')
+parser.add_argument('--test_data', default="pairwise/github_java_sort_function_pkl_train_test_val__test.txt", help='test program data')
 parser.add_argument('--model_path', default="model//pairwise_java_sort_function_attention_sum_softmax", help='path to save the model')
 parser.add_argument('--n_hidden', type=int, default=50, help='number of hidden layers')
 parser.add_argument('--training', action="store_true",help='is training')
@@ -126,39 +126,38 @@ def scale_attention(attention_score, max_node, node_ids):
 
     attention_score = np.reshape(attention_score, (max_node))
 
-    attention_score_map = {}
-    for i, score in enumerate(attention_score):
-        key = str(node_ids[i])
-        attention_score_map[key] = float(score)
+    # attention_score_map = {}
+    # for i, score in enumerate(attention_score):
+    #     key = str(node_ids[i])
+    #     attention_score_map[key] = float(score)
 
     
-    attention_score_sorted = sorted(attention_score_map.items(), key=operator.itemgetter(1))
-    attention_score_sorted.reverse() 
+    # attention_score_sorted = sorted(attention_score_map.items(), key=operator.itemgetter(1))
+    # attention_score_sorted.reverse() 
 
-    node_ids = []
-    attention_score = []
-    for element in attention_score_sorted:
-        node_ids.append(element[0])
-        attention_score.append(element[1])
+    # node_ids = []
+    # attention_score = []
+    # for element in attention_score_sorted:
+    #     node_ids.append(element[0])
+    #     attention_score.append(element[1])
 
-    attention_score_scaled = scale_attention_score_by_group(attention_score)
+    # attention_score_scaled = scale_attention_score_by_group(attention_score)
 
-    attention_score_scaled_map = {}
-    for i, score in enumerate(attention_score_scaled):
-        key = str(node_ids[i])
-        attention_score_scaled_map[key] = float(score)
-
-    score_str = []
-    for node_id, score in attention_score_scaled_map.items():
-        line = str(node_id) + ":" + str(score)
-        score_str.append(line)
+    # attention_score_scaled_map = {}
+    # for i, score in enumerate(attention_score_scaled):
+    #     key = str(node_ids[i])
+    #     attention_score_scaled_map[key] = float(score)
 
     # score_str = []
-    # for i, score in enumerate(attention_score):
-    #     print("ASDSDOPIhSPDSPDOIPHDIOHIOSHIODHSDSd")
-    #     line = str(node_ids[i]) + ":" + str(score)
-    #     print(line)
+    # for node_id, score in attention_score_scaled_map.items():
+    #     line = str(node_id) + ":" + str(score)
     #     score_str.append(line)
+
+    score_str = []
+    for i, score in enumerate(attention_score):
+      
+        line = str(node_ids[i]) + ":" + str(score)
+        score_str.append(line)
 
     return ",".join(score_str)
 
@@ -211,11 +210,11 @@ def predict(sess, index, left_path, right_path, pairs, left_node_ids_list, right
 
         right_scaled_attention_score = scale_attention(right_attention_score, len(right_nodes[0]), right_node_ids_list)
 
-        left_pb_path = left_path.replace("github_java_sort_function_pkl_train_test_val","github_java_sort_function_pb").replace(".pkl","").replace("/val","")
-        right_pb_path = right_path.replace("github_java_sort_function_pkl_train_test_val","github_java_sort_function_pb").replace(".pkl","").replace("/val","")
+        left_pb_path = left_path.replace("github_java_sort_function_pkl_train_test_val","github_java_sort_function_pb").replace(".pkl","").replace("/test","")
+        right_pb_path = right_path.replace("github_java_sort_function_pkl_train_test_val","github_java_sort_function_pb").replace(".pkl","").replace("/test","")
 
-        left_java_path = left_path.replace("github_java_sort_function_pkl_train_test_val","github_java_sort_function").replace(".pb.pkl","").replace("/val","")
-        right_java_path = right_path.replace("github_java_sort_function_pkl_train_test_val","github_java_sort_function").replace(".pb.pkl","").replace("/val","")
+        left_java_path = left_path.replace("github_java_sort_function_pkl_train_test_val","github_java_sort_function").replace(".pb.pkl","").replace("/test","")
+        right_java_path = right_path.replace("github_java_sort_function_pkl_train_test_val","github_java_sort_function").replace(".pb.pkl","").replace("/test","")
 
         # print(cmd)
        
@@ -235,11 +234,19 @@ def predict(sess, index, left_path, right_path, pairs, left_node_ids_list, right
         generate_pb(temp_left_java_path)
         generate_pb(temp_right_java_path)
 
-        save_file = "github_java_pairwise_visualization/" + "pair_" + str(index) + ".html"
-        cmd = "docker run -v $(pwd):/e yijun/fast -H 0 -a 0 -D " + temp_left_pb_path + " " + temp_right_pb_path + " -x " + "'" + left_scaled_attention_score + "'" + " -y " + "'" + right_scaled_attention_score + "'" + " > " + save_file
+        save_file_normal = "github_java_pairwise_visualization/" + "pair_" + str(index) + "_normal.html"
+        save_file_spread = "github_java_pairwise_visualization/" + "pair_" + str(index) + "_spread.html"
+        save_file_spread_subtree = "github_java_pairwise_visualization/" + "pair_" + str(index) + "_spread_subtree.html"
+
+        cmd_normal = "docker run -v $(pwd):/e yijun/fast -H 0 -a 0 --diff-weight --linear " + " -x " + "'" + left_scaled_attention_score + "'" + " -y " + "'" + right_scaled_attention_score + "'" + " -D " + temp_left_pb_path + " " + temp_right_pb_path + " > " + save_file_normal
+        # cmd_spread = "docker run -v $(pwd):/e yijun/fast -H 0 -a 1 --diff-weight --linear -D " + temp_left_pb_path + " " + temp_right_pb_path + " -x " + "'" + left_scaled_attention_score + "'" + " -y " + "'" + right_scaled_attention_score + "'" + " > " + save_file_spread
+        # cmd_spread_with_sub_tree = "docker run -v $(pwd):/e yijun/fast -H 0 -a 2 --diff-weight --linear -D " + temp_left_pb_path + " " + temp_right_pb_path + " -x " + "'" + left_scaled_attention_score + "'" + " -y " + "'" + right_scaled_attention_score + "'" + " > " + save_file_spread_subtree
+
         # cmd = "docker run -v $(pwd):/e yijun/fast -D -H -x " + "'" + left_scaled_attention_score + "'" + " -y " + "'" + right_scaled_attention_score + "'" + " -p " + temp_left_path + " " + temp_right_path
-        print(cmd)
-        os.system(cmd)
+        print(cmd_normal)
+        os.system(cmd_normal)
+        # os.system(cmd_spread)
+        # os.system(cmd_spread_with_sub_tree)
         # gumtree_cmd = "docker run -v $(pwd):/e --entrypoint gumtree -it yijun/fast diff " + temp_left_path + " " + temp_right_path
         # print(gumtree_cmd)
 

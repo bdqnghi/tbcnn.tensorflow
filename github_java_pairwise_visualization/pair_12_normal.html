@@ -1,0 +1,90 @@
+Highlighting both left and right by computing their weighted differences
+n = 1
+<pre style='background-color:blue;'>
+<font color='blue'>
+package algorithms.sort;
+
+public class SortInsertionSort {
+	
+	
+public static void main(String args[]){
+		
+		int arr[] = {30,6,2,3,4,6,7,8,10,20,11,5,5,30};
+		
+	    int n = arr.length;
+	    
+	    
+	    for (int i=1; i&lt;n; i++)
+        {
+            int key = arr[i]; 
+             
+            int j = i-1;
+            
+            
+            while (j&gt;=0 &amp;&amp; arr[j] &gt; key)  
+            {
+                arr[j+1] = arr[j];
+                
+                j--;
+            }
+            
+            arr[j+1] = key;            
+        }
+	    
+	    
+	  System.out.println(" Sorted Array: " );  
+	  
+	  for(int m=0; m &lt; n; m++){
+		  
+		  System.out.print(" "+ arr[m]);
+	  }
+	  			
+	}
+
+}
+</font>
+</pre>
+n = 1
+<pre style='background-color:blue;'>
+<font color='blue'>
+  private static void merge(Comparable[] a, Comparable[] aux, int lo, int mid, int hi) {
+
+        
+        assert isSorted(a, lo, mid);
+        assert isSorted(a, mid+1, hi);
+
+        
+        for (int k = lo; k &lt;= hi; k++) {
+            aux[k] = a[k]; 
+        }
+
+        
+        int i = lo, j = mid+1;
+        for (int k = lo; k &lt;= hi; k++) {
+            if      (i &gt; mid)              a[k] = aux[j++];   
+            else if (j &gt; hi)               a[k] = aux[i++];
+            else if (less(aux[j], aux[i])) a[k] = aux[j++];
+            else                           a[k] = aux[i++];
+        }
+
+        
+        assert isSorted(a, lo, hi);
+    }
+
+    
+    private static void sort(Comparable[] a, Comparable[] aux, int lo, int hi) {
+        if (hi &lt;= lo) return;
+        int mid = lo + (hi - lo) / 2;
+        sort(a, aux, lo, mid);
+        sort(a, aux, mid + 1, hi);
+        merge(a, aux, lo, mid, hi);
+    }
+
+    
+    public static void sort(Comparable[] a) {
+        Comparable[] aux = new Comparable[a.length];
+        sort(a, aux, 0, a.length-1);
+        assert isSorted(a);
+    }
+</font>
+</pre>
