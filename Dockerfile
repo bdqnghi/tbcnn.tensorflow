@@ -1,11 +1,28 @@
-FROM yijun/gitpod:fast
-USER root
-RUN apk add --no-cache python3 && \
-    python3 -m ensurepip && \
-    rm -r /usr/lib/python*/ensurepip && \
-    pip3 install --upgrade pip setuptools && \
-    if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && \
-    if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi && \
-    rm -r /root/.cache
+FROM yijun/fast:base
+RUN apk update
+RUN apk upgrade
+RUN apk add --update go gcc g++
+WORKDIR /usr/bin
+ENV GOPATH /usr/bin
+ENV CGO_ENABLED=1
+ENV GOOS=linux
+RUN addgroup -g 33333 gitpod && \
+    adduser -G gitpod -u 33333 -s /bin/bash -D gitpod
+RUN chmod g+rw /home && \
+    chown -R gitpod:gitpod /home/gitpod && \
+    mkdir -p /workspace && \
+    chown -R gitpod:gitpod /workspace;
+RUN mkdir -p /root && touch /root/dontBreakMyBuild
+RUN apk add --update --no-cache --allow-untrusted fast@testing
+RUN pip3 install --update pip
+RUN pip3 install ggnn
+RUN pip3 uninstall -y flatast
+RUN pip3 install flatast
 RUN pip3 install numpy
 RUN pip3 install tensorflow
+ENV HOME=/home/gitpod
+ENV GITPOD_HOME /home/gitpod
+ENV GITPOD_UID_GID 33333
+ENV SHELL /bin/bash
+ENV USE_LOCAL_GIT trueWORKDIR $HOME
+USER gitpod
