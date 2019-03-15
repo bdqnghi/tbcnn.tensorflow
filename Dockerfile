@@ -14,7 +14,7 @@ RUN chmod g+rw /home && \
     chown -R gitpod:gitpod /workspace;
 RUN mkdir -p /root && touch /root/dontBreakMyBuild
 RUN apk add --update --no-cache --allow-untrusted fast@testing
-RUN pip3 install --update pip
+RUN pip3 install --upgrade pip
 RUN pip3 install ggnn
 RUN pip3 uninstall -y flatast
 RUN pip3 install flatast
