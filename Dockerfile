@@ -19,7 +19,7 @@ RUN pip3 install ggnn
 RUN pip3 uninstall -y flatast
 RUN pip3 install flatast
 RUN pip3 install numpy
-RUN pip3 install --upgrade tensorflow
+RUN pip3 install --upgrade https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.12.0-py3-none-any.whl
 ENV HOME=/home/gitpod
 ENV GITPOD_HOME /home/gitpod
 ENV GITPOD_UID_GID 33333
