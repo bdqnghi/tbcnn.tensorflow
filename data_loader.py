@@ -123,6 +123,23 @@ def load_pairwise_programs(path, train_test_val):
 
     return pairs
 
+
+def load_single_pair_for_live_test(left_path, right_path, label):
+    print("Loading pairwise data............")
+    pairs = []
+    
+    left_node_ids_list = []
+    right_node_ids_list = []
+  
+    left_tree, _ , left_node_ids, _, = load_single_program(left_path)
+    right_tree, _ , right_node_ids, _ = load_single_program(right_path)
+    pairs.append((left_tree,right_tree,int(label)))
+    left_node_ids_list.append(left_node_ids)
+    right_node_ids_list.append(right_node_ids)
+
+    return pairs, left_node_ids_list, right_node_ids_list
+
+
 def load_pairwise_programs_for_live_test(path, train_test_val):
     print("Loading pairwise data............")
     pairs = []
@@ -150,7 +167,7 @@ def load_pairwise_programs_for_live_test(path, train_test_val):
 
 def build_tree(script):
     """Builds an AST from a script."""
-   
+  
     with open(script, 'rb') as file_handler:
         data_source = pickle.load(file_handler)
     return data_source
@@ -171,7 +188,23 @@ def load_single_program(file_path):
   
     return result, label, node_ids, node_types
 
-def load_single_program_for_live_test(file_pkl_path, common_part, node_count):
+def load_single_program_for_live_test(file_path):
+    result = []
+    splits = file_path.split("/")
+    label = "1"
+    # print(label)
+    ast_representation = build_tree(file_path)
+    if ast_representation.HasField("element"):
+        root = ast_representation.element
+        tree, size, node_ids, node_types = _traverse_tree(root)
+
+    result.append({
+        'tree': tree, 'label': label
+    })
+  
+    return result, label, node_ids, node_types
+
+def load_single_program_for_bilateral_live_test(file_pkl_path, common_part, node_count):
     result = []
     # labels = []
     # nodes_ids_list = []

@@ -16,7 +16,7 @@ def gen_samples(trees, labels, vectors, vector_lookup):
     # print vector_lookup
 
     for tree in trees:
-
+    
         nodes = []
         children = []
         label = label_lookup[tree['label']]
@@ -119,17 +119,18 @@ def batch_random_samples_2_sides(left_trees, right_trees, labels, vectors, vecto
             n = str(node['node'])
             right_nodes.append(vectors[int(n)])
       
-        if (len(left_nodes) < 7000 and len(left_nodes) > 50) and (len(right_nodes) < 7000 and len(right_nodes) > 50):
+        # if (len(left_nodes) < 7000 and len(left_nodes) > 50) and (len(right_nodes) < 7000 and len(right_nodes) > 50):
 
-            batch_left_nodes.append(left_nodes)
-            batch_left_children.append(left_children)
+        batch_left_nodes.append(left_nodes)
+        batch_left_children.append(left_children)
 
-            batch_right_nodes.append(right_nodes)
-            batch_right_children.append(right_children)
+        batch_right_nodes.append(right_nodes)
+        batch_right_children.append(right_children)
 
-            batch_labels.append(labels[i])
+        batch_labels.append(labels[i])
 
-            samples += 1
+        samples += 1
+        
         if samples >= batch_size:
             if batch_type == "original": 
                 yield _pad_batch_siamese_2_side_original(batch_left_nodes, batch_left_children, batch_right_nodes, batch_right_children, batch_labels)

@@ -42,7 +42,7 @@ parser.add_argument('--verbal', type=bool, default=True, help='print training in
 parser.add_argument('--manualSeed', type=int, help='manual seed')
 parser.add_argument('--n_classes', type=int, default=10, help='manual seed')
 parser.add_argument('--test_file', default="live_test/github_cpp/26/10.cpp", help='test program')
-parser.add_argument('--model_path', default="model/github_50_cpp", help='path to save the model')
+parser.add_argument('--model_path', default="model/github_sort_10_java_attention_sum_softmax", help='path to save the model')
 parser.add_argument('--n_hidden', type=int, default=50, help='number of hidden layers')
 parser.add_argument('--log_path', default="" ,help='log path for tensorboard')
 parser.add_argument('--epoch', type=int, default=0, help='epoch to test')
