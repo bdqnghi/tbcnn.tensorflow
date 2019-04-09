@@ -1,6 +1,6 @@
-from tensorflow import saved_model
-from tensorflow.python.saved_model import tag_constants
-from tensorflow.python.saved_model.signature_def_utils_impl import predict_signature_def
+# from tensorflow import saved_model
+# from tensorflow.python.saved_model import tag_constants
+# from tensorflow.python.saved_model.signature_def_utils_impl import predict_signature_def
 import os
 import logging
 import pickle
@@ -42,14 +42,14 @@ parser.add_argument('--verbal', type=bool, default=True, help='print training in
 parser.add_argument('--manualSeed', type=int, help='manual seed')
 parser.add_argument('--n_classes', type=int, default=10, help='manual seed')
 parser.add_argument('--test_file', default="test/0.java", help='test program')
-parser.add_argument('--output_file', default="test/0.csv", help='test program')
+# parser.add_argument('--output_file', default="test/0.csv", help='test program')
 parser.add_argument('--model_path', default="model/github_sort_10_java_attention_sum_softmax", help='path to save the model')
 parser.add_argument('--n_hidden', type=int, default=50, help='number of hidden layers')
 parser.add_argument('--log_path', default="" ,help='log path for tensorboard')
 parser.add_argument('--epoch', type=int, default=0, help='epoch to test')
 parser.add_argument('--feature_size', type=int, default=100, help='epoch to test')
 parser.add_argument('--aggregation', type=int, default=1, help='0 for max pooling, 1 for global attention')
-parser.add_argument('--distributed_function', type=int, default=1, choices=range(0,2), help='0 for softmax, 1 for sigmoid')
+parser.add_argument('--distributed_function', type=int, default=0, choices=range(0,2), help='0 for softmax, 1 for sigmoid')
 parser.add_argument('--embeddings_directory', default="embedding/fast_pretrained_vectors.pkl", help='pretrained embeddings url, there are 2 objects in this file, the first object is the embedding matrix, the other is the lookup dictionary')
 
 
@@ -84,20 +84,36 @@ if not os.path.isdir("cached"):
 
 
 def generate_pb(src_path):
+    print("Generating pb with src_path : " + src_path)
     pb_path = os.path.join(src_path.split(".")[0] + ".pb")
-    if not os.path.exists(src_path):
-        cmd = "docker run --rm -v $(pwd):/e -it yijun/fast -p " + src_path + " " + pb_path
-        os.system(cmd)
+    # if not os.path.exists(src_path):
+    cmd = "docker run --rm -v $(pwd):/e -it yijun/fast -p " + src_path + " " + pb_path
+    os.system(cmd)
     return pb_path
 
 
 def generate_pkl(pb_path):
     pkl_path = os.path.join(pb_path.split(".")[0] + ".pkl")
-    if not os.path.exists(pkl_path):
-        cmd = "docker run --rm -v $(pwd):/e -it yijun/fast " + pb_path + " " + pkl_path
-        print(cmd)
-        os.system(cmd)
+    # if not os.path.exists(pkl_path):
+    cmd = "docker run --rm -v $(pwd):/e -it yijun/fast " + pb_path + " " + pkl_path
+    print(cmd)
+    os.system(cmd)
     return pkl_path
+
+
+def generate_visualization(pb_path, attention_path):
+  
+    # attention_path = os.path.join(pb_path.split(".")[0] + ".csv")
+    
+
+    normal_html_path = os.path.join(pb_path.split(".")[0] + ".html")
+
+    normal_node_id_cmd = "docker run --rm -v $(pwd):/e -it yijun/fast -H 0 -t -x " + attention_path + " " + pb_path  + " > " + normal_html_path
+
+    os.system(normal_node_id_cmd)
+
+    return normal_html_path
+
 
 def predict(sess, out_node, attention_score_node, nodes_node, children_node, pkl_path, pb_path, test_trees, labels, node_ids, node_types, embeddings, embedding_lookup):
     for batch in sampling.batch_samples(
@@ -279,13 +295,23 @@ def main(opt):
        
 
         test_trees, node_ids, node_types, pkl_path, pb_path = load_program(opt.test_file)
+        
 
         attention_score_scaled_map = predict(sess, out_node, attention_score_node, nodes_node, children_node, pkl_path, pb_path, test_trees, labels, node_ids, node_types, embeddings, embed_lookup)
         
-        with open(opt.output_file,"a") as f:
+        attention_path = os.path.join(opt.test_file.split(".")[0] + ".csv")
+
+        if os.path.exists(attention_path):
+            os.remove(attention_path)
+        with open(attention_path,"a") as f:
            for k, v in attention_score_scaled_map.items():
                 f.write(str(k) + "," + str(v))
                 f.write("\n")
 
+
+        generate_visualization(pb_path, attention_path)
+
+
+       
 if __name__ == "__main__":
     main(opt)
