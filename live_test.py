@@ -105,11 +105,8 @@ def generate_visualization(pb_path, attention_path):
   
     # attention_path = os.path.join(pb_path.split(".")[0] + ".csv")
     
-
     normal_html_path = os.path.join(pb_path.split(".")[0] + ".html")
-
     normal_node_id_cmd = "docker run --rm -v $(pwd):/e -it yijun/fast -H 0 -t -x " + attention_path + " " + pb_path  + " > " + normal_html_path
-
     os.system(normal_node_id_cmd)
 
     return normal_html_path
