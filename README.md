@@ -38,9 +38,13 @@ This step will process the AST trees, which comprises of 2 steps. First, it will
 
 ## Tips on tuning the model
 Looking at the "tbcnn_training_script.sh", there are a few parameters to consider to tune the network.
+
 -NODE_INIT: to use node type, node token or both to initialize for the node embedding.
+
 -NUM_CONV: the number of convolutional steps. Our experiments show that 4 usually perform the best.
+
 -NODE_TOKEN_DIM: dimension size of node type embedding. 
+
 -NODE_TOKEN_DIM: dimension size of node type embedding.
 
 
