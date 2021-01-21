@@ -43,9 +43,12 @@ class DataProcessor():
             pickle.dump(self.trees, open(self.simple_tree_pkl_path, "wb" ) )
 
         print("Convert trees into training indices....")
-        self.convert_trees_into_training_indices(self.trees)
+        if os.path.exists(self.buckets_name_path):
+            print("Bucket data exsits. In case you want to re-process, delete the bucket files : ", self.buckets_name_path)
 
-        pickle.dump(self.buckets, open(self.buckets_name_path, "wb" ) )
+        else:
+            self.convert_trees_into_training_indices(self.trees)
+            pickle.dump(self.buckets, open(self.buckets_name_path, "wb" ) )
 
     
     def load_node_token_vocab(self, token_vocab_path):

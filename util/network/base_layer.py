@@ -1,26 +1,42 @@
 import math
 import tensorflow as tf
 import numpy as np
+from bidict import bidict
 from keras_radam.training import RAdamOptimizer
 import sys
 from pathlib import Path
 # To import upper level modules
 sys.path.append(str(Path('.').absolute().parent))
-from util.data.data_processor.base_data_processor import DataProcessor
-from tensorflow import keras
 
-class BaseLayer(keras.Model):
+class BaseLayer():
     def __init__(self, opt):
-        data_processor = DataProcessor()
-        self.node_type_lookup = data_processor.load_node_type_vocab(opt.node_type_vocabulary_path)
-        self.node_token_lookup = data_processor.load_node_type_vocab(opt.token_vocabulary_path)
+        self.node_type_lookup = self.load_node_type_vocab(opt.node_type_vocabulary_path)
+        self.node_token_lookup = self.load_node_type_vocab(opt.token_vocabulary_path)
 
-    def minimize_loss(loss, lr):
-        loss_node = loss
-        optimizer = RAdamOptimizer(lr)
+        self.label_size = opt.label_size
+        self.batch_size = opt.batch_size
 
-        update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
-        with tf.control_dependencies(update_ops):
-            training_point = optimizer.minimize(loss_node)
+        self.placeholders = {}
+        self.weights = {}
+    
+    def load_node_token_vocab(self, token_vocab_path):
+        node_token_lookup = {}
+        with open(token_vocab_path, "r") as f:
+            data = f.readlines()
+           
+            for i, line in enumerate(data):
+                line = line.replace("\n", "").strip()
+                node_token_lookup[line] = i
 
-        return optimizer
+        return bidict(node_token_lookup)
+
+    def load_node_type_vocab(self, node_type_vocab_path):
+        node_type_lookup = {}
+        with open(node_type_vocab_path, "r") as f:
+            data = f.readlines()
+           
+            for i, line in enumerate(data):
+                line = line.replace("\n", "").strip()
+                node_type_lookup[line.upper()] = i
+
+        return bidict(node_type_lookup)

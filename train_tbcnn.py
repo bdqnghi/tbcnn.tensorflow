@@ -16,7 +16,7 @@ from sklearn.metrics import classification_report, confusion_matrix, accuracy_sc
 from datetime import datetime
 from keras_radam.training import RAdamOptimizer
 import logging
-from util.network_v2.tbcnn import TBCNN
+from util.network.tbcnn import TBCNN
 from util import util_functions
 logging.basicConfig(filename='training.log',level=logging.DEBUG)
 np.set_printoptions(threshold=sys.maxsize)
