@@ -43,9 +43,9 @@ Looking at the "tbcnn_training_script.sh", there are a few parameters to conside
 
 -NUM_CONV: the number of convolutional steps. Our experiments show that 4 usually perform the best.
 
--NODE_TOKEN_DIM: dimension size of node type embedding. 
+-NODE_TYPE_DIM: dimension size of node type embedding. 
 
--NODE_TOKEN_DIM: dimension size of node type embedding.
+-NODE_TOKEN_DIM: dimension size of node t embedding.
 
 
 
