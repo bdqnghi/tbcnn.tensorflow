@@ -11,10 +11,10 @@ import argparse
 
 def parse_arguments(): 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--data_path', default="../OJ_pycparser_train_test_val/train")
+    parser.add_argument('--data_path', default="../OJ_pycparser_train_test_val/val")
     parser.add_argument('--node_type_vocab_path',default="../vocab/pycparser/node_type/type.txt")
     parser.add_argument('--node_token_vocab_path', default="../vocab/pycparser/node_token/token.txt")
-    parser.add_argument('--parser', type=str, default="ctxl", help="pycparser, treesitterc, srcml")
+    parser.add_argument('--parser', type=str, default="pycparser", help="pycparser, treesitterc, srcml")
     opt = parser.parse_args(),
     return opt
 
