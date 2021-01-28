@@ -44,13 +44,13 @@ def parse_arguments():
                         default=60, help='sampling size for each epoch')
     parser.add_argument('--best_f1', type=float,
                         default=0.0, help='best f1 to save model')
-    parser.add_argument('--train_path', default="OJ_rs/OJ_rs-buckets-train.pkl",
+    parser.add_argument('--train_path', default="OJ_pycparser_train_test_val/pycparser-buckets-train.pkl",
                         help='path of training data')
-    parser.add_argument('--test_path', default="OJ_rs/OJ_rs-buckets-train.pkl",
+    parser.add_argument('--test_path', default="OJ_pycparser_train_test_val/pycparser-buckets-val.pkl",
                         help='path of testing data')
-    parser.add_argument('--node_type_vocabulary_path', default="vocab/Rust/node_type/txl_used.txt",
+    parser.add_argument('--node_type_vocabulary_path', default="vocab/pycparser/node_type/type.txt",
                         help='the path to node type vocab')
-    parser.add_argument('--token_vocabulary_path', default="vocab/Rust/node_token/token.txt",
+    parser.add_argument('--token_vocabulary_path', default="vocab/pycparser/node_token/token.txt",
                         help='the path to node token vocab')
     parser.add_argument('--task', type=int, default=1,
                         choices=range(0, 2), help='0 for training, 1 for testing')
