@@ -46,7 +46,7 @@ Looking at the "tbcnn_training_script.sh", there are a few parameters to conside
 
 -NODE_TYPE_DIM: dimension size of node type embedding. 
 
--NODE_TOKEN_DIM: dimension size of node t embedding.
+-NODE_TOKEN_DIM: dimension size of node token embedding.
 
 
 
