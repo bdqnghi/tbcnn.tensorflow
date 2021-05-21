@@ -19,11 +19,12 @@ After this step, you can see data folder (OJ_pycparser_train_test_val) and the p
 Noted that the dataset is taken from the website of the original paper (https://sites.google.com/site/treebasedcnn/).
 
 3. Preprocess the data
+
     -```cd script```
     
     -```source process_data.sh```
 
-This step will process the AST trees, which comprises of 2 steps. First, it will convert the pycparser format into our simple tree format in the form of Python dictionary. Second, it will bucket the trees with similar sizes into the same bucket.
+This step will process the AST trees, which comprises of 2 steps. First, it will convert the pycparser format into our simple tree format in the form of Python dictionary. Second, it will put the trees with similar sizes into the same bucket.
 
 
 
