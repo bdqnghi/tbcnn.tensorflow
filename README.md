@@ -2,7 +2,7 @@
 
 This is a Tensorflow implementation of the Tree-based Convolutional Neural Network (TBCNN) as described in the paper [Convolutional Neural Networks over Tree Structures for Programming Language Processingks, AAAI 2015] (Mou et al. - https://arxiv.org/abs/1409.5718).
 
-Our reproduced results are much better than the results reported in the original paper. Concretely, we could get up to 96.5% in F1 score (compared to 94% reported in the original paper)
+Our reproduced results are much better than the results reported in the original paper. Concretely, we could get up to 97% in F1 score (compared to 94% reported in the original paper)
 
 
 ## Data Preparation
