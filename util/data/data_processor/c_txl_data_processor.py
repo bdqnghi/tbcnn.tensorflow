@@ -77,7 +77,7 @@ class CTxlDataProcessor(DataProcessor):
         queue = [root]
 
         # Extract root token information, include splitting a token into sub tokens
-        root_token = self.process_token(str(root.text))
+        root_token = str(root.text)
         if root_token is None or root_token == "None": 
             root_token = ""
         root_sub_tokens = identifier_splitting.split_identifier_into_parts(root_token)
@@ -115,7 +115,7 @@ class CTxlDataProcessor(DataProcessor):
 
             for child in children:
 
-                child_token = self.process_token(str(child.text))
+                child_token = str(child.text)
                 if child_token is None or child_token == "None": 
                     child_token = ""
                 # else:

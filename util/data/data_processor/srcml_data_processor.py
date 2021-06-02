@@ -72,6 +72,7 @@ class SrcmlDataProcessor(DataProcessor):
 
         root_sub_token_ids = []
         for sub_token in root_sub_tokens:
+            sub_token = self.process_token(sub_token)
             root_sub_token_ids.append(self.look_up_for_id_from_token(sub_token))
        
         root_json = {

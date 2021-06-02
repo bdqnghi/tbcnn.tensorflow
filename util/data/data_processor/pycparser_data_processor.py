@@ -35,33 +35,26 @@ class PycParserDataProcessor(DataProcessor):
                 if file.endswith(".c"):
                     try:
                         file_path = os.path.join(subdir,file)
+                        print(file_path)
                         # print(txl_file_path)
                         file_path_splits = file_path.split("/")
                         label = int(file_path_splits[len(file_path_splits)-2]) - 1
                         # print(pkl_file_path)
 
-                        with open(file_path) as f:
-                            line_count = sum(1 for _ in f)
+                 
+                        count_processed_files += 1
 
-                        # Set this condition to get rid of very large xml files (due to bugs when parsing)
-                        if line_count < 10000:
-                            count_processed_files += 1
+                        ast = parse_file(file_path, use_cpp=True)
+                        tree, sub_tokens, size = self._convert_ast_into_simpler_tree_format(ast)
+                        tree_data = {
+                            "tree": tree,
+                            "size": size,
+                            "label": label,
+                            "sub_tokens": sub_tokens,
+                            "file_path": file_path
+                        }
+                        trees.append(tree_data)
 
-                            ast = parse_file(file_path, use_cpp=True)
-                            print(file_path)
-                            tree, sub_tokens, size = self._convert_ast_into_simpler_tree_format(ast)
-
-                            tree_data = {
-                                "tree": tree,
-                                "size": size,
-                                "label": label,
-                                "sub_tokens": sub_tokens,
-                                "file_path": file_path
-                            }
-                            trees.append(tree_data)
-
-                        else:
-                            print("Ignoring too large file with path : " + txl_file_path)
                             
                     except Exception as e:
                         print(e)
@@ -76,28 +69,29 @@ class PycParserDataProcessor(DataProcessor):
         klass = root.__class__
         queue = [root]
 
-        root_token = ""
+        root_token_raw = ""
         for attr in klass.attr_names:
             attribute = getattr(root, attr)
             if attr == "name" or attr == "op" or attr == "declname":
-                root_token = attribute
+                root_token_raw = attribute
             if attr == "names":
-                root_token = attribute[0]
+                root_token_raw = attribute[0]
         
-        root_token = self.process_token(root_token)
-        root_sub_tokens = identifier_splitting.split_identifier_into_parts(root_token)
+        # root_token = self.process_token(root_token)    
+        root_sub_tokens = identifier_splitting.split_identifier_into_parts(root_token_raw)
         root_sub_tokens = self.remove_noisy_tokens(root_sub_tokens)
 
 
         root_sub_token_ids = []
         for sub_token in root_sub_tokens:
+            sub_token = self.process_token(sub_token)
             root_sub_token_ids.append(self.look_up_for_id_from_token(sub_token))
 
 
         root_json = {
             "node_type": str(klass.__name__),
             "node_type_id": self.look_up_for_id_from_node_type(str(klass.__name__)),
-            "node_token": root_token,
+            "node_token": root_token_raw,
             "node_sub_tokens": root_sub_tokens,
             "node_sub_tokens_id": root_sub_token_ids,
             "children": []
@@ -116,15 +110,16 @@ class PycParserDataProcessor(DataProcessor):
             # Child attributes
             for child_name, child in current_node.children():
                 
-                child_token = ""
+                child_token_raw = ""
                 for attr in child.__class__.attr_names:
                     attribute = getattr(child, attr)
                     if attr == "name" or attr == "op" or attr == "declname":
-                        child_token = attribute
+                        child_token_raw = attribute
                     if attr == "names":
-                        child_token = attribute[0]
+                        child_token_raw = attribute[0]
 
-                child_sub_tokens = identifier_splitting.split_identifier_into_parts(str(child_token))
+
+                child_sub_tokens = identifier_splitting.split_identifier_into_parts(str(child_token_raw))
             
                 children_sub_token_ids = []
                 for sub_token in child_sub_tokens:
@@ -139,12 +134,13 @@ class PycParserDataProcessor(DataProcessor):
                 child_json = {
                     "node_type": str(child.__class__.__name__),
                     "node_type_id": self.look_up_for_id_from_node_type(str(child.__class__.__name__)),
-                    "node_token": child_token,
+                    "node_token": child_token_raw,
                     "node_sub_tokens": child_sub_tokens,
                     "node_sub_tokens_id": children_sub_token_ids,
                     "children": []
                 }
 
+                tree_tokens.extend(child_sub_tokens)
 
                 current_node_json['children'].append(child_json)
                 queue_json.append(child_json)
@@ -152,7 +148,7 @@ class PycParserDataProcessor(DataProcessor):
         
 
         tree_tokens = list(set(tree_tokens))
-
+        tree_tokens = self.remove_noisy_tokens(tree_tokens)
         # print(root_json)
         return root_json, tree_tokens, num_nodes
 
