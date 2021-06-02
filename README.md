@@ -14,8 +14,10 @@ Our reproduced results are much better than the results reported in the original
     -```cd script```
 
     -```python3 download_data.py```
+    
+    -```python3 download_pretrained_model.py```
 
-After this step, you can see data folder (OJ_pycparser_train_test_val) and the pretrained models (model). The data folder has been splitted into train\test\val. 
+After these steps, you can see data folder (OJ_pycparser_train_test_val) and the pretrained models (model). The data folder has been splitted into 3 subfolders train\test\val. 
 Noted that the dataset is taken from the website of the original paper (https://sites.google.com/site/treebasedcnn/).
 
 3. Preprocess the data
