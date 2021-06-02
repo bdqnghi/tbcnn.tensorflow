@@ -13,21 +13,35 @@ class DownloadProgressBar(tqdm):
 def download_url(url, output_path):
     with DownloadProgressBar(unit='B', unit_scale=True,
                              miniters=1, desc=url.split('/')[-1]) as t:
-        urllib.request.urlretrieve(url, filename=output_path, reporthook=t.update_to)\
+        urllib.request.urlretrieve(url, filename=output_path, reporthook=t.update_to)
+
+def parse_arguments(): 
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--url', default="https://ai4code.s3-ap-southeast-1.amazonaws.com/OJ104_pycparser_train_test_val.zip")
+    parser.add_argument('--output_path',default="../OJ104_pycparser_train_test_val.zip")
+    opt = parser.parse_args(),
+    return opt
 
 
-code_classification_data_url = "https://ai4code.s3-ap-southeast-1.amazonaws.com/OJ_pycparser_train_test_val.zip"
-code_classification_output_path = "../OJ_pycparser_train_test_val.zip"
+def main(opt):
+
+    url = opt.url
+    output_path = opt.output_path
 
 
-if not os.path.exists(code_classification_output_path):
-    download_url(code_classification_data_url, code_classification_output_path)
+    if not os.path.exists(output_path):
+        download_url(url, output_path)
 
 
-with zipfile.ZipFile(code_classification_output_path) as zf:
-    for member in tqdm(zf.infolist(), desc='Extracting '):
-        try:
-            zf.extract(member, "../")
-        except zipfile.error as e:
-            pass
+    with zipfile.ZipFile(output_path) as zf:
+        for member in tqdm(zf.infolist(), desc='Extracting '):
+            try:
+                zf.extract(member, "../")
+            except zipfile.error as e:
+                pass
 
+
+if __name__ == "__main__":
+    opt = parse_arguments()
+    main(opt[0])
+   
