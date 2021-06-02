@@ -15,7 +15,7 @@ Our reproduced results are much better than the results reported in the original
 
     - Download dataset: ```python3 download_data.py  --url=https://ai4code.s3-ap-southeast-1.amazonaws.com/OJ104_pycparser_train_test_val.zip --output_path=../OJ104_pycparser_train_test_val.zip```
     
-    - Download pretrained models: ```python3 download_data.py  --url=https://ai4code.s3-ap-southeast-1.amazonaws.com/https://ai4code.s3-ap-southeast-1.amazonaws.com/OJ104_model_pycparser.zip --output_path=../OJ104_model_pycparser.zip```
+    - Download pretrained models: ```python3 download_data.py  --url=https://ai4code.s3-ap-southeast-1.amazonaws.com/OJ104_model_pycparser.zip --output_path=../OJ104_model_pycparser.zip```
     
 
 After these steps, you can see data folder (OJ_pycparser_train_test_val) and the pretrained models (model). The data folder has been splitted into 3 subfolders train\test\val. 
