@@ -11,20 +11,21 @@ Our reproduced results are much better than the results reported in the original
 
 2. Download and extract the dataset and the pretrained models;
 
-    -```cd script```
+    - ```cd script```
 
-    -```python3 download_data.py```
+    - Download dataset: ```python3 download_data.py  --url=https://ai4code.s3-ap-southeast-1.amazonaws.com/OJ104_pycparser_train_test_val.zip --output_path=../OJ104_pycparser_train_test_val.zip```
     
-    -```python3 download_pretrained_model.py```
+    - Download pretrained models: ```python3 download_data.py  --url=https://ai4code.s3-ap-southeast-1.amazonaws.com/OJ104_model_pycparser.zip --output_path=../OJ104_model_pycparser.zip```
+    
 
 After these steps, you can see data folder (OJ_pycparser_train_test_val) and the pretrained models (model). The data folder has been splitted into 3 subfolders train\test\val. 
 Noted that the dataset is taken from the website of the original paper (https://sites.google.com/site/treebasedcnn/).
 
 3. Preprocess the data
 
-    -```cd script```
+    - ```cd script```
     
-    -```source process_data.sh```
+    - ```source process_data.sh```
 
 This step will process the AST trees, which comprises of 2 steps. First, it will convert the pycparser format into our simple tree format in the form of Python dictionary. Second, it will put the trees with similar sizes into the same bucket.
 
