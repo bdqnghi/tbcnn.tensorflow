@@ -1,6 +1,6 @@
 PARSER=pycparser
-TRAIN_PATH=OJ_${PARSER}_train_test_val/${PARSER}-buckets-train.pkl
-TEST_PATH=OJ_${PARSER}_train_test_val/${PARSER}-buckets-val.pkl
+TRAIN_PATH=/home/nghibui/codes/datasets/${PARSER}_train_test_val/${PARSER}-buckets-train.pkl
+TEST_PATH=/home/nghibui/codes/datasets/${PARSER}_train_test_val/${PARSER}-buckets-val.pkl
 NODE_TYPE_VOCABULARY_PATH=vocab/${PARSER}/node_type/type.txt
 TOKEN_VOCABULARY_PATH=vocab/${PARSER}/node_token/token.txt
 BATCH_SIZE=16

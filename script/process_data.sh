@@ -1,7 +1,7 @@
 PARSER=pycparser
-TRAIN_DATA_PATH=../OJ_${PARSER}_train_test_val/train
-TEST_DATA_PATH=../OJ_${PARSER}_train_test_val/test
-VAL_DATA_PATH=../OJ_${PARSER}_train_test_val/val
+TRAIN_DATA_PATH=../OJ104_${PARSER}_train_test_val/train
+TEST_DATA_PATH=../OJ104_${PARSER}_train_test_val/test
+VAL_DATA_PATH=../OJ104_${PARSER}_train_test_val/val
 NODE_TYPE_VOCAB_PATH=../vocab/${PARSER}/node_type/type.txt
 NODE_TOKEN_VOCAB_PATH=../vocab/${PARSER}/node_token/token.txt
 PYTHON=python3

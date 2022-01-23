@@ -15,6 +15,7 @@ class TBCNN(BaseLayer):
         self.node_token_dim = opt.node_token_dim
         self.node_type_dim = opt.node_type_dim
         self.node_dim = self.conv_output_dim
+        self.training_loss_option = opt.training_loss_option
         self.init_tbcnn_params()
        
     def init_tbcnn_params(self):
@@ -65,10 +66,17 @@ class TBCNN(BaseLayer):
 
             self.logits = tf.compat.v1.layers.dense(self.code_vector, self.label_size, activation=tf.nn.leaky_relu)
 
-            self.softmax = tf.nn.softmax(self.logits)
-            self.softmax_loss = tf.nn.softmax_cross_entropy_with_logits(logits=self.logits, labels=self.placeholders["labels"])
+            if self.training_loss_option == "energy":
+                loss = tf.keras.losses.SparseCategoricalCrossentropy(self.logits, labels=self.placeholders["labels"])
+                Ec_out = tf.math.reduce_logsumexp(x[len(in_set[0]):], dim=1)
+                Ec_in = -torch.logsumexp(x[:len(in_set[0])], dim=1)
+                loss += 0.1*(torch.pow(F.relu(Ec_in-args.m_in), 2).mean() + torch.pow(F.relu(args.m_out-Ec_out), 2).mean())
+            # training_loss_option = "softmax"
+            else:
+                self.softmax = tf.nn.softmax(self.logits)
+                self.softmax_loss = tf.nn.softmax_cross_entropy_with_logits(logits=self.logits, labels=self.placeholders["labels"])
 
-            self.loss = tf.reduce_mean(input_tensor=self.softmax_loss)
+                self.loss = tf.reduce_mean(input_tensor=self.softmax_loss)
 
     def convolve_tree_based_cnn(self):
         if self.node_init == 0:

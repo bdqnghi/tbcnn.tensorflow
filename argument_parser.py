@@ -42,6 +42,8 @@ def parse_arguments():
                         default=30, help='tree size threshold')                   
     parser.add_argument('--sampling_size', type=int,
                         default=60, help='sampling size for each epoch')
+    parser.add_argument('--training_loss_option', type=int,
+                        default=60, help='loss function to train the model')
     parser.add_argument('--best_f1', type=float,
                         default=0.0, help='best f1 to save model')
     parser.add_argument('--train_path', default="OJ_pycparser_train_test_val/pycparser-buckets-train.pkl",

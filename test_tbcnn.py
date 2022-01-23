@@ -61,6 +61,7 @@ def main(test_opt):
         for test_step, test_batch_data in enumerate(test_batch_iterator):
             print("***************")
 
+            print(test_batch_data["batch_labels"])
             # print(test_batch_data["batch_size"])
             scores = sess.run(
                     [tbcnn_model.softmax],
